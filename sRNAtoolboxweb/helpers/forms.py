@@ -53,11 +53,6 @@ class RemovedupForm(forms.Form):
             handler.retrieve(url_input, dest)
             ifile = dest
 
-            # dest = os.path.join(FS.location, os.path.basename(url_input))
-            # with urlrequest.urlopener(url_input) as urlfile:
-            #     localfile = open(dest, 'wb')
-            #     localfile.write(urlfile.read())
-            #     localfile.close()
         else:
             raise Http404
         name= pipeline_id+'_h_rd'
