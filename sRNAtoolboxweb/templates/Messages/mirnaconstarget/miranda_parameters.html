@@ -1,0 +1,23 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}miranda{% endblock %}
+{% block title %}
+    MIRANDA Available Parameters
+{% endblock %}
+{% block text %}
+<p>-sc S Set score threshold to S [DEFAULT: 140.0]<br />
+ -en -E Set energy threshold to -E kcal/mol [DEFAULT: 1.0]<br />
+ -scale Z Set scaling parameter to Z [DEFAULT: 4.0]<br />
+ -strict Demand strict 5' seed pairing [DEFAULT: off]</p>
+
+<p>Alignment parameters:<br />
+ -go -X Set gap-open penalty to -X [DEFAULT: -4.0]<br />
+ -ge -Y Set gap-extend penalty to -Y [DEFAULT: -9.0]</p>
+
+<p>General Options:<br />
+ -out file Output results to file [DEFAULT: off]<br />
+ -quiet Output fewer event notifications [DEFAULT: off]<br />
+ -trim T Trim reference sequences to T nt [DEFAULT: off]<br />
+ -noenergy Do not perform thermodynamics [DEFAULT: off]</p>
+
+</p>
+{% endblock %}

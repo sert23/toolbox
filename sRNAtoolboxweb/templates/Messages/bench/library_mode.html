@@ -1,0 +1,8 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}library_mode{% endblock %}
+{% block title %}
+    Do not map to genome (Library mode)
+{% endblock %}
+{% block text %}
+<p>The input reads are mapped directly against the annotations from the sRNAbenchDB database or against the user provided libraries. They are not mapped first to the genome.</p>
+{% endblock %}

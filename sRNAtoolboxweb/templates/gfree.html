@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block header %}
+{% load dajaxice_templatetags %}
+{% dajaxice_js_import %}
+{% endblock %}
+
+
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+            <div class="page-header">
+            <h1>sRNAgFree: </h1>
+            <h3>Prediction of novel microRNAs without a genome assembly</h3>
+            </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-9">
+
+                <form action="srnagfree/test" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="submit"  class="btn btn-success" value="Launch Test">
+                </form>
+
+                <br>
+
+                <form action="/srnatoolbox/srnagfree/run" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+
+
+
+                    <!-- INPUT DATA -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                Input data
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label> Upload the reads (fastq.gz, fa.gz or rc.gz):</label>
+                                <input type="file" name="reads_file" id=file1>
+                            </div>
+
+                            <div class="row row-grid">
+                              <div class="col-lg-12">
+                            <h3 style="color: #183c60"> Parameters</h3>
+                                  </div>
+                                </div>
+
+                            <div class="row row-grid">
+
+
+                                <div class="col-lg-4">
+
+                                    <label>Minimum Read Count:</label>
+                                    <select class="form-control-static"  name="rc">
+                                        <option value="2"> 2</option>
+                                        <option value="5"> 5</option>
+                                        <option value="10" selected> 10</option>
+                                        <option value="15"> 15</option>
+                                        <option value="20"> 20</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label>Allowed number of mismatches</label>
+                                    <select class="form-control-static" name="mm">
+                                        <option value="0" selected> 0</option>
+                                        <option value="1"> 1</option>
+                                        <option value="2"> 2</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-4">
+                                </div>
+
+
+
+
+                                <div class="col-lg-4">
+                                    <label>Analyse homologous microRNAs(names can be copy form: <a href="http://www.mirbase.org/cgi-bin/browse.pl">miRBase</a>)</label>
+                                    <input type="text" size="40" name="homolog" id="organims">
+                                    <br>
+                                    <br>
+                                    <input class="form-control" id="ajax_names" name="ajax_names" type="text" placeholder="Processed names will appear here" readonly />
+                                    </div>
+
+                                </div>
+
+
+
+
+
+
+                            <input type="submit"  class="btn btn-primary" value="Run">
+
+
+                        </div>
+                    </div>
+
+                </form>
+
+
+
+            </div>
+
+            <div class="col-lg-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Help
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <a href="{% static "WebManual_sRNAtoolbox.pdf" %}" target="_blank">Link to Web Manual</a>
+                        <br>
+                        <a href="http://bioinfo5.ugr.es/srnatoolbox/jobstatus/srnagfree/?id=VV3XJ5J1N9V32AK"  target="_blank">Link to Test Data Results</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Test Data Description
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        Small RNAs of exosomes secreted by the parasitic helminth Dicrocoelium dendriticum for which non genome assembly does exist.
+                        <br>
+                        <a href="http://www.sciencedirect.com/science/article/pii/S187439191400061X" target="_blank">Link To Publication</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Test Data Parameters
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        Input File: <a href="http://bioinfo5.ugr.es/static/testData/Ddent_exo.fa" download> <i class="fa fa-download fa-fw"></i> Ddent_exo.fa</a>
+                        <br>
+                        <br>
+                        Analyse homologous microRNAs:
+                        <pre style=" white-space: nowrap; overflow-y: hidden">sja:sma:egr:emu:sme:cel:bta</pre>
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script language="JavaScript" type="text/javascript" src="{% static 'js/jquery.dajax.core.js' %}"></script>
+    <script>
+        $('input[id="organims"]').on('input',function(){
+            console.log("hola");
+            Dajaxice.sRNAgFree.ajax_name_organisms(Dajax.process, {'list_name': $(this).val()});
+        })
+        // tooltip demo
+        $('.row').tooltip({
+            selector: "[data-toggle=tooltip]",
+            container: "body"
+        })
+
+
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}SampleDesc{% endblock %}
+{% block title %}
+    Sample Description
+{% endblock %}
+{% block text %}
+<p>This field is mandatory if a matrix of Expression Values is provided <br />
+ The information provided in this Field will be used to assign a group to each sample in the Matrix. Values provided must be separated using colons.
+The order must be the same that in in the matrix of expression. This is, If the first sample in the Matrix belongs to "Cancer" group and the second to "Normal" group;
+The user should write: Cancer:Normal... </p>
+{% endblock %}

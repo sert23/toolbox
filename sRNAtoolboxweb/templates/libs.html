@@ -1,0 +1,22 @@
+{% load static %}
+
+        <div class="col-lg-6 well">
+        {% for key, value in libs.items %}
+            <h5>{{ key.0}}</h5>
+            <dl class="dl-horizontal">
+                {% for key2, value2 in value.items %}
+                <dt style='text-align: left; margin-bottom: 0.25em; width: auto; padding-right: 1em;'>{{ key2 }}
+                </dt>
+                <dd style="margin-left: 0; margin-bottom: 0.25em;">{{ value2 }}
+                    {% if "anti" in key2 %}
+                    <a href="{% url "sRNABench.views.render_table" "MA_antisense" id key.1%}"> MA </a> /
+                    <a href="{% url "sRNABench.views.render_table" "SA_antisense" id key.1%}"> SA </a>
+                    {% else %}
+                    <a href="{% url "sRNABench.views.render_table" "MA" id key.1%}"> MA </a> /
+                    <a href="{% url "sRNABench.views.render_table" "SA" id key.1%}"> SA </a>
+                    {% endif %}
+                </dd>
+                {% endfor %}
+            </dl>
+        {% endfor %}
+        </div>

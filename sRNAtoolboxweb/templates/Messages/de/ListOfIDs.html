@@ -1,0 +1,13 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}becnhids{% endblock %}
+{% block title %}
+    List of sRNAbench IDs
+{% endblock %}
+{% block text %}
+<p>sRNAde can use completed jobs of sRNAbench if jobsID of these jobs are provided.<br><br>
+In order to assign the groups of analysis, ids of different groups must be separated using hashes and samples inside the same group using colons.
+    Additionally the groups name must be provided in the same order separated by hashes using the Sample groups form. For example:<br><br>
+    Given the samples: ID1(cancer), ID2(cancer) and ID3(normal): <br>
+    The user should fill "List of sRNAbench IDs" with: ID1:ID2#ID3 abd "Sample groups" with: cancer#normal
+</p>
+{% endblock %}

@@ -1,0 +1,222 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="page-header">
+                    <h1>miRNAconsTarget:</h1>
+                    <h3>Consensus microRNA target prediction</h3>
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-9">
+
+{% comment %}
+                <form action="mirconstarget/test" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="submit"  class="btn btn-success" value="Launch Test">
+                </form>
+
+                <br>
+{% endcomment %}
+
+
+            <form action="/srnatoolbox/mirconstarget/run" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a>Input data</a>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="row row-grid">
+                                    <div class="col-lg-6">
+                                        <label> Upload miRNAs file:</label>
+                                        <input type="file" name="miRNA_file" id=file1>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label> Upload utrs file:</label>
+                                        <input type="file" name="utr_file" id=file1>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row row-grid">
+                                <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Is plant analysis
+                                    <input id="plant" type="checkbox"></label>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <label>Choose programs to predict targets: </label>
+                                    <br>
+                                    <label class="checkbox-inline">
+                                        <input id="TS" value="TS" type="checkbox" name="programs"><a href="http://www.biomedcentral.com/1471-2105/11/292"  target="_blank">TargetSpy</a>
+                                        <br>
+                                        <input id="MR" value="MIRANDA" type="checkbox" name="programs"><a href="http://www.plosbiology.org/article/info:doi/10.1371/journal.pbio.0020363"  target="_blank">Miranda</a>
+                                        <br>
+                                        <input id="PT" value="PITA" type="checkbox" name="programs"><a href="http://genie.weizmann.ac.il/pubs/mir07/mir07_data.html"  target="_blank">PITA</a>
+                                        <br>
+                                        <input id="PS" value="PSROBOT" type="checkbox" name="programs"><a href="http://nar.oxfordjournals.org/content/40/W1/W22"  target="_blank">psRobot</a>
+                                        <br>
+                                        <input  id="TF" value="TAPIR_FASTA" type="checkbox" name="programs"><a href="http://bioinformatics.psb.ugent.be/webtools/tapir/"  target="_blank">TAPIR FASTA engine</a>
+                                        <br>
+                                        <input  id="TH" value="TAPIR_HYBRID" type="checkbox" name="programs"><a href="http://bioinformatics.psb.ugent.be/webtools/tapir/"  target="_blank">TAPIR RNAhybrid engine</a>
+
+                                    </label>
+                                </div>
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a data-toggle="collapse"  href="#collapseThree">Programs Parameters</a> <a  data-toggle="modal" data-target="#AdvanceParameters" style="color: orangered" class="btn btn-link"><i class="fa fa-exclamation-triangle">(Advanced Parameters)</i></a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseThree" class="panel-collapse collapse">
+                                            <div class="panel-body">
+
+                                                <div class="form-group">
+
+                                                    <label> TargetSpy Parameters: <input class="form-control" name="targetspy" size="60"></label> <a  data-toggle="modal" data-target="#targetspy" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
+                                                    <br>
+                                                    <label> Miranda Parameters: <input class="form-control"  name="miranda" size="60"></label> <a  data-toggle="modal" data-target="#miranda" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
+                                                    <br>
+                                                    <label> PITA Parameters: <input  class="form-control" name="pita" size="60"></label> <a  data-toggle="modal" data-target="#pita" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
+                                                    <br>
+                                                    <label> psRobot Parameters: <input  class="form-control" name="psrobot" size="60"></label> <a  data-toggle="modal" data-target="#psrobot" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
+                                                    <br>
+                                                    <label> TAPIR FASTA engine: <input class="form-control" name="tapir" size="60"></label> <a  data-toggle="modal" data-target="#tapir" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
+                                                    <br>
+                                                    <label> TAPIR RNAhybrid engine: <input class="form-control" name="hybrid" size="60"></label> <a  data-toggle="modal" data-target="#hybrid" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                            <br>
+                            <input type="submit"  class="btn btn-primary" value="Run">
+                        </div>
+
+
+
+                    </div>
+                </form>
+
+            </div>
+
+
+            <div class="col-lg-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Help
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <a href="{% static "WebManual_sRNAtoolbox.pdf" %}" target="_blank">Link to Web Manual</a>
+                        <br>
+                        <a href="http://bioinfo5.ugr.es/srnatoolbox/jobstatus/mirconstarget/?id=3NDQXYW9XGPZ5O9"  target="_blank">Link to Test Data Results</a>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Test Data Description
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        rat 3’ UTRs and 3 microRNAs
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Test Data Parameters
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        miRNAs File: <a href="http://bioinfo5.ugr.es/static/testData/rno_miR.fa" download> <i class="fa fa-download fa-fw"></i> rno_miR.fa</a>
+                        <br>
+                        UTRs File: <a href="http://bioinfo5.ugr.es/static/testData/rn5_refSeq_3utr.fa" download> <i class="fa fa-download fa-fw"></i>rn5_refSeq_3utr.fa</a>
+                        <br>
+                        <br>
+                        Programs to predict targets: <pre style=" white-space: nowrap; overflow-y: hidden">TargetSpy, Miranda and PITA</pre>
+
+
+                    </div>
+                </div>
+
+            </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+    </div>
+
+
+{% endblock %}
+
+{% block modals %}
+    {% include "Messages/mirnaconstarget/ProgramsParameters.html" %}
+    {% include "Messages/mirnaconstarget/tapir_hybrid_parameters.html" %}
+    {% include "Messages/mirnaconstarget/tapir_parameters.html" %}
+    {% include "Messages/mirnaconstarget/miranda_parameters.html" %}
+    {% include "Messages/mirnaconstarget/psrobot_tar_parameters.html" %}
+    {% include "Messages/mirnaconstarget/targetspy_parameters.html" %}
+    {% include "Messages/mirnaconstarget/pita_parameters.html" %}
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function() {
+            $('input[id="PS"]').attr('disabled', 'disabled');
+            $('input[id="TF"]').attr('disabled', 'disabled');
+            $('input[id="TH"]').attr('disabled', 'disabled');
+        });
+
+        $('input[id="plant"]').on('change',function() {
+            if($(this).is(':checked')) {
+
+                $('input[id="TS"]').attr('disabled','disabled');
+                $('input[id="MR"]').attr('disabled','disabled');
+                $('input[id="PT"]').attr('disabled','disabled');
+                $('input[id="PS"]').removeAttr('disabled');
+                $('input[id="TF"]').removeAttr('disabled');
+                $('input[id="TH"]').removeAttr('disabled');
+
+            }
+            else {
+                $('input[id="TS"]').removeAttr('disabled');
+                $('input[id="MR"]').removeAttr('disabled');
+                $('input[id="PT"]').removeAttr('disabled');
+                $('input[id="PS"]').attr('disabled','disabled');
+                $('input[id="TF"]').attr('disabled','disabled');
+                $('input[id="TH"]').attr('disabled','disabled');
+            }
+        });
+    </script>
+{% endblock %}

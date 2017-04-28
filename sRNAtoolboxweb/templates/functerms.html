@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+                <div class="page-header">
+                    <h1>sRNAfuncTerms: </h1>
+                    <h3>Enrichment of functional annotations in target genes</h3>
+                </div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-9">
+{% comment %}
+            <form action="srnafuncterms/test" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="submit"  class="btn btn-success" value="Launch Test">
+            </form>
+
+            <br>{% endcomment %}
+
+
+            <form action="srnafuncterms/run" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Input data
+                        </h4>
+                    </div>
+                        <div class="panel-body">
+                            <div class="col-lg-4">
+                                <label>Provide a sRNAde ID: </label>
+                                <input id="form1" class="form-control" name="de_id" placeholder="Enter sRNAde ID">
+                                <br>
+                                <label>Or provide a sRNAbench ID (Top 10 miRNA will be selected): </label>
+                                <input id="form2" class="form-control" name="id" placeholder="Enter a sRNAbench ID">
+                                <br>
+                                <label>Or upload a list of miRNAs names</label>
+                                <input  id=file1  type="file" name="list">
+                                <br>
+                                <div class="form-group">
+                                    <label>Use only Experimental Targets (not available for all species)
+                                    <input name="exp" type="checkbox"></label>
+
+                                </div>
+
+                                <label>  Specie <br>
+                                    <select class="form-control-static"  name="db_table">
+                                        {% for sp in species %}
+
+                                                <option value="{{ sp.0 }}"> {{ sp.1 }} </option>
+
+                                                {% endfor %}
+
+                                    </select></label>
+
+                                <br><br>
+
+
+
+                                <input type="submit"  class="btn btn-primary" value="Run">
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="col-lg-3">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Help
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <a href="{% static "WebManual_sRNAtoolbox.pdf" %}" target="_blank">Link to Web Manual</a>
+                    <br>
+                    <a href="http://bioinfo5.ugr.es/srnatoolbox/jobstatus/srnafuncterms/?id=QMMN8HH5N3AN80S"  target="_blank">Link to Test Data Results</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-3">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Test Data Description
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <h4>Human miRNAs set:</h4>
+                    <ul>
+                        <li>hsa-miR-451a</li>
+                        <li>hsa-miR-144-3p</li>
+                        <li>hsa-miR-126-3p</li>
+                        <li>hsa-miR-340-5p</li>
+                    </ul>
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+
+        <div class="col-lg-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Test Data Parameters
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    Input File: <a href="http://bioinfo5.ugr.es/static/testData/functerms_test_data.txt" download> <i class="fa fa-download fa-fw"></i> List of Human miRNAs</a>
+
+
+                </div>
+            </div>
+        <!-- /.row -->
+    </div>
+    </div>
+    <!-- /#page-wrapper -->
+</div>
+{% endblock %}
+
+{% block js %}
+    <!-- <script src="{% static 'js/sRNAfuncTerms_form_control.js' %}"></script> -->
+{% endblock %}

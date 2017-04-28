@@ -1,0 +1,78 @@
+{% extends "static_pages/base_static.html" %}
+{% load staticfiles %}
+{% block content %}
+    {% load render_table from django_tables2 %}
+
+    <div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header">Barley Cultivar Results</h3>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+
+
+        <div class="col-lg-12">
+        <p>The following tables allow browsing the genome mappings for Golden Promise and Pallas as a function of read length. For each chromosome position, the RPM (reads per million) values have been calculated.
+ 3 length groups have been established: 17-19 nt (Hvu082214v1_26_17-19), 20-22 nt (Hvu082214v1_26_20-22) and 23-24 nt (Hvu082214v1_26_23-24 nt).
+The tables hold all differentially expressed regions between Golden Promise and Pallas, being the score the log2 of the fold-change between Golden Promise and Pallas in the given region.
+By clicking on the link on the right column in the table, the corresponding tracks are automatically shown.
+In the jBwrowse genome browser, on the top-left part, the barley Ensembl gene and repeat annotations can be activated.</p>
+
+
+            {% for table in tables %}
+                <div class="panel panel-primary" id="tax">
+
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{table.name}}">{{table.name}}</a>
+                    </h4>
+
+                </div>
+                <!-- .panel-heading -->
+                {% if forloop.first %}
+                    <div id="collapse{{table.name}}" class="panel-collapse collapse in">
+                {% else %}
+                    <div id="collapse{{table.name}}" class="panel-collapse collapse">
+                {% endif %}
+
+
+            <div class="panel-body">
+
+                <div class="table-responsive">
+                    {% render_table table.content %}
+                </div>
+
+            </div></div>
+            </div>
+            {% endfor %}
+            </div>
+
+
+        </div>
+
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+
+
+
+{% endblock %}
+
+
+{% block js %}
+    <script src="{% static 'js/plugins/dataTables/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'js/plugins/dataTables/dataTables.bootstrap.js' %}"></script>
+    <script>
+        $('table').each(function() {
+            if (this.id != "notformattable"){
+                console.log(this.id);
+                $(this).dataTable();
+            }
+
+        });
+
+    </script>
+{% endblock %}

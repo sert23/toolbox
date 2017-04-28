@@ -1,0 +1,30 @@
+__author__ = 'antonior'
+from pipelines import sRNAfuncTermsPipeline
+import sys
+import optparse
+
+def main():
+#    ################################################
+
+    #### Options and arguments #####################
+
+    ################################################
+
+    usage=""" python Main.py  -a [annotations] -n [job_name]  -p [pipeline_key]  --type <type> -i <file miRNA input> """
+    parser = optparse.OptionParser(usage)
+
+    #Example:
+
+    parser.add_option("-a", dest="annotations", help="""Requiered.  comma separated annontations """)
+    parser.add_option("-p", dest="pipeline_key", help="""Requiered. pipeline_key""")
+    parser.add_option("-n", dest="name", help="""Requiered. job name""")
+    parser.add_option("-i", dest="input", help="""Required. path to miRNA input file. Default=None""")
+    parser.add_option("-t", dest="type", default="list", help="""Optional. pipeline type. Default=list""")
+
+    (options, args) = parser.parse_args(sys.argv)
+    newPipe=sRNAfuncTermsPipeline(options.annotations.split(","), options.pipeline_key, options.name, options.input, options.type)
+    newPipe.run()
+
+
+if __name__ == '__main__':
+    main()

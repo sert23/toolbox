@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+    <div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">{{ desc }}</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+    <a class="btn btn-default" href="{% url "sRNABench.views.render_table" back id %}"><i class="fa fa-arrow-left"></i>Back</a>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+        </div>
+        <!-- .panel-heading -->
+        <div class="panel-body">
+
+                {% if align %}
+                    <pre style="white-space: pre-wrap">
+                    {{ align }}
+                    </pre>
+
+                {% else %}
+                    <h3 class="text-warning">No Results!</h3>
+                {% endif %}
+        </div>
+        </div>
+
+
+        </div>
+    </div>
+
+{% endblock %}

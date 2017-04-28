@@ -1,0 +1,215 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load dajaxice_templatetags %}
+
+
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="page-header">sRNAbench Results for job ID: <a href="/srnatoolbox/jobstatus/srnabench/?id={{ id }}" class="alert-link">{{ id }}</a> </h3>
+
+            </div>
+            <!-- /.col-lg-12 -->
+            <div class="col-lg-8">
+
+                <p class="text-danger">The results will be stored for 15 days (This will be removed on:  {{ date|date:"D d M Y" }}).</p>
+
+                <p class="text-primary">If you use the sRNAbench webserver plese check <a data-toggle="modal" data-target="#HWTC" >How to Cite.</a></p>
+
+                {% if running %}
+                    <p class="text-warning">This job is still running. The page will be automatically refreshed each 60s</p>
+                {% endif %}
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+
+            <!-- Nav tabs -->
+    <div class="row">
+
+
+
+                    {% if zip %}
+<div class="col-lg-12">
+                <h4 class="text-success"> Download all results as zip file <a href="{% static  zip  %}" download> <i class="fa fa-file-zip-o fa-fw"></i> here</a></h4>
+</div>
+                {% endif %}
+        {% if parameters %}
+            <div class="col-lg-12">
+            <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#Parameters" >Parameters</a>
+                </h4>
+            </div>
+            <!-- .panel-heading -->
+            <div id="Parameters" class="panel-collapse collapse">
+                <div class="panel-body">
+
+
+                    <div class="col-lg-6">
+                        <pre style="white-space: pre-line">
+
+                    {{ parameters }}
+                        </pre>
+                    </div>
+
+
+                </div>
+            </div>
+            </div>
+            </div>
+        {% endif %}
+        </div>
+
+            <ul class="nav nav-pills" id="myTab">
+
+
+                <li><a href="#Summary" data-toggle="tab">Summary</a>
+                </li>
+
+                {% if preproc %}
+                <li class="active" ><a href="#Preprocessing" data-toggle="tab">Preprocessing</a>
+                </li>
+                {% endif %}
+
+                {% if mapping_results %}
+                <li><a href="#Genome" data-toggle="tab">Genome/Library Mapping</a>
+                </li>
+                {% endif %}
+
+                {% if mirimg %}
+                <li><a href="#microRNA" data-toggle="tab">MicroRNA summary (miRBase v21)</a>
+                </li>
+                {% endif %}
+
+                {% if libs %}
+                <li><a href="#libs" data-toggle="tab">sRNA summary</a>
+                </li>
+                {% endif %}
+
+                {% if novel %}
+                <li><a href="#novel" data-toggle="tab">Novel microRNAs</a>
+                </li>
+                {% endif %}
+
+                {% if trna %}
+                <li><a href="#trna" data-toggle="tab">Other features</a>
+                </li>
+                {% endif %}
+
+
+            </ul>
+
+
+
+
+
+            <!-- Tab panes -->
+        <br>
+        <br>
+            <div class="tab-content">
+
+
+                <div class="tab-pane fade" id="Summary">
+
+                    <div class="col-lg-12">
+                    {% include "summary.html" %}
+                        </div>
+                </div>
+
+                {% if preproc %}
+                <div class="tab-pane fade in active" id="Preprocessing">
+                <div class="col-lg-12">
+                    {% include "preprocessing.html" %}
+                </div>
+                </div>
+                {% endif %}
+
+                {% if  mapping_results %}
+                <div class="tab-pane fade" id="Genome">
+                <div class="col-lg-12">
+                    {% include "Genome.html" %}
+                </div>
+                </div>
+                {% endif %}
+
+                {% if mirimg %}
+
+                <div class="tab-pane fade" id="microRNA">
+                <div class="col-lg-12">
+                    {% include "microrna_summary.html" %}
+                </div>
+                </div>
+                {% endif %}
+
+                {% if libs %}
+                <div class="tab-pane fade" id="libs">
+                <div class="col-lg-12">
+                    {% include "libs.html" %}
+                </div>
+                </div>
+                {% endif %}
+
+                {% if novel %}
+                <div class="tab-pane fade" id="novel">
+                <div class="col-lg-12">
+                    {% include "novel.html" %}
+                </div>
+                </div>
+                {% endif %}
+
+                {% if trna %}
+                <div class="tab-pane fade" id="trna">
+                <div class="col-lg-12">
+                    {% include "trna.html" %}
+                </div>
+                </div>
+                {% endif %}
+
+
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block modals %}
+    {% include "Messages/bench/HWTCbench.html" %}
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function() {
+            if(location.hash) {
+                $('a[href=' + location.hash + ']').tab('show');
+            }
+            $(document.body).on("click", "a[data-toggle]", function(event) {
+                location.hash = this.getAttribute("href");
+            });
+        });
+        $(window).on('popstate', function() {
+            var anchor = location.hash || $("a[data-toggle=tab]").first().attr("href");
+            $('a[href=' + anchor + ']').tab('show');
+        });
+    </script>
+
+    {% if running %}
+
+    <script type="text/javascript">
+
+        function ReloadPage() {
+            location.reload();
+        }
+
+        $(document).ready(function() {
+            setTimeout("ReloadPage()", 60000);
+        });
+    </script>
+
+    {% endif %}
+
+{% endblock %}

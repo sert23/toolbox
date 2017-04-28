@@ -1,0 +1,223 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">sRNAtoolbox: a collection of small RNA analysis tools</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    <!-- /.row -->
+    <div class="row">
+    <div class="col-lg-12">
+    <div class="row row-grid">
+        <div class="well well-lg col-lg-12">
+            <h4>sRNAtoolbox is aimed to provide small RNA researchers with several useful tools including sRNA
+                expression profiling from deep sequencing experiments and several downstream analysis tools.
+                The center piece of sRNAtoolbox is sRNAbench, which allows the expression profiling and
+                prediction of novel microRNAs in deep sequencing experiments.
+                The other tools can be either launched on sRNAbench results, or independently using the
+                appropriate file formats.</h4><br>
+            <h4>Currently the toolbox is comprised of the following methods:</h4>
+
+
+        </div>
+    </div>
+
+    <div class="row row-grid">
+
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3>Methods</h3>
+        </div>
+        <div class="panel-body">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#sRNAbench" data-toggle="tab">sRNAbench</a>
+                </li>
+                <li class=""><a href="#sRNAde" data-toggle="tab">sRNAde</a>
+                </li>
+                <li class=""><a href="#sRNAblast" data-toggle="tab">sRNAblast</a>
+                </li>
+                <li class=""><a href="#miRNAconsTarget" data-toggle="tab">miRNAconsTarget</a>
+                </li>
+                <li class=""><a href="#sRNAjBrowser" data-toggle="tab">sRNAjBrowser</a>
+                </li>
+                <li class=""><a href="#sRNAjBrowserDE" data-toggle="tab">sRNAjBrowserDE</a>
+                </li>
+                <li class=""><a href="#sRNAfuncTerms" data-toggle="tab">sRNAfuncTerms</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="sRNAbench">
+                    <a href="/srnatoolbox/srnabench/"> <h3>sRNAbench:</h3> <h4>Expression profiling of small RNAs and prediction of novel microRNAs from deep sequencing data</h4>  </a>
+                    <h4 style="line-height: 150%">sRNAbench is principally designed for the use in model species, or at least species with
+                        an available genome assembly or annotations is fasta format. It accepts several commonly
+                        used input formats like fastq, sra, fasta or read/count. It performs the expression
+                        profiling of known microRNAs and other types of small RNAs, detects and analysis
+                        isomiRs, prepares several graphical summaries and predicts novel microRNAs both in
+                        plants and animals.</h4>
+                </div>
+
+                <div class="tab-pane fade" id="sRNAde">
+                    <a href="/srnatoolbox/srnade/"> <h3>sRNAde:</h3> <h4>Differential expression analysis </h4></a>
+                    <h4 style="line-height: 150%">sRNAde is a module for the detection of differentially expressed sRNA. The input is
+                                either a number of sRNAbench output folders or a user-given expression matrix.
+                                For the detection of differentially expressed RNAs it applies 3 widely used methods,
+                                edgeR, DEseq and noiseq. Apart of the output from the individual methods, it provides a
+                                consensus differential expression file. Additionally, this tool can perform cluster
+                                analysis (heatmaps), isomiR analysis and it gives a summary on the sequencing statistic
+                                of all used samples (if the input has been from sRNAbench).</h4>
+                </div>
+
+                <div class="tab-pane fade" id="sRNAgFree">
+                    <a href="/srnatoolbox/srnagfree/" > <h3>sRNAgFree:</h3>  <h4>Profiling and detection of novel microRNAs in non-model specie</h4>  </a>
+                    <h4 style="line-height: 150%">Currently, microRNA deep sequencing data is available for many species that do not count
+                        with a proper genome assembly. In such cases, frequently simple homology based detection
+                        methods are applied. These methods can lead to false positive predictions but will also
+                        fail to detect microRNAs that are not present in the reference database (like miRBase).
+                        sRNAgFree is aimed for the prediction and expression profiling of microRNAs in
+                        non-model species. It based on the duplex properties formed by the guide and passenger
+                        strand and applies homology and learning form known binding and Drosha/Dicer processing
+                        patterns.</h4>
+                </div>
+
+                <div class="tab-pane fade" id="sRNAblast">
+                    <a href="/srnatoolbox/srnablast/"> <h3>sRNAblast:</h3> <h4>Blast analysis of deep sequencing reads against a local nt/nr (NCBI link) database</h4>  </a>
+                    <h4 style="line-height: 150%">This tool is principally aimed for the analysis of reads that could not be mapped in
+                                sRNAbench or other profiling tools. The results could either point towards contamination
+                                sources or biological meaningful information like the presence of unexpected viral or
+                                bacterial RNA molecules.</h4>
+                </div>
+
+
+                <div class="tab-pane fade" id="miRNAconsTarget">
+                    <a href="/srnatoolbox/mirconstarget/"> <h3>miRNAconsTarget:</h3> <h4>Predict microRNA targets on user defined sets of microRNAs and 3'UTRs </h4> </a>
+                    <h4 style="line-height: 150%">Most microRNA target prediction tools are implemented as webservers on a limited number of
+                                species, or do allow only the prediction of a limited number of microRNAs and/or mRNAs.
+                                miRNAconsTargets uses two microRNA target prediction programs, miranda and TargetSpy and
+                                applies them to the user supplied sets of microRNAs and 3'UTRs. It reports both, the
+                                individual predictions and a consensus prediction. Currently, only animal microRNA
+                                targets can be predicted.</h4>
+                </div>
+
+                <div class="tab-pane fade" id="sRNAjBrowser">
+                    <a href="/srnatoolbox/srnajbrowser/" > <h3>sRNAjBrowser:</h3> <h4>Browse the small RNA expression values in a genome context </h4> </a>
+                    <h4 style="line-height: 150%">In several small RNA research fields, the visual exploration of small RNA expression
+                                pattern in a genome context will be helpful. sRNAjBrowser allows the user to analyse
+                                the expression data in a genome context by means of a jBrowser implementation.
+                                Furthermore, this tool is connected to NGSmethDB and can therefore also display
+                                some selected methylation tracks.</h4>
+                </div>
+
+                <div class="tab-pane fade" id="sRNAjBrowserDE">
+                    <a href="/srnatoolbox/srnajbrowserde/" > <h3>sRNAjBrowserDE:</h3> <h4>Visualize differential expression as a function of read length </h4> </a>
+
+                        <h4 style="line-height: 150%">
+                        sRNAjBrowserDE extends on sRNAjBrowser as it: i) allows the comparison of two experimental
+                            groups, i.e. it visualizes the differential expression in a genome context and ii) it
+                            allows to visualize the expression as a function of read length. This might me particularly
+                            interesting for plant research as 24nt long and 21/22nt long reads have very different functions. </h4>
+                </div>
+
+                <div class="tab-pane fade" id="sRNAfuncTerms">
+                    <a href="/srnatoolbox/srnafuncterms/" > <h3>sRNAfuncTerms:</h3> <h4>Determine over represented functional annotations in target gene set</h4>  </a>
+                    <h4 style="line-height: 150%">Overrepresented functional annotations in a list of target genes might give useful hints
+                                on the functional implications of the microRNAs. sRNAfuncTerms takes a set of microRNAs
+                                as input, retrieves the target genes from the underlying database and detected
+                                overrepresented GO-terms among the target genes. Apart from the complete set of microRNAs,
+                                it tests also all microRNA modules (combinations) which allow the user to detect the microRNAs
+                                that act on the same pathways or share the same functions.</h4>
+                </div>
+
+            </div>
+        </div>
+        </div>
+
+        <div class="panel panel-green">
+        <div class="panel-heading">
+            <h3>Workflows</h3>
+        </div>
+        <div class="panel-body">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#miRNAfuncTargets" data-toggle="tab">miRNAfuncTargets</a>
+                </li>
+            </ul>
+
+            <!-- Tab panes -->
+
+            <div class="tab-content">
+                <div class="tab-pane fade active in" id="miRNAfuncTargets">
+                    <a href="/srnatoolbox/mirnafunctargets/"> <h3>miRNAfuncTargets:</h3> <h4>Cross-species microRNA target prediction and enrichment analysis of functional annotations.</h4>  </a>
+                    <h4 style="line-height: 150%">This workflow connects directly sRNAconsTargets and sRNAfuncTerms.
+                        It allows the user to i) predict the putative target genes of a set of exogenous microRNAs and
+                        ii) determine the enriched functional annotations, i.e. which pathways or functions are enriched
+                        for the target genes.</h4>
+                </div>
+
+        </div>
+            </div>
+            </div>
+
+        <div class="panel panel-info">
+        <div class="panel-heading">
+            <h3>Helper Tools</h3>
+        </div>
+        <div class="panel-body">
+
+            <h4 style="line-height: 150%">These tools are intended to help the user to either setting up a local sRNAbench database
+                (Ensembl Parser, NCBI Parser, RNA Central Parser, genomic tRNA Parser) or to prepare input
+                data for other sRNAtoolbox tools. If you use any of the generated data in your publication, please
+                cite the papers given at the data retrieval page (NCBI, ENSEMBL, genomic tRNA and RNA central databases).</h4>
+<br><h4>Tools: </h4>
+            <ul class="list-inline">
+                                <li>
+                                    <a href="/srnatoolbox/helper/ensemlparser">Ensembl Parser</a>
+                                </li>
+                                <li>
+                                    <a href="/srnatoolbox/helper/ncbiparser">NCBI Parser</a>
+                                </li>
+                                <li>
+                                    <a href="/srnatoolbox/helper/rnacentralparser">RNA central parser</a>
+                                </li>
+                                <li>
+                                    <a href="/srnatoolbox/helper/trnaparser">Genomic tRNA database parser</a>
+                                </li>
+                                <li>
+                                    <a href="{% url 'removedup' %}">Remove duplicates from a fasta file</a>
+                                </li>
+                                <li>
+                                    <a href="/srnatoolbox/helper/extract">Extract Sequences from a fasta file</a>
+                                </li>
+                            </ul>
+        </div>
+
+
+
+		</div>
+
+
+
+            </div>
+
+    <script type="text/javascript">
+    function showValue(newValue)
+    {
+        document.getElementById("range").innerHTML=newValue;
+    }
+    </script>
+
+    <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+{% endblock %}
+
+

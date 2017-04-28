@@ -1,0 +1,9 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}adapter_length{% endblock %}
+{% block title %}
+    Minimum Adapter Length
+{% endblock %}
+{% block text %}
+<p>Reads can have both, a 5&rsquo; barcode and 3&rsquo; adapter sequences. For example, reads of 36 nt length, out of which 5 nt correspond to the barcode will have at the most 31 nt &lsquo;useful&rsquo; information. In such a case, the default minimum adapter length cannot be used as this would imply that only small RNAs equal or shorter than 31nt -10nt = 21nt can be profiled. <br />
+Therefore, in such a case, the minimum adapter length should be set to 6nt allowing the profiling of small RNAs up to 25 nt. Moreover, the allowed max. number of mismatches in adapter detection should be set to 0 as otherwise the false positive detection of the adapters will increase notably (given the short sequence of only 6nt that has a much higher probability to occur by chance alone.</p>
+{% endblock %}

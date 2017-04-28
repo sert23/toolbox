@@ -1,0 +1,34 @@
+{% load staticfiles %}
+
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Job Progress
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        {% for msg in msgs %}
+                            {% if msg.type == "info" %}
+                                <div class="alert alert-info">
+                                    {{ msg.text }}
+                                </div>
+                            {% elif msg.type == "warning" %}
+                                <div class="alert alert-warning">
+                                    {{ msg.text }}
+                                </div>
+                            {% elif msg.type == "error" %}
+                                <div class="alert alert-danger">
+                                    {{ msg.text }}
+                                </div>
+                            {% elif msg.type == "success" %}
+                                <div class="alert alert-success">
+                                    {{ msg.text }}
+                                </div>
+                            {% endif %}
+                        {% empty %}
+                        {% endfor %}
+
+                    </div>
+                    <!-- .panel-body -->
+                </div>
+            </div>

@@ -1,0 +1,3 @@
+django_tables2
+dajaxice
+dajax

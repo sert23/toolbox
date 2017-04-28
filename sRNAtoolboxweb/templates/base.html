@@ -1,0 +1,207 @@
+{% load staticfiles %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>sRNAtoolbox</title>
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet"  >
+
+    <!-- MetisMenu CSS -->
+    <link href="{% static 'css/plugins/metisMenu/metisMenu.min.css' %}" rel="stylesheet" >
+
+    <!-- Timeline CSS -->
+    <link href="{% static 'css/plugins/timeline.css' %}" rel="stylesheet" >
+
+    <!-- Custom CSS -->
+    <link href="{% static 'css/sb-admin-2.css' %}" rel="stylesheet"   >
+
+    <!-- Morris Charts CSS -->
+    <link href="{% static 'css/plugins/morris.css' %} " rel="stylesheet"  >
+
+    <!-- Custom Fonts -->
+    <link href="{% static 'font-awesome-4.1.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media sRNAfuncTerms -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    {% block header %}{% endblock %}
+
+
+
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/srnatoolbox/index">sRNAtoolbox</a><p class="text-danger"></p>
+            </div>
+            <!-- /.navbar-header -->
+
+
+            <!-- /.navbar-top-links -->
+
+            <div class="navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="sidebar-search">
+                            <form action="/srnatoolbox/search" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="input-group custom-search-form">
+
+                                    <input type="text" name="job_id" class="form-control" placeholder="Search Results by ID">
+                                <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+
+                </div>
+                </form>
+                <!-- /input-group -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-gears fa-fw"></i> Tools<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/srnatoolbox/srnabench">sRNAbench</a>
+                                </li>
+                                <li>
+                                    <a href="/srnatoolbox/srnade">sRNAde</a>
+                                </li>
+
+{% comment %}                                <li>
+                                    <a href="/srnatoolbox/srnagfree">sRNAgFree</a>
+                                </li>{% endcomment %}
+
+                                <li>
+                                    <a href="/srnatoolbox/srnablast">sRNAblast</a>
+                                </li>
+
+                                <li>
+                                    <a href="/srnatoolbox/mirconstarget">miRNAconstarget</a>
+                                </li>
+                                <li>
+                                    <a href="/srnatoolbox/srnajbrowser">JBrowser</a>
+                                </li>
+                                <li>
+                                    <a href="/srnatoolbox/srnafuncterms">sRNAfuncTerms</a>
+                                </li>
+                                <li>
+                                    <a href="/srnatoolbox/srnajbrowserde">jBrowserDE</a>
+                                </li>
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-link fa-fw"></i> Workflows<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="/srnatoolbox/mirnafunctargets">miRNAFuncTargets</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-plus fa-fw"></i>Helper Tools<span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+
+                                <li>
+                                    <a href="/srnatoolbox/helper/ensemlparser">Ensembl Parser</a>
+                                </li>
+                                <li>
+                                    <a href="/srnatoolbox/helper/ncbiparser">NCBI Parser</a>
+                                </li>
+                                <li>
+                                    <a href="/srnatoolbox/helper/rnacentralparser">RNA central parser</a>
+                                </li>
+                                <li>
+                                    <a href="/srnatoolbox/helper/trnaparser">Genomic tRNA database parser</a>
+                                </li>
+                                <li>
+                                    <a href="/srnatoolbox/helper/removedup">Remove duplicates from a fasta file</a>
+                                </li>
+                                <li>
+                                    <a href="/srnatoolbox/helper/extract">Extract Sequences from a fasta file</a>
+                                </li>
+
+
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
+                            <a href="/srnatoolbox/manual"><i class="fa fa-book fa-fw"></i>Web Manual</a>
+                        </li>
+                        <li>
+                            <a href="{% url "sRNAtoolboxweb.views.version" %}"><i class="fa fa-history fa-fw"></i>Version Control and Additional Information</a>
+                        </li>
+                        <li>
+                            <a href="http://nar.oxfordjournals.org/cgi/content/full/gkv555?ijkey=EMjboV7qH09gY08&keytype=ref" target="_blank"><i class="fa fa-graduation-cap"></i>How to Cite</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.sidebar-collapse -->
+            </div>
+            <!-- /.navbar-static-side -->
+        </nav>
+
+
+
+        {% block content %}{% endblock %}
+        {% block modals %}{% endblock %}
+
+
+
+
+
+    <!-- /#wrapper -->
+
+    <!-- jQuery Version 1.11.0 -->
+    <script src="{% static 'js/jquery-1.11.0.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="{% static 'js/plugins/metisMenu/metisMenu.min.js' %}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="{% static 'js/sb-admin-2.js' %}"></script>
+
+    {% block js %}  {% endblock %}
+
+
+
+
+
+
+</body>
+
+</html>

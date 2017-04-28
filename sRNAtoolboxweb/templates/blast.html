@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <h1>sRNAblast: </h1>
+                    <h3>Profiling of small RNAs of unknown origin </h3>
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+    <!-- /.row -->
+
+    <div class="row">
+        <div class="col-lg-9">
+
+{% comment %}            <form action="srnablast/test" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="submit"  class="btn btn-success" value="Launch Test">
+            </form>
+
+            <br>{% endcomment %}
+
+            <form action="/srnatoolbox/srnablast/run" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+
+
+                <!-- INPUT DATA -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse"  href="#collapseOne">Input data</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <label> Upload the reads (fastq.gz, fa.gz or rc.gz):</label>
+                                <input type="file" name="reads_file" id=file1>
+                            </div>
+
+                            <div class="form-group">
+                                <label> Or provide a URL for big files </label>
+                                <label class="text-success"> (recommended!) </label>
+                                <input name="url" size="50">
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Or provide a sRNAbench ID: </label>
+                                <input size="50" name="bench_id" >
+                            </div>
+
+                            <div class="form-group">
+                                <label>Number of unique unmapped reads to blast</label>
+                                <select class="form-control-static"  name="maxReads">
+                                    <option value="1"> 1 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="10"> 10 </option>
+                                    <option value="20"> 20 </option>
+                                    <option value="50"> 50 </option>
+                                    <option value="100" selected> 100 </option>
+                                    <option value="500"> 500 </option>
+                                    <option value="1000"> 1000 </option>
+                                    <option value="2000"> 2000 </option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Database</label>
+                                <select class="form-control-static"  name="blastDB">
+                                    <option value="nr"> nr </option>
+                                    <option value="refseq_rna"> refseq_rna </option>
+                                    <option value="est"> est </option>
+                                    <option value="env_nt"> env_nt </option>
+                                </select>
+                                <a href="http://www.ncbi.nlm.nih.gov/BLAST/blastcgihelp.shtml#nucleotide_databases" target="_blank" class="btn btn-link"><i class="fa fa-info-circle"></i></a>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label>Expect threshold:</label>
+                                <input size="10" name="minEvalue">
+                                <a href="http://www.ncbi.nlm.nih.gov/BLAST/blastcgihelp.shtml#expect" target="_blank" class="btn btn-link"><i class="fa fa-info-circle"></i></a>
+                            </div>
+
+
+                            <!-- Adapter Removal -->
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse"  href="#collapseThree">Adapter removal</a>
+                                    </h4>
+                                </div>
+                                <div id="collapseThree" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label><input type="checkbox" name="guessAdapter">Guess the adapter sequence </label>
+                                            <label class="text-danger">(not recommended!)</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="row row-grid">
+                                                <div class="col-lg-4">
+                                                    <label>Select Adapter</label>
+                                                    <select class="form-control" name="adapter">
+                                                        <option value="XXX">Input is adapter trimmed</option>
+                                                        <option value="TGGAATTCTCGGGTGCCAAGG">Illumina RA3 - TGGAATTCTCGGGTGCCAAGG</option>
+                                                        <option value="UCGUAUGCCGUCUUCUGCUUGU">Illumina (alternative) - UCGUAUGCCGUCUUCUGCUUGU</option>
+                                                        <option value="330201030313112312">SOLiD (SREK) - 330201030313112312</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <label> Or Provide adapter sequence: </label>
+                                                    <input name="alterAdapter" size="40">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <div class="row row-grid" >
+                                                <div class="col-lg-4">
+                                                    <label> Minimum Adapter Length </label>
+                                                    <br>
+                                                    <select class="form-control-static"  name="adapterMinLength">
+                                                        <option value="10">10</option>
+                                                        <option value="8">8</option>
+                                                        <option value="6">6</option>
+                                                        <option value="12">12</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-4">
+                                                    <label>  Max. mismatches in adapter detection </label>
+                                                    <br>
+                                                    <select class="form-control-static"  name="adapterMM">
+                                                        <option value="1"> 1 </option>
+                                                        <option value="0"> 0 </option>
+                                                        <option value="2"> 2 </option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-lg-4">
+                                                    <label><input type="checkbox" name="recursiveAdapterTrimming">Recursive Adapter trimming</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+                            <input type="submit"  class="btn btn-primary" value="Run">
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </form>
+
+
+
+
+
+        </div>
+
+
+        <div class="col-lg-3">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Help
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    <a href="{% static "WebManual_sRNAtoolbox.pdf" %}" target="_blank">Link to Web Manual</a>
+                    <br>
+                    <a href="http://bioinfo5.ugr.es/srnatoolbox/srnablast/results/?id=V6IC71DG3VVOGUK" target="_blank">Link to Test Data Results</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-3">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Test Data Description
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    A Salmonella-encoded microRNA-like RNA facilitates bacterial invasion and intracellular replication via suppressing host cell inducible nitric oxide synthase.
+                    <br>
+                    <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE53586"  target="_blank">Link To Publication</a>
+                </div>
+            </div>
+
+
+            <!-- /.row -->
+        </div>
+
+        <div class="col-lg-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        Test Data Parameters
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    Input File: <a href="http://bioinfo5.ugr.es/static/4XVGNWRUK0ZCUM1/reads.fa" download> <i class="fa fa-download fa-fw"></i> Reads File</a>
+                    <br>
+                    <br>
+                    <a href="http://bioinfo5.ugr.es/srnatoolbox/jobstatus/srnabench/?id=HUVLME9Q11YVHBU" target="_blank">Link to sRNAbench Analysis</a>
+
+
+                </div>
+            </div>
+
+
+            <!-- /#page-wrapper -->
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        // tooltip demo
+        $('.row').tooltip({
+            selector: "[data-toggle=tooltip]",
+            container: "body"
+        })
+
+    </script>
+
+
+    <script type="text/javascript" language="JavaScript">
+        var filecounter = 1;
+        var urlcounter = 1;
+        var limit = 10;
+        function addInput(divName, type){
+            if(filecounter == limit)  {
+                alert("You have reached the limit of " + filecounter + " files.");
+            }else{
+                var newdiv = document.createElement('div');
+                newdiv.innerHTML = "<input type=\"file\" name=\"user_files\" size=\"40\">";
+                document.getElementById(divName).appendChild(newdiv);
+                filecounter++;
+            }
+        }
+        function addInputURL(divName, type){
+            if(filecounter == limit)  {
+                alert("You have reached the limit of " + filecounter + " files.");
+            }else{
+                var newdiv = document.createElement('div');
+                newdiv.innerHTML = "Provide URL: <input name=\"user_urls\" size=\"40\">";
+                document.getElementById(divName).appendChild(newdiv);
+                filecounter++;
+            }
+        }
+        function HideContent(d) {
+            document.getElementById(d).style.display = "none";
+        }
+        function ShowContent(d) {
+            document.getElementById(d).style.display = "block";
+        }
+        function ReverseDisplay(d) {
+            if(document.getElementById(d).style.display == "none") { document.getElementById(d).style.display = "block"; }
+            else { document.getElementById(d).style.display = "none"; }
+        }
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    {#                    <h1>Helper Tools: </h1>#}
+                    <h1>{{ tool }} </h1>
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-9">
+
+
+                <div class="well">
+                    <h4>Remove Duplicates from a Fasta File :</h4>
+                    <p>The UCSC table browser allows to obtain 3' UTR sequences
+                        which are needed when searching for microRNA target genes. However the output files have the
+                        following format:
+                    </p>
+
+                    <pre style="white-space: pre-line">
+                            >hg19_refGene_NM_001184906 range=chr17:37408897-37417712 5'pad=0 3'pad=0 strand=- repeatMasking=none
+                            CAATGGAGGTGGTCAACCTTGGCGAACTGAGTATTTAATGACACTTCTAG
+                            AGCTACCGTGGAGTCTCTCCAGTGGAAGCAACCCCAGTGTTCTGAGCAAG
+                        </pre>
+
+                    <p>The name of the sequence ' hg19_refGene_NM_001184906' would not be recognized by downstream
+                        analysis programs (functional enrichment analysis). This parser allows to substitute certain
+                        parts of the sequence name in order to recover the name of the transcript ( NM_001184906 in this
+                        case). </p>
+
+                    <p>Specifying 'hg19_refGene_' in the textbox would make the parser to remove this string
+                        from the sequence name leaving only the name of the transcript.
+                        This parser removes also duplicated IDs and gives the additional possibility to remove
+                        duplicated sequence.
+
+                    </p>
+                </div>
+
+
+                <!-- INPUT DATA -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapseOne">Input data</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+
+                            <form enctype="multipart/form-data"
+                                  action="{% url 'removedup' %}"
+                                  method="post">{% csrf_token %}
+
+                                    <fieldset>
+                                        {% for field in form %}
+                                            <div class="form-group">
+                                                {% if field.errors %}
+                                                    {% for error in field.errors %}
+                                                        <div class="row">
+                                                            <div class="col-lg-8">
+                                                                <span class="label label-danger">{{ error|escape }}</span>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <label class="control-label">{{ field.label_tag }}</label>
+                                                {{ field }}
+                                            </div>
+                                        {% endfor %}
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="reset" class="btn btn-primary ">Reset</button>
+                                    </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="col-lg-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Help
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <a href="{% static "WebManual_sRNAtoolbox.pdf" %}" target="_blank">Link to Web Manual</a>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- /#page-wrapper -->
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        // tooltip demo
+        $('.row').tooltip({
+            selector: "[data-toggle=tooltip]",
+            container: "body"
+        })
+
+    </script>
+
+{% endblock %}

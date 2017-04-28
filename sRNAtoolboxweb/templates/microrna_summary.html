@@ -1,0 +1,44 @@
+{% load static %}
+
+<div class="row row-grid">
+    <h4>MiR profiling results</h4>
+    <div class="col-lg-6 well">
+        <dl class="dl-horizontal">
+            {% for key, value in mirprof.items %}
+                <dt style='text-align: left; margin-bottom: 0.25em; width: auto; padding-right: 1em;'>{{ key }}</dt>
+                <dd style="margin-left: 0; margin-bottom: 0.25em;">{{ value }}</dd>
+            {% endfor %}
+        </dl>
+    </div>
+</div>
+
+<div class="row row-grid">
+    <dl class="dl-horizontal">
+        <dt>MicroRNA details:</dt>
+        <dd><ul class="list-inline">
+            <li><a href="{% url "sRNABench.views.render_table" "pre-microRNA" id %}">pre-microRNA</a></li>
+            <li><a href="{% url "sRNABench.views.render_table" "mature" id %}">mature (MA)</a></li>
+            <li><a href="{% url "sRNABench.views.render_table" "maturesa" id %}">mature (SA)</a></li>
+        </ul></dd>
+
+        <dt>isomiR details:</dt>
+        <dd><ul class="list-inline">
+            <li><a href="{% url "sRNABench.views.render_table" "isomir" id %}"> isomiR summary </a></li>
+        </ul></dd>
+    </dl>
+</div>
+
+
+
+
+    <div class="row row-grid">
+    <div class="col-lg-12">
+        {% for img  in mirimg %}
+            <div class="col-lg-6">
+                <a href="{% static  img  %}" > <img src="{% static  img  %}" alt="Heat Map" style="width:100%;height:100%" /> </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+

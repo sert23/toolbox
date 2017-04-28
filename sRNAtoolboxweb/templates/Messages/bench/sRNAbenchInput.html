@@ -1,0 +1,29 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}SRNAinput{% endblock %}
+{% block title %}
+    Input File Formats
+{% endblock %}
+{% block text %}
+<p>Different types of input can be provided: fastq, sra, read/count and fasta format.<br />
+ The files can be provided as plain text (fastq, read/count and fasta) or compressed with gzip (*.gz extension). Please try whenever possible upload *.gz files.<br />
+ Please note that sRNAbench infers the file format by means of the extension. unknown extensions are treated as read/count format. For example sample.gz would be treated as read/count format file. The program will fail if the file format is incorrectly inferred.<br />
+ The recognized extensions are:<br />
+ fasta: fa, fasta, fa.gz, fasta.gz<br />
+ read/count: rc, rc.gz<br />
+ sra: sra<br />
+ fastq: fastq.gz, fastq, fq, fq.gz, FASTQ, FASTQ.gz, fastQ, fastQ.gz</p>
+
+<p> File format explanation:<br />
+ read/count<br />
+ read/count format is tab separated with two columns: the read sequence separated by the read count (number of times this read was sequenced)<br />
+ read read count<br />
+ ATTACG&#8230; 3000<br />
+ GCATT&#8230; 2500</p>
+
+<p> fasta format:<br />
+ >readID#3000<br />
+ ATTACG&#8230;<br />
+ >readID#2500</p>
+
+<p> Note that spaces between the readID and the read count are also allowed.</p>
+{% endblock %}

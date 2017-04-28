@@ -1,0 +1,47 @@
+{% load render_table from django_tables2 %}
+{% load staticfiles %}
+
+{% if mirnas %}
+<div class="panel panel-success" id="Homologous">
+                <div class="panel-heading">
+                    Homologous Detected
+                </div>
+                <!-- .panel-heading -->
+                <div class="panel-body">
+
+                    {% render_table mirnas.content %}
+
+                </div>
+</div>
+
+{% endif %}
+
+
+<div class="panel panel-success" id="Mature">
+                <div class="panel-heading">
+                   Mature miRNAs
+                </div>
+                <!-- .panel-heading -->
+                <div class="panel-body">
+
+                    {% render_table matures.content %}
+
+                </div>
+</div>
+
+
+<div class="panel panel-success" id="align">
+                <div class="panel-heading">
+                    Alignment
+                </div>
+                <!-- .panel-heading -->
+                <div class="panel-body">
+                    <pre>
+                        {{align}}
+                    </pre>
+
+
+
+                </div>
+
+</div>

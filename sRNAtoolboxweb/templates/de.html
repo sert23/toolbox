@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+            <div class="page-header">
+            <h1>sRNAde: </h1>
+            <h3>Consensus differential expression (DESeq, edgeR and NOISeq), visual cluster analysis and sequencing statistics. </h3>
+            </div>
+            </div>
+
+
+
+
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-9">
+{% comment %}                <form action="srnade/test" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="submit"  class="btn btn-success" value="Launch Test">
+                </form>
+
+                <br>{% endcomment %}
+
+                <form id="configform" action="/srnatoolbox/srnade/run" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a>Input data</a>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="row row-grid">
+                                    <div class="col-lg-6">
+                                        <label>List of sRNAbench IDs (colon separated, separate groups by hashes): </label><a  data-toggle="modal" data-target="#becnhids" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
+                                        <input id="form0" class="form-control" name="id" placeholder="e.g: id1:id2#id3:id4#id5:id6:id7">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label> Or Upload a matrix of expression values:</label>
+                                        <input type="file" name="mat" id=file1>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sample groups (Hash separated): </label>
+                                <input id="form1" class="form-control" name="groups" placeholder="e.g: Normal#TumorI#TumorII">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sample Description (colon separated): </label><a  data-toggle="modal" data-target="#SampleDesc" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
+
+                                <input id="form2" class="form-control" name="desc" placeholder="e.g: Normal:Normal:TumorI:TumorI:TumorII:TumorII:TumorII">
+                            </div>
+
+                            <div class="row row-grid">
+
+                                <div class="col-lg-4">
+
+                                    <label>Differential expression cutoff used by dSeq and EdgeR (p-value): </label>
+                                    <input id="form3" class="form-control" name="cutoff1" placeholder="Default 0.05"  width="1">
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label>Differential expression cutoff used by NOISeq(probability): </label>
+                                    <input id="form4" class="form-control" name="cutoff2" placeholder="Default 0.8">
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <lable> <input type="checkbox" name="isomir"> isoMir Analysis  </lable>
+                                </div>
+                            </div>
+
+                            <div class="row row-grid">
+                                <br>
+                                <div class="col-lg-4">
+                                    <input type="submit"  class="btn btn-primary" value="Run">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </form>
+
+
+
+    </div>
+            <div class="col-lg-3">
+            <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Help
+                </h4>
+            </div>
+                <div class="panel-body">
+                    <a href="{% static "WebManual_sRNAtoolbox.pdf" %}" target="_blank">Link to Web Manual</a>
+                    <br>
+                    <a href="http://bioinfo5.ugr.es/srnatoolbox/srnade/results/?id=XCKFJW3PWHS00ZH"  target="_blank">Link to Test Data Results</a>
+                </div>
+            </div>
+
+            </div>
+
+            <div class="col-lg-3">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Test Data Description
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        High-throughput sequencing of matched colorectal normal, tumor and metastasis tissue.
+                        <br>
+                        <a href="http://www.ncbi.nlm.nih.gov/Traces/sra/?study=SRP022054" target="_blank">Link To Publication</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Test Data Parameters
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        List of sRNAbench IDs:
+                        <pre style=" white-space: nowrap; overflow-y: hidden">4BVIF1F8RQP4Q51:7YE5V1HDXM6P4F7:8QCU135VBZ7UFIP:W175Z9RPXC9EQ6U:RW80R79UQFIDDPA:LKS2ON7R65PUZY1:ROKDJE3MIRZHU3X:GE2V6V244P16YY2#F6TVYO1FV2G3YNP:K23Y0MXX90YQ218:2MLPVBAOYDWWQD8:LRNEGOCDIR0WO5X:2TZDR75098RXPY6:RF295V54D9L937L:SE7HDLBHQGPK9M8:7J73F7F4K2E2DD0:J67VJTPJMQ10VSJ#OF04GY3XAQRITSU:8ACJNG8K3ADYRX5:UC6BBCZDR77C4NW:14D8IYMD5TGQOGU:WZHXNYKJE8QMVXS:4FYIRMF0DJNOJXX:179A4W4IY4J2DVU:O91QYC2DQQK0D7Q:VW0I988EDIIE6XG</pre>
+                        <br>
+                        Sample groups:
+                        <pre style="white-space: nowrap; overflow-y: hidden">control#cancer#metastasis</pre>
+                        Or you can use this expression matrix:
+                        <br>
+                        <a href="http://bioinfo5.ugr.es/static/XCKFJW3PWHS00ZH/mature_sense_5_2.mat" download> <i class="fa fa-download fa-fw"></i>Matrix File</a>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+    <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+    </div>
+
+{% endblock %}
+
+{% block modals %}
+     {% include "Messages/de/SampleDescription.html" %}
+     {% include "Messages/de/ListOfIDs.html" %}
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/sRNAde_form_control.js' %}"></script>
+{% endblock %}

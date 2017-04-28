@@ -1,0 +1,19 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}psrobot{% endblock %}
+{% block title %}
+    PSROBOT_tar Available Parameters
+{% endblock %}
+{% block text %}
+<p>-ts target penalty score, lower is better (0-5)<br />
+ default = 2.5<br />
+ -fp 5 prime boundary of essential sequence (1-2)<br />
+ default = 2<br />
+ -tp 3 prime boundary of essential sequence (7-31)<br />
+ default = 17<br />
+ -gl position after which with gap/bulge permit (0-30), 0 means no gap/bulge permitted<br />
+ default = 17<br />
+ -p number of processors use<br />
+ default = 1<br />
+ -gn number of gaps/bulges permitted (0-5)<br />
+ default = 1</p>
+{% endblock %}

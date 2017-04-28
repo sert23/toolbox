@@ -1,0 +1,1366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="257f5e96-4f7f-4f18-bf1d-979e2c7f2506" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata.keystream" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata.keystream.len" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata.len" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata_i" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata_i.len" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db.sqlite3" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/fonts/FontAwesome.otf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/fonts/fontawesome-webfont.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/fonts/fontawesome-webfont.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/fonts/fontawesome-webfont.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/fonts/glyphicons-halflings-regular.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/fonts/glyphicons-halflings-regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/FuncAnnot.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/Isomir.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/MA.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/Mature.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/MatureSa.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/Novel.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/SA.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/bench summary.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/blast.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/blastSpecies.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/blasttax.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/deConsensus.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/deSeq.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/deStats.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/edgeR.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/jBrowserBed.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/miRNAtargets.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/mirbaseMain.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/newmiRNA.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/noiseqTable.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/organism_mirbase.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/params_bench.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/sRNABenchConfig.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/sRNABlastConfig.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/species.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/tRNA.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/targetPrediction.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/DataModels/targetconsensus.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/BlastParsers.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/IsomirParser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/MAParser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/NovelParser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/Parser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/SAParser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/TRNAParser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/TargetConsensusParser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/TargetsParsers.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/deStatsParser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/gfreeOutParser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/jBrowserParser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/matureParser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/matureParserSa.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/mirbaseMainParser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/organimsParser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/sRNAdeparser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/sRNAfuncParsers.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/speciesAnnotationParser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/FileModels/speciesParser.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/IntegrativeTarDB/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/IntegrativeTarDB/index_mapping_uniprot.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/IntegrativeTarDB/sRNAbaseLoader.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_helper_ensembl.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_helper_extract.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_helper_ncbi.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_helper_remove_duplicates.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_helper_rnacentral.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_helper_rnacentral_taxon.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_helper_trna.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_mirnafunctargets.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_mirnatarget.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_sRNAbench.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_sRNAblast.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_sRNAde.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_sRNAde_matrix.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_sRNAdejbrowser.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_sRNAdejbrowser_nolength.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_sRNAfuncterms.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_sRNAgfree.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/bash_scripts/run_sRNAjbrowser.sh" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/pipelines/Load_consensus_file.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/pipelines/Load_consensus_file_plants.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/pipelines/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/pipelines/checkers.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/pipelines/configfile.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/pipelines/loadGeneMapper.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/pipelines/pipeline_utils.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/pipelines/pipelines.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/pipelines/runPipelines.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/pipelines/sRNAfuncTrems.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/setup.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/utils/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/utils/mongoDB.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/utils/sysUtils.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../core/utils/watcher.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/sRNAtoolboxweb.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/helpers/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/helpers/forms.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/helpers/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/helpers/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/helpers/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/helpers/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/manage.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/miRNAconstarget/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/miRNAconstarget/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/miRNAconstarget/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/miRNAconstarget/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/miRNAconstarget/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/miRNAfuncTargets/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/miRNAfuncTargets/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/miRNAfuncTargets/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/miRNAfuncTargets/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/miRNAfuncTargets/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/progress/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/progress/migrations/0001_initial.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/progress/migrations/0002_auto_20170427_1527.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/progress/migrations/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/progress/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/progress/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/progress/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/progress/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/requirements.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNABench/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNABench/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNABench/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNABench/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNABench/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAblast/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAblast/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAblast/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAblast/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAblast/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAde/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAde/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAde/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAde/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAde/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAdejBrowser/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAdejBrowser/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAdejBrowser/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAdejBrowser/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAdejBrowser/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAfuncTerms/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAfuncTerms/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAfuncTerms/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAfuncTerms/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAfuncTerms/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAgFree/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAgFree/ajax.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAgFree/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAgFree/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAgFree/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAgFree/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAjBrowser/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAjBrowser/models.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAjBrowser/tests.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAjBrowser/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAjBrowser/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/__init__.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/settings.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/css/bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/css/bootstrap.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/css/plugins/dataTables.bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/css/plugins/metisMenu/metisMenu.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/css/plugins/metisMenu/metisMenu.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/css/plugins/morris.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/css/plugins/social-buttons.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/css/plugins/timeline.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/css/sb-admin-2.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/css/font-awesome.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/css/font-awesome.min.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/fonts/fontawesome-webfont.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/less/bordered-pulled.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/less/core.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/less/fixed-width.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/less/font-awesome.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/less/icons.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/less/larger.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/less/list.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/less/mixins.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/less/path.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/less/rotated-flipped.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/less/spinning.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/less/stacked.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/less/variables.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/scss/_bordered-pulled.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/scss/_core.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/scss/_fixed-width.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/scss/_icons.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/scss/_larger.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/scss/_list.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/scss/_mixins.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/scss/_path.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/scss/_rotated-flipped.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/scss/_spinning.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/scss/_stacked.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/scss/_variables.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/font-awesome-4.1.0/scss/font-awesome.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/fonts/glyphicons-halflings-regular.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/bootstrap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/dojo.dajax.core.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/jquery-1.11.0.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/jquery.dajax.core.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/mootools.dajax.core.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/plugins/dataTables/dataTables.bootstrap.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/plugins/dataTables/jquery.dataTables.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/plugins/flot/excanvas.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/plugins/flot/flot-data.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/plugins/flot/jquery.flot.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/plugins/flot/jquery.flot.pie.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/plugins/flot/jquery.flot.resize.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/plugins/flot/jquery.flot.tooltip.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/plugins/metisMenu/metisMenu.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/plugins/metisMenu/metisMenu.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/plugins/morris/morris-data.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/plugins/morris/morris.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/plugins/morris/morris.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/plugins/morris/raphael.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/prototype.dajax.core.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/sRNAde_form_control.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/sRNAfuncTerms_form_control.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/js/sb-admin-2.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/less/mixins.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/less/sb-admin-2.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/less/variables.less" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/static/sRNAde_form_control.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/urls.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/views.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sRNAtoolboxweb/wsgi.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Common/VersionControlDonwloads.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Genome.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/bench/HWTCbench.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/bench/Not_profile.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/bench/RecursiveAdaptorTrimming.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/bench/UploadUserFiles.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/bench/guess_Adapter.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/bench/library_mode.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/bench/minimum_adapter_length.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/bench/mirnas.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/bench/mismatches_adapter.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/bench/sRNAbenchInput.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/bench/speciesBench.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/blast/HWTCblast.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/de/HWTCde.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/de/ListOfIDs.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/de/SampleDescription.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/helpers/HWTChelpers.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/mirnaconstarget/HWTCtargets.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/mirnaconstarget/ProgramsParameters.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/mirnaconstarget/miranda_parameters.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/mirnaconstarget/pita_parameters.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/mirnaconstarget/psrobot_tar_parameters.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/mirnaconstarget/tapir_hybrid_parameters.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/mirnaconstarget/tapir_parameters.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/mirnaconstarget/targetspy_parameters.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/Messages/modal_template.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ajax_progress.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/ajax_result.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/align.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/base.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/bench.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/blank.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/blast.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/blast_result.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/de.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/de_result.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/dejbrowsee.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/dejbrowser.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/error_page.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/functerms.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/functerms_results.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/gfree.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/gfree_result.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/helper_result.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/helpers.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/helpers/helpers_removedup.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/index_cp.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/input_params.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/jBrowser.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/jbrowserDE_result.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/jbrowser_result.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/libs.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/miRNAfuncTargets.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/miRNAfuncTargets_results.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/miRNAtarget.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/microrna_summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/mirconstarget_result.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/novel.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/preprocessing.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/progress.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/srnabench_result.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/static_pages/base_static.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/static_pages/jbrowserDE_result_static.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/summary.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/tables_srnabench.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/trna.html" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_TABLE_DETAILS" value="true" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="db.sqlite3" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" />
+        <option name="myItemType" value="com.intellij.database.view.DatabaseStructure$Root" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="db.sqlite3" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="main" />
+        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
+      </PATH_ELEMENT>
+    </PATH>
+  </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/helpers/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="873">
+              <caret line="246" column="47" lean-forward="true" selection-start-line="246" selection-start-column="47" selection-end-line="246" selection-end-column="47" />
+              <folding>
+                <element signature="e#26#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pipelines.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../core/pipelines/pipelines.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="535">
+              <caret line="62" column="34" lean-forward="false" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="34" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sRNAtoolboxweb/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1000">
+              <caret line="29" column="40" lean-forward="false" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/helpers/forms.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="604">
+              <caret line="63" column="33" lean-forward="false" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="33" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/miRNAfuncTargets/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="560">
+              <caret line="14" column="50" lean-forward="false" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sRNAtoolboxweb/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="640">
+              <caret line="120" column="43" lean-forward="false" selection-start-line="120" selection-start-column="43" selection-end-line="120" selection-end-column="43" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sRNABench/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="40">
+              <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+              <folding>
+                <element signature="e#26#35#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/progress/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="3" column="11" lean-forward="false" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="srnabench_result.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/srnabench_result.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="193" column="45" lean-forward="false" selection-start-line="193" selection-start-column="45" selection-end-line="193" selection-end-column="45" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ajax.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sRNAgFree/ajax.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3560">
+              <caret line="93" column="64" lean-forward="false" selection-start-line="93" selection-start-column="64" selection-end-line="93" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Setup Script" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>frp,core.</find>
+      <find>frpcore.</find>
+      <find>fcore.</find>
+      <find>frcore.</find>
+      <find>frocore.</find>
+      <find>fromcore.</find>
+      <find>from core.</find>
+      <find>from srmacore.</find>
+      <find>from srmcore.</find>
+      <find>from srcore.</find>
+      <find>from score.</find>
+      <find>from sRcore.</find>
+      <find>from sRNcore.</find>
+      <find>from sRNAcore.</find>
+      <find>from sRNAtcore.</find>
+      <find>from sRNAtocore.</find>
+      <find>from sRNAtoocore.</find>
+      <find>from sRNAtoolcore.</find>
+      <find>from sRNAtoolBcore.</find>
+      <find>from sRNAtoolBoscore.</find>
+      <find>from sRNAtoolBocore.</find>
+      <find>from sRNAtoolBoxcore.</find>
+      <find>from sRNAtooloxcore.</find>
+      <find>from sRNAtoolboxcore.</find>
+      <find>from sRNAtoolbox.core.</find>
+      <find>stati</find>
+      <find>&quot;/shared/sRNAtoolbox/sRNAtoolbox.conf&quot;</find>
+      <find>a</find>
+      <find>ajax</find>
+      <find>fs.lo</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+      <replace>from</replace>
+    </replaceStrings>
+    <dirStrings>
+      <dir>C:\Users\Ernesto\Desktop\sRNAtoolbox\core</dir>
+      <dir>C:\Users\Ernesto\Desktop\sRNAtoolbox\sRNAtoolboxweb</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/sRNAfuncTerms/models.py" />
+        <option value="$PROJECT_DIR$/miRNAconstarget/views.py" />
+        <option value="$PROJECT_DIR$/sRNAblast/views.py" />
+        <option value="$PROJECT_DIR$/sRNAde/views.py" />
+        <option value="$PROJECT_DIR$/sRNAgFree/views.py" />
+        <option value="$PROJECT_DIR$/sRNAjBrowser/views.py" />
+        <option value="$PROJECT_DIR$/../core/setup.py" />
+        <option value="$PROJECT_DIR$/sRNAtoolboxweb/views.py" />
+        <option value="$PROJECT_DIR$/../core/pipelines/configfile.py" />
+        <option value="$PROJECT_DIR$/sRNAgFree/ajax.py" />
+        <option value="$PROJECT_DIR$/../core/FileModels/BlastParsers.py" />
+        <option value="$PROJECT_DIR$/sRNAfuncTerms/views.py" />
+        <option value="$PROJECT_DIR$/sRNABench/views.py" />
+        <option value="$PROJECT_DIR$/miRNAfuncTargets/views.py" />
+        <option value="$PROJECT_DIR$/progress/tests.py" />
+        <option value="$PROJECT_DIR$/progress/models.py" />
+        <option value="$PROJECT_DIR$/helpers/urls.py" />
+        <option value="$PROJECT_DIR$/templates/index.html" />
+        <option value="$PROJECT_DIR$/templates/helpers/helpers_removedup.html" />
+        <option value="$PROJECT_DIR$/sRNAdejBrowser/views.py" />
+        <option value="$PROJECT_DIR$/sRNAtoolboxweb/settings.py" />
+        <option value="$PROJECT_DIR$/sRNAtoolboxweb/urls.py" />
+        <option value="$PROJECT_DIR$/helpers/views.py" />
+        <option value="$PROJECT_DIR$/helpers/forms.py" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-16" />
+    <option name="y" value="-16" />
+    <option name="width" value="3872" />
+    <option name="height" value="2104" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sRNAtoolboxweb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sRNAtoolboxweb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sRNAtoolboxweb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sRNAtoolboxweb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pipelines" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sRNAtoolboxweb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sRNAtoolboxweb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../core" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Ernesto\Desktop\sRNAtoolbox\sRNAtoolboxweb\sRNAtoolboxweb" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Ernesto\Desktop\sRNAtoolbox\sRNAtoolboxweb\templates\helpers" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Django server.sRNAtoolboxweb">
+    <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="sRNAtoolboxweb" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="TARGET" value="" />
+      <option name="SETTINGS_FILE" value="" />
+      <option name="CUSTOM_SETTINGS" value="false" />
+      <option name="USE_OPTIONS" value="false" />
+      <option name="OPTIONS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerJest" factoryName="Jest">
+      <node-interpreter value="project" />
+      <working-dir value="" />
+      <envs />
+      <scope-kind value="ALL" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerProtractor" factoryName="Protractor">
+      <config-file value="" />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="sRNAtoolboxweb" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="sRNAtoolboxweb" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="ADDITIONAL_ARGS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Python.DjangoServer" factoryName="Django server">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="sRNAtoolboxweb" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="sRNAtoolboxweb" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <module name="sRNAtoolboxweb" />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run" />
+      <scripts />
+      <node-interpreter value="project" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="sRNAtoolboxweb" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Unittests">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="sRNAtoolboxweb" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;.&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method />
+    </configuration>
+    <configuration default="false" name="sRNAtoolboxweb" type="Python.DjangoServer" factoryName="Django server">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="DJANGO_SETTINGS_MODULE" value="sRNAtoolboxweb.settings" />
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Ernesto\venvs\venvSRNAtoolBox\Scripts\python.exe" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="sRNAtoolboxweb" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8800" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Django server.sRNAtoolboxweb" />
+    </list>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="257f5e96-4f7f-4f18-bf1d-979e2c7f2506" name="Default" comment="" />
+      <created>1493213177183</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1493213177183</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-16" y="-16" width="3872" height="2104" extended-state="6" />
+    <layout>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32341596" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3311185" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1382353" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32994652" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294766" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="manage.py@sRNAtoolboxweb" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34269974" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40716255" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="processedProjectFiles" value="true" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/helpers/forms.py</url>
+          <line>21</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/helpers/forms.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/helpers/views.py</url>
+          <line>243</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="8" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/helpers/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNAgFree/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/miRNAfuncTargets/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNABench/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/miRNAconstarget/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/miRNAfuncTargets/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNAfuncTerms/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/miRNAconstarget/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="12" column="5" lean-forward="false" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNAblast/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNAblast/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="14" column="9" lean-forward="false" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNAde/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="434">
+          <caret line="11" column="9" lean-forward="false" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNAdejBrowser/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/FileModels/jBrowserParser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="6" column="6" lean-forward="false" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNAjBrowser/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="8" column="12" lean-forward="false" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNAgFree/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="10" column="5" lean-forward="false" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNAdejBrowser/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/pipelines/configfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="800">
+          <caret line="20" column="29" lean-forward="false" selection-start-line="20" selection-start-column="29" selection-end-line="20" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/FileModels/BlastParsers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="920">
+          <caret line="23" column="44" lean-forward="false" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+          <folding>
+            <element signature="e#25#61#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../sRNAtoolbox.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNAfuncTerms/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="880">
+          <caret line="25" column="20" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#9#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/progress/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/venvs/venvSRNAtoolBox/Lib/site-packages/django/test/testcases.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="383">
+          <caret line="993" column="6" lean-forward="false" selection-start-line="993" selection-start-column="6" selection-end-line="993" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/37268759/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/main.progress_jobstatus">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://dbtable:/37268759/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/main.progress_status">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/progress/tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="857">
+          <caret line="24" column="72" lean-forward="false" selection-start-line="24" selection-start-column="72" selection-end-line="24" selection-end-column="72" />
+          <folding>
+            <element signature="e#183#212#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/progress/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="497">
+          <caret line="46" column="63" lean-forward="false" selection-start-line="46" selection-start-column="63" selection-end-line="46" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/helpers.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="5" column="25" lean-forward="false" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/venvs/venvSRNAtoolBox/Lib/site-packages/django/forms/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="290" column="8" lean-forward="false" selection-start-line="290" selection-start-column="8" selection-end-line="290" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/venvs/venvSRNAtoolBox/Lib/site-packages/django/conf/urls/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#15#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/helpers/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding>
+            <element signature="e#25#57#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNAtoolboxweb/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6155">
+          <caret line="7" column="15" lean-forward="false" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#50#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="603">
+          <caret line="194" column="57" lean-forward="false" selection-start-line="194" selection-start-column="57" selection-end-line="194" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/helper_result.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/venvs/venvSRNAtoolBox/Lib/site-packages/django/db/models/query.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="392">
+          <caret line="784" column="8" lean-forward="false" selection-start-line="784" selection-start-column="8" selection-end-line="784" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/venvs/venvSRNAtoolBox/Lib/site-packages/django/core/files/storage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="775">
+          <caret line="48" column="42" lean-forward="true" selection-start-line="48" selection-start-column="42" selection-end-line="48" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNAdejBrowser/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="53" />
+          <folding>
+            <element signature="e#52#61#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/helpers/helpers_removedup.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="57" column="62" lean-forward="false" selection-start-line="57" selection-start-column="62" selection-end-line="57" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/pipelines/pipeline_utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="6" column="4" lean-forward="false" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/progress/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="3" column="11" lean-forward="false" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/srnabench_result.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="193" column="45" lean-forward="false" selection-start-line="193" selection-start-column="45" selection-end-line="193" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNAgFree/ajax.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3560">
+          <caret line="93" column="64" lean-forward="false" selection-start-line="93" selection-start-column="64" selection-end-line="93" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNAtoolboxweb/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1000">
+          <caret line="29" column="40" lean-forward="false" selection-start-line="29" selection-start-column="40" selection-end-line="29" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNABench/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="1" column="0" lean-forward="false" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding>
+            <element signature="e#26#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/Python27/Lib/urllib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="63" column="56" lean-forward="false" selection-start-line="63" selection-start-column="56" selection-end-line="63" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sRNAtoolboxweb/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="640">
+          <caret line="120" column="43" lean-forward="false" selection-start-line="120" selection-start-column="43" selection-end-line="120" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/helpers/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="873">
+          <caret line="246" column="47" lean-forward="true" selection-start-line="246" selection-start-column="47" selection-end-line="246" selection-end-column="47" />
+          <folding>
+            <element signature="e#26#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../core/pipelines/pipelines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="535">
+          <caret line="62" column="34" lean-forward="false" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/helpers/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="604">
+          <caret line="63" column="33" lean-forward="false" selection-start-line="63" selection-start-column="33" selection-end-line="63" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/miRNAfuncTargets/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="14" column="50" lean-forward="false" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

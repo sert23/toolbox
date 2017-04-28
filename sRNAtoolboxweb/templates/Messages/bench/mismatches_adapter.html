@@ -1,0 +1,8 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}mismatches_adapter{% endblock %}
+{% block title %}
+    Number of Mismatches in Adapter
+{% endblock %}
+{% block text %}
+<p>Permitting more mismatches between the read and the adapter sequence will allow to detect and trim a higher number of adapter sequences, but will also increase the number of false positive trimmings (especially if the minimum adapter length is decreased!).</p>
+{% endblock %}

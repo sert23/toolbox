@@ -1,0 +1,10 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}Guess_Adapter{% endblock %}
+{% block title %}
+    Guess Adapter
+{% endblock %}
+{% block text %}
+<p>sRNAbench will try to guess the adapter. Briefly, sRNAbench will align the first 250000 reads to the genome using the Bowtie seed function (<br />
+the adapters will not count for the mismatches). Then , the adapter<br />
+sequence is defined as the most frequent 10-mer starting at the first mismatch (default: guessAdapter=false)</p>
+{% endblock %}

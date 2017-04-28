@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Version Control and Additional Information</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-12">
+            <div class="col-lg-8">
+                <div class="well">
+                    <h4>Software and DBs versions</h4>
+                    <ul>
+                        <li>MirTarBase: Release 4.5</li>
+                        <li>mirBase: Release 21</li>
+                        <li>Nucleotide-Nucleotide BLAST: 2.2.30+</li>
+                        <li>miRanda: v3.3a</li>
+                        <li>PITA executable: v6</li>
+                        <li>tapir: v1.2</li>
+                        <li>TargetSpy: v1.1</li>
+                        <li>psRobot_tar: v1.2</li>
+                    </ul>
+                </div>
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Run Time Estimations
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                                <table class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Tool</th>
+                                            <th>Test Data</th>
+                                            <th>Test Data Time</th>
+                                            <th>Average Time</th>
+                                            <th>Number of Successful Jobs</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>sRNAbench</td>
+                                            <td><a href="http://bioinfo5.ugr.es/static/testData/IK_exo.fastq.gz" download>IK_exo.fastq.gz</a></td>
+                                            <td>15 min</td>
+                                            <td>{{ sRNAbench.0 }}</td>
+                                            <td>{{ sRNAbench.1 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>sRNAde</td>
+                                            <td><a href="http://bioinfo5.ugr.es/static/XCKFJW3PWHS00ZH/mature_sense_5_2.mat" download>Matrix File</a></td>
+                                            <td>20min</td>
+                                            <td>{{ sRNAde.0 }}</td>
+                                            <td>{{ sRNAde.1 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>sRNAblast</td>
+                                            <td><a href="http://bioinfo5.ugr.es/static/4XVGNWRUK0ZCUM1/reads.fa" download>Reads file</a> (taking 500 unique Reads)</td>
+                                            <td>20min</td>
+                                            <td>{{ sRNAblast.0 }}</td>
+                                            <td>{{ sRNAblast.1 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>miRNAconsTarget</td>
+                                            <td><p><a href="http://bioinfo5.ugr.es/static/testData/rno_miR.fa" download>miRNAs (3)</a></p>
+                                                <p><a href="http://bioinfo5.ugr.es/static/testData/rn5_refSeq_3utr.fa" download>3' UTRs</a></p>
+                                                <p>(Run with TargetSpy, Miranda and PITA)</p>
+                                            </td>
+                                            <td>2h 27min</td>
+                                            <td>{{ miRNAconsTarget.0 }}</td>
+                                            <td>{{ miRNAconsTarget.1 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>jBrowser</td>
+                                            <td>F33H7949W0C2FFY</td>
+                                            <td>3min</td>
+                                            <td>{{ jBrowser.0 }}</td>
+                                            <td>{{ jBrowser.1 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>sRNAfuncTerms</td>
+                                            <td>4 miRNAs with 330 targets predicted</td>
+                                            <td>15min</td>
+                                            <td>{{ sRNAfuncTerms.0 }}</td>
+                                            <td>{{ sRNAfuncTerms.1 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td>jBrowserDE</td>
+                                            <td>RG5TRAJIOOFS7II#F33H7949W0C2FFY</td>
+                                            <td>30min</td>
+                                            <td>{{ jBrowserDE.0 }}</td>
+                                            <td>{{ jBrowserDE.1 }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td>miRNAfuncTargets</td>
+                                            <td><p><a href="http://bioinfo5.ugr.es/static/testData/rno_miR.fa" download>miRNAs (3)</a></p>
+                                                <p><a href="http://bioinfo5.ugr.es/static/testData/rn5_refSeq_3utr.fa" download>3' UTRs</a></p>
+                                                <p>(Run with TargetSpy, Miranda and PITA)</p></td>
+                                            <td>1h15min</td>
+                                            <td>{{ miRNAfuncTargets.0 }}</td>
+                                            <td>{{ miRNAfuncTargets.1 }}</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                    </div>
+                    <div class="panel-footer">
+                        Please note the time depends strongly of input data and server load.
+                    </div>
+                </div>
+
+            </div>
+
+              <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-history fa-fw"></i> ChangeLog
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <ul class="timeline">
+                            <li>
+                                <div class="timeline-badge"><i class="fa fa fa-code"></i>
+                                </div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h4 class="timeline-title">sRNAtoolBox v1.0 released</h4>
+                                        <p><small class="text-muted"><i class="fa fa-clock-o"></i> Sat 02 May 2015</small>
+                                        </p>
+                                    </div>
+                                    <div class="timeline-body">
+                                        <p>This is The first version of this web application. Even though a big work of debugging was
+                                        done, errors can appear due to the complexity of input data. Any feedback is welcome.</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="timeline-inverted">
+                                <div class="timeline-badge success"><i class="fa fa-graduation-cap"></i>
+                                </div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h4 class="timeline-title">sRNAtoolBox pubication</h4>
+                                        <p><small class="text-muted"><i class="fa fa-clock-o"></i> Thu 28 May 2015</small>
+                                        </p>
+                                    </div>
+                                    <div class="timeline-body">
+                                            <a href="http://nar.oxfordjournals.org/content/early/2015/05/26/nar.gkv555.abstract" target="_blank"><h5>sRNAtoolbox: an integrated collection of small RNA research tools</h5></a>
+                                            <p> Antonio Rueda; Guillermo Barturen; Ricardo Lebron; Cristina Gomez-Martin; Angel Alganza; Jose L. Oliver; Michael Hackenberg
+                                            Nucleic Acids Research 2015;
+                                            doi:<a href="http://nar.oxfordjournals.org/content/early/2015/05/26/nar.gkv555.abstract" target="_blank"> 10.1093/nar/gkv555 </a></p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-download fa-fw"></i> Downloads
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+
+                            Standalone software will be added here.
+                         </div>
+                    </div>
+
+
+
+            </div>
+
+
+</div>
+
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+
+
+{% endblock %}
+
+

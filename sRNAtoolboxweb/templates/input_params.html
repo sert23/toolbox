@@ -1,0 +1,13 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Input Parameters
+    </div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            {% for param in params %}
+                <dt>{{ param.0 }}</dt>
+                <dd>{{ param.1 }}</dd>
+            {% endfor %}
+        </dl>
+    </div>
+</div>

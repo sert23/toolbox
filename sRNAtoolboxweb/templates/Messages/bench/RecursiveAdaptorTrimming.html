@@ -1,0 +1,8 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}RecursiveAdaptorTrimming{% endblock %}
+{% block title %}
+    Recursive Adapter Trimming
+{% endblock %}
+{% block text %}
+<p>If the adapter was not found within the complete read sequence using the minimum adapter length, the program will try to detect the adapter at the 3&rsquo; end of the read using recursively shorter minimum adapter lengths. For example, if the adapter min. length is 10, then in the first round the last nine bases would be aligned to the adapter (only to the first 9 bases of the 5&rsquo; end of the adapter sequence), in the second round the last 8 bases etc. No lower threshold for the minimum adapter length is established and therefore most trimmings of the last couple of bases might be by chance alone. </p>
+{% endblock %}

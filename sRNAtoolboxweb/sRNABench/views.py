@@ -1,0 +1,777 @@
+# Create your views here.
+import os
+import urllib
+import datetime
+from django.core.urlresolvers import reverse
+
+from django.shortcuts import render, redirect
+from django.core.files.storage import FileSystemStorage
+import itertools
+import django_tables2 as tables
+from DataModels.params_bench import ParamsBench
+from FileModels.IsomirParser import IsomirParser
+from FileModels.MAParser import MAParser
+from FileModels.NovelParser import NovelParser
+from FileModels.SAParser import SAParser
+from FileModels.TRNAParser import TRNAParser
+from FileModels.matureParser import MatureParser
+from FileModels.matureParserSa import MatureParserSA
+from FileModels.mirbaseMainParser import MirBaseParser
+
+from FileModels.speciesAnnotationParser import SpeciesAnnotationParser
+from FileModels.speciesParser import SpeciesParser
+from pipelines import pipeline_utils
+from DataModels.sRNABenchConfig import SRNABenchConfig
+from utils.sysUtils import make_dir
+from progress.models import JobStatus
+#import json
+from django.conf import settings
+
+#CONF = json.load(file("/shared/sRNAtoolbox/sRNAtoolbox.conf"))
+CONF = settings.CONF
+SPECIES_PATH = CONF["species"]
+SPECIES_ANNOTATION_PATH = CONF["speciesAnnotation"]
+DB = CONF["db"]
+FS = FileSystemStorage(CONF["sRNAtoolboxSODataPath"])
+counter = itertools.count()
+
+
+class TableStatic(tables.Table):
+    """
+    Class to serialize table of results
+    """
+
+    class Meta:
+        orderable = False
+        attrs = {'class': 'table table-striped',
+                 "id": lambda: "table_%d" % next(counter)}
+        empty_text = "Results not found!"
+        order_by = ("name",)
+
+class TableResult(tables.Table):
+    """
+    Class to serialize table of results
+    """
+
+    class Meta:
+        orderable = False
+        attrs = {'class': 'table table-striped table-bordered table-hover dataTable no-footer',
+                 "id": lambda: "table_%d" % next(counter)}
+        empty_text = "Results not found!"
+        order_by = ("name",)
+
+
+def define_table(columns, typeTable):
+    """
+    :param columns: Array with names of columns to show
+    :return: a class of type TableResults
+    """
+
+    attrs = dict((c, tables.Column()) for c in columns if c != "align" and c != "align_")
+    attrs2 = dict((c, tables.TemplateColumn('<a href="{% url "sRNABench.views.show_align" id "hairpin" record.align %}">align</a>')) for c in columns if c == "align")
+    attrs.update(attrs2)
+    attrs3 = dict((c, tables.TemplateColumn('<a href="{% url "sRNABench.views.show_align" id "novel" record.align_ %}">align</a>')) for c in columns if c == "align_")
+    attrs.update(attrs3)
+
+
+
+
+    if typeTable == "TableResult":
+        attrs['Meta'] = type('Meta', (),
+                             dict(attrs={'class': 'table table-striped table-bordered table-hover dataTable no-footer',
+                                         "id": lambda: "table_%d" % next(counter)},
+                                  ordenable=False,
+                                  empty_text="Results not found!",
+                                  order_by=("name",)))
+    else:
+        attrs['Meta'] = type('Meta', (),
+                             dict(attrs={'class': 'table table-striped',
+                                         "id": "notformattable"},
+                                  ordenable=False,
+                                  empty_text="Results not found!",
+                                  order_by=("name",)))
+
+
+
+    klass = type('TableResult', (tables.Table,), attrs)
+    return klass
+
+
+class Result():
+    """
+    Class to manage tables results and meta-info
+    """
+
+    def __init__(self, name, table):
+        self.name = name.capitalize()
+        self.content = table
+        self.id = name.replace(" ", "_")
+
+
+
+
+def input(request):
+    """
+    :rtype : render
+    :param request: posts and gets
+    :return: html with main of functerms
+    """
+
+    species_file = SpeciesParser(SPECIES_PATH)
+    array_species = species_file.parse()
+    species_dict = {}
+
+    for species in array_species:
+        if species.sp_class in species_dict:
+            species_dict[species.sp_class].append(species)
+        else:
+            species_dict[species.sp_class] = [species]
+    return render(request, 'bench.html', {"species_data": species_dict})
+
+
+def run(request):
+    libs_files = []
+    pipeline_id = pipeline_utils.generate_uniq_id()
+    lib_mode = False
+    no_libs = False
+    species = []
+    assemblies = []
+    guess_adapter = None
+    recursive_adapter_trimming = None
+    high_conf = False
+    solid = None
+    ifile = ""
+    mircro_names = []
+    name_modifier = None
+
+    FS.location = os.path.join("/shared/sRNAtoolbox/webData", pipeline_id)
+    make_dir(FS.location)
+
+    if len(request.POST["job_name"].replace(" ", "")) > 1:
+        name_modifier = request.POST["job_name"].replace(" ", "")
+
+    if "reads_file" in request.FILES:
+        file_to_update = request.FILES['reads_file']
+
+        extension = ".".join(str(file_to_update).split(".")[1:])
+
+        if extension not in ["fastq", "fa", "rc", "fastq.gz", "fa.gz", "rc.gz", "txt", "txt.gz", "sra"]:
+            return render(request, "error_page.html", {"errors": ['Reads file extension must be: "fastq", "fa", "rc", "rc.gz", "fa.gz", "fastq.gz" , "txt", "txt.gz", "sra". We have detected: ' +  extension + ' please use one of the supported formats']})
+
+
+        if name_modifier is not None:
+            uploaded_file = str(name_modifier) + "." + extension
+        else:
+            uploaded_file = str(file_to_update).replace(" ", "")
+        FS.save(uploaded_file, file_to_update)
+        ifile = os.path.join(FS.location, uploaded_file)
+
+    elif request.POST["reads_url"].replace(" ", "") != "":
+        url_input = request.POST["reads_url"]
+
+        extension = ".".join(os.path.basename(url_input).split(".")[1:])
+
+        if extension not in ["fastq", "fa", "rc", "fastq.gz", "fa.gz", "rc.gz", "txt", "txt.gz", "sra"]:
+            return render(request, "error_page.html", {"errors": [
+                'Reads file extension must be: "fastq", "fa", "rc", "rc.gz", "fa.gz", "fastq.gz", "txt", "txt.gz", "sra"  ".' + extension + '" found']})
+
+
+        if name_modifier is not None:
+            dest = os.path.join(FS.location, str(name_modifier) + "." + extension).replace(" ", "")
+        else:
+            dest = os.path.join(FS.location, os.path.basename(url_input))
+
+
+        handler = urllib.URLopener()
+        handler.retrieve(url_input, dest)
+        ifile = dest
+
+    else:
+        return render(request, "error_page.html", {"errors": ["Read File or URL must be provided"]})
+
+    if "user_files" in request.FILES:
+        for i, afile in enumerate(request.FILES.getlist("user_files")):
+            file_to_update = afile
+            uploaded_file = str(file_to_update).replace(" ", "")
+            FS.save(uploaded_file, file_to_update)
+            libs_files.append(os.path.join(FS.location, uploaded_file))
+
+    if "user_urls" in request.POST:
+        for i, url in enumerate(request.POST.getlist("user_urls")):
+            if url != "":
+                libfile = urllib.URLopener()
+                dest = os.path.join(FS.location, os.path.basename(url)).replace(" ", "")
+                libfile.retrieve(url, dest)
+                libs_files.append(dest)
+
+    if "libMode" in request.POST:
+        lib_mode = True
+
+    if "noLibs" in request.POST:
+        no_libs = True
+
+    for specie in request.POST.getlist("species"):
+        if specie != "":
+            species.append(specie.split(":")[2])
+            assemblies.append(specie.split(":")[1])
+            mircro_names.append(specie.split(":")[0])
+
+    if "guessAdapter" in request.POST:
+        guess_adapter = "true"
+
+    adapter = request.POST["adapter"]
+    alter_adapter = request.POST["alterAdapter"].upper().replace(" ", "")
+
+    if len(alter_adapter) > 1:
+        adapter = alter_adapter
+    if adapter == "XXX":
+        adapter = None
+
+    adapter_minLength = request.POST["adapterMinLength"]
+    adapterMM = request.POST["adapterMM"]
+
+    if "recursiveAdapterTrimming" in request.POST:
+        recursive_adapter_trimming = "true"
+
+    if "highconf" in request.POST:
+        high_conf = True
+
+    mir = request.POST["miR"]
+    homolog = request.POST["homolog"]
+
+    if len(homolog) < 1:
+        homolog = None
+
+    if "genomeMiR" in request.POST:
+        mir = ":".join(mircro_names)
+
+    if "solid" in request.POST:
+        solid = "true"
+
+    rc = request.POST["rc"]
+    mm = request.POST["mm"]
+    seed = request.POST["seed"]
+    align_type = request.POST["alignType"]
+    remove_barcode = request.POST["removeBarcode"]
+    minReadLength = request.POST["minReadLength"]
+    mBowtie = request.POST["mBowtie"]
+
+    if "predict" in request.POST:
+        predict="true"
+    else:
+        predict=None
+
+    species_annotation_file = SpeciesAnnotationParser(SPECIES_ANNOTATION_PATH)
+    species_annotation = species_annotation_file.parse()
+
+    newConf = SRNABenchConfig(species_annotation, DB, FS.location, ifile, iszip="true",
+                              RNAfold="RNAfold2",
+                              bedGraph="true", writeGenomeDist="true", predict=predict, graphics="true",
+                              species=species, assembly=assemblies, short_names=mircro_names, adapter=adapter,
+                              recursiveAdapterTrimming=recursive_adapter_trimming, libmode=lib_mode, nolib=no_libs,
+                              microRNA=mir, removeBarcode=str(remove_barcode),
+                              adapterMinLength=str(adapter_minLength), adapterMM=str(adapterMM), seed=str(seed),
+                              noMM=str(mm), alignType=str(align_type), minRC=str(rc), solid=solid,
+                              guessAdapter=guess_adapter, highconf=high_conf, homolog=homolog,
+                              user_files=libs_files, minReadLength=minReadLength, mBowtie=mBowtie)
+
+    conf_file_location = os.path.join(FS.location, "conf.txt")
+    newConf.write_conf_file(conf_file_location)
+
+    os.system(
+        'qsub -v pipeline="bench",configure="' + conf_file_location + '",key="' + pipeline_id + '",outdir="' + FS.location + '",name="' + pipeline_id
+        + '_sRNAbench' + '" -N ' + pipeline_id + '_sRNAbench /shared/sRNAtoolbox/core/bash_scripts/run_sRNAbench.sh')
+
+    return redirect("/srnatoolbox/jobstatus/srnabench/?id=" + pipeline_id)
+
+
+def result(request):
+    if 'id' in request.GET:
+        try:
+            job_id = request.GET['id']
+            new_record = JobStatus.objects.get(pipeline_key=job_id)
+            assert isinstance(new_record, JobStatus)
+
+            if new_record.job_status == "Finished":
+                return redirect("http://bioinfo5.ugr.es/sRNAtoolbox/sRNAbench/sRNAbench.php?launched=true&id=" + job_id)
+            else:
+                return redirect("/srnatoolbox/jobstatus/srnabench/?id=" + job_id)
+        except:
+            return redirect("/srnatoolbox/jobstatus/srnabench/?id=" + job_id)
+    else:
+        redirect("/srnatoolbox/srnabench")
+
+
+def add_sumimg(new_record, results):
+    sumimgs = []
+    if os.path.exists(os.path.join(new_record.outdir, "graphs", "mappingStat.png")):
+        sumimgs.append(os.path.join(new_record.pipeline_key, "graphs", "mappingStat.png"))
+    if os.path.exists(os.path.join(new_record.outdir, "graphs", "byLength_stack.png")):
+        sumimgs.append(os.path.join(new_record.pipeline_key, "graphs", "byLength_stack.png"))
+    if len(sumimgs) != 0:
+        results["sumimgs"] = sumimgs
+
+
+def add_preimg(new_record, results):
+    imgs = []
+    if os.path.exists(os.path.join(new_record.outdir, "graphs", "readLengthFull.png")):
+        imgs.append([os.path.join(new_record.pipeline_key, "graphs", "readLengthFull.png"), "Read Length Distribution of Raw Input Reads"])
+    if os.path.exists(os.path.join(new_record.outdir, "graphs", "readLengthAnalysis.png")):
+        imgs.append([os.path.join(new_record.pipeline_key, "graphs", "readLengthAnalysis.png"), "Read Length Distribution of Reads in Analysis"])
+    if os.path.exists(os.path.join(new_record.outdir, "graphs", "mappedReadsLenghtDist.png")):
+        imgs.append([os.path.join(new_record.pipeline_key, "graphs", "mappedReadsLenghtDist.png"), "Read Length Distribution of Genome mapped reads"])
+    if len(imgs) != 0:
+        results["preimgs"] = imgs
+
+
+def add_mirimg(new_record, results):
+    imgs = []
+    if os.path.exists(os.path.join(new_record.outdir, "graphs", "microRNA_species.png")):
+        imgs.append(os.path.join(new_record.pipeline_key, "graphs", "microRNA_species.png"))
+    if os.path.exists(os.path.join(new_record.outdir, "graphs", "microRNA_top.png")):
+        imgs.append(os.path.join(new_record.pipeline_key, "graphs", "microRNA_top.png"))
+    if os.path.exists(os.path.join(new_record.outdir, "graphs", "miRBase__allNTA.png")):
+        imgs.append(os.path.join(new_record.pipeline_key, "graphs", "miRBase__allNTA.png"))
+    if os.path.exists(os.path.join(new_record.outdir, "graphs", "miRBase_otherVariants.png")):
+        imgs.append(os.path.join(new_record.pipeline_key, "graphs", "miRBase_otherVariants.png"))
+    if len(imgs) != 0:
+        results["mirimg"] = imgs
+
+
+def add_preproc(params, results):
+    preproc = {}
+    raw = int(params.params["readsRaw"])
+    preproc["Raw reads:"] = str(raw)
+    if "readsAdapterFound" in params.params:
+        preproc["Adapter trimmed"] = str(int(params.params['readsAdapterFound'])) + " (" + str(round(
+            int(params.params['readsAdapterFound']) * 100.0 / raw, 2)) + "%)"
+    else:
+        preproc["Input was adapter trimmed"] = ""
+    preproc["Length filtered (min):"] = str(int(params.params['readsLengthFilteredMin'])) + " (" + str(round(
+        int(params.params['readsLengthFilteredMin']) * 100.0 / raw, 2)) + "%)"
+
+    preproc["Quality filtered:"] = str(int(params.params['readsQRCfiltered'])) + " (" + str(round(
+        int(params.params['readsQRCfiltered']) * 100.0 / raw, 2))+ "%)"
+
+    preproc["Reads in analysis:"] = str(int(params.params['reads'])) + " (" + str(round(int(params.params['reads']) * 100.0 / raw, 2)) + "%)"
+
+    if len(preproc.keys()) > 0:
+        results["preproc"] = preproc
+
+
+def add_mirprof(params, results):
+    mirprof = {}
+    try:
+        mirprof["Detected mature miR:"] = str(int(params.params['matureDetected'])) + " (" + str(round(
+            int(params.params['matureDetected']) * 100.0 / int(params.params['matureDB']), 2)) + "%)"
+    except:
+        mirprof["Detected mature miR:"] = str(0)
+    try:
+        mirprof["Reads mapped to miRBase hairpins:"] = str(int(params.params['readHairpin'])) + " (" + str(round(
+            int(params.params['readHairpin']) * 100.0 / int(params.params['readGMapped']), 2)) + "%)"
+    except:
+        mirprof["Reads mapped to miRBase hairpins:"] = str(0)
+    if len(mirprof.keys()) > 0:
+        results["mirprof"] = mirprof
+
+
+def add_mapping_result(new_record, parameters, results):
+    mapping_results = {}
+    if os.path.exists(os.path.join(new_record.outdir, "graphs", "genomeDistribution.png")):
+        genomeDistribution = os.path.join(new_record.pipeline_key, "graphs", "genomeDistribution.png")
+        results["genomeDistribution"] = genomeDistribution
+    if "readGMapped" in parameters:
+        raw = int(parameters["readsRaw"])
+        mapping_results["Genome mapped reads:"] = str(int(parameters['readGMapped'])) + "(" + str(round(
+            int(parameters['readGMapped']) * 100.0 / raw, 2)) + "%)"
+
+    elif "readLMapped" in parameters:
+        raw = int(parameters["readsRaw"])
+        mapping_results["Genome mapped reads:"] = str(int(parameters['readLMapped'])) + "(" + str(round(
+            int(parameters['Mapped reads:']) * 100.0 / raw, 2)) + "%)"
+
+    if len(mapping_results.keys()) > 0:
+        results["mapping_results"] = mapping_results
+
+
+def add_libs(parameters, results):
+    libs = {}
+    for i, lib in enumerate(parameters["libs"]):
+        val = lib.split("/")[-1].split(".")[0]
+        if "desc" in parameters:
+            try:
+                desc = parameters["desc"][i]
+            except:
+                desc = val
+        else:
+            desc = val
+
+        if "readFW" + val in parameters:
+            libs[(desc, val)] = {}
+            try:
+                libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters["readFW" + val]) + "(" + str(round(
+                	int(parameters["readFW" + val]) * 100.0 / int(parameters["readGMapped"]), 2)) + "%)"
+            except:
+                libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters["readFW" + val]) + "(" + str(round(0)) + "%)"
+ 
+        if "readRV" + val in parameters:
+            try:
+                libs[(desc, val)]["Mapped reads in antisense direction:"] = str(parameters["readRV" + val]) + "(" + str(round(
+                	int(parameters["readRV" + val]) * 100.0 / int(parameters["readGMapped"]), 2)) + "%)"
+            except:
+                libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters["readFW" + val]) + "(" + str(round(0)) + "%)"
+
+    if len(libs.keys()) > 0:
+        results["libs"] = libs
+
+
+def add_novel(parameters, results):
+    novel = {}
+    novel["Predicted novel microRNAS: "] = parameters["novelMiR"] + " with a total read count: " + parameters[
+        "readsNovel"]
+    results["novel"] = novel
+
+
+def add_trna(results):
+    trna = True
+    results["trna"] = trna
+
+
+def result_new(request):
+    if 'id' in request.GET:
+        job_id = request.GET['id']
+        try:
+            new_record = JobStatus.objects.get(pipeline_key=job_id)
+            assert isinstance(new_record, JobStatus)
+        except:
+            return redirect("/srnatoolbox/jobstatus/srnabench/?id=" + job_id)
+            
+
+        results = {}
+        results["id"] = job_id
+
+        if (new_record.job_status == "Finished" or new_record.job_status == "Running") and os.path.exists(os.path.join(new_record.outdir, "parameters.txt")):
+            params = ParamsBench(os.path.join(new_record.outdir, "parameters.txt"))
+            if new_record.job_status == "Running":
+                results["running"] = True
+
+            if os.path.exists(new_record.outdir):
+
+                parameters = params.params
+                 #Summary
+                add_sumimg(new_record, results)
+
+
+                #Preproc
+                if "inputFinished" in parameters:
+                    add_preproc(params, results)
+                    add_preimg(new_record, results)
+
+                #Genome Mapping
+                if "species" in parameters:
+                    add_mapping_result(new_record, parameters, results)
+
+                #MicroRNA summary (miRBase v21)
+                if "microRNA" in parameters:
+                    if "matureDetected" in parameters:
+                        add_mirimg(new_record, results)
+                        add_mirprof(params, results)
+
+                #sRNA summary
+                if "libs" in parameters:
+                    add_libs(parameters, results)
+
+                #New Mirna
+                if os.path.exists(os.path.join(new_record.outdir, "novel.txt")):
+                    add_novel(parameters, results)
+                if os.path.exists(os.path.join(new_record.outdir, "tRNA_anticodon_sense.grouped")):
+                    add_trna(results)
+
+                if os.path.exists(os.path.join(new_record.outdir, "sRNAbench.zip")):
+                    zip_file = os.path.join(new_record.outdir, "sRNAbench.zip")
+                    zip_file = "/".join(zip_file.split("/")[-2:])
+                    results["zip"] = zip_file
+
+
+                try:
+                    results["parameters"] = new_record.parameters
+                except:
+                    pass
+
+                results["date"] = new_record.start_time + datetime.timedelta(days=15)
+
+            return render(request, "srnabench_result.html", results)
+
+        else:
+            return redirect("/srnatoolbox/jobstatus/srnabench/?id=" + job_id)
+    else:
+        redirect("/srnatoolbox/srnabench")
+
+
+
+
+
+def render_table(request, mode, job_id, lib=""):
+
+    result={}
+    result["id"] = job_id
+    new_record = JobStatus.objects.get(pipeline_key=job_id)
+
+    if mode == "pre-microRNA":
+        result["title"] = "Mapping results to pre-microRNA"
+        ifile = os.path.join(new_record.outdir, "miRBase_main.txt")
+        parser = MirBaseParser(ifile)
+        table = [obj for obj in parser.parse()]
+        id = "table"
+        try:
+            header = table[0].get_sorted_attr()
+            r = Result(id, define_table(header, 'TableResult')(table[:500]))
+            result["table"] = r
+            result["sec"] = "microRNA"
+
+        except:
+            r = Result(id, define_table(["Empty"], 'TableResult')([]))
+
+    if mode == "mature":
+        result["title"] = "Profiling of mature microRNAs (Multiple Assignment of reads, i.e. the reads are assigned to all loci or reference sequences to which they map with the same quality)"
+        ifile = os.path.join(new_record.outdir, "mature_sense.grouped")
+        parser = MatureParser(ifile)
+        table = [obj for obj in parser.parse()]
+        id = "table"
+        try:
+            header = table[0].get_sorted_attr()
+            r = Result(id, define_table(header, 'TableResult')(table[:500]))
+            result["table"] = r
+            result["sec"] = "microRNA"
+        except:
+            pass
+
+    if mode == "maturesa":
+        result["title"] = "Profiling of mature microRNAs (Single Assignment of reads; each read is only assigned once, i.e. to the loci or reference sequence with the highest read count)"
+        ifile = os.path.join(new_record.outdir, "mature_sense_singleA.grouped")
+        parser = MatureParserSA(ifile)
+        table = [obj for obj in parser.parse()]
+        id = "table"
+        try:
+            header = table[0].get_sorted_attr()
+            r = Result(id, define_table(header, 'TableResult')(table[:500]))
+            result["table"] = r
+            result["sec"] = "microRNA"
+        except:
+            pass
+
+    if mode == "isomir":
+        result["title"] = "isomiR summary: (NTA: non-templated addition; lv=length variant; E=extension; T=trimmed; mv=multi-variant)"
+        ifile = os.path.join(new_record.outdir, "stat", "isomiR_summary.txt")
+        parser = IsomirParser(ifile)
+        table = [obj for obj in parser.parse()]
+        id = "table"
+        try:
+            header = table[0].get_sorted_attr()
+            r = Result(id, define_table(header, 'TableResult')(table[:500]))
+            result["table"] = r
+            result["sec"] = "microRNA"
+        except:
+            pass
+
+    if mode == "novel":
+        result["title"] = "Novel microRNAs"
+        ifile = os.path.join(new_record.outdir, "novel.txt")
+        parser = NovelParser(ifile)
+        table = [obj for obj in parser.parse()]
+        id = "table"
+        try:
+            header = table[0].get_sorted_attr()
+            r = Result(id, define_table(header, 'TableResult')(table[:500]))
+            result["table"] = r
+            result["sec"] = "novel"
+        except:
+            pass
+
+    if mode == "trna":
+        result["title"] = "tRNA mapped reads as a function of anti-codon"
+        ifile = os.path.join(new_record.outdir, "tRNA_anticodon_sense.grouped")
+        parser = TRNAParser(ifile)
+        table = [obj for obj in parser.parse()]
+        id = "table"
+        try:
+            header = table[0].get_sorted_attr()
+            r = Result(id, define_table(header, 'TableResult')(table[:500]))
+            result["table"] = r
+            result["sec"] = "trna"
+        except:
+            pass
+
+    if mode == "MA":
+        result["title"] = lib
+        ifile = os.path.join(new_record.outdir, lib + "_sense.grouped")
+        parser = MAParser(ifile)
+        table = [obj for obj in parser.parse()]
+        id = "table"
+        try:
+            header = table[0].get_sorted_attr()
+            r = Result(id, define_table(header, 'TableResult')(table[:500]))
+            result["table"] = r
+            result["sec"] = "libs"
+        except:
+            pass
+
+    if mode == "SA":
+        result["title"] = lib
+        ifile = os.path.join(new_record.outdir, lib + "_sense_singleA.grouped")
+        parser = SAParser(ifile)
+        table = [obj for obj in parser.parse()]
+        id = "table"
+        try:
+            header = table[0].get_sorted_attr()
+            r = Result(id, define_table(header, 'TableResult')(table[:500]))
+            result["table"] = r
+            result["sec"] = "libs"
+        except:
+            pass
+
+    if mode == "MA_antisense":
+        result["title"] = lib
+        ifile = os.path.join(new_record.outdir, lib + "_antisense.grouped")
+        parser = MAParser(ifile)
+        table = [obj for obj in parser.parse()]
+        id = "table"
+        try:
+            header = table[0].get_sorted_attr()
+            r = Result(id, define_table(header, 'TableResult')(table[:500]))
+            result["table"] = r
+            result["sec"] = "libs"
+        except:
+            pass
+
+    if mode == "SA_antisense":
+        result["title"] = lib
+        ifile = os.path.join(new_record.outdir, lib + "_antisense_singleA.grouped")
+        parser = SAParser(ifile)
+        table = [obj for obj in parser.parse()]
+        id = "table"
+        try:
+            header = table[0].get_sorted_attr()
+            r = Result(id, define_table(header, 'TableResult')(table[:500]))
+            result["table"] = r
+            result["sec"] = "libs"
+        except:
+            pass
+
+    return render(request, "tables_srnabench.html", result)
+
+
+
+def show_align(request, job_id, type, name):
+
+        result={}
+        result["id"] = job_id
+        new_record = JobStatus.objects.get(pipeline_key=job_id)
+        outdir = new_record.outdir
+        if type == "hairpin":
+            ifile = os.path.join(outdir, "hairpin", name + ".align")
+            if os.path.exists(ifile):
+                content = file(ifile).readlines()
+            else:
+                content = "No Alignment available. Read count below threshold"
+            desc = "alignment to pre-microRNA"
+            back = "pre-microRNA"
+
+        elif type == "novel":
+            ifile = os.path.join(outdir, "novel", name + ".align")
+            content = file(ifile).readlines()
+            desc = "Alignment to predicted microRNA"
+            back = "novel"
+
+        else:
+            return redirect(reverse("sRNABench.views.input"))
+
+        result["back"] = back
+        result["desc"] = desc
+        result["name"] = name
+        result["align"] = "".join(content)
+
+        return render(request, "align.html", result)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def test(request):
+    pipeline_id = pipeline_utils.generate_uniq_id()
+    FS.location = os.path.join("/shared/sRNAtoolbox/webData", pipeline_id)
+    make_dir(FS.location)
+
+    libs_files = []
+    lib_mode = False
+    no_libs = False
+    guess_adapter = None
+    recursive_adapter_trimming = None
+    high_conf = False
+    solid = None
+    ifile = "/shared/sRNAtoolbox/testData/IK_exo.fastq.gz"
+
+    adapter = "TGGAATTCTCGGGTGCCAAGG"
+    species = ["hg19_5_mp", "NC_007605"]
+    assemblies = ["hg19", "NC_007605"]
+    mircro_names = ["hsa", "ebv"]
+
+    mir = ":".join(mircro_names)
+    homolog = ""
+
+    adapter_minLength = "10"
+    adapterMM = "1"
+
+    outdir = FS.location
+
+    rc = "2"
+    mm = "0"
+    seed = "20"
+    align_type = "n"
+    remove_barcode = "0"
+
+    species_annotation_file = SpeciesAnnotationParser(SPECIES_ANNOTATION_PATH)
+    species_annotation = species_annotation_file.parse()
+
+    newConf = SRNABenchConfig(species_annotation, DB, FS.location, ifile, iszip="true",
+                              RNAfold="RNAfold2",
+                              bedGraph="true", writeGenomeDist="true", predict="true", graphics="true",
+                              species=species, assembly=assemblies, adapter=adapter,
+                              recursiveAdapterTrimming=recursive_adapter_trimming, libmode=lib_mode, nolib=no_libs,
+                              microRNA=mir, removeBarcode=str(remove_barcode),
+                              adapterMinLength=str(adapter_minLength), adapterMM=str(adapterMM), seed=str(seed),
+                              noMM=str(mm), alignType=str(align_type), rc=str(rc), solid=solid,
+                              guessAdapter=guess_adapter, highconf=high_conf, homolog=homolog,
+                              user_files=libs_files)
+
+    conf_file_location = os.path.join(FS.location, "conf.txt")
+    newConf.write_conf_file(conf_file_location)
+
+    os.system(
+        'qsub -v pipeline="bench",configure="' + conf_file_location + '",key="' + pipeline_id + '",outdir="' + outdir + '",name="' + pipeline_id
+        + '_sRNAbench' + '" -N ' + pipeline_id + '_sRNAbench /shared/sRNAtoolbox/core/bash_scripts/run_sRNAbench.sh')
+
+    return redirect("/srnatoolbox/jobstatus/srnabench/?id=" + pipeline_id)

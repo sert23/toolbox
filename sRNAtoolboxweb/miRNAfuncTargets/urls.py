@@ -1,0 +1,13 @@
+__author__ = 'antonior'
+
+from django.conf.urls import url
+
+
+import views
+
+urlpatterns = [
+    url(r'results', views.result),
+    url(r'run$', views.run),
+    url(r'^/*$', views.input),
+    url(r'test$', views.test),
+]

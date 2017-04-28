@@ -1,0 +1,14 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}pita{% endblock %}
+{% block title %}
+    PITA Available Parameters
+{% endblock %}
+{% block text %}
+<p>-flank_up &lt;bp&gt;<br />-flank_down &lt;bp&gt;: Flank requirement in basepairs (default: zero for both)<br />
+    -ddG_context &lt;bp&gt;: Number of bases upstream and downstream for target site that are taken into account when folding the UTR (default: 70)<br />
+    -prefix &lt;string&gt;: Add the string as a prefix to the output files (pita_results.tab and ext_utr.stab)<br />
+    -gxp: Produce a gxp (Genomica project file) output file.<br />-l &lt;num1-num2&gt;: Search for seed lengths of num1,...,num2 to the MicroRNA (default: 6-8)<br />
+    -gu &lt;nums&gt;: Lengths for which G:U wobbles are allowed and number of allowed wobbles. Format of nums: &lt;length;num G:U&gt;,&lt;length;num G:U&gt;,... (default: 6;0,7;1,8;1)<br />
+    -m &lt;nums&gt;: Lengths for which mismatches are allowed and number of allowed mismatches Format of nums: &lt;length;num mismatches&gt;,&lt;length;num mismatches&gt;,...(default: 6;0,7;0,8;1)<br />
+    -loop &lt;nums&gt;: Lengths for which a single loop in either the target or the microrna is allowed. Format of nums: &lt;length&gt;,&lt;length&gt;,... (default: none)</p>
+{% endblock %}
