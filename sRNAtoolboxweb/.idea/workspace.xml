@@ -2,30 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="257f5e96-4f7f-4f18-bf1d-979e2c7f2506" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/progress/migrations/0003_auto_20170428_1253.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/progress/migrations/0004_auto_20170428_1255.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/helpers/helpers.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/helpers/helpers_ensembl.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/helpers/helpers_extract.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/helpers/helpers_ncbi.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/helpers/helpers_rnacentral.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/helpers/helpers_trnaparser.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata" afterPath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata.keystream" afterPath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata.keystream" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata.keystream.len" afterPath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata.keystream.len" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata.len" afterPath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata.len" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata_i" afterPath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata_i" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata_i.len" afterPath="$PROJECT_DIR$/.idea/dataSources/0b927a9b-ed4a-4979-9e82-f13bedd61e1f/_metadata_/metadata_i.len" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/helpers/forms.py" afterPath="$PROJECT_DIR$/helpers/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/helpers/urls.py" afterPath="$PROJECT_DIR$/helpers/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/helpers/views.py" afterPath="$PROJECT_DIR$/helpers/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/miRNAfuncTargets/views.py" afterPath="$PROJECT_DIR$/miRNAfuncTargets/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/progress/models.py" afterPath="$PROJECT_DIR$/progress/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/helpers.html" afterPath="$PROJECT_DIR$/templates/helpers.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/index.html" afterPath="$PROJECT_DIR$/templates/index.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -607,7 +584,14 @@
       <option name="project" value="LOCAL" />
       <updated>1493367641588</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Removed unnecessary code">
+      <created>1496247012848</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1496247012851</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView">
