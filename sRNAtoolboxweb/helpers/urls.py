@@ -4,12 +4,12 @@ from django.conf.urls import url
 import views
 
 urlpatterns = [
-    url(r'^ncbiparser', views.ncbi),
-    url(r'^ensemlparser', views.ens),
-    url(r'^rnacentralparser', views.rnac),
-    url(r'^trnaparser', views.trna),
+    url(r'^ncbiparser', views.NCBI.as_view(), name="ncbi"),
+    url(r'^ensemlparser', views.Ensembl.as_view(), name="ensembl"),
+    url(r'^rnacentralparser', views.RNAcentral.as_view(), name="rnacentral"),
+    url(r'^trnaparser', views.Trna.as_view(), name="trna"),
     url(r'^removedup', views.RemoveDup.as_view(), name='removedup'),
-    url(r'^extract', views.extract),
+    url(r'^extract', views.Extract.as_view(), name="extract"),
     url(r'^run/([A-za-z]+)', views.run),
     url(r'^results', views.result),
 ]

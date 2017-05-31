@@ -6,7 +6,8 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
 
-from helpers.forms import RemovedupForm
+from helpers.forms import RemovedupForm, EnsemblForm, RnacentralForm, TrnaparserForm
+from helpers.forms import ExtractForm
 from pipelines import pipeline_utils
 from utils.sysUtils import make_dir
 from progress.models import JobStatus
@@ -236,12 +237,76 @@ class RemoveDup(FormView):
     template_name = 'helpers/helpers_removedup.html'
     form_class = RemovedupForm
 
-    success_url = reverse_lazy("home")
+    success_url = reverse_lazy("removedup")
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call = form.create_call()
-        # llamada al sistema
         print call
         return super(RemoveDup, self).form_valid(form)
+
+class Extract(FormView):
+    template_name = 'helpers/helpers_extract.html'
+    form_class = ExtractForm
+
+    success_url = reverse_lazy("extract")
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        call = form.create_call()
+        print call
+        return super(Extract, self).form_valid(form)
+
+class Ensembl(FormView):
+    template_name = 'helpers/helpers_ensembl.html'
+    form_class = EnsemblForm
+
+    success_url = reverse_lazy("ensembl")
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        call = form.create_call()
+        print call
+        return super(Ensembl, self).form_valid(form)
+
+class NCBI(FormView):
+    template_name = 'helpers/helpers_ncbi.html'
+    form_class = EnsemblForm
+
+    success_url = reverse_lazy("ncbi")
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        call = form.create_call()
+        print call
+        return super(NCBI, self).form_valid(form)
+
+class RNAcentral(FormView):
+    template_name = 'helpers/helpers_rnacentral.html'
+    form_class = RnacentralForm
+
+    success_url = reverse_lazy("rnacentral")
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        call = form.create_call()
+        print call
+        return super(RNAcentral, self).form_valid(form)
+
+class Trna(FormView):
+    template_name = 'helpers/helpers_trnaparser.html'
+    form_class =TrnaparserForm
+
+    success_url = reverse_lazy("trna")
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        call = form.create_call()
+        print call
+        return super(Trna, self).form_valid(form)

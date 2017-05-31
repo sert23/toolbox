@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    {#                    <h1>Helper Tools: </h1>#}
+                    <h1>{{tool}} </h1>
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-9">
+                    <div class="well">
+                        <h4>Ensembl Parser:</h4>
+                        <p>sRNAbench can read specially prepared annotations, i.e. the transcript name and the
+                            classification separated by ‘:’. The 'Ensembl Parser' reads a Ensembl fasta annotation file
+                            and generates the sRNAbench format. In can use cDNA and ncRNA fasta files from this
+                        <a href="http://www.ensembl.org/info/data/ftp/index.html"> page </a>.
+
+
+                        </p>
+
+                        <p><a href="ftp://ftp.ensembl.org/pub/release-79/fasta/homo_sapiens/ncrna/Homo_sapiens.GRCh38.ncrna.fa.gz">Link to test data</a></p>
+                       <p> If you use this data please cite: <a target="_blank" href="http://nar.oxfordjournals.org/content/41/D1/D48" >Paul Flicek et al. (2012). Ensembl 2013. Nucleic Acids Res.</a></p>
+
+                    </div>
+
+
+                    <!-- INPUT DATA -->
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapseOne">Input data</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+
+                            <form enctype="multipart/form-data"
+                                  action="{% url 'ensembl' %}"
+                                  method="post">{% csrf_token %}
+
+                                    <fieldset>
+                                        {% for field in form %}
+                                            <div class="form-group">
+                                                {% if field.errors %}
+                                                    {% for error in field.errors %}
+                                                        <div class="row">
+                                                            <div class="col-lg-8">
+                                                                <span class="label label-danger">{{ error|escape }}</span>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <label class="control-label">{{ field.label_tag }}</label>
+                                                {{ field }}
+                                            </div>
+                                        {% endfor %}
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="reset" class="btn btn-primary ">Reset</button>
+                                    </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="col-lg-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Help
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <a href="{% static "WebManual_sRNAtoolbox.pdf" %}" target="_blank">Link to Web Manual</a>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- /#page-wrapper -->
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        // tooltip demo
+        $('.row').tooltip({
+            selector: "[data-toggle=tooltip]",
+            container: "body"
+        })
+
+    </script>
+
+{% endblock %}

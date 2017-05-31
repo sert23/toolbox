@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    {#                    <h1>Helper Tools: </h1>#}
+                    <h1>{{tool}} </h1>
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-9">
+
+                    <div class="well">
+                        <h4>Extract Sequences from a fasta file:</h4>
+                        <p>This parser allows to specify a search criterion for fasta sequence names. For example, microRNA sequences from miRBase start with the species name like 'has' (Homo sapiens). Providing
+                            a miRBase fasta file specifying 'hsa' would make the program return only human (hsa) sequences from the file. </p>
+                    </div>
+
+                    <!-- INPUT DATA -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse"  href="#collapseOne">Input data</a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+
+                                <form enctype="multipart/form-data"
+                                      action="{% url 'extract' %}"
+                                      method="post">{% csrf_token %}
+
+                                    <fieldset>
+                                        {% for field in form %}
+                                            <div class="form-group">
+                                                {% if field.errors %}
+                                                    {% for error in field.errors %}
+                                                        <div class="row">
+                                                            <div class="col-lg-8">
+                                                                <span class="label label-danger">{{ error|escape }}</span>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <label class="control-label">{{ field.label_tag }}</label>
+                                                {{ field }}
+                                            </div>
+                                        {% endfor %}
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="reset" class="btn btn-primary ">Reset</button>
+                                    </fieldset>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+            </div>
+
+
+            <div class="col-lg-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Help
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <a href="{% static "WebManual_sRNAtoolbox.pdf" %}" target="_blank">Link to Web Manual</a>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- /#page-wrapper -->
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        // tooltip demo
+        $('.row').tooltip({
+            selector: "[data-toggle=tooltip]",
+            container: "body"
+        })
+
+    </script>
+
+{% endblock %}

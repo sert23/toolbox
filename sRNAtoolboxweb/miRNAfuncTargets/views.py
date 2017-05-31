@@ -24,7 +24,6 @@ CONF = settings.CONF
 SPECIES_PATH = CONF["species"]
 FS = FileSystemStorage(CONF["sRNAtoolboxSODataPath"])
 
-
 class TableResultenrich(tables.Table):
     """
     Class to serialize table of results
