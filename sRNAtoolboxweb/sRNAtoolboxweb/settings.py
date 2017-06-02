@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     # 'sRNAtoolboxweb',
     'sRNAfuncTerms',
     'progress',
@@ -83,6 +84,29 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'sRNAtoolboxweb.wsgi.application'
+
+
+CORS_ALLOW_HEADERS = (
+    'x-requested-with',
+    'content-type',
+    'accept',
+    'origin',
+    'authorization',
+    'X-Prototype-Version',
+    'x-csrftoken'
+)
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = (
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS'
+)
 
 
 # Database

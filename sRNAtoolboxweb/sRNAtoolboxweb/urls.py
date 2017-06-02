@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import include, url
 # from dajaxice.core import dajaxice_autodiscover, dajaxice_config
 # dajaxice_autodiscover()
 
@@ -10,7 +10,7 @@ import views
 
 urlpatterns =[
     #url(r'^/*', views.index),
-    url(r'^jobstatus', include('progress.urls')),
+    url(r'^jobstatus/', include('progress.urls')),
     url(r'^srnafuncterms', include('sRNAfuncTerms.urls')),
     url(r'^srnade', include('sRNAde.urls')),
     url(r'^srnablast', include('sRNAblast.urls')),

@@ -1,10 +1,13 @@
 # Create your views here.
 import os
+import time
+from subprocess import Popen, PIPE
 
 from django.shortcuts import render, redirect
-import time
+from rest_framework import generics
+
 from models import JobStatus
-from subprocess import Popen, PIPE, STDOUT, call
+from serializers import JobStatusSerializer
 
 
 class Msg():
@@ -154,3 +157,10 @@ def progress(request, tool):
                 return render(request, 'progress.html', {'error': True, 'msgs': [Msg(
                     "ERROR: An error occured with your job:" + job_id + "\nPlease report it indicating the jobID")], "id": job_id})
 
+
+class Progress(generics.CreateAPIView, generics.UpdateAPIView):
+    model = JobStatus
+    serializer_class = JobStatusSerializer
+    lookup_field = 'pipeline_key'
+    lookup_url_kwarg = 'pipeline_id'
+    queryset = JobStatus.objects.all()
