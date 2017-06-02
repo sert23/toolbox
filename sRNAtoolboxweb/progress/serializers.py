@@ -1,15 +1,15 @@
 from rest_framework import serializers
-from models import JobStatus
+from models import JobStatus, Status
 
+class StatusSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Status
+        fields = ['status_progress']
 
 class JobStatusSerializer(serializers.ModelSerializer):
+    status = StatusSerializer(many=True)
     class Meta:
         model = JobStatus
         fields = '__all__'
-
-    # def create(self, validated_data):
-    #     # status = validated_data.pop('status')
-    #     js = JobStatus.objects.create(**validated_data)
-    #     return js
 
 

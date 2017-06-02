@@ -21,5 +21,5 @@ class SimpleTest(TestCase):
                                  outdir="output", parameters="x,y", command_line="bash_lime",
                                  java_commad_line="jar")
 
-        self.assertEqual(len(JobStatus.objects.all()),1)
+        self.assertEqual(len(JobStatus.objects.all()), 1)
         self.assertEqual(len(JobStatus.objects.first().status.all()), 1)
