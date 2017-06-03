@@ -1,15 +1,13 @@
 # Create your views here.
 import os
+
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
-import django_tables2 as tables
-import itertools
-from FileModels.gfreeOutParser import GFreeOutParser
-from FileModels.jBrowserParser import JBrowserParser
-from pipelines import pipeline_utils
-from progress.models import JobStatus
-from utils.sysUtils import make_dir
 
+from FileModels.gfreeOutParser import GFreeOutParser
+from progress.models import JobStatus
+from utils import pipeline_utils
+from utils.sysUtils import make_dir
 
 FS = FileSystemStorage("/shared/sRNAtoolbox/webData")
 

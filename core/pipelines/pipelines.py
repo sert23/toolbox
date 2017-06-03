@@ -2,7 +2,7 @@ from abc import abstractmethod
 from abc import ABCMeta
 import re
 import pygal
-
+import requests
 from FileModels.BlastParsers import BlastParser
 from pygal.style import LightColorizedStyle
 from checkers import *
@@ -13,8 +13,8 @@ __author__ = 'antonior'
 import sys
 
 sys.path.append("/shared/")
-from utils.sysUtils import make_dir
-from utils.mongoDB import mongoDB
+from core_utils.sysUtils import make_dir
+from core_utils.mongoDB import mongoDB
 import os
 from time import gmtime, strftime
 from datetime import datetime
@@ -58,41 +58,48 @@ class Pipeline:
 
         # Open logDB connection
         self.job_name = job_name
-        self.logdb_connection = mongoDB("localhost", "srnatoolbox")
+        self.api_server = 'localhost'
+        self.api_path = os.path.join(self.api_server, 'jobstatus', 'api')
+        self.api_path_key = os.path.join(self.api_path, self.pipeline_key)
+        self.api_path_add_status = os.path.join(self.api_path, self.pipeline_key, 'add_status')
+
 
     def initialize_pipeline_status(self):
+
         started_info = (strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " INFO: Analysis starts")
-        insert = {"pipeline_key": self.pipeline_key, "job_name": self.job_name, "job_status_progress": [started_info],
-                  "job_status": "Running", "start_time": datetime.now(), "pipeline_type": self.tool,
-                  "outdir": self.outdir,
-                  "command_line": " ".join(sys.argv),
-                  "parameters": self.parameters}
-        self.logdb_connection.insert_doc(self.table_log, insert)
+        payload = {
+            "job_status": "Running",
+            "command_line": " ".join(sys.argv)
+        }
+        requests.patch(self.pipeline_key, json=payload)
+        self.actualize_pipeline_progress(new_step=started_info)
 
     def actualize_pipeline_progress(self, new_step):
-        query = {"pipeline_key": self.pipeline_key}
-
-        self.logdb_connection.update(self.table_log, query, {"$push": {"job_status_progress": new_step}})
+        payload = {
+            "status_progress": new_step
+        }
+        requests.post(self.api_path_add_status, json=payload)
         if "ERROR" in new_step:
             self.change_pipeline_status("Finished with Errors")
 
     def change_pipeline_status(self, new_status):
-        query = {"pipeline_key": self.pipeline_key}
-        update = {"$set": {"job_status": new_status}}
-
-        self.logdb_connection.update(self.table_log, query, update)
+        payload = {
+            "job_status": new_status,
+        }
+        requests.patch(self.pipeline_key, json=payload)
 
     def set_finish_time(self):
-        query = {"pipeline_key": self.pipeline_key}
-        update = {"$set": {"finish_time": datetime.now()}}
-
-        self.logdb_connection.update(self.table_log, query, update)
+        payload= {
+            "finish_time": str(datetime.now())
+        }
+        requests.patch(self.pipeline_key, json=payload)
 
     def set_java_command_line(self, line):
-        query = {"pipeline_key": self.pipeline_key}
-        update = {"$set": {"java_commad_line": line}}
+        payload = {"java_commad_line": line}
+        requests.patch(self.pipeline_key, json=payload)
 
-        self.logdb_connection.update(self.table_log, query, update)
+    def raw_update(self, payload):
+        requests.patch(self.pipeline_key, json=payload)
 
 
     # def actualize_log(self, log_msg):
@@ -244,9 +251,8 @@ class sRNAfuncTermsPipeline(Pipeline):
         zip_file = os.path.join(self.outdir, "sRNAfuncTerms_full_Result.zip")
         os.system("cd " + self.outdir + "; zip -r " + zip_file + " " + " *")
 
-        query = {"pipeline_key": self.pipeline_key}
-        update = {"$set": {"all_files": all_files, "modules_files": modules_files, "zip_file": zip_file}}
-        self.logdb_connection.update(self.table_log, query, update)
+        update = {"all_files": all_files, "modules_files": modules_files, "zip_file": zip_file}
+        self.raw_update(update)
 
 
 class sRNAdePipeline(Pipeline):
@@ -322,9 +328,6 @@ class sRNAdePipeline(Pipeline):
         self.actualize_pipeline_progress(log_msg)
 
     def set_out_files(self):
-
-        query = {"pipeline_key": self.pipeline_key}
-
         xls_files = glob.glob(os.path.join(self.outdir, "*.xlsx"))
         heatmap = glob.glob(os.path.join(self.outdir, "*heatmap*.png"))
         zip_file = os.path.join(self.outdir, "sRNAde_full_Result.zip")
@@ -333,9 +336,8 @@ class sRNAdePipeline(Pipeline):
             stats_file = ""
 
         os.system("cd " + self.outdir + "; zip -r " + zip_file + " " + " *")
-        update = {"$set": {"heatmaps": heatmap, "xls_files": xls_files, "zip_file": zip_file, "stats_file": stats_file}}
-
-        self.logdb_connection.update(self.table_log, query, update)
+        update = {"heatmaps": heatmap, "xls_files": xls_files, "zip_file": zip_file, "stats_file": stats_file}
+        self.raw_update(payload=update)
 
 
 class sRNAbenchPipeline(Pipeline):
@@ -461,11 +463,10 @@ class sRNAblastPipeline(Pipeline):
 
         zip_file = os.path.join(self.outdir, "sRNAblast_full_Result.zip")
         os.system("cd " + self.outdir + "; zip -r " + zip_file + " " + " *")
-        update = {
-            "$set": {"blast_file": blast_file, "species_file": species_file, "zip_file": zip_file, "tax_file": tax_file,
-                     "tax_svg": tax_svg, "species_svg": species_svg}}
+        update = {"blast_file": blast_file, "species_file": species_file, "zip_file": zip_file, "tax_file": tax_file,
+                     "tax_svg": tax_svg, "species_svg": species_svg}
 
-        self.logdb_connection.update(self.table_log, query, update)
+        self.raw_update(update)
 
 
 class mirconstargetPipeline(Pipeline):
@@ -512,20 +513,14 @@ class mirconstargetPipeline(Pipeline):
 
 
     def set_out_files(self):
-        query = {"pipeline_key": self.pipeline_key}
         consensus_file = os.path.join(self.outdir, "consensus.txt")
-
-
         if not os.path.isfile(consensus_file):
             consensus_file = ""
-
-
         zip_file = os.path.join(self.outdir, "miRNAconsTarget_full_Result.zip")
         os.system("cd " + self.outdir + "; zip -r " + zip_file + " " + " *")
 
-        update = {"$set": {"consensus_file": consensus_file,
-                           "zip_file": zip_file}}
-        self.logdb_connection.update(self.table_log, query, update)
+        update = {"consensus_file": consensus_file, "zip_file": zip_file}
+        self.raw_update(update)
 
 
 class mirconsfunctargetPipeline(Pipeline):
@@ -649,10 +644,8 @@ class mirconsfunctargetPipeline(Pipeline):
         :param all_files: files *_all stored
         :param modules_files: files *_modules stored
         """
-
-        query = {"pipeline_key": self.pipeline_key}
-        update = {"$set": {"all_files": all_files, "modules_files": modules_files}}
-        self.logdb_connection.update(self.table_log, query, update)
+        update = {"all_files": all_files, "modules_files": modules_files}
+        self.raw_update(update)
 
 
     def set_out_files(self):
@@ -666,9 +659,8 @@ class mirconsfunctargetPipeline(Pipeline):
         zip_file = os.path.join(self.outdir, "miRNAconsTarget_full_Result.zip")
         os.system("cd " + self.outdir + "; zip -r " + zip_file + " " + " *")
 
-        update = {"$set": { "consensus_file": consensus_file,
-                           "zip_file": zip_file}}
-        self.logdb_connection.update(self.table_log, query, update)
+        update = {"consensus_file": consensus_file, "zip_file": zip_file}
+        self.raw_update(update)
 
 
 class sRNAjBrowserPipeline(Pipeline):
@@ -705,8 +697,8 @@ class sRNAjBrowserPipeline(Pipeline):
         bed_file = glob.glob(os.path.join(PATH_TO_OUT, self.sid, "*jBrowser.bed"))
 
         # self.logger.write(os.path.join(PATH_TO_OUT, self.sid, "*jBrowser.bed") + "\n")
-        update = {"$set": {"bed_files": bed_file}}
-        self.logdb_connection.update(self.table_log, query, update)
+        update = {"bed_files": bed_file}
+        self.raw_update(update)
 
 
 class sRNAgFreePipeline(Pipeline):
@@ -752,8 +744,6 @@ class sRNAgFreePipeline(Pipeline):
         # self.logger.write(log_msg + "\n")
 
     def set_out_files(self):
-        query = {"pipeline_key": self.pipeline_key}
-
         info_file = os.path.join(self.outdir, "info.txt")
         micro_file = os.path.join(self.outdir, "microRNAs.txt")
         allfiles = glob.glob(os.path.join(self.outdir, "*"))
@@ -768,8 +758,8 @@ class sRNAgFreePipeline(Pipeline):
             zip_file = os.path.join(self.outdir, "sRNAblast_full_Result.zip")
             os.system("cd " + self.outdir + "; zip -r " + zip_file + " " + " *")
 
-            update = {"$set": {"info_file": info_file, "micro_file": micro_file, "zip_file": zip_file}}
-            self.logdb_connection.update(self.table_log, query, update)
+            update = {"info_file": info_file, "micro_file": micro_file, "zip_file": zip_file, "all_files": allfiles}
+            self.raw_update(update)
             return True
 
 
@@ -816,8 +806,8 @@ class sRNAdejBrowserPipeline(Pipeline):
         print bed_file
 
         # self.logger.write(os.path.join(PATH_TO_OUT, self.sid, "*jBrowser.bed") + "\n")
-        update = {"$set": {"bed_files": bed_file}}
-        self.logdb_connection.update(self.table_log, query, update)
+        update = {"bed_files": bed_file}
+        self.raw_update(update)
 
 
 class helpersPipelines(Pipeline):
@@ -968,9 +958,8 @@ class helpersPipelines(Pipeline):
             os.system("cd " + self.outdir + "; zip " + zip_file + " " + os.path.basename(backvalue))
             self.error_logger.write("cd self.outdir; zip " + zip_file + " " + os.path.basename(backvalue))
 
-            query = {"pipeline_key": self.pipeline_key}
-            update = {"$set": {"zip_file": zip_file}}
-            self.logdb_connection.update(self.table_log, query, update)
+            update = {"zip_file": zip_file}
+            self.raw_update(update)
             return True
         else:
             log_msg = strftime("%Y-%m-%d %H:%M:%S",

@@ -1,11 +1,9 @@
 from django.db import models
 
 
-
-
-
 class JobStatus (models.Model):
     job_name = models.CharField(max_length=100)
+    # tool = models.CharField(max_length=100)
     pipeline_key = models.CharField(max_length=100)
     #job_status_progress = ListField(models.CharField(max_length=400))
     job_status = models.CharField(max_length=100)
@@ -54,3 +52,8 @@ class Status(models.Model):
         on_delete=models.CASCADE,
         related_name='status'
     )
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        super(Status, self).save()
+        self.JobStatus.job_status = self.status_progress
