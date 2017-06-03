@@ -1,0 +1,1333 @@
+
+#############################################################################
+#############################################################################
+##################  Annotation for hg38 #################
+hg38:kingdom=animal
+hg38:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+hg38:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+hg38:tRNA=hg38_genomic_tRNA
+hsa:tRNA=hg38_genomic_tRNA
+
+hg38:libs=hg38_genomic_tRNA
+hg38:desc=Genomic tRNA database
+
+hsa:libs=hg38_genomic_tRNA
+hsa:desc=Genomic tRNA database
+
+
+hg38:libs=hg38_ncRNA
+hg38:desc=Ensembl release 83 (ncRNA)
+
+hsa:libs=hg38_ncRNA
+hsa:desc=Ensembl release 83 (ncRNA)
+
+
+hg38:libs=hg38_cdna
+hg38:desc=Ensembl release 83 (cDNA)
+
+hsa:libs=hg38_cdna
+hsa:desc=Ensembl release 83 (cDNA)
+
+
+hg38:libs=hg38_RNAcentral
+hg38:desc=RNAcentral database
+
+hsa:libs=hg38_RNAcentral
+hsa:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for grcm38 #################
+grcm38:kingdom=animal
+grcm38:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+grcm38:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+grcm38:tRNA=grcm38_genomic_tRNA
+mmu:tRNA=grcm38_genomic_tRNA
+
+grcm38:libs=grcm38_genomic_tRNA
+grcm38:desc=Genomic tRNA database
+
+mmu:libs=grcm38_genomic_tRNA
+mmu:desc=Genomic tRNA database
+
+
+grcm38:libs=grcm38_ncRNA
+grcm38:desc=Ensembl release 83 (ncRNA)
+
+mmu:libs=grcm38_ncRNA
+mmu:desc=Ensembl release 83 (ncRNA)
+
+
+grcm38:libs=grcm38_cdna
+grcm38:desc=Ensembl release 83 (cDNA)
+
+mmu:libs=grcm38_cdna
+mmu:desc=Ensembl release 83 (cDNA)
+
+
+grcm38:libs=grcm38_RNAcentral
+grcm38:desc=RNAcentral database
+
+mmu:libs=grcm38_RNAcentral
+mmu:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for rnor6 #################
+rnor6:kingdom=animal
+rnor6:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+rnor6:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+rnor6:tRNA=rnor6_genomic_tRNA
+rno:tRNA=rnor6_genomic_tRNA
+
+rnor6:libs=rnor6_genomic_tRNA
+rnor6:desc=Genomic tRNA database
+
+rno:libs=rnor6_genomic_tRNA
+rno:desc=Genomic tRNA database
+
+
+rnor6:libs=rnor6_ncRNA
+rnor6:desc=Ensembl release 83 (ncRNA)
+
+rno:libs=rnor6_ncRNA
+rno:desc=Ensembl release 83 (ncRNA)
+
+
+rnor6:libs=rnor6_cdna
+rnor6:desc=Ensembl release 83 (cDNA)
+
+rno:libs=rnor6_cdna
+rno:desc=Ensembl release 83 (cDNA)
+
+
+rnor6:libs=rnor6_RNAcentral
+rnor6:desc=RNAcentral database
+
+rno:libs=rnor6_RNAcentral
+rno:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for dme_BDGP6 #################
+dme_BDGP6:kingdom=animal
+dme_BDGP6:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+dme_BDGP6:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+dme_BDGP6:tRNA=dme_BDGP6_genomic_tRNA
+dme:tRNA=dme_BDGP6_genomic_tRNA
+
+dme_BDGP6:libs=dme_BDGP6_genomic_tRNA
+dme_BDGP6:desc=Genomic tRNA database
+
+dme:libs=dme_BDGP6_genomic_tRNA
+dme:desc=Genomic tRNA database
+
+
+dme_BDGP6:libs=dme_BDGP6_ncRNA
+dme_BDGP6:desc=Ensembl release 83 (ncRNA)
+
+dme:libs=dme_BDGP6_ncRNA
+dme:desc=Ensembl release 83 (ncRNA)
+
+
+dme_BDGP6:libs=dme_BDGP6_cdna
+dme_BDGP6:desc=Ensembl release 83 (cDNA)
+
+dme:libs=dme_BDGP6_cdna
+dme:desc=Ensembl release 83 (cDNA)
+
+
+dme_BDGP6:libs=dme_BDGP6_RNAcentral
+dme_BDGP6:desc=RNAcentral database
+
+dme:libs=dme_BDGP6_RNAcentral
+dme:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for WBcel235 #################
+WBcel235:kingdom=animal
+WBcel235:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+WBcel235:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+WBcel235:tRNA=WBcel235_genomic_tRNA
+cel:tRNA=WBcel235_genomic_tRNA
+
+WBcel235:libs=WBcel235_genomic_tRNA
+WBcel235:desc=Genomic tRNA database
+
+cel:libs=WBcel235_genomic_tRNA
+cel:desc=Genomic tRNA database
+
+
+WBcel235:libs=WBcel235_ncRNA
+WBcel235:desc=Ensembl release 83 (ncRNA)
+
+cel:libs=WBcel235_ncRNA
+cel:desc=Ensembl release 83 (ncRNA)
+
+
+WBcel235:libs=WBcel235_cdna
+WBcel235:desc=Ensembl release 83 (cDNA)
+
+cel:libs=WBcel235_cdna
+cel:desc=Ensembl release 83 (cDNA)
+
+
+WBcel235:libs=WBcel235_RNAcentral
+WBcel235:desc=RNAcentral database
+
+cel:libs=WBcel235_RNAcentral
+cel:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for galgal4 #################
+galgal4:kingdom=animal
+galgal4:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+galgal4:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+galgal4:tRNA=galgal4_genomic_tRNA
+gga:tRNA=galgal4_genomic_tRNA
+
+galgal4:libs=galgal4_genomic_tRNA
+galgal4:desc=Genomic tRNA database
+
+gga:libs=galgal4_genomic_tRNA
+gga:desc=Genomic tRNA database
+
+
+galgal4:libs=galgal4_ncRNA
+galgal4:desc=Ensembl release 83 (ncRNA)
+
+gga:libs=galgal4_ncRNA
+gga:desc=Ensembl release 83 (ncRNA)
+
+
+galgal4:libs=galgal4_cdna
+galgal4:desc=Ensembl release 83 (cDNA)
+
+gga:libs=galgal4_cdna
+gga:desc=Ensembl release 83 (cDNA)
+
+
+galgal4:libs=galgal4_RNAcentral
+galgal4:desc=RNAcentral database
+
+gga:libs=galgal4_RNAcentral
+gga:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for GRCz10 #################
+GRCz10:kingdom=animal
+GRCz10:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+GRCz10:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+GRCz10:tRNA=GRCz10_genomic_tRNA
+dre:tRNA=GRCz10_genomic_tRNA
+
+GRCz10:libs=GRCz10_genomic_tRNA
+GRCz10:desc=Genomic tRNA database
+
+dre:libs=GRCz10_genomic_tRNA
+dre:desc=Genomic tRNA database
+
+
+GRCz10:libs=GRCz10_ncRNA
+GRCz10:desc=Ensembl release 83 (ncRNA)
+
+dre:libs=GRCz10_ncRNA
+dre:desc=Ensembl release 83 (ncRNA)
+
+
+GRCz10:libs=GRCz10_cdna
+GRCz10:desc=Ensembl release 83 (cDNA)
+
+dre:libs=GRCz10_cdna
+dre:desc=Ensembl release 83 (cDNA)
+
+
+GRCz10:libs=GRCz10_RNAcentral
+GRCz10:desc=RNAcentral database
+
+dre:libs=GRCz10_RNAcentral
+dre:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for umd3_1 #################
+umd3_1:kingdom=animal
+umd3_1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+umd3_1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+umd3_1:tRNA=umd3_1_genomic_tRNA
+bta:tRNA=umd3_1_genomic_tRNA
+
+umd3_1:libs=umd3_1_genomic_tRNA
+umd3_1:desc=Genomic tRNA database
+
+bta:libs=umd3_1_genomic_tRNA
+bta:desc=Genomic tRNA database
+
+
+umd3_1:libs=umd3_1_ncRNA
+umd3_1:desc=Ensembl release 83 (ncRNA)
+
+bta:libs=umd3_1_ncRNA
+bta:desc=Ensembl release 83 (ncRNA)
+
+
+umd3_1:libs=umd3_1_cdna
+umd3_1:desc=Ensembl release 83 (cDNA)
+
+bta:libs=umd3_1_cdna
+bta:desc=Ensembl release 83 (cDNA)
+
+
+umd3_1:libs=umd3_1_RNAcentral
+umd3_1:desc=RNAcentral database
+
+bta:libs=umd3_1_RNAcentral
+bta:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for canfam3_1 #################
+canfam3_1:kingdom=animal
+canfam3_1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+canfam3_1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+canfam3_1:tRNA=canfam3_1_genomic_tRNA
+cfa:tRNA=canfam3_1_genomic_tRNA
+
+canfam3_1:libs=canfam3_1_genomic_tRNA
+canfam3_1:desc=Genomic tRNA database
+
+cfa:libs=canfam3_1_genomic_tRNA
+cfa:desc=Genomic tRNA database
+
+
+canfam3_1:libs=canfam3_1_ncRNA
+canfam3_1:desc=Ensembl release 83 (ncRNA)
+
+cfa:libs=canfam3_1_ncRNA
+cfa:desc=Ensembl release 83 (ncRNA)
+
+
+canfam3_1:libs=canfam3_1_cdna
+canfam3_1:desc=Ensembl release 83 (cDNA)
+
+cfa:libs=canfam3_1_cdna
+cfa:desc=Ensembl release 83 (cDNA)
+
+
+canfam3_1:libs=canfam3_1_RNAcentral
+canfam3_1:desc=RNAcentral database
+
+cfa:libs=canfam3_1_RNAcentral
+cfa:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for sscrofa10_2 #################
+sscrofa10_2:kingdom=animal
+sscrofa10_2:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+sscrofa10_2:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+sscrofa10_2:tRNA=sscrofa10_2_genomic_tRNA
+ssc:tRNA=sscrofa10_2_genomic_tRNA
+
+sscrofa10_2:libs=sscrofa10_2_genomic_tRNA
+sscrofa10_2:desc=Genomic tRNA database
+
+ssc:libs=sscrofa10_2_genomic_tRNA
+ssc:desc=Genomic tRNA database
+
+
+sscrofa10_2:libs=sscrofa10_2_ncRNA
+sscrofa10_2:desc=Ensembl release 83 (ncRNA)
+
+ssc:libs=sscrofa10_2_ncRNA
+ssc:desc=Ensembl release 83 (ncRNA)
+
+
+sscrofa10_2:libs=sscrofa10_2_cdna
+sscrofa10_2:desc=Ensembl release 83 (cDNA)
+
+ssc:libs=sscrofa10_2_cdna
+ssc:desc=Ensembl release 83 (cDNA)
+
+
+sscrofa10_2:libs=sscrofa10_2_RNAcentral
+sscrofa10_2:desc=RNAcentral database
+
+ssc:libs=sscrofa10_2_RNAcentral
+ssc:desc=RNAcentral database
+
+
+
+#############################################################################
+#############################################################################
+##################  Annotation for cavpor3 #################
+cavpor3:kingdom=animal
+cavpor3:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+cavpor3:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+cavpor3:tRNA=cavpor3_genomic_tRNA
+cpo:tRNA=cavpor3_genomic_tRNA
+
+cavpor3:libs=cavpor3_genomic_tRNA
+cavpor3:desc=Genomic tRNA database
+
+cpo:libs=cavpor3_genomic_tRNA
+cpo:desc=Genomic tRNA database
+
+
+cavpor3:libs=cavpor3_ncRNA
+cavpor3:desc=Ensembl release 83 (ncRNA)
+
+cpo:libs=cavpor3_ncRNA
+cpo:desc=Ensembl release 83 (ncRNA)
+
+
+cavpor3:libs=cavpor3_cdna
+cavpor3:desc=Ensembl release 83 (cDNA)
+
+cpo:libs=cavpor3_cdna
+cpo:desc=Ensembl release 83 (cDNA)
+
+
+cavpor3:libs=cavpor3_RNAcentral
+cavpor3:desc=RNAcentral database
+
+cpo:libs=cavpor3_RNAcentral
+cpo:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for astmex102 #################
+astmex102:kingdom=animal
+astmex102:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+astmex102:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+astmex102:libs=astmex102_ncRNA
+astmex102:desc=Ensembl release 83 (ncRNA)
+
+amx:libs=astmex102_ncRNA
+amx:desc=Ensembl release 83 (ncRNA)
+
+
+astmex102:libs=astmex102_cdna
+astmex102:desc=Ensembl release 83 (cDNA)
+
+amx:libs=astmex102_cdna
+amx:desc=Ensembl release 83 (cDNA)
+
+
+astmex102:libs=astmex102_RNAcentral
+astmex102:desc=RNAcentral database
+
+amx:libs=astmex102_RNAcentral
+amx:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for fugu_4 #################
+fugu_4:kingdom=animal
+fugu_4:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+fugu_4:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+fugu_4:tRNA=fugu_4_genomic_tRNA
+tru:tRNA=fugu_4_genomic_tRNA
+
+fugu_4:libs=fugu_4_genomic_tRNA
+fugu_4:desc=Genomic tRNA database
+
+tru:libs=fugu_4_genomic_tRNA
+tru:desc=Genomic tRNA database
+
+
+fugu_4:libs=fugu_4_ncRNA
+fugu_4:desc=Ensembl release 83 (ncRNA)
+
+tru:libs=fugu_4_ncRNA
+tru:desc=Ensembl release 83 (ncRNA)
+
+
+fugu_4:libs=fugu_4_cdna
+fugu_4:desc=Ensembl release 83 (cDNA)
+
+tru:libs=fugu_4_cdna
+tru:desc=Ensembl release 83 (cDNA)
+
+
+fugu_4:libs=fugu_4_RNAcentral
+fugu_4:desc=RNAcentral database
+
+tru:libs=fugu_4_RNAcentral
+tru:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for equ_cab_2 #################
+equ_cab_2:kingdom=animal
+equ_cab_2:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+equ_cab_2:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+equ_cab_2:tRNA=equ_cab_2_genomic_tRNA
+eca:tRNA=equ_cab_2_genomic_tRNA
+
+equ_cab_2:libs=equ_cab_2_genomic_tRNA
+equ_cab_2:desc=Genomic tRNA database
+
+eca:libs=equ_cab_2_genomic_tRNA
+eca:desc=Genomic tRNA database
+
+
+equ_cab_2:libs=equ_cab_2_ncRNA
+equ_cab_2:desc=Ensembl release 83 (ncRNA)
+
+eca:libs=equ_cab_2_ncRNA
+eca:desc=Ensembl release 83 (ncRNA)
+
+
+equ_cab_2:libs=equ_cab_2_cdna
+equ_cab_2:desc=Ensembl release 83 (cDNA)
+
+eca:libs=equ_cab_2_cdna
+eca:desc=Ensembl release 83 (cDNA)
+
+
+equ_cab_2:libs=equ_cab_2_RNAcentral
+equ_cab_2:desc=RNAcentral database
+
+eca:libs=equ_cab_2_RNAcentral
+eca:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for mmul_1 #################
+mmul_1:kingdom=animal
+mmul_1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+mmul_1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+mmul_1:tRNA=mmul_1_genomic_tRNA
+mml:tRNA=mmul_1_genomic_tRNA
+
+mmul_1:libs=mmul_1_genomic_tRNA
+mmul_1:desc=Genomic tRNA database
+
+mml:libs=mmul_1_genomic_tRNA
+mml:desc=Genomic tRNA database
+
+
+mmul_1:libs=mmul_1_ncRNA
+mmul_1:desc=Ensembl release 83 (ncRNA)
+
+mml:libs=mmul_1_ncRNA
+mml:desc=Ensembl release 83 (ncRNA)
+
+
+mmul_1:libs=mmul_1_cdna
+mmul_1:desc=Ensembl release 83 (cDNA)
+
+mml:libs=mmul_1_cdna
+mml:desc=Ensembl release 83 (cDNA)
+
+
+mmul_1:libs=mmul_1_RNAcentral
+mmul_1:desc=RNAcentral database
+
+mml:libs=mmul_1_RNAcentral
+mml:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for orycun2.0 #################
+orycun2.0:kingdom=animal
+orycun2.0:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+orycun2.0:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+orycun2.0:tRNA=orycun2.0_genomic_tRNA
+ocu:tRNA=orycun2.0_genomic_tRNA
+
+orycun2.0:libs=orycun2.0_genomic_tRNA
+orycun2.0:desc=Genomic tRNA database
+
+ocu:libs=orycun2.0_genomic_tRNA
+ocu:desc=Genomic tRNA database
+
+
+orycun2.0:libs=orycun2.0_ncRNA
+orycun2.0:desc=Ensembl release 83 (ncRNA)
+
+ocu:libs=orycun2.0_ncRNA
+ocu:desc=Ensembl release 83 (ncRNA)
+
+
+orycun2.0:libs=orycun2.0_cdna
+orycun2.0:desc=Ensembl release 83 (cDNA)
+
+ocu:libs=orycun2.0_cdna
+ocu:desc=Ensembl release 83 (cDNA)
+
+
+orycun2.0:libs=orycun2.0_RNAcentral
+orycun2.0:desc=RNAcentral database
+
+ocu:libs=orycun2.0_RNAcentral
+ocu:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for oar_v3_1 #################
+oar_v3_1:kingdom=animal
+oar_v3_1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+oar_v3_1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+oar_v3_1:tRNA=oar_v3_1_genomic_tRNA
+oar:tRNA=oar_v3_1_genomic_tRNA
+
+oar_v3_1:libs=oar_v3_1_genomic_tRNA
+oar_v3_1:desc=Genomic tRNA database
+
+oar:libs=oar_v3_1_genomic_tRNA
+oar:desc=Genomic tRNA database
+
+
+oar_v3_1:libs=oar_v3_1_ncRNA
+oar_v3_1:desc=Ensembl release 83 (ncRNA)
+
+oar:libs=oar_v3_1_ncRNA
+oar:desc=Ensembl release 83 (ncRNA)
+
+
+oar_v3_1:libs=oar_v3_1_cdna
+oar_v3_1:desc=Ensembl release 83 (cDNA)
+
+oar:libs=oar_v3_1_cdna
+oar:desc=Ensembl release 83 (cDNA)
+
+
+oar_v3_1:libs=oar_v3_1_RNAcentral
+oar_v3_1:desc=RNAcentral database
+
+oar:libs=oar_v3_1_RNAcentral
+oar:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for TAIR10 #################
+TAIR10:kingdom=plant
+TAIR10:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+TAIR10:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+TAIR10:tRNA=TAIR10_genomic_tRNA
+ath:tRNA=TAIR10_genomic_tRNA
+
+TAIR10:libs=TAIR10_genomic_tRNA
+TAIR10:desc=Genomic tRNA database
+
+ath:libs=TAIR10_genomic_tRNA
+ath:desc=Genomic tRNA database
+
+
+TAIR10:libs=TAIR10_ncRNA
+TAIR10:desc=Ensembl plants release-30 (ncRNA)
+
+ath:libs=TAIR10_ncRNA
+ath:desc=Ensembl plants release-30 (ncRNA)
+
+
+TAIR10:libs=TAIR10_cdna
+TAIR10:desc=Ensembl plants release-30 (cDNA)
+
+ath:libs=TAIR10_cdna
+ath:desc=Ensembl plants release-30 (cDNA)
+
+
+TAIR10:libs=TAIR10_RNAcentral
+TAIR10:desc=RNAcentral database
+
+ath:libs=TAIR10_RNAcentral
+ath:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for sly_SL2_50 #################
+sly_SL2_50:kingdom=plant
+sly_SL2_50:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+sly_SL2_50:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+sly_SL2_50:libs=sly_SL2_50_ncRNA
+sly_SL2_50:desc=Ensembl plants release-30 (ncRNA)
+
+sly:libs=sly_SL2_50_ncRNA
+sly:desc=Ensembl plants release-30 (ncRNA)
+
+
+sly_SL2_50:libs=sly_SL2_50_cdna
+sly_SL2_50:desc=Ensembl plants release-30 (cDNA)
+
+sly:libs=sly_SL2_50_cdna
+sly:desc=Ensembl plants release-30 (cDNA)
+
+#############################################################################
+#############################################################################
+##################  Annotation for IVFCAASv1_30 #################
+IVFCAASv1_30:kingdom=plant
+IVFCAASv1_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+IVFCAASv1_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+IVFCAASv1_30:libs=IVFCAASv1_30_ncRNA
+IVFCAASv1_30:desc=Ensembl plants release-30 (ncRNA)
+
+bra:libs=IVFCAASv1_30_ncRNA
+bra:desc=Ensembl plants release-30 (ncRNA)
+
+
+IVFCAASv1_30:libs=IVFCAASv1_30_cdna
+IVFCAASv1_30:desc=Ensembl plants release-30 (cDNA)
+
+bra:libs=IVFCAASv1_30_cdna
+bra:desc=Ensembl plants release-30 (cDNA)
+
+
+IVFCAASv1_30:libs=IVFCAASv1_30_RNAcentral
+IVFCAASv1_30:desc=RNAcentral database
+
+bra:libs=IVFCAASv1_30_RNAcentral
+bra:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for stu3_0_30 #################
+stu3_0_30:kingdom=plant
+stu3_0_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+stu3_0_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+stu3_0_30:libs=stu3_0_30_ncRNA
+stu3_0_30:desc=Ensembl plants release-30 (ncRNA)
+
+stu:libs=stu3_0_30_ncRNA
+stu:desc=Ensembl plants release-30 (ncRNA)
+
+
+stu3_0_30:libs=stu3_0_30_cdna
+stu3_0_30:desc=Ensembl plants release-30 (cDNA)
+
+stu:libs=stu3_0_30_cdna
+stu:desc=Ensembl plants release-30 (cDNA)
+
+
+stu3_0_30:libs=stu3_0_30_RNAcentral
+stu3_0_30:desc=RNAcentral database
+
+stu:libs=stu3_0_30_RNAcentral
+stu:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for hvu082214v1_30 #################
+hvu082214v1_30:kingdom=plant
+hvu082214v1_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+hvu082214v1_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+hvu082214v1_30:libs=hvu082214v1_30_ncRNA
+hvu082214v1_30:desc=Ensembl plants release-30 (ncRNA)
+
+hvu:libs=hvu082214v1_30_ncRNA
+hvu:desc=Ensembl plants release-30 (ncRNA)
+
+
+hvu082214v1_30:libs=hvu082214v1_30_cdna
+hvu082214v1_30:desc=Ensembl plants release-30 (cDNA)
+
+hvu:libs=hvu082214v1_30_cdna
+hvu:desc=Ensembl plants release-30 (cDNA)
+
+
+hvu082214v1_30:libs=hvu082214v1_30_RNAcentral
+hvu082214v1_30:desc=RNAcentral database
+
+hvu:libs=hvu082214v1_30_RNAcentral
+hvu:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for zma_AGPv3_30 #################
+zma_AGPv3_30:kingdom=plant
+zma_AGPv3_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+zma_AGPv3_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+zma_AGPv3_30:tRNA=zma_AGPv3_30_genomic_tRNA
+zma:tRNA=zma_AGPv3_30_genomic_tRNA
+
+zma_AGPv3_30:libs=zma_AGPv3_30_genomic_tRNA
+zma_AGPv3_30:desc=Genomic tRNA database
+
+zma:libs=zma_AGPv3_30_genomic_tRNA
+zma:desc=Genomic tRNA database
+
+
+zma_AGPv3_30:libs=zma_AGPv3_30_ncRNA
+zma_AGPv3_30:desc=Ensembl plants release-30 (ncRNA)
+
+zma:libs=zma_AGPv3_30_ncRNA
+zma:desc=Ensembl plants release-30 (ncRNA)
+
+
+zma_AGPv3_30:libs=zma_AGPv3_30_cdna
+zma_AGPv3_30:desc=Ensembl plants release-30 (cDNA)
+
+zma:libs=zma_AGPv3_30_cdna
+zma:desc=Ensembl plants release-30 (cDNA)
+
+
+zma_AGPv3_30:libs=zma_AGPv3_30_RNAcentral
+zma_AGPv3_30:desc=RNAcentral database
+
+zma:libs=zma_AGPv3_30_RNAcentral
+zma:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for gma_v1_03 #################
+gma_v1_03:kingdom=plant
+gma_v1_03:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+gma_v1_03:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+gma_v1_03:tRNA=gma_v1_03_genomic_tRNA
+gma:tRNA=gma_v1_03_genomic_tRNA
+
+gma_v1_03:libs=gma_v1_03_genomic_tRNA
+gma_v1_03:desc=Genomic tRNA database
+
+gma:libs=gma_v1_03_genomic_tRNA
+gma:desc=Genomic tRNA database
+
+
+gma_v1_03:libs=gma_v1_03_cdna
+gma_v1_03:desc=Ensembl plants release-30 (cDNA)
+
+gma:libs=gma_v1_03_cdna
+gma:desc=Ensembl plants release-30 (cDNA)
+
+
+gma_v1_03:libs=gma_v1_03_RNAcentral
+gma_v1_03:desc=RNAcentral database
+
+gma:libs=gma_v1_03_RNAcentral
+gma:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for c_reinhardtii_v3_1_30 #################
+c_reinhardtii_v3_1_30:kingdom=plant
+c_reinhardtii_v3_1_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+c_reinhardtii_v3_1_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+c_reinhardtii_v3_1_30:libs=c_reinhardtii_v3_1_30_ncRNA
+c_reinhardtii_v3_1_30:desc=Ensembl plants release-30 (ncRNA)
+
+cre:libs=c_reinhardtii_v3_1_30_ncRNA
+cre:desc=Ensembl plants release-30 (ncRNA)
+
+
+c_reinhardtii_v3_1_30:libs=c_reinhardtii_v3_1_30_cdna
+c_reinhardtii_v3_1_30:desc=Ensembl plants release-30 (cDNA)
+
+cre:libs=c_reinhardtii_v3_1_30_cdna
+cre:desc=Ensembl plants release-30 (cDNA)
+
+
+c_reinhardtii_v3_1_30:libs=c_reinhardtii_v3_1_30_RNAcentral
+c_reinhardtii_v3_1_30:desc=RNAcentral database
+
+cre:libs=c_reinhardtii_v3_1_30_RNAcentral
+cre:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for aly_v1_0_30 #################
+aly_v1_0_30:kingdom=plant
+aly_v1_0_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+aly_v1_0_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+aly_v1_0_30:libs=aly_v1_0_30_cdna
+aly_v1_0_30:desc=Ensembl plants release-30 (cDNA)
+
+aly:libs=aly_v1_0_30_cdna
+aly:desc=Ensembl plants release-30 (cDNA)
+
+
+aly_v1_0_30:libs=aly_v1_0_30_RNAcentral
+aly_v1_0_30:desc=RNAcentral database
+
+aly:libs=aly_v1_0_30_RNAcentral
+aly:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for mtr_000219495_2_30 #################
+mtr_000219495_2_30:kingdom=plant
+mtr_000219495_2_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+mtr_000219495_2_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+mtr_000219495_2_30:tRNA=mtr_000219495_2_30_genomic_tRNA
+mtr:tRNA=mtr_000219495_2_30_genomic_tRNA
+
+mtr_000219495_2_30:libs=mtr_000219495_2_30_genomic_tRNA
+mtr_000219495_2_30:desc=Genomic tRNA database
+
+mtr:libs=mtr_000219495_2_30_genomic_tRNA
+mtr:desc=Genomic tRNA database
+
+
+mtr_000219495_2_30:libs=mtr_000219495_2_30_ncRNA
+mtr_000219495_2_30:desc=Ensembl plants release-30 (ncRNA)
+
+mtr:libs=mtr_000219495_2_30_ncRNA
+mtr:desc=Ensembl plants release-30 (ncRNA)
+
+
+mtr_000219495_2_30:libs=mtr_000219495_2_30_cdna
+mtr_000219495_2_30:desc=Ensembl plants release-30 (cDNA)
+
+mtr:libs=mtr_000219495_2_30_cdna
+mtr:desc=Ensembl plants release-30 (cDNA)
+
+
+mtr_000219495_2_30:libs=mtr_000219495_2_30_RNAcentral
+mtr_000219495_2_30:desc=RNAcentral database
+
+mtr:libs=mtr_000219495_2_30_RNAcentral
+mtr:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for osain_ASM465v1_30 #################
+osain_ASM465v1_30:kingdom=plant
+osain_ASM465v1_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+osain_ASM465v1_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+osain_ASM465v1_30:tRNA=osain_ASM465v1_30_genomic_tRNA
+osa:tRNA=osain_ASM465v1_30_genomic_tRNA
+
+osain_ASM465v1_30:libs=osain_ASM465v1_30_genomic_tRNA
+osain_ASM465v1_30:desc=Genomic tRNA database
+
+osa:libs=osain_ASM465v1_30_genomic_tRNA
+osa:desc=Genomic tRNA database
+
+
+osain_ASM465v1_30:libs=osain_ASM465v1_30_ncRNA
+osain_ASM465v1_30:desc=Ensembl plants release-30 (ncRNA)
+
+osa:libs=osain_ASM465v1_30_ncRNA
+osa:desc=Ensembl plants release-30 (ncRNA)
+
+
+osain_ASM465v1_30:libs=osain_ASM465v1_30_cdna
+osain_ASM465v1_30:desc=Ensembl plants release-30 (cDNA)
+
+osa:libs=osain_ASM465v1_30_cdna
+osa:desc=Ensembl plants release-30 (cDNA)
+
+
+osain_ASM465v1_30:libs=osain_ASM465v1_30_RNAcentral
+osain_ASM465v1_30:desc=RNAcentral database
+
+osa:libs=osain_ASM465v1_30_RNAcentral
+osa:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for osaj_IRGSP-1_0_30 #################
+osaj_IRGSP-1_0_30:kingdom=plant
+osaj_IRGSP-1_0_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+osaj_IRGSP-1_0_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+osaj_IRGSP-1_0_30:tRNA=osaj_IRGSP-1_0_30_genomic_tRNA
+osa:tRNA=osaj_IRGSP-1_0_30_genomic_tRNA
+
+osaj_IRGSP-1_0_30:libs=osaj_IRGSP-1_0_30_genomic_tRNA
+osaj_IRGSP-1_0_30:desc=Genomic tRNA database
+
+osa:libs=osaj_IRGSP-1_0_30_genomic_tRNA
+osa:desc=Genomic tRNA database
+
+
+osaj_IRGSP-1_0_30:libs=osaj_IRGSP-1_0_30_ncRNA
+osaj_IRGSP-1_0_30:desc=Ensembl plants release-30 (ncRNA)
+
+osa:libs=osaj_IRGSP-1_0_30_ncRNA
+osa:desc=Ensembl plants release-30 (ncRNA)
+
+
+osaj_IRGSP-1_0_30:libs=osaj_IRGSP-1_0_30_cdna
+osaj_IRGSP-1_0_30:desc=Ensembl plants release-30 (cDNA)
+
+osa:libs=osaj_IRGSP-1_0_30_cdna
+osa:desc=Ensembl plants release-30 (cDNA)
+
+
+osaj_IRGSP-1_0_30:libs=osaj_IRGSP-1_0_30_RNAcentral
+osaj_IRGSP-1_0_30:desc=RNAcentral database
+
+osa:libs=osaj_IRGSP-1_0_30_RNAcentral
+osa:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for vvi_IGGP_12x_30 #################
+vvi_IGGP_12x_30:kingdom=plant
+vvi_IGGP_12x_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+vvi_IGGP_12x_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+vvi_IGGP_12x_30:libs=vvi_IGGP_12x_30_cdna
+vvi_IGGP_12x_30:desc=Ensembl plants release-30 (cDNA)
+
+vvi:libs=vvi_IGGP_12x_30_cdna
+vvi:desc=Ensembl plants release-30 (cDNA)
+
+
+vvi_IGGP_12x_30:libs=vvi_IGGP_12x_30_RNAcentral
+vvi_IGGP_12x_30:desc=RNAcentral database
+
+vvi:libs=vvi_IGGP_12x_30_RNAcentral
+vvi:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for bdi_1_0_30 #################
+bdi_1_0_30:kingdom=plant
+bdi_1_0_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+bdi_1_0_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+bdi_1_0_30:libs=bdi_1_0_30_cdna
+bdi_1_0_30:desc=Ensembl plants release-30 (cDNA)
+
+bdi:libs=bdi_1_0_30_cdna
+bdi:desc=Ensembl plants release-30 (cDNA)
+
+#############################################################################
+#############################################################################
+##################  Annotation for ttu_000471905_1_30 #################
+ttu_000471905_1_30:kingdom=plant
+ttu_000471905_1_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+ttu_000471905_1_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+ttu_000471905_1_30:libs=ttu_000471905_1_30_ncRNA
+ttu_000471905_1_30:desc=Ensembl plants release-30 (ncRNA)
+
+turartu:libs=ttu_000471905_1_30_ncRNA
+turartu:desc=Ensembl plants release-30 (ncRNA)
+
+
+ttu_000471905_1_30:libs=ttu_000471905_1_30_cdna
+ttu_000471905_1_30:desc=Ensembl plants release-30 (cDNA)
+
+turartu:libs=ttu_000471905_1_30_cdna
+turartu:desc=Ensembl plants release-30 (cDNA)
+
+
+ttu_000471905_1_30:libs=ttu_000471905_1_30_RNAcentral
+ttu_000471905_1_30:desc=RNAcentral database
+
+turartu:libs=ttu_000471905_1_30_RNAcentral
+turartu:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for ata_000347335_1_30 #################
+ata_000347335_1_30:kingdom=plant
+ata_000347335_1_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+ata_000347335_1_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+ata_000347335_1_30:libs=ata_000347335_1_30_ncRNA
+ata_000347335_1_30:desc=Ensembl plants release-30 (ncRNA)
+
+ata:libs=ata_000347335_1_30_ncRNA
+ata:desc=Ensembl plants release-30 (ncRNA)
+
+
+ata_000347335_1_30:libs=ata_000347335_1_30_cdna
+ata_000347335_1_30:desc=Ensembl plants release-30 (cDNA)
+
+ata:libs=ata_000347335_1_30_cdna
+ata:desc=Ensembl plants release-30 (cDNA)
+
+
+ata_000347335_1_30:libs=ata_000347335_1_30_RNAcentral
+ata_000347335_1_30:desc=RNAcentral database
+
+ata:libs=ata_000347335_1_30_RNAcentral
+ata:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for atr_000471905_1_30 #################
+atr_000471905_1_30:kingdom=plant
+atr_000471905_1_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+atr_000471905_1_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+atr_000471905_1_30:libs=atr_000471905_1_30_ncRNA
+atr_000471905_1_30:desc=Ensembl plants release-30 (ncRNA)
+
+atr:libs=atr_000471905_1_30_ncRNA
+atr:desc=Ensembl plants release-30 (ncRNA)
+
+
+atr_000471905_1_30:libs=atr_000471905_1_30_cdna
+atr_000471905_1_30:desc=Ensembl plants release-30 (cDNA)
+
+atr:libs=atr_000471905_1_30_cdna
+atr:desc=Ensembl plants release-30 (cDNA)
+
+
+atr_000471905_1_30:libs=atr_000471905_1_30_RNAcentral
+atr_000471905_1_30:desc=RNAcentral database
+
+atr:libs=atr_000471905_1_30_RNAcentral
+atr:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for bol_v2_1_30 #################
+bol_v2_1_30:kingdom=plant
+bol_v2_1_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+bol_v2_1_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+bol_v2_1_30:libs=bol_v2_1_30_cdna
+bol_v2_1_30:desc=Ensembl plants release-30 (cDNA)
+
+bol:libs=bol_v2_1_30_cdna
+bol:desc=Ensembl plants release-30 (cDNA)
+
+
+bol_v2_1_30:libs=bol_v2_1_30_RNAcentral
+bol_v2_1_30:desc=RNAcentral database
+
+bol:libs=bol_v2_1_30_RNAcentral
+bol:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for mac_MA1_30 #################
+mac_MA1_30:kingdom=plant
+mac_MA1_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+mac_MA1_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+mac_MA1_30:libs=mac_MA1_30_ncRNA
+mac_MA1_30:desc=Ensembl plants release-30 (ncRNA)
+
+mac:libs=mac_MA1_30_ncRNA
+mac:desc=Ensembl plants release-30 (ncRNA)
+
+
+mac_MA1_30:libs=mac_MA1_30_cdna
+mac_MA1_30:desc=Ensembl plants release-30 (cDNA)
+
+mac:libs=mac_MA1_30_cdna
+mac:desc=Ensembl plants release-30 (cDNA)
+
+
+mac_MA1_30:libs=mac_MA1_30_RNAcentral
+mac_MA1_30:desc=RNAcentral database
+
+mac:libs=mac_MA1_30_RNAcentral
+mac:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for oba_ABRL00000000_30 #################
+oba_ABRL00000000_30:kingdom=plant
+oba_ABRL00000000_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+oba_ABRL00000000_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+oba_ABRL00000000_30:libs=oba_ABRL00000000_30_ncRNA
+oba_ABRL00000000_30:desc=Ensembl plants release-30 (ncRNA)
+
+oba:libs=oba_ABRL00000000_30_ncRNA
+oba:desc=Ensembl plants release-30 (ncRNA)
+
+
+oba_ABRL00000000_30:libs=oba_ABRL00000000_30_cdna
+oba_ABRL00000000_30:desc=Ensembl plants release-30 (cDNA)
+
+oba:libs=oba_ABRL00000000_30_cdna
+oba:desc=Ensembl plants release-30 (cDNA)
+
+
+oba_ABRL00000000_30:libs=oba_ABRL00000000_30_RNAcentral
+oba_ABRL00000000_30:desc=RNAcentral database
+
+oba:libs=oba_ABRL00000000_30_RNAcentral
+oba:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for Oryza_bra_v1_4b_30 #################
+Oryza_bra_v1_4b_30:kingdom=plant
+Oryza_bra_v1_4b_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+Oryza_bra_v1_4b_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+Oryza_bra_v1_4b_30:libs=Oryza_bra_v1_4b_30_ncRNA
+Oryza_bra_v1_4b_30:desc=Ensembl plants release-30 (ncRNA)
+
+obr:libs=Oryza_bra_v1_4b_30_ncRNA
+obr:desc=Ensembl plants release-30 (ncRNA)
+
+
+Oryza_bra_v1_4b_30:libs=Oryza_bra_v1_4b_30_cdna
+Oryza_bra_v1_4b_30:desc=Ensembl plants release-30 (cDNA)
+
+obr:libs=Oryza_bra_v1_4b_30_cdna
+obr:desc=Ensembl plants release-30 (cDNA)
+
+
+Oryza_bra_v1_4b_30:libs=Oryza_bra_v1_4b_30_RNAcentral
+Oryza_bra_v1_4b_30:desc=RNAcentral database
+
+obr:libs=Oryza_bra_v1_4b_30_RNAcentral
+obr:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for O_lucimarinus_000092065_1_30 #################
+O_lucimarinus_000092065_1_30:kingdom=plant
+O_lucimarinus_000092065_1_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+O_lucimarinus_000092065_1_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+O_lucimarinus_000092065_1_30:libs=O_lucimarinus_000092065_1_30_cdna
+O_lucimarinus_000092065_1_30:desc=Ensembl plants release-30 (cDNA)
+
+olu:libs=O_lucimarinus_000092065_1_30_cdna
+olu:desc=Ensembl plants release-30 (cDNA)
+
+
+O_lucimarinus_000092065_1_30:libs=O_lucimarinus_000092065_1_30_RNAcentral
+O_lucimarinus_000092065_1_30:desc=RNAcentral database
+
+olu:libs=O_lucimarinus_000092065_1_30_RNAcentral
+olu:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for P_patens_ASM242v1_30 #################
+P_patens_ASM242v1_30:kingdom=plant
+P_patens_ASM242v1_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+P_patens_ASM242v1_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+P_patens_ASM242v1_30:tRNA=P_patens_ASM242v1_30_genomic_tRNA
+ppt:tRNA=P_patens_ASM242v1_30_genomic_tRNA
+
+P_patens_ASM242v1_30:libs=P_patens_ASM242v1_30_genomic_tRNA
+P_patens_ASM242v1_30:desc=Genomic tRNA database
+
+ppt:libs=P_patens_ASM242v1_30_genomic_tRNA
+ppt:desc=Genomic tRNA database
+
+
+P_patens_ASM242v1_30:libs=P_patens_ASM242v1_30_cdna
+P_patens_ASM242v1_30:desc=Ensembl plants release-30 (cDNA)
+
+ppt:libs=P_patens_ASM242v1_30_cdna
+ppt:desc=Ensembl plants release-30 (cDNA)
+
+
+P_patens_ASM242v1_30:libs=P_patens_ASM242v1_30_RNAcentral
+P_patens_ASM242v1_30:desc=RNAcentral database
+
+ppt:libs=P_patens_ASM242v1_30_RNAcentral
+ppt:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for P_persica_000346465_1_30 #################
+P_persica_000346465_1_30:kingdom=plant
+P_persica_000346465_1_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+P_persica_000346465_1_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+P_persica_000346465_1_30:libs=P_persica_000346465_1_30_ncRNA
+P_persica_000346465_1_30:desc=Ensembl plants release-30 (ncRNA)
+
+ppe:libs=P_persica_000346465_1_30_ncRNA
+ppe:desc=Ensembl plants release-30 (ncRNA)
+
+
+P_persica_000346465_1_30:libs=P_persica_000346465_1_30_cdna
+P_persica_000346465_1_30:desc=Ensembl plants release-30 (cDNA)
+
+ppe:libs=P_persica_000346465_1_30_cdna
+ppe:desc=Ensembl plants release-30 (cDNA)
+
+
+P_persica_000346465_1_30:libs=P_persica_000346465_1_30_RNAcentral
+P_persica_000346465_1_30:desc=RNAcentral database
+
+ppe:libs=P_persica_000346465_1_30_RNAcentral
+ppe:desc=RNAcentral database
+
+
+
+#############################################################################
+#############################################################################
+##################  Annotation for S_bicolor_Sorbi1_30 #################
+S_bicolor_Sorbi1_30:kingdom=plant
+S_bicolor_Sorbi1_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+S_bicolor_Sorbi1_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+S_bicolor_Sorbi1_30:tRNA=S_bicolor_Sorbi1_30_genomic_tRNA
+sbi:tRNA=S_bicolor_Sorbi1_30_genomic_tRNA
+
+S_bicolor_Sorbi1_30:libs=S_bicolor_Sorbi1_30_genomic_tRNA
+S_bicolor_Sorbi1_30:desc=Genomic tRNA database
+
+sbi:libs=S_bicolor_Sorbi1_30_genomic_tRNA
+sbi:desc=Genomic tRNA database
+
+
+S_bicolor_Sorbi1_30:libs=S_bicolor_Sorbi1_30_ncRNA
+S_bicolor_Sorbi1_30:desc=Ensembl plants release-30 (ncRNA)
+
+sbi:libs=S_bicolor_Sorbi1_30_ncRNA
+sbi:desc=Ensembl plants release-30 (ncRNA)
+
+
+S_bicolor_Sorbi1_30:libs=S_bicolor_Sorbi1_30_cdna
+S_bicolor_Sorbi1_30:desc=Ensembl plants release-30 (cDNA)
+
+sbi:libs=S_bicolor_Sorbi1_30_cdna
+sbi:desc=Ensembl plants release-30 (cDNA)
+
+
+S_bicolor_Sorbi1_30:libs=S_bicolor_Sorbi1_30_RNAcentral
+S_bicolor_Sorbi1_30:desc=RNAcentral database
+
+sbi:libs=S_bicolor_Sorbi1_30_RNAcentral
+sbi:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for S_italica_JGIv2_0_30 #################
+S_italica_JGIv2_0_30:kingdom=plant
+S_italica_JGIv2_0_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+S_italica_JGIv2_0_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+S_italica_JGIv2_0_30:libs=S_italica_JGIv2_0_30_cdna
+S_italica_JGIv2_0_30:desc=Ensembl plants release-30 (cDNA)
+
+sit:libs=S_italica_JGIv2_0_30_cdna
+sit:desc=Ensembl plants release-30 (cDNA)
+
+
+S_italica_JGIv2_0_30:libs=S_italica_JGIv2_0_30_RNAcentral
+S_italica_JGIv2_0_30:desc=RNAcentral database
+
+sit:libs=S_italica_JGIv2_0_30_RNAcentral
+sit:desc=RNAcentral database
+
+#############################################################################
+#############################################################################
+##################  Annotation for T_cacao_000403535_1_30 #################
+T_cacao_000403535_1_30:kingdom=plant
+T_cacao_000403535_1_30:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|protein_coding#sense;cdna#sense;cds#sense|protein_coding#antisense;cdna#antisense;cds#antisense|piRNA#sense|repeat#sense
+T_cacao_000403535_1_30:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|cdna(sense)|mRNA(antisense)|piRNA|repeats(sense)
+
+T_cacao_000403535_1_30:libs=T_cacao_000403535_1_30_cdna
+T_cacao_000403535_1_30:desc=Ensembl plants release-30 (cDNA)
+
+tcc:libs=T_cacao_000403535_1_30_cdna
+tcc:desc=Ensembl plants release-30 (cDNA)
+
+
+T_cacao_000403535_1_30:libs=T_cacao_000403535_1_30_RNAcentral
+T_cacao_000403535_1_30:desc=RNAcentral database
+
+tcc:libs=T_cacao_000403535_1_30_RNAcentral
+tcc:desc=RNAcentral database
+
+
