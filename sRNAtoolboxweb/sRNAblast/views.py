@@ -1,18 +1,18 @@
 # Create your views here.
+import datetime
+import itertools
 import os
 import urllib
-import datetime
 
-from django.shortcuts import render, redirect
-from django.core.files.storage import FileSystemStorage
 import django_tables2 as tables
-import itertools
+from django.core.files.storage import FileSystemStorage
+from django.shortcuts import render, redirect
+
 from DataModels.sRNABlastConfig import SRNABlastConfig
 from FileModels.BlastParsers import BlastParser
-from pipelines import pipeline_utils
-from utils.sysUtils import make_dir
 from progress.models import JobStatus
-import pygal
+from utils import pipeline_utils
+from utils.sysUtils import make_dir
 
 SPECIES_PATH = '/shared/data/sRNAbench/species.csv'
 SPECIES_ANNOTATION_PATH = '/shared/data/sRNAbench/annotation.txt'
