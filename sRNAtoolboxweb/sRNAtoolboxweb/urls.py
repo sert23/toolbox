@@ -26,7 +26,7 @@ urlpatterns =[
     url(r'^manual', views.manual),
     url(r'^search', views.search),
     url(r'^barleyCultivar', views.cultivar),
-    url(r'^versionControl', views.version),
+    url(r'^versionControl', views.version, name='versions'),
     url(r'^/*$', views.index, name='home'),
     # url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
 ]
