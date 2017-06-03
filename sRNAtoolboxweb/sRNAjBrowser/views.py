@@ -1,15 +1,16 @@
 # Create your views here.
-import os
 import datetime
+import itertools
+import os
+
+import django_tables2 as tables
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
-import django_tables2 as tables
-import itertools
-from FileModels.jBrowserParser import JBrowserParser
-from pipelines import pipeline_utils
-from progress.models import JobStatus
-from utils.sysUtils import make_dir
 
+from FileModels.jBrowserParser import JBrowserParser
+from progress.models import JobStatus
+from utils import pipeline_utils
+from utils.sysUtils import make_dir
 
 counter = itertools.count()
 

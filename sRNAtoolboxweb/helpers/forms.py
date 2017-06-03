@@ -1,15 +1,15 @@
+import datetime
 import os
 import urllib
 
-import datetime
 from django import forms
 from django.core.files.storage import FileSystemStorage
 from django.http import Http404
 
-from pipelines.pipeline_utils import generate_uniq_id
 from progress.models import JobStatus
-from sRNAtoolboxweb.settings import MEDIA_ROOT
 from sRNAtoolboxweb.settings import BASE_DIR
+from sRNAtoolboxweb.settings import MEDIA_ROOT
+from utils.pipeline_utils import generate_uniq_id
 
 
 class RemovedupForm(forms.Form):

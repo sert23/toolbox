@@ -1,16 +1,17 @@
 # Create your views here.
 import os
 import urllib
+
 from django.core.files.storage import FileSystemStorage
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
 
-from helpers.forms import RemovedupForm, EnsemblForm, RnacentralForm, TrnaparserForm
 from helpers.forms import ExtractForm
-from pipelines import pipeline_utils
-from utils.sysUtils import make_dir
+from helpers.forms import RemovedupForm, EnsemblForm, RnacentralForm, TrnaparserForm
 from progress.models import JobStatus
+from utils import pipeline_utils
+from utils.sysUtils import make_dir
 
 FS = FileSystemStorage("/shared/sRNAtoolbox/webData")
 

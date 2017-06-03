@@ -1,19 +1,19 @@
 # Create your views here.
-import os
 import datetime
+import itertools
+
+import django_tables2 as tables
+import pygal
+import xlrd
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
-import django_tables2 as tables
-import itertools
-from FileModels.deStatsParser import DeStatsParser
-from FileModels.sRNAdeparser import SRNAdeParser
-from pipelines import pipeline_utils
-from progress.models import JobStatus
-import xlrd
-import pygal
-from utils.sysUtils import *
 from pygal.style import LightGreenStyle
 
+from FileModels.deStatsParser import DeStatsParser
+from FileModels.sRNAdeparser import SRNAdeParser
+from progress.models import JobStatus
+from utils import pipeline_utils
+from utils.sysUtils import *
 
 counter = itertools.count()
 

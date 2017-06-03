@@ -1,23 +1,20 @@
-import os
-import itertools
-import xlrd
 import datetime
+import itertools
+import os
 
-from django.shortcuts import render, redirect
-from django.core.files.storage import default_storage, FileSystemStorage
-from django.core.files.base import ContentFile
 import django_tables2 as tables
+import xlrd
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+from django.shortcuts import render, redirect
 
-from progress.models import JobStatus
 from FileModels.sRNAdeparser import SRNAdeParser
 from FileModels.sRNAfuncParsers import EdaFile
-from pipelines import pipeline_utils
-from utils.sysUtils import make_dir
-from utils.sysUtils import istext
-from django.conf import settings
-
 from FileModels.speciesParser import SpeciesParser
-import json
+from progress.models import JobStatus
+from utils import pipeline_utils
+from utils.sysUtils import istext
+from utils.sysUtils import make_dir
 
 counter = itertools.count()
 TOOLS = ["TS", "MIRANDA", "PITA", "PSROBOT", "TAPIR_FASTA", "TAPIR_HYBRID"]
