@@ -26,6 +26,7 @@ from utils.sysUtils import make_dir
 from progress.models import JobStatus
 #import json
 from django.conf import settings
+from django.views.generic import FormView
 
 #CONF = json.load(file("/shared/sRNAtoolbox/sRNAtoolbox.conf"))
 CONF = settings.CONF
@@ -708,18 +709,6 @@ def show_align(request, job_id, type, name):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 def test(request):
     pipeline_id = pipeline_utils.generate_uniq_id()
     FS.location = os.path.join("/shared/sRNAtoolbox/webData", pipeline_id)
@@ -775,3 +764,18 @@ def test(request):
         + '_sRNAbench' + '" -N ' + pipeline_id + '_sRNAbench /shared/sRNAtoolbox/core/bash_scripts/run_sRNAbench.sh')
 
     return redirect("/srnatoolbox/jobstatus/srnabench/?id=" + pipeline_id)
+
+##############New part
+
+# class Srnabench(FormView):
+#     template_name = 'bench.html'
+#     form_class = BenchForm
+#
+#     success_url = reverse_lazy("srnabench")
+#
+#     def form_valid(self, form):
+#         # This method is called when valid form data has been POSTed.
+#         # It should return an HttpResponse.
+#         call = form.create_call()
+#         print call
+#         return super(BenchForm, self).form_valid(form)

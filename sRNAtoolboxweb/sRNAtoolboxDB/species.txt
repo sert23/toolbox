@@ -1,0 +1,75 @@
+animal,Aedes aegypti,aae,aae_L3,aae_L3_mp,Aedes aegypti,0,false,false
+animal,Anopheles gambiae,aga,anogam1,anogam1_mp,Anopheles gambiae,7165,false,true
+animal,Astyanax mexicanus,amx,astmex102,astmex102_mp,Astyanax mexicanus,7994,true,true
+animal,Atlantic Salmon,ssa,agkd04,agkd04_mp,Salmo salar,9504,false,false
+animal,chicken,gga,galgal4,galgal4_mp,Gallus gallus,9031,true,true
+animal,Cow,bta,umd3_1,umd3_1_mp,Bos taurus,9913,true,true
+animal,Diamondback moth,pxy,plutella_xylostella_DBM_FJ_V1,plutella_xylostella_DBM_FJ_V1,Plutella xylostella,---,false,false
+animal,Dog,cfa,canfam3_1,canfam3_1_mp,Canis familiaris,9615,true,true
+animal,Fruit fly,dme,dme_BDGP6,dme_BDGP6_mp,Drosophila melanogaster,7227,true,true
+animal,Guinea pig,cpo,cavpor3,cavpor3_mp,Cavia porcellus,10141,false,true
+animal,Horse,eca,equ_cab_2,equ_cab_2_mp,Equus caballus,9796,true,true
+animal,Human,hsa,hg19,hg19_5_mp,Homo sapiens - hg19,9606,true,true
+animal,Human,hsa,hg38_prim,hg38_prim_mp,Homo sapiens prim,9606,true,true
+animal,Human,hsa,hg38,hg38_mp,Homo sapiens - hg38,9606,true,true
+animal,Mexican tetra,astmex,astmex102,astmex102_mp,Astyanax mexicanus,7994,false,true
+animal,Mouse,mmu,grcm38,grcm38_mp,Mus musculus,10090,true,true
+animal,Pig,ssc,sscrofa10_2,sscrofa10_2_mp,Sus scrofa,9823,true,true
+animal,Rabbit,ocu,orycun2.0,orycun2.0_mp,Oryctolagus cuniculus,9986,true,true
+animal,rat,rno,rnor6,rnor6_mp,Rattus norvegicus,10116,true,true
+animal,Rhesus monkey,mml,mmul_1,mmul_1_mp,Macaca mulatta,9544,true,true
+animal,Round worm,cel,WBcel235,WBcel235_mp,Caenorhabditis elegans,6239,true,true
+animal,Sheep,oar,oar_v3_1,oar_v3_1_mp,Ovis aries,9940,true,true
+animal,Takifugu rubripes,tru,fugu_4,fugu_4_mp,Takifugu rubripes,31033,false,true
+animal,Zebrafish,dre,d_rerio_Zv9,d_rerio_Zv9_mp,Danio rerio,7955,true,true
+animal virus,Drosophila C virus,xxx,NC_001834,NC_001834,Drosophila C virus,64279,false,false
+animal virus,Epstein Barr Virus,ebv,NC_007605,NC_007605,Human herpesvirus 4,10376,false,false
+animal virus,Hepatitis B virus (strain ayw),---,NC_003977,NC_003977,Hepatitis B virus strain ayw,0,false,false
+animal virus,Hepatitis C virus genotype 1,---,NC_004102,NC_004102,Hepatitis C virus genotype 1,0,false,false
+animal virus,Human herpesvirus 5 strain Merlin,hcmv,NC_006273,NC_006273,Human herpesvirus 5,10359,false,false
+animal virus,Human herpesvirus 8(KSHV),kshv,NC_009333,NC_009333,Human herpesvirus 8,37296,false,false
+animal virus,Human papillomavirus,xxx,NC_022095,NC_022095,Human papillomavirus,10566,false,false
+animal virus,Israel acute paralysis virus of bees,---,EU436423,EU436423,Israeli acute paralysis virus,294365,false,false
+animal virus,Sindbis virus,xxx,NC_001547,NC_001547,Sindbis virus,11034,false,false
+animal virus,Slow bee paralysis virus,---,GU938761,GU938761,Slow bee paralysis virus,458132,false,false
+bacteria,E. coli (REL606),xxx,NC_012967,NC_012967,Escherichia coli,413997,false,false
+general,microRNADB,miRBase_miRGeneDB,miRBase_miRGeneDB,---,MicroRNA libraries,0,true,ture
+other,Plasmodium falciparum,pfalc,PfNF54,PfNF54_mp,Plasmodium falciparum,36329,false,false
+other,Plasmodium falciparum,pfalc3d7,Pf3D7_v2_1_5,Pf3D7_v2_1_5_mp,Plasmodium falciparum,36329,false,false
+plant,Aegilops tauschii,ata,ata_000347335_1_30,ata_000347335_1_30_mp,Aegilops tauschii,37682,true,true
+plant,African wild rice,oba,oba_ABRL00000000_30,oba_ABRL00000000_30_mp,Oryza barthii,65489,false,true
+plant,Amborella trichopoda,atr,atr_000471905_1_30,atr_000471905_1_30_mp,Amborella trichopoda,13333,true,true
+plant,Arabidopsis thaliana,ath,TAIR10,tair10_mp,Arabidopsis thaliana,0,true,true
+plant,Barley,hvu,hvu082214v1_30,hvu082214v1_30_mp,Hordeum vulgare,4513,true,true
+plant,Barrel medic,mtr,mtr_000219495_2_30,mtr_000219495_2_30_mp,Medicago truncatula,3880,true,true
+plant,Black cottonwood,ptc,P_trichocarpa_JGI2_0,P_trichocarpa_JGI2_0_mp,Populus trichocarpa,3694,true,true
+plant,Brassica oleracea,bol,bol_v2_1_30,bol_v2_1_30_mp,Brassica oleracea,3712,true,true
+plant,Cacao,tcc,T_cacao_000403535_1_30,T_cacao_000403535_1_30_mp,Theobroma cacao,3641,true,true
+plant,Dwarf banana,mac,mac_MA1_30,mac_MA1_30_mp,Musa acuminata,4641,false,true
+plant,Field mustard,bra,IVFCAASv1_30,IVFCAASv1_30_mp,Brassica rapa,3711,true,true
+plant,Foxtail millet,sit,S_italica_JGIv2_0_30,S_italica_JGIv2_0_30_mp,Setaria italica,4555,false,true
+plant,Green algae,cre,c_reinhardtii_v3_1_30,c_reinhardtii_v3_1_30_mp,Chlamydomonas reinhardtii,3055,true,true
+plant,Japanese rice,osa,osaj_IRGSP-1_0_30,osaj_IRGSP-1_0_30_mp,Oryza sativa,39947,true,true
+plant,Long-grained rice (indica),osa,osain_ASM465v1_30,osain_ASM465v1_30_mp,Oryza sativa indica,39946,true,true
+plant,Lyrate rockcress,aly,aly_v1_0_30,aly_v1_0_30_mp,Arabidopsis lyrata,59689,true,true
+plant,Maize,zma,zma_AGPv3_30,zma_AGPv3_30_mp,Zea mays,4577,true,true
+plant,Oryza brachyantha,obr,Oryza_bra_v1_4b_30,Oryza_bra_v1_4b_30_mp,Oryza brachyantha,4533,false,true
+plant,Mosses,ppt,P_patens_ASM242v1_30,P_patens_ASM242v1_30_mp,Physcomitrella patens,3218,true,true
+plant,Ostreococcus lucimarinus,olu,O_lucimarinus_000092065_1_30,O_lucimarinus_000092065_1_30_mp,Ostreococcus lucimarinus,242159,false,true
+plant,Peach,ppe,P_persica_000346465_1_30,P_persica_000346465_1_30_mp,Prunus persica,3760,true,true
+plant,Potato,stu,stu3_0_30,stu3_0_30_mp,Solanum tuberosum,4113,true,true
+plant,Sorghum,sbi,S_bicolor_Sorbi1_30,S_bicolor_Sorbil_30_mp,Sorghum bicolor,4558,true,true
+plant,Soybean,gma,gma_v1_03,gma_v1_03_mp,Glycine max,3847,true,true
+plant,Stiff brome,bdi,bdi_1_0_30,bdi_1_0_30_mp,Brachypodium distachyion,15368,true,true
+plant,tomato,sly,sly_SL2_50,sly_SL2_50_mp,Solanum lycopersicum(Heinz 1706),4081,true,true
+plant,Triticum urartu,T_urartu,ttu_000471905_1_30,ttu_000471905_1_30_mp,Triticum urartu,4572,false,true
+plant,Wine grape,vvi,vvi_IGGP_12x_30,vvi_IGGP_12x_30_mp,Vitis vinifera,29760,true,true
+plant virus,Cauliflower mosaic virus,xxx,CaMV,CaMV_mp,Cauliflower mosaic virus,0,false,false
+plant virus,Maize chlorotic dwarf virus,xxx,MCDV,MCDV_mp,Maize chlorotic dwarf virus,0,false,false
+plant virus,Potato leafroll virus,xxx,PLRV,PLRV_mp,Potato leafroll virus,0,false,false
+plant virus,Potato virus Y,xxx,PVY,PVY_mp,Potato virus Y,0,false,false
+plant virus,Rice tungro bacilliform virus,xxx,RTBV,RTBV_mp,Rice tungro bacilliform virus,0,false,false
+plant virus,Rice tungro spherical virus,xxx,RTSV,RTSV_mp,Rice tungro spherical virus,0,false,false
+plant virus,Tomato yellow leaf curl virus,xxx,TYLCV,TYLCV_mp,Tomato yellow leaf curl virus,0,false,false
+plant,bread wheat,tae,TGACv1,TGACv1_mp,Triticum aestivum,4564,true,true
+
