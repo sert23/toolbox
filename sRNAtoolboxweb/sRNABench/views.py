@@ -1,14 +1,17 @@
 # Create your views here.
+import datetime
+import itertools
 import os
 import urllib
-import datetime
-from django.core.urlresolvers import reverse
 
-from django.shortcuts import render, redirect
-from django.core.files.storage import FileSystemStorage
-import itertools
 import django_tables2 as tables
+from django.conf import settings
+from django.core.files.storage import FileSystemStorage
+from django.core.urlresolvers import reverse
+from django.shortcuts import render, redirect
+
 from DataModels.params_bench import ParamsBench
+from DataModels.sRNABenchConfig import SRNABenchConfig
 from FileModels.IsomirParser import IsomirParser
 from FileModels.MAParser import MAParser
 from FileModels.NovelParser import NovelParser
@@ -17,15 +20,11 @@ from FileModels.TRNAParser import TRNAParser
 from FileModels.matureParser import MatureParser
 from FileModels.matureParserSa import MatureParserSA
 from FileModels.mirbaseMainParser import MirBaseParser
-
 from FileModels.speciesAnnotationParser import SpeciesAnnotationParser
 from FileModels.speciesParser import SpeciesParser
-from pipelines import pipeline_utils
-from DataModels.sRNABenchConfig import SRNABenchConfig
-from utils.sysUtils import make_dir
 from progress.models import JobStatus
-#import json
-from django.conf import settings
+from utils import pipeline_utils
+from utils.sysUtils import make_dir
 
 #CONF = json.load(file("/shared/sRNAtoolbox/sRNAtoolbox.conf"))
 CONF = settings.CONF

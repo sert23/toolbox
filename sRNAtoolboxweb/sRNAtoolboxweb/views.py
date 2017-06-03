@@ -1,8 +1,10 @@
+import itertools
+
+import django_tables2 as tables
+
 from pipelines.configfile import PIPELINETYPES_URL
 from progress.models import JobStatus
-from pipelines import pipeline_utils
-import django_tables2 as tables
-import itertools
+
 counter = itertools.count()
 from FileModels.jBrowserParser import JBrowserParser
 import datetime

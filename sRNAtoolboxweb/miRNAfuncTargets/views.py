@@ -1,20 +1,21 @@
 # Create your views here.
 
 # Create your views here.
-import os
 import datetime
+import itertools
+import os
+
+import django_tables2 as tables
+from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
-import django_tables2 as tables
-import itertools
+
 from FileModels.TargetConsensusParser import TargetConsensusParser
-from pipelines import pipeline_utils
-from progress.models import JobStatus
-from utils.sysUtils import make_dir
 from FileModels.sRNAfuncParsers import EdaFile
 from FileModels.speciesParser import SpeciesParser
-import json
-from django.conf import settings
+from progress.models import JobStatus
+from utils import pipeline_utils
+from utils.sysUtils import make_dir
 
 counter = itertools.count()
 TOOLS = ["TS", "MIRANDA", "PITA", "PSROBOT", "TAPIR_FASTA", "TAPIR_HYBRID"]
