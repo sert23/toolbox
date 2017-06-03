@@ -13,8 +13,8 @@ __author__ = 'antonior'
 import sys
 
 sys.path.append("/shared/")
-from utils.sysUtils import make_dir
-from utils.mongoDB import mongoDB
+from core_utils.sysUtils import make_dir
+from core_utils.mongoDB import mongoDB
 import os
 from time import gmtime, strftime
 from datetime import datetime

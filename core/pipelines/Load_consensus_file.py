@@ -1,5 +1,5 @@
 import json
-from utils.mongoDB import mongoDB
+from core_utils.mongoDB import mongoDB
 
 __author__ = 'antonior'
 
