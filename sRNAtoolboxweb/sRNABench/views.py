@@ -23,6 +23,7 @@ from FileModels.mirbaseMainParser import MirBaseParser
 from FileModels.speciesAnnotationParser import SpeciesAnnotationParser
 from FileModels.speciesParser import SpeciesParser
 from progress.models import JobStatus
+from sRNABench.forms import sRNABenchForm
 from utils import pipeline_utils
 from utils.sysUtils import make_dir
 
@@ -119,13 +120,14 @@ def input(request):
     species_file = SpeciesParser(SPECIES_PATH)
     array_species = species_file.parse()
     species_dict = {}
+    form = sRNABenchForm()
 
     for species in array_species:
         if species.sp_class in species_dict:
             species_dict[species.sp_class].append(species)
         else:
             species_dict[species.sp_class] = [species]
-    return render(request, 'bench.html', {"species_data": species_dict})
+    return render(request, 'bench.html', {"species_data": species_dict, "form": form})
 
 
 def run(request):

@@ -72,4 +72,3 @@ plant virus,Rice tungro bacilliform virus,xxx,RTBV,RTBV_mp,Rice tungro bacillifo
 plant virus,Rice tungro spherical virus,xxx,RTSV,RTSV_mp,Rice tungro spherical virus,0,false,false
 plant virus,Tomato yellow leaf curl virus,xxx,TYLCV,TYLCV_mp,Tomato yellow leaf curl virus,0,false,false
 plant,bread wheat,tae,TGACv1,TGACv1_mp,Triticum aestivum,4564,true,true
-

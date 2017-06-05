@@ -8,7 +8,7 @@ class SpeciesParser(Parser):
 
     def parse(self):
         fd = file(self.ipath)
-        header = fd.readline().replace("\n", "").split(",")
+        # header = fd.readline().replace("\n", "").split(",")
         species_array = []
         for line in fd:
             aline = line.replace("\n", "").split(",")

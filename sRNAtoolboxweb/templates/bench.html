@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 {% block content %}
+
 
     <div id="page-wrapper">
     <div class="row">
@@ -26,7 +28,7 @@
 
     <br>{% endcomment %}
 
-    <form action="/srnatoolbox/srnabench/run" method="post" enctype="multipart/form-data">
+    <form action="{% url 'run_bench' %}" method="post" enctype="multipart/form-data">
 	{% csrf_token %}
 
 
@@ -392,10 +394,25 @@
     </div>
     </form>
 
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapseOne">Input data</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    {% crispy form %}
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
-    <div class="col-lg-3">
+
+
+        <div class="col-lg-3">
             <div class="panel panel-info">
             <div class="panel-heading">
                 <h4 class="panel-title">
@@ -444,7 +461,15 @@
 
 
             </div>
+
         </div>
+
+
+
+
+
+            </div>
+
 
     </div>
 

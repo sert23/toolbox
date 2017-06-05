@@ -343,3 +343,15 @@ table.dataTable thead .sorting:after {
 .panel-yellow a:hover {
     color: #df8a13;
 }
+
+.checkbox {
+    margin-left: 18px;
+}
+
+.panel {
+    margin-top: 15px;
+}
+
+.label{
+    margin-top: 20px;
+}
