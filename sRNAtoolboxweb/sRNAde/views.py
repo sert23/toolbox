@@ -2,18 +2,21 @@
 import datetime
 import itertools
 
+from django.core.urlresolvers import reverse_lazy
 import django_tables2 as tables
 import pygal
 import xlrd
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from pygal.style import LightGreenStyle
+from forms import DEForm
 
 from FileModels.deStatsParser import DeStatsParser
 from FileModels.sRNAdeparser import SRNAdeParser
 from progress.models import JobStatus
 from utils import pipeline_utils
 from utils.sysUtils import *
+from django.views.generic import FormView
 
 counter = itertools.count()
 
@@ -347,3 +350,16 @@ def test(request):
         pipeline_id + '_de /shared/sRNAtoolbox/core/bash_scripts/run_sRNAde.sh')
 
     return redirect("/srnatoolbox/jobstatus/srnade/?id=" + pipeline_id)
+
+class De(FormView):
+    template_name = 'de.html'
+    form_class = DEForm
+
+    success_url = reverse_lazy("DE")
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        call = form.create_call()
+        print call
+        return super(De, self).form_valid(form)

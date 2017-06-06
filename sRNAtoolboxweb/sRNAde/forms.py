@@ -30,9 +30,9 @@ class DEForm(forms.Form):
                              required=False, widget=forms.TextInput(attrs={'placeholder': "e.g: Normal#TumorI#TumorII"}))
     matDescription = forms.CharField(label='Sample description (colon separated):',
                              required=False, widget=forms.TextInput(attrs={'placeholder': "e.g: Normal:Normal:TumorI:TumorI:TumorII:TumorII:TumorII"}))
-    pvalue= forms.CharField(label='Differential expression cutoff used by DESeq and EdgeR (p-value):', default= "0.05",
+    pvalue= forms.CharField(label='Differential expression cutoff used by DESeq and EdgeR (p-value):', #default= "0.05",
                              required=False, widget=forms.TextInput(attrs={'placeholder': "Default 0.05"}))
-    probability = forms.CharField(label='Differential expression cutoff used by NOISeq(probability):', default= "0.8",
+    probability = forms.CharField(label='Differential expression cutoff used by NOISeq(probability):', #default= "0.8",
                              required=False, widget=forms.TextInput(attrs={'placeholder': "Default 0.8"}))
     isomiRs = forms.BooleanField(label='isoMir Analysis', required=False )
 
@@ -140,7 +140,7 @@ class DEForm(forms.Form):
                 top="20",
                 perc="1",
                 iso=self.cleaned_data.get("isomiRs"),
-                sh=os.path.join(BASE_DIR + '/core/bash_scripts/run_sRNAde.sh')
+                sh=os.path.join(BASE_DIR + '/core/bash_scripts/run_sRNAde.sh'))
 
         else:
             raise Http404
