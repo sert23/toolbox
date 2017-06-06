@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'run$', views.run),
     url(r'result', views.result),
     url(r'test$', views.test),
+
 ]
