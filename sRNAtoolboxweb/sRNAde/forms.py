@@ -48,6 +48,10 @@ class DEForm(forms.Form):
             self.add_error('matDescription', 'This field is mandatory if a matrix of Expression Values is provided ')
         if cleaned_data.get('listofIDs') and not cleaned_data.get('sampleGroups'):
             self.add_error('matDescription', 'This field is mandatory if a list of sRNAbench IDs is provided')
+        if not cleaned_data.get('probability'):
+            probability= "0.8"
+        if not cleaned_data.get('pvalue'):
+            pvalue= "0.05"
         if (1.0> float(cleaned_data.get('pvalue'))) and (0.0 < float(cleaned_data.get('pvalue'))):
             self.add_error('pvalue', 'Must be a number between 1 and 0')
         if (1.0> float(cleaned_data.get('probability'))) and (0.0 < float(cleaned_data.get('probability'))):
@@ -65,6 +69,7 @@ class DEForm(forms.Form):
                     self.add_error('listofIDs', 'Number of groups must be the same, separate with #')
                     self.add_error('sampleGroups', 'Number of groups must be the same, separate with #')
                     self.add_error('matDescription', 'Number of groups must be the same, separate with #')
+
 
         return cleaned_data
 
