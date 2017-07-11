@@ -7,10 +7,15 @@ import django_tables2 as tables
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 
+from django.views.generic import FormView
+from django.core.urlresolvers import reverse_lazy
+from forms import MirconsForm
+
 from FileModels.TargetConsensusParser import TargetConsensusParser
 from progress.models import JobStatus
 from utils import pipeline_utils
 from utils.sysUtils import make_dir
+#import forms
 
 counter = itertools.count()
 
@@ -223,3 +228,15 @@ def test(request):
 
     return redirect("/srnatoolbox/jobstatus/mirconstarget/?id=" + pipeline_id)
 
+class MirConsTarget(FormView):
+    template_name = 'miRNAtarget.html'
+    form_class = MirconsForm
+
+    success_url = reverse_lazy("mirconstarget")
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        call = form.create_call()
+        print call
+        return super(MirConsTarget, self).form_valid(form)

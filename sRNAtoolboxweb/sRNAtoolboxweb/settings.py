@@ -182,7 +182,7 @@ CONF={
  "annotationPath" : "/shared/sRNAtoolboxDB/jBrowserAnnot",
  "species": "sRNAtoolboxDB/species.txt",
  "speciesAnnotation": "sRNAtoolboxDB/annotation.txt",
- "targetAnnotation": "/shared/sRNAtoolboxDB/targetAnnot.txt",
+ "targetAnnotation": "sRNAtoolboxDB/targetAnnot.txt",
  "db" : "/shared/sRNAtoolboxDB",
  "exec" : "/shared/sRNAtoolboxDB/exec",
  "RNAcentral" : "/shared/sRNAtoolboxDB/dbs/rnacentral_active.fasta",
