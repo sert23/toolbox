@@ -2,7 +2,6 @@ import itertools
 
 import django_tables2 as tables
 
-from pipelines.configfile import PIPELINETYPES_URL
 from progress.models import JobStatus
 
 counter = itertools.count()
@@ -14,6 +13,20 @@ __author__ = 'antonior'
 
 # Create your views here.
 from django.shortcuts import render, redirect
+
+
+PIPELINETYPES_URL = {
+    "sRNAfuncTerms": "srnafuncterms",
+    "sRNAde": "srnade",
+    "sRNAbench": "srnabench",
+    "sRNAblast": "srnablast",
+    "mirconstarget": "mirconstarget",
+    "mirnafunctargets": "mirnafunctargets",
+    "jBrowser": "jBrowser",
+    "dejbrowser": "srnajbrowserde",
+    "gFree": "srnagfree"
+}
+
 
 
 def index(request):

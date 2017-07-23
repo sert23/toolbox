@@ -160,38 +160,30 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-os.path.join(BASE_DIR, 'sRNAtoolboxweb', 'static')
+    os.path.join(BASE_DIR, 'sRNAtoolboxweb', 'static')
 
 ]
 STATICFILES_FINDERS = (
-'django.contrib.staticfiles.finders.FileSystemFinder',
-'django.contrib.staticfiles.finders.AppDirectoriesFinder'
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder'
 )
 
-
-
-CONF={
- "sRNAtoolboxSOBasePath" : "/shared/sRNAtoolbox",
- "sRNAtoolboxSODataPath" : "/shared/sRNAtoolbox/webData",
- "jBrowserSOPathGenome" : "/var/www/sRNAtoolbox/sRNAjBrowser/genomes",
- "jBrowserSOPathTmpUsers" : "/var/www/sRNAtoolbox/sRNAjBrowser/tmpUsers",
- "jBrowserWWWPath" : "/sRNAtoolbox/sRNAjBrowser",
- "jBrowserWWWPathTmpUsers" : "/sRNAtoolbox/sRNAjBrowser/tmpUsers",
- "jBrowserWWWPathGenome" : "/sRNAtoolbox/sRNAjBrowser/genomes",
- "seqObj" : "/srv/shared/sRNAtoolboxDB/seqOBJ",
- "annotationPath" : "/shared/sRNAtoolboxDB/jBrowserAnnot",
- "species": "sRNAtoolboxDB/species.txt",
- "speciesAnnotation": "sRNAtoolboxDB/annotation.txt",
- "targetAnnotation": "/shared/sRNAtoolboxDB/targetAnnot.txt",
- "db" : "/shared/sRNAtoolboxDB",
- "exec" : "/shared/sRNAtoolboxDB/exec",
- "RNAcentral" : "/shared/sRNAtoolboxDB/dbs/rnacentral_active.fasta",
- "tRNA" : "/shared/sRNAtoolboxDB/dbs/eukaryotic-tRNAs.fa",
- "tax" : "/shared/sRNAtoolboxDB/dbs/taxonomy.txt"
+CONF = {
+    "sRNAtoolboxSOBasePath": "/shared/sRNAtoolbox",
+    "sRNAtoolboxSODataPath": "/shared/sRNAtoolbox/webData",
+    "jBrowserSOPathGenome": "/var/www/sRNAtoolbox/sRNAjBrowser/genomes",
+    "jBrowserSOPathTmpUsers": "/var/www/sRNAtoolbox/sRNAjBrowser/tmpUsers",
+    "jBrowserWWWPath": "/sRNAtoolbox/sRNAjBrowser",
+    "jBrowserWWWPathTmpUsers": "/sRNAtoolbox/sRNAjBrowser/tmpUsers",
+    "jBrowserWWWPathGenome": "/sRNAtoolbox/sRNAjBrowser/genomes",
+    "seqObj": "/srv/shared/sRNAtoolboxDB/seqOBJ",
+    "annotationPath": "/shared/sRNAtoolboxDB/jBrowserAnnot",
+    "species": "sRNAtoolboxDB/species.txt",
+    "speciesAnnotation": "sRNAtoolboxDB/annotation.txt",
+    "targetAnnotation": "/shared/sRNAtoolboxDB/targetAnnot.txt",
+    "db": "/shared/sRNAtoolboxDB",
+    "exec": "/shared/sRNAtoolboxDB/exec",
+    "RNAcentral": "/shared/sRNAtoolboxDB/dbs/rnacentral_active.fasta",
+    "tRNA": "/shared/sRNAtoolboxDB/dbs/eukaryotic-tRNAs.fa",
+    "tax": "/shared/sRNAtoolboxDB/dbs/taxonomy.txt"
 }
-
-
-
-
-
-
