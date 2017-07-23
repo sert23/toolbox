@@ -1,6 +1,6 @@
 __author__ = 'antonior'
 
-from GbpaCommonLibs.FileModels.gene_info import GeneNcbi
+#from GbpaCommonLibs.FileModels.gene_info import GeneNcbi
 import optparse
 import os
 import sys

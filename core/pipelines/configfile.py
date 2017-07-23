@@ -14,15 +14,3 @@ for line in targetAnnot:
         UTR_FILES[aline[0]] = aline[2]
     else:
         UTR_FILES[aline[0]] = aline[1]
-
-PIPELINETYPES_URL = {
-    "sRNAfuncTerms": "srnafuncterms",
-    "sRNAde": "srnade",
-    "sRNAbench": "srnabench",
-    "sRNAblast": "srnablast",
-    "mirconstarget": "mirconstarget",
-    "mirnafunctargets": "mirnafunctargets",
-    "jBrowser": "jBrowser",
-    "dejbrowser": "srnajbrowserde",
-    "gFree": "srnagfree"
-}

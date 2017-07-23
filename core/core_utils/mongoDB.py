@@ -6,7 +6,6 @@ Created on 11/04/2014
 
 import json
 import os
-
 import pymongo
 import progressbar
 
@@ -38,13 +37,13 @@ class mongoDB ():
         
     def insert_table(self, _filename, tmp_jsonfile, table, columns_index,strict_str=None, header=None, sep='\t'):
         
-        fd=file(_filename)
+        fd=open(_filename)
         line_count=len(fd.readlines())
-        print line_count
+        print(line_count)
         widgets = ["processing file: "+_filename, progressbar.Percentage(), ' ', progressbar.Bar(marker=progressbar.RotatingMarker()),' ', progressbar.ETA(), ' ', progressbar.FileTransferSpeed()]
         pbar = progressbar.ProgressBar(widgets=widgets, maxval=line_count).start()      
         
-        fd=file(_filename)
+        fd=open(_filename)
         if header==None:
             header=fd.readline().replace("\n",'').split(sep) 
 
@@ -52,7 +51,7 @@ class mongoDB ():
         i=0
         batch=fd.readlines(2097152)
         while batch!=[]:
-            fdw=file(tmp_jsonfile,'w')
+            fdw=open(tmp_jsonfile,'w')
             batch_array=[]
             for line in batch:
                 pbar.update(i+1)

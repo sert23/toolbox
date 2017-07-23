@@ -3,4 +3,5 @@
 
 export PYTHONPATH=/shared/
 export BLASTDB=/shared/blastDB/
-python /shared/sRNAtoolbox/core/pipelines/runPipelines.py $key $name $outdir $pipeline -c $configure
+workon dev
+runPipelines $key $name $outdir $pipeline -c $configure

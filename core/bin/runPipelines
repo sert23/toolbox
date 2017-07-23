@@ -1,7 +1,18 @@
-__author__ = 'antonior'
-import sys
-from pipelines import *
+#!/usr/bin/env python
+# coding=utf-8
 import argparse
+
+from pipelines.tools.helpersPipelines import helpersPipelines
+from pipelines.tools.mirconsfunctargetPipeline import mirconsfunctargetPipeline
+from pipelines.tools.mirconstargetPipeline import mirconstargetPipeline
+from pipelines.tools.sRNAbenchPipeline import sRNAbenchPipeline
+from pipelines.tools.sRNAblastPipeline import sRNAblastPipeline
+from pipelines.tools.sRNAdePipeline import sRNAdePipeline
+from pipelines.tools.sRNAfuncTermsPipeline import sRNAfuncTermsPipeline
+from pipelines.tools.sRNAgFreePipeline import sRNAgFreePipeline
+from pipelines.tools.sRNAjBrowserPipeline import sRNAjBrowserPipeline, sRNAdejBrowserPipeline
+
+__author__ = 'antonior'
 
 
 def functerms(args):
@@ -13,7 +24,7 @@ def functerms(args):
 
 
 def bench(args):
-    parameters = "".join([line for line in file(args.configure).readlines() if "desc" not in line and "libs" not in line and not "maintaingOrig" in line and not "zip" in line and not "graphics" in line]).replace("=", ": ").replace("/shared/", "").replace("sRNAtoolbox/webData/", "")
+    parameters = "".join([line for line in open(args.configure).readlines() if "desc" not in line and "libs" not in line and not "maintaingOrig" in line and not "zip" in line and not "graphics" in line]).replace("=", ": ").replace("/shared/", "").replace("sRNAtoolbox/webData/", "")
     new_pipe = sRNAbenchPipeline(args.pipelineKey, args.jobName, args.outdir, args.configure, parameters)
     new_pipe.run()
 
@@ -33,7 +44,7 @@ def de(args):
 
 
 def blast(args):
-    parameters = "".join([line for line in file(args.configure).readlines() if "output" not in line and "minRC" not in line and not "blastn" in line ]).replace("=", ": ").replace("/shared/", "").replace("sRNAtoolbox/webData/", "")
+    parameters = "".join([line for line in open(args.configure).readlines() if "output" not in line and "minRC" not in line and not "blastn" in line ]).replace("=", ": ").replace("/shared/", "").replace("sRNAtoolbox/webData/", "")
     new_pipe = sRNAblastPipeline(args.pipelineKey, args.jobName, args.outdir, args.configure, parameters)
     new_pipe.run()
 
@@ -107,6 +118,7 @@ def main():
     parser.add_argument('pipelineKey', help='Identifier to pipeline')
     parser.add_argument('jobName', help='Name of the Job')
     parser.add_argument('outdir', help='outdir')
+    parser.add_argument('--mode', required=False, help='mode',  default='prod', choices=('prod', 'test', 'dev'))
     subparsers = parser.add_subparsers(help='Pipeline Name', description="Pipeline Name", dest="tool")
 
     functerm_parser = subparsers.add_parser('functerms', help='Launch SRNAfuncterms')
@@ -211,7 +223,6 @@ def main():
 
 
     if args.tool == "helper":
-        print "helper"
         helper(args)
 
 

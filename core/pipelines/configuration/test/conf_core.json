@@ -1,0 +1,14 @@
+{
+ "sRNAtoolboxSOBasePath" : "/shared/sRNAtoolbox",
+ "sRNAtoolboxSODataPath" : "/home/antonior/webData",
+ "seqObj" : "/opt/sRNAtoolboxDB/seqOBJ",
+ "annotationPath" : "/opt/sRNAtoolboxDB/jBrowserAnnot",
+ "species": "/opt/sRNAtoolboxDB/species.txt",
+ "speciesAnnotation": "/opt/sRNAtoolboxDB/annotation.txt",
+ "targetAnnotation": "/opt/sRNAtoolboxDB/targetAnnot.txt",
+ "db" : "/opt/sRNAtoolboxDB",
+ "exec" : "/opt/sRNAtoolboxDB/exec",
+ "RNAcentral" : "/opt/sRNAtoolboxDB/dbs/rnacentral_active.fasta",
+ "tRNA" : "/opt/sRNAtoolboxDB/dbs/eukaryotic-tRNAs.fa",
+ "tax" : "/opt/sRNAtoolboxDB/dbs/taxonomy.txt"
+}

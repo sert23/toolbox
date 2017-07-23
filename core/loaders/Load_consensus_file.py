@@ -5,10 +5,10 @@ __author__ = 'antonior'
 
 import sys
 
-fd = file(sys.argv[1])
+fd = open(sys.argv[1])
 sp = sys.argv[2]
 cds_utr = sys.argv[3]
-fdw = file(sys.argv[4], "w")
+fdw = open(sys.argv[4], "w")
 
 db_uniprot = mongoDB("localhost", "Uniprots")
 

@@ -32,7 +32,7 @@ def istext(filename):
     return True
 
 def istabfile(filename):
-    fd = file(filename)
+    fd = open(filename)
     if len(fd.readline().split("\t")) > 1:
         return True
     else:

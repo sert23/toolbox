@@ -1,5 +1,7 @@
+#!/usr/bin/env python
+# coding=utf-8
 __author__ = 'antonior'
-from pipelines import sRNAfuncTermsPipeline
+from pipelines.tools.sRNAfuncTermsPipeline import sRNAfuncTermsPipeline
 import sys
 import optparse
 
