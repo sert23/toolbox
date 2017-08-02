@@ -15,7 +15,7 @@ __author__ = 'antonior'
 class ParseMirTarBase(Parser):
     def parse(self):
 
-        fdw = file(os.path.basename(self.ipath)+"_MirTarBase.txt", "w")
+        fdw = open(os.path.basename(self.ipath)+"_MirTarBase.txt", "w")
 
         workbook = xlrd.open_workbook(self.ipath)
         if "miRTarBase" in workbook.sheet_names():
@@ -66,16 +66,16 @@ class ParseMirTarBase(Parser):
 class ParserMiranda(Parser):
     def parse(self):
 
-        fd = file(self.ipath)
+        fd = open(self.ipath)
         lines = 0
         for line in fd:
             lines += 1
         fd.close()
 
-        fd = file(self.ipath)
+        fd = open(self.ipath)
 
-        fdw = file(os.path.basename(self.ipath)+"_not_founds_miranda.txt", "w")
-        fdw1 = file(os.path.basename(self.ipath)+"_miranda.json", "w")
+        fdw = open(os.path.basename(self.ipath)+"_not_founds_miranda.txt", "w")
+        fdw1 = open(os.path.basename(self.ipath)+"_miranda.json", "w")
 
 
         # Connectors
@@ -128,16 +128,16 @@ class ParserMiranda(Parser):
 class ParserTargetScan(Parser):
     def parse(self):
 
-        fd = file(self.ipath)
+        fd = open(self.ipath)
         lines = 0
         for line in fd:
             lines += 1
         fd.close()
 
-        fd = file(self.ipath)
+        fd = open(self.ipath)
 
-        fdw = file("not_founds.txt", "w")
-        fdw1 = file("ts.json", "w")
+        fdw = open("not_founds.txt", "w")
+        fdw1 = open("ts.json", "w")
 
 
         # Connectors

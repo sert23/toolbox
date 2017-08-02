@@ -5,7 +5,7 @@ __author__ = 'antonior'
 
 class MatureParser(Parser):
     def parse(self):
-        fd = file(self.ipath)
+        fd = open(self.ipath)
         header = fd.readline().replace("\n", "").split("\t")
         for line in fd:
             aline = line.replace("\n", "").split("\t")

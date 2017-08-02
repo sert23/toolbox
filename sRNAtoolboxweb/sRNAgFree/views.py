@@ -47,7 +47,7 @@ def run(request):
                   '",outdir="' + outdir + '",name="' + name + '" -N ' + name +
                   ' /shared/sRNAtoolbox/core/bash_scripts/run_sRNAgfree.sh')
 
-        print 'qsub -v pipeline="gfree",input="' + input + '",key="' + pipeline_id + '",minReadLength="' + rl +'",maxReadLength="' + xrl + '",microRNA="' + homolog + '",minRC="' + rc + '",noMM="' + mm +'",outdir="' + outdir + '",name="' + name + '" -N ' + name +' /shared/sRNAtoolbox/core/bash_scripts/run_sRNAgfree.sh'
+        print ('qsub -v pipeline="gfree",input="' + input + '",key="' + pipeline_id + '",minReadLength="' + rl +'",maxReadLength="' + xrl + '",microRNA="' + homolog + '",minRC="' + rc + '",noMM="' + mm +'",outdir="' + outdir + '",name="' + name + '" -N ' + name +' /shared/sRNAtoolbox/core/bash_scripts/run_sRNAgfree.sh')
 
 
         return redirect("/srnatoolbox/jobstatus/srnagfree/?id=" + pipeline_id)

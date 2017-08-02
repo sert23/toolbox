@@ -45,6 +45,7 @@ class sRNABenchForm(forms.Form):
     # species
     library_mode = forms.BooleanField(label='Do not map to genome (Library mode)', required=False)
     no_libs = forms.BooleanField(label='Do not profile other ncRNAs  (you are interested in known microRNAs only!)', required=False)
+
     # Adapter Trimming
     guess_adapter = forms.BooleanField(label='Guess the adapter sequence  (not recommended!)', required=False)
     adapter_chosen = forms.ChoiceField(choices=ADAPTERS)
@@ -52,6 +53,7 @@ class sRNABenchForm(forms.Form):
     adapter_length = forms.IntegerField(label='Minimum Adapter Length', max_value=12, min_value=6, initial=10)
     adapter_mismatch = forms.IntegerField(label='Max. mismatches in adapter detection', max_value=2, min_value=0, initial=1)
     adapter_recursive_trimming = forms.BooleanField(label='Recursive Adapter trimming', required=False)
+
     # MicroRNA Analysis
     genome_mir = forms.BooleanField(label='Use the miRNAs for the species from the selected genomes', required=False)
     highconf = forms.BooleanField(label='Use high confidence microRNAs from miRBase', required=False)
@@ -61,6 +63,7 @@ class sRNABenchForm(forms.Form):
         required=False,
     )
     homologous = forms.CharField(label='Analyse homologous microRNAs (can be set to "all"):', required=False)
+
     # Parameters
     is_solid = forms.BooleanField(label='The input is SOLiD', required=False)
     predict_mirna = forms.BooleanField(label='Predict New miRNAs', required=False)

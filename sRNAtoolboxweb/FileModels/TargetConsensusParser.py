@@ -7,7 +7,7 @@ __author__ = 'antonior'
 class TargetConsensusParser(Parser):
 
     def parse(self):
-        fd = file(self.ipath)
+        fd = open(self.ipath)
 
         for line in fd:
             aline = line.replace("\n", "").split("\t")

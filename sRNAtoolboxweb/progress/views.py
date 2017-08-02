@@ -8,10 +8,9 @@ from django.shortcuts import render, redirect
 from django.views.generic import DetailView
 from rest_framework import generics
 from rest_framework.generics import UpdateAPIView, RetrieveAPIView, CreateAPIView
-
-from models import JobStatus, Status
+from progress.models import JobStatus, Status
 from sRNAtoolboxweb.settings import CONF
-from serializers import JobStatusSerializer, StatusSerializer
+from progress.serializers import JobStatusSerializer, StatusSerializer
 
 
 class Msg():

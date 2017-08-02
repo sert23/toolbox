@@ -1,12 +1,5 @@
 from django.conf.urls import include, url
-# from dajaxice.core import dajaxice_autodiscover, dajaxice_config
-# dajaxice_autodiscover()
-
-import views
-
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from sRNAtoolboxweb import views
 
 urlpatterns =[
     #url(r'^/*', views.index),
@@ -28,6 +21,5 @@ urlpatterns =[
     url(r'^barleyCultivar', views.cultivar),
     url(r'^versionControl', views.version, name='versions'),
     url(r'^/*$', views.index, name='home'),
-    # url(dajaxice_config.dajaxice_url, include('dajaxice.urls')),
 ]
 

@@ -6,7 +6,7 @@ __author__ = 'antonior'
 
 class OrganimsParser(Parser):
     def parse(self):
-        fd = file(self.ipath)
+        fd = open(self.ipath)
         fd.readline()
 
         for line in fd:

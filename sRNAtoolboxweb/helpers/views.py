@@ -87,7 +87,7 @@ def run(request, tool):
 
     FS.location = os.path.join("/shared/sRNAtoolbox/webData", pipeline_id)
     make_dir(FS.location)
-    fdw = file(os.path.join(FS.location,"error.txt"),"w")
+    fdw = open(os.path.join(FS.location,"error.txt"),"w")
     if tool == "removedup" or tool == "extract":
 
         if "ifile" in request.FILES:
@@ -244,7 +244,6 @@ class RemoveDup(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call = form.create_call()
-        print call
         return super(RemoveDup, self).form_valid(form)
 
 class Extract(FormView):
@@ -257,7 +256,6 @@ class Extract(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call = form.create_call()
-        print call
         return super(Extract, self).form_valid(form)
 
 class Ensembl(FormView):
@@ -270,7 +268,6 @@ class Ensembl(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call = form.create_call()
-        print call
         return super(Ensembl, self).form_valid(form)
 
 class NCBI(FormView):
@@ -283,7 +280,6 @@ class NCBI(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call = form.create_call()
-        print call
         return super(NCBI, self).form_valid(form)
 
 class RNAcentral(FormView):
@@ -296,7 +292,6 @@ class RNAcentral(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call = form.create_call()
-        print call
         return super(RNAcentral, self).form_valid(form)
 
 class Trna(FormView):
@@ -309,5 +304,4 @@ class Trna(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call = form.create_call()
-        print call
         return super(Trna, self).form_valid(form)

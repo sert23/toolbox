@@ -12,7 +12,7 @@ class EdaFile():
 
     def parse(self):
 
-        fd = file(self.filename)
+        fd = open(self.filename)
 
         fd.readline()
         for line in fd:

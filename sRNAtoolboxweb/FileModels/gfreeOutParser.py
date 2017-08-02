@@ -11,8 +11,8 @@ class GFreeOutParser():
         self.info_file = info_file
 
     def parse(self):
-        self.fd_info = file(self.info_file)
-        self.fd_micro = file(self.micro_file)
+        self.fd_info = open(self.info_file)
+        self.fd_micro = open(self.micro_file)
         self.fd_micro.readline()
         self.fd_info.readline()
         all_matures = {}

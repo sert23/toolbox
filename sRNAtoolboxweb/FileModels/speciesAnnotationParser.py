@@ -10,7 +10,7 @@ class SpeciesAnnotationParser(Parser):
         self.speciesAnnotation = {}
 
     def parse(self):
-        fd = file(self.ipath)
+        fd = open(self.ipath)
 
         for line in fd:
             if not (line.startswith("#")) and line != "\n":

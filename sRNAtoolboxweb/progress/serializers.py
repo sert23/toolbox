@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import JobStatus, Status
+from progress.models import JobStatus, Status
 
 class StatusSerializer(serializers.ModelSerializer):
     class Meta:

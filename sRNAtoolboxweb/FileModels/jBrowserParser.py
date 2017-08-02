@@ -1,3 +1,5 @@
+
+
 from DataModels.jBrowserBed import JBrowserBed
 from FileModels.Parser import Parser
 import mmap
@@ -7,17 +9,17 @@ __author__ = 'antonior'
 class JBrowserParser(Parser):
 
     def parse(self):
-        fd = file(self.ipath)
+        fd = open(self.ipath)
 
         for line in fd:
             aline = line.replace("\n", "").split("\t")
-            print aline
+            print (aline)
             new_bed = JBrowserBed(*aline)
             yield new_bed
 
     def get_firsts(self, n):
 
-        fd = file(self.ipath)
+        fd = open(self.ipath)
 
         for i, line in enumerate(fd):
             aline = line.replace("\n", "").split("\t")

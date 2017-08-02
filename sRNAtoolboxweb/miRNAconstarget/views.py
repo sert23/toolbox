@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect
 
 from django.views.generic import FormView
 from django.core.urlresolvers import reverse_lazy
-from forms import MirconsForm
+from miRNAconstarget.forms import MirconsForm
 
 from FileModels.TargetConsensusParser import TargetConsensusParser
 from progress.models import JobStatus
@@ -238,5 +238,5 @@ class MirConsTarget(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call = form.create_call()
-        print call
+        print(call)
         return super(MirConsTarget, self).form_valid(form)

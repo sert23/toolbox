@@ -2,7 +2,7 @@ from DataModels.deConsensus import DeConsensus
 
 __author__ = 'antonior'
 import xlrd
-from Parser import Parser
+from FileModels.Parser import Parser
 from DataModels.noiseqTable import NOISeq
 from DataModels.deSeq import DeSeq
 from DataModels.edgeR import EdegeR
