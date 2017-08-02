@@ -6,7 +6,9 @@ from django.conf.urls import url
 import views
 
 urlpatterns = [
-    url(r'^/*$', views.input),
+    url(r'^', views.MirConsTarget.as_view(), name="mirconstarget"),
+    #url(r'^/*$', views.),
+    #url(r'^/*$', views.input),
     url(r'run$', views.run),
     url(r'result', views.result),
     url(r'test$', views.test),

@@ -25,26 +25,76 @@
                 </form>
 
                 <br>{% endcomment %}
-                {% csrf_token %}
-               <fieldset>
-                                        {% for field in form %}
-                                            <div class="form-group">
-                                                {% if field.errors %}
-                                                    {% for error in field.errors %}
-                                                        <div class="row">
-                                                            <div class="col-lg-8">
-                                                                <span class="label label-danger">{{ error|escape }}</span>
-                                                            </div>
-                                                        </div>
-                                                    {% endfor %}
-                                                {% endif %}
-                                                <label class="control-label">{{ field.label_tag }}</label>
-                                                {{ field }}
-                                            </div>
-                                        {% endfor %}
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="reset" class="btn btn-primary ">Reset</button>
-                                    </fieldset>
+
+                <form id="configform" action="/srnatoolbox/srnade/run" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+
+
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a>Input data</a>
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="row row-grid">
+                                    <div class="col-lg-6">
+                                        <label>List of sRNAbench IDs (colon separated, separate groups by hashes): </label><a  data-toggle="modal" data-target="#becnhids" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
+                                        <input id="form0" class="form-control" name="id" placeholder="e.g: id1:id2#id3:id4#id5:id6:id7">
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <label> Or Upload a matrix of expression values:</label>
+                                        <input type="file" name="mat" id=file1>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sample groups (Hash separated): </label>
+                                <input id="form1" class="form-control" name="groups" placeholder="e.g: Normal#TumorI#TumorII">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Sample Description (colon separated): </label><a  data-toggle="modal" data-target="#SampleDesc" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
+
+                                <input id="form2" class="form-control" name="desc" placeholder="e.g: Normal:Normal:TumorI:TumorI:TumorII:TumorII:TumorII">
+                            </div>
+
+                            <div class="row row-grid">
+
+                                <div class="col-lg-4">
+
+                                    <label>Differential expression cutoff used by dSeq and EdgeR (p-value): </label>
+                                    <input id="form3" class="form-control" name="cutoff1" placeholder="Default 0.05"  width="1">
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <label>Differential expression cutoff used by NOISeq(probability): </label>
+                                    <input id="form4" class="form-control" name="cutoff2" placeholder="Default 0.8">
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <lable> <input type="checkbox" name="isomir"> isoMir Analysis  </lable>
+                                </div>
+                            </div>
+
+                            <div class="row row-grid">
+                                <br>
+                                <div class="col-lg-4">
+                                    <input type="submit"  class="btn btn-primary" value="Run">
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </form>
 
 
 

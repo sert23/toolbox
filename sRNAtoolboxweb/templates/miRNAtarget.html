@@ -27,94 +27,29 @@
 {% endcomment %}
 
 
-            <form action="/srnatoolbox/mirconstarget/run" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
+            <form enctype="multipart/form-data"
+                                      action="{% url 'extract' %}"
+                                      method="post">{% csrf_token %}
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a>Input data</a>
-                            </h4>
-                        </div>
-                        <div class="panel-body">
-                            <div class="form-group">
-                                <div class="row row-grid">
-                                    <div class="col-lg-6">
-                                        <label> Upload miRNAs file:</label>
-                                        <input type="file" name="miRNA_file" id=file1>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label> Upload utrs file:</label>
-                                        <input type="file" name="utr_file" id=file1>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row row-grid">
-                                <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Is plant analysis
-                                    <input id="plant" type="checkbox"></label>
-                                </div>
-
-                                <div class="form-group">
-
-                                    <label>Choose programs to predict targets: </label>
-                                    <br>
-                                    <label class="checkbox-inline">
-                                        <input id="TS" value="TS" type="checkbox" name="programs"><a href="http://www.biomedcentral.com/1471-2105/11/292"  target="_blank">TargetSpy</a>
-                                        <br>
-                                        <input id="MR" value="MIRANDA" type="checkbox" name="programs"><a href="http://www.plosbiology.org/article/info:doi/10.1371/journal.pbio.0020363"  target="_blank">Miranda</a>
-                                        <br>
-                                        <input id="PT" value="PITA" type="checkbox" name="programs"><a href="http://genie.weizmann.ac.il/pubs/mir07/mir07_data.html"  target="_blank">PITA</a>
-                                        <br>
-                                        <input id="PS" value="PSROBOT" type="checkbox" name="programs"><a href="http://nar.oxfordjournals.org/content/40/W1/W22"  target="_blank">psRobot</a>
-                                        <br>
-                                        <input  id="TF" value="TAPIR_FASTA" type="checkbox" name="programs"><a href="http://bioinformatics.psb.ugent.be/webtools/tapir/"  target="_blank">TAPIR FASTA engine</a>
-                                        <br>
-                                        <input  id="TH" value="TAPIR_HYBRID" type="checkbox" name="programs"><a href="http://bioinformatics.psb.ugent.be/webtools/tapir/"  target="_blank">TAPIR RNAhybrid engine</a>
-
-                                    </label>
-                                </div>
-
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
-                                                <a data-toggle="collapse"  href="#collapseThree">Programs Parameters</a> <a  data-toggle="modal" data-target="#AdvanceParameters" style="color: orangered" class="btn btn-link"><i class="fa fa-exclamation-triangle">(Advanced Parameters)</i></a>
-                                            </h4>
-                                        </div>
-                                        <div id="collapseThree" class="panel-collapse collapse">
-                                            <div class="panel-body">
-
-                                                <div class="form-group">
-
-                                                    <label> TargetSpy Parameters: <input class="form-control" name="targetspy" size="60"></label> <a  data-toggle="modal" data-target="#targetspy" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
-                                                    <br>
-                                                    <label> Miranda Parameters: <input class="form-control"  name="miranda" size="60"></label> <a  data-toggle="modal" data-target="#miranda" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
-                                                    <br>
-                                                    <label> PITA Parameters: <input  class="form-control" name="pita" size="60"></label> <a  data-toggle="modal" data-target="#pita" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
-                                                    <br>
-                                                    <label> psRobot Parameters: <input  class="form-control" name="psrobot" size="60"></label> <a  data-toggle="modal" data-target="#psrobot" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
-                                                    <br>
-                                                    <label> TAPIR FASTA engine: <input class="form-control" name="tapir" size="60"></label> <a  data-toggle="modal" data-target="#tapir" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
-                                                    <br>
-                                                    <label> TAPIR RNAhybrid engine: <input class="form-control" name="hybrid" size="60"></label> <a  data-toggle="modal" data-target="#hybrid" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
-                                                </div>
+                                    <fieldset>
+                                        {% for field in form %}
+                                            <div class="form-group">
+                                                {% if field.errors %}
+                                                    {% for error in field.errors %}
+                                                        <div class="row">
+                                                            <div class="col-lg-8">
+                                                                <span class="label label-danger">{{ error|escape }}</span>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                                <label class="control-label">{{ field.label_tag }}</label>
+                                                {{ field }}
                                             </div>
-                                        </div>
-                                    </div>
-
-
-
-                                </div>
-                            </div>
-                            <br>
-                            <input type="submit"  class="btn btn-primary" value="Run">
-                        </div>
-
-
-
-                    </div>
-                </form>
+                                        {% endfor %}
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="reset" class="btn btn-primary ">Reset</button>
+                                    </fieldset>
 
             </div>
 

@@ -61,7 +61,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/srnatoolbox/index">sRNAtoolbox</a><p class="text-danger"></p>
+                <a class="navbar-brand" href="/index">sRNAtoolbox</a><p class="text-danger"></p>
             </div>
             <!-- /.navbar-header -->
 
@@ -72,7 +72,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
-                            <form action="/srnatoolbox/search" method="post" enctype="multipart/form-data">
+                            <form action="/search" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="input-group custom-search-form">
 
@@ -91,31 +91,31 @@
                             <a href="#"><i class="fa fa-gears fa-fw"></i> Tools<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/srnatoolbox/srnabench">sRNAbench</a>
+                                    <a href="/srnabench">sRNAbench</a>
                                 </li>
                                 <li>
-                                    <a href="/srnatoolbox/srnade">sRNAde</a>
+                                    <a href="/srnade">sRNAde</a>
                                 </li>
 
 {% comment %}                                <li>
-                                    <a href="/srnatoolbox/srnagfree">sRNAgFree</a>
+                                    <a href="/srnagfree">sRNAgFree</a>
                                 </li>{% endcomment %}
 
                                 <li>
-                                    <a href="/srnatoolbox/srnablast">sRNAblast</a>
+                                    <a href="/srnablast">sRNAblast</a>
                                 </li>
 
                                 <li>
-                                    <a href="/srnatoolbox/mirconstarget">miRNAconstarget</a>
+                                    <a href="/mirconstarget">miRNAconstarget</a>
                                 </li>
                                 <li>
-                                    <a href="/srnatoolbox/srnajbrowser">JBrowser</a>
+                                    <a href="/srnajbrowser">JBrowser</a>
                                 </li>
                                 <li>
-                                    <a href="/srnatoolbox/srnafuncterms">sRNAfuncTerms</a>
+                                    <a href="/srnafuncterms">sRNAfuncTerms</a>
                                 </li>
                                 <li>
-                                    <a href="/srnatoolbox/srnajbrowserde">jBrowserDE</a>
+                                    <a href="/srnajbrowserde">jBrowserDE</a>
                                 </li>
 
                             </ul>
@@ -125,7 +125,7 @@
                             <a href="#"><i class="fa fa-link fa-fw"></i> Workflows<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/srnatoolbox/mirnafunctargets">miRNAFuncTargets</a>
+                                    <a href="/mirnafunctargets">miRNAFuncTargets</a>
                                 </li>
                             </ul>
                         </li>
@@ -157,7 +157,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="/srnatoolbox/manual"><i class="fa fa-book fa-fw"></i>Web Manual</a>
+                            <a href="/manual"><i class="fa fa-book fa-fw"></i>Web Manual</a>
                         </li>
                         <li>
                             <a href="{% url "versions" %}"><i class="fa fa-history fa-fw"></i>Version Control and Additional Information</a>

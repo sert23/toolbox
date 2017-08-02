@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse_lazy
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
 
-from helpers.forms import ExtractForm
+from helpers.forms import ExtractForm, NcbiForm
 from helpers.forms import RemovedupForm, EnsemblForm, RnacentralForm, TrnaparserForm
 from progress.models import JobStatus
 from utils import pipeline_utils
@@ -275,7 +275,7 @@ class Ensembl(FormView):
 
 class NCBI(FormView):
     template_name = 'helpers/helpers_ncbi.html'
-    form_class = EnsemblForm
+    form_class = NcbiForm
 
     success_url = reverse_lazy("ncbi")
 
