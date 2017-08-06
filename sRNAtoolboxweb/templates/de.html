@@ -5,13 +5,12 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-            <div class="page-header">
-            <h1>sRNAde: </h1>
-            <h3>Consensus differential expression (DESeq, edgeR and NOISeq), visual cluster analysis and sequencing statistics. </h3>
+                <div class="page-header">
+                    <h1>sRNAde: </h1>
+                    <h3>Consensus differential expression (DESeq, edgeR and NOISeq), visual cluster analysis and
+                        sequencing statistics. </h3>
+                </div>
             </div>
-            </div>
-
-
 
 
             <!-- /.col-lg-12 -->
@@ -19,49 +18,28 @@
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-9">
-{% comment %}                <form action="srnade/test" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="submit"  class="btn btn-success" value="Launch Test">
-                </form>
-
-                <br>{% endcomment %}
-                {% csrf_token %}
-               <fieldset>
-                                        {% for field in form %}
-                                            <div class="form-group">
-                                                {% if field.errors %}
-                                                    {% for error in field.errors %}
-                                                        <div class="row">
-                                                            <div class="col-lg-8">
-                                                                <span class="label label-danger">{{ error|escape }}</span>
-                                                            </div>
-                                                        </div>
-                                                    {% endfor %}
-                                                {% endif %}
-                                                <label class="control-label">{{ field.label_tag }}</label>
-                                                {{ field }}
-                                            </div>
-                                        {% endfor %}
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="reset" class="btn btn-primary ">Reset</button>
-                                    </fieldset>
 
 
+                {% include 'form_base.html' %}
 
-    </div>
+
+            </div>
+
+
             <div class="col-lg-3">
-            <div class="panel panel-info">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    Help
-                </h4>
-            </div>
-                <div class="panel-body">
-                    <a href="{% static "WebManual_sRNAtoolbox.pdf" %}" target="_blank">Link to Web Manual</a>
-                    <br>
-                    <a href="http://bioinfo5.ugr.es/srnatoolbox/srnade/results/?id=XCKFJW3PWHS00ZH"  target="_blank">Link to Test Data Results</a>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Help
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <a href="{% static "WebManual_sRNAtoolbox.pdf" %}" target="_blank">Link to Web Manual</a>
+                        <br>
+                        <a href="http://bioinfo5.ugr.es/srnatoolbox/srnade/results/?id=XCKFJW3PWHS00ZH" target="_blank">Link
+                            to Test Data Results</a>
+                    </div>
                 </div>
-            </div>
 
             </div>
 
@@ -75,7 +53,8 @@
                     <div class="panel-body">
                         High-throughput sequencing of matched colorectal normal, tumor and metastasis tissue.
                         <br>
-                        <a href="http://www.ncbi.nlm.nih.gov/Traces/sra/?study=SRP022054" target="_blank">Link To Publication</a>
+                        <a href="http://www.ncbi.nlm.nih.gov/Traces/sra/?study=SRP022054" target="_blank">Link To
+                            Publication</a>
                     </div>
                 </div>
 
@@ -96,24 +75,24 @@
                         <pre style="white-space: nowrap; overflow-y: hidden">control#cancer#metastasis</pre>
                         Or you can use this expression matrix:
                         <br>
-                        <a href="http://bioinfo5.ugr.es/static/XCKFJW3PWHS00ZH/mature_sense_5_2.mat" download> <i class="fa fa-download fa-fw"></i>Matrix File</a>
-
+                        <a href="http://bioinfo5.ugr.es/static/XCKFJW3PWHS00ZH/mature_sense_5_2.mat" download> <i
+                                class="fa fa-download fa-fw"></i>Matrix File</a>
 
 
                     </div>
                 </div>
 
             </div>
-    <!-- /.row -->
-    </div>
-    <!-- /#page-wrapper -->
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
     </div>
 
 {% endblock %}
 
 {% block modals %}
-     {% include "Messages/de/SampleDescription.html" %}
-     {% include "Messages/de/ListOfIDs.html" %}
+    {% include "Messages/de/SampleDescription.html" %}
+    {% include "Messages/de/ListOfIDs.html" %}
 {% endblock %}
 
 {% block js %}

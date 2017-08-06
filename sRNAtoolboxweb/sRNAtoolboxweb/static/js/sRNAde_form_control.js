@@ -1,37 +1,35 @@
 $(window).bind("pageshow", function() {
-    var form = $('#configform');
+    var form = $('form')[1];
     // let the browser natively reset defaults
-    form[0].reset();
+    form.reset();
 });
 
 
-$('input[id="form1"]').attr('disabled','disabled');
+$('input[id="id_matDescription"]').attr('disabled','disabled');
 
 
 
-
-
-$('input[id="form0"]').on('input',function() {
+$('input[id="id_listofIDs"]').on('input',function() {
     if($(this).val() != '') {
-        $("#file1").val('');
-        $('input[id="form1"]').removeAttr('disabled');
+        $("#id_ifile").val('');
+        $('input[id="id_matDescription"]').removeAttr('disabled');
 
 
     }
     else {
-            $('input[id="form1"]').attr('disabled','disabled');
-            $('input[id="form1"]').val('');
+            $('input[id="id_matDescription"]').attr('disabled','disabled');
+            $('input[id="id_matDescription"]').val('');
         }
     
     
-})
+});
 
 
 
-$("#file1").on('change',function() {
+$("#id_ifile").on('change',function() {
     if($(this).val() != '') {
-            $('input[id="form0"]').val('');
-            $('input[id="form1"]').attr('disabled','disabled');
-            $('input[id="form1"]').val('');
+            $('input[id="id_listofIDs"]').val('');
+            $('input[id="id_matDescription"]').attr('disabled','disabled');
+            $('input[id="id_matDescription"]').val('');
     }
-})
+});

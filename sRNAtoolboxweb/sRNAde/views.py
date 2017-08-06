@@ -93,7 +93,7 @@ def run(request):
     pipeline_id = pipeline_utils.generate_uniq_id()
     FS.location = os.path.join("/shared/sRNAtoolbox/webData", pipeline_id)
     make_dir(FS.location)
-    fdw = file(os.path.join(FS.location, "error"), "w")
+    fdw = open(os.path.join(FS.location, "error"), "w")
     input = ""
     isomir = "false"
 
