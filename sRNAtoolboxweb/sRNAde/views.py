@@ -296,5 +296,5 @@ class De(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call = form.create_call()
-        print(call)
+        os.system(call)
         return super(De, self).form_valid(form)
