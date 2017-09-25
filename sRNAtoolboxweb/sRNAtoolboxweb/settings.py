@@ -187,3 +187,6 @@ CONF = {
     "tRNA": "/shared/sRNAtoolboxDB/dbs/eukaryotic-tRNAs.fa",
     "tax": "/shared/sRNAtoolboxDB/dbs/taxonomy.txt"
 }
+
+
+QSUB = False

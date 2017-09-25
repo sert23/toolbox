@@ -8,7 +8,7 @@ from django.core.files.storage import FileSystemStorage
 from django.http import Http404
 
 from progress.models import JobStatus
-from sRNAtoolboxweb.settings import BASE_DIR
+from sRNAtoolboxweb.settings import BASE_DIR, QSUB
 from sRNAtoolboxweb.settings import MEDIA_ROOT
 from sRNAtoolboxweb.utils import render_modal
 from utils.pipeline_utils import generate_uniq_id
@@ -103,7 +103,7 @@ class DEForm(forms.Form):
                 return pipeline_id
 
     @staticmethod
-    def create_con_file(cleaned_data, pipeline_id):
+    def create_conf_file(cleaned_data, pipeline_id):
         conf = {}
         if cleaned_data.get("isomiRs"):
             conf['isom'] = "true"
@@ -121,6 +121,7 @@ class DEForm(forms.Form):
             uploaded_file = str(file_to_update)
             ifile = os.path.join(out_dir, FS.save(uploaded_file, file_to_update))
             if not check_mat_file(ifile):
+                # TODO: Antonio control this error
                 raise Http404
             conf['input'] = ifile
         elif cleaned_data.get("listofIDs"):
@@ -136,6 +137,7 @@ class DEForm(forms.Form):
         conf['top'] = "20"
         conf['perc'] = "1"
         conf['matdesc'] = cleaned_data.get("matDescription")
+        conf['type'] = 'sRNAde'
 
         JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not launched",
                                  start_time=datetime.datetime.now(),
@@ -151,8 +153,13 @@ class DEForm(forms.Form):
 
     def create_call(self):
         pipeline_id = self.generate_id()
-        name, configuration_file_path = self.create_con_file(self.cleaned_data, pipeline_id)
-        return 'qsub -v c="{configuration_file_path}"" -N {job_name} {sh}'.format(
-            configuration_file_path=configuration_file_path,
-            job_name=name,
-            sh=os.path.join(BASE_DIR + '/core/bash_scripts/run_sRNAde_matrix.sh'))
+        name, configuration_file_path = self.create_conf_file(self.cleaned_data, pipeline_id)
+        if QSUB:
+            return 'qsub -v c="{configuration_file_path}"" -N {job_name} {sh}'.format(
+                configuration_file_path=configuration_file_path,
+                job_name=name,
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_sRNAde_matrix.sh'))
+        else:
+            return '{sh} {configuration_file_path}'.format(
+                configuration_file_path=configuration_file_path,
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_sRNAde_matrix.sh'))

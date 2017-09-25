@@ -89,70 +89,6 @@ def de(request):
     return render(request, 'de.html', {})
 
 
-def run(request):
-    pipeline_id = pipeline_utils.generate_uniq_id()
-    FS.location = os.path.join("/shared/sRNAtoolbox/webData", pipeline_id)
-    make_dir(FS.location)
-    fdw = open(os.path.join(FS.location, "error"), "w")
-    input = ""
-    isomir = "false"
-
-    outdir = FS.location
-
-    cutoff1 = request.POST["cutoff1"]
-    if cutoff1 == "":
-        cutoff1 = "0.05"
-    cutoff2 = request.POST["cutoff2"]
-    if cutoff2 == "":
-        cutoff2 = "0.8"
-
-    if "isomir" in request.POST:
-        isomir = "true"
-
-    if "mat" in request.FILES:
-        file_to_update = request.FILES['mat']
-        uploaded_file = str(file_to_update)
-        FS.save(uploaded_file, file_to_update)
-        ifile = os.path.join(FS.location, uploaded_file)
-        mtrxdesc = request.POST["desc"]
-        if mtrxdesc == "":
-            return render(request, "error_page.html", {"errors": ["Sample Description must be provided"]})
-
-
-        response = check_mat_file(ifile)
-        if response is not True:
-            return render(request, "error_page.html", response)
-
-        cmd = 'qsub -v pipeline="de",matrixDesc="' + mtrxdesc + '",key="' + pipeline_id + '",outdir="' + outdir + '",name="' + pipeline_id + '_de",input="' + ifile + '",iso="' + isomir + '",nt="' + cutoff2 + '",dt="' + cutoff1 + '",hmTop="' + '20' + '",hmPerc="' + '1' + '"  -N ' + pipeline_id + '_de /shared/sRNAtoolbox/core/bash_scripts/run_sRNAde_matrix.sh'
-        fdw.write(cmd+"\n")
-        os.system(cmd)
-
-        return redirect("/srnatoolbox/jobstatus/srnade/?id=" + pipeline_id)
-
-    elif len(request.POST["id"].replace(" ", "")) > 0:
-        input = request.POST["id"]
-
-        if "groups" in request.POST:
-            groups = request.POST["groups"]
-        else:
-            groups = ""
-
-        desc = request.POST["desc"]
-        response = check_ids_param(input, groups, desc, cutoff1, cutoff2)
-
-        if response is not True:
-            return render(request, "error_page.html", response)
-
-        os.system('qsub -v pipeline="de",group="' + groups + '",key="' + pipeline_id + '",outdir="' + outdir +
-                  '",name="' + pipeline_id + '_de",input="' + input + '",iso="' + isomir +
-                  '",nt="' + cutoff2 + '",dt="' + cutoff1 + '",hmTop="' + '20' + '",hmPerc="' + '1' + '"  -N ' +
-                  pipeline_id + '_de /shared/sRNAtoolbox/core/bash_scripts/run_sRNAde.sh')
-
-        return redirect("/srnatoolbox/jobstatus/srnade/?id=" + pipeline_id)
-
-    else:
-        return render(request, "error_page.html", {"errors": ["sRNAbench IDs or Matrix File must be provided"]})
-
 
 def check_ids_param(idlist, samples, desc, pvalue, prob):
     groups = idlist.split("#")
@@ -354,12 +290,11 @@ def test(request):
 class De(FormView):
     template_name = 'de.html'
     form_class = DEForm
-
     success_url = reverse_lazy("DE")
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call = form.create_call()
-        print (call)
+        print(call)
         return super(De, self).form_valid(form)
