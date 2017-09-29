@@ -19,8 +19,8 @@ def istext(filename):
     return False
 
 def istabfile(filename):
-    fd = open(filename)
-    if len(fd.readline().split("\t")) > 1:
-        return True
-    else:
-        return False
+    with open(filename) as fd:
+        if len(fd.readline().split("\t")) > 1:
+            return True
+        else:
+            return False

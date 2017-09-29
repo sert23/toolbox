@@ -51,7 +51,7 @@ class Pipeline:
 
         # Open logDB connection
         self.job_name = job_name
-        self.api_server = 'http://localhost'
+        self.api_server = 'http://127.0.0.1:8000'
         self.api_path = os.path.join(self.api_server, 'jobstatus', 'api')
         self.api_path_key = os.path.join(self.api_path, self.pipeline_key)
         self.api_path_add_status = os.path.join(self.api_path, self.pipeline_key, 'add_status')
@@ -63,7 +63,8 @@ class Pipeline:
         started_info = (strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " INFO: Analysis starts")
         payload = {
             "job_status": "Running",
-            "command_line": " ".join(sys.argv)
+            "command_line": " ".join(sys.argv),
+            "parameters": self.parameters
         }
         try:
             requests.patch(self.api_path_key, json=payload, timeout=10)
