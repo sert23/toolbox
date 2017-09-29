@@ -29,7 +29,7 @@ $('input[id="id_listofIDs"]').on('input',function() {
 $("#id_ifile").on('change',function() {
     if($(this).val() != '') {
             $('input[id="id_listofIDs"]').val('');
-            $('input[id="id_matDescription"]').attr('disabled','disabled');
+            $('input[id="id_matDescription"]').removeAttr('disabled');
             $('input[id="id_matDescription"]').val('');
     }
 });
