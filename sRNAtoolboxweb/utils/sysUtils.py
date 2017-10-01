@@ -14,7 +14,7 @@ def make_dir(path):
 
 def istext(filename):
     mime = mimetypes.guess_type(filename)[0]
-    if 'text' in mime:
+    if mime is None or 'text' in mime:
         return True
     return False
 
