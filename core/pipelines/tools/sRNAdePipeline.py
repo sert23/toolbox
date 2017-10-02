@@ -72,11 +72,11 @@ class sRNAdePipeline(Pipeline):
 
             if self.desc is not None:
 
-                cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.configuration.path_to_out + " grpString=" + self.input + " iso=" + self.iso + " sampleDesc=" + self.desc + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " grpDesc=" + self.groups + " output=" + self.outdir + " minRCexpr=5 rscripts=/shared/sRNAtoolbox/rscripts"
+                cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.configuration.path_to_out + " grpString=" + self.input + " iso=" + self.iso + " sampleDesc=" + self.desc + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " grpDesc=" + self.groups + " output=" + self.outdir + " minRCexpr=5"# rscripts=/shared/sRNAtoolbox/rscripts"
             else:
-                cmd = "java -jar " + self.configuration.path_to_makede + " input=/shared/sRNAtoolbox/webData" + " grpString=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " grpDesc=" + self.groups + " output=" + self.outdir + " minRCexpr=5 rscripts=/shared/sRNAtoolbox/rscripts"
+                cmd = "java -jar " + self.configuration.path_to_makede + " input=/shared/sRNAtoolbox/webData" + " grpString=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " grpDesc=" + self.groups + " output=" + self.outdir + " minRCexpr=5 "#rscripts=/shared/sRNAtoolbox/rscripts"
         else:
-            cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " matrixDesc=" + self.md.replace(":", ",") + " output=" + self.outdir + " minRCexpr=5 rscripts=/shared/sRNAtoolbox/rscripts"
+            cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " matrixDesc=" + self.md.replace(":", ",") + " output=" + self.outdir + " minRCexpr=5 "#rscripts=/shared/sRNAtoolbox/rscripts"
 
         self.set_java_command_line(cmd)
         os.system(cmd)
