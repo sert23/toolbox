@@ -1,6 +1,6 @@
 
 import os
-import mimetypes
+import magic
 
 __author__ = 'antonior'
 
@@ -13,7 +13,8 @@ def make_dir(path):
 
 
 def istext(filename):
-    mime = mimetypes.guess_type(filename)[0]
+    f = magic.Magic(mime=True)
+    mime = f.from_file(filename=filename)
     if 'text' in mime:
         return True
     return False
