@@ -77,7 +77,7 @@ class Pipeline:
             "status_progress": new_step
         }
         try:
-            requests.post(self.api_path_add_status, json=payload)
+            requests.put(self.api_path_add_status, json=payload)
             if "ERROR" in new_step:
                 self.change_pipeline_status("Finished with Errors")
         except ConnectionError or ConnectTimeout:
