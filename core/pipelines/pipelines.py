@@ -19,7 +19,7 @@ class Configuration:
     def __init__(self, conf):
         self.path_to_out = conf["sRNAtoolboxSODataPath"]
         self.path_to_makeenrichmentanalysis = os.path.join(conf["exec"], "sRNAfuncTerms.jar")
-        self.path_to_makede = os.path.join(conf["exec"], "sRNAde.jar")
+        self.path_to_makede = os.path.join(conf["exec"],  "sRNAde.jar")
         self.path_to_srnabech = os.path.join(conf["exec"], "sRNAbench.jar")
         self.path_to_srnablast = os.path.join(conf["exec"], "sRNAblast.jar")
         self.path_to_srnajbrowser = os.path.join(conf["exec"], "sRNAjBrowser.jar")
