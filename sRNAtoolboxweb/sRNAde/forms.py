@@ -155,7 +155,7 @@ class DEForm(forms.Form):
         pipeline_id = self.generate_id()
         name, configuration_file_path = self.create_conf_file(self.cleaned_data, pipeline_id)
         if QSUB:
-            return 'qsub -v c="{configuration_file_path}"" -N {job_name} {sh}'.format(
+            return 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
                 configuration_file_path=configuration_file_path,
                 job_name=name,
                 sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_sRNAde_qsub.sh'))
