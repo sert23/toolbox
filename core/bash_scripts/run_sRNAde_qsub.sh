@@ -3,5 +3,7 @@
 
 
 source virtualenvs/srantoolbox/bin/activate
+echo $c
+echo $1
 runPipelines $c
 
