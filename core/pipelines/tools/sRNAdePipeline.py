@@ -41,7 +41,7 @@ class sRNAdePipeline(Pipeline):
 
     def pre_checks(self):
         if os.path.isfile(self.input):
-            response = self.valid_mat_file_group(self.input, self.md.split(":"))
+            response = self.valid_mat_file_group(self.input, self.groups)
             if response is not True:
                 self.error_logger.write(response + "\n")
                 log_msg = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " " + response
