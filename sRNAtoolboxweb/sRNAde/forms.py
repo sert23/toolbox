@@ -126,7 +126,6 @@ class DEForm(forms.Form):
             conf['input'] = ifile
         elif cleaned_data.get("listofIDs"):
             conf['input'] = cleaned_data.get("listofIDs")
-            conf['groups'] = cleaned_data.get("sampleGroups")
         else:
             return Http404
 
@@ -136,6 +135,7 @@ class DEForm(forms.Form):
         conf['pval'] = cleaned_data.get("pvalue") or "0.05"
         conf['top'] = "20"
         conf['perc'] = "1"
+        conf['groups'] = cleaned_data.get("sampleGroups")
         conf['matdesc'] = cleaned_data.get("matDescription")
         conf['type'] = 'sRNAde'
 
