@@ -2,6 +2,6 @@
 #PBS -l walltime=24:30,mem=4Gb
 
 
-source virtualenvs/srantoolbox/bin/activate
+source /opt/venv/sRNAtoolbox2017/bin/activate
 runPipelines $c
 
