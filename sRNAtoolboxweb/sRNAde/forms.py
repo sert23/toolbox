@@ -27,13 +27,20 @@ class DEForm(forms.Form):
         label='List of sRNAbench IDs (colon separated, separate groups by hashes):' + render_modal('becnhids'),
         required=False, widget=forms.TextInput(attrs={'placeholder': "e.g: id1:id2#id3:id4#id5:id6:id7"}),
         )
+    sampleGroups = forms.CharField(label='Sample groups (hash separated):',
+                                   required=False,
+                                   widget=forms.TextInput(attrs={'placeholder': "e.g: Normal#TumorI#TumorII"}))
+    sampleDescription = forms.CharField(label='Sample description (colon separated):' + render_modal('SampleDesc'),
+                                     required=False, widget=forms.TextInput(
+            attrs={'placeholder': "e.g: Normal_1:Normal_2:TumorI_1:TumorI_2:TumorII_1:TumorII_2:TumorII_3"}))
+
     ifile = forms.FileField(label='Or upload a matrix of expression values:', required=False)
     sampleGroups = forms.CharField(label='Sample groups (hash separated):',
                                    required=False,
                                    widget=forms.TextInput(attrs={'placeholder': "e.g: Normal#TumorI#TumorII"}))
     matDescription = forms.CharField(label='Sample description (colon separated):' + render_modal('SampleDesc'),
                                      required=False, widget=forms.TextInput(
-            attrs={'placeholder': "e.g: Normal:Normal:TumorI:TumorI:TumorII:TumorII:TumorII"}))
+            attrs={'placeholder': "e.g: Normal,Normal,TumorI,TumorI,TumorII,TumorII,TumorII"}))
     pvalue = forms.CharField(label='Differential expression cutoff used by DESeq and EdgeR (p-value):',
                              required=False, widget=forms.TextInput(attrs={'placeholder': "Default 0.05"}))
     probability = forms.CharField(label='Differential expression cutoff used by NOISeq(probability):',
