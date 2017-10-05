@@ -1,7 +1,7 @@
 import glob
 import os
 from time import strftime, gmtime
-
+import re
 from pipelines.pipelines import Pipeline
 
 
@@ -34,14 +34,14 @@ class sRNAdePipeline(Pipeline):
     @staticmethod
     def valid_mat_file_group(mat, groups):
         fd = open(mat)
-        if len(fd.readline().split("\t")) - 1 == len(groups):
+        if len(fd.readline().split("\t")) - 1 == len(re.findall(r"[\w']+", groups)):
             return True
         else:
             return "ERROR: Number of columns in matrix file and number of group description given are different. Please provided one group name per sample in matrix file"
 
     def pre_checks(self):
         if os.path.isfile(self.input):
-            response = self.valid_mat_file_group(self.input, self.md.split(":"))
+            response = self.valid_mat_file_group(self.input, self.md)
             if response is not True:
                 self.error_logger.write(response + "\n")
                 log_msg = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " " + response
@@ -78,7 +78,6 @@ class sRNAdePipeline(Pipeline):
         else:
             cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " matrixDesc=" + self.md.replace(":", ",") + " output=" + self.outdir + " minRCexpr=5 "#rscripts=/shared/sRNAtoolbox/rscripts"
 
-        cmd="testing"
         self.set_java_command_line(cmd)
         os.system(cmd)
 
