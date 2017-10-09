@@ -54,8 +54,9 @@ class DEForm(forms.Form):
             Fieldset(
                 '',
                 Field('listofIDs', css_class='form-control'),
-                'ifile',
                 Field('sampleGroups', css_class='form-control'),
+                Field('sampleDescription', css_class='form-control'),
+                'ifile',
                 Field('matDescription', css_class='form-control'),
                 Fieldset('Parameters',
                          Field('pvalue', css_class='form-control'),
