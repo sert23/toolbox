@@ -52,10 +52,10 @@ class DEForm(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Fieldset(
-                '',
+                'Using job IDs',
                 Field('listofIDs', css_class='form-control'),
                 Field('sampleGroups', css_class='form-control'),
-                Field('sampleDescription', css_class='form-control'),
+                Field('sampleDescription', css_class='form-control')),
                 'ifile',
                 Field('matDescription', css_class='form-control'),
                 Fieldset('Parameters',
@@ -63,7 +63,7 @@ class DEForm(forms.Form):
                          Field('probability', css_class='form-control'),
                          'isomiRs'
                          ),
-            ),
+
             ButtonHolder(
                 Submit('submit', 'RUN', css_class='btn btn-primary')
             )
