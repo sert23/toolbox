@@ -147,6 +147,7 @@ class DEForm(forms.Form):
         conf['groups'] = cleaned_data.get("sampleGroups")
         conf['matdesc'] = cleaned_data.get("matDescription")
         conf['type'] = 'sRNAde'
+        conf['sampleDescription']= cleaned_data.get("sampleDescription")
 
         JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not launched",
                                  start_time=datetime.datetime.now(),
