@@ -183,7 +183,7 @@ def result(request):
                         else:
                             results["consensus"] = [r]
 
-            if os.path.isfile(new_record.stats_file):
+            if new_record.stats_file and os.path.isfile(new_record.stats_file):
                 parser = DeStatsParser(new_record.stats_file)
                 stats = [obj for obj in parser.parse()]
                 header = stats[0].get_sorted_attr()
