@@ -64,7 +64,8 @@ class Pipeline:
         payload = {
             "job_status": "Running",
             "command_line": " ".join(sys.argv),
-            "parameters": self.parameters
+            "parameters": self.parameters,
+            "outdir": self.outdir
         }
         try:
             requests.patch(self.api_path_key, json=payload, timeout=10)

@@ -88,8 +88,8 @@ class sRNAdePipeline(Pipeline):
         self.actualize_pipeline_progress(log_msg)
 
     def set_out_files(self):
-        xls_files = glob.glob(os.path.join(self.outdir, "*.xlsx"))
-        heatmap = glob.glob(os.path.join(self.outdir, "*heatmap*.png"))
+        xls_files = ','.join(glob.glob(os.path.join(self.outdir, "*.xlsx")))
+        heatmap = ','.join(glob.glob(os.path.join(self.outdir, "*heatmap*.png")))
         zip_file = os.path.join(self.outdir, "sRNAde_full_Result.zip")
         stats_file = os.path.join(self.outdir, "sequencingStat.txt")
         if not os.path.exists(stats_file):

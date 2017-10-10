@@ -141,6 +141,8 @@ def result(request):
         results = {}
         results["id"] = job_id
         if new_record.job_status == "Finished":
+            new_record.xls_files = new_record.xls_files.split(',')
+            new_record.heatmaps = new_record.heatmaps.split(',')
             for file in new_record.xls_files:
                 workbook = xlrd.open_workbook(file)
                 names = workbook.sheet_names()
