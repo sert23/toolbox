@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^$', views.De.as_view(), name="DE"),
     # url(r'^/*$', views.de),
     # url(r'run$', views.run, name='run_de'),
-    url(r'result', views.result, name='results_de'),
+    url(r'result', views.result, name='srnade'),
     url(r'test$', views.test),
 
 ]

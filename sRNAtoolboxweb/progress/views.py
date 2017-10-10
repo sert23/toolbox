@@ -5,6 +5,7 @@ from subprocess import Popen, PIPE
 
 from django.http import Http404
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views.generic import DetailView
 from rest_framework import generics
 from rest_framework.generics import UpdateAPIView, RetrieveAPIView, CreateAPIView
@@ -139,7 +140,7 @@ class JobStatusDetail(DetailView):
         job_status = context.get('object')
         if status == 'R' or status == 'E':
             if job_status.job_status == 'send_to_queue':
-                time.sleep(5)
+                time.sleep(20)
                 job_status = JobStatus.objects.get(pipeline_key=kwargs.get('pipeline_id'))
                 if job_status.job_status == 'send_to_queue':
                     return self.get_error_context(job_status)
@@ -149,7 +150,8 @@ class JobStatusDetail(DetailView):
                 else:
                     return self.get_context_with_messages(job_status)
             if job_status.job_status == 'Finished':
-                return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
+                # return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
+                return {}
             elif job_status.job_status == "Finished with Errors":
                 return self.get_context_finished_with_errors(job_status)
             else:
@@ -163,11 +165,20 @@ class JobStatusDetail(DetailView):
                 if job_status.pipeline_type == "srnabench" and not os.path.exists(os.path.join(job_status.outdir, "parameters.txt")):
                     return self.get_error_context(job_status)
                 else:
-                    return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
+                    # return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
+                    return {}
             elif job_status.job_status == "Finished with Errors":
                 return self.get_context_finished_with_errors(job_status)
             else:
                 return self.get_error_context(job_status)
+
+    def render_to_response(self, context, **response_kwargs):
+        if context:
+            super(JobStatusDetail, self).render_to_response(context, **response_kwargs)
+
+        job_status = self.object
+        return redirect(reverse_lazy(job_status.pipeline_type.lower()) + "?id=" + job_status.pipeline_key)
+
 
 
 class ProgressAPI(RetrieveAPIView, UpdateAPIView):
