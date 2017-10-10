@@ -140,10 +140,10 @@ class JobStatusDetail(DetailView):
         job_status = context.get('object')
         if status == 'R' or status == 'E':
             if job_status.job_status == 'send_to_queue':
-                time.sleep(20)
+                time.sleep(7)
                 job_status = JobStatus.objects.get(pipeline_key=kwargs.get('pipeline_id'))
                 if job_status.job_status == 'send_to_queue':
-                    return self.get_error_context(job_status)
+                    return self.get_context_qw(job_status)
             if job_status.job_status == 'Running':
                 if job_status.pipeline_type == 'srnabench':
                     return self.get_running_context_for_srnabench(job_status)
