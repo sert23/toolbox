@@ -174,7 +174,7 @@ class JobStatusDetail(DetailView):
 
     def render_to_response(self, context, **response_kwargs):
         if context:
-            super(JobStatusDetail, self).render_to_response(context, **response_kwargs)
+            return super(JobStatusDetail, self).render_to_response(context, **response_kwargs)
 
         job_status = self.object
         return redirect(reverse_lazy(job_status.pipeline_type.lower()) + "?id=" + job_status.pipeline_key)
