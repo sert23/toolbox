@@ -80,7 +80,7 @@ class JobStatusDetail(DetailView):
 
     @staticmethod
     def get_context_with_messages(job_status):
-        msgs = [Msg(t) for t in job_status.job_status_progress]
+        msgs = [Msg(t.status_progress) for t in job_status.status.all()]
         msgs += load_status_from_file(job_status.pipeline_key)
         error = False
         for msg in msgs:
