@@ -254,9 +254,9 @@ def result(request):
 
 
             if len(new_record.heatmaps) == 2:
-                results["heatmap"] = ["/".join(heatmap.split("/")[-2:]) for heatmap in new_record.heatmaps]
+                results["heatmap"] = ["/".join(heatmap.split("/")[-3:]) for heatmap in new_record.heatmaps]
 
-            results["zip"] = "/".join(new_record.zip_file.split("/")[-2:])
+            results["zip"] = "/".join(new_record.zip_file.split("/")[-3:])
 
             try:
                 results["parameters"] = new_record.parameters
