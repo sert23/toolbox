@@ -138,8 +138,7 @@ class JobStatusDetail(DetailView):
         context = super(JobStatusDetail, self).get_context_data(**kwargs)
         job_status = context.get('object')
         status = queue_Status(job_status.pipeline_key)
-        
-        if status == 'R' or status == 'E':
+        if status == 'R' or status == 'E' or status == 'C':
             if job_status.job_status == 'sent_to_queue':
                 return self.get_context_qw(job_status)
             if job_status.job_status == 'Running':
