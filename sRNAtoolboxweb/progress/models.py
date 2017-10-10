@@ -42,7 +42,7 @@ class JobStatus (models.Model):
             super(JobStatus, self).save()
         else:
             super(JobStatus, self).save()
-            self.status.create(status_progress="send_to_queue")
+            self.status.create(status_progress='not_launched')
 
 class Status(models.Model):
 

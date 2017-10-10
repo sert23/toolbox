@@ -139,10 +139,10 @@ class JobStatusDetail(DetailView):
         status = queue_Status(kwargs.get('pipeline_id'))
         job_status = context.get('object')
         if status == 'R' or status == 'E':
-            if job_status.job_status == 'send_to_queue':
+            if job_status.job_status == 'sent_to_queue':
                 time.sleep(7)
                 job_status = JobStatus.objects.get(pipeline_key=kwargs.get('pipeline_id'))
-                if job_status.job_status == 'send_to_queue':
+                if job_status.job_status == 'sent_to_queue':
                     return self.get_context_qw(job_status)
             if job_status.job_status == 'Running':
                 if job_status.pipeline_type == 'srnabench':
@@ -159,7 +159,7 @@ class JobStatusDetail(DetailView):
         if status is not None:
             return self.get_context_qw(job_status)
         else:
-            if job_status.job_status == 'send_to_queue':
+            if job_status.job_status == 'sent_to_queue':
                 return self.get_error_context(job_status)
             if job_status.job_status == "Finished":
                 if job_status.pipeline_type == "srnabench" and not os.path.exists(os.path.join(job_status.outdir, "parameters.txt")):

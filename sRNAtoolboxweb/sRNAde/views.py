@@ -301,5 +301,9 @@ class De(FormView):
 
         print(call)
         os.system(call)
+        js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
         return super(De, self).form_valid(form)
 

@@ -146,7 +146,7 @@ class DEForm(forms.Form):
         conf['type'] = 'sRNAde'
         conf['sampleDescription']= cleaned_data.get("sampleDescription")
 
-        JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not launched",
+        JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not_launched",
                                  start_time=datetime.datetime.now(),
                                  # finish_time=datetime.time(0, 0),
                                  all_files=ifile,
