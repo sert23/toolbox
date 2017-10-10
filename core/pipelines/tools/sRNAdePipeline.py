@@ -93,7 +93,7 @@ class sRNAdePipeline(Pipeline):
         zip_file = os.path.join(self.outdir, "sRNAde_full_Result.zip")
         stats_file = os.path.join(self.outdir, "sequencingStat.txt")
         if not os.path.exists(stats_file):
-            stats_file = ""
+            stats_file = None
 
         os.system("cd " + self.outdir + "; zip -r " + zip_file + " " + " *")
         update = {"heatmaps": heatmap, "xls_files": xls_files, "zip_file": zip_file, "stats_file": stats_file}
