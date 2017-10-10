@@ -79,6 +79,7 @@ class sRNAdePipeline(Pipeline):
             cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " matrixDesc=" + self.md.replace(":", ",") + " output=" + self.outdir + " minRCexpr=5 "#rscripts=/shared/sRNAtoolbox/rscripts"
 
         self.set_java_command_line(cmd)
+        print(cmd)
         os.system(cmd)
 
 
