@@ -137,7 +137,6 @@ def result(request):
         job_id = request.GET['id']
 
         new_record = JobStatus.objects.get(pipeline_key=job_id)
-        assert isinstance(new_record, JobStatus)
 
         results = {}
         results["id"] = job_id
@@ -267,7 +266,7 @@ def result(request):
 
             return render(request, "de_result.html", results)
         else:
-            return redirect("/srnatoolbox/jobstatus/srnade/?id=" + job_id)
+            return redirect(reverse_lazy('progress', kwargs={"pipeline_id": job_id}))
 
     else:
         return redirect("/srnatoolbox/srnade")
@@ -296,7 +295,7 @@ class De(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call, pipeline_id = form.create_call()
-        #self.success_url = reverse_lazy('results_de') + '?id=' + pipeline_id
+        self.success_url = reverse_lazy('results_de') + '?id=' + pipeline_id
 
         print(call)
         os.system(call)
