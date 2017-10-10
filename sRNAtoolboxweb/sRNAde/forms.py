@@ -34,10 +34,7 @@ class DEForm(forms.Form):
                                      required=False, widget=forms.TextInput(
             attrs={'placeholder': "e.g: Normal_1:Normal_2:TumorI_1:TumorI_2:TumorII_1:TumorII_2:TumorII_3"}))
 
-    ifile = forms.FileField(label='Or upload a matrix of expression values:', required=False)
-    sampleGroups = forms.CharField(label='Sample groups (hash separated):',
-                                   required=False,
-                                   widget=forms.TextInput(attrs={'placeholder': "e.g: Normal#TumorI#TumorII"}))
+    ifile = forms.FileField(label='Or upload a matrix of expression values:', required=False),
     matDescription = forms.CharField(label='Sample description (colon separated):' + render_modal('SampleDesc'),
                                      required=False, widget=forms.TextInput(
             attrs={'placeholder': "e.g: Normal,Normal,TumorI,TumorI,TumorII,TumorII,TumorII"}))
@@ -122,13 +119,14 @@ class DEForm(forms.Form):
         FS = FileSystemStorage()
         FS.location = os.path.join(MEDIA_ROOT, pipeline_id)
         os.system("mkdir " + FS.location)
-        out_dir = FS.location
+        out_dir = os.path.join(FS.location,"output")
         conf['out_dir'] = out_dir
         ifile = cleaned_data.get("ifile")
         if ifile:
             file_to_update = ifile
             uploaded_file = str(file_to_update)
-            ifile = os.path.join(out_dir, FS.save(uploaded_file, file_to_update))
+            #ifile = os.path.join(outdir, FS.save(uploaded_file, file_to_update))
+            ifile = os.path.join(FS.location, FS.save(uploaded_file, file_to_update))
             if not check_mat_file(ifile):
                 # TODO: Antonio control this error
                 raise Http404
