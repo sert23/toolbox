@@ -39,7 +39,8 @@ class Msg():
 
 
 def queue_Status(id):
-    outputs = str(Popen("qstat -f", shell=True, stdout=PIPE).communicate()[0]).replace(" ", "").split("\n")
+    with Popen(["qstat", "-f"], stdout=PIPE) as proc:
+        outputs = proc.stdout.read().decode("utf8").replace(" ", "").split("\n")
     is_job = False
     for line in outputs:
         if line.startswith("Job_Name"):
