@@ -171,7 +171,7 @@ def result(request):
                         else:
                             results["edgertable"] = [r]
 
-                if Selection > 0:
+                if len(Selection) > 0:
                     parser = SRNAdeParser(file, "none")
                     id = "_".join(os.path.basename(file).split(".")[0].split("_")[-3:])
                     list_d = [obj for obj in parser.get_consensus(*Selection)]
