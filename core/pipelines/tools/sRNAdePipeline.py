@@ -18,6 +18,7 @@ class sRNAdePipeline(Pipeline):
         self.desc = desc
         self.input = input
         self.groups = groups
+        self.outdir = os.path.join(self.outdir, 'output_directory')
 
 
     def run(self):
@@ -34,7 +35,7 @@ class sRNAdePipeline(Pipeline):
     @staticmethod
     def valid_mat_file_group(mat, groups):
         fd = open(mat)
-        if len(fd.readline().split("\t")) - 1 == len(re.findall(r"[\w']+", groups)):
+        if len(fd.readline().split("\t")) - 1 == len(groups.split(',')):
             return True
         else:
             return "ERROR: Number of columns in matrix file and number of group description given are different. Please provided one group name per sample in matrix file"

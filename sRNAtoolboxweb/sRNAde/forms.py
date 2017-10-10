@@ -151,7 +151,7 @@ class DEForm(forms.Form):
                                  # finish_time=datetime.time(0, 0),
                                  all_files=ifile,
                                  modules_files="",
-                                 pipeline_type="de",
+                                 pipeline_type="sRNAde",
                                  )
         configuration_file_path = os.path.join(out_dir, 'conf.json')
         with open(configuration_file_path, 'w') as conf_file:

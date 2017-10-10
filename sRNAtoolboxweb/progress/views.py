@@ -38,7 +38,7 @@ class Msg():
 
 
 def queue_Status(id):
-    outputs = Popen("qstat -f", shell=True, stdout=PIPE).communicate()[0].replace(" ", "").split("\n")
+    outputs = str(Popen("qstat -f", shell=True, stdout=PIPE).communicate()[0]).replace(" ", "").split("\n")
     is_job = False
     for line in outputs:
         if line.startswith("Job_Name"):
@@ -61,7 +61,7 @@ def load_status_from_file(id):
     else:
         return []
 
-    fd = file(log_file)
+    fd = open(log_file)
     msgs = [Msg(t) for t in fd.readlines() if Msg(t).type != "None"]
     fd.close()
 
@@ -87,30 +87,42 @@ class JobStatusDetail(DetailView):
 
         if error:
             return {'msgs': msgs,
-                    "url": "/srnatoolbox/" + job_status.tool + "/results/?id=" + job_status.pipeline_key,
+                    "url": "/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key,
                     "id": job_status.pipeline_key}
         else:
             return {'running': True,
-                    'msgs': msgs, "url": "/srnatoolbox/" + job_status.tool + "/results/?id=" + job_status.pipeline_key,
+                    'msgs': msgs, "url": "/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key,
                     "id": job_status.pipeline_key}
 
     @staticmethod
     def get_running_context_for_srnabench(job_status):
         if os.path.exists(os.path.join(job_status.outdir, "parameters.txt")):
-            return redirect("/srnatoolbox/" + job_status.tool + "/results/?id=" + job_status.pipeline_key)
+            return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
         else:
             return JobStatusDetail.get_context_with_messages(job_status)
 
     @staticmethod
     def get_context_finished_with_errors(job_status):
-        msgs = [Msg(t) for t in job_status.job_status_progress]
+        """
+
+        :param job_status:
+        :type job_status: JobStatus
+        :return:
+        """
+        msgs = [Msg(t.status_progress) for t in job_status.status.all()]
         msgs += load_status_from_file(job_status.pipeline_key)
         return {'msgs': msgs,
-                "url": "/srnatoolbox/" + job_status.tool + "/results/?id=" + job_status.pipeline_key,
+                "url": "/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key,
                 "id": job_status.pipeline_key}
 
     @staticmethod
     def get_error_context(job_status):
+        """
+
+        :param job_status:
+        :type job_status: JobStatus
+        :return:
+        """
         return {'msgs': [Msg(
             "ERROR: An error occured with your job:" + job_status.pipeline_key + "\nPlease report it indicating the jobID")],
             "id": job_status.pipeline_key}
@@ -132,12 +144,12 @@ class JobStatusDetail(DetailView):
                 if job_status.job_status == 'send_to_queue':
                     return self.get_error_context(job_status)
             if job_status.job_status == 'Running':
-                if job_status.tool == 'srnabench':
+                if job_status.pipeline_type == 'srnabench':
                     return self.get_running_context_for_srnabench(job_status)
                 else:
                     return self.get_context_with_messages(job_status)
             if job_status.job_status == 'Finished':
-                return redirect("/srnatoolbox/" + job_status.tool + "/results/?id=" + job_status.pipeline_key)
+                return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
             elif job_status.job_status == "Finished with Errors":
                 return self.get_context_finished_with_errors(job_status)
             else:
@@ -148,10 +160,10 @@ class JobStatusDetail(DetailView):
             if job_status.job_status == 'send_to_queue':
                 return self.get_error_context(job_status)
             if job_status.job_status == "Finished":
-                if job_status.tool == "srnabench" and not os.path.exists(os.path.join(job_status.outdir, "parameters.txt")):
+                if job_status.pipeline_type == "srnabench" and not os.path.exists(os.path.join(job_status.outdir, "parameters.txt")):
                     return self.get_error_context(job_status)
                 else:
-                    return redirect("/srnatoolbox/" + job_status.tool + "/results/?id=" + job_status.pipeline_key)
+                    return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
             elif job_status.job_status == "Finished with Errors":
                 return self.get_context_finished_with_errors(job_status)
             else:
