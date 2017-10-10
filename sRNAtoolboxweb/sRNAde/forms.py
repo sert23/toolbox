@@ -54,8 +54,7 @@ class DEForm(forms.Form):
                 Field('sampleGroups', css_class='form-control'),
                 Field('sampleDescription', css_class='form-control')),
             Fieldset("Uploading an expression matrix",
-                     Field('ifile', css_class='form-control'),
-                #'ifile',
+                'ifile',
                 Field('matDescription', css_class='form-control')),
                 Fieldset('Parameters',
                          Field('pvalue', css_class='form-control'),
@@ -120,14 +119,13 @@ class DEForm(forms.Form):
         FS = FileSystemStorage()
         FS.location = os.path.join(MEDIA_ROOT, pipeline_id)
         os.system("mkdir " + FS.location)
-        out_dir = os.path.join(FS.location,"output")
+        out_dir = FS.location
         conf['out_dir'] = out_dir
         ifile = cleaned_data.get("ifile")
         if ifile:
             file_to_update = ifile
             uploaded_file = str(file_to_update)
-            #ifile = os.path.join(outdir, FS.save(uploaded_file, file_to_update))
-            ifile = os.path.join(FS.location, FS.save(uploaded_file, file_to_update))
+            ifile = os.path.join(out_dir, FS.save(uploaded_file, file_to_update))
             if not check_mat_file(ifile):
                 # TODO: Antonio control this error
                 raise Http404
