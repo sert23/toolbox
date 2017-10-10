@@ -202,7 +202,7 @@ def result(request):
                     adapter_chart.add("values", values)
                     adapter_fig = os.path.join(new_record.outdir, "fig_adapter") + ".svg"
                     adapter_chart.render_to_file(adapter_fig)
-                    results["figures"].append("/".join(adapter_fig.split("/")[-2:]))
+                    results["figures"].append("/".join(adapter_fig.split("/")[-3:]))
                 except:
                     pass
 
@@ -217,7 +217,7 @@ def result(request):
                     analysis_chart.add("values", values)
                     analysis_fig = os.path.join(new_record.outdir, "fig_analysis") + ".svg"
                     analysis_chart.render_to_file(analysis_fig)
-                    results["figures"].append("/".join(analysis_fig.split("/")[-2:]))
+                    results["figures"].append("/".join(analysis_fig.split("/")[-3:]))
                 except:
                     pass
 
@@ -233,7 +233,7 @@ def result(request):
                     mapped_chart.add("values", values)
                     mapped_fig = os.path.join(new_record.outdir, "fig_mapped") + ".svg"
                     mapped_chart.render_to_file(mapped_fig)
-                    results["figures"].append("/".join(mapped_fig.split("/")[-2:]))
+                    results["figures"].append("/".join(mapped_fig.split("/")[-3:]))
                 except:
                     pass
 
@@ -248,7 +248,7 @@ def result(request):
                     unique_chart.add("values", values)
                     unique_fig = os.path.join(new_record.outdir, "unique_fig") + ".svg"
                     unique_chart.render_to_file(unique_fig)
-                    results["figures"].append("/".join(unique_fig.split("/")[-2:]))
+                    results["figures"].append("/".join(unique_fig.split("/")[-3:]))
                 except:
                     pass
 
