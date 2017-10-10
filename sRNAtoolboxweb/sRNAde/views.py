@@ -296,7 +296,7 @@ class De(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call, pipeline_id = form.create_call()
-        self.success_url = reverse_lazy('progress', kwargs={"pipeline_id": pipeline_id})
+        #self.success_url = reverse_lazy('results_de') + '?id=' + pipeline_id
 
         print(call)
         os.system(call)
