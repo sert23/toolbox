@@ -54,7 +54,7 @@ class DEForm(forms.Form):
                 Field('sampleGroups', css_class='form-control'),
                 Field('sampleDescription', css_class='form-control')),
             Fieldset("Uploading an expression matrix",
-                     Field('ifile', css_class='form-control')
+                     Field('ifile', css_class='form-control'),
                 #'ifile',
                 Field('matDescription', css_class='form-control')),
                 Fieldset('Parameters',
