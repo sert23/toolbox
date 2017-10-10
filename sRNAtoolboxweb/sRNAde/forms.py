@@ -34,7 +34,7 @@ class DEForm(forms.Form):
                                      required=False, widget=forms.TextInput(
             attrs={'placeholder': "e.g: Normal_1:Normal_2:TumorI_1:TumorI_2:TumorII_1:TumorII_2:TumorII_3"}))
 
-    ifile = forms.FileField(label='Or upload a matrix of expression values:', required=False),
+    ifile = forms.FileField(label='Or upload a matrix of expression values:', required=False)
     matDescription = forms.CharField(label='Sample description (colon separated):' + render_modal('SampleDesc'),
                                      required=False, widget=forms.TextInput(
             attrs={'placeholder': "e.g: Normal,Normal,TumorI,TumorI,TumorII,TumorII,TumorII"}))
@@ -165,8 +165,8 @@ class DEForm(forms.Form):
             return 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
                 configuration_file_path=configuration_file_path,
                 job_name=name,
-                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_sRNAde_qsub.sh'))
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_sRNAde_qsub.sh')), pipeline_id
         else:
             return '{sh} {configuration_file_path}'.format(
                 configuration_file_path=configuration_file_path,
-                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_sRNAde.sh'))
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_sRNAde.sh')), pipeline_id
