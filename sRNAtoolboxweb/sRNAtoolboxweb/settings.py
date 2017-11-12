@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     'sRNAjBrowser',
     'sRNAgFree',
     'django_tables2',
-    # 'dajaxice',
     'dajax',
 ]
 
@@ -180,7 +179,7 @@ CONF = {
     "seqObj": "/srv/shared/sRNAtoolboxDB/seqOBJ",
     "annotationPath": "/shared/sRNAtoolboxDB/jBrowserAnnot",
     "species": "sRNAtoolboxDB/species.txt",
-    "speciesAnnotation": "sRNAtoolboxDB/annotation.txt",
+    "speciesAnnotation": "/home/aruedamartin/annotation.txt",
     "targetAnnotation": "/shared/sRNAtoolboxDB/targetAnnot.txt",
     "db": "/shared/sRNAtoolboxDB",
     "exec": "/shared/sRNAtoolboxDB/exec",

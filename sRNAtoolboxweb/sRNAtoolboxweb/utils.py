@@ -11,7 +11,11 @@ def create_collapsable_div(*fields, **kwargs):
     panel_heading = Div(panel_title, css_class='panel-heading')
     form_group = Div(*fields, css_class='form-group')
     body = Div(form_group, css_class='panel-body')
-    panel_collapse = Div(body, css_class="panel-collapse collapse", css_id=c_id)
+    if 'open' in kwargs and kwargs['open']:
+        collapse_in = "panel-collapse collapse in"
+    else:
+        collapse_in = "panel-collapse collapse"
+    panel_collapse = Div(body, css_class=collapse_in, css_id=c_id)
     panel = Div(panel_heading, panel_collapse, css_class="panel panel-default")
     return panel
 

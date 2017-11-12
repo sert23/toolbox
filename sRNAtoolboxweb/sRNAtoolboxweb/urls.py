@@ -1,4 +1,6 @@
 from django.conf.urls import include, url
+from django.contrib import admin
+
 from sRNAtoolboxweb import views
 
 urlpatterns =[
@@ -7,7 +9,7 @@ urlpatterns =[
     url(r'^srnafuncterms', include('sRNAfuncTerms.urls')),
     url(r'^srnade/', include('sRNAde.urls')),
     url(r'^srnablast', include('sRNAblast.urls')),
-    url(r'^srnabench', include('sRNABench.urls')),
+    url(r'^srnabench/', include('sRNABench.urls')),
     url(r'^srnajbrowserde', include('sRNAdejBrowser.urls')),
     url(r'^srnajbrowser', include('sRNAjBrowser.urls')),
     url(r'^srnagfree', include('sRNAgFree.urls')),
@@ -21,5 +23,6 @@ urlpatterns =[
     url(r'^barleyCultivar', views.cultivar),
     url(r'^versionControl', views.version, name='versions'),
     url(r'^/*$', views.index, name='home'),
+    url(r'^admin/', admin.site.urls),
 ]
 

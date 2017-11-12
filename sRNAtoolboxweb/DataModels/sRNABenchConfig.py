@@ -93,7 +93,7 @@ class SRNABenchConfig():
 
     def write_conf_file(self, config_file_name):
 
-        fdw = file(config_file_name, "w")
+        fdw = open(config_file_name, "w")
 
         none_atr = [key for key in self.__dict__.keys() if self.__dict__[key] is None]
         for atr in none_atr:

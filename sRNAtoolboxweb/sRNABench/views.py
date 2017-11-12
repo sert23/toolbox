@@ -7,8 +7,9 @@ import urllib
 import django_tables2 as tables
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render, redirect
+from django.views.generic import FormView
 
 from DataModels.params_bench import ParamsBench
 from DataModels.sRNABenchConfig import SRNABenchConfig
@@ -672,7 +673,7 @@ def show_align(request, job_id, type, name):
         if type == "hairpin":
             ifile = os.path.join(outdir, "hairpin", name + ".align")
             if os.path.exists(ifile):
-                content = file(ifile).readlines()
+                content = open(ifile).readlines()
             else:
                 content = "No Alignment available. Read count below threshold"
             desc = "alignment to pre-microRNA"
@@ -680,7 +681,7 @@ def show_align(request, job_id, type, name):
 
         elif type == "novel":
             ifile = os.path.join(outdir, "novel", name + ".align")
-            content = file(ifile).readlines()
+            content = open(ifile).readlines()
             desc = "Alignment to predicted microRNA"
             back = "novel"
 
@@ -700,7 +701,30 @@ def show_align(request, job_id, type, name):
 
 
 
+class Bench(FormView):
+    template_name = 'bench.html'
+    form_class = sRNABenchForm
+    success_url = reverse_lazy("BENCH")
 
+    def post(self, request, *args, **kwargs):
+        request.POST._mutable = True
+        request.POST['species'] = request.POST['species_hidden'].split(',')
+        request.POST._mutable = False
+        return super(Bench, self).post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        call, pipeline_id = form.create_call()
+        self.success_url = reverse_lazy('srnabench') + '?id=' + pipeline_id
+
+        print(call)
+        os.system(call)
+        js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
+        return super(Bench, self).form_valid(form)
 
 
 

@@ -24,9 +24,13 @@ def functerms(args):
     new_pipe.run()
 
 
-def bench(args):
-    parameters = "".join([line for line in open(args.configure).readlines() if "desc" not in line and "libs" not in line and not "maintaingOrig" in line and not "zip" in line and not "graphics" in line]).replace("=", ": ").replace("/shared/", "").replace("sRNAtoolbox/webData/", "")
-    new_pipe = sRNAbenchPipeline(args.pipelineKey, args.jobName, args.outdir, args.configure, parameters)
+def bench(pipeline_id=None, name=None, out_dir=None, conf_input=None):
+    parameters = "".join([line for line in open(conf_input).readlines()
+                          if "desc" not in line and "libs" not in line
+                          and not "maintaingOrig" in line and not "zip" in line
+                          and not "graphics" in line]
+                         ).replace("=", ": ").replace("/shared/", "").replace("sRNAtoolbox/webData/", "")
+    new_pipe = sRNAbenchPipeline(pipeline_id, name, out_dir, conf_input, parameters)
     new_pipe.run()
 
 
@@ -235,6 +239,8 @@ def main():
         conf = json.load(j)
     if conf['type'] == 'sRNAde':
         de(**conf)
+    if conf['type'] == 'sRNAbench':
+        bench(**conf)
 
 
 

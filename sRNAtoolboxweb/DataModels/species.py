@@ -8,8 +8,6 @@ class Species():
         else:
             self.hasTargetSequencesAndGO = False
 
-
-
         if full == "true":
             self.full = True
         else:

@@ -165,8 +165,8 @@ class DEForm(forms.Form):
             return 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
                 configuration_file_path=configuration_file_path,
                 job_name=name,
-                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_sRNAde_qsub.sh')), pipeline_id
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
         else:
             return '{sh} {configuration_file_path}'.format(
                 configuration_file_path=configuration_file_path,
-                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_sRNAde.sh')), pipeline_id
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run.sh')), pipeline_id
