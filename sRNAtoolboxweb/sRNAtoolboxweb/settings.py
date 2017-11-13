@@ -179,7 +179,7 @@ CONF = {
     "seqObj": "/srv/shared/sRNAtoolboxDB/seqOBJ",
     "annotationPath": "/shared/sRNAtoolboxDB/jBrowserAnnot",
     "species": "sRNAtoolboxDB/species.txt",
-    "speciesAnnotation": "/home/aruedamartin/annotation.txt",
+    "speciesAnnotation": "/opt/sRNAtoolboxDB/annotation.txt",
     "targetAnnotation": "/shared/sRNAtoolboxDB/targetAnnot.txt",
     "db": "/shared/sRNAtoolboxDB",
     "exec": "/shared/sRNAtoolboxDB/exec",
