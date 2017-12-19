@@ -19,26 +19,31 @@ from utils.pipeline_utils import generate_uniq_id
 
 class CategoriesField(forms.ModelMultipleChoiceField):
     def __init__(self, queryset, **kwargs):
-        super(forms.ModelMultipleChoiceField, self).__init__(queryset, **kwargs)
-        self.queryset = queryset.select_related()
-        self.to_field_name=None
-
-        group = None
-        list = []
-        self.choices = []
-
-        for category in queryset:
-            if not group:
-                group = category.sp_class
-
-            if group != category.sp_class:
-                self.choices.append((group, list))
-                group = category.sp_class
-                list = [(category.id, str(category))]
-            else:
-                list.append((category.id, str(category)))
         try:
-            self.choices.append((group, list))
+            queryset = queryset()
+            super(CategoriesField, self).__init__(queryset, **kwargs)
+            self.queryset = queryset.select_related()
+            self.to_field_name=None
+
+            group = None
+            list = []
+            self.choices = []
+
+            for category in queryset:
+                if not group:
+                    group = category.sp_class
+
+                if group != category.sp_class:
+                    self.choices.append((group, list))
+                    group = category.sp_class
+                    list = [(category.id, str(category))]
+                else:
+                    list.append((category.id, str(category)))
+            try:
+                self.choices.append((group, list))
+            except:
+                pass
+
         except:
             pass
 
@@ -48,6 +53,9 @@ class CategoriesField(forms.ModelMultipleChoiceField):
                 value = value[0]
         value = [v for v in value if v != '']
         return super(CategoriesField, self).clean(value)
+
+def m():
+    return Species.objects.all().order_by('sp_class')
 
 class sRNABenchForm(forms.Form):
     ADAPTERS = (
@@ -71,7 +79,7 @@ class sRNABenchForm(forms.Form):
     # species
     library_mode = forms.BooleanField(label='Do not map to genome (Library mode)', required=False)
     no_libs = forms.BooleanField(label='Do not profile other ncRNAs  (you are interested in known microRNAs only!)', required=False)
-    species = CategoriesField(queryset=Species.objects.all().order_by('sp_class'), required=False)
+    species = CategoriesField(queryset=m, required=False)
 
     # Adapter Trimming
     guess_adapter = forms.BooleanField(label='Guess the adapter sequence  (not recommended!)', required=False)
