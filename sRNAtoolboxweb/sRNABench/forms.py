@@ -318,7 +318,7 @@ class sRNABenchForm(forms.Form):
             'pipeline_id': pipeline_id,
             'out_dir': out_dir,
             'name': name,
-            'conf_input': conf,
+            'conf_input': conf_file_location,
             'type': 'sRNAbench'
         }
 
