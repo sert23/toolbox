@@ -319,7 +319,7 @@ class sRNABenchForm(forms.Form):
             'out_dir': out_dir,
             'name': name,
             'conf_input': conf,
-            'type': ''
+            'type': 'sRNAbench'
         }
 
         JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not_launched",
