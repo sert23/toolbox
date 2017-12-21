@@ -291,7 +291,7 @@ class sRNABenchForm(forms.Form):
         min_read_count = str(cleaned_data['min_read_count'])
         min_read_length = str(cleaned_data['min_read_length'])
         max_multiple_mapping = str(cleaned_data['max_multiple_mapping'])
-        homologous = cleaned_data['homologous']
+        homologous = cleaned_data['homologous'] if cleaned_data['homologous'] != '' else None
 
         species_annotation_file = SpeciesAnnotationParser(CONF["speciesAnnotation"])
         species_annotation = species_annotation_file.parse()
