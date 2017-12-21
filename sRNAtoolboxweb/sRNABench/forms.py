@@ -269,12 +269,12 @@ class sRNABenchForm(forms.Form):
         out_dir = FS.location
         conf['out_dir'] = out_dir
         ifile, libs_files = self.upload_files(cleaned_data, FS)
-        lib_mode = str(cleaned_data.get('library_mode')).lower()
+        lib_mode = cleaned_data.get('library_mode')
         is_solid = str(cleaned_data.get('is_solid')).lower()
         guess_adapter = str(cleaned_data.get('guess_adapter')).lower()
         predict_mirna = str(cleaned_data.get('predict_mirna')).lower()
-        no_libs = str(cleaned_data.get('no_libs')).lower()
-        highconf = str(cleaned_data.get('highconf')).lower()
+        no_libs = cleaned_data.get('no_libs')
+        highconf = cleaned_data.get('highconf')
         recursive_adapter_trimming = str(cleaned_data.get('recursive_adapter_trimming')).lower()
         species = [i.db_ver for i in cleaned_data['species']]
         assemblies = [i.db for i in cleaned_data['species']]
