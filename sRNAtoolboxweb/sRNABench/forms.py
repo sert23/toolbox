@@ -269,7 +269,7 @@ class sRNABenchForm(forms.Form):
         out_dir = FS.location
         conf['out_dir'] = out_dir
         ifile, libs_files = self.upload_files(cleaned_data, FS)
-        lib_mode = 'true' if 'library_mode' in cleaned_data else 'false'
+        lib_mode = str(cleaned_data.get('library_mode')).lower()
         is_solid = str(cleaned_data.get('is_solid')).lower()
         guess_adapter = str(cleaned_data.get('guess_adapter')).lower()
         predict_mirna = str(cleaned_data.get('predict_mirna')).lower()
