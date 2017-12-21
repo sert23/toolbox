@@ -63,7 +63,7 @@ class SRNABenchConfig():
                     if "kingdom" in annot_dic[assemb]:
                         self.kingdom = annot_dic[assemb]["kingdom"][0]
                     if "tRNA" in annot_dic[assemb]:
-                        self.tRNA = annot_dic[assemb]["tRNA"][0]
+                        self.tRNA = '{}.fa'.format(annot_dic[assemb]["tRNA"][0])
             if nolib:
                 delattr(self, "libs")
             if libmode:
