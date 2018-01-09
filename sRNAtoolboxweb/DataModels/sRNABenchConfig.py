@@ -66,7 +66,6 @@ class SRNABenchConfig():
                         self.tRNA = '{}.fa'.format(annot_dic[assemb]["tRNA"][0])
             if nolib:
                 delattr(self, "libs")
-                delattr(self, "tRNA")
             if libmode:
                 delattr(self, "species")
                 delattr(self, "assembly")

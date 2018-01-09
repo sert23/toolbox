@@ -442,18 +442,14 @@ def add_trna(results):
 def result_new(request):
     if 'id' in request.GET:
         job_id = request.GET['id']
-        try:
-            new_record = JobStatus.objects.get(pipeline_key=job_id)
-            assert isinstance(new_record, JobStatus)
-        except:
-            return redirect("/srnatoolbox/jobstatus/srnabench/?id=" + job_id)
-            
+
+        new_record = JobStatus.objects.get(pipeline_key=job_id)
 
         results = {}
         results["id"] = job_id
 
         if (new_record.job_status == "Finished" or new_record.job_status == "Running") and os.path.exists(os.path.join(new_record.outdir, "parameters.txt")):
-            params = ParamsBench(os.path.join(new_record.outdir, "parameters.txt"))
+            params = ParamsBench(os.path.join(new_record.outdir, "parameters.txt"), os.path.join(new_record.outdir, "results.txt"))
             if new_record.job_status == "Running":
                 results["running"] = True
 
@@ -462,7 +458,6 @@ def result_new(request):
                 parameters = params.params
                  #Summary
                 add_sumimg(new_record, results)
-
 
                 #Preproc
                 if "inputFinished" in parameters:
@@ -486,14 +481,13 @@ def result_new(request):
                 #New Mirna
                 if os.path.exists(os.path.join(new_record.outdir, "novel.txt")):
                     add_novel(parameters, results)
-                if os.path.exists(os.path.join(new_record.outdir, "tRNA_anticodon_sense.grouped")):
+                if os.path.exists(os.path.join(new_record.outdir, "tRNA_mature_sense.grouped")):
                     add_trna(results)
 
                 if os.path.exists(os.path.join(new_record.outdir, "sRNAbench.zip")):
                     zip_file = os.path.join(new_record.outdir, "sRNAbench.zip")
                     zip_file = "/".join(zip_file.split("/")[-2:])
                     results["zip"] = zip_file
-
 
                 try:
                     results["parameters"] = new_record.parameters
@@ -505,12 +499,9 @@ def result_new(request):
             return render(request, "srnabench_result.html", results)
 
         else:
-            return redirect("/srnatoolbox/jobstatus/srnabench/?id=" + job_id)
+            return redirect(reverse_lazy('progress', kwargs={"pipeline_id": job_id}))
     else:
-        redirect("/srnatoolbox/srnabench")
-
-
-
+        return redirect(reverse_lazy('BENCH'))
 
 
 def render_table(request, mode, job_id, lib=""):
@@ -550,7 +541,7 @@ def render_table(request, mode, job_id, lib=""):
 
     if mode == "maturesa":
         result["title"] = "Profiling of mature microRNAs (Single Assignment of reads; each read is only assigned once, i.e. to the loci or reference sequence with the highest read count)"
-        ifile = os.path.join(new_record.outdir, "mature_sense_singleA.grouped")
+        ifile = os.path.join(new_record.outdir, "mature_sense_SA.grouped")
         parser = MatureParserSA(ifile)
         table = [obj for obj in parser.parse()]
         id = "table"
@@ -592,7 +583,7 @@ def render_table(request, mode, job_id, lib=""):
 
     if mode == "trna":
         result["title"] = "tRNA mapped reads as a function of anti-codon"
-        ifile = os.path.join(new_record.outdir, "tRNA_anticodon_sense.grouped")
+        ifile = os.path.join(new_record.outdir, "tRNA_mature_sense.grouped")
         parser = TRNAParser(ifile)
         table = [obj for obj in parser.parse()]
         id = "table"
@@ -694,12 +685,6 @@ def show_align(request, job_id, type, name):
         result["align"] = "".join(content)
 
         return render(request, "align.html", result)
-
-
-
-
-
-
 
 class Bench(FormView):
     template_name = 'bench.html'

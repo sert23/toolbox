@@ -17,7 +17,6 @@ from django.core.files.storage import FileSystemStorage
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
@@ -28,7 +27,6 @@ SECRET_KEY = '^qn#c))1g9tb103+q4@04gk^**9#@6=kp(i4lz%$ron%yumut='
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -84,7 +82,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'sRNAtoolboxweb.wsgi.application'
 
-
 CORS_ALLOW_HEADERS = (
     'x-requested-with',
     'content-type',
@@ -106,7 +103,6 @@ CORS_ALLOW_METHODS = (
     'DELETE',
     'OPTIONS'
 )
-
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -137,11 +133,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-MEDIA_ROOT=os.path.join(BASE_DIR, "upload")
+MEDIA_ROOT = os.path.join(BASE_DIR, "upload")
 
 LANGUAGE_CODE = 'en-us'
 
@@ -152,7 +147,6 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
@@ -179,7 +173,7 @@ CONF = {
     "seqObj": "/srv/shared/sRNAtoolboxDB/seqOBJ",
     "annotationPath": "/shared/sRNAtoolboxDB/jBrowserAnnot",
     "species": "sRNAtoolboxDB/species.txt",
-    "speciesAnnotation": "/opt/sRNAtoolboxDB/annotation.txt",
+    "speciesAnnotation": "/home/aruedamartin/annotation.txt",
     "targetAnnotation": "/shared/sRNAtoolboxDB/targetAnnot.txt",
     "db": "/shared/sRNAtoolboxDB",
     "exec": "/shared/sRNAtoolboxDB/exec",
@@ -187,6 +181,5 @@ CONF = {
     "tRNA": "/shared/sRNAtoolboxDB/dbs/eukaryotic-tRNAs.fa",
     "tax": "/shared/sRNAtoolboxDB/dbs/taxonomy.txt"
 }
-
 
 QSUB = False

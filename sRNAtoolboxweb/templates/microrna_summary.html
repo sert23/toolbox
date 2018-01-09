@@ -16,14 +16,14 @@
     <dl class="dl-horizontal">
         <dt>MicroRNA details:</dt>
         <dd><ul class="list-inline">
-            <li><a href="{% url "sRNABench.views.render_table" "pre-microRNA" id %}">pre-microRNA</a></li>
-            <li><a href="{% url "sRNABench.views.render_table" "mature" id %}">mature (MA)</a></li>
-            <li><a href="{% url "sRNABench.views.render_table" "maturesa" id %}">mature (SA)</a></li>
+            <li><a href="{% url "table_bench" "pre-microRNA" id %}">pre-microRNA</a></li>
+            <li><a href="{% url "table_bench" "mature" id %}">mature (MA)</a></li>
+            <li><a href="{% url "table_bench" "maturesa" id %}">mature (SA)</a></li>
         </ul></dd>
 
         <dt>isomiR details:</dt>
         <dd><ul class="list-inline">
-            <li><a href="{% url "sRNABench.views.render_table" "isomir" id %}"> isomiR summary </a></li>
+            <li><a href="{% url "table_bench" "isomir" id %}"> isomiR summary </a></li>
         </ul></dd>
     </dl>
 </div>
