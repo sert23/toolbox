@@ -26,7 +26,7 @@ SECRET_KEY = '^qn#c))1g9tb103+q4@04gk^**9#@6=kp(i4lz%$ron%yumut='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["bioinfo5.ugr.es"]
 
 # Application definition
 
