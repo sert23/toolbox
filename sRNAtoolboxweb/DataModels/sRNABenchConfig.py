@@ -4,7 +4,7 @@ __author__ = 'antonior'
 
 
 class SRNABenchConfig():
-    def __init__(self, annot_dic, dbPath, output, ifile, iszip="true", RNAfold="RNAfold2", bedGraph="true",
+    def __init__(self, annot_dic, dbPath, output, ifile, iszip="true", bedGraph="true",
                  writeGenomeDist="true", predict=None,  graphics="true", species=None, assembly=None, short_names=(), adapter=None,
                  recursiveAdapterTrimming = "false", libmode=False, nolib=False, microRNA=None, removeBarcode=None, adapterMinLength=None, adapterMM=None,
                  seed=None, noMM=None, alignType=None, minRC=None, solid=None, guessAdapter=False, highconf=False,
@@ -15,7 +15,7 @@ class SRNABenchConfig():
         self.recursiveAdapterTrimming = recursiveAdapterTrimming
         self.guessAdapter = guessAdapter
         self.zip = iszip
-        self.RNAfold = RNAfold
+        #self.RNAfold = RNAfold
         self.dbPath = dbPath
         self.output = output
         self.input = ifile

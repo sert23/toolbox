@@ -7,7 +7,7 @@ from django.http import Http404
 from progress.models import JobStatus
 from sRNAtoolboxweb.settings import BASE_DIR
 from FileModels.speciesParser import SpeciesParser
-from sRNAtoolboxweb.settings import MEDIA_ROOT
+from sRNAtoolboxweb.settings import MEDIA_ROOT,QSUB
 from utils.pipeline_utils import generate_uniq_id
 from django.conf import settings
 from django.core.files.base import ContentFile
@@ -38,7 +38,6 @@ class MirconsForm(forms.Form):
     utrtext = forms.CharField(label="Or paste your targets here",widget=forms.Textarea,required=False)
 
     plants = forms.BooleanField(label='Is plant analysis', required=False)
-
     targetspy=forms.BooleanField(label='TargetSpy', required=False)
     miranda=forms.BooleanField(label='Miranda', required=False)
     PITA=forms.BooleanField(label='PITA', required=False)
@@ -121,14 +120,15 @@ class MirconsForm(forms.Form):
             FS.save()
 
         name = pipeline_id + '_mirconstarget'
-        JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not launched",
-                                 start_time=datetime.datetime.now(),
-                                 #finish_time=datetime.time(0, 0),
-                                 all_files=ifile,
-                                 modules_files="",
-                                 pipeline_type="mirconstarget",
-                                )
-        return 'qsub -v pipeline="mirconstarget",program_string="{program_string}",parameter_string="{}",'.format(
+        # JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not launched",
+        #                          start_time=datetime.datetime.now(),
+        #                          #finish_time=datetime.time(0, 0),
+        #                          all_files=ifile,
+        #                          modules_files="",
+        #                          pipeline_type="mirconstarget",
+        #                         )
+        if QSUB:
+            return 'qsub -v pipeline="mirconstarget",program_string="{program_string}",parameter_string="{}",'.format(
             pipeline_id=pipeline_id,
             out_dir=out_dir,
             miRNA_file=mirfile,
@@ -140,7 +140,8 @@ class MirconsForm(forms.Form):
             job_name=name,
             sh=os.path.join(BASE_DIR + '/core/bash_scripts/run_mirnatarget.sh')
         )
-
+        else:
+            return ''
 ###########ADDING
         #'",parameter_string="' + parameter_string + '",key="' + pipeline_id + '",outdir="' + outdir + '",miRNA_file="' + miRNA_file + '",utr_file="' + utr_file +
         #'",name="' + pipeline_id + '_mirconstarget"' + ' -N ' + pipeline_id + '_mirconstarget

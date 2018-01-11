@@ -87,7 +87,8 @@ class sRNABenchForm(forms.Form):
     adapter_manual = forms.CharField(label='Or Provide adapter sequence', required=False)
     adapter_length = forms.IntegerField(label='Minimum Adapter Length', max_value=12, min_value=6, initial=10)
     adapter_mismatch = forms.IntegerField(label='Max. mismatches in adapter detection', max_value=2, min_value=0, initial=1)
-    adapter_recursive_trimming = forms.BooleanField(label='Recursive Adapter trimming', required=False)
+    adapter_recursive_trimming = forms.BooleanField(label='Recursive Adapter trimming', required=False, initial=False)
+
 
     # MicroRNA Analysis
     genome_mir = forms.BooleanField(label='Use the miRNAs for the species from the selected genomes', required=False)
@@ -275,7 +276,8 @@ class sRNABenchForm(forms.Form):
         predict_mirna = str(cleaned_data.get('predict_mirna')).lower()
         no_libs = cleaned_data.get('no_libs')
         highconf = cleaned_data.get('highconf')
-        recursive_adapter_trimming = str(cleaned_data.get('recursive_adapter_trimming')).lower()
+        #recursive_adapter_trimming = str(cleaned_data.get('recursive_adapter_trimming')).lower()
+        recursive_adapter_trimming = str(cleaned_data.get('adapter_recursive_trimming')).lower()
         species = [i.db_ver for i in cleaned_data['species']]
         assemblies = [i.db for i in cleaned_data['species']]
         short_names = [i.shortName for i in cleaned_data['species']]
@@ -299,7 +301,7 @@ class sRNABenchForm(forms.Form):
 
 
         new_conf = SRNABenchConfig(species_annotation, db, FS.location, ifile, iszip="true",
-                                  RNAfold="RNAfold2",
+                                  #RNAfold="RNAfold2",
                                   bedGraph="true", writeGenomeDist="true", predict=predict_mirna, graphics="true",
                                   species=species, assembly=assemblies, short_names=short_names, adapter=adapter,
                                   recursiveAdapterTrimming=recursive_adapter_trimming, libmode=lib_mode, nolib=no_libs,
