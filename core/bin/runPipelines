@@ -62,7 +62,7 @@ def jbrowser(args):
     new_pipe.run()
 
 
-def mirconstarget(pipeline_id=None, name=None, out_dir=None, mirna_file=None, utr_file=None, threads=4, program_string="", parameter_string="", **kwargs):
+def mirconstarget(pipeline_id=None, name=None, out_dir=None, mirna_file=None, utr_file=None, threads="4", program_string="", parameter_string="", **kwargs):
 
     parameter_string = parameter_string.replace("55-55", "-")
     print(parameter_string)
