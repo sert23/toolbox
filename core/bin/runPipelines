@@ -241,6 +241,8 @@ def main():
         de(**conf)
     if conf['type'] == 'sRNAbench':
         bench(**conf)
+    if conf['type'] == 'miRNAconstarget':
+        mirconstarget(**conf)
 
 
 
