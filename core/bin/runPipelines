@@ -62,14 +62,14 @@ def jbrowser(args):
     new_pipe.run()
 
 
-def mirconstarget(args):
+def mirconstarget(pipeline_id=None, name=None, out_dir=None, mirna_file=None, utr_file=None, threads=4, program_string="", parameter_string="", **kwargs):
 
-    parameter_string = args.parameter_string.replace("55-55", "-")
+    parameter_string = parameter_string.replace("55-55", "-")
     print(parameter_string)
-    parameters = "\n".join(["miRNAs File: "+args.mirna_file.split("/")[-1], "UTRs File: "+args.utr_file.split("/")[-1],
-                            "Programs: "+args.program_string, "Programs Parameters: "+ parameter_string])
-    new_pipe = mirconstargetPipeline(args.pipelineKey, args.jobName, args.outdir, args.mirna_file, args.utr_file,
-                                   args.threads, args.program_string, parameter_string, parameters)
+    parameters = "\n".join(["miRNAs File: "+mirna_file.split("/")[-1], "UTRs File: "+utr_file.split("/")[-1],
+                            "Programs: "+program_string, "Programs Parameters: "+ parameter_string])
+    new_pipe = mirconstargetPipeline(pipeline_id, name, out_dir, mirna_file, utr_file,
+                                   threads, program_string, parameter_string, parameters)
     new_pipe.run()
 
 
