@@ -40,7 +40,10 @@ class mirconstargetPipeline(Pipeline):
 
             cmd = "cd " + self.outdir + ";  java -jar " + self.configuration.path_to_mirnatarget + " " + " ".join(
                 [self.mirna_file, self.utr_file, self.outdir, self.threads, self.program_string, self.parameter_string])
+
+            print(cmd)
             os.system(cmd)
+
             self.set_java_command_line(cmd)
 
         log_msg = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " SUCCESS: miRNAconstarget Analysis finished"
