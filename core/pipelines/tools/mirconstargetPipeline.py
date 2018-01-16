@@ -35,7 +35,7 @@ class mirconstargetPipeline(Pipeline):
             self.set_java_command_line(cmd)
 
         else:
-            self.parameter_string = ":".join(['" '+ param + ' "' for param in self.parameter_string.split(":")])
+            #self.parameter_string = ":".join(['" '+ param + ' "' for param in self.parameter_string.split(":")])
 
 
             cmd = "cd " + self.outdir + ";  java -jar " + self.configuration.path_to_mirnatarget + " " + " ".join(
