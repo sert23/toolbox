@@ -34,6 +34,7 @@ class MirconsForm(forms.Form):
     from os import listdir
     #from os.path import isfile, os.path.join
     onlyfiles = [f for f in listdir(os.path.join(PATH_TO_DB,"utr")) if os.path.isfile(os.path.join(os.path.join(PATH_TO_DB,"utr"), f))]
+    species = ((key, key) for (key) in onlyfiles)
     #species = {key: key for (key) in onlyfiles}
 
     mirfile = forms.FileField(label='Upload miRNAs file', required=False)
