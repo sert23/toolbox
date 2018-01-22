@@ -33,7 +33,7 @@ class MirconsForm(forms.Form):
      #   complete_species[sp[4]]=None
     from os import listdir
     from os.path import isfile, join
-    onlyfiles = [f for f in listdir(join(PATH_TO_DB,"utr")) if isfile(join(join(PATH_TO_DB,"utr"), f))]
+    onlyfiles = [f for f in listdir(join(PATH_TO_DB,"utr")) if os.path.isfile(join(join(PATH_TO_DB,"utr"), f))]
     species = {key: key for (key) in onlyfiles}
 
     mirfile = forms.FileField(label='Upload miRNAs file', required=False)
