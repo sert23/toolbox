@@ -5,7 +5,7 @@ from django import forms
 from django.core.files.storage import FileSystemStorage
 from django.http import Http404
 from progress.models import JobStatus
-from sRNAtoolboxweb.settings import BASE_DIR
+from sRNAtoolboxweb.settings import BASE_DIR, CONF
 from FileModels.speciesParser import SpeciesParser
 from sRNAtoolboxweb.settings import MEDIA_ROOT,QSUB
 from utils.pipeline_utils import generate_uniq_id
@@ -13,6 +13,8 @@ from django.conf import settings
 from django.core.files.base import ContentFile
 
 SPECIES_PATH = settings.CONF["species"]
+PATH_TO_DB=CONF["db"]
+
 
 from FileModels.TargetConsensusParser import TargetConsensusParser
 
@@ -29,10 +31,14 @@ class MirconsForm(forms.Form):
 
     #for sp in array_species:
      #   complete_species[sp[4]]=None
-
+    from os import listdir
+    from os.path import isfile, join
+    onlyfiles = [f for f in listdir(join(PATH_TO_DB,"utr")) if isfile(join(join(PATH_TO_DB,"utr"), f))]
+    species = {key: key for (key) in onlyfiles}
 
     mirfile = forms.FileField(label='Upload miRNAs file', required=False)
     utrfile = forms.FileField(label='Upload targets file', required=False)
+    utrchoice = forms.CharField(label='Or choose UTR from the list', widget=forms.Select(choices=species))
 
     mirtext = forms.CharField(label="Or paste your miRNAs here",widget=forms.Textarea,required=False)
     utrtext = forms.CharField(label="Or paste your targets here",widget=forms.Textarea,required=False)
