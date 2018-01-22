@@ -38,7 +38,8 @@ class MirconsForm(forms.Form):
 
     mirfile = forms.FileField(label='Upload miRNAs file', required=False)
     utrfile = forms.FileField(label='Upload targets file', required=False)
-    utrchoice = forms.CharField(label='Or choose UTR from the list', widget=forms.Select(choices=species))
+    #utrchoice = forms.CharField(label='Or choose UTR from the list', widget=forms.Select(choices=species))
+    utrchoice = forms.ChoiceField(label="Or choose UTR from the list",choices=species)
 
     mirtext = forms.CharField(label="Or paste your miRNAs here",widget=forms.Textarea,required=False)
     utrtext = forms.CharField(label="Or paste your targets here",widget=forms.Textarea,required=False)
