@@ -36,11 +36,17 @@ class MirconsForm(forms.Form):
     onlyfiles = [f for f in listdir(os.path.join(PATH_TO_DB,"utr")) if os.path.isfile(os.path.join(os.path.join(PATH_TO_DB,"utr"), f))]
     species = ((key, key) for (key) in onlyfiles)
     #species = {key: key for (key) in onlyfiles}
+    YEAR_IN_SCHOOL_CHOICES = (
+        ('FR', 'Freshman'),
+        ('SO', 'Sophomore'),
+        ('JR', 'Junior'),
+        ('SR', 'Senior'),
+    )
 
     mirfile = forms.FileField(label='Upload miRNAs file', required=False)
     utrfile = forms.FileField(label='Upload targets file', required=False)
     #utrchoice = forms.CharField(label='Or choose UTR from the list', widget=forms.Select(choices=species))
-    utrchoice = forms.ChoiceField(label="Or choose UTR from the list",choices=onlyfiles)
+    utrchoice = forms.ChoiceField(label="Or choose UTR from the list",choices=species)
 
     mirtext = forms.CharField(label="Or paste your miRNAs here",widget=forms.Textarea,required=False)
     utrtext = forms.CharField(label="Or paste your targets here",widget=forms.Textarea,required=False)
