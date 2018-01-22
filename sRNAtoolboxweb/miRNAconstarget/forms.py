@@ -140,7 +140,7 @@ class MirconsForm(forms.Form):
             miRNA_file=mirfile,
             utr_file=utrfile,
             program_string=program_string,
-            input_file=os.path.join(FS.location, ifile),
+            input_file=os.path.join(FS.location, mirfile),
             string=self.cleaned_data.get("string"),
             name=name,
             job_name=name,
