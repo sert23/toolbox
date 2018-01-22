@@ -34,7 +34,7 @@ class MirconsForm(forms.Form):
     from os import listdir
     #from os.path import isfile, os.path.join
     onlyfiles = [f for f in listdir(os.path.join(PATH_TO_DB,"utr")) if os.path.isfile(os.path.join(os.path.join(PATH_TO_DB,"utr"), f))]
-    species = ((key[0:-9].replace("_", " "), key) for (key) in onlyfiles)
+    species = ((key,key[0:-9].replace("_", " ")) for (key) in onlyfiles)
     #species = {key: key for (key) in onlyfiles}
     YEAR_IN_SCHOOL_CHOICES = (
         ('FR', 'Freshman'),
