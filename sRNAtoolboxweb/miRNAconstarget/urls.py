@@ -9,7 +9,7 @@ urlpatterns = [
     url(r'^', views.MirConsTarget.as_view(), name="mirconstarget"),
     #url(r'^/*$', views.),
     #url(r'^/*$', views.input),
-    url(r'run$', views.run),
+    #url(r'run$', views.run),
     url(r'result', views.result),
     url(r'test$', views.test),
 ]

@@ -237,6 +237,37 @@ class MirConsTarget(FormView):
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
-        call = form.create_call()
+        call, pipeline_id = form.create_call()
         print(call)
+        os.system(call)
+        js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
         return super(MirConsTarget, self).form_valid(form)
+
+
+# class Bench(FormView):
+#     template_name = 'bench.html'
+#     form_class = sRNABenchForm
+#     success_url = reverse_lazy("BENCH")
+#
+#     def post(self, request, *args, **kwargs):
+#         request.POST._mutable = True
+#         request.POST['species'] = request.POST['species_hidden'].split(',')
+#         request.POST._mutable = False
+#         return super(Bench, self).post(request, *args, **kwargs)
+#
+#     def form_valid(self, form):
+#         # This method is called when valid form data has been POSTed.
+#         # It should return an HttpResponse.
+#         call, pipeline_id = form.create_call()
+#         self.success_url = reverse_lazy('srnabench') + '?id=' + pipeline_id
+#
+#         print(call)
+#         os.system(call)
+#         js = JobStatus.objects.get(pipeline_key=pipeline_id)
+#         js.status.create(status_progress='sent_to_queue')
+#         js.job_status = 'sent_to_queue'
+#         js.save()
+#         return super(Bench, self).form_valid(form)
