@@ -34,14 +34,8 @@ class MirconsForm(forms.Form):
     from os import listdir
     #from os.path import isfile, os.path.join
     onlyfiles = [f for f in listdir(os.path.join(PATH_TO_DB,"utr")) if os.path.isfile(os.path.join(os.path.join(PATH_TO_DB,"utr"), f))]
-    species = ((key,key[0:-9].replace("_", " ")) for (key) in onlyfiles)
+    species = ((os.path.join(os.path.join(PATH_TO_DB,"utr"), key),key[0:-9].replace("_", " ")) for (key) in onlyfiles)
     #species = {key: key for (key) in onlyfiles}
-    YEAR_IN_SCHOOL_CHOICES = (
-        ('FR', 'Freshman'),
-        ('SO', 'Sophomore'),
-        ('JR', 'Junior'),
-        ('SR', 'Senior'),
-    )
 
     mirfile = forms.FileField(label='Upload miRNAs file', required=False)
     utrfile = forms.FileField(label='Upload targets file', required=False)
@@ -72,9 +66,10 @@ class MirconsForm(forms.Form):
         if not cleaned_data.get('mirfile') and not cleaned_data.get('mirtext'):
             self.add_error('mirfile', 'miRNA input is required')
             self.add_error('mirtext', 'miRNA input is required')
-        if not cleaned_data.get('utrfile') and not cleaned_data.get('utrtext'):
+        if not cleaned_data.get('utrfile') and not cleaned_data.get('utrtext') and not cleaned_data.get('utrchoice'):
             self.add_error('utrfile', 'UTR input is required')
             self.add_error('utrtext', 'UTR input is required')
+            self.add_error('utrchoice', 'UTR input is required')
         if not cleaned_data.get('targetspy') and not cleaned_data.get('miranda') and not cleaned_data.get('PITA') and not cleaned_data.get('psRobot') and not cleaned_data.get('tapir_fasta') and not cleaned_data.get('tapir_RNAhyb'):
             self.add_error('targetspy', 'At least one program should be chosen')
             self.add_error('miranda', 'At least one program should be chosen')
@@ -101,12 +96,16 @@ class MirconsForm(forms.Form):
         mirfile = self.cleaned_data.get("mirfile")
         utrfile= self.cleaned_data.get("utrfile")
         program_list=[]
+        param_list=[]
         if self.cleaned_data.get('targetspy'):
-            program_list.append("targetspy")
+            program_list.append("TS")
+            param_list.append(self.cleaned_data.get("target_par"))
         if self.cleaned_data.get('miranda'):
-            program_list.append("miranda")
+            program_list.append("MIRANDA")
+            param_list.append(self.cleaned_data.get("miranda_par"))
         if self.cleaned_data.get('PITA'):
             program_list.append("PITA")
+            param_list.append(self.cleaned_data.get("PITA_par"))
         if self.cleaned_data.get('psRobot'):
             program_list.append("psRobot")
         if self.cleaned_data.get('tapir_fasta'):
@@ -127,37 +126,60 @@ class MirconsForm(forms.Form):
             file_to_update = utrfile
             uploaded_file = str(file_to_update)
             utrfile = FS.save(uploaded_file, file_to_update)
-        else:
+        elif self.cleaned_data.get("utrtext"):
             utrtext = self.cleaned_data.get("utrtext")
             content = ContentFile(utrtext)
             utrfile=FS.fileUpload.save('utrs.fa', content)
             FS.save()
+        else:
+            utrfile = self.cleaned_data.get('utrchoice')
 
         name = pipeline_id + '_mirconstarget'
-        # JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not launched",
-        #                          start_time=datetime.datetime.now(),
-        #                          #finish_time=datetime.time(0, 0),
-        #                          all_files=ifile,
-        #                          modules_files="",
-        #                          pipeline_type="mirconstarget",
-        #                         )
-        if QSUB:
-            return 'qsub -v pipeline="mirconstarget",program_string="{program_string}",parameter_string="{}",'.format(
-            pipeline_id=pipeline_id,
-            out_dir=out_dir,
-            miRNA_file=mirfile,
-            utr_file=utrfile,
-            program_string=program_string,
-            input_file=os.path.join(FS.location, mirfile),
-            string=self.cleaned_data.get("string"),
-            name=name,
-            job_name=name,
-            sh=os.path.join(BASE_DIR + '/core/bash_scripts/run_mirnatarget.sh')
-        )
-        else:
-            return ''
-###########ADDING
-        #'",parameter_string="' + parameter_string + '",key="' + pipeline_id + '",outdir="' + outdir + '",miRNA_file="' + miRNA_file + '",utr_file="' + utr_file +
-        #'",name="' + pipeline_id + '_mirconstarget"' + ' -N ' + pipeline_id + '_mirconstarget
 
-        #return 'qsub -v pipeline="mirconstarget",program_string="{program_string}",key="{pipeline_id}",outdir="{out_dir}",inputfile="{input_file}",string="{string}",remove="true",name="{name}" -N {job_name} {sh}'.format(
+        configuration = {
+            'pipeline_id': pipeline_id,
+            'out_dir': out_dir,
+            'name': name,
+            "mirna_file": mirfile,
+            "utr_file": utrfile,
+            "program_string": program_string,
+            "parameter_string": ":".join(program_list),
+            'type': 'miRNAconstarget'
+         }
+        configuration_file_path = os.path.join(out_dir, 'conf.json')
+        import json
+        with open(configuration_file_path, 'w') as conf_file:
+            json.dump(configuration, conf_file, indent=True)
+
+        JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not launched",
+                                 start_time=datetime.datetime.now(),
+                                 #finish_time=datetime.time(0, 0),
+                                 all_files=[mirfile,utrfile],
+                                 modules_files="",
+                                 pipeline_type="mirconstarget",
+                                )
+
+        if QSUB:
+            return 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
+                configuration_file_path=configuration_file_path,
+                job_name=name,
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
+        else:
+            return '{sh} {configuration_file_path}'.format(
+                configuration_file_path=configuration_file_path,
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run.sh')), pipeline_id
+
+        # if QSUB:
+        #     return 'qsub -v pipeline="mirconstarget",program_string="{program_string}",parameter_string="{}",'.format(
+        #     pipeline_id=pipeline_id,
+        #     out_dir=out_dir,
+        #     miRNA_file=mirfile,
+        #     utr_file=utrfile,
+        #     program_string=program_string,
+        #     input_file=os.path.join(FS.location, mirfile),
+        #     string=self.cleaned_data.get("string"),
+        #     name=name,
+        #     job_name=name,
+        #     sh=os.path.join(BASE_DIR + '/core/bash_scripts/run_mirnatarget.sh')
+        # )
+
