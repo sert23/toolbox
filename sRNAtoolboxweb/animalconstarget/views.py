@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect
 
 from django.views.generic import FormView
 from django.core.urlresolvers import reverse_lazy
-from miRNAconstarget.forms import AMirconsForm
+from animalconstarget.forms import AMirconsForm
 
 from FileModels.TargetConsensusParser import TargetConsensusParser
 from progress.models import JobStatus
@@ -244,7 +244,7 @@ class AMirConsTarget(FormView):
         js.status.create(status_progress='sent_to_queue')
         js.job_status = 'sent_to_queue'
         js.save()
-        return super(MirConsTarget, self).form_valid(form)
+        return super(AMirConsTarget, self).form_valid(form)
 
 
 # class Bench(FormView):
