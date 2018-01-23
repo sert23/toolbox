@@ -46,6 +46,7 @@ class MirconsForm(forms.Form):
     utrtext = forms.CharField(label="Or paste your targets here",widget=forms.Textarea,required=False)
 
     plants = forms.BooleanField(label='Is plant analysis', required=False)
+    seed = forms.BooleanField(label='Simple seed analysis', required=False)
     targetspy=forms.BooleanField(label='TargetSpy', required=False)
     miranda=forms.BooleanField(label='Miranda', required=False)
     PITA=forms.BooleanField(label='PITA', required=False)
@@ -53,6 +54,7 @@ class MirconsForm(forms.Form):
     tapir_fasta=forms.BooleanField(label='TAPIR FASTA engine', required=False)
     tapir_RNAhyb=forms.BooleanField(label='TAPIR RNAhybrid engine', required=False)
 
+    seed_par=forms.CharField(label="Seed analysis parameters",required=False)
     target_par=forms.CharField(label="TargetSpy parameters",required=False)
     miranda_par = forms.CharField(label="Miranda Parameters", required=False)
     PITA_par = forms.CharField(label="PITA parameters", required=False)
@@ -70,7 +72,7 @@ class MirconsForm(forms.Form):
             self.add_error('utrfile', 'UTR input is required')
             self.add_error('utrtext', 'UTR input is required')
             self.add_error('utrchoice', 'UTR input is required')
-        if not cleaned_data.get('targetspy') and not cleaned_data.get('miranda') and not cleaned_data.get('PITA') and not cleaned_data.get('psRobot') and not cleaned_data.get('tapir_fasta') and not cleaned_data.get('tapir_RNAhyb'):
+        if not cleaned_data.get('seed') and not cleaned_data.get('targetspy') and not cleaned_data.get('miranda') and not cleaned_data.get('PITA') and not cleaned_data.get('psRobot') and not cleaned_data.get('tapir_fasta') and not cleaned_data.get('tapir_RNAhyb'):
             self.add_error('targetspy', 'At least one program should be chosen')
             self.add_error('miranda', 'At least one program should be chosen')
             self.add_error('PITA', 'At least one program should be chosen')
@@ -97,6 +99,9 @@ class MirconsForm(forms.Form):
         utrfile= self.cleaned_data.get("utrfile")
         program_list=[]
         param_list=[]
+        if self.cleaned_data.get('seed'):
+            program_list.append("SEED")
+            param_list.append(self.cleaned_data.get("seed_par"))
         if self.cleaned_data.get('targetspy'):
             program_list.append("TS")
             param_list.append(self.cleaned_data.get("target_par"))
@@ -143,7 +148,7 @@ class MirconsForm(forms.Form):
             "mirna_file": mirfile,
             "utr_file": utrfile,
             "program_string": program_string,
-            "parameter_string": ":".join(program_list),
+            "parameter_string": ":".join(param_list),
             'type': 'miRNAconstarget'
          }
         configuration_file_path = os.path.join(out_dir, 'conf.json')
