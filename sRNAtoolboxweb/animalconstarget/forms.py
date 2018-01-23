@@ -28,6 +28,8 @@ from FileModels.TargetConsensusParser import TargetConsensusParser
 
 class AMirconsForm(forms.Form):
     import csv
+    from operator import itemgetter
+
     animals_dict={}
     with open(os.path.join(PATH_TO_DB,"species.txt"), 'rt') as csvfile:
         rows = csv.reader(csvfile)
@@ -42,7 +44,7 @@ class AMirconsForm(forms.Form):
                 current = (row[2],animals_dict[row[0]])
                 choice_list.append(current)
 
-
+    choice_list = sorted(choice_list, key= itemgetter(0))
 
     #species = ((os.path.join(os.path.join(PATH_TO_DB,"utr"), key),key[0:-9].replace("_", " ")) for (key) in onlyfiles)
 
