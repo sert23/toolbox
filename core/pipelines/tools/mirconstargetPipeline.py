@@ -15,6 +15,7 @@ class mirconstargetPipeline(Pipeline):
         self.mirna_file = mirna_file
 
 
+
     def run(self):
         self.initialize_pipeline_status()
         self.call_mirconstarget()
