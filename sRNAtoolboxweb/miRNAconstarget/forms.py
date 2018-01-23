@@ -101,12 +101,12 @@ class MirconsForm(forms.Form):
         param_list=[]
         if self.cleaned_data.get('seed'):
             program_list.append("SEED")
-            param_list.append(self.cleaned_data.get("seed_par"))
+            "'"+param_list.append(self.cleaned_data.get("seed_par"))+"'"
         if self.cleaned_data.get('targetspy'):
             program_list.append("TS")
             param_list.append(self.cleaned_data.get("target_par"))
         if self.cleaned_data.get('miranda'):
-            program_list.append("MIRANDA")
+            "'" +program_list.append("MIRANDA")+"'"
             param_list.append(self.cleaned_data.get("miranda_par"))
         if self.cleaned_data.get('PITA'):
             program_list.append("PITA")
@@ -149,7 +149,7 @@ class MirconsForm(forms.Form):
             "utr_file": utrfile,
             "program_string": program_string,
             #"parameter_string": '":"'.join(param_list),
-            "parameter_string": "'"+ " : ".join(param_list) + "'",
+            "parameter_string": " : ".join(param_list) ,
             'type': 'miRNAconstarget'
          }
         configuration_file_path = os.path.join(out_dir, 'conf.json')
