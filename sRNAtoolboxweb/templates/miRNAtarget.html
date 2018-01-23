@@ -28,7 +28,9 @@
 
 
             <form enctype="multipart/form-data"
+                                    {% comment %}
                                       action="{% url 'extract' %}"
+                                    {% endcomment %}
                                       method="post">{% csrf_token %}
 
                                     <fieldset>
