@@ -27,25 +27,34 @@ from FileModels.TargetConsensusParser import TargetConsensusParser
 
 
 class AMirconsForm(forms.Form):
+    import csv
+    animals_dict={}
+    with open(os.path.join(PATH_TO_DB,"species.txt"), 'rb') as csvfile:
+        rows = csv.reader(csvfile)
+        for row in rows:
+            if row[0]=="animal":
+                animals_dict[row[3]] =  row[5]
+    choice_list=[]
+    with open(os.path.join(PATH_TO_DB,"targetAnnot.txt"), 'rb') as tsvfile:
+        rows = csv.reader(tsvfile,delimiter='\t')
+        for row in rows:
+            if animals_dict.get(row[0]) :
+                current = (row[2],animals_dict[row[0]])
+                choice_list.append(current)
 
 
-    #for sp in array_species:
-     #   complete_species[sp[4]]=None
-    from os import listdir
-    #from os.path import isfile, os.path.join
-    onlyfiles = [f for f in listdir(os.path.join(PATH_TO_DB,"utr")) if os.path.isfile(os.path.join(os.path.join(PATH_TO_DB,"utr"), f))]
-    species = ((os.path.join(os.path.join(PATH_TO_DB,"utr"), key),key[0:-9].replace("_", " ")) for (key) in onlyfiles)
-    #species = {key: key for (key) in onlyfiles}
+
+    #species = ((os.path.join(os.path.join(PATH_TO_DB,"utr"), key),key[0:-9].replace("_", " ")) for (key) in onlyfiles)
+
 
     mirfile = forms.FileField(label='Upload miRNAs file', required=False)
     utrfile = forms.FileField(label='Upload targets file', required=False)
-    #utrchoice = forms.CharField(label='Or choose UTR from the list', widget=forms.Select(choices=species))
-    utrchoice = forms.ChoiceField(label="Or choose UTR from the list",choices=species)
+
+    utrchoice = forms.ChoiceField(label="Or choose UTR from the list",choices=choice_list)
 
     mirtext = forms.CharField(label="Or paste your miRNAs here",widget=forms.Textarea,required=False)
     utrtext = forms.CharField(label="Or paste your targets here",widget=forms.Textarea,required=False)
 
-    plants = forms.BooleanField(label='Is plant analysis', required=False)
     seed = forms.BooleanField(label='Simple seed analysis', required=False)
     targetspy=forms.BooleanField(label='TargetSpy', required=False)
     miranda=forms.BooleanField(label='Miranda', required=False)
