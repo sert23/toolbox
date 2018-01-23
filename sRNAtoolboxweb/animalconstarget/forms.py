@@ -29,13 +29,13 @@ from FileModels.TargetConsensusParser import TargetConsensusParser
 class AMirconsForm(forms.Form):
     import csv
     animals_dict={}
-    with open(os.path.join(PATH_TO_DB,"species.txt"), 'rb') as csvfile:
+    with open(os.path.join(PATH_TO_DB,"species.txt"), 'rt') as csvfile:
         rows = csv.reader(csvfile)
         for row in rows:
             if row[0]=="animal":
                 animals_dict[row[3]] =  row[5]
     choice_list=[]
-    with open(os.path.join(PATH_TO_DB,"targetAnnot.txt"), 'rb') as tsvfile:
+    with open(os.path.join(PATH_TO_DB,"targetAnnot.txt"), 'rt') as tsvfile:
         rows = csv.reader(tsvfile,delimiter='\t')
         for row in rows:
             if animals_dict.get(row[0]) :
