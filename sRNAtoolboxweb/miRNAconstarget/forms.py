@@ -54,13 +54,13 @@ class MirconsForm(forms.Form):
     tapir_fasta=forms.BooleanField(label='TAPIR FASTA engine', required=False)
     tapir_RNAhyb=forms.BooleanField(label='TAPIR RNAhybrid engine', required=False)
 
-    seed_par=forms.CharField(label="Seed analysis parameters",required=False)
-    target_par=forms.CharField(label="TargetSpy parameters",required=False)
-    miranda_par = forms.CharField(label="Miranda Parameters", required=False)
-    PITA_par = forms.CharField(label="PITA parameters", required=False)
-    psRobot_par=forms.CharField(label="psRobot parameters",required=False)
-    tapir_fa_par = forms.CharField(label="TAPIR FASTA parameters", required=False)
-    tapir_RNA_par = forms.CharField(label="TAPIR RNA parameters", required=False)
+    seed_par=forms.CharField(label="Seed analysis parameters",required=False, initial=" ")
+    target_par=forms.CharField(label="TargetSpy parameters",required=False, initial=" ")
+    miranda_par = forms.CharField(label="Miranda Parameters", required=False, initial=" ")
+    PITA_par = forms.CharField(label="PITA parameters", required=False, initial=" ")
+    psRobot_par=forms.CharField(label="psRobot parameters",required=False, initial=" ")
+    tapir_fa_par = forms.CharField(label="TAPIR FASTA parameters", required=False, initial=" ")
+    tapir_RNA_par = forms.CharField(label="TAPIR RNA parameters", required=False, initial=" ")
 
 
     def clean(self):
