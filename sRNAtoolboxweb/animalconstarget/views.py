@@ -239,6 +239,7 @@ class AMirConsTarget(FormView):
         # It should return an HttpResponse.
         call, pipeline_id = form.create_call()
         print(call)
+        os.system("source /opt/venv/sRNAtoolbox2017/bin/activate")
         os.system(call)
         js = JobStatus.objects.get(pipeline_key=pipeline_id)
         js.status.create(status_progress='sent_to_queue')
