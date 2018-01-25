@@ -146,7 +146,7 @@ class AMirconsForm(forms.Form):
             "utr_file": utrfile,
             "program_string": program_string,
             #"parameter_string": '":"'.join(param_list),
-            "parameter_string": "\"" + " : ".join(param_list) + "\"" ,
+            "parameter_string": "'" + " : ".join(param_list) + "'" ,
             'type': 'miRNAconstarget'
          }
         configuration_file_path = os.path.join(out_dir, 'conf.json')
