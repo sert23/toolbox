@@ -3,5 +3,6 @@
 
 
 source /opt/venv/sRNAtoolbox2017/bin/activate
+export PATH=$PATH:/usr/local/bin:/usr/bin
 runPipelines $c
 
