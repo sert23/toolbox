@@ -41,10 +41,10 @@ class AMirconsForm(forms.Form):
         rows = csv.reader(tsvfile,delimiter='\t')
         for row in rows:
             if animals_dict.get(row[0]) :
-                current = (row[2],animals_dict[row[0]])
+                current = (row[2] , animals_dict[row[0]] + " (3'UTRs)")
                 choice_list.append(current)
 
-    choice_list = sorted(choice_list, key= itemgetter(0))
+    choice_list = sorted(choice_list, key= itemgetter(1))
 
     #species = ((os.path.join(os.path.join(PATH_TO_DB,"utr"), key),key[0:-9].replace("_", " ")) for (key) in onlyfiles)
 
@@ -146,7 +146,7 @@ class AMirconsForm(forms.Form):
             "utr_file": utrfile,
             "program_string": program_string,
             #"parameter_string": '":"'.join(param_list),
-            "parameter_string": " : ".join(param_list) ,
+            "parameter_string": "\"" + " : ".join(param_list) + "\"" ,
             'type': 'miRNAconstarget'
          }
         configuration_file_path = os.path.join(out_dir, 'conf.json')
