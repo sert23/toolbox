@@ -82,6 +82,19 @@ class AMirconsForm(forms.Form):
                 Field('utrfile', css_class='form-control'),
                 'utrchoice',
                 Field('utrtext', css_class='form-control')),
+            Fieldset(
+                'Choose programs and parameters',
+                'seed',
+                Field('seed_par', css_class='form-control'),
+                'targetspy',
+                Field('target_par', css_class='form-control'),
+                'miranda',
+                Field('miranda_par', css_class='form-control'),
+                'PITA',
+                Field('PITA_par', css_class='form-control'),
+
+            ),
+
             ButtonHolder(
                 Submit('submit', 'RUN', css_class='btn btn-primary')
             )
