@@ -11,6 +11,8 @@ from sRNAtoolboxweb.settings import MEDIA_ROOT,QSUB
 from utils.pipeline_utils import generate_uniq_id
 from django.conf import settings
 from django.core.files.base import ContentFile
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, Field, ButtonHolder, Submit
 
 SPECIES_PATH = settings.CONF["species"]
 PATH_TO_DB=CONF["db"]
@@ -66,6 +68,24 @@ class AMirconsForm(forms.Form):
     target_par=forms.CharField(label="TargetSpy parameters",required=False, initial=" ")
     miranda_par = forms.CharField(label="Miranda Parameters", required=False, initial=" ")
     PITA_par = forms.CharField(label="PITA parameters", required=False, initial=" ")
+
+    def __init__(self, *args, **kwargs):
+        super(AMirconsForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                'Choose miRNA input',
+                Field('mirfile', css_class='form-control'),
+                Field('mirtext', css_class='form-control')),
+            Fieldset(
+                'Choose target input',
+                Field('utrfile', css_class='form-control'),
+                'utrchoice',
+                Field('utrtext', css_class='form-control')),
+            ButtonHolder(
+                Submit('submit', 'RUN', css_class='btn btn-primary')
+            )
+        )
 
 
     def clean(self):
