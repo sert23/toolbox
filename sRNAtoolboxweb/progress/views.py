@@ -131,7 +131,7 @@ class JobStatusDetail(DetailView):
 
     @staticmethod
     def get_context_qw(job_status):
-        return {'running': True, 'queue': True, 'msgs': [Msg("INFO: Job is queue waiting")], "id": job_status.pipeline_key}
+        return {'running': True, 'queue': True, 'msgs': [Msg("INFO: Job is queue waiting")], "id": job_status.pipeline_key, "position":"23"}
 
 
     def get_context_data(self, **kwargs):
