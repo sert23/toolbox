@@ -149,6 +149,7 @@ class JobStatusDetail(DetailView):
                         # plist.append(data[1],data[4])
                         if data[9] == "Q":
                             count += 1
+                            break
                     elif data[9] == "Q":
                         count += 1
             return str(count)
