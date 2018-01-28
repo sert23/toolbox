@@ -129,9 +129,30 @@ class JobStatusDetail(DetailView):
             "ERROR: An error occured with your job:" + job_status.pipeline_key + "\nPlease report it indicating the jobID")],
             "id": job_status.pipeline_key}
 
+
     @staticmethod
     def get_context_qw(job_status):
-        return {'running': True, 'queue': True, 'msgs': [Msg("INFO: Job is queue waiting")], "id": job_status.pipeline_key, "position":"23"}
+
+        def qstat_pos(jobID):
+            import subprocess
+
+            # Set up the echo command and direct the output to a pipe
+            p1 = subprocess.Popen(['qstat', '-a'], stdout=subprocess.PIPE)
+            output = str(p1.communicate()[0])
+            lines = output.split("\\n")
+            count = 0
+            # qstat -a
+            for l in lines:
+                if l[0].isdigit():
+                    data = l.split()
+                    if data[3].startswith(jobID):
+                        # plist.append(data[1],data[4])
+                        if data[9] == "Q":
+                            count += 1
+                    elif data[9] == "Q":
+                        count += 1
+            return str(count)
+        return {'running': True, 'queue': True, 'msgs': [Msg("INFO: Job is queue waiting")], "id": job_status.pipeline_key, "position": qstat_pos(job_status.pipeline_key)}
 
 
     def get_context_data(self, **kwargs):
