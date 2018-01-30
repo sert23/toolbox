@@ -694,6 +694,7 @@ class Bench(FormView):
 
     def post(self, request, *args, **kwargs):
         request.POST._mutable = True
+        print(SPECIES_PATH)
         request.POST['species'] = request.POST['species_hidden'].split(',')
         request.POST._mutable = False
         return super(Bench, self).post(request, *args, **kwargs)
