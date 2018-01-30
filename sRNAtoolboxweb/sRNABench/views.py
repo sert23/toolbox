@@ -119,6 +119,7 @@ def input(request):
     """
 
     species_file = SpeciesParser(SPECIES_PATH)
+    print(SPECIES_PATH)
     array_species = species_file.parse()
     species_dict = {}
     form = sRNABenchForm()
