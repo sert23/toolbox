@@ -47,3 +47,7 @@ class Species (models.Model):
                     hasTargetSequencesAndGO=a[8]
 
                 )
+
+    @staticmethod
+    def clear_species():
+        Species.object.all().delete()
