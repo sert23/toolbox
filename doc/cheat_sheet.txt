@@ -1,0 +1,13 @@
+###Load new entries from species.txt
+python manage.py shell
+
+from sRNABench.models import Species
+Species.create_batch('input_tile')  
+#Species.create_batch('/opt/sRNAtoolboxDB/species.txt')
+
+##Delete (clear the fields)
+python manage.py shell
+
+from sRNABench.models import Species
+Species.clear_species()
+#Species.create_batch('/opt/sRNAtoolboxDB/species.txt')
