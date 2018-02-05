@@ -50,4 +50,4 @@ class Species (models.Model):
 
     @staticmethod
     def clear_species():
-        Species.object.all().delete( )
+        Species.objects.all().delete()
