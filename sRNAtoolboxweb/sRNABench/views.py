@@ -347,8 +347,8 @@ def add_preproc(params, results):
     preproc["Raw reads:"] = str(raw)
     if "readsAdapterFound" in params.params:
         preproc["Adapter trimmed"] = str(int(params.params['readsAdapterFound'])) + " (" + str(round(
-           # int(params.params['readsAdapterFound']) * 100.0 / raw, 2)) + "%)"
-            int(params.params['readsAdapterFound']) * 100.0, 2)) + "%)"
+            int(params.params['readsAdapterFound']) * 100.0 / raw, 2)) + "%)"
+
     else:
         preproc["Input was adapter trimmed"] = ""
     preproc["Length filtered (min):"] = str(int(params.params['readsLengthFilteredMin'])) + " (" + str(round(
