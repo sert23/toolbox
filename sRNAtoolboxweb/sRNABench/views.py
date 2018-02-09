@@ -320,9 +320,9 @@ def add_preimg(new_record, results):
     if os.path.exists(os.path.join(new_record.outdir, "graphs", "readLengthFull.png")):
         imgs.append([os.path.join(new_record.pipeline_key, "graphs", "readLengthFull.png"), "Read Length Distribution of Raw Input Reads"])
     if os.path.exists(os.path.join(new_record.outdir, "graphs", "readLengthAnalysis.png")):
-        imgs.append([os.path.join(new_record.pipeline_key, "graphs", "readLengthAnalysis.png"), "Read Length Distribution of Reads in Analysis"])
+        imgs.append([os.path.join(new_record.pipeline_key, "graphs", "rnaComposition_readLength.png"), "Read Length Distribution of Reads in Analysis"])
     if os.path.exists(os.path.join(new_record.outdir, "graphs", "mappedReadsLenghtDist.png")):
-        imgs.append([os.path.join(new_record.pipeline_key, "graphs", "mappedReadsLenghtDist.png"), "Read Length Distribution of Genome mapped reads"])
+        imgs.append([os.path.join(new_record.pipeline_key, "graphs", "genomeMappedReads.png"), "Read Length Distribution of Genome mapped reads"])
     if len(imgs) != 0:
         results["preimgs"] = imgs
 
