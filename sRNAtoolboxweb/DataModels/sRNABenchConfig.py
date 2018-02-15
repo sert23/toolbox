@@ -5,7 +5,7 @@ __author__ = 'antonior'
 
 class SRNABenchConfig():
     def __init__(self, annot_dic, dbPath, output, ifile, iszip="true", bedGraph="true",
-                 writeGenomeDist="true", predict=None,  graphics="true", species=None, short_names=(), adapter=None,
+                 writeGenomeDist="true", predict=None,  graphics="true", species=None, assembly=None, short_names=(), adapter=None,
                  recursiveAdapterTrimming = "false", libmode=False, nolib=False, microRNA=None, removeBarcode=None, adapterMinLength=None, adapterMM=None,
                  seed=None, noMM=None, alignType=None, minRC=None, solid=None, guessAdapter=False, highconf=False,
                  homolog=None, user_files=None, minReadLength="15", mBowtie="10"):
