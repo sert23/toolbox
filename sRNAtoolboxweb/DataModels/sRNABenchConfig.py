@@ -100,7 +100,8 @@ class SRNABenchConfig():
         for atr in none_atr:
             delattr(self, atr)
 
-        delattr(self,"assembly")
+        if self.__dict__.get("assembly"):
+            delattr(self,"assembly")
         for attr in self.__dict__:
 
             if attr == "species":
