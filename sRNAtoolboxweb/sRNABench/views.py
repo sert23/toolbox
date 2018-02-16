@@ -383,7 +383,7 @@ def add_mapping_result(new_record, parameters, results):
     mapping_results = {}
     if os.path.exists(os.path.join(new_record.outdir, "graphs", "genomeDistribution.png")):
         print("exists!")
-        print(os.path.exists(os.path.join(new_record.outdir, "graphs", "genomeDistribution.png")))
+        print(os.path.join(new_record.outdir, "graphs", "genomeDistribution.png"))
         genomeDistribution = os.path.join(new_record.pipeline_key, "graphs", "genomeDistribution.png")
         results["genomeDistribution"] = genomeDistribution
     if "readGMapped" in parameters:
