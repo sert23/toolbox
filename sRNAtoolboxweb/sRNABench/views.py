@@ -433,9 +433,10 @@ def add_libs(parameters, results):
 
 def add_novel(parameters, results):
     novel = {}
-    novel["Predicted novel microRNAS: "] = parameters["novelMiR"] + " with a total read count: " + parameters[
+    if parameters.get("novelMiR"):
+        novel["Predicted novel microRNAS: "] = parameters["novelMiR"] + " with a total read count: " + parameters[
         "readsNovel"]
-    results["novel"] = novel
+        results["novel"] = novel
 
 
 def add_trna(results):
@@ -516,7 +517,7 @@ def render_table(request, mode, job_id, lib=""):
 
     if mode == "pre-microRNA":
         result["title"] = "Mapping results to pre-microRNA"
-        ifile = os.path.join(new_record.outdir, "hairpin_sense_SA.grouped")
+        ifile = os.path.join(new_record.outdir, "hairpin_sense.grouped")
         #parser = MirBaseParser(ifile)
         parser = MatureParser(ifile)
         table = [obj for obj in parser.parse()]
