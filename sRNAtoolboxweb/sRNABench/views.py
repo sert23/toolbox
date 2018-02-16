@@ -333,8 +333,8 @@ def add_mirimg(new_record, results):
         imgs.append(os.path.join(new_record.pipeline_key, "graphs", "microRNA_species.png"))
     if os.path.exists(os.path.join(new_record.outdir, "graphs", "microRNA_top.png")):
         imgs.append(os.path.join(new_record.pipeline_key, "graphs", "microRNA_top.png"))
-    if os.path.exists(os.path.join(new_record.outdir, "graphs", "miRBase__allNTA.png")):
-        imgs.append(os.path.join(new_record.pipeline_key, "graphs", "miRBase__allNTA.png"))
+    if os.path.exists(os.path.join(new_record.outdir, "graphs", "isomiR_NTA.png")):
+        imgs.append(os.path.join(new_record.pipeline_key, "graphs", "isomiR_NTA.png"))
     if os.path.exists(os.path.join(new_record.outdir, "graphs", "miRBase_otherVariants.png")):
         imgs.append(os.path.join(new_record.pipeline_key, "graphs", "miRBase_otherVariants.png"))
     if len(imgs) != 0:
@@ -366,13 +366,14 @@ def add_preproc(params, results):
 def add_mirprof(params, results):
     mirprof = {}
     try:
-        mirprof["Detected mature miR:"] = str(int(params.params['matureDetected'])) + " (" + str(round(
-            int(params.params['matureDetected']) * 100.0 / int(params.params['matureDB']), 2)) + "%)"
+        mirprof["Detected mature miR:"] = str(int(params.params['detectedMature'])) + " (" + str(round(
+            int(params.params['detectedMature']) * 100.0 / 2000, 2)) + "%)"
+            #int(params.params['detectedMature']) * 100.0 / int(params.params['matureDB']), 2)) + "%)"
     except:
         mirprof["Detected mature miR:"] = str(0)
     try:
-        mirprof["Reads mapped to miRBase hairpins:"] = str(int(params.params['readHairpin'])) + " (" + str(round(
-            int(params.params['readHairpin']) * 100.0 / int(params.params['readGMapped']), 2)) + "%)"
+        mirprof["Reads mapped to miRBase hairpins:"] = str(int(params.params['detectedHairpin'])) + " (" + str(round(
+            int(params.params['detectedHairpin']) * 100.0 / int(params.params['readGMapped']), 2)) + "%)"
     except:
         mirprof["Reads mapped to miRBase hairpins:"] = str(0)
     if len(mirprof.keys()) > 0:
@@ -473,7 +474,7 @@ def result_new(request):
 
                 #MicroRNA summary (miRBase v21)
                 if "microRNA" in parameters:
-                    if "matureDetected" in parameters:
+                    if "detectedMature" in parameters:
                         add_mirimg(new_record, results)
                         add_mirprof(params, results)
 
