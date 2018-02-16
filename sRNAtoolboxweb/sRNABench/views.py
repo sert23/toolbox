@@ -382,18 +382,16 @@ def add_mirprof(params, results):
 def add_mapping_result(new_record, parameters, results):
     mapping_results = {}
     if os.path.exists(os.path.join(new_record.outdir, "graphs", "genomeDistribution.png")):
-        print("exists!")
-        print(os.path.join(new_record.outdir, "graphs", "genomeDistribution.png"))
         genomeDistribution = os.path.join(new_record.pipeline_key, "graphs", "genomeDistribution.png")
         results["genomeDistribution"] = genomeDistribution
     if "readGMapped" in parameters:
         raw = int(parameters["readsRaw"])
-        mapping_results["Genome mapped reads:"] = str(int(parameters['readGMapped'])) + "(" + str(round(
-            int(parameters['readGMapped']) * 100.0 / raw, 2)) + "%)"
+        mapping_results["Genome mapped reads:"] = str(int(parameters['readsRCgenomeMapped'])) + "(" + str(round(
+            int(parameters['readsRCgenomeMapped']) * 100.0 / raw, 2)) + "%)"
 
     elif "readLMapped" in parameters:
         raw = int(parameters["readsRaw"])
-        mapping_results["Genome mapped reads:"] = str(int(parameters['readLMapped'])) + "(" + str(round(
+        mapping_results["Genome mapped reads:"] = str(int(parameters['assignedRC'])) + "(" + str(round(
             int(parameters['Mapped reads:']) * 100.0 / raw, 2)) + "%)"
 
     if len(mapping_results.keys()) > 0:
