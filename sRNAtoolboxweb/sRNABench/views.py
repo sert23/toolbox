@@ -490,7 +490,7 @@ def result_new(request):
 
                 #New Mirna
                 if os.path.exists(os.path.join(new_record.outdir, "novel.txt")):
-                    add_novel(parameters, results)
+                    add_novel(new_record, results)
                 if os.path.exists(os.path.join(new_record.outdir, "tRNA_mature_sense.grouped")):
                     add_trna(results)
 
