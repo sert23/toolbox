@@ -367,13 +367,17 @@ def add_mirprof(params, results):
     mirprof = {}
     try:
         mirprof["Detected mature miR:"] = str(int(params.params['detectedMature'])) + " (" + str(round(
-            int(params.params['detectedMature']) * 100.0 / 2000, 2)) + "%)"
+            int(params.params['detectedMature']) * 100.0 / int(params.params['matureDB']), 2)) + "%)"
+        mirprof["Reads mapped to miRNAs:"] = str(int(params.params['readsRCmatureSense'])) + " (" + str(round(
+            int(params.params['readsRCmatureSense']) * 100.0 / int(params.params['assignedRC']), 2)) + "%)"
             #int(params.params['detectedMature']) * 100.0 / int(params.params['matureDB']), 2)) + "%)"
     except:
         mirprof["Detected mature miR:"] = str(0)
     try:
-        mirprof["Reads mapped to miRBase hairpins:"] = str(int(params.params['detectedHairpin'])) + " (" + str(round(
-            int(params.params['detectedHairpin']) * 100.0 / int(params.params['readGMapped']), 2)) + "%)"
+        mirprof["Detected hairpin miR:"] = str(int(params.params['detectedHairpin'])) + " (" + str(round(
+            int(params.params['detectedHairpin']) * 100.0 / int(params.params['hairpinDB']), 2)) + "%)"
+        mirprof["Reads mapped to miRBase hairpins:"] = str(int(params.params['readsRChairpinSense'])) + " (" + str(round(
+            int(params.params['readsRChairpinSense']) * 100.0 / int(params.params['assignedRC']), 2)) + "%)"
     except:
         mirprof["Reads mapped to miRBase hairpins:"] = str(0)
     if len(mirprof.keys()) > 0:
