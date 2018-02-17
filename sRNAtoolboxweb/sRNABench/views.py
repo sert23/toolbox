@@ -435,11 +435,12 @@ def add_libs(parameters, results):
         results["libs"] = libs
 
 
-def add_novel(parameters, results):
+def add_novel(new_record, results):
     novel = {}
-    if parameters.get("novelMiR"):
-        novel["Predicted novel microRNAS: "] = parameters["novelMiR"] + " with a total read count: " + parameters[
-        "readsNovel"]
+    if os.path.exists(os.path.join(new_record.outdir, "novel.txt")):
+        num_lines = sum(1 for line in open(os.path.join(new_record.outdir, "novel.txt")))
+        #novel["Predicted novel microRNAS: "] = parameters["novelMiR"] + " with a total read count: " + parameters["readsNovel"]
+        novel["new hairpins predicted: "] = str(num_lines-1)
         results["novel"] = novel
 
 
