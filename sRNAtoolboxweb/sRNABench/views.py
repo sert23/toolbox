@@ -429,7 +429,7 @@ def add_libs(parameters, results,config):
             except:
                 libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters[val + "Sense"]) + "(" + str(round(0)) + "%)"
  
-        if val + "ASense" in parameters:
+        if "readsRC" +val + "ASense" in parameters:
             try:
                 libs[(desc, val)]["Mapped reads in antisense direction:"] = str(parameters["readsRC"+val + "ASense"]) +\
                 "(" + str(round(int(parameters["readsRC" + val + "ASense"]) * 100.0 / int(parameters["assignedRC"]), 2)) + "%)"
