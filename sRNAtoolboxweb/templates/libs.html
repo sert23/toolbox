@@ -14,7 +14,7 @@
                         <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "SA_antisense" id key.1 %}">SA antisense</a></dd>
 {#                    <a href="{% url "sRNABench.views.render_table" "MA_antisense" id key.1%}"> MA </a> /#}
 {#                    <a href="{% url "sRNABench.views.render_table" "SA_antisense" id key.1%}"> SA </a>#}
-                    {% elif %}
+                    {% else %}
                         <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "MA" id key.1 %}">multiple assignment (MA)</a></dd>
                         <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "SA" id key.1 %}">single assignment (SA)</a></dd>
                     {% endifequal %}
