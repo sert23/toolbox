@@ -404,17 +404,18 @@ def add_mapping_result(new_record, parameters, results):
         results["mapping_results"] = mapping_results
 
 
-def add_libs(parameters, results):
+def add_libs(parameters, results,config):
     libs = {}
-    for i, lib in enumerate(parameters["libs"]):
+    for i, lib in enumerate(config.params["libs"]):
         print(lib)
         val = lib.split("/")[-1].split(".")[0]
-        if "desc" in parameters:
-            print(parameters["desc"][i])
+        if "desc" in config.params:
+            #print(parameters["desc"][i])
             try:
                 desc = parameters["desc"][i]
+                print(desc)
             except:
-                desc = val
+               desc = val
         else:
             desc = val
 
@@ -462,6 +463,7 @@ def result_new(request):
 
         if (new_record.job_status == "Finished" or new_record.job_status == "Running") and os.path.exists(os.path.join(new_record.outdir, "parameters.txt")):
             params = ParamsBench(os.path.join(new_record.outdir, "parameters.txt"), os.path.join(new_record.outdir, "results.txt"),os.path.join(new_record.outdir, "conf.txt"))
+            config_params = ParamsBench(os.path.join(new_record.outdir, "conf.txt"))
             if new_record.job_status == "Running":
                 results["running"] = True
 
@@ -488,7 +490,7 @@ def result_new(request):
 
                 #sRNA summary
                 if "libs" in parameters:
-                    add_libs(parameters, results)
+                    add_libs(parameters, results, config_params)
 
                 #New Mirna
                 if os.path.exists(os.path.join(new_record.outdir, "novel.txt")):
