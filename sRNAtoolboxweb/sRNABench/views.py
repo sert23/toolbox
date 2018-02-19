@@ -631,7 +631,7 @@ def render_table(request, mode, job_id, lib=""):
 
     if mode == "SA":
         result["title"] = lib
-        ifile = os.path.join(new_record.outdir, lib + "_sense_singleA.grouped")
+        ifile = os.path.join(new_record.outdir, lib + "_sense_SA.grouped")
         parser = SAParser(ifile)
         table = [obj for obj in parser.parse()]
         id = "table"
@@ -659,7 +659,7 @@ def render_table(request, mode, job_id, lib=""):
 
     if mode == "SA_antisense":
         result["title"] = lib
-        ifile = os.path.join(new_record.outdir, lib + "_antisense_singleA.grouped")
+        ifile = os.path.join(new_record.outdir, lib + "_antisense_SA.grouped")
         parser = SAParser(ifile)
         table = [obj for obj in parser.parse()]
         id = "table"
