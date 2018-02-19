@@ -433,11 +433,9 @@ def add_libs(parameters, results):
 
     if len(libs.keys()) > 0:
         results["libs"] = libs
-    else:
-        results["libs"] = "lalo"
 
 
-def add_novel(new_record, results):
+def add_novel(new_record, results):id
     novel = {}
     if os.path.exists(os.path.join(new_record.outdir, "novel.txt")):
         num_lines = sum(1 for line in open(os.path.join(new_record.outdir, "novel.txt")))
@@ -461,7 +459,7 @@ def result_new(request):
         results["id"] = job_id
 
         if (new_record.job_status == "Finished" or new_record.job_status == "Running") and os.path.exists(os.path.join(new_record.outdir, "parameters.txt")):
-            params = ParamsBench(os.path.join(new_record.outdir, "parameters.txt"), os.path.join(new_record.outdir, "results.txt"))
+            params = ParamsBench(os.path.join(new_record.outdir, "parameters.txt"), os.path.join(new_record.outdir, "results.txt"),os.path.join(new_record.outdir, "conf.txt"))
             if new_record.job_status == "Running":
                 results["running"] = True
 
