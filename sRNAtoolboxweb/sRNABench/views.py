@@ -69,8 +69,8 @@ def define_table(columns, typeTable):
     """
 
     attrs = dict((c, tables.Column()) for c in columns if c != "align" and c != "align_")
-    # attrs2 = dict((c, tables.TemplateColumn('<a href="{% url "sRNABench.views.show_align" id "hairpin" record.align %}">align</a>')) for c in columns if c == "align")
-    # attrs.update(attrs2)
+    attrs2 = dict((c, tables.TemplateColumn('<a href="{% url "sRNABench.views.show_align" id "hairpin" record.align %}">align</a>')) for c in columns if c == "align")
+    attrs.update(attrs2)
     # attrs3 = dict((c, tables.TemplateColumn('<a href="{% url "sRNABench.views.show_align" id "novel" record.align_ %}">align</a>')) for c in columns if c == "align_")
     # attrs.update(attrs3)
 
@@ -416,20 +416,20 @@ def add_libs(parameters, results):
         else:
             desc = val
 
-        if "readFW" + val in parameters:
+        if val + "Sense" in parameters:
             libs[(desc, val)] = {}
             try:
-                libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters["readFW" + val]) + "(" + str(round(
-                	int(parameters["readFW" + val]) * 100.0 / int(parameters["readGMapped"]), 2)) + "%)"
+                libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters[val + "Sense"]) + "(" + str(round(
+                	int(parameters[val + "Sense"]) * 100.0 / int(parameters['assignedRC']), 2)) + "%)"
             except:
-                libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters["readFW" + val]) + "(" + str(round(0)) + "%)"
+                libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters[val + "Sense"]) + "(" + str(round(0)) + "%)"
  
-        if "readRV" + val in parameters:
+        if val + "ASense" in parameters:
             try:
-                libs[(desc, val)]["Mapped reads in antisense direction:"] = str(parameters["readRV" + val]) + "(" + str(round(
-                	int(parameters["readRV" + val]) * 100.0 / int(parameters["readGMapped"]), 2)) + "%)"
+                libs[(desc, val)]["Mapped reads in antisense direction:"] = str(parameters[val + "ASense"]) + "(" + str(round(
+                	int(parameters[val + "ASense"]) * 100.0 / int(parameters["assignedRC"]), 2)) + "%)"
             except:
-                libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters["readFW" + val]) + "(" + str(round(0)) + "%)"
+                libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters[val + "ASense"]) + "(" + str(round(0)) + "%)"
 
     if len(libs.keys()) > 0:
         results["libs"] = libs
