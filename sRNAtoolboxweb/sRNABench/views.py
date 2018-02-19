@@ -433,6 +433,8 @@ def add_libs(parameters, results):
 
     if len(libs.keys()) > 0:
         results["libs"] = libs
+    else:
+        results["libs"] = "lalo"
 
 
 def add_novel(new_record, results):
