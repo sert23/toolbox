@@ -421,9 +421,11 @@ def add_libs(parameters, results,config):
 
         if val + "Sense" in parameters:
             libs[(desc, val)] = {}
+            print(val)
+            print("in sense")
             try:
-                libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters[val + "Sense"]) + "(" + str(round(
-                	int(parameters[val + "Sense"]) * 100.0 / int(parameters['assignedRC']), 2)) + "%)"
+                libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters[val + "Sense"]) + \
+                "(" + str(round(int(parameters[val + "Sense"]) * 100.0 / int(parameters['assignedRC']), 2)) + "%)"
             except:
                 libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters[val + "Sense"]) + "(" + str(round(0)) + "%)"
  
@@ -434,7 +436,7 @@ def add_libs(parameters, results,config):
             except:
                 libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters[val + "ASense"]) + "(" + str(round(0)) + "%)"
 
-    if len(libs.keys()) > 0:
+    if len(list(libs.keys())) > 0:
         results["libs"] = libs
 
 
