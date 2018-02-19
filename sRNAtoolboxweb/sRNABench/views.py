@@ -581,8 +581,8 @@ def render_table(request, mode, job_id, lib=""):
     if mode == "novel":
         result["title"] = "Novel microRNAs"
         ifile = os.path.join(new_record.outdir, "novel.txt")
-        #parser = NovelParser(ifile)
-        parser = MatureParser(ifile)
+        parser = NovelParser(ifile)
+        #parser = MatureParser(ifile)
         #parser = TRNAParser(ifile)
         table = [obj for obj in parser.parse()]
         id = "table"
@@ -590,7 +590,8 @@ def render_table(request, mode, job_id, lib=""):
             header = table[0].get_sorted_attr()
             r = Result(id, define_table(header, 'TableResult')(table[:500]))
             result["table"] = r
-            result["sec"] = "novel"
+            #result["sec"] = "novel"
+            result["sec"] = "trna"
         except:
             pass
 
