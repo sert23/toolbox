@@ -435,7 +435,7 @@ def add_libs(parameters, results):
         results["libs"] = libs
 
 
-def add_novel(new_record, results):id
+def add_novel(new_record, results):
     novel = {}
     if os.path.exists(os.path.join(new_record.outdir, "novel.txt")):
         num_lines = sum(1 for line in open(os.path.join(new_record.outdir, "novel.txt")))
