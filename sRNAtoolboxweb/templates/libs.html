@@ -8,7 +8,7 @@
                 <dt style='text-align: left; margin-bottom: 0.25em; width: auto; padding-right: 1em;'>{{ key2 }}
                 </dt>
                 <dd style="margin-left: 0; margin-bottom: 0.25em;">{{ value2 }}
-                    {% if " sense " in key.0 %}
+                    {% if "anti" in key.0 %}
                         <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "MA" id key.1 %}">multiple assignment (MA)</a></dd>
                         <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "SA" id key.1 %}">single assignment (SA)</a></dd>
                     {% else %}
