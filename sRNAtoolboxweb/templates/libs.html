@@ -9,11 +9,11 @@
                 </dt>
                 <dd style="margin-left: 0; margin-bottom: 0.25em;">{{ value2 }}
                     {% if "anti" in key2 %}
-                        <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "MA" id key.1 %}">multiple assignment (MA)</a></dd>
-                        <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "SA" id key.1 %}">single assignment (SA)</a></dd>
-                    {% else %}
                         <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "MA_antisense" id key.1 %}">MA antisense</a></dd>
                         <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "SA_antisense" id key.1 %}">SA antisense</a></dd>
+                    {% else %}
+                        <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "MA" id key.1 %}">multiple assignment (MA)</a></dd>
+                        <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "SA" id key.1 %}">single assignment (SA)</a></dd>
                     {% endif %}
                 </dd>
                 {% endfor %}
