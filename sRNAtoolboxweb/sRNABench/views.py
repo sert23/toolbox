@@ -407,7 +407,7 @@ def add_mapping_result(new_record, parameters, results):
 def add_libs(parameters, results):
     libs = {}
     for i, lib in enumerate(parameters["libs"]):
-        print lib
+        print(lib)
         val = lib.split("/")[-1].split(".")[0]
         if "desc" in parameters:
             try:
