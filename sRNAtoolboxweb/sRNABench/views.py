@@ -410,6 +410,7 @@ def add_libs(parameters, results):
         print(lib)
         val = lib.split("/")[-1].split(".")[0]
         if "desc" in parameters:
+            print(parameters["desc"][i])
             try:
                 desc = parameters["desc"][i]
             except:
