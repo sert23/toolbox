@@ -431,8 +431,8 @@ def add_libs(parameters, results,config):
  
         if val + "ASense" in parameters:
             try:
-                libs[(desc, val)]["Mapped reads in antisense direction:"] = str(parameters[val + "ASense"]) + "(" + str(round(
-                	int(parameters[val + "ASense"]) * 100.0 / int(parameters["assignedRC"]), 2)) + "%)"
+                libs[(desc, val)]["Mapped reads in antisense direction:"] = str(parameters["readsRC"+val + "ASense"]) +\
+                "(" + str(round(int(parameters["readsRC" + val + "ASense"]) * 100.0 / int(parameters["assignedRC"]), 2)) + "%)"
             except:
                 libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters[val + "ASense"]) + "(" + str(round(0)) + "%)"
 
