@@ -683,7 +683,7 @@ def show_align(request, job_id, type, name):
         result["id"] = job_id
         new_record = JobStatus.objects.get(pipeline_key=job_id)
         outdir = new_record.outdir
-        if type == "hairpin":
+        if type == "pre-microRNA":
             ifile = os.path.join(outdir, "hairpin", name + ".align")
             if os.path.exists(ifile):
                 content = open(ifile).readlines()
