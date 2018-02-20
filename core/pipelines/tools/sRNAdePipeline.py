@@ -71,7 +71,7 @@ class sRNAdePipeline(Pipeline):
 
         if self.groups is not None:
 
-            if self.desc is not None:
+            if self.desc is not "":
 
                 cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.input + " grpString=" + self.groups + " iso=" + self.iso + " matrixDesc=" + self.desc + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " grpDesc=" + self.groups + " output=" + self.outdir + " minRCexpr=5"# rscripts=/shared/sRNAtoolbox/rscripts"
             else:
