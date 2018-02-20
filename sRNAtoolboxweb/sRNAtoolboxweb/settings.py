@@ -26,7 +26,8 @@ SECRET_KEY = '^qn#c))1g9tb103+q4@04gk^**9#@6=kp(i4lz%$ron%yumut='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["bioinfo5.ugr.es"]
+ALLOWED_HOSTS = ["bioinfo5.ugr.es",
+		"127.0.0.1"]
 
 # Application definition
 
@@ -41,9 +42,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'sRNAfuncTerms',
     'progress',
+    'sRNAde',
     'helpers',
     'sRNABench',
-    'sRNAde'
     'sRNAblast',
     'miRNAconstarget',
     'sRNAjBrowser',
@@ -115,7 +116,7 @@ DATABASES = {
     }
 }
 
-#FS = FileSystemStorage("/shared/sRNAtoolbox/webData")
+FS = FileSystemStorage("/shared/sRNAtoolbox/webData")
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
@@ -173,15 +174,15 @@ CONF = {
     "jBrowserWWWPathGenome": "/sRNAtoolbox/sRNAjBrowser/genomes",
     "seqObj": "/srv/shared/sRNAtoolboxDB/seqOBJ",
     "annotationPath": "/shared/sRNAtoolboxDB/jBrowserAnnot",
-    "species": "sRNAtoolboxDB/species.txt",
+    "species": "/opt/sRNAtoolboxDB/species.txt",
     #"speciesAnnotation": "/home/aruedamartin/annotation.txt",
     "speciesAnnotation": "/opt/sRNAtoolboxDB/annotation.txt",
     "targetAnnotation": "/shared/sRNAtoolboxDB/targetAnnot.txt",
-    "db": "/shared/sRNAtoolboxDB",
-    "exec": "/shared/sRNAtoolboxDB/exec",
+    "db": "/opt/sRNAtoolboxDB",
+    "exec": "/opt/sRNAtoolboxDB/exec",
     "RNAcentral": "/shared/sRNAtoolboxDB/dbs/rnacentral_active.fasta",
     "tRNA": "/shared/sRNAtoolboxDB/dbs/eukaryotic-tRNAs.fa",
     "tax": "/shared/sRNAtoolboxDB/dbs/taxonomy.txt"
 }
 
-QSUB = False
+QSUB = True
