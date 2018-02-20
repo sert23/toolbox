@@ -9,7 +9,7 @@ class JobStatus (models.Model):
     job_status = models.CharField(max_length=100)
     start_time = models.DateTimeField(default=0)
     finish_time = models.DateTimeField(null=True)
-    all_files = models.CharField(max_length=1000)
+    all_files = models.CharField(max_length=1000, null=True)
     modules_files = models.CharField(max_length=1000)
     pipeline_type = models.CharField(max_length=100)
     heatmaps = models.CharField(max_length=1000, null=True)
