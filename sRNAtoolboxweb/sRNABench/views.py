@@ -531,8 +531,8 @@ def render_table(request, mode, job_id, lib=""):
     if mode == "pre-microRNA":
         result["title"] = "Mapping results to pre-microRNA"
         ifile = os.path.join(new_record.outdir, "hairpin_sense.grouped")
-        #parser = MirBaseParser(ifile)
-        parser = MatureParser(ifile)
+        parser = MirBaseParser(ifile)
+        #parser = MatureParser(ifile)
         table = [obj for obj in parser.parse()]
         id = "table"
         try:
