@@ -74,7 +74,7 @@ def define_table(columns, typeTable):
     attrs.update(attrs2)
     #attrs3 = dict((c, tables.TemplateColumn('<a href="{% url "show_align" id "novel" record.align_ %}">align</a>')) for c in columns if c == "align_")
     #attrs3 = dict((c, tables.TemplateColumn('<a href="{% url "sRNABench.views.show_align" id "novel" record.align_ %}">align</a>')) for c in columns if c == "align_")
-    attrs.update(attrs3)
+    #attrs.update(attrs3)
 
 
 
