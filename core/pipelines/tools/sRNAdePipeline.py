@@ -3,7 +3,7 @@ import os
 from time import strftime, gmtime
 import re
 from pipelines.pipelines import Pipeline
-from sRNAtoolboxweb.settings import MEDIA_ROOT
+from django.conf import settings
 
 
 class sRNAdePipeline(Pipeline):
@@ -76,7 +76,7 @@ class sRNAdePipeline(Pipeline):
 
                 cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.input + " grpString=" + self.groups + " iso=" + self.iso + " matrixDesc=" + self.desc + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " grpDesc=" + self.groups + " output=" + self.outdir + " minRCexpr=5"# rscripts=/shared/sRNAtoolbox/rscripts"
             else:
-                cmd = "java -jar " + self.configuration.path_to_makede + " input=" + MEDIA_ROOT + " grpString=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " grpDesc=" + self.groups + " output=" + self.outdir + " minRCexpr=5"#rscripts=/shared/sRNAtoolbox/rscripts"
+                cmd = "java -jar " + self.configuration.path_to_makede + " input=" + settings.MEDIA_ROOT + " grpString=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " grpDesc=" + self.groups + " output=" + self.outdir + " minRCexpr=5"#rscripts=/shared/sRNAtoolbox/rscripts"
         else:
             cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " matrixDesc=" + self.md.replace(":", ",") + " output=" + self.outdir + " minRCexpr=5 "#rscripts=/shared/sRNAtoolbox/rscripts"
 
