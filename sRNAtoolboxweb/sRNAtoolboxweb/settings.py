@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'progress',
     'helpers',
     'sRNABench',
+    'sRNAde'
     'sRNAblast',
     'miRNAconstarget',
     'sRNAjBrowser',
@@ -114,7 +115,7 @@ DATABASES = {
     }
 }
 
-FS = FileSystemStorage("/shared/sRNAtoolbox/webData")
+#FS = FileSystemStorage("/shared/sRNAtoolbox/webData")
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
