@@ -71,8 +71,7 @@ class sRNABenchForm(forms.Form):
     )
 
     mirdb_list = [(None, "Do not use MirGeneDB")]
-    print(CONF)
-    fh = open(CONF.mirDbPath)
+    fh = open(CONF["mirDbPath"])
     for line in fh:
         mirdb_list.append((line.rstrip(), line.rstrip()))
 
