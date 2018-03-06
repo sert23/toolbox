@@ -169,7 +169,7 @@ class sRNABenchForm(forms.Form):
                 'miRNA Analysis Options',
                 'genome_mir',
                 'highconf',
-                 'mirDB'
+                Field('mirDB', css_class='form-control')
                 ),
                 Fieldset(
                 'Species Selection',
