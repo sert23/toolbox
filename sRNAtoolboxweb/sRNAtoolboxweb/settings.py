@@ -176,6 +176,7 @@ CONF = {
     "annotationPath": "/shared/sRNAtoolboxDB/jBrowserAnnot",
     "species": "/opt/sRNAtoolboxDB/species.txt",
     #"speciesAnnotation": "/home/aruedamartin/annotation.txt",
+    "mirDbPath" : "/opt/sRNAtoolboxDB/mirdb.tsv",
     "speciesAnnotation": "/opt/sRNAtoolboxDB/annotation.txt",
     "targetAnnotation": "/shared/sRNAtoolboxDB/targetAnnot.txt",
     "db": "/opt/sRNAtoolboxDB",
