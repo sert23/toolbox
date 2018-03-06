@@ -70,6 +70,11 @@ class sRNABenchForm(forms.Form):
         ('v', 'full read alignment(all mismatches count)'),
     )
 
+    mirdb_list = [(None, "Do not use MirGeneDB")]
+    fh = open(CONF.mirDbPath)
+    for line in fh:
+        mirdb_list.append((line.rstrip(), line.rstrip()))
+
 
     ifile = forms.FileField(label='Upload the reads (fastq.gz, fa.gz or rc.gz)' + render_modal('SRNAinput'),
                             required=False)
@@ -93,6 +98,7 @@ class sRNABenchForm(forms.Form):
     # MicroRNA Analysis
     genome_mir = forms.BooleanField(label='Use the miRNAs for the species from the selected genomes', required=False)
     highconf = forms.BooleanField(label='Use high confidence microRNAs from miRBase', required=False)
+    mirDB = forms.ChoiceField(label="Select MirGeneDBv2.0 tag", choices=mirdb_list, required=False)
     mirna_profiled = forms.CharField(
         label='Specify the microRNAs that should be profiled (for example, hsa (human), mmu (mouse) or hsa:hsv1 '
               '(human and herpes simplex virus):',
@@ -162,7 +168,8 @@ class sRNABenchForm(forms.Form):
                 Fieldset(
                 'miRNA Analysis Options',
                 'genome_mir',
-                'highconf'
+                'highconf',
+                 'mirDB'
                 ),
                 Fieldset(
                 'Species Selection',
