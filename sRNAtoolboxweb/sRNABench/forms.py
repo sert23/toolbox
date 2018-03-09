@@ -60,6 +60,7 @@ def m():
 class sRNABenchForm(forms.Form):
     ADAPTERS = (
         (None, "Select Adapter to trim off"),
+        ("EMPTY", "Input reads are already trimmed"),
         ("TGGAATTCTCGGGTGCCAAGG", "Illumina RA3 - TGGAATTCTCGGGTGCCAAGG"),
         ("UCGUAUGCCGUCUUCUGCUUGU", "Illumina(alternative) - UCGUAUGCCGUCUUCUGCUUGU", ),
         ("330201030313112312", "SOLiD(SREK) - 330201030313112312"),
@@ -223,6 +224,9 @@ class sRNABenchForm(forms.Form):
             self.add_error('guess_adapter', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
             self.add_error('adapter_chosen', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
             self.add_error('adapter_manual', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
+        if cleaned_data.get('guess_adapter') and not cleaned_data.get('species'):
+            self.add_error('species', 'if `guess the adapter sequence`, an input genome is required')
+
         if cleaned_data.get('highconf') and cleaned_data.get('mirDB') :
             self.add_error('highconf', 'Choose either miRBase or MirGeneDB for high confidence annotation')
             self.add_error('mirDB', 'Choose either miRBase or MirGeneDB for high confidence annotation')
