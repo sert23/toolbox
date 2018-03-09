@@ -230,7 +230,7 @@ class sRNABenchForm(forms.Form):
         print(cleaned_data.get('species'))
         if cleaned_data.get('predict_mirna') and cleaned_data.get('species'):
             #self.add_error('species', 'if `Predict New miRNA`, an input genome is required')
-            print cleaned_data.get('species')
+            print(cleaned_data.get('species'))
 
         if cleaned_data.get('highconf') and cleaned_data.get('mirDB') :
             self.add_error('highconf', 'Choose either miRBase or MirGeneDB for high confidence annotation')
