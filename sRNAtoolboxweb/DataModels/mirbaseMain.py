@@ -20,3 +20,4 @@ class MirBaseMain():
 
     def get_sorted_attr(self):
         return ["Name", "UR", "RC", "RC_adj", "coordinates","align"]
+

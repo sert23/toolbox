@@ -7,7 +7,7 @@ class SRNABenchConfig():
     def __init__(self, annot_dic, dbPath, output, ifile, iszip="true", bedGraph="true",
                  writeGenomeDist="true", predict=None,  graphics="true", species=None, assembly=None, short_names=(), adapter=None,
                  recursiveAdapterTrimming = "false", libmode=False, nolib=False, microRNA=None, removeBarcode=None, adapterMinLength=None, adapterMM=None,
-                 seed=None, noMM=None, alignType=None, minRC=None, solid=None, guessAdapter=False, highconf=False,
+                 seed=None, noMM=None, alignType=None, minRC=None, solid=None, guessAdapter=False, highconf=False, mirDB=False,
                  homolog=None, user_files=None, minReadLength="15", mBowtie="10"):
 
         self.mBowtie = mBowtie
@@ -84,9 +84,10 @@ class SRNABenchConfig():
         if highconf:
             self.mature = "high_conf_mature.fa"
             self.hairpin = "high_conf_hairpin.fa"
-
-
-
+        if mirDB:
+            self.mature = "mature_MGDB.fa"
+            self.hairpin = "hairpin_MGDB.fa"
+            self.microRNA = mirDB
 
         if self.microRNA and self.microRNA != "":
             self.isoMiR = "true"

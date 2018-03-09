@@ -61,7 +61,6 @@ class DEForm(forms.Form):
                          Field('probability', css_class='form-control'),
                          'isomiRs'
                          ),
-
             ButtonHolder(
                 Submit('submit', 'RUN', css_class='btn btn-primary')
             )

@@ -223,6 +223,9 @@ class sRNABenchForm(forms.Form):
             self.add_error('guess_adapter', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
             self.add_error('adapter_chosen', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
             self.add_error('adapter_manual', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
+        if cleaned_data.get('highconf') and cleaned_data.get('mirDB') :
+            self.add_error('highconf', 'Choose either miRBase or MirGeneDB for high confidence annotation')
+            self.add_error('mirDB', 'Choose either miRBase or MirGeneDB for high confidence annotation')
 
         return cleaned_data
 
@@ -285,6 +288,7 @@ class sRNABenchForm(forms.Form):
         predict_mirna = str(cleaned_data.get('predict_mirna')).lower()
         no_libs = cleaned_data.get('no_libs')
         highconf = cleaned_data.get('highconf')
+        mirDB = cleaned_data.get('mirDB')
         #recursive_adapter_trimming = str(cleaned_data.get('recursive_adapter_trimming')).lower()
         recursive_adapter_trimming = str(cleaned_data.get('adapter_recursive_trimming')).lower()
         species = [i.db_ver for i in cleaned_data['species']]
@@ -318,7 +322,7 @@ class sRNABenchForm(forms.Form):
                                   adapterMinLength=adapter_length, adapterMM=adapter_mismatch,
                                   seed=seed_length,
                                   noMM=mismatches, alignType=aligment_type, minRC=min_read_count, solid=is_solid,
-                                  guessAdapter=guess_adapter, highconf=highconf, homolog=homologous,
+                                  guessAdapter=guess_adapter, highconf=highconf, mirDB=mirDB, homolog=homologous,
                                   user_files=libs_files, minReadLength=min_read_length, mBowtie=max_multiple_mapping)
 
         conf_file_location = os.path.join(FS.location, "conf.txt")
