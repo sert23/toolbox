@@ -73,7 +73,7 @@ class sRNABenchForm(forms.Form):
     mirdb_list = [(None, "Do not use MirGeneDB")]
     fh = open(CONF["mirDbPath"])
     for line in fh:
-        mirdb_list.append((line, line))
+        mirdb_list.append((line.rstrip(), line.rstrip()))
 
 
     ifile = forms.FileField(label='Upload the reads (fastq.gz, fa.gz or rc.gz)' + render_modal('SRNAinput'),
