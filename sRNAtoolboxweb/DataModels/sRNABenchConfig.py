@@ -106,7 +106,7 @@ class SRNABenchConfig():
         for attr in self.__dict__:
             if attr == "assembly":
                 continue
-            if attr == "species":
+            if attr == "species" and self.__dict__.get(attr):
                 fdw.write("species" + "=" + ":".join(self.__dict__[attr]) + "\n")
             elif attr != "libs" and attr != "desc":
                 print(attr)
