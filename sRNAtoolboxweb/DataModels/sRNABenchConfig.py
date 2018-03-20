@@ -55,7 +55,7 @@ class SRNABenchConfig():
                 if assemb in annot_dic:
                     if "libs" in annot_dic[assemb]:
                         self.libs = annot_dic[assemb]["libs"]
-                        print(annot_dic[assemb]["libs"])
+                        #print(annot_dic[assemb]["libs"])
                     if "desc" in annot_dic[assemb]:
                         self.desc = annot_dic[assemb]["desc"]
                     if "libsStringTypes" in annot_dic[assemb]:
