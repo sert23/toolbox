@@ -14,6 +14,7 @@ class SpeciesAnnotationParser(Parser):
 
         for line in fd:
             if not (line.startswith("#")) and line != "\n":
+                print(line)
                 (sp, values) = line.replace("\n", "").replace("\r", "").split(":")
                 (tag, value) = values.split("=")
 
