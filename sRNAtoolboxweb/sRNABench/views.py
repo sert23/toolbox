@@ -724,17 +724,17 @@ class Bench(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
 
-        #form.clean()
+        form.clean()
 
-        #call, pipeline_id = form.create_call()
-        #self.success_url = reverse_lazy('srnabench') + '?id=' + pipeline_id
+        call, pipeline_id = form.create_call()
+        self.success_url = reverse_lazy('srnabench') + '?id=' + pipeline_id
 
-        #print(call)
-        #os.system(call)
-        #js = JobStatus.objects.get(pipeline_key=pipeline_id)
-        #js.status.create(status_progress='sent_to_queue')
-        #js.job_status = 'sent_to_queue'
-        #js.save()
+        print(call)
+        os.system(call)
+        js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
         return super(Bench, self).form_valid(form)
 
     def print_file_locat(self, form):
