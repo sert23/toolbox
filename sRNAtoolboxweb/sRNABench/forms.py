@@ -211,6 +211,10 @@ class sRNABenchForm(forms.Form):
     def clean(self):
 
         cleaned_data = super(sRNABenchForm, self).clean()
+
+        if not cleaned_data.get('species'):
+            print("no species")
+
         if not cleaned_data.get('ifile') and not cleaned_data.get('url'):
             self.add_error('ifile', 'One of these two fields is required')
             self.add_error('url', 'One of these two fields is required')
