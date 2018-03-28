@@ -211,31 +211,27 @@ class sRNABenchForm(forms.Form):
     def clean(self):
 
         cleaned_data = super(sRNABenchForm, self).clean()
-
         if not cleaned_data.get('species') and not cleaned_data.get('mirna_profiled'):
-            print("no species and no mirna")
-            self.add_error('species','lolalo')
-
+            self.add_error('species','Species or a miRBase short name tag are required')
+            self.add_error('mirna_profiled', 'Species or a miRBase short name tag are required')
         if not cleaned_data.get('ifile') and not cleaned_data.get('url'):
             self.add_error('ifile', 'One of these two fields is required')
             self.add_error('url', 'One of these two fields is required')
+            print(cleaned_data.get('ifile'))
         if cleaned_data.get('ifile') and cleaned_data.get('url'):
             self.add_error('ifile', 'Choose either file or URL')
             self.add_error('url', 'Choose either file or URL')
         if cleaned_data.get('predict_mirna') and cleaned_data.get('library_mode'):
             self.add_error('library_mode', 'Genome mode is needed for miRNA prediction')
-
         if not cleaned_data.get('guess_adapter') and cleaned_data.get('adapter_chosen')=='' and cleaned_data.get('adapter_manual')=='':
             self.add_error('guess_adapter', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
             self.add_error('adapter_chosen', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
             self.add_error('adapter_manual', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
         if cleaned_data.get('guess_adapter') and not cleaned_data.get('species'):
             self.add_error('species', 'if `guess the adapter sequence`, an input genome is required')
-
-        print(cleaned_data.get('species'))
-        if cleaned_data.get('predict_mirna') and cleaned_data.get('species'):
-            #self.add_error('species', 'if `Predict New miRNA`, an input genome is required')
-            print(cleaned_data.get('species'))
+        # if cleaned_data.get('predict_mirna') and cleaned_data.get('species'):
+        #     #self.add_error('species', 'if `Predict New miRNA`, an input genome is required')
+        #     print(cleaned_data.get('species'))
 
         if cleaned_data.get('highconf') and cleaned_data.get('mirDB') :
             self.add_error('highconf', 'Choose either miRBase or MirGeneDB for high confidence annotation')
