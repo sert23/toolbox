@@ -212,8 +212,9 @@ class sRNABenchForm(forms.Form):
 
         cleaned_data = super(sRNABenchForm, self).clean()
 
-        if not cleaned_data.get('species') and cleaned_data.get('mirna_profiled'):
+        if not cleaned_data.get('species') and not cleaned_data.get('mirna_profiled'):
             print("no species and no mirna")
+            self.add_error('species','lolalo')
 
         if not cleaned_data.get('ifile') and not cleaned_data.get('url'):
             self.add_error('ifile', 'One of these two fields is required')
