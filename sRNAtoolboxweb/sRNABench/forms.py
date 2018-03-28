@@ -103,7 +103,7 @@ class sRNABenchForm(forms.Form):
     mirna_profiled = forms.CharField(
         label='Specify the microRNAs that should be profiled (for example, hsa (human), mmu (mouse) or hsa:hsv1 '
               '(human and herpes simplex virus):',
-        required=False,
+        required=False, initial= ""
     )
     homologous = forms.CharField(label='Analyse homologous microRNAs (can be set to "all"):', required=False)
 
