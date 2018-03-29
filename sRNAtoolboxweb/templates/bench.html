@@ -174,7 +174,8 @@
 {#            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true#}
         } else if (document.getElementById("id_ifile").value && document.getElementById("id_url").value){
             document.getElementById('id_ifile').value = "";
-            alert("id_file url"); return true
+            alert("id_file url");
+            return true;
             {#            alert(message); return true#}
         }else if (document.getElementById('id_predict_mirna').checked && document.getElementById('id_library_mode').checked){
             document.getElementById('id_ifile').value = "";
