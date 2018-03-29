@@ -204,7 +204,7 @@ class sRNABenchForm(forms.Form):
             ),
 
             ButtonHolder(
-                Submit('submit', 'RUN', css_class='btn btn-primary',onclick="alert('Neat!');")
+                Submit('submit', 'RUN', css_class='btn btn-primary',onclick="alert('Neat!'); return False")
 
             )
         )
