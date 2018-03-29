@@ -150,27 +150,27 @@
 
     </script>
 
+    <script>
+    function myFunction() {
+        var x, text;
+
+        // Get the value of the input field with id="numb"
+    {#    x = document.getElementsById("id_adapter_manual").val;#}
+        x = "{{ id_adapter_manual.value }}"
+
+        {#    document.getElementsById("id_start_date").val;#}
+
+        // If x is Not a Number or less than one or greater than 10
+    {#    if (isNaN(x) || x < 1 || x > 10) {#}
+        if (true) {
+            alert('maybe working!'); return false
+        } else {
+            return true
+        }
+
+    }
+    </script>
 
 
 {% endblock %}
 
-<script>
-function myFunction() {
-    var x, text;
-
-    // Get the value of the input field with id="numb"
-{#    x = document.getElementsById("id_adapter_manual").val;#}
-    x = "{{ id_adapter_manual.value }}"
-
-    {#    document.getElementsById("id_start_date").val;#}
-
-    // If x is Not a Number or less than one or greater than 10
-{#    if (isNaN(x) || x < 1 || x > 10) {#}
-    if (true) {
-        alert('maybe working!'); return false
-    } else {
-        return true
-    }
-
-}
-</script>
