@@ -189,10 +189,10 @@
             document.getElementById('id_ifile').value = "";
 {#            alert(message); return true#}
             alert("guess without species"); return true
-        }else if (document.getElementById('id_mirDB')){
+        }else if (document.getElementById('id_mirDB').value){
 {#        }else if (document.getElementById('id_highconf').checked && document.getElementById('id_mirDB')){#}
             document.getElementById('id_ifile').value = "";
-            alert(message); return true
+            alert(message + document.getElementById('id_mirDB').value); return true
         }
 
     }
