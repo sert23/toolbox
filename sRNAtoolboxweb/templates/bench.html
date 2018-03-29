@@ -159,7 +159,8 @@ function myFunction() {
     var x, text;
 
     // Get the value of the input field with id="numb"
-    x = document.getElementsById("id_adapter_manual").val;
+{#    x = document.getElementsById("id_adapter_manual").val;#}
+    x = "{{ form.data.adapter_manual }}"
 
     {#    document.getElementsById("id_start_date").val;#}
 
