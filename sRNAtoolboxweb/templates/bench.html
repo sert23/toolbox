@@ -162,9 +162,8 @@
 
         // If x is Not a Number or less than one or greater than 10
     {#    if (isNaN(x) || x < 1 || x > 10) {#}
-        if (true) {
-{#            alert('maybe working!');#}
-            return false
+        if (x) {
+            alert('maybe working!'); return false
         } else {
             return true
         }
