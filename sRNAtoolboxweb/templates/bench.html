@@ -163,8 +163,8 @@
 
         // If x is Not a Number or less than one or greater than 10
     {#    if (isNaN(x) || x < 1 || x > 10) {#}
-        var myBool = Boolean(document.getElementById('id_highconf').value);
-        if (myBool){
+{#        var myBool = Boolean(document.getElementById('id_highconf').value);#}
+        if (document.getElementById('id_highconf').value < 1){
             document.getElementById('id_ifile').value = "";
             alert('we dont talk anymore 2'); return true
         }
