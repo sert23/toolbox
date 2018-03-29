@@ -156,7 +156,7 @@
         message = "There were some errors in your job. Please select your input again and check for invalid options"
         // Get the value of the input field with id="numb"
         x = document.getElementById("id_adapter_manual").value;
-        document.getElementById('id_ifile').value = "";
+
 {#        x = document.getElementsById("id_adapter_manual").val;#}
 
         {#    document.getElementsById("id_start_date").val;#}
@@ -168,10 +168,10 @@
 {#            document.getElementById('id_ifile').value = "";#}
 {#            alert('we dont talk anymore 2'+ document.getElementById('id_highconf').checked); return true#}
 {#        }#}
-        if (!document.getElementById("id_species") && !document.getElementById("id_mirna_profiled")) {
+        if (!document.getElementById("id_species").value && !document.getElementById("id_mirna_profiled").value) {
             document.getElementById('id_ifile').value = "";
 {#            alert(message); return true#}
-            alert("species and mirna_profiled"); return true
+            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true
         } else if (document.getElementById("id_ifile") && document.getElementById("id_url")){
             document.getElementById('id_ifile').value = "";
             alert(message); return true
