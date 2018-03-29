@@ -181,13 +181,16 @@
             document.getElementById('id_ifile').value = "";
             alert( " predict and library mode"); return true
 {#            alert(message); return true#}
-        }else if (!document.getElementById('id_guess_adapter') && !document.getElementById('id_adapter_chosen') && !document.getElementById('id_adapter_manual') ){
+        }else if (!document.getElementById('id_guess_adapter').checked && !document.getElementById('id_adapter_chosen') && !document.getElementById('id_adapter_manual') ){
             document.getElementById('id_ifile').value = "";
-            alert(message); return true
-        }else if (document.getElementById('id_guess_adapter') && !document.getElementById('id_species')){
+{#            alert(message); return true#}
+            alert("adapter row"); return true
+        }else if (document.getElementById('id_guess_adapter').checked && !document.getElementById('id_species')){
             document.getElementById('id_ifile').value = "";
-            alert(message); return true
-        }else if (document.getElementById('id_highconf') && document.getElementById('id_mirDB')){
+{#            alert(message); return true#}
+            alert("guess without species"); return true
+        }else if (document.getElementById('id_mirDB')){
+{#        }else if (document.getElementById('id_highconf').checked && document.getElementById('id_mirDB')){#}
             document.getElementById('id_ifile').value = "";
             alert(message); return true
         }
