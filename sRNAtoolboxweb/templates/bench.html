@@ -164,7 +164,7 @@
         // If x is Not a Number or less than one or greater than 10
     {#    if (isNaN(x) || x < 1 || x > 10) {#}
 
-        if (document.getElementById('id_highconf')){
+        if (!document.getElementById('id_highconf')=== 'False'){
             document.getElementById('id_ifile').value = "";
             alert('we dont talk anymore 2'); return true
         }
