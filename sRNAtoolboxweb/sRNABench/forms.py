@@ -98,7 +98,7 @@ class sRNABenchForm(forms.Form):
 
     # MicroRNA Analysis
     genome_mir = forms.BooleanField(label='Use the miRNAs for the species from the selected genomes', required=False)
-    highconf = forms.BooleanField(label='Use high confidence microRNAs from miRBase', required=False, initial=0)
+    highconf = forms.BooleanField(label='Use high confidence microRNAs from miRBase', required=False, initial=1)
     mirDB = forms.ChoiceField(label="Select MirGeneDBv2.0 tag", choices=mirdb_list, required=False)
     mirna_profiled = forms.CharField(
         label='Specify the microRNAs that should be profiled (for example, hsa (human), mmu (mouse) or hsa:hsv1 '
