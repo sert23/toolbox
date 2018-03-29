@@ -164,9 +164,9 @@
         // If x is Not a Number or less than one or greater than 10
     {#    if (isNaN(x) || x < 1 || x > 10) {#}
 
-        if (document.getElementById('id_highconf') && document.getElementById('id_mirDB')){
+        if (!document.getElementById('id_highconf') && document.getElementById('id_mirDB')){
             document.getElementById('id_ifile').value = "";
-            alert('we dont talk anymore'); return true
+            alert('we dont talk anymore 2'); return true
         }
         if (!document.getElementById("id_species") && !document.getElementById("id_mirna_profiled")) {
             document.getElementById('id_ifile').value = "";
