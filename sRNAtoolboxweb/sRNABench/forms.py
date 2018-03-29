@@ -218,12 +218,12 @@ class sRNABenchForm(forms.Form):
             self.add_error('species','Species or a miRBase short name tag are required')
             self.add_error('mirna_profiled', 'Species or a miRBase short name tag are required')
         if not cleaned_data.get('ifile') and not cleaned_data.get('url'):
-            self.add_error('ifile', 'One of these two fields is required')
-            self.add_error('url', 'One of these two fields is required')
+            self.add_error('ifile', 'Choose either file or URL as input')
+            self.add_error('url', 'Choose either file or URL as input')
             print(cleaned_data.get('ifile'))
         if cleaned_data.get('ifile') and cleaned_data.get('url'):
-            self.add_error('ifile', 'Choose either file or URL')
-            self.add_error('url', 'Choose either file or URL')
+            self.add_error('ifile', 'Choose either file or URL as input')
+            self.add_error('url', 'Choose either file or URL as input')
         if cleaned_data.get('predict_mirna') and cleaned_data.get('library_mode'):
             self.add_error('library_mode', 'Genome mode is needed for miRNA prediction')
         if not cleaned_data.get('guess_adapter') and cleaned_data.get('adapter_chosen')=='' and cleaned_data.get('adapter_manual')=='':

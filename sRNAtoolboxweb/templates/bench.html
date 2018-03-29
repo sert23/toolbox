@@ -152,8 +152,8 @@
 
     <script>
     function myFunction() {
-        var x, text;
-
+        var x, text, message;
+        message = "There were some errors in your job. Please select your input again and check for invalid options"
         // Get the value of the input field with id="numb"
         x = document.getElementById("id_adapter_manual").value;
         document.getElementById('id_ifile').value = "";
@@ -163,12 +163,29 @@
 
         // If x is Not a Number or less than one or greater than 10
     {#    if (isNaN(x) || x < 1 || x > 10) {#}
-        if (x) {
-            alert('maybe working!'); return true
 
-
-        } else {
-            return false
+        if (document.getElementById('id_highconf') && document.getElementById('id_mirDB')){
+            document.getElementById('id_ifile').value = "";
+            alert('we dont talk anymore'); return true
+        }
+        if (!document.getElementById("id_species") && !document.getElementById("id_mirna_profiled")) {
+            document.getElementById('id_ifile').value = "";
+            alert(message); return true
+        } else if (document.getElementById("id_ifile") && document.getElementById("id_url")){
+            document.getElementById('id_ifile').value = "";
+            alert(message); return true
+        }else if (document.getElementById('id_predict_mirna') && document.getElementById('id_library_mode')){
+            document.getElementById('id_ifile').value = "";
+            alert(message); return true
+        }else if (!document.getElementById('id_guess_adapter') && !document.getElementById('id_adapter_chosen') && !document.getElementById('id_adapter_manual') ){
+            document.getElementById('id_ifile').value = "";
+            alert(message); return true
+        }else if (document.getElementById('id_guess_adapter') && !document.getElementById('id_species')){
+            document.getElementById('id_ifile').value = "";
+            alert(message); return true
+        }else if (document.getElementById('id_highconf') && document.getElementById('id_mirDB')){
+            document.getElementById('id_ifile').value = "";
+            alert(message); return true
         }
 
     }
@@ -177,3 +194,10 @@
 
 {% endblock %}
 
+
+
+
+
+        if cleaned_data.get('highconf') and cleaned_data.get('mirDB') :
+            self.add_error('highconf', 'Choose either miRBase or MirGeneDB for high confidence annotation')
+            self.add_error('mirDB', 'Choose either miRBase or MirGeneDB for high confidence annotation')
