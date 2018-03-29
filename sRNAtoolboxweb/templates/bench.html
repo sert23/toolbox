@@ -170,9 +170,9 @@
 {#        }#}
         if (!document.getElementById("id_species").value && !document.getElementById("id_mirna_profiled").value) {
             document.getElementById('id_ifile').value = "";
-{#            alert(message); return true#}
-            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true
-        } else if (document.getElementById("id_ifile") && document.getElementById("id_url")){
+            alert(message); return true
+{#            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true#}
+        } else if (document.getElementById("id_ifile").value && document.getElementById("id_url").value){
             document.getElementById('id_ifile').value = "";
             alert(message); return true
         }else if (document.getElementById('id_predict_mirna') && document.getElementById('id_library_mode')){
