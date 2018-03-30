@@ -170,8 +170,8 @@
 {#        }#}
         if (!document.getElementById("id_species").value && !document.getElementById("id_mirna_profiled").value) {
             document.getElementById('id_ifile').value = "";
-            alert(message); return true
-{#            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true#}
+{#            alert(message); return true#}
+            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true
         } else if (document.getElementById("id_ifile").value && document.getElementById("id_url").value){
             document.getElementById('id_ifile').value = "";
             alert("id_file url");
@@ -181,7 +181,7 @@
             document.getElementById('id_ifile').value = "";
             alert( " predict and library mode"); return true
 {#            alert(message); return true#}
-        }else if (!document.getElementById('id_guess_adapter').checked && !document.getElementById('id_adapter_chosen') && !document.getElementById('id_adapter_manual') ){
+        }else if (!document.getElementById('id_guess_adapter').checked && !document.getElementById('id_adapter_chosen').value && !document.getElementById('id_adapter_manual').value ){
             document.getElementById('id_ifile').value = "";
 {#            alert(message); return true#}
             alert("adapter row"); return true
@@ -192,7 +192,7 @@
         }else if (document.getElementById('id_mirDB').value){
 {#        }else if (document.getElementById('id_highconf').checked && document.getElementById('id_mirDB')){#}
             document.getElementById('id_ifile').value = "";
-            alert(message + document.getElementById('id_mirDB').value); return true
+            alert(message + document.getElementById('id_mirDB').value+"mirDB"); return true
         }
 
     }

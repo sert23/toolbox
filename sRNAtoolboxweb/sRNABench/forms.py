@@ -232,10 +232,6 @@ class sRNABenchForm(forms.Form):
             self.add_error('adapter_manual', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
         if cleaned_data.get('guess_adapter') and not cleaned_data.get('species'):
             self.add_error('species', 'if `guess the adapter sequence`, an input genome is required')
-        # if cleaned_data.get('predict_mirna') and cleaned_data.get('species'):
-        #     #self.add_error('species', 'if `Predict New miRNA`, an input genome is required')
-        #     print(cleaned_data.get('species'))
-
         if cleaned_data.get('highconf') and cleaned_data.get('mirDB') :
             self.add_error('highconf', 'Choose either miRBase or MirGeneDB for high confidence annotation')
             self.add_error('mirDB', 'Choose either miRBase or MirGeneDB for high confidence annotation')
