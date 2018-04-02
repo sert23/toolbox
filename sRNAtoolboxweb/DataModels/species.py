@@ -22,4 +22,5 @@ class Species():
         self.sp_class = sp_class
 
     def __str__(self):
-        return self.specie + "(" + self.db + ")"
+        #return self.specie + "(" + self.db + ")"
+        return self.specie + "(" + self.db + "), " +self.scientific
