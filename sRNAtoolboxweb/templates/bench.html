@@ -134,12 +134,13 @@
             filterBehavior: 'both',
             maxHeight: 300,
             onDropdownHidden: function (e) {
-                jQuery('#id_species_hidden').val(jQuery('#id_species').val().join(','));
+                for (i = 0; i < e.length; i++) {
+                a.push(e[i].split(:)[0])
+                };
+                jQuery('#id_species_hidden').val(jQuery('#id_species').val(e).join(','));
 {#                qsp=jQuery('#id_species').val();#}
 {#                var a;#}
-{#                for (i = 0; i < qsp.length; i++) {#}
-{#                a.push(qsp[i].split(:)[0])#}
-{#                }#}
+
 {#                res=a.join(',');#}
 {#                jQuery('#id_species_hidden').val(res);#}
             }
