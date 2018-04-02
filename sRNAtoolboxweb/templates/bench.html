@@ -134,9 +134,9 @@
             filterBehavior: 'both',
             maxHeight: 300,
             onDropdownHidden: function (e) {
-                for (i = 0; i < e.length; i++) {
-                a.push(e[i].split(:)[0])
-                };
+{#                for (i = 0; i < e.length; i++) {#}
+{#                a.push(e[i].split(:)[0])#}
+{#                };#}
                 jQuery('#id_species_hidden').val(jQuery('#id_species').val(e).join(','));
 {#                qsp=jQuery('#id_species').val();#}
 {#                var a;#}
