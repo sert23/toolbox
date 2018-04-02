@@ -155,41 +155,31 @@
     function myFunction() {
         var x, text, message;
         message = "There were some errors in your job. Please select your input again and check for invalid options"
-        // Get the value of the input field with id="numb"
+
         x = document.getElementById("id_adapter_manual").value;
 
-{#        x = document.getElementsById("id_adapter_manual").val;#}
 
-        {#    document.getElementsById("id_start_date").val;#}
-
-        // If x is Not a Number or less than one or greater than 10
-    {#    if (isNaN(x) || x < 1 || x > 10) {#}
-{#        var myBool = Boolean(document.getElementById('id_highconf').value);#}
-{#        if ( document.getElementById('id_highconf').checked ){#}
-{#            document.getElementById('id_ifile').value = "";#}
-{#            alert('we dont talk anymore 2'+ document.getElementById('id_highconf').checked); return true#}
-{#        }#}
         if (!document.getElementById("id_species").value && !document.getElementById("id_mirna_profiled").value) {
             document.getElementById('id_ifile').value = "";
-{#            alert(message); return true#}
-            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true
+            alert(message); return true
+{#            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true#}
         } else if (document.getElementById("id_ifile").value && document.getElementById("id_url").value){
             document.getElementById('id_ifile').value = "";
-            alert("id_file url");
-            return true;
-            {#            alert(message); return true#}
+{#            alert("id_file url");#}
+{#            return true;#}
+                        alert(message); return true
         }else if (document.getElementById('id_predict_mirna').checked && document.getElementById('id_library_mode').checked){
             document.getElementById('id_ifile').value = "";
-            alert( " predict and library mode"); return true
-{#            alert(message); return true#}
+{#            alert( " predict and library mode"); return true#}
+            alert(message); return true
         }else if ((0 + document.getElementById('id_guess_adapter').checked + Boolean(document.getElementById('id_adapter_chosen').value) + Boolean(document.getElementById('id_adapter_manual').value )!=1)){
             document.getElementById('id_ifile').value = "";
-{#            alert(message); return true#}
-            alert("adapter row"); return true
+            alert(message); return true
+{#            alert("adapter row"); return true#}
         }else if (document.getElementById('id_guess_adapter').checked && !document.getElementById('id_species')){
             document.getElementById('id_ifile').value = "";
-{#            alert(message); return true#}
-            alert("guess without species"); return true
+            alert(message); return true
+{#            alert("guess without species"); return true#}
         }else if (document.getElementById('id_highconf').checked && document.getElementById('id_mirDB').value){
             document.getElementById('id_ifile').value = "";
             alert(message + document.getElementById('id_mirDB').value+"mirDB"); return true
@@ -201,10 +191,3 @@
 
 {% endblock %}
 
-
-
-
-
-        if cleaned_data.get('highconf') and cleaned_data.get('mirDB') :
-            self.add_error('highconf', 'Choose either miRBase or MirGeneDB for high confidence annotation')
-            self.add_error('mirDB', 'Choose either miRBase or MirGeneDB for high confidence annotation')
