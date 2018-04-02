@@ -49,12 +49,12 @@ class CategoriesField(forms.ModelMultipleChoiceField):
         except:
             pass
 
-    def clean(self, value):
-        if value:
-            if isinstance(value[0], list):
-                value = value[0]
-        value = [v for v in value if v != '']
-        return super(CategoriesField, self).clean(value)
+    # def clean(self, value):
+    #     if value:
+    #         if isinstance(value[0], list):
+    #             value = value[0]
+    #     value = [v for v in value if v != '']
+    #     return super(CategoriesField, self).clean(value)
 
 def m():
     return Species.objects.all().order_by('sp_class')
