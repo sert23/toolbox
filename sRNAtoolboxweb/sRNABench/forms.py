@@ -215,6 +215,7 @@ class sRNABenchForm(forms.Form):
     def clean(self):
 
         cleaned_data = super(sRNABenchForm, self).clean()
+        print(cleaned_data.get('species'))
         if not cleaned_data.get('species') and not cleaned_data.get('mirna_profiled'):
             self.add_error('species','Species or a miRBase short name tag are required')
             self.add_error('mirna_profiled', 'Species or a miRBase short name tag are required')
