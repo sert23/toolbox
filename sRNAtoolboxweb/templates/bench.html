@@ -131,6 +131,7 @@
         jQuery('#id_species').multiselect({
             enableCollapsibleOptGroups: true,
             enableCaseInsensitiveFiltering: true,
+            filterBehavior: 'scientific',
             maxHeight: 300,
             onDropdownHidden: function (e) {
                 jQuery('#id_species_hidden').val(jQuery('#id_species').val().join(','));
