@@ -139,7 +139,8 @@
 {#                };#}
 
                 jQuery('#id_species_hidden').val(jQuery('#id_species').val().map(value,function(value){
-                    value.split(":")[0]
+                    m=value.split(":")[0];
+                    return m
                 }).join(','));
                 alert(jQuery('#id_species').val());
 
