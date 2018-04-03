@@ -1,7 +1,7 @@
 __author__ = 'antonior'
 
 from django.conf.urls import url
-from views import AMirConsTarget
+from animalconstarget.views import AMirConsTarget
 
 from . import views
 
