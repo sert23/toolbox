@@ -137,8 +137,12 @@
 {#                for (i = 0; i < e.length; i++) {#}
 {#                a.push(e[i].split(:)[0])#}
 {#                };#}
-                alert("ricardo is");
-                jQuery('#id_species_hidden').val(jQuery('#id_species').val().join(','));
+
+                jQuery('#id_species_hidden').val(jQuery('#id_species').val().map(value,function(value){
+                    value.split(":")[0]
+                }).join(','));
+                alert(jQuery('#id_species').val());
+
 {#                qsp=jQuery('#id_species').val();#}
 {#                var a;#}
 
