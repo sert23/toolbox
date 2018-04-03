@@ -232,7 +232,8 @@ class AMirConsTarget(FormView):
     template_name = 'miRNAtarget.html'
     form_class = AMirconsForm
 
-    success_url = reverse_lazy("mirconstarget")
+    #success_url = reverse_lazy("mirconstarget")
+
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
@@ -245,6 +246,7 @@ class AMirConsTarget(FormView):
         js.status.create(status_progress='sent_to_queue')
         js.job_status = 'sent_to_queue'
         js.save()
+        self.success_url = reverse_lazy('amirconstarget') + '?id=' + pipeline_id
         return super(AMirConsTarget, self).form_valid(form)
 
 
