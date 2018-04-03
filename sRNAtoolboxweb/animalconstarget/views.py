@@ -200,10 +200,10 @@ def result(request):
             return render(request, "mirconstarget_result.html", results)
 
         else:
-            return redirect("/srnatoolbox/jobstatus/mirconstarget/?id=" + job_id)
+            return redirect(reverse_lazy('progress', kwargs={"pipeline_id": job_id}))
 
     else:
-        return redirect("/srnatoolbox/mirconstarget")
+        return redirect(reverse_lazy('MIRCONS'))
 
 
 def test(request):
