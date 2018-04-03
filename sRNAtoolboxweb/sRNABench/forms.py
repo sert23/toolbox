@@ -39,8 +39,8 @@ class CategoriesField(forms.ModelMultipleChoiceField):
                     list = [(category.id, str(category))]
                 else:
                     #list.append((category.id, str(category)))
-                    #list.append((str(category.id)+":"+category.scientific, str(category)))
-                    list.append((category.scientific, str(category)))
+                    list.append((str(category.id)+":"+category.scientific, str(category)))
+                    #list.append((str(category.id)+""+category.scientific, str(category)))
             try:
                 self.choices.append((group, list))
             except:
