@@ -1,14 +1,14 @@
 __author__ = 'antonior'
 
 from django.conf.urls import url
-
+from views import AMirConsTarget
 
 from . import views
 
 urlpatterns = [
     url(r'results', views.result, name='mirconstarget'),
     url(r'results', views.result, name='animalconstarget'),
-    url(r'^$', views.AMirConsTarget.as_view(), name="amirconstarget"),
+    url(r'^$', AMirConsTarget.as_view(), name="MIRCONS"),
 
 
     #url(r'^/*$', views.),

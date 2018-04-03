@@ -151,11 +151,10 @@ def run(request):
               '",name="' + pipeline_id + '_mirconstarget"' + ' -N ' + pipeline_id + '_mirconstarget /shared/sRNAtoolbox/core/bash_scripts/run_mirnatarget.sh')
 
 
-
-
     return redirect("/srnatoolbox/jobstatus/mirconstarget/?id=" + pipeline_id)
 
 def result(request):
+
     if 'id' in request.GET:
         job_id = request.GET['id']
 
