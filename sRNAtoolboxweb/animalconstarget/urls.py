@@ -6,8 +6,8 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'results', views.result, name='amirconstarget'),
-url(r'results', views.result, name='animalconstarget'),
+    url(r'results', views.result, name='mirconstarget'),
+    url(r'results', views.result, name='animalconstarget'),
     url(r'^', views.AMirConsTarget.as_view(), name="mirconstarget"),
 
     #url(r'^/*$', views.),
