@@ -246,7 +246,7 @@ class AMirConsTarget(FormView):
         js.status.create(status_progress='sent_to_queue')
         js.job_status = 'sent_to_queue'
         js.save()
-        self.success_url = reverse_lazy('amirconstarget') + '?id=' + pipeline_id
+        self.success_url = reverse_lazy('mirconstarget') + '?id=' + pipeline_id
         return super(AMirConsTarget, self).form_valid(form)
 
 
