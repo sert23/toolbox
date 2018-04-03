@@ -239,6 +239,7 @@ class AMirConsTarget(FormView):
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
+        form.clean()
         call, pipeline_id = form.create_call()
         self.success_url = reverse_lazy('mirconstarget') + '?id=' + pipeline_id
 
