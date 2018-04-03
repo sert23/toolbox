@@ -231,6 +231,7 @@ def test(request):
 class AMirConsTarget(FormView):
     template_name = 'miRNAtarget.html'
     form_class = AMirconsForm
+    success_url = reverse_lazy("MIRCONS")
 
     #success_url = reverse_lazy("mirconstarget")
 
@@ -239,6 +240,8 @@ class AMirConsTarget(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call, pipeline_id = form.create_call()
+        self.success_url = reverse_lazy('mirconstarget') + '?id=' + pipeline_id
+
         print(call)
         os.system("source /opt/venv/sRNAtoolbox2017/bin/activate")
         os.system(call)
@@ -246,7 +249,7 @@ class AMirConsTarget(FormView):
         js.status.create(status_progress='sent_to_queue')
         js.job_status = 'sent_to_queue'
         js.save()
-        self.success_url = reverse_lazy('mirconstarget') + '?id=' + pipeline_id
+
         return super(AMirConsTarget, self).form_valid(form)
 
 
