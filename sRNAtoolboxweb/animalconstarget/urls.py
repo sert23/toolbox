@@ -8,7 +8,7 @@ from . import views
 urlpatterns = [
     url(r'results', views.result, name='mirconstarget'),
     url(r'results', views.result, name='animalconstarget'),
-    url(r'^', views.AMirConsTarget.as_view(), name="mirconstarget"),
+    url(r'^', views.AMirConsTarget.as_view(), name="amirconstarget"),
 
     #url(r'^/*$', views.),
     #url(r'^/*$', views.input),
