@@ -42,7 +42,7 @@ class mirconsfunctargetPipeline(Pipeline):
         log_msg = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " INFO: miRNAconstarget Analysis Starts"
         self.actualize_pipeline_progress(log_msg)
 
-        if "PSROBOT" in self.program_string or "TAPIR_FASTA" in self.program_string or "TAPIR_HYBRID" in self.program_string:
+        if 'psRobot' in self.program_string or 'tapir_fasta' in self.program_string or 'tapir_RNA' in self.program_string:
             cmd = "cd " + self.outdir + "; python3 " + self.configuration.mirnaconstargets_plants + " " + " ".join(
                 [self.mirna_file, self.utr_file, self.outdir, self.threads, self.program_string, self.parameter_string])
             os.system(cmd)
