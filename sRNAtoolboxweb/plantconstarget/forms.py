@@ -132,14 +132,15 @@ class PMirconsForm(forms.Form):
         utrfile= self.cleaned_data.get("utrfile")
         program_list=[]
         param_list=[]
+
         if self.cleaned_data.get('psRobot'):
-            program_list.append('psRobot')
+            program_list.append("PSROBOT")
             param_list.append(self.cleaned_data.get("psRobot_par"))
         if self.cleaned_data.get('tapir_fasta'):
-            program_list.append("tapir_fasta_par")
-            param_list.append(self.cleaned_data.get("target_par"))
+            program_list.append("TAPIR_FASTA")
+            param_list.append(self.cleaned_data.get("tapir_fasta_par"))
         if self.cleaned_data.get('tapir_RNA'):
-            program_list.append('tapir_RNA')
+            program_list.append("TAPIR_HYBRID")
             param_list.append(self.cleaned_data.get('tapir_RNA_par'))
         program_string = ":".join(program_list)
         if mirfile:
