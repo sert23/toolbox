@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'sRNABench',
     'sRNAblast',
     'animalconstarget',
+    'plantconstarget',
     'miRNAconstarget',
     'sRNAjBrowser',
     'sRNAgFree',
