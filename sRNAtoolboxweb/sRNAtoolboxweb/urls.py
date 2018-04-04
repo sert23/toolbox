@@ -15,6 +15,7 @@ urlpatterns =[
     url(r'^srnagfree', include('sRNAgFree.urls')),
     url(r'^mirconstarget', include('miRNAconstarget.urls')),
     url(r'^amirconstarget', include('animalconstarget.urls')),
+    url(r'^pmirconstarget', include('plantconstarget.urls')),
     url(r'^mirnafunctargets', include('miRNAfuncTargets.urls')),
     url(r'^helper/', include('helpers.urls')),
     url(r'^blank$', views.blank),
