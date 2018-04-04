@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect
 
 from django.views.generic import FormView
 from django.core.urlresolvers import reverse_lazy
-from animalconstarget.forms import PMirconsForm
+from plantconstarget.forms import PMirconsForm
 
 from FileModels.TargetConsensusParser import TargetConsensusParser
 from progress.models import JobStatus
