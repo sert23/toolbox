@@ -115,7 +115,11 @@ class sRNAblastForm(forms.Form):
                 '',
                 'ifile',
                 Field('url',css_class='form-control'),
-                Field('job_name', css_class='form-control'),
+                Field('job_ID', css_class='form-control'),
+                Field('maxReads', css_class='form-control'),
+                Field('dataBase', css_class='form-control'),
+                Field('maxEval', css_class='form-control'),
+
             ),
             create_collapsable_div(
                 Fieldset(
