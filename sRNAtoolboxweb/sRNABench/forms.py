@@ -91,7 +91,7 @@ class sRNABenchForm(forms.Form):
     species = CategoriesField(queryset=m, required=False)
 
     # Adapter Trimming
-    guess_adapter = forms.BooleanField(label=mark_safe('<strong>Guess the adapter sequence  (not recommended!)</strong>'), required=False)
+    guess_adapter = forms.BooleanField(label=mark_safe('<strong style="color:Red;">Guess the adapter sequence  (not recommended!)</strong>'), required=False)
     #guess_adapter = forms.BooleanField(label='Guess the adapter sequence  (not recommended!)', required=False) <strong>My Condition is</strong>
     adapter_chosen = forms.ChoiceField(choices=ADAPTERS, required=False)
     adapter_manual = forms.CharField(label='Or Provide adapter sequence', required=False)
