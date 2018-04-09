@@ -13,10 +13,13 @@ from FileModels.BlastParsers import BlastParser
 from progress.models import JobStatus
 from utils import pipeline_utils
 from utils.sysUtils import make_dir
+from django.views.generic import FormView
+from sRNAblast.forms import sRNAblastForm
+from django.core.urlresolvers import reverse_lazy
 
-SPECIES_PATH = '/shared/data/sRNAbench/species.csv'
-SPECIES_ANNOTATION_PATH = '/shared/data/sRNAbench/annotation.txt'
-FS = FileSystemStorage("/shared/sRNAtoolbox/webData")
+#SPECIES_PATH = '/shared/data/sRNAbench/species.csv'
+#SPECIES_ANNOTATION_PATH = '/shared/data/sRNAbench/annotation.txt'
+#FS = FileSystemStorage("/shared/sRNAtoolbox/webData")
 
 counter = itertools.count()
 
@@ -264,3 +267,27 @@ def test(request):
     return redirect("/srnatoolbox/jobstatus/srnablast/?id=" + pipeline_id)
 
 
+class SRNABlast(FormView):
+    template_name = 'miRNAtarget.html'
+    form_class = sRNAblastForm
+    success_url = reverse_lazy("SRNABLAST")
+
+    #success_url = reverse_lazy("mirconstarget")
+
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        form.clean()
+        call, pipeline_id = form.create_call()
+        self.success_url = reverse_lazy('') + '?id=' + pipeline_id
+
+        print(call)
+        os.system("source /opt/venv/sRNAtoolbox2017/bin/activate")
+        os.system(call)
+        js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
+
+        return super(SRNABlast, self).form_valid(form)
