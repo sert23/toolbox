@@ -134,24 +134,11 @@
             filterBehavior: 'both',
             maxHeight: 300,
             onDropdownHidden: function (e) {
-{#                for (i = 0; i < e.length; i++) {#}
-{#                a.push(e[i].split(:)[0])#}
-{#                };#}
-{#                jQuery('#id_species_hidden').val(jQuery('#id_species').val().join(','));#}
+
                 jQuery('#id_species_hidden').val(jQuery('#id_species').val().map(function(item) {
                 return item.split(':')[0];}).join(','));
                 alert(jQuery('#id_species').val().join(','));
-{#                jQuery('#id_species_hidden').val(jQuery('#id_species').val().map(value,function(value){#}
-{#                    m=value.split(":")[0];#}
-{#                    return m#}
-{#                }).join(','));#}
-{#                alert(jQuery('#id_species').val());#}
 
-{#                qsp=jQuery('#id_species').val();#}
-{#                var a;#}
-
-{#                res=a.join(',');#}
-{#                jQuery('#id_species_hidden').val(res);#}
             }
 
         });

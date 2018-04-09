@@ -60,7 +60,7 @@ class CategoriesField(forms.ModelMultipleChoiceField):
 def m():
     return Species.objects.all().order_by('sp_class')
 
-class sRNABenchForm(forms.Form):
+class sRNAblastForm(forms.Form):
     ADAPTERS = (
         (None, "Select Adapter to trim off"),
         ("EMPTY", "Input reads are already trimmed"),
@@ -68,74 +68,47 @@ class sRNABenchForm(forms.Form):
         ("UCGUAUGCCGUCUUCUGCUUGU", "Illumina(alternative) - UCGUAUGCCGUCUUCUGCUUGU", ),
         ("330201030313112312", "SOLiD(SREK) - 330201030313112312"),
     )
+    NUMBERS = (
+        ("1","1"),
+        ("5","5"),
+        ("10","10"),
+        ("50","50"),
+        ("100","100"),
+        ("500","500"),
+        ("1000","1000"),
+        ("2000","2000"),
+    )
+
+    DATABASES = (
+        ("nr","nr"),
+        ("refseq_rna","refseq_rna"),
+        ("est","est"),
+        ("env_nt","env_nt")
+    )
 
     ALIGMENT_TYPES = (
         ('n', 'bowtie seed alignment(only mismatches in seed region count)'),
         ('v', 'full read alignment(all mismatches count)'),
     )
 
-    mirdb_list = [(None, "Do not use MirGeneDB")]
-    fh = open(CONF["mirDbPath"])
-    for line in fh:
-        mirdb_list.append((line.rstrip(), line.rstrip()))
-
-
     ifile = forms.FileField(label='Upload the reads (fastq.gz, fa.gz or rc.gz)' + render_modal('SRNAinput'),
                             required=False)
     url = forms.URLField(label=mark_safe('<strong >Or provide a URL for big files <strong class="text-success"> (recommended!)</strong>'), required=False)
-    job_name = forms.CharField(label='Provide a Job Name.  (Leave blank to use fileName)',
+    job_ID = forms.CharField(label='Or provide a sRNAbench jobID: ',
                              required=False)
-    # species
-    library_mode = forms.BooleanField(label='Do not map to genome (Library mode)', required=False)
-    no_libs = forms.BooleanField(label='Do not profile other ncRNAs  (you are interested in known microRNAs only!)', required=False)
-    species = CategoriesField(queryset=m, required=False)
+    maxReads=forms.ChoiceField(label='Number of unique unmapped reads to blast',choices= NUMBERS )
+    dataBase=forms.ChoiceField(label= 'Database', choices=DATABASES)
+    maxEval=forms.DecimalField(label= 'Evalue Maximum threshold')
 
-    # Adapter Trimming<div class="alert alert-danger">
-    #guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence<strong style="color:Red;"> (not recommended!)</strong>'), required=False)
-    guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence <strong class="text-danger"> (not recommended!)</strong>'), required=False)
-    #guess_adapter = forms.BooleanField(label='Guess the adapter sequence  (not recommended!)', required=False) <strong>My Condition is</strong>
     adapter_chosen = forms.ChoiceField(choices=ADAPTERS, required=False)
     adapter_manual = forms.CharField(label='Or Provide adapter sequence', required=False)
     adapter_length = forms.IntegerField(label='Minimum Adapter Length', max_value=12, min_value=6, initial=10)
     adapter_mismatch = forms.IntegerField(label='Max. mismatches in adapter detection', max_value=2, min_value=0, initial=1)
-    adapter_recursive_trimming = forms.BooleanField(label='Recursive Adapter trimming', required=False, initial=False)
-
-
-    # MicroRNA Analysis
-    genome_mir = forms.BooleanField(label='Use the miRNAs for the species from the selected genomes', required=False)
-    highconf = forms.BooleanField(label='Use high confidence microRNAs from miRBase', required=False, initial=False)
-    mirDB = forms.ChoiceField(label="Select MirGeneDBv2.0 tag", choices=mirdb_list, required=False)
-    mirna_profiled = forms.CharField(
-        label='Specify the microRNAs that should be profiled (for example, hsa (human), mmu (mouse) or hsa:hsv1 '
-              '(human and herpes simplex virus):',
-        required=False, initial= ""
-    )
-    homologous = forms.CharField(label='Analyse homologous microRNAs (can be set to "all"):', required=False)
-
-    # Parameters
-    is_solid = forms.BooleanField(label='The input is SOLiD', required=False)
-    predict_mirna = forms.BooleanField(label='Predict New miRNAs', required=False)
-    aligment_type = forms.ChoiceField(choices=ALIGMENT_TYPES, initial='n')
-    seed_length = forms.IntegerField(label='Select the seed length for alignment', max_value=21, min_value=17, initial=20)
-    min_read_count = forms.IntegerField(label='Minimum Read Count: ', max_value=10, min_value=1, initial=2)
-    min_read_length = forms.IntegerField(label='Min. Read Length ', max_value=17, min_value=15, initial=15)
-    mismatches = forms.IntegerField(label='Allowed number of mismatches (either to the genome or libraries)', max_value=2, min_value=0, initial=2)
-    nucleotides_5_removed = forms.IntegerField(label='Remove 5\' barcode', max_value=6, min_value=0, initial=0)
-    max_multiple_mapping = forms.IntegerField(label='Maximum Number of Multiple Mappings', max_value=40, min_value=1, initial=10)
-
-    #Profile
-    profile1 = forms.FileField(label='', required=False)
-    profile2 = forms.FileField(label='', required=False)
-    profile3 = forms.FileField(label='', required=False)
-    profile4 = forms.FileField(label='', required=False)
-    profile5 = forms.FileField(label='', required=False)
-    profile_url1 = forms.CharField(label='Provide a URLs (one per line)', required=False, widget=forms.Textarea)
-    species_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
 
 
 
     def __init__(self, *args, **kwargs):
-        super(sRNABenchForm, self).__init__(*args, **kwargs)
+        super(sRNAblastForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Fieldset(
@@ -143,74 +116,23 @@ class sRNABenchForm(forms.Form):
                 'ifile',
                 Field('url',css_class='form-control'),
                 Field('job_name', css_class='form-control'),
-                Field('species_hidden', name='species_hidden')
             ),
-
-            create_collapsable_div(
-                'library_mode',
-                'no_libs',
-                Field('species'),
-                title='Select species', c_id='2',
-                extra_title=render_modal('Species'),
-                open=True
-            ),
-
             create_collapsable_div(
                 Fieldset(
                 'Adapter Selection',
-                'guess_adapter',
                 Field('adapter_chosen', css_class='form-control'),
                 Field('adapter_manual', css_class='form-control')
                 ),Fieldset(
                     'Trimming Options',
                 Field('adapter_length', css_class='form-control'),
                 Field('adapter_mismatch', css_class='form-control'),
-                'adapter_recursive_trimming'),
+                ),
                 title='Adapter Trimming', c_id='3',
                 open=True
             ),
-
-            create_collapsable_div(
-                Fieldset(
-                'miRNA Analysis Options',
-                'genome_mir',
-                'highconf',
-                Field('mirDB', css_class='form-control')
-                ),
-                Fieldset(
-                'Species Selection',
-                Field('mirna_profiled',css_class='form-control'),
-                Field('homologous',css_class='form-control'),
-                ),
-                title='MicroRNA analysis', c_id='4'
-            ),
-
-            create_collapsable_div(
-                'is_solid',
-                'predict_mirna',
-                Field('aligment_type', css_class='form-control'),
-                Field('seed_length', css_class='form-control'),
-                Field('min_read_count', css_class='form-control'),
-                Field('min_read_length', css_class='form-control'),
-                Field('mismatches', css_class='form-control'),
-                Field('nucleotides_5_removed', css_class='form-control'),
-                Field('max_multiple_mapping', css_class='form-control'),
-                title='Parameters', c_id='5'
-            ),
-
-            create_collapsable_div(
-                'profile1',
-                'profile2',
-                'profile3',
-                'profile4',
-                'profile5',
-                 Field('profile_url1', css_class='form-control'),
-                title='Upload user annotations for profiling', c_id='6'
-            ),
-
             ButtonHolder(
                 #Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
-                Submit('submit', 'RUN', css_class='btn btn-primary', onclick="return myFunction()")
+                Submit('submit', 'RUN', css_class='btn btn-primary')
                        #onsubmit="alert('Neat!'); return false")
 
             )
@@ -218,7 +140,7 @@ class sRNABenchForm(forms.Form):
 
     def clean(self):
 
-        cleaned_data = super(sRNABenchForm, self).clean()
+        cleaned_data = super(sRNAblastForm, self).clean()
         print(cleaned_data.get('species'))
         if not cleaned_data.get('species') and not cleaned_data.get('mirna_profiled'):
             self.add_error('species','Species or a miRBase short name tag are required')
