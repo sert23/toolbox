@@ -7,6 +7,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field
 from django import forms
 from django.core.files.storage import FileSystemStorage
+from django.utils.safestring import mark_safe
 
 from DataModels.sRNABenchConfig import SRNABenchConfig
 from FileModels.speciesAnnotationParser import SpeciesAnnotationParser
@@ -90,7 +91,8 @@ class sRNABenchForm(forms.Form):
     species = CategoriesField(queryset=m, required=False)
 
     # Adapter Trimming
-    guess_adapter = forms.BooleanField(label='Guess the adapter sequence  (not recommended!)', required=False)
+    guess_adapter = forms.BooleanField(label=mark_safe('<strong>Guess the adapter sequence  (not recommended!)</strong>'), required=False)
+    #guess_adapter = forms.BooleanField(label='Guess the adapter sequence  (not recommended!)', required=False) <strong>My Condition is</strong>
     adapter_chosen = forms.ChoiceField(choices=ADAPTERS, required=False)
     adapter_manual = forms.CharField(label='Or Provide adapter sequence', required=False)
     adapter_length = forms.IntegerField(label='Minimum Adapter Length', max_value=12, min_value=6, initial=10)
