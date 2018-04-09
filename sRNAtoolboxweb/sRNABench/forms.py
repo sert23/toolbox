@@ -90,8 +90,9 @@ class sRNABenchForm(forms.Form):
     no_libs = forms.BooleanField(label='Do not profile other ncRNAs  (you are interested in known microRNAs only!)', required=False)
     species = CategoriesField(queryset=m, required=False)
 
-    # Adapter Trimming
-    guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence<strong style="color:Red;"> (not recommended!)</strong>'), required=False)
+    # Adapter Trimming<div class="alert alert-danger">
+    #guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence<strong style="color:Red;"> (not recommended!)</strong>'), required=False)
+    guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence <strong class="alert alert-danger"> (not recommended!)</strong>'), required=False)
     #guess_adapter = forms.BooleanField(label='Guess the adapter sequence  (not recommended!)', required=False) <strong>My Condition is</strong>
     adapter_chosen = forms.ChoiceField(choices=ADAPTERS, required=False)
     adapter_manual = forms.CharField(label='Or Provide adapter sequence', required=False)
