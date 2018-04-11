@@ -222,6 +222,8 @@ class sRNAblastForm(forms.Form):
         #conf_dict["minIdent"]= cleaned_data.get("minIdent")
         conf_dict["maxEvalue"]= cleaned_data.get("maxEval")
         conf_dict["adapter"] = adapter
+        if conf_dict["adapter"] =="EMPTY":
+            conf_dict["adapter"] = None
         conf_dict["adapterMinLength"] = adapter_length
         conf_dict["adapterMM"] = adapter_mismatch
         conf_file_location = os.path.join(FS.location, "conf.txt")
