@@ -31,6 +31,7 @@ class sRNAblastPipeline(Pipeline):
         # self.logger.write(log_msg + "\n")
 
         cmd = "java -Xmx8000m -jar " + self.configuration.path_to_srnablast + " " + self.conf
+        print(cmd)
         os.system(cmd)
         self.set_java_command_line(cmd)
 
