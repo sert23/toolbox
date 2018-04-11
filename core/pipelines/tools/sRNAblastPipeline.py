@@ -10,9 +10,10 @@ from FileModels.BlastParsers import BlastParser
 
 
 class sRNAblastPipeline(Pipeline):
-    def __init__(self, pipeline_key, job_name, outdir, config_file,  **kwargs):
-        super(sRNAblastPipeline, self).__init__(pipeline_key, job_name, outdir, "sRNAblast" )
+    def __init__(self, pipeline_key, job_name, outdir, config_file, parameters = ""):
+        super(sRNAblastPipeline, self).__init__(pipeline_key, job_name, outdir, "sRNAblast",parameters )
         self.conf = config_file
+
 
     def run(self):
         self.initialize_pipeline_status()
