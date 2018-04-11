@@ -62,8 +62,8 @@ def m():
 
 class sRNAblastForm(forms.Form):
     ADAPTERS = (
-        (None, "Select Adapter to trim off"),
         ("EMPTY", "Input reads are already trimmed"),
+        (None, "Select Adapter to trim off"),
         ("TGGAATTCTCGGGTGCCAAGG", "Illumina RA3 - TGGAATTCTCGGGTGCCAAGG"),
         ("UCGUAUGCCGUCUUCUGCUUGU", "Illumina(alternative) - UCGUAUGCCGUCUUCUGCUUGU", ),
         ("330201030313112312", "SOLiD(SREK) - 330201030313112312"),
@@ -238,7 +238,7 @@ class sRNAblastForm(forms.Form):
             'pipeline_id': pipeline_id,
             'out_dir': out_dir,
             'name': name,
-            'config_file': conf_file_location,
+            'conf_input': conf_file_location,
             'type': 'sRNAblast'
         }
 
