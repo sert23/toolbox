@@ -6,7 +6,7 @@ import pygal
 from pygal.style import LightColorizedStyle
 
 from pipelines.pipelines import Pipeline
-import FileModels.BlastParsers.BlastParser as BlastParser
+from FileModels.BlastParsers import BlastParser
 
 
 class sRNAblastPipeline(Pipeline):
