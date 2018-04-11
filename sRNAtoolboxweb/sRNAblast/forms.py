@@ -211,7 +211,6 @@ class sRNAblastForm(forms.Form):
         ifile, libs_files = self.upload_files(cleaned_data, FS)
         #recursive_adapter_trimming = str(cleaned_data.get('recursive_adapter_trimming')).lower()
         adapter = cleaned_data['adapter_chosen'] or cleaned_data['adapter_manual']
-        nucleotides_5_removed = str(cleaned_data['nucleotides_5_removed'])
         adapter_length = str(cleaned_data['adapter_length'])
         adapter_mismatch = str(cleaned_data['adapter_mismatch'])
 
