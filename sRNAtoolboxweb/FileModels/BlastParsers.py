@@ -13,6 +13,8 @@ class BlastParser(Parser):
         self.limit = limit
 
     def parse(self):
+        print("Aquí está el Blast")
+        print(self.ipath)
         fd = open(self.ipath)
         header = fd.readline()
 
