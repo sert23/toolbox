@@ -7,6 +7,7 @@ from sRNAblast.views import SRNABlast
 from . import views
 
 urlpatterns = [
+    url(r'results', views.result, name='srnablast'),
     url(r'^/*$', SRNABlast.as_view(),name="SRNABLAST"),
     #url(r'^/*$', views.input),
     url(r'run$', views.run),
