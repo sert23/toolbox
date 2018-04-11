@@ -152,8 +152,8 @@ class sRNAblastForm(forms.Form):
             self.add_error('job_ID', 'Choose either file or URL as input')
             #print(cleaned_data.get('ifile'))
         if sum([bool(cleaned_data.get('guess_adapter')), bool(cleaned_data.get('adapter_chosen')==''), bool(cleaned_data.get('adapter_manual')=='')]) != 1:
-            self.add_error('adapter_chosen', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
-            self.add_error('adapter_manual', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
+            self.add_error('adapter_chosen', 'Choose either an adapter from the list or enter it manually ')
+            self.add_error('adapter_manual','Choose either an adapter from the list or enter it manually ')
         return cleaned_data
 
     @staticmethod
