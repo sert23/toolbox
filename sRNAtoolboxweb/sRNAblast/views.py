@@ -228,12 +228,14 @@ def result(request):
 
             results["date"] = new_record.start_time + datetime.timedelta(days=15)
 
+
             return render(request, "blast_result.html", results)
         else:
-            return redirect("/srnatoolbox/jobstatus/srnablast/?id=" + job_id)
+            return redirect(reverse_lazy('progress', kwargs={"pipeline_id": job_id}))
 
     else:
-        return redirect("/srnatoolbox/blast")
+        return (reverse_lazy('SRNABLAST'))
+
 
 
 def test(request):
