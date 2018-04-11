@@ -100,7 +100,7 @@ class sRNAblastForm(forms.Form):
     dataBase=forms.ChoiceField(label= 'Database', choices=DATABASES, required=False)
     maxEval=forms.DecimalField(label= 'Evalue Maximum threshold', required= False)
 
-    adapter_chosen = forms.ChoiceField(choices=ADAPTERS, required=False)
+    adapter_chosen = forms.ChoiceField(choices=ADAPTERS, required=False, initial=("EMPTY", "Input reads are already trimmed"))
     adapter_manual = forms.CharField(label='Or Provide adapter sequence', required=False)
     adapter_length = forms.IntegerField(label='Minimum Adapter Length', max_value=12, min_value=6, initial=10, required=False)
     adapter_mismatch = forms.IntegerField(label='Max. mismatches in adapter detection', max_value=2, min_value=0, initial=1, required=False)
