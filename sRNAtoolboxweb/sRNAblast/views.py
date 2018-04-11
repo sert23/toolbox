@@ -193,7 +193,8 @@ def result(request):
 
         results = {}
         results["id"] = job_id
-        if new_record.job_status == "Finished":
+        if True:
+        #if new_record.job_status == "Finished":
 
             parser = BlastParser(new_record.blast_file, "blast", 100)
             blast = [obj for obj in parser.parse()]
