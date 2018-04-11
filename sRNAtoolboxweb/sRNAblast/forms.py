@@ -96,14 +96,14 @@ class sRNAblastForm(forms.Form):
     url = forms.URLField(label=mark_safe('<strong >Or provide a URL for big files <strong class="text-success"> (recommended!)</strong>'), required=False)
     job_ID = forms.CharField(label='Or provide a sRNAbench jobID: ',
                              required=False)
-    maxReads=forms.ChoiceField(label='Number of unique unmapped reads to blast',choices= NUMBERS )
-    dataBase=forms.ChoiceField(label= 'Database', choices=DATABASES)
-    maxEval=forms.DecimalField(label= 'Evalue Maximum threshold')
+    maxReads=forms.ChoiceField(label='Number of unique unmapped reads to blast',choices= NUMBERS, required=False )
+    dataBase=forms.ChoiceField(label= 'Database', choices=DATABASES, required=False)
+    maxEval=forms.DecimalField(label= 'Evalue Maximum threshold', required= False)
 
     adapter_chosen = forms.ChoiceField(choices=ADAPTERS, required=False)
     adapter_manual = forms.CharField(label='Or Provide adapter sequence', required=False)
-    adapter_length = forms.IntegerField(label='Minimum Adapter Length', max_value=12, min_value=6, initial=10)
-    adapter_mismatch = forms.IntegerField(label='Max. mismatches in adapter detection', max_value=2, min_value=0, initial=1)
+    adapter_length = forms.IntegerField(label='Minimum Adapter Length', max_value=12, min_value=6, initial=10, required=False)
+    adapter_mismatch = forms.IntegerField(label='Max. mismatches in adapter detection', max_value=2, min_value=0, initial=1, required=False)
 
 
 
@@ -145,36 +145,22 @@ class sRNAblastForm(forms.Form):
     def clean(self):
 
         cleaned_data = super(sRNAblastForm, self).clean()
-        print(cleaned_data.get('species'))
-        if not cleaned_data.get('species') and not cleaned_data.get('mirna_profiled'):
-            self.add_error('species','Species or a miRBase short name tag are required')
-            self.add_error('mirna_profiled', 'Species or a miRBase short name tag are required')
-        if not cleaned_data.get('ifile') and not cleaned_data.get('url'):
+
+        if sum([0,bool(cleaned_data.get('ifile')),bool(cleaned_data.get('url')),bool(cleaned_data.get('job_ID'))]) != 1:
             self.add_error('ifile', 'Choose either file or URL as input')
             self.add_error('url', 'Choose either file or URL as input')
-            print(cleaned_data.get('ifile'))
-        if cleaned_data.get('ifile') and cleaned_data.get('url'):
-            self.add_error('ifile', 'Choose either file or URL as input')
-            self.add_error('url', 'Choose either file or URL as input')
-        if cleaned_data.get('predict_mirna') and cleaned_data.get('library_mode'):
-            self.add_error('library_mode', 'Genome mode is needed for miRNA prediction')
-        # if not cleaned_data.get('guess_adapter') and cleaned_data.get('adapter_chosen')=='' and cleaned_data.get('adapter_manual')=='':
+            self.add_error('job_ID', 'Choose either file or URL as input')
+            #print(cleaned_data.get('ifile'))
         if sum([bool(cleaned_data.get('guess_adapter')), bool(cleaned_data.get('adapter_chosen')==''), bool(cleaned_data.get('adapter_manual')=='')]) != 1:
             self.add_error('guess_adapter', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
             self.add_error('adapter_chosen', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
             self.add_error('adapter_manual', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
-        if cleaned_data.get('guess_adapter') and not cleaned_data.get('species'):
-            self.add_error('species', 'if `guess the adapter sequence`, an input genome is required')
-        if cleaned_data.get('highconf') and cleaned_data.get('mirDB') :
-            self.add_error('highconf', 'Choose either miRBase or MirGeneDB for high confidence annotation')
-            self.add_error('mirDB', 'Choose either miRBase or MirGeneDB for high confidence annotation')
-
         return cleaned_data
 
     @staticmethod
     def upload_files(cleaned_data, FS):
         libs_files = []
-        name_modifier = cleaned_data.get('job_name')
+        name_modifier = ""
         url = cleaned_data.get('url')
         ifile = cleaned_data.get("ifile") or ''
         if ifile:
@@ -224,66 +210,43 @@ class sRNAblastForm(forms.Form):
         out_dir = FS.location
         conf['out_dir'] = out_dir
         ifile, libs_files = self.upload_files(cleaned_data, FS)
-        lib_mode = cleaned_data.get('library_mode')
-        is_solid = str(cleaned_data.get('is_solid')).lower()
-        guess_adapter = str(cleaned_data.get('guess_adapter')).lower()
-        predict_mirna = str(cleaned_data.get('predict_mirna')).lower()
-        no_libs = cleaned_data.get('no_libs')
-        highconf = cleaned_data.get('highconf')
-        mirDB = cleaned_data.get('mirDB')
         #recursive_adapter_trimming = str(cleaned_data.get('recursive_adapter_trimming')).lower()
-        recursive_adapter_trimming = str(cleaned_data.get('adapter_recursive_trimming')).lower()
-        species = [i.db_ver for i in cleaned_data['species']]
-        assemblies = [i.db for i in cleaned_data['species']]
-        short_names = [i.shortName for i in cleaned_data['species']]
-        micrornas_species = ':'.join(short_names)
         adapter = cleaned_data['adapter_chosen'] or cleaned_data['adapter_manual']
-
         nucleotides_5_removed = str(cleaned_data['nucleotides_5_removed'])
         adapter_length = str(cleaned_data['adapter_length'])
         adapter_mismatch = str(cleaned_data['adapter_mismatch'])
-        seed_length = str(cleaned_data['seed_length'])
-        mismatches = str(cleaned_data['mismatches'])
-        aligment_type = str(cleaned_data['aligment_type'])
-        min_read_count = str(cleaned_data['min_read_count'])
-        min_read_length = str(cleaned_data['min_read_length'])
-        max_multiple_mapping = str(cleaned_data['max_multiple_mapping'])
-        homologous = cleaned_data['homologous'] if cleaned_data['homologous'] != '' else None
 
-        species_annotation_file = SpeciesAnnotationParser(CONF["speciesAnnotation"])
-        species_annotation = species_annotation_file.parse()
-        db = CONF["db"]
-
-
-        new_conf = SRNABenchConfig(species_annotation, db, FS.location, ifile, iszip="true",
-                                  #RNAfold="RNAfold2",
-                                  bedGraph="true", writeGenomeDist="true", predict=predict_mirna, graphics="true",
-                                  species=species, assembly=assemblies, short_names=short_names, adapter=adapter,
-                                  recursiveAdapterTrimming=recursive_adapter_trimming, libmode=lib_mode, nolib=no_libs,
-                                  microRNA=micrornas_species, removeBarcode=nucleotides_5_removed,
-                                  adapterMinLength=adapter_length, adapterMM=adapter_mismatch,
-                                  seed=seed_length,
-                                  noMM=mismatches, alignType=aligment_type, minRC=min_read_count, solid=is_solid,
-                                  guessAdapter=guess_adapter, highconf=highconf, mirDB=mirDB, homolog=homologous,
-                                  user_files=libs_files, minReadLength=min_read_length, mBowtie=max_multiple_mapping)
-
+        conf_dict={}
+        conf_dict["input"] = ifile
+        conf_dict["output"] = out_dir
+        conf_dict["maxReads"] = cleaned_data.get("maxReads")
+        conf_dict["blastDB"]= cleaned_data.get("database")
+        #conf_dict["minIdent"]= cleaned_data.get("minIdent")
+        conf_dict["maxEvalue"]= cleaned_data.get("maxEval")
+        conf_dict["adapter"] = adapter
+        conf_dict["adapterMinLength"] = adapter_length
+        conf_dict["adapterMM"] = adapter_mismatch
         conf_file_location = os.path.join(FS.location, "conf.txt")
-        new_conf.write_conf_file(conf_file_location)
+        with open(conf_file_location, "a") as cfile:
+            for k in conf_dict.keys():
+                if conf_dict.get(k):
+                    line= str(k)+"="+conf_dict.get(k)+"\n"
+                    cfile.write(line)
 
-        name = pipeline_id + '_bench'
+        name = pipeline_id + '_blast'
         configuration = {
             'pipeline_id': pipeline_id,
             'out_dir': out_dir,
             'name': name,
-            'conf_input': conf_file_location,
-            'type': 'sRNAbench'
+            'config_file': conf_file_location,
+            'type': 'sRNAblast'
         }
 
         JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not_launched",
                                  start_time=datetime.now(),
                                  all_files=ifile,
                                  modules_files="",
-                                 pipeline_type="sRNAbench",
+                                 pipeline_type="sRNAblast",
                                  )
         configuration_file_path = os.path.join(out_dir, 'conf.json')
         with open(configuration_file_path, 'w') as conf_file:

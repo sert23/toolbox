@@ -16,10 +16,13 @@ from utils.sysUtils import make_dir
 from django.views.generic import FormView
 from sRNAblast.forms import sRNAblastForm
 from django.core.urlresolvers import reverse_lazy
+from django.conf import settings
 
 #SPECIES_PATH = '/shared/data/sRNAbench/species.csv'
 #SPECIES_ANNOTATION_PATH = '/shared/data/sRNAbench/annotation.txt'
 #FS = FileSystemStorage("/shared/sRNAtoolbox/webData")
+CONF = settings.CONF
+FS = FileSystemStorage(CONF["sRNAtoolboxSODataPath"])
 
 counter = itertools.count()
 
@@ -280,7 +283,7 @@ class SRNABlast(FormView):
         # It should return an HttpResponse.
         form.clean()
         call, pipeline_id = form.create_call()
-        self.success_url = reverse_lazy('') + '?id=' + pipeline_id
+        self.success_url = reverse_lazy('srnablast') + '?id=' + pipeline_id
 
         print(call)
         os.system("source /opt/venv/sRNAtoolbox2017/bin/activate")

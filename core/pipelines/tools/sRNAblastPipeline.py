@@ -6,12 +6,12 @@ import pygal
 from pygal.style import LightColorizedStyle
 
 from pipelines.pipelines import Pipeline
+import FileModels.BlastParsers.BlastParser as BlastParser
 
 
 class sRNAblastPipeline(Pipeline):
-    def __init__(self, pipeline_key, job_name, outdir, config_file=None, parameters=""):
-        super(sRNAblastPipeline, self).__init__(pipeline_key, job_name, outdir, "sRNAblast", parameters)
-
+    def __init__(self, pipeline_key, job_name, outdir, config_file,  **kwargs):
+        super(sRNAblastPipeline, self).__init__(pipeline_key, job_name, outdir, "sRNAblast" )
         self.conf = config_file
 
     def run(self):
