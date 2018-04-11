@@ -249,7 +249,7 @@ def main():
         bench(**conf)
     if conf['type'] == 'miRNAconstarget':
         mirconstarget(**conf)
-    if conf['type'] == 'blast':
+    if conf['type'] == 'sRNAblast':
         blast(**conf)
 
 
