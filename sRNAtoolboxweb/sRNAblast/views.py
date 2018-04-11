@@ -203,13 +203,13 @@ def result(request):
             blast_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(blast))
             results["blast"] = blast_result
 
-            parser = BlastParser(new_record.species_file, "species", 50)
+            parser = BlastParser(os.path.join(new_record.outdir,"species.out"), "species", 50)
             species = [obj for obj in parser.parse()]
             header = species[0].get_sorted_attr()
             species_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(species))
             results["species"] = species_result
 
-            parser = BlastParser(new_record.tax_file, "tax")
+            parser = BlastParser(os.path.join(new_record.outdir,"species.out"), "tax")
             tax = [obj for obj in parser.parse()]
             header = tax[0].get_sorted_attr()
             tax_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(tax))
