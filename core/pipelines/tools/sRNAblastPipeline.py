@@ -18,11 +18,12 @@ class sRNAblastPipeline(Pipeline):
     def run(self):
         self.initialize_pipeline_status()
         self.call_srnablast()
-        self.create_graphics()
-        self.set_out_files()
-        if self.post_checks():
-            self.set_finish_time()
-            self.change_pipeline_status("Finished")
+        # self.create_graphics()
+        # self.set_out_files()
+        # if self.post_checks():
+        #     self.set_finish_time()
+        #     self.change_pipeline_status("Finished")
+        self.change_pipeline_status("Finished")
         # self.logger.close()
         self.error_logger.close()
 
