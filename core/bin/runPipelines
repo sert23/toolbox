@@ -249,7 +249,9 @@ def main():
     if conf['type'] == 'miRNAconstarget':
         mirconstarget(**conf)
     if conf['type'] == 'sRNAblast':
-        blast(**conf)
+        print([conf.get("pipeline_id"),conf.get("name"),conf.get("out_dir"),conf.get("conf_input")])
+        blast(conf.get("pipeline_id"),conf.get("name"),conf.get("out_dir"),conf.get("conf_input"))
+        #blast(**conf)
 
 
 
