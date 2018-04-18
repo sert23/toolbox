@@ -7,7 +7,8 @@ from DataModels.blasttax import BlastTax
 
 
 class BlastParser(Parser):
-    def __init__(self, ipath, file_type, limit=None):
+    def __init__(self, ipath, file_type, limit=1):
+    #def __init__(self, ipath, file_type, limit=None):
         super(BlastParser, self).__init__(ipath)
         self.file_type = file_type
         self.limit = limit
