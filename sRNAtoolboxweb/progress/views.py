@@ -102,7 +102,8 @@ class JobStatusDetail(DetailView):
     @staticmethod
     def get_running_context_for_srnabench(job_status):
         if os.path.exists(os.path.join(job_status.outdir, "parameters.txt")):
-            return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
+            #return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
+            return redirect("/jobstatus/" + job_status.pipeline_key)
         else:
             return JobStatusDetail.get_context_with_messages(job_status)
 
@@ -117,7 +118,8 @@ class JobStatusDetail(DetailView):
         msgs = [Msg(t.status_progress) for t in job_status.status.all()]
         msgs += load_status_from_file(job_status.pipeline_key)
         return {'msgs': msgs,
-                "url": "/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key,
+                #"url": "/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key,
+                "url": "/jobstatus/" + job_status.pipeline_key,
                 "id": job_status.pipeline_key}
 
     @staticmethod
