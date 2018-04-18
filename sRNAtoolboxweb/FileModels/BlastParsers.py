@@ -12,6 +12,8 @@ class BlastParser(Parser):
         super(BlastParser, self).__init__(ipath)
         self.file_type = file_type
         self.limit = limit
+        print(limit)
+        print("this is the limit")
 
     def parse(self):
         print("Aquí está el Blast")
