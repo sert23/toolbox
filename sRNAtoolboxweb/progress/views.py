@@ -197,7 +197,8 @@ class JobStatusDetail(DetailView):
             return super(JobStatusDetail, self).render_to_response(context, **response_kwargs)
 
         job_status = self.object
-        return redirect(reverse_lazy(job_status.pipeline_type.lower()) + "?id=" + job_status.pipeline_key)
+        #return redirect(reverse_lazy(job_status.pipeline_type.lower()) + "?id=" + job_status.pipeline_key)
+        return redirect(reverse_lazy(job_status.pipeline_type.lower()) + "/results/?id=" + job_status.pipeline_key)
 
 
 
