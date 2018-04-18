@@ -10,32 +10,21 @@ from FileModels.BlastParsers import BlastParser
 
 
 class sRNAblastPipeline(Pipeline):
-    def __init__(self, pipeline_key, job_name, outdir, config_file, parameters = ""):
-
-        print("LOli")
-        print(self)
-        print(outdir)
-
+    def __init__(self, pipeline_key, job_name, outdir, config_file=None, parameters = ""):
         super(sRNAblastPipeline, self).__init__(pipeline_key, job_name, outdir, "sRNAblast", parameters)
-
-        print("pasado el super")
-        print(self)
-        print(self.outdir)
-        print(outdir)
         self.conf = config_file
         self.outdir=outdir
-        print(self.outdir)
         self.job_name=job_name
 
     def run(self):
         self.initialize_pipeline_status()
         self.call_srnablast()
-        # self.create_graphics()
-        # self.set_out_files()
-        # if self.post_checks():
-        #     self.set_finish_time()
-        #     self.change_pipeline_status("Finished")
-        self.change_pipeline_status("Finished")
+        self.create_graphics()
+        self.set_out_files()
+        if self.post_checks():
+            self.set_finish_time()
+            self.change_pipeline_status("Finished")
+        #self.change_pipeline_status("Finished")
         # self.logger.close()
         self.error_logger.close()
 
