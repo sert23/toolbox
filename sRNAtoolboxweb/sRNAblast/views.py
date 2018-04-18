@@ -215,7 +215,7 @@ def result(request):
             tax_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(tax))
             results["taxonomy"] = tax_result
 
-            results["zip"] = "/".join(new_record.zip_file.split("/")[-2:])
+            #results["zip"] = "/".join(new_record.zip_file.split("/")[-2:])
 
             try:
                 results["parameters"] = new_record.parameters
