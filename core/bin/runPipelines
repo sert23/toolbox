@@ -50,9 +50,8 @@ def de(pipeline_id=None, name=None, out_dir=None, groups=None, probab=None, pval
 
 
 
-
 def blast(pipeline_id=None, name=None, out_dir=None, conf_input=None, **kwargs):
-    parameters = "".join([line for line in open(args.configure).readlines() if "output" not in line and "minRC" not in line and not "blastn" in line ]).replace("=", ": ").replace("/shared/", "").replace("sRNAtoolbox/webData/", "")
+    #parameters = "".join([line for line in open(args.configure).readlines() if "output" not in line and "minRC" not in line and not "blastn" in line ]).replace("=", ": ").replace("/shared/", "").replace("sRNAtoolbox/webData/", "")
     #new_pipe = sRNAblastPipeline(args.pipelineKey, args.jobName, args.outdir, args.configure, parameters)
     print("before pipe")
     new_pipe = sRNAblastPipeline(pipeline_id, name, out_dir, conf_input)
