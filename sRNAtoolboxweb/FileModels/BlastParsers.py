@@ -14,6 +14,8 @@ class BlastParser(Parser):
         self.limit = limit
         print(limit)
         print("this is the limit")
+        print(self.limit)
+        print(type(limit))
 
     def parse(self):
         print("Aquí está el Blast")
