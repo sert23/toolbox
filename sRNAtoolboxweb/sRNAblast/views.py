@@ -189,6 +189,7 @@ def result(request):
         job_id = request.GET['id']
 
         new_record = JobStatus.objects.get(pipeline_key=job_id)
+        print("new record")
         print(new_record)
         assert isinstance(new_record, JobStatus)
 
