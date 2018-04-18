@@ -246,6 +246,7 @@ class sRNAblastForm(forms.Form):
                                  start_time=datetime.now(),
                                  all_files=ifile,
                                  modules_files="",
+                                 outdir=out_dir,
                                  pipeline_type="sRNAblast",
                                  )
         configuration_file_path = os.path.join(out_dir, 'conf.json')
