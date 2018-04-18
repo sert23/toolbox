@@ -87,13 +87,16 @@ class JobStatusDetail(DetailView):
             if msg.type == "error":
                 error = True
 
+        #http://bioinfo5.ugr.es:8000/jobstatus/IJFPGD68UAKFFHU
         if error:
             return {'msgs': msgs,
-                    "url": "/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key,
+                    #"url": "/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key,
+                    "url": "/jobstatus/" + job_status.pipeline_key,
                     "id": job_status.pipeline_key}
         else:
             return {'running': True,
-                    'msgs': msgs, "url": "/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key,
+                    'msgs': msgs, "url": "/jobstatus/" + job_status.pipeline_key,
+                    #'msgs': msgs, "url": "/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key,
                     "id": job_status.pipeline_key}
 
     @staticmethod
@@ -197,8 +200,8 @@ class JobStatusDetail(DetailView):
             return super(JobStatusDetail, self).render_to_response(context, **response_kwargs)
 
         job_status = self.object
-        #return redirect(reverse_lazy(job_status.pipeline_type.lower()) + "?id=" + job_status.pipeline_key)
-        return redirect(reverse_lazy(job_status.pipeline_type.lower()) + "/results/?id=" + job_status.pipeline_key)
+        return redirect(reverse_lazy(job_status.pipeline_type.lower()) + "?id=" + job_status.pipeline_key)
+        #return redirect(reverse_lazy(job_status.pipeline_type.lower()) + "/results/?id=" + job_status.pipeline_key)
 
 
 
