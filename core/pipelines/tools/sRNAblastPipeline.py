@@ -14,7 +14,7 @@ class sRNAblastPipeline(Pipeline):
 
         print("LOli")
         print(self)
-        print(self.outdir)
+        print(outdir)
 
         super(sRNAblastPipeline, self).__init__(pipeline_key, job_name, outdir, "sRNAblast", parameters)
 
