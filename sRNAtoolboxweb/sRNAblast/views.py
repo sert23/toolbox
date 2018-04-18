@@ -190,7 +190,7 @@ def result(request):
 
         new_record = JobStatus.objects.get(pipeline_key=job_id)
         print("new record")
-        print(new_record)
+        print(new_record.outdir)
         assert isinstance(new_record, JobStatus)
 
         results = {}
