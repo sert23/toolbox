@@ -224,7 +224,7 @@ def result(request):
                 par_file= os.path.join(new_record.outdir,"parameters.txt")
                 results["parameters"] = "".join(open(par_file).readlines()),
                 #results["parameters"] = new_record.parameters
-                results["species_figure"] = os.path.join(new_record.outdir, "species.svg")
+                results["species_figure"] = os.path.join("/",new_record.outdir, "species.svg")
                 # results["species_figure"] = "/".join(new_record.species_svg.split("/")[-2:])
             except:
                 pass
