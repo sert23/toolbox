@@ -221,7 +221,8 @@ def result(request):
             #results["zip"] = "/".join(new_record.zip_file.split("/")[-2:])
 
             try:
-                results["parameters"] = new_record.parameters
+                results["parameters"] = "Lolailolaaa= fino "
+                #results["parameters"] = new_record.parameters
             except:
                 pass
 
