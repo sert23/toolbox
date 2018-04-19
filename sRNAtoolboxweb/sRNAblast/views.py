@@ -221,7 +221,9 @@ def result(request):
             #results["zip"] = "/".join(new_record.zip_file.split("/")[-2:])
 
             try:
-                results["parameters"] = new_record.parameters
+                par_file= os.path.join(new_record.outdir,"parameters.txt")
+                results["parameters"] = "".join(open(par_file).readlines()),
+                #results["parameters"] = new_record.parameters
             except:
                 pass
 

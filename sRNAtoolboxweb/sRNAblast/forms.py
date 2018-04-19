@@ -218,7 +218,7 @@ class sRNAblastForm(forms.Form):
         conf_dict["input"] = ifile
         conf_dict["output"] = out_dir
         conf_dict["maxReads"] = cleaned_data.get("maxReads")
-        conf_dict["blastDB"]= cleaned_data.get("database")
+        conf_dict["blastDB"]= cleaned_data.get("dataBase")
         #conf_dict["minIdent"]= cleaned_data.get("minIdent")
         conf_dict["maxEvalue"]= cleaned_data.get("maxEval")
         conf_dict["adapter"] = adapter
@@ -247,7 +247,7 @@ class sRNAblastForm(forms.Form):
                                  all_files=ifile,
                                  modules_files="",
                                  outdir=out_dir,
-                                 parameters="".join(open(conf_file_location).readlines()),
+                                 #parameters="".join(open(conf_file_location).readlines()),
                                  pipeline_type="sRNAblast",
                                  )
         configuration_file_path = os.path.join(out_dir, 'conf.json')
