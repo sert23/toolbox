@@ -231,7 +231,8 @@ def result(request):
                 results["tax_figure"] = "/".join(new_record.tax_svg.split("/")[-2:])
 
             if new_record.species_svg:
-                results["species_figure"] = "/".join(new_record.species_svg.split("/")[-2:])
+                results["species_figure"] = os.path.join(new_record.outdir,"species.svg")
+                #results["species_figure"] = "/".join(new_record.species_svg.split("/")[-2:])
 
             results["date"] = new_record.start_time + datetime.timedelta(days=15)
 
