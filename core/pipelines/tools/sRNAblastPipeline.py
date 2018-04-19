@@ -50,13 +50,13 @@ class sRNAblastPipeline(Pipeline):
         tax_file = os.path.join(self.outdir, "tax.out")
         species_file = os.path.join(self.outdir, "species.out")
         if os.path.isfile(tax_file):
-            parser = BlastParser(tax_file, "tax",100)
+            parser = BlastParser(tax_file, "tax",20000)
             tax = [obj for obj in parser.parse()]
             self.create_pie([(tx.Taxonomy, tx.Percentage_Read_Count) for tx in tax], "Taxonomy Percentage Read Count",
                             os.path.join(self.outdir, "tax"))
 
         if os.path.isfile(tax_file):
-            parser = BlastParser(species_file, "species",100)
+            parser = BlastParser(species_file, "species",20000)
             sp = [obj for obj in parser.parse()]
             self.create_pie([(s.specie, s.Percentage_Read_Count) for s in sp], "Species Percentage Read Count",
                             os.path.join(self.outdir, "species"))
