@@ -25,7 +25,7 @@ class sRNAblastPipeline(Pipeline):
         if self.post_checks():
             self.set_finish_time()
             self.change_pipeline_status("Finished")
-        #self.change_pipeline_status("Finished")
+        self.change_pipeline_status("Finished")
         # self.logger.close()
         self.error_logger.close()
 
