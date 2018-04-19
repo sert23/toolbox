@@ -34,8 +34,8 @@ class BlastParser(Parser):
                 break
 
     def sort_blast_by_rc(self, out):
-        fd = file(self.ipath)
-        fdw = file(out, "w")
+        fd = open(self.ipath)
+        fdw = open(out, "w")
 
         header = fd.readline()
         fdw.write(header)
