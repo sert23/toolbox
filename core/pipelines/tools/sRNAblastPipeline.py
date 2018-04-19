@@ -38,6 +38,7 @@ class sRNAblastPipeline(Pipeline):
         print(cmd)
         os.system(cmd)
         self.set_java_command_line(cmd)
+        self.change_pipeline_status("Running")
 
         log_msg = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " SUCCESS: sRNAblast Analysis finished"
         self.actualize_pipeline_progress(log_msg)
