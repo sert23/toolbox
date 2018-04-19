@@ -229,6 +229,8 @@ def result(request):
             except:
                 pass
 
+            results["species_figure"] = os.path.join(new_record.outdir, "species.svg")
+
             if new_record.tax_svg:
                 results["tax_figure"] = "/".join(new_record.tax_svg.split("/")[-2:])
 
