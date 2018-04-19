@@ -18,6 +18,7 @@ class sRNAblastPipeline(Pipeline):
 
     def run(self):
         self.initialize_pipeline_status()
+        self.change_pipeline_status("Running")
         self.call_srnablast()
         self.create_graphics()
         self.set_out_files()
@@ -105,7 +106,7 @@ class sRNAblastPipeline(Pipeline):
 
         zip_file = os.path.join(self.outdir, "sRNAblast_full_Result.zip")
         os.system("cd " + self.outdir + "; zip -r " + zip_file + " " + " *")
-        update = {"blast_file": blast_file, "species_file": species_file, "zip_file": zip_file, "tax_file": tax_file,
-                     "tax_svg": tax_svg, "species_svg": species_svg}
+        # update = {"blast_file": blast_file, "species_file": species_file, "zip_file": zip_file, "tax_file": tax_file,
+        #              "tax_svg": tax_svg, "species_svg": species_svg}
 
-        self.raw_update(update)
+        #self.raw_update(update)
