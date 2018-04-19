@@ -224,12 +224,12 @@ def result(request):
                 par_file= os.path.join(new_record.outdir,"parameters.txt")
                 results["parameters"] = "".join(open(par_file).readlines()),
                 #results["parameters"] = new_record.parameters
-                results["species_figure"] = os.path.join("/",new_record.outdir, "species.svg")
+                #results["species_figure"] = os.path.join("/",new_record.outdir, "species.svg")
                 # results["species_figure"] = "/".join(new_record.species_svg.split("/")[-2:])
             except:
                 pass
 
-            results["species_figure"] = os.path.join(new_record.outdir, "species.svg")
+            results["species_figure"] = "/opt/sRNAtoolbox/sRNAtoolboxweb/upload/CJZ35ZJBIAGHK31/species.svg"
 
             if new_record.tax_svg:
                 results["tax_figure"] = "/".join(new_record.tax_svg.split("/")[-2:])
