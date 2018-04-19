@@ -55,7 +55,7 @@ def blast(pipeline_id=None, name=None, out_dir=None, conf_input=None, **kwargs):
     #new_pipe = sRNAblastPipeline(args.pipelineKey, args.jobName, args.outdir, args.configure, parameters)
     print("before pipe")
     print([pipeline_id, name, out_dir, conf_input])
-    new_pipe = sRNAblastPipeline(pipeline_id, name, out_dir, conf_input,parameters="calimerooooo= calocu")
+    new_pipe = sRNAblastPipeline(pipeline_id, name, out_dir, conf_input)
     print("after pipe")
     new_pipe.run()
 
