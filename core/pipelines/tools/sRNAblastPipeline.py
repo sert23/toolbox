@@ -21,6 +21,7 @@ class sRNAblastPipeline(Pipeline):
         self.change_pipeline_status("Running")
         self.call_srnablast()
         #self.create_graphics()
+        self.change_pipeline_status("Finished")
         self.set_out_files()
         if self.post_checks():
             self.set_finish_time()
