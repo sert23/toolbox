@@ -157,7 +157,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 SUB_SITE = '/srnatoolbox_dev'
-STATIC_URL = os.path.join(SUB_SITE,'/static/')
+STATIC_URL = SUB_SITE + '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'sRNAtoolboxweb', 'static'),
