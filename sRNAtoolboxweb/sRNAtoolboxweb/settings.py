@@ -155,7 +155,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-STATIC_URL = '/static/'
+SUB_SITE = '/srnatoolbox_dev'
+STATIC_URL = os.path.join(SUB_SITE,'/static/')
+
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'sRNAtoolboxweb', 'static'),
     MEDIA_ROOT
