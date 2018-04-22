@@ -81,7 +81,8 @@
                                 <div class="col-lg-6">
                                     {% if species_figure %}
                                         <figure>
-                                            <embed type="image/svg+xml" src="{%get_media_prefix%}  {%species_figure  %}"/>
+                                            {% get_media_prefix as MEDIA_PREFIX %}
+                                            <embed type="image/svg+xml" src="{{ MEDIA_PREFIX }} {%species_figure  %}"/>
 
                                         </figure>
                                     {% endif %}
