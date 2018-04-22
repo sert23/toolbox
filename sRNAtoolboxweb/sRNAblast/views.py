@@ -229,7 +229,12 @@ def result(request):
             except:
                 pass
 
-            results["species_figure"] = "/opt/sRNAtoolbox/sRNAtoolboxweb/upload/CJZ35ZJBIAGHK31/species.svg"
+            species_figure = new_record.pipeline_key
+            if os.path.exists(os.path.join(new_record.outdir,"species.svg")):
+                results["species_figure"] = "/"+new_record.pipeline_key+"/species.svg"
+
+            if os.path.exists(os.path.join(new_record.outdir,"tax.svg")):
+                results["tax_figure"] = "/"+new_record.pipeline_key+"/tax.svg"
 
             if new_record.tax_svg:
                 results["tax_figure"] = "/".join(new_record.tax_svg.split("/")[-2:])
