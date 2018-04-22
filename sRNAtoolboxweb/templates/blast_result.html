@@ -14,7 +14,7 @@
 
 
             <div class="col-lg-12">
-                <h3 class="page-header">sRNAblast Results for job ID: <a href="/srnatoolbox/jobstatus/srnablast/?id={{ id }}" class="alert-link">{{ id }}</a> </h3>
+                <h3 class="page-header">sRNAblast Results for job ID: <a href="{{sttings.SUB_SITE}}/jobstatus/{{ id }}" class="alert-link">{{ id }}</a> </h3>
             </div>
             <!-- /.col-lg-12 -->
         </div>
@@ -81,8 +81,8 @@
                                 <div class="col-lg-6">
                                     {% if species_figure %}
                                         <figure>
-                                            {% get_media_prefix as MEDIA_PREFIX %}
-                                            <embed type="image/svg+xml" src="{{ MEDIA_PREFIX }} {%species_figure  %}"/>
+{#                                            {% get_media_prefix as MEDIA_PREFIX %}#}
+                                            <embed type="image/svg+xml" src="{{ MEDIA_URL }} {%species_figure  %}"/>
 
                                         </figure>
                                     {% endif %}

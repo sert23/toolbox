@@ -77,6 +77,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                'django.template.context_processors.media',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django_settings_export.settings_export',
@@ -143,6 +144,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "upload")
 
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -158,6 +160,7 @@ USE_TZ = True
 
 SUB_SITE = '/srnatoolbox_dev'
 STATIC_URL = SUB_SITE + '/static/'
+MEIDA_URL = SUB_SITE + '/media/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'sRNAtoolboxweb', 'static'),
