@@ -158,8 +158,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
-SUB_SITE = ''
-#SUB_SITE = '/srnatoolbox_dev'
+# SUB_SITE = ''
+SUB_SITE = '/srnatoolbox_dev'
 STATIC_URL = SUB_SITE + '/static/'
 MEIDA_URL = SUB_SITE + '/media/'
 
