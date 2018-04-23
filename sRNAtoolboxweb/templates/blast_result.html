@@ -74,7 +74,7 @@
                                 <div class="col-lg-6">
                                     {% if tax_figure %}
                                         <figure>
-                                            <embed type="image/svg+xml" src="{% static  tax_figure  %}"/>
+                                            <embed type="image/svg+xml" src="{{ MEDIA_URL }}{{ tax_figure  }}"/>
                                         </figure>
                                     {% endif %}
                                 </div>
