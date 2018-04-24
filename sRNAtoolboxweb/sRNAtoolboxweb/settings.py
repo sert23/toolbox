@@ -166,7 +166,7 @@ MEDIA_URL = SUB_SITE + '/media/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'sRNAtoolboxweb', 'static'),
-    MEDIA_ROOT
+   # MEDIA_ROOT
 
 
 ]
