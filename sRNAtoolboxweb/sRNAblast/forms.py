@@ -249,6 +249,7 @@ class sRNAblastForm(forms.Form):
                                  outdir=out_dir,
                                  #parameters="".join(open(conf_file_location).readlines()),
                                  pipeline_type="sRNAblast",
+                                 zip_file=pipeline_id+"/"+"sRNAblast_full_Result.zip",
                                  )
         configuration_file_path = os.path.join(out_dir, 'conf.json')
         with open(configuration_file_path, 'w') as conf_file:
