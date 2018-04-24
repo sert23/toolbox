@@ -171,7 +171,7 @@ STATICFILES_DIRS = [
 
 ]
 
-STATIC_ROOT= "/opt/sRNAtoolbox/sRNAtoolboxweb/sRNAtoolboxweb/static/"
+STATIC_ROOT= "/var/www/html/sRNAtoolbox_static/"
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder'
