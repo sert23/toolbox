@@ -168,7 +168,10 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'sRNAtoolboxweb', 'static'),
     MEDIA_ROOT
 
+
 ]
+
+STATIC_ROOT= "/opt/sRNAtoolbox/sRNAtoolboxweb/sRNAtoolboxweb/static/"
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder'
