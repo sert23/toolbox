@@ -236,9 +236,6 @@ def result(request):
             if os.path.exists(os.path.join(new_record.outdir,"tax.svg")):
                 results["tax_figure"] = "/"+new_record.pipeline_key+"/tax.svg"
 
-            if new_record.tax_svg:
-                results["tax_figure"] = "/".join(new_record.tax_svg.split("/")[-2:])
-
 
 
 
