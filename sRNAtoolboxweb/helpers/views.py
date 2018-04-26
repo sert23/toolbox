@@ -235,8 +235,10 @@ def result(request):
 
 
 class RemoveDup(FormView):
-    template_name = 'helpers/helpers_removedup.html'
-    form_class = RemovedupForm
+    template_name = 'helpers/helpers_extract.html'
+    #template_name = 'helpers/helpers_removedup.html'
+    form_class = ExtractForm
+    #form_class = RemovedupForm
 
     success_url = reverse_lazy("removedup")
 
