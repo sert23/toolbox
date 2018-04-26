@@ -122,6 +122,19 @@ class ExtractForm(forms.Form):
             raise Http404
 
         name = pipeline_id + '_h_extract'
+
+        configuration = {
+            'pipeline_id': pipeline_id,
+            'out_dir': out_dir,
+            'name': name,
+            'conf_input': os.path.join(out_dir,"conf.json"),
+            'type': 'helper'
+        }
+        import json
+        configuration_file_path = os.path.join(out_dir, 'conf.json')
+        with open(configuration_file_path, 'w') as conf_file:
+            json.dump(configuration, conf_file, indent=True)
+
         JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not launched",
                                  start_time=datetime.datetime.now(),
                                  #finish_time=datetime.time(0, 0),
@@ -130,15 +143,7 @@ class ExtractForm(forms.Form):
                                  pipeline_type="helper",
                                 )
 
-        return 'qsub -v pipeline="helper",mode="extract",key="{pipeline_id}",outdir="{out_dir}",inputfile="{input_file}",string="{string}",name="{name}" -N {job_name} {sh}'.format(
-                pipeline_id=pipeline_id,
-                out_dir=out_dir,
-                input_file=os.path.join(FS.location, ifile),
-                string=self.cleaned_data.get("string"),
-                name=name,
-                job_name=name,
-                sh=os.path.join(BASE_DIR + '/core/bash_scripts/run_helper_extract.sh')
-            )
+        return pipeline_id, "runPipelines " +configuration_file_path
 
 class EnsemblForm(forms.Form):
     ifile = forms.FileField(label='Upload input file(Ensembl file)', required=False)
