@@ -253,7 +253,7 @@ class Extract(FormView):
     template_name = 'helpers/helpers_extract.html'
     form_class = ExtractForm
 
-    success_url = reverse_lazy("EXTRACT")
+    success_url = reverse_lazy("extract")
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
