@@ -244,18 +244,20 @@ class RemoveDup(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call = form.create_call()
+
         return super(RemoveDup, self).form_valid(form)
 
 class Extract(FormView):
     template_name = 'helpers/helpers_extract.html'
     form_class = ExtractForm
 
-    success_url = reverse_lazy("extract")
+    success_url = reverse_lazy("EXTRACT")
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
-        call = form.create_call()
+        pipeline_id,call = form.create_call()
+        self.success_url = reverse_lazy('helper') + '?id=' + pipeline_id
         return super(Extract, self).form_valid(form)
 
 class Ensembl(FormView):
