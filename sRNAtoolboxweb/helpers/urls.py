@@ -8,8 +8,9 @@ urlpatterns = [
     url(r'^ensemlparser', views.Ensembl.as_view(), name="ensembl"),
     url(r'^rnacentralparser', views.RNAcentral.as_view(), name="rnacentral"),
     url(r'^trnaparser', views.Trna.as_view(), name="trna"),
+
     url(r'^removedup', views.RemoveDup.as_view(), name='removedup'),
-    url(r'^extract', views.Extract.as_view(), name="EXTRACT"),
+    #url(r'^extract', views.Extract.as_view(), name="EXTRACT"),
     url(r'results', views.result, name='helper'),
     #url(r'^run/([A-za-z]+)', views.run),
     url(r'^results', views.result),
