@@ -10,7 +10,8 @@ from progress.models import JobStatus
 from sRNAtoolboxweb.settings import BASE_DIR
 from sRNAtoolboxweb.settings import MEDIA_ROOT
 from utils.pipeline_utils import generate_uniq_id
-
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field
 
 class RemovedupForm(forms.Form):
     ifile = forms.FileField(label='Upload input file(Fasta file)', required=False)
@@ -82,6 +83,24 @@ class ExtractForm(forms.Form):
     url = forms.URLField(label='Or provide a URL for big files (recommended!)', required=False)
     string = forms.CharField(label='Provide a string the characters used to select the sequences',
                              required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(ExtractForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                "ifile",
+                "url",
+                "string",
+
+                ButtonHolder(
+                    # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
+                    Submit('submit', 'RUN', css_class='btn btn-primary'))
+
+
+
+            )
+        )
     def clean(self):
         cleaned_data = super(ExtractForm, self).clean()
         if not cleaned_data.get('ifile') and not cleaned_data.get('url'):
