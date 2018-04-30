@@ -213,7 +213,8 @@ def run(request, tool):
                 '_h_trna /shared/sRNAtoolbox/core/bash_scripts/run_helper_trna.sh')
 
 
-    return redirect("/srnatoolbox/jobstatus/helper/?id=" + pipeline_id)
+    #return redirect("/srnatoolbox/jobstatus/helper/?id=" + pipeline_id)
+    return redirect("/srnatoolbox_dev/")
 
 
 def result(request):
