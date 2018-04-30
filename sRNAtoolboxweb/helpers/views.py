@@ -12,6 +12,8 @@ from helpers.forms import RemovedupForm, EnsemblForm, RnacentralForm, Trnaparser
 from progress.models import JobStatus
 from utils import pipeline_utils
 from utils.sysUtils import make_dir
+from django.conf import settings
+
 
 FS = FileSystemStorage("/shared/sRNAtoolbox/webData")
 
@@ -229,9 +231,11 @@ def result(request):
             return render(request, 'helper_result.html', results)
 
         else:
-            return redirect("/srnatoolbox/jobstatus/helper/?id=" + job_id)
+            return redirect(reverse_lazy('progress', kwargs={"pipeline_id": job_id}))
     else:
-        return redirect("/srnatoolbox/")
+        return redirect(settings.SUB_SITE)
+
+
 
 
 class RemoveDup(FormView):
