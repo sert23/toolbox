@@ -2,6 +2,7 @@
 # coding=utf-8
 import argparse
 import json
+import os
 
 from pipelines.tools.helpersPipelines import helpersPipelines
 from pipelines.tools.mirconsfunctargetPipeline import mirconsfunctargetPipeline
@@ -85,8 +86,10 @@ def gfree(args):
 
     new_pipe.run()
 
-
 def helper(args):
+    os.system("touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/S3LLSLVRW36VI06/elo.txt")
+
+def helper2(args):
     dic_arg={}
     if args.mode:
         dic_arg["mode"]=args.mode
@@ -253,6 +256,10 @@ def main():
         print([conf.get("pipeline_id"),conf.get("name"),conf.get("out_dir"),conf.get("conf_input")])
         blast(pipeline_id=conf.get("pipeline_id"),name=conf.get("name"),out_dir=conf.get("out_dir"),conf_input=conf.get("conf_input"))
         #blast(**conf)
+    if conf['type'] == 'helper':
+        helper(**conf)
+
+
 
 
 
