@@ -86,8 +86,10 @@ def gfree(args):
 
     new_pipe.run()
 
-def helper(**kwargs):
-    os.system("touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/S3LLSLVRW36VI06/elo.txt")
+def helper(pipeline_id=None, name=None, out_dir=None, conf_input=None, **kwargs):
+
+    new_pipe = helpersPipelines(pipeline_id, name, out_dir, conf_input)
+    new_pipe.run()
 
 def helper2(args):
     dic_arg={}

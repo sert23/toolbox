@@ -143,13 +143,20 @@ class ExtractForm(forms.Form):
 
         name = pipeline_id + '_h_extract'
 
+        config_location=os.path.join(out_dir,"conf.txt")
         configuration = {
             'pipeline_id': pipeline_id,
             'out_dir': out_dir,
             'name': name,
-            'conf_input': os.path.join(out_dir,"conf.json"),
+            'conf_input': config_location,
             'type': 'helper'
         }
+
+        with open(config_location, "w+") as file:
+            file.write("input="+ifile+"\n")
+            file.write("mode=FA\n")
+            file.write("output="+out_dir+"\n")
+            file.write("search="+self.cleaned_data.get('ifile')+"\n")
         import json
         configuration_file_path = os.path.join(out_dir, 'conf.json')
         with open(configuration_file_path, 'w') as conf_file:
