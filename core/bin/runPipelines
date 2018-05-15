@@ -257,7 +257,8 @@ def main():
         blast(pipeline_id=conf.get("pipeline_id"),name=conf.get("name"),out_dir=conf.get("out_dir"),conf_input=conf.get("conf_input"))
         #blast(**conf)
     if conf['type'] == 'helper':
-        helper(**conf)
+        #helper(**conf)
+        print("I'm a damn helper")
 
 
 
