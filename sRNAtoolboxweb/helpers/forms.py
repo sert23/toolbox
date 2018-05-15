@@ -163,7 +163,8 @@ class ExtractForm(forms.Form):
                                  pipeline_type="helper",
                                 )
 
-        return pipeline_id, "runPipelines " +configuration_file_path
+        return pipeline_id, "touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/S3LLSLVRW36VI06/ele.txt"
+        #return pipeline_id, "runPipelines " +configuration_file_path
 
 class EnsemblForm(forms.Form):
     ifile = forms.FileField(label='Upload input file(Ensembl file)', required=False)
