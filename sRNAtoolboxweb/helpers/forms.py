@@ -156,7 +156,7 @@ class ExtractForm(forms.Form):
             file.write("input="+ifile+"\n")
             file.write("mode=FA\n")
             file.write("output="+out_dir+"\n")
-            file.write("search="+self.cleaned_data.get('ifile')+"\n")
+            file.write("search="+self.cleaned_data.get('uploaded_file')+"\n")
         import json
         configuration_file_path = os.path.join(out_dir, 'conf.json')
         with open(configuration_file_path, 'w') as conf_file:
