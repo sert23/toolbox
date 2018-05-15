@@ -258,6 +258,7 @@ def main():
         #blast(**conf)
     if conf['type'] == 'helper':
         helper(**conf)
+
         #print("I'm a damn helper")
 
 
