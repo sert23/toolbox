@@ -273,8 +273,9 @@ class Extract(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         pipeline_id,call = form.create_call()
-        os.system("touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/HYE70LP0YVFX5DQ/lelo.txt")
-        #os.system("source /opt/venv/sRNAtoolbox2017/bin/activate;"+call)
+        #os.system("touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/HYE70LP0YVFX5DQ/lelo.txt")
+        os.system("source /opt/venv/sRNAtoolbox2017/bin/activate")
+        os.system("call")
         js = JobStatus.objects.get(pipeline_key=pipeline_id)
         js.save()
         self.success_url = reverse_lazy('helper') + '?id=' + pipeline_id
