@@ -227,8 +227,16 @@ def result(request):
         results = {}
 
         if new_record.job_status == "Finished":
-            results["result"] = os.path.join(new_record.outdir ,"mature.txt.zip")
-            #results["result"] = "/".join(new_record.zip_file.split("/")[-2:])
+            fd = open(os.path.join(new_record.outdir, "logFile.txt"))
+            backvalue = "result"
+            for line in fd:
+                if "BACKVALUE" in line:
+                    value = line.replace("\n", "").split(" ")[-1]
+                    backvalue = value
+
+            zip_file = os.path.join(backvalue + ".zip")
+            #results["result"] = os.path.join(new_record.outdir ,"mature.txt.zip")
+            results["result"] = zip_file
 
             return render(request, 'helper_result.html', results)
 
