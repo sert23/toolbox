@@ -168,6 +168,7 @@ class ExtractForm(forms.Form):
                                  all_files=ifile,
                                  modules_files="",
                                  pipeline_type="helper",
+                                 outdir=FS.location,
                                 )
 
         #return pipeline_id, "touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/S3LLSLVRW36VI06/ele.txt"

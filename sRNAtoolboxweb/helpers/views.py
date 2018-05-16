@@ -227,7 +227,8 @@ def result(request):
         results = {}
 
         if new_record.job_status == "Finished":
-            results["result"] = "/".join(new_record.zip_file.split("/")[-2:])
+            results["result"] = os.path.join(new_record.outdir ,"mature.txt.zip")
+            #results["result"] = "/".join(new_record.zip_file.split("/")[-2:])
 
             return render(request, 'helper_result.html', results)
 
