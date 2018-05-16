@@ -8,7 +8,7 @@ class helpersPipelines(Pipeline):
     def __init__(self, pipeline_key, job_name, outdir, conf_input, mode=None, inputfile=None, species=None,
                  taxon=None, string=None,
                  remove=None):
-        super(helpersPipelines, self).__init__(pipeline_key, job_name, outdir, conf_input)
+        super(helpersPipelines, self).__init__(pipeline_key, job_name, outdir, conf_input,parameters="")
 
     def run(self):
         log_msg = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " INFO: Helper tool Starts"
