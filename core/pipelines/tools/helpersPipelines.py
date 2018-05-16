@@ -1,6 +1,6 @@
 import os
 from time import strftime, gmtime
-
+from progress.models import JobStatus
 from pipelines.pipelines import Pipeline
 
 
@@ -10,6 +10,7 @@ class helpersPipelines(Pipeline):
                  remove=None):
         super(helpersPipelines, self).__init__(pipeline_key, job_name, outdir, conf_input,parameters="")
         self.conf_input=conf_input
+        self.pipeline_id=pipeline_key
 
     def run(self):
         log_msg = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " INFO: Helper tool Starts"
@@ -157,11 +158,14 @@ class helpersPipelines(Pipeline):
             os.system("cd " + self.outdir + "; zip " + zip_file + " " + os.path.basename(backvalue))
             self.error_logger.write("cd self.outdir; zip " + zip_file + " " + os.path.basename(backvalue))
 
-            update = {"zip_file": zip_file}
-            self.raw_update(update)
+            js = JobStatus.objects.get(pipeline_key=self.pipeline_id)
+            js.status.create(status_progress='sent_to_queue')
+            js.zip_file = zip_file
+
             return True
         else:
             log_msg = strftime("%Y-%m-%d %H:%M:%S",
                                gmtime()) + " ERROR:Please report it indicating the jobID: " + self.pipeline_key
             self.actualize_pipeline_progress(log_msg)
             return False
+
