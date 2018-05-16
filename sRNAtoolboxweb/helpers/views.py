@@ -234,9 +234,9 @@ def result(request):
                     value = line.replace("\n", "").split(" ")[-1]
                     backvalue = value
 
-            zip_file = os.path.join(backvalue + ".zip")
+            zip_file = os.path.join(backvalue + ".zip").split("/")[-1]
             #results["result"] = os.path.join(new_record.outdir ,"mature.txt.zip")
-            results["result"] = zip_file
+            results["result"] = os.path.join(new_record.pipeline_key,zip_file)
 
             return render(request, 'helper_result.html', results)
 
