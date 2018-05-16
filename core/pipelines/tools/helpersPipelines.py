@@ -5,18 +5,24 @@ from pipelines.pipelines import Pipeline
 
 
 class helpersPipelines(Pipeline):
-    def __init__(self, pipeline_key, job_name, outdir, parameters="", mode=None, inputfile=None, species=None,
+    def __init__(self, pipeline_key, job_name, outdir, conf_input, mode=None, inputfile=None, species=None,
                  taxon=None, string=None,
                  remove=None):
-        super(helpersPipelines, self).__init__(pipeline_key, job_name, outdir, "helper" + "_" + mode, parameters)
-        self.remove = remove
-        self.string = string
-        self.taxon = taxon
-        self.species = species
-        self.inputfile = inputfile
-        self.mode = mode
+        super(helpersPipelines, self).__init__(pipeline_key, job_name, outdir, conf_input)
 
     def run(self):
+        log_msg = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " INFO: Helper tool Starts"
+        self.actualize_pipeline_progress(log_msg)
+        cmd="sRNAhelper "+ self.conf_input
+        os.system(cmd)
+        self.set_java_command_line(cmd)
+        log_msg = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " SUCCESS: Helper tool finished"
+        self.actualize_pipeline_progress(log_msg)
+        if self.set_out_files():
+            self.set_finish_time()
+            self.change_pipeline_status("Finished")
+
+    def run1(self):
         self.initialize_pipeline_status()
         if self.mode == "ensembl":
             self.mode_ensmble()
