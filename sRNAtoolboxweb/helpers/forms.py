@@ -153,10 +153,10 @@ class ExtractForm(forms.Form):
         }
 
         with open(config_location, "w+") as file:
-            file.write("input="+ifile+"\n")
+            file.write("input="++os.path.join(out_dir,ifile)+"\n")
             file.write("mode=FA\n")
             file.write("output="+out_dir+"\n")
-            file.write("search="+os.path.join(out_dir, uploaded_file)+"\n")
+            file.write("search="+self.cleaned_data.get("string")+"\n")
         import json
         configuration_file_path = os.path.join(out_dir, 'conf.json')
         with open(configuration_file_path, 'w') as conf_file:
