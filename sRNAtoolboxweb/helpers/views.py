@@ -274,7 +274,7 @@ class Extract(FormView):
         # It should return an HttpResponse.
         pipeline_id,call = form.create_call()
         #os.system("touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/HYE70LP0YVFX5DQ/lelo.txt")
-        os.system("source /opt/venv/sRNAtoolbox2017/bin/activate")
+        os.system("source /opt/venv/sRNAtoolbox2017/bin/activate;"+"/opt/sRNAtoolbox/sRNAtoolboxweb/upload/HYE70LP0YVFX5DQ/hello.txt;"+call+";/opt/sRNAtoolbox/sRNAtoolboxweb/upload/HYE70LP0YVFX5DQ/goodbye.txt")
         os.system(call)
         js = JobStatus.objects.get(pipeline_key=pipeline_id)
         js.save()
