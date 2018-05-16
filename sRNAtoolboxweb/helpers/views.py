@@ -266,8 +266,6 @@ class Extract(FormView):
         pipeline_id,call = form.create_call()
         os.system(call)
         js = JobStatus.objects.get(pipeline_key=pipeline_id)
-        js.status.create(status_progress='sent_to_queue')
-        js.job_status = 'sent_to_queue'
         js.save()
         self.success_url = reverse_lazy('helper') + '?id=' + pipeline_id
         return super(Extract, self).form_valid(form)
