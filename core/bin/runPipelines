@@ -244,6 +244,7 @@ def dejbrowser(args):
 #         helper(args)
 
 def main():
+    os.system("touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/N7UCWY7O5FT48KY/este1.txt")
     parser = argparse.ArgumentParser(description='Launch all sRNAtoolbox Pipelines')
     parser.add_argument('configuration', help='configuration file')
     args = parser.parse_args()
