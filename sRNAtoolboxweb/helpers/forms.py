@@ -12,6 +12,7 @@ from sRNAtoolboxweb.settings import MEDIA_ROOT
 from utils.pipeline_utils import generate_uniq_id
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field
+from sRNAtoolboxweb.settings import MEDIA_ROOT, CONF, QSUB, BASE_DIR
 
 class RemovedupForm(forms.Form):
     ifile = forms.FileField(label='Upload input file(Fasta file)', required=False)
@@ -170,9 +171,14 @@ class ExtractForm(forms.Form):
                                  pipeline_type="helper",
                                  outdir=FS.location,
                                 )
-
+        if QSUB:
+            return 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
+                configuration_file_path=configuration_file_path,
+                job_name=name,
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
         #return pipeline_id, "touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/S3LLSLVRW36VI06/ele.txt"
-        return pipeline_id, "runPipelines " +configuration_file_path
+        #return pipeline_id, "runPipelines " +configuration_file_path
+
 
 class EnsemblForm(forms.Form):
     ifile = forms.FileField(label='Upload input file(Ensembl file)', required=False)
