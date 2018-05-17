@@ -272,7 +272,7 @@ class Extract(FormView):
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
-        pipeline_id,call = form.create_call()
+        call,pipeline_id = form.create_call()
         #os.system("touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/HYE70LP0YVFX5DQ/lelo.txt")
         #os.system("source /opt/venv/sRNAtoolbox2017/bin/activate;"+"touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/HYE70LP0YVFX5DQ/hello.txt;echo "+call+"|qsub")
         with open('/opt/sRNAtoolbox/sRNAtoolboxweb/upload/HYE70LP0YVFX5DQ/hello.txt', 'a') as the_file:
