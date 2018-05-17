@@ -88,6 +88,7 @@ def gfree(args):
 
 def helper(pipeline_id=None, name=None, out_dir=None, conf_input=None, **kwargs):
 
+    os.system("touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/N7UCWY7O5FT48KY/este.txt")
     new_pipe = helpersPipelines(pipeline_id, name, out_dir, conf_input)
     new_pipe.run()
 
