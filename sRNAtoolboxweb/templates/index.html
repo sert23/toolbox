@@ -44,19 +44,19 @@
                 </li>
                 <li class=""><a href="#miRNAconsTarget" data-toggle="tab">miRNAconsTarget</a>
                 </li>
-                <li class=""><a href="#sRNAjBrowser" data-toggle="tab">sRNAjBrowser</a>
-                </li>
-                <li class=""><a href="#sRNAjBrowserDE" data-toggle="tab">sRNAjBrowserDE</a>
-                </li>
-                <li class=""><a href="#sRNAfuncTerms" data-toggle="tab">sRNAfuncTerms</a>
-                </li>
+{#                <li class=""><a href="#sRNAjBrowser" data-toggle="tab">sRNAjBrowser</a>#}
+{#                </li>#}
+{#                <li class=""><a href="#sRNAjBrowserDE" data-toggle="tab">sRNAjBrowserDE</a>#}
+{#                </li>#}
+{#                <li class=""><a href="#sRNAfuncTerms" data-toggle="tab">sRNAfuncTerms</a>#}
+{#                </li>#}
             </ul>
 
             <!-- Tab panes -->
 
             <div class="tab-content">
-                <div class="tab-pane fade active in" id="sRNAbench">
-                    <a href="/srnabench/"> <h3>sRNAbench:</h3> <h4>Expression profiling of small RNAs and prediction of novel microRNAs from deep sequencing data</h4>  </a>
+                <div class="tab-pane fade active in" id="sRNAbench"
+                    <a href="{{ settings.SUB_SITE }}/srnabench"> <h3>sRNAbench:</h3> <h4>Expression profiling of small RNAs and prediction of novel microRNAs from deep sequencing data</h4>  </a>
                     <h4 style="line-height: 150%">sRNAbench is principally designed for the use in model species, or at least species with
                         an available genome assembly or annotations is fasta format. It accepts several commonly
                         used input formats like fastq, sra, fasta or read/count. It performs the expression
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="tab-pane fade" id="sRNAde">
-                    <a href="/srnade/"> <h3>sRNAde:</h3> <h4>Differential expression analysis </h4></a>
+                    <a href="{{ settings.SUB_SITE }}/srnade"> <h3>sRNAde:</h3> <h4>Differential expression analysis </h4></a>
                     <h4 style="line-height: 150%">sRNAde is a module for the detection of differentially expressed sRNA. The input is
                                 either a number of sRNAbench output folders or a user-given expression matrix.
                                 For the detection of differentially expressed RNAs it applies 3 widely used methods,
@@ -89,7 +89,7 @@
                 </div>
 
                 <div class="tab-pane fade" id="sRNAblast">
-                    <a href="/srnablast/"> <h3>sRNAblast:</h3> <h4>Blast analysis of deep sequencing reads against a local nt/nr (NCBI link) database</h4>  </a>
+                    <a href="{{ settings.SUB_SITE }}/srnablast"> <h3>sRNAblast:</h3> <h4>Blast analysis of deep sequencing reads against a local nt/nr (NCBI link) database</h4>  </a>
                     <h4 style="line-height: 150%">This tool is principally aimed for the analysis of reads that could not be mapped in
                                 sRNAbench or other profiling tools. The results could either point towards contamination
                                 sources or biological meaningful information like the presence of unexpected viral or
@@ -98,7 +98,7 @@
 
 
                 <div class="tab-pane fade" id="miRNAconsTarget">
-                    <a href="/mirconstarget/"> <h3>miRNAconsTarget:</h3> <h4>Predict microRNA targets on user defined sets of microRNAs and 3'UTRs </h4> </a>
+                    <a href="{{ settings.SUB_SITE }}/mirconstarget"> <h3>miRNAconsTarget:</h3> <h4>Predict microRNA targets on user defined sets of microRNAs and 3'UTRs </h4> </a>
                     <h4 style="line-height: 150%">Most microRNA target prediction tools are implemented as webservers on a limited number of
                                 species, or do allow only the prediction of a limited number of microRNAs and/or mRNAs.
                                 miRNAconsTargets uses two microRNA target prediction programs, miranda and TargetSpy and
