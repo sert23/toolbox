@@ -1,6 +1,7 @@
 import itertools
 
 import django_tables2 as tables
+from django.conf import settings
 
 from progress.models import JobStatus
 
