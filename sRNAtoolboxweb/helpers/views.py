@@ -296,6 +296,8 @@ class Ensembl(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call, pipeline_id = form.create_call()
+        with open('/opt/sRNAtoolbox/sRNAtoolboxweb/upload/HYE70LP0YVFX5DQ/hello.txt', 'a') as the_file:
+            the_file.write(call)
         os.system(call)
         js = JobStatus.objects.get(pipeline_key=pipeline_id)
         js.status.create(status_progress='sent_to_queue')
