@@ -185,7 +185,7 @@ class EnsemblForm(forms.Form):
     url = forms.URLField(label='Or provide a URL for big files (recommended!)', required=False)
 
     def __init__(self, *args, **kwargs):
-        super(ExtractForm, self).__init__(*args, **kwargs)
+        super(EnsemblForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Fieldset(
