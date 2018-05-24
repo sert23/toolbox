@@ -249,7 +249,6 @@ class EnsemblForm(forms.Form):
             file.write("input=" + os.path.join(out_dir, ifile) + "\n")
             file.write("mode=ENS\n")
             file.write("output=" + out_dir + "\n")
-
         import json
         configuration_file_path = os.path.join(out_dir, 'conf.json')
         with open(configuration_file_path, 'w') as conf_file:
