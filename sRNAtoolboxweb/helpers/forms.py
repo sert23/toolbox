@@ -184,6 +184,19 @@ class EnsemblForm(forms.Form):
     ifile = forms.FileField(label='Upload input file(Ensembl file)', required=False)
     url = forms.URLField(label='Or provide a URL for big files (recommended!)', required=False)
 
+    def __init__(self, *args, **kwargs):
+        super(ExtractForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                "",
+                "ifile",
+                "url",
+
+                ButtonHolder(
+                    # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
+                    Submit('submit', 'RUN', css_class='btn btn-primary'))))
+
     def clean(self):
         cleaned_data = super(EnsemblForm, self).clean()
         if not cleaned_data.get('ifile') and not cleaned_data.get('url'):
@@ -224,22 +237,37 @@ class EnsemblForm(forms.Form):
             raise Http404
 
         name = pipeline_id + '_h_ens'
+        config_location = os.path.join(out_dir, "conf.txt")
+        configuration = {
+            'pipeline_id': pipeline_id,
+            'out_dir': out_dir,
+            'name': name,
+            'conf_input': config_location,
+            'type': 'helper'
+        }
+        with open(config_location, "w+") as file:
+            file.write("input=" + os.path.join(out_dir, ifile) + "\n")
+            file.write("mode=ENS\n")
+            file.write("output=" + out_dir + "\n")
+            file.write("search=" + self.cleaned_data.get("string") + "\n")
+        import json
+        configuration_file_path = os.path.join(out_dir, 'conf.json')
+        with open(configuration_file_path, 'w') as conf_file:
+            json.dump(configuration, conf_file, indent=True)
         JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not launched",
                                  start_time=datetime.datetime.now(),
                                  #finish_time=datetime.time(0, 0),
                                  all_files=ifile,
                                  modules_files="",
                                  pipeline_type="helper",
+                                 outdir=FS.location,
                                 )
 
-        return 'qsub -v pipeline="helper",mode="ensembl",key="{pipeline_id}",outdir="{out_dir}",inputfile="{input_file}",name="{name}" -N {job_name} {sh}'.format(
-                pipeline_id=pipeline_id,
-                out_dir=out_dir,
-                input_file=os.path.join(FS.location, ifile),
-                name=name,
+        if QSUB:
+            return 'qsub -q ff -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
+                configuration_file_path=configuration_file_path,
                 job_name=name,
-                sh=os.path.join(BASE_DIR + '/core/bash_scripts/run_helper_ensembl.sh')
-            )
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
 
 
 class NcbiForm(forms.Form):
@@ -380,7 +408,7 @@ class TrnaparserForm(forms.Form):
 
     def create_call(self):
 
-        cleaned_data.get('species').replace(" ", "")
+        species= self.cleaned_data.get('species').replace(" ", "")
         pipeline_id = self.generate_id()
         FS = FileSystemStorage()
         FS.location = os.path.join(MEDIA_ROOT, pipeline_id)
