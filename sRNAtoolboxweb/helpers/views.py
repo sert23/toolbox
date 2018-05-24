@@ -304,7 +304,7 @@ class Ensembl(FormView):
         js.job_status = 'sent_to_queue'
         js.save()
         self.success_url = reverse_lazy('helper') + '?id=' + pipeline_id
-        return super(Extract, self).form_valid(form)
+        return super(Ensembl, self).form_valid(form)
 
 class NCBI(FormView):
     template_name = 'helpers/helpers_ncbi.html'
