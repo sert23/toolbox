@@ -286,8 +286,8 @@ class Extract(FormView):
         return super(Extract, self).form_valid(form)
 
 class Ensembl(FormView):
-    #template_name = 'helpers/helpers_ensembl.html'
-    template_name = 'helpers/helpers_extract.html'
+    template_name = 'helpers/helpers_ensembl.html'
+    #template_name = 'helpers/helpers_extract.html'
     form_class = EnsemblForm
 
     success_url = reverse_lazy("ensembl")
