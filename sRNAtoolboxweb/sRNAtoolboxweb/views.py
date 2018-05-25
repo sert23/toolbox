@@ -76,7 +76,7 @@ def search(request):
                 errors['errors'].append("Sorry, Actually we do not support search of helper tools results")
                 return render(request, "error_page.html", errors)
             else:
-                return redirect("/srnatoolbox/" + PIPELINETYPES_URL[p_type] + "/results/?id=" + job_id)
+                return redirect("/jobstatus/" + job_id)
 
         except:
             errors['errors'].append(job_id +" job not found, please check if the id is correct and job is currently active. Web Results will be stored for 15 days")
