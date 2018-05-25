@@ -3,7 +3,7 @@ import os
 import time
 from subprocess import Popen, PIPE
 
-from django.http import Http404
+from django.http import Http404, HttpResponseBadRequest
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import DetailView
@@ -226,5 +226,6 @@ class AddStatus(UpdateAPIView):
         try:
             job_status = JobStatus.objects.get(pipeline_key=pipeline_key)
         except:
-            raise Http404
+            #raise Http404
+            raise HttpResponseBadRequest
         return Status(JobStatus=job_status)
