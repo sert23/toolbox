@@ -89,7 +89,7 @@
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
                         <li class="sidebar-search">
-                            <form action="/search" method="post" enctype="multipart/form-data">
+                            <form action="{{ settings.SUB_SITE }}/search" method="post" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <div class="input-group custom-search-form">
 
