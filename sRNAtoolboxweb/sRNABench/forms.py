@@ -312,7 +312,8 @@ class sRNABenchForm(forms.Form):
         short_names = [i.shortName for i in cleaned_data['species']]
         micrornas_species = ':'.join(short_names)
         adapter = cleaned_data['adapter_chosen'] or cleaned_data['adapter_manual']
-
+        if adapter== "EMPTY":
+            adapter = None
         nucleotides_5_removed = str(cleaned_data['nucleotides_5_removed'])
         adapter_length = str(cleaned_data['adapter_length'])
         adapter_mismatch = str(cleaned_data['adapter_mismatch'])
