@@ -128,16 +128,15 @@ class ExtractForm(forms.Form):
         os.system("mkdir " + FS.location)
         out_dir = FS.location
         ifile = self.cleaned_data.get("ifile")
+        url = self.cleaned_data.get("url")
         if ifile:
             file_to_update = ifile
             uploaded_file = str(file_to_update)
             ifile = FS.save(uploaded_file, file_to_update)
         elif self.cleaned_data.get("url"):
-            url_input = self.cleaned_data.get("url")
-            dest = os.path.join(FS.location, os.path.basename(url_input))
-            handler = urllib.URLopener()
-            handler.retrieve(url_input, dest)
-            ifile = dest
+            extension = os.path.basename(url).split('.')[-1]
+            dest = os.path.join(FS.location, os.path.basename(url))
+            ifile, headers = urllib.request.urlretrieve(url, filename=dest)
 
         else:
             raise Http404
