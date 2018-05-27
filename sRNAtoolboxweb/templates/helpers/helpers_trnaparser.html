@@ -27,47 +27,12 @@
 
                         <p>Test with: Homo sapiens</p>
                         <p> If you use this data please cite: <a target="_blank" href="http://nar.oxfordjournals.org/content/37/suppl_1/D93.abstract" >Chan, P.P., Lowe, T.M. (2009) GtRNAdb: A database of transfer RNA genes detected in genomic sequence Nucl. Acids Res. 37(Database issue):D93-D97.</a></p>
-                    </div>
-<!-- INPUT DATA -->
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#collapseOne">Input data</a>
-                        </h4>
-                    </div>
-                    <div id="collapseOne" class="panel-collapse collapse in">
-                        <div class="panel-body">
-
-                            <form enctype="multipart/form-data"
-                                  action="{% url 'trna' %}"
-                                  method="post">{% csrf_token %}
-
-                                    <fieldset>
-                                        {% for field in form %}
-                                            <div class="form-group">
-                                                {% if field.errors %}
-                                                    {% for error in field.errors %}
-                                                        <div class="row">
-                                                            <div class="col-lg-8">
-                                                                <span class="label label-danger">{{ error|escape }}</span>
-                                                            </div>
-                                                        </div>
-                                                    {% endfor %}
-                                                {% endif %}
-                                                <label class="control-label">{{ field.label_tag }}</label>
-                                                {{ field }}
-                                            </div>
-                                        {% endfor %}
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                        <button type="reset" class="btn btn-primary ">Reset</button>
-                                    </fieldset>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+                         {% include 'form_base.html' %}
 
 
             </div>
+                </div>
+
 
 
             <div class="col-lg-3">
