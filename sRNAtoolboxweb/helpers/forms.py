@@ -51,11 +51,10 @@ class RemovedupForm(forms.Form):
             uploaded_file = str(file_to_update)
             ifile = FS.save(uploaded_file, file_to_update)
         elif self.cleaned_data.get("url"):
-            url_input = self.cleaned_data.get("url")
-            dest = os.path.join(FS.location, os.path.basename(url_input))
-            handler = urllib.URLopener()
-            handler.retrieve(url_input, dest)
-            ifile = dest
+            url = self.cleaned_data.get("url")
+            extension = os.path.basename(url).split('.')[-1]
+            dest = os.path.join(FS.location, os.path.basename(url))
+            ifile, headers = urllib.request.urlretrieve(url, filename=dest)
 
         else:
             raise Http404
@@ -134,6 +133,7 @@ class ExtractForm(forms.Form):
             uploaded_file = str(file_to_update)
             ifile = FS.save(uploaded_file, file_to_update)
         elif self.cleaned_data.get("url"):
+            url = self.cleaned_data.get("url")
             extension = os.path.basename(url).split('.')[-1]
             dest = os.path.join(FS.location, os.path.basename(url))
             ifile, headers = urllib.request.urlretrieve(url, filename=dest)
@@ -226,11 +226,10 @@ class EnsemblForm(forms.Form):
             uploaded_file = str(file_to_update)
             ifile = FS.save(uploaded_file, file_to_update)
         elif self.cleaned_data.get("url"):
-            url_input = self.cleaned_data.get("url")
-            dest = os.path.join(FS.location, os.path.basename(url_input))
-            handler = urllib.URLopener()
-            handler.retrieve(url_input, dest)
-            ifile = dest
+            url = self.cleaned_data.get("url")
+            extension = os.path.basename(url).split('.')[-1]
+            dest = os.path.join(FS.location, os.path.basename(url))
+            ifile, headers = urllib.request.urlretrieve(url, filename=dest)
 
         else:
             raise Http404
@@ -272,6 +271,19 @@ class NcbiForm(forms.Form):
     ifile = forms.FileField(label='Upload input file(NCBI file)', required=False)
     url = forms.URLField(label='Or provide a URL for big files (recommended!)', required=False)
 
+    def __init__(self, *args, **kwargs):
+        super(NcbiForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                "",
+                "ifile",
+                "url",
+
+                ButtonHolder(
+                    # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
+                    Submit('submit', 'RUN', css_class='btn btn-primary'))))
+
     def clean(self):
         cleaned_data = super(NcbiForm, self).clean()
         if not cleaned_data.get('ifile') and not cleaned_data.get('url'):
@@ -302,38 +314,64 @@ class NcbiForm(forms.Form):
             uploaded_file = str(file_to_update)
             ifile = FS.save(uploaded_file, file_to_update)
         elif self.cleaned_data.get("url"):
-            url_input = self.cleaned_data.get("url")
-            dest = os.path.join(FS.location, os.path.basename(url_input))
-            handler = urllib.URLopener()
-            handler.retrieve(url_input, dest)
-            ifile = dest
+            url = self.cleaned_data.get("url")
+            extension = os.path.basename(url).split('.')[-1]
+            dest = os.path.join(FS.location, os.path.basename(url))
+            ifile, headers = urllib.request.urlretrieve(url, filename=dest)
 
         else:
             raise Http404
 
         name = pipeline_id + '_h_ncbi'
+        config_location = os.path.join(out_dir, "conf.txt")
+        configuration = {
+            'pipeline_id': pipeline_id,
+            'out_dir': out_dir,
+            'name': name,
+            'conf_input': config_location,
+            'type': 'helper'
+        }
+        with open(config_location, "w+") as file:
+            file.write("input=" + os.path.join(out_dir, ifile) + "\n")
+            file.write("mode=NCBI\n")
+            file.write("output=" + out_dir + "\n")
+        import json
+        configuration_file_path = os.path.join(out_dir, 'conf.json')
+        with open(configuration_file_path, 'w') as conf_file:
+            json.dump(configuration, conf_file, indent=True)
         JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not launched",
                                  start_time=datetime.datetime.now(),
-                                 #finish_time=datetime.time(0, 0),
+                                 # finish_time=datetime.time(0, 0),
                                  all_files=ifile,
                                  modules_files="",
                                  pipeline_type="helper",
-                                )
-
-        return 'qsub -v pipeline="helper",mode="ncbi",key="{pipeline_id}",outdir="{out_dir}",inputfile="{input_file}",name="{name}" -N {job_name} {sh}'.format(
-                pipeline_id=pipeline_id,
-                out_dir=out_dir,
-                input_file=os.path.join(FS.location, ifile),
-                name=name,
+                                 outdir=FS.location,
+                                 )
+        if QSUB:
+            return 'qsub -q ff -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
+                configuration_file_path=configuration_file_path,
                 job_name=name,
-                sh=os.path.join(BASE_DIR + '/core/bash_scripts/run_helper_ncbi.sh')
-            )
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
+
 
 class RnacentralForm(forms.Form):
     species = forms.CharField(label='Provide a Species Name  (Must be Scientific Name):',
                              required=False)
     taxonomy = forms.CharField(label='Or provide a Taxonomy Name :',
                              required=False)
+
+    def __init__(self, *args, **kwargs):
+        super(RnacentralForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                "",
+                "species",
+                "taxonomy",
+
+                ButtonHolder(
+                    # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
+                    Submit('submit', 'RUN', css_class='btn btn-primary'))))
 
     def clean(self):
         cleaned_data = super(RnacentralForm, self).clean()
@@ -360,33 +398,48 @@ class RnacentralForm(forms.Form):
         os.system("mkdir " + FS.location)
         out_dir = FS.location
         name = pipeline_id + '_h_rnac'
+        species=self.cleaned_data.get('species')
+        taxonomy=self.cleaned_data.get('taxonomy')
+        name = pipeline_id + '_h_central'
+        config_location = os.path.join(out_dir, "conf.txt")
+        configuration = {
+            'pipeline_id': pipeline_id,
+            'out_dir': out_dir,
+            'name': name,
+            'conf_input': config_location,
+            'type': 'helper'
+        }
+
+        with open(config_location, "w+") as file:
+            file.write("input=" + os.path.join(CONF["db"],"dbs/rnacentral_active.fasta" ) + "\n")
+            file.write("mode=RNAC \n")
+            file.write("output=" + out_dir + "\n")
+            if self.cleaned_data.get('species'):
+                species = species.replace(" ", "_")
+                file.write("species=" + species + "\n")
+
+            elif self.cleaned_data.get('taxonomy'):
+                taxonomy = taxonomy.replace(" ", "_")
+
+        import json
+        configuration_file_path = os.path.join(out_dir, 'conf.json')
+        with open(configuration_file_path, 'w') as conf_file:
+            json.dump(configuration, conf_file, indent=True)
+
         JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not launched",
                                  start_time=datetime.datetime.now(),
-                                 #finish_time=datetime.time(0, 0),
-                                 all_files=ifile,
+                                 # finish_time=datetime.time(0, 0),
+                                 #all_files=ifile,
                                  modules_files="",
                                  pipeline_type="helper",
-                                )
-        if cleaned_data.get('species'):
-            species = species.replace(" ", "_")
-            return 'qsub -v pipeline="helper",mode="rnacentral",key="{pipeline_id}",outdir="{out_dir}",species="{species}",name="{name}" -N {job_name} {sh}'.format(
-                pipeline_id=pipeline_id,
-                out_dir=out_dir,
-                species=species,
-                name=name,
+                                 outdir=FS.location,
+                                 )
+        if QSUB:
+            return 'qsub -q ff -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
+                configuration_file_path=configuration_file_path,
                 job_name=name,
-                sh=os.path.join(BASE_DIR + '/core/bash_scripts/run_helper_rnacentral.sh')
-            )
-        elif cleaned_data.get('taxon'):
-            taxon = taxon.replace(" ", "_")
-            return 'qsub -v pipeline="helper",mode="rnacentral",key="{pipeline_id}",outdir="{out_dir}",taxon="{taxon}",name="{name}" -N {job_name} {sh}'.format(
-                pipeline_id=pipeline_id,
-                out_dir=out_dir,
-                taxon=taxon,
-                name=name,
-                job_name=name,
-                sh=os.path.join(BASE_DIR + '/core/bash_scripts/run_helper_rnacentral_taxon.sh')
-            )
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
+
 
 class TrnaparserForm(forms.Form):
     species = forms.CharField(label='Provide a Species Name  (Must be Scientific Name):',
