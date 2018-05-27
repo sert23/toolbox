@@ -101,7 +101,7 @@ class JobStatusDetail(DetailView):
 
     @staticmethod
     def get_running_context_for_srnabench(job_status):
-        if os.path.exists(os.path.join(job_status.outdir, "parameters.txt")):
+        if os.path.exists(os.path.join(job_status.outdir, "parameters.txt")) and os.path.exists(os.path.join(job_status.outdir, "results.txt")):
             #return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
             return redirect("/jobstatus/" + job_status.pipeline_key)
         else:
