@@ -10,7 +10,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
-from sRNAtoolboxweb.settings import BASE_DIR
+from sRNAtoolboxweb.settings import BASE_DIR,MEDIA_ROOT
 from DataModels.params_bench import ParamsBench
 from DataModels.sRNABenchConfig import SRNABenchConfig
 from FileModels.IsomirParser import IsomirParser
@@ -465,7 +465,7 @@ def result_new(request):
         results = {}
         results["id"] = job_id
 
-        if (new_record.job_status == "Finished" or new_record.job_status == "Running") and os.path.exists(os.path.join(new_record.outdir, "parameters.txt")):
+        if (new_record.job_status == "Finished" or new_record.job_status == "Running") and os.path.exists(os.path.join(new_record.outdir, "parameters.txt")) and os.path.exists(os.path.join(new_record.outdir, "results.txt")):
             params = ParamsBench(os.path.join(new_record.outdir, "parameters.txt"), os.path.join(new_record.outdir, "results.txt"),os.path.join(new_record.outdir, "conf.txt"))
             config_params = ParamsBench(os.path.join(new_record.outdir, "conf.txt"))
             if new_record.job_status == "Running":
@@ -509,7 +509,7 @@ def result_new(request):
 
                 try:
                     results["parameters"] = new_record.parameters
-                    results["parameters"]=results["parameters"].replace(BASE_DIR,"")
+                    results["parameters"]=results["parameters"].replace(MEDIA_ROOT,"")
                 except:
                     pass
 
