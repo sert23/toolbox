@@ -509,7 +509,7 @@ def result_new(request):
 
                 try:
                     results["parameters"] = new_record.parameters
-                    results["parameters"].replace(BASE_DIR,"")
+                    results["parameters"]=results["parameters"].replace(BASE_DIR,"")
                 except:
                     pass
 
