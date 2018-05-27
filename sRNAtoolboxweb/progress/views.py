@@ -170,7 +170,7 @@ class JobStatusDetail(DetailView):
             if job_status.job_status == 'sent_to_queue':
                 return self.get_context_qw(job_status)
             if job_status.job_status == 'Running':
-                if job_status.pipeline_type == 'srnabench':
+                if job_status.pipeline_type == 'sRNAbench':
                     return self.get_running_context_for_srnabench(job_status)
                 else:
                     return self.get_context_with_messages(job_status)
