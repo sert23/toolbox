@@ -251,16 +251,21 @@ def result(request):
 class RemoveDup(FormView):
     #template_name = 'helpers/helpers_extract.html'
     template_name = 'helpers/helpers_removedup.html'
-    form_class = ExtractForm
-    #form_class = RemovedupForm
+    #form_class = ExtractForm
+    form_class = RemovedupForm
 
     success_url = reverse_lazy("removedup")
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
-        call = form.create_call()
-
+        call, pipeline_id = form.create_call()
+        os.system(call)
+        js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
+        self.success_url = reverse_lazy('helper') + '?id=' + pipeline_id
         return super(RemoveDup, self).form_valid(form)
 
 class Extract(FormView):
@@ -275,8 +280,8 @@ class Extract(FormView):
         call,pipeline_id = form.create_call()
         #os.system("touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/HYE70LP0YVFX5DQ/lelo.txt")
         #os.system("source /opt/venv/sRNAtoolbox2017/bin/activate;"+"touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/HYE70LP0YVFX5DQ/hello.txt;echo "+call+"|qsub")
-        with open('/opt/sRNAtoolbox/sRNAtoolboxweb/upload/HYE70LP0YVFX5DQ/hello.txt', 'a') as the_file:
-            the_file.write(call)
+        # with open('/opt/sRNAtoolbox/sRNAtoolboxweb/upload/HYE70LP0YVFX5DQ/hello.txt', 'a') as the_file:
+        #     the_file.write(call)
         os.system(call)
         js = JobStatus.objects.get(pipeline_key=pipeline_id)
         js.status.create(status_progress='sent_to_queue')
@@ -296,8 +301,8 @@ class Ensembl(FormView):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call, pipeline_id = form.create_call()
-        with open('/opt/sRNAtoolbox/sRNAtoolboxweb/upload/HYE70LP0YVFX5DQ/hello.txt', 'a') as the_file:
-            the_file.write(call)
+        # with open('/opt/sRNAtoolbox/sRNAtoolboxweb/upload/HYE70LP0YVFX5DQ/hello.txt', 'a') as the_file:
+        #     the_file.write(call)
         os.system(call)
         js = JobStatus.objects.get(pipeline_key=pipeline_id)
         js.status.create(status_progress='sent_to_queue')
@@ -315,7 +320,13 @@ class NCBI(FormView):
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
-        call = form.create_call()
+        call, pipeline_id = form.create_call()
+        os.system(call)
+        js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
+        self.success_url = reverse_lazy('helper') + '?id=' + pipeline_id
         return super(NCBI, self).form_valid(form)
 
 class RNAcentral(FormView):
@@ -327,7 +338,13 @@ class RNAcentral(FormView):
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
-        call = form.create_call()
+        call, pipeline_id = form.create_call()
+        os.system(call)
+        js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
+        self.success_url = reverse_lazy('helper') + '?id=' + pipeline_id
         return super(RNAcentral, self).form_valid(form)
 
 class Trna(FormView):
@@ -339,5 +356,11 @@ class Trna(FormView):
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
-        call = form.create_call()
+        call, pipeline_id = form.create_call()
+        os.system(call)
+        js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
+        self.success_url = reverse_lazy('helper') + '?id=' + pipeline_id
         return super(Trna, self).form_valid(form)
