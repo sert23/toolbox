@@ -10,7 +10,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
-
+from sRNAtoolboxweb.settings import BASE_DIR
 from DataModels.params_bench import ParamsBench
 from DataModels.sRNABenchConfig import SRNABenchConfig
 from FileModels.IsomirParser import IsomirParser
@@ -509,6 +509,7 @@ def result_new(request):
 
                 try:
                     results["parameters"] = new_record.parameters
+                    results["parameters"].replace(BASE_DIR,"")
                 except:
                     pass
 
