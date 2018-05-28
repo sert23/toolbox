@@ -502,12 +502,12 @@ def result_new(request):
                 if os.path.exists(os.path.join(new_record.outdir, "tRNA_mature_sense.grouped")):
                     add_trna(results)
 
-                if os.path.exists(os.path.join(new_record.outdir, "sRNAbench.zip")):
-                    import glob
-                    files = glob.glob(new_record.outdir+"/*.zip")
-                    files.sort(key=os.path.getmtime)
-                    zip_file = files[0]
+                import glob
+                files = glob.glob(new_record.outdir + "/*.zip")
+                files.sort(key=os.path.getmtime)
+                zip_file = files[0]
 
+                if os.path.exists(zip_file):
                     #zip_file = os.path.join(new_record.outdir, "sRNAbench.zip")
                     #zip_file = "/".join(zip_file.split("/")[-2:])
                     results["zip"] = zip_file
