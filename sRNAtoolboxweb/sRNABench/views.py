@@ -505,11 +505,11 @@ def result_new(request):
                 import glob
                 files = glob.glob(new_record.outdir + "/*.zip")
                 files.sort(key=os.path.getmtime)
-                zip_file = files[0]
+                zip_file = files[-1]
 
                 if os.path.exists(zip_file):
                     #zip_file = os.path.join(new_record.outdir, "sRNAbench.zip")
-                    #zip_file = "/".join(zip_file.split("/")[-2:])
+                    zip_file = "/".join(zip_file.split("/")[-2:])
                     results["zip"] = zip_file
 
                 try:
