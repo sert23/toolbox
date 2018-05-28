@@ -209,11 +209,16 @@ class sRNAblastForm(forms.Form):
         out_dir = FS.location
         conf['out_dir'] = out_dir
         ifile, libs_files = self.upload_files(cleaned_data, FS)
+        if not ifile and cleaned_data.get("job_ID"):
+            new_record = JobStatus.objects.get(pipeline_key=cleaned_data.get("job_ID"))
+            path = new_record.outdir
+            ifile=os.path.join(path,"reads.fa")
+
+
         #recursive_adapter_trimming = str(cleaned_data.get('recursive_adapter_trimming')).lower()
         adapter = cleaned_data['adapter_chosen'] or cleaned_data['adapter_manual']
         adapter_length = str(cleaned_data['adapter_length'])
         adapter_mismatch = str(cleaned_data['adapter_mismatch'])
-
         conf_dict={}
         conf_dict["input"] = ifile
         conf_dict["output"] = out_dir
