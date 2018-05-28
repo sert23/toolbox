@@ -503,8 +503,13 @@ def result_new(request):
                     add_trna(results)
 
                 if os.path.exists(os.path.join(new_record.outdir, "sRNAbench.zip")):
-                    zip_file = os.path.join(new_record.outdir, "sRNAbench.zip")
-                    zip_file = "/".join(zip_file.split("/")[-2:])
+                    import glob
+                    files = glob.glob(new_record.outdir+"/*.zip")
+                    files.sort(key=os.path.getmtime)
+                    zip_file = files[0]
+
+                    #zip_file = os.path.join(new_record.outdir, "sRNAbench.zip")
+                    #zip_file = "/".join(zip_file.split("/")[-2:])
                     results["zip"] = zip_file
 
                 try:
