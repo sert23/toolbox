@@ -12,9 +12,11 @@
             <!-- /.row -->
             <div class="row">
 
+                {% if result %}
             <p class="text-success"> Please, find your results in this <a href="{{ MEDIA_URL }}{{ result }}" download> link.</a></p>
-
-
+                {% else %}
+            <p class="text-warning"> No results found for your job, please report it using jobID {{ jobID }}</p>
+                {% endif %}
             </div>
             <!-- /.row -->
         </div>
