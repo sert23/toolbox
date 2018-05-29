@@ -212,7 +212,7 @@ def result(request):
             species_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(species))
             results["species"] = species_result
 
-            parser = BlastParser(os.path.join(new_record.outdir,"species.out"), "tax", 50)
+            parser = BlastParser(os.path.join(new_record.outdir,"tax.out"), "tax", 50)
             tax = [obj for obj in parser.parse()]
             header = tax[0].get_sorted_attr()
             tax_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(tax))
