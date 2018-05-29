@@ -225,7 +225,7 @@ def result(request):
         assert isinstance(new_record, JobStatus)
 
         results = {}
-
+        results["jobID"]=new_record.pipeline_key
         if new_record.job_status == "Finished":
             fd = open(os.path.join(new_record.outdir, "logFile.txt"))
             backvalue = "result"

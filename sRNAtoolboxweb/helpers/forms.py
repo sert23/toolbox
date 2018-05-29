@@ -417,6 +417,7 @@ class RnacentralForm(forms.Form):
             if self.cleaned_data.get('species'):
                 species = species.replace(" ", "_")
                 file.write("species=" + species + "\n")
+                file.write(os.path.join(CONF["dbs"],))
 
             elif self.cleaned_data.get('taxonomy'):
                 taxonomy = taxonomy.replace(" ", "_")
