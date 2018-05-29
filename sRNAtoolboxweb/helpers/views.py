@@ -235,8 +235,9 @@ def result(request):
                     backvalue = value
 
             zip_file = os.path.join(backvalue + ".zip").split("/")[-1]
-            #results["result"] = os.path.join(new_record.outdir ,"mature.txt.zip")
-            results["result"] = os.path.join(new_record.pipeline_key,zip_file)
+            if os.path.exists(backvalue+".zip"):
+                #results["result"] = os.path.join(new_record.outdir ,"mature.txt.zip")
+                results["result"] = os.path.join(new_record.pipeline_key,zip_file)
 
             return render(request, 'helper_result.html', results)
 
@@ -244,8 +245,6 @@ def result(request):
             return redirect(reverse_lazy('progress', kwargs={"pipeline_id": job_id}))
     else:
         return redirect(settings.SUB_SITE)
-
-
 
 
 class RemoveDup(FormView):
