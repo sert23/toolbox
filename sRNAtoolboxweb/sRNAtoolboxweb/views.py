@@ -9,6 +9,7 @@ counter = itertools.count()
 from FileModels.jBrowserParser import JBrowserParser
 import datetime
 import os
+from functools import reduce
 
 __author__ = 'antonior'
 
@@ -42,7 +43,7 @@ def blank(request):
 
 def version(request):
     results={}
-    results["sRNAfuncTerms"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="sRNAfuncTerms", job_status="Finished")]
+    #results["sRNAfuncTerms"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="sRNAfuncTerms", job_status="Finished")]
     results["sRNAde"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="sRNAde", job_status="Finished")]
     results["sRNAbench"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="sRNAbench", job_status="Finished")]
     results["sRNAblast"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="sRNAblast", job_status="Finished")]
