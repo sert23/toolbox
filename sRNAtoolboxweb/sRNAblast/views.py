@@ -224,7 +224,7 @@ def result(request):
 
             try:
                 par_file= os.path.join(new_record.outdir,"parameters.txt")
-                results["parameters"] = "".join(open(par_file).readlines()).replace("\n",""),
+                results["parameters"] = "".join(list(open(par_file).readlines())).replace("\n",""),
                 #results["parameters"] = new_record.parameters
                 #results["species_figure"] = os.path.join("/",new_record.outdir, "species.svg")
                 # results["species_figure"] = "/".join(new_record.species_svg.split("/")[-2:])
