@@ -202,6 +202,8 @@ def result(request):
             parser = BlastParser(os.path.join(new_record.outdir,"blast.out"), "blast", 500)
             #parser = BlastParser("/opt/sRNAtoolbox/sRNAtoolboxweb/upload/P19XKMOHJEZ09ZG/blast.out", "blast", 100)
             blast = [obj for obj in parser.parse()]
+            print("here print")
+            print(blast)
             header = blast[0].get_sorted_attr()
             blast_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(blast))
             results["blast"] = blast_result
