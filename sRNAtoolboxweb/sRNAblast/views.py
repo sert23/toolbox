@@ -199,8 +199,8 @@ def result(request):
         if new_record.job_status == "Finished":
 
 
-            #parser = BlastParser(os.path.join(new_record.outdir,"blast.out"), "blast", 500)
-            parser = BlastParser("/opt/sRNAtoolbox/sRNAtoolboxweb/upload/P19XKMOHJEZ09ZG/blast.out", "blast", 100)
+            parser = BlastParser(os.path.join(new_record.outdir,"blast.out"), "blast", 500)
+            #parser = BlastParser("/opt/sRNAtoolbox/sRNAtoolboxweb/upload/P19XKMOHJEZ09ZG/blast.out", "blast", 100)
             blast = [obj for obj in parser.parse()]
             print("here print")
             print(blast)
@@ -224,7 +224,7 @@ def result(request):
 
             try:
                 par_file= os.path.join(new_record.outdir,"parameters.txt")
-                results["parameters"] = "".join(open(par_file).readlines()),
+                results["parameters"] = "\n".join(open(par_file).readlines()),
                 #results["parameters"] = new_record.parameters
                 #results["species_figure"] = os.path.join("/",new_record.outdir, "species.svg")
                 # results["species_figure"] = "/".join(new_record.species_svg.split("/")[-2:])
