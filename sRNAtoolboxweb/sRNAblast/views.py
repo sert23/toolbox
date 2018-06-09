@@ -199,7 +199,7 @@ def result(request):
         if new_record.job_status == "Finished":
 
 
-            parser = BlastParser(os.path.join(new_record.outdir,"blast.out"), "blast", 100)
+            parser = BlastParser(os.path.join(new_record.outdir,"blast.out"), "blast", 500)
             #parser = BlastParser("/opt/sRNAtoolbox/sRNAtoolboxweb/upload/P19XKMOHJEZ09ZG/blast.out", "blast", 100)
             blast = [obj for obj in parser.parse()]
             header = blast[0].get_sorted_attr()
