@@ -25,9 +25,9 @@
             <div class="col-lg-12">
 
                 {%  if url %}
-                    <p class="text-success"> The job has been launched. The result will appear in <a href="{{sttings.SUB_SITE}}/jobstatus/{{ id }}"> this page.</a></p>
+                    <p class="text-success"> The job has been launched. The result will appear in <a href="{{settings.SUB_SITE}}/jobstatus/{{ id }}"> this page.</a></p>
                     <p class="text-primary"> Your Job ID is: {{ id }}</p>
-                      <p class="text-warning">  Some analysis may take time, please be patient. You can bookmark <a href="{{sttings.SUB_SITE}}/jobstatus/{{ id }}"> <i class="fa fa-bookmark fa-fw"></i> this page.</a></p>
+                      <p class="text-warning">  Some analysis may take time, please be patient. You can bookmark <a href="{{settings.SUB_SITE}}/jobstatus/{{ id }}"> <i class="fa fa-bookmark fa-fw"></i> this page.</a></p>
                 {% endif %}
 
                 {% if queue %}
