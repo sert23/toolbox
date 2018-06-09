@@ -223,9 +223,12 @@ def result(request):
             results["zip"] =new_record.zip_file
 
             try:
-                par_file= os.path.join(new_record.outdir,"parameters.txt")
-                results["parameters"] = "".join(list(open(par_file).readlines())).replace("\n",""),
-                #results["parameters"] = new_record.parameters
+                with open(os.path.join(new_record.outdir,"parameters.txt"), 'r') as myfile:
+                    parameters = myfile.read()
+
+
+                #results["parameters"] = "\\n".join(list(open(par_file).readlines())).replace("\n",""),
+                results["parameters"] = parameters
                 #results["species_figure"] = os.path.join("/",new_record.outdir, "species.svg")
                 # results["species_figure"] = "/".join(new_record.species_svg.split("/")[-2:])
             except:
