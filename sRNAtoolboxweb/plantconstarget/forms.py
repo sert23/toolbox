@@ -51,7 +51,7 @@ class PMirconsForm(forms.Form):
     choice_list = sorted(choice_list, key= itemgetter(1))
     choice_list = [(None, "None selected")]+ choice_list
 
-    # cdna_list = []
+    cdna_list = []
     # with open(os.path.join(PATH_TO_DB, "targetAnnot.txt"), 'rt') as tsvfile:
     #     rows = csv.reader(tsvfile, delimiter='\t')
     #     for row in rows:
