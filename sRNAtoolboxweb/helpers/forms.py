@@ -411,13 +411,13 @@ class RnacentralForm(forms.Form):
         }
 
         with open(config_location, "w+") as file:
-            # file.write("input=" + os.path.join(CONF["db"],"dbs/rnacentral_active.fasta" ) + "\n")
-            # file.write("taxonFile="+os.path.join(CONF["db"],"dbs/taxonomy_full.txt" ) + "\n")
+            file.write("input=" + os.path.join(CONF["db"],"dbs/rnacentral_active.fasta" ) + "\n")
+            file.write("taxonFile="+os.path.join(CONF["db"],"dbs/taxonomy_full.txt" ) + "\n")
             file.write("mode=RNAC \n")
             file.write("output=" + out_dir + "\n")
             if self.cleaned_data.get('species'):
                 species = species.replace(" ", "_")
-                # file.write("species=" + species + "\n")
+                file.write("species=" + species + "\n")
             elif self.cleaned_data.get('taxonomy'):
                 taxonomy = taxonomy.replace(" ", "_")
                 file.write("taxon="+taxonomy+"\n")
