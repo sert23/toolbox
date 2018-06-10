@@ -45,7 +45,6 @@ class PMirconsForm(forms.Form):
             if animals_dict.get(row[0]) :
                 if row[2] != "-":
                     current = (row[2] , animals_dict[row[0]] + " (3'UTRs)")
-                    print(current)
                     choice_list.append(current)
 
     choice_list = sorted(choice_list, key= itemgetter(1))
@@ -58,7 +57,6 @@ class PMirconsForm(forms.Form):
             if animals_dict.get(row[0]) :
                 if row[1] != "-":
                     current = (row[1] , animals_dict[row[0]] + " (cDNA)")
-                    print(current)
                     cdna_list.append(current)
 
     cdna_list = sorted(cdna_list, key=itemgetter(1))
