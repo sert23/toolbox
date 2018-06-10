@@ -61,7 +61,7 @@ class PMirconsForm(forms.Form):
                     print(current)
                     cdna_list.append(current)
 
-    cdna_list = sorted(choice_list, key=itemgetter(1))
+    cdna_list = sorted(cdna_list, key=itemgetter(1))
     # cdna_list=[(None, "None selected")]+cdna_list
 
     #species = ((os.path.join(os.path.join(PATH_TO_DB,"utr"), key),key[0:-9].replace("_", " ")) for (key) in onlyfiles)
