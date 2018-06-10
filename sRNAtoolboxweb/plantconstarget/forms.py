@@ -38,15 +38,27 @@ class PMirconsForm(forms.Form):
         for row in rows:
             if row[0]=="plant":
                 animals_dict[row[3]] =  row[5]
-    choice_list=[]
+    choice_list=[(None, "None selected")]
     with open(os.path.join(PATH_TO_DB,"targetAnnot.txt"), 'rt') as tsvfile:
         rows = csv.reader(tsvfile,delimiter='\t')
         for row in rows:
             if animals_dict.get(row[0]) :
-                current = (row[2] , animals_dict[row[0]] + " (3'UTRs)")
-                choice_list.append(current)
+                if row[2] != "-":
+                    current = (row[2] , animals_dict[row[0]] + " (3'UTRs)")
+                    choice_list.append(current)
 
     choice_list = sorted(choice_list, key= itemgetter(1))
+
+    cdna_list = [(None, "None selected")]
+    with open(os.path.join(PATH_TO_DB, "targetAnnot.txt"), 'rt') as tsvfile:
+        rows = csv.reader(tsvfile, delimiter='\t')
+        for row in rows:
+            if animals_dict.get(row[0]) :
+                if row[1] != "-":
+                    current = (row[1] , animals_dict[row[0]] + " (3'UTRs)")
+                    cdna_list.append(current)
+
+    choice_list = sorted(choice_list, key=itemgetter(1))
 
     #species = ((os.path.join(os.path.join(PATH_TO_DB,"utr"), key),key[0:-9].replace("_", " ")) for (key) in onlyfiles)
 
@@ -55,6 +67,7 @@ class PMirconsForm(forms.Form):
     utrfile = forms.FileField(label='Upload targets file', required=False)
 
     utrchoice = forms.ChoiceField(label="Or choose UTR from the list",choices=choice_list,required=False)
+    cdnachoice = forms.ChoiceField(label="Or choose cDNA from Ensembl",choices=cdna_list,required=False)
 
     mirtext = forms.CharField(label="Or paste your miRNAs here",widget=forms.Textarea,required=False)
     utrtext = forms.CharField(label="Or paste your targets here",widget=forms.Textarea,required=False)
@@ -80,6 +93,7 @@ class PMirconsForm(forms.Form):
                 'Choose target input',
                 Field('utrfile', css_class='form-control'),
                 'utrchoice',
+                'cdnachoice',
                 Field('utrtext', css_class='form-control')),
             Fieldset(
                 'Choose programs and parameters',
