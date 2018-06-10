@@ -417,7 +417,7 @@ class RnacentralForm(forms.Form):
             file.write("output=" + out_dir + "\n")
             if self.cleaned_data.get('species'):
                 species = species.replace(" ", "_")
-                file.write("species=" + species + "\n")
+                # file.write("species=" + species + "\n")
             elif self.cleaned_data.get('taxonomy'):
                 taxonomy = taxonomy.replace(" ", "_")
                 file.write("taxon="+taxonomy+"\n")
