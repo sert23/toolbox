@@ -38,7 +38,7 @@ class PMirconsForm(forms.Form):
         for row in rows:
             if row[0]=="plant":
                 animals_dict[row[3]] =  row[5]
-    choice_list=[(None, "None selected")]
+    choice_list=[]
     with open(os.path.join(PATH_TO_DB,"targetAnnot.txt"), 'rt') as tsvfile:
         rows = csv.reader(tsvfile,delimiter='\t')
         for row in rows:
@@ -48,8 +48,9 @@ class PMirconsForm(forms.Form):
                     choice_list.append(current)
 
     choice_list = sorted(choice_list, key= itemgetter(1))
+    choice_list = [(None, "None selected")]+ choice_list
 
-    cdna_list = [(None, "None selected")]
+    cdna_list = []
     with open(os.path.join(PATH_TO_DB, "targetAnnot.txt"), 'rt') as tsvfile:
         rows = csv.reader(tsvfile, delimiter='\t')
         for row in rows:
@@ -58,7 +59,8 @@ class PMirconsForm(forms.Form):
                     current = (row[1] , animals_dict[row[0]] + " (3'UTRs)")
                     cdna_list.append(current)
 
-    choice_list = sorted(choice_list, key=itemgetter(1))
+    cdna_list = sorted(choice_list, key=itemgetter(1))
+    cdna_list=[(None, "None selected")]+cdna_list
 
     #species = ((os.path.join(os.path.join(PATH_TO_DB,"utr"), key),key[0:-9].replace("_", " ")) for (key) in onlyfiles)
 
