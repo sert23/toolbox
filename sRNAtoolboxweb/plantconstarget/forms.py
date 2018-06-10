@@ -57,7 +57,7 @@ class PMirconsForm(forms.Form):
         for row in rows:
             if animals_dict.get(row[0]) :
                 if row[1] != "-":
-                    current = (row[1] , animals_dict[row[0]] + " cDNA")
+                    current = (row[1] , animals_dict[row[0]] + " (cDNA)")
                     print(current)
                     cdna_list.append(current)
 
