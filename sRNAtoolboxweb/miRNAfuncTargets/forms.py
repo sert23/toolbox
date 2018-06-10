@@ -92,7 +92,9 @@ class MirFuncForm(forms.Form):
             TabHolder(
                 Tab('Using jobID',
                     Field('jobID', css_class='form-control')
-                    )))
+                    ),
+                Tab('Lolailo')
+            ))
         #     Fieldset(
         #         'Choose miRNA input',
         #         Field('mirfile', css_class='form-control'),
