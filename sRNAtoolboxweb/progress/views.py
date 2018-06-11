@@ -177,13 +177,14 @@ class JobStatusDetail(DetailView):
                 else:
                     return self.get_context_with_messages(job_status)
             if job_status.job_status == 'Finished':
+                sleep(10)
                 if job_status.pipeline_type == 'sRNAbench':
                     new_record = JobStatus.objects.get(pipeline_key=job_status.pipeline_key)
                     #status = queue_Status(job_status.pipeline_key)
                     if not os.path.exists(os.path.join(new_record.outdir, "results.txt")):
                         return self.get_error_context(job_status)
                 # return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
-                return {}
+                return redirect(reverse_lazy(job_status.pipeline_type.lower()) + "?id=" + job_status.pipeline_key)
             elif job_status.job_status == "Finished with Errors":
                 return self.get_context_finished_with_errors(job_status)
             else:
