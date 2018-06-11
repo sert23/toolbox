@@ -251,6 +251,7 @@ class sRNABenchForm(forms.Form):
         libs_files = []
         name_modifier = cleaned_data.get('job_name')
         url = cleaned_data.get('url')
+        sra_input = cleaned_data.get('sra_input')
         ifile = cleaned_data.get("ifile") or ''
         if ifile:
             file_to_update = ifile
@@ -272,6 +273,8 @@ class sRNABenchForm(forms.Form):
                 dest = os.path.join(FS.location, os.path.basename(url))
 
             ifile, headers = urllib.request.urlretrieve(url, filename=dest)
+        elif sra_input:
+            ifile = sra_input
 
         for i in range(1, 6):
             profile = cleaned_data.get('profile' + str(i))
