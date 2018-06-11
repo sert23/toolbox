@@ -16,6 +16,7 @@ __author__ = 'antonior'
 # Create your views here.
 from django.shortcuts import render, redirect
 
+from django.conf import settings
 
 PIPELINETYPES_URL = {
     "sRNAfuncTerms": "srnafuncterms",
@@ -74,10 +75,10 @@ def search(request):
             p_type = new_record.pipeline_type
 
             if p_type not in PIPELINETYPES_URL:
-                errors['errors'].append("Sorry, Actually we do not support search of helper tools results")
+                errors['errors'].append("Sorry, we do not support search of helper tools results")
                 return render(request, "error_page.html", errors)
             else:
-                return redirect("/jobstatus/" + job_id)
+                return redirect(settings.SUB_SITE+"/jobstatus/" + job_id)
 
         except:
             errors['errors'].append(job_id +" job not found, please check if the id is correct and job is currently active. Web Results will be stored for 15 days")
