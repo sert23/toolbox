@@ -201,7 +201,8 @@ class JobStatusDetail(DetailView):
                     return self.get_error_context(job_status)
                 else:
                     # return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
-                    return redirect(reverse_lazy(job_status.pipeline_type.lower()) + "?id=" + job_status.pipeline_key)
+                    #return redirect(reverse_lazy(job_status.pipeline_type.lower()) + "?id=" + job_status.pipeline_key)
+                    return {}
             elif job_status.job_status == "Finished with Errors":
                 return self.get_context_finished_with_errors(job_status)
             else:
