@@ -30,7 +30,7 @@ class Configuration:
         self.taxon_file = conf["tax"]
         self.trna_file = conf["tRNA"]
         self.rnac_file = conf["RNAcentral"]
-        self.media = conf["media"]
+        #self.media = conf["media"]
         self.mirnaconstargets_plants = os.path.join(conf["exec"], "miRNAconsTargets_plants.py")
 
 
@@ -53,7 +53,7 @@ class Pipeline:
         # Open logDB connection
         self.job_name = job_name
         # self.api_server = 'http://127.0.0.1:8000'
-        self.api_server = 'http://bioinfo5.ugr.es/srnatoolbox_dev'
+        self.api_server = 'http://bioinfo5.ugr.es/srnatoolbox'
         self.api_path = os.path.join(self.api_server, 'jobstatus', 'api')
         self.api_path_key = os.path.join(self.api_path, self.pipeline_key)
         self.api_path_add_status = os.path.join(self.api_path, self.pipeline_key, 'add_status')
