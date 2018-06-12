@@ -142,8 +142,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-#MEDIA_ROOT = os.path.join(BASE_DIR, "upload")
-MEDIA_ROOT = "/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload"
+MEDIA_ROOT = os.path.join(BASE_DIR, "upload")
+#MEDIA_ROOT = "/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload"
 
 
 
