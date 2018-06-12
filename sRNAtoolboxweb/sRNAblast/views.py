@@ -291,7 +291,7 @@ def test(request):
 
 
 class SRNABlast(FormView):
-    template_name = 'miRNAtarget.html'
+    template_name = 'new_blast.html'
     form_class = sRNAblastForm
     success_url = reverse_lazy("SRNABLAST")
 
