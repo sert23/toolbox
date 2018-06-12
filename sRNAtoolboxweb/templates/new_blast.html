@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="page-header">
+                    <h1>sRNAblast:</h1>
+                    <h3>Profiling of small RNAs of unknown origin</h3>
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-9">
+
+{% comment %}
+                <form action="mirconstarget/test" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="submit"  class="btn btn-success" value="Launch Test">
+                </form>
+
+                <br>
+{% endcomment %}
+
+                {% include 'form_base.html' %}
+
+
+            </div>
+
+
+
+            <div class="col-lg-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Help
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <a href="{% static "WebManual_sRNAtoolbox.pdf" %}" target="_blank">Link to Web Manual</a>
+                        <br>
+                        <a href="http://bioinfo5.ugr.es/srnatoolbox/jobstatus/mirconstarget/?id=3NDQXYW9XGPZ5O9"  target="_blank">Link to Test Data Results</a>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Test Data Description
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        rat 3’ UTRs and 3 microRNAs
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Test Data Parameters
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        miRNAs File: <a href="http://bioinfo5.ugr.es/static/testData/rno_miR.fa" download> <i class="fa fa-download fa-fw"></i> rno_miR.fa</a>
+                        <br>
+                        UTRs File: <a href="http://bioinfo5.ugr.es/static/testData/rn5_refSeq_3utr.fa" download> <i class="fa fa-download fa-fw"></i>rn5_refSeq_3utr.fa</a>
+                        <br>
+                        <br>
+                        Programs to predict targets: <pre style=" white-space: nowrap; overflow-y: hidden">TargetSpy, Miranda and PITA</pre>
+
+
+                    </div>
+                </div>
+
+            </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+    </div>
+
+
+{% endblock %}
+
+{% block modals %}
+    {% include "Messages/mirnaconstarget/ProgramsParameters.html" %}
+    {% include "Messages/mirnaconstarget/tapir_hybrid_parameters.html" %}
+    {% include "Messages/mirnaconstarget/tapir_parameters.html" %}
+    {% include "Messages/mirnaconstarget/miranda_parameters.html" %}
+    {% include "Messages/mirnaconstarget/psrobot_tar_parameters.html" %}
+    {% include "Messages/mirnaconstarget/targetspy_parameters.html" %}
+    {% include "Messages/mirnaconstarget/pita_parameters.html" %}
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function() {
+            $('input[id="PS"]').attr('disabled', 'disabled');
+            $('input[id="TF"]').attr('disabled', 'disabled');
+            $('input[id="TH"]').attr('disabled', 'disabled');
+        });
+
+        $('input[id="plant"]').on('change',function() {
+            if($(this).is(':checked')) {
+
+                $('input[id="TS"]').attr('disabled','disabled');
+                $('input[id="MR"]').attr('disabled','disabled');
+                $('input[id="PT"]').attr('disabled','disabled');
+                $('input[id="PS"]').removeAttr('disabled');
+                $('input[id="TF"]').removeAttr('disabled');
+                $('input[id="TH"]').removeAttr('disabled');
+
+            }
+            else {
+                $('input[id="TS"]').removeAttr('disabled');
+                $('input[id="MR"]').removeAttr('disabled');
+                $('input[id="PT"]').removeAttr('disabled');
+                $('input[id="PS"]').attr('disabled','disabled');
+                $('input[id="TF"]').attr('disabled','disabled');
+                $('input[id="TH"]').attr('disabled','disabled');
+            }
+        });
+    </script>
+{% endblock %}
