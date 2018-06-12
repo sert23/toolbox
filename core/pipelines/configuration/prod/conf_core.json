@@ -10,5 +10,6 @@
  "exec" : "/opt/sRNAtoolboxDB/exec",
  "RNAcentral" : "/opt/sRNAtoolboxDB/dbs/rnacentral_active.fasta",
  "tRNA" : "/opt/sRNAtoolboxDB/dbs/eukaryotic-tRNAs.fa",
- "tax" : "/opt/sRNAtoolboxDB/dbs/taxonomy.txt"
+ "tax" : "/opt/sRNAtoolboxDB/dbs/taxonomy.txt",
+ "media" : "/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload"
 }
