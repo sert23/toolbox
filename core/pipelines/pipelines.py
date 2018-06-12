@@ -30,7 +30,7 @@ class Configuration:
         self.taxon_file = conf["tax"]
         self.trna_file = conf["tRNA"]
         self.rnac_file = conf["RNAcentral"]
-        self.media = conf["media"]
+        #self.media = conf["media"]
         self.mirnaconstargets_plants = os.path.join(conf["exec"], "miRNAconsTargets_plants.py")
 
 
