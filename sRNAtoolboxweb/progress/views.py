@@ -101,11 +101,12 @@ class JobStatusDetail(DetailView):
 
     @staticmethod
     def get_running_context_for_srnabench(job_status):
-        # if os.path.exists(os.path.join(job_status.outdir, "parameters.txt")) and os.path.exists(os.path.join(job_status.outdir, "results.txt")):
+        if os.path.exists(os.path.join(job_status.outdir, "parameters.txt")) and os.path.exists(os.path.join(job_status.outdir, "results.txt")):
+            return JobStatusDetail.get_context_with_messages(job_status)
         #     #return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
         #     return redirect("/jobstatus/" + job_status.pipeline_key)
         # else:
-        return JobStatusDetail.get_context_with_messages(job_status)
+
 
     @staticmethod
     def get_context_finished_with_errors(job_status):
