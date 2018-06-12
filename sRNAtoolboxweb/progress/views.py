@@ -12,6 +12,8 @@ from rest_framework.generics import UpdateAPIView, RetrieveAPIView, CreateAPIVie
 from progress.models import JobStatus, Status
 from sRNAtoolboxweb.settings import CONF
 from progress.serializers import JobStatusSerializer, StatusSerializer
+from time import sleep
+
 
 
 class Msg():
@@ -102,7 +104,7 @@ class JobStatusDetail(DetailView):
     @staticmethod
     def get_running_context_for_srnabench(job_status):
         if os.path.exists(os.path.join(job_status.outdir, "parameters.txt")) and os.path.exists(os.path.join(job_status.outdir, "results.txt")):
-            #return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
+            #return redirect(reverse_lazy(job_status.pipeline_type.lower()) + "?id=" + job_status.pipeline_key)
             return redirect("/jobstatus/" + job_status.pipeline_key)
         else:
             return JobStatusDetail.get_context_with_messages(job_status)
@@ -175,6 +177,7 @@ class JobStatusDetail(DetailView):
                 else:
                     return self.get_context_with_messages(job_status)
             if job_status.job_status == 'Finished':
+                sleep(10)
                 if job_status.pipeline_type == 'sRNAbench':
                     new_record = JobStatus.objects.get(pipeline_key=job_status.pipeline_key)
                     #status = queue_Status(job_status.pipeline_key)
@@ -182,7 +185,8 @@ class JobStatusDetail(DetailView):
                         return self.get_error_context(job_status)
 
                 # return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
-                return {}
+                return redirect(reverse_lazy(job_status.pipeline_type.lower()) + "?id=" + job_status.pipeline_key)
+
             elif job_status.job_status == "Finished with Errors":
                 return self.get_context_finished_with_errors(job_status)
             else:
@@ -193,10 +197,12 @@ class JobStatusDetail(DetailView):
             if job_status.job_status == 'sent_to_queue':
                 return self.get_error_context(job_status)
             if job_status.job_status == "Finished":
-                if job_status.pipeline_type == "sRNAbench" and (not os.path.exists(os.path.join(job_status.outdir, "parameters.txt")) or not os.path.exists(os.path.join(job_status.outdir, "results.txt"))):
+                sleep(10)
+                if job_status.pipeline_type == "sRNAbench" and (not os.path.exists(os.path.join(job_status.outdir, "parameters.txt") or not os.path.exists(os.path.join(job_status.outdir, "results.txt")))):
                     return self.get_error_context(job_status)
                 else:
                     # return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
+                    #return redirect(reverse_lazy(job_status.pipeline_type.lower()) + "?id=" + job_status.pipeline_key)
                     return {}
             elif job_status.job_status == "Finished with Errors":
                 return self.get_context_finished_with_errors(job_status)

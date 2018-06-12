@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="page-header">
-            <a href="http://www.degruyter.com/view/j/mngs.2014.1.issue-1/mngs-2014-0001/mngs-2014-0001.xml" target="_blank"> <h1>sRNAbench: </h1></a>
+            <a href="{{ settings.SUB_SITE }}/srnabench" target="_blank"> <h1>sRNAbench: </h1></a>
             <h3>Profiling of small RNAs and its sequence variants in single or multi-species high-throughput experiments</h3>
             </div>
         </div>
@@ -76,7 +76,7 @@
                 </h4>
             </div>
             <div class="panel-body">
-                Input File: <a href="{{ MEDIA_URL }}/testData/IK_exosomes.fastq.gz" download> <i class="fa fa-download fa-fw"></i> IK_exo.fastq.gz</a>
+                Input File: <a href="{{ MEDIA_URL }}/UBNMV10I6X5S169/IK_exosomes.fastq.gz" download> <i class="fa fa-download fa-fw"></i> IK_exo.fastq.gz</a>
                 <br>
                 Adapter: TGGAATTCTCGGGTGCCAAGG
                 <br>
@@ -167,7 +167,7 @@
             document.getElementById('id_ifile').value = "";
             alert(message); return true
 {#            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true#}
-        } else if (document.getElementById("id_ifile").value && document.getElementById("id_url").value){
+        }else if ((0 + Boolean(document.getElementById('id_ifile').value) + Boolean(document.getElementById('id_url').value) + Boolean(document.getElementById('id_sra_input').value )!=1)){
             document.getElementById('id_ifile').value = "";
 {#            alert("id_file url");#}
 {#            return true;#}
@@ -178,8 +178,8 @@
             alert(message); return true
         }else if ((0 + document.getElementById('id_guess_adapter').checked + Boolean(document.getElementById('id_adapter_chosen').value) + Boolean(document.getElementById('id_adapter_manual').value )!=1)){
             document.getElementById('id_ifile').value = "";
-            alert(message); return true
-{#            alert("adapter row"); return true#}
+{#            alert(message); return true#}
+            alert("adapter row"); return true
         }else if (document.getElementById('id_guess_adapter').checked && !document.getElementById('id_species')){
             document.getElementById('id_ifile').value = "";
             alert(message); return true

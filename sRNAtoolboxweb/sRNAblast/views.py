@@ -199,9 +199,11 @@ def result(request):
         if new_record.job_status == "Finished":
 
 
-            parser = BlastParser(os.path.join(new_record.outdir,"blast.out"), "blast", 100)
+            parser = BlastParser(os.path.join(new_record.outdir,"blast.out"), "blast", 500)
             #parser = BlastParser("/opt/sRNAtoolbox/sRNAtoolboxweb/upload/P19XKMOHJEZ09ZG/blast.out", "blast", 100)
             blast = [obj for obj in parser.parse()]
+            print("here print")
+            print(blast)
             header = blast[0].get_sorted_attr()
             blast_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(blast))
             results["blast"] = blast_result
@@ -221,9 +223,12 @@ def result(request):
             results["zip"] =new_record.zip_file
 
             try:
-                par_file= os.path.join(new_record.outdir,"parameters.txt")
-                results["parameters"] = "".join(open(par_file).readlines()),
-                #results["parameters"] = new_record.parameters
+                with open(os.path.join(new_record.outdir,"parameters.txt"), 'r') as myfile:
+                    parameters = myfile.read()
+
+
+                #results["parameters"] = "\\n".join(list(open(par_file).readlines())).replace("\n",""),
+                results["parameters"] = parameters
                 #results["species_figure"] = os.path.join("/",new_record.outdir, "species.svg")
                 # results["species_figure"] = "/".join(new_record.species_svg.split("/")[-2:])
             except:

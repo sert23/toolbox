@@ -13,6 +13,7 @@ from django.conf import settings
 from django.core.files.base import ContentFile
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Field, ButtonHolder, Submit
+from crispy_forms.bootstrap import TabHolder,Tab
 
 SPECIES_PATH = settings.CONF["species"]
 PATH_TO_DB=CONF["db"]
@@ -28,23 +29,23 @@ from FileModels.TargetConsensusParser import TargetConsensusParser
 
 
 
-class PMirconsForm(forms.Form):
+class MirFuncForm(forms.Form):
     import csv
     from operator import itemgetter
 
-    animals_dict={}
+    plants_dict={}
     with open(os.path.join(PATH_TO_DB,"species.txt"), 'rt') as csvfile:
         rows = csv.reader(csvfile)
         for row in rows:
             if row[0]=="plant":
-                animals_dict[row[3]] =  row[5]
+                plants_dict[row[3]] =  row[5]
     choice_list=[]
     with open(os.path.join(PATH_TO_DB,"targetAnnot.txt"), 'rt') as tsvfile:
         rows = csv.reader(tsvfile,delimiter='\t')
         for row in rows:
-            if animals_dict.get(row[0]) :
+            if plants_dict.get(row[0]) :
                 if row[2] != "-":
-                    current = (row[2] , animals_dict[row[0]] + " (3'UTRs)")
+                    current = (row[2] , plants_dict[row[0]] + " (3'UTRs)")
                     choice_list.append(current)
 
     choice_list = sorted(choice_list, key= itemgetter(1))
@@ -54,16 +55,15 @@ class PMirconsForm(forms.Form):
     with open(os.path.join(PATH_TO_DB, "targetAnnot.txt"), 'rt') as tsvfile:
         rows = csv.reader(tsvfile, delimiter='\t')
         for row in rows:
-            if animals_dict.get(row[0]) :
+            if plants_dict.get(row[0]) :
                 if row[1] != "-":
-                    current = (row[1] , animals_dict[row[0]] + " (cDNA)")
+                    current = (row[1] , plants_dict[row[0]] + " (cDNA)")
                     cdna_list.append(current)
 
     cdna_list = sorted(cdna_list, key=itemgetter(1))
     cdna_list=[(None, "None selected")]+cdna_list
 
     #species = ((os.path.join(os.path.join(PATH_TO_DB,"utr"), key),key[0:-9].replace("_", " ")) for (key) in onlyfiles)
-
 
     mirfile = forms.FileField(label='Upload miRNAs file', required=False)
     utrfile = forms.FileField(label='Upload targets file', required=False)
@@ -82,47 +82,56 @@ class PMirconsForm(forms.Form):
     tapir_fasta_par=forms.CharField(label="TAPIR FASTA engine parameters",required=False, initial=" ")
     tapir_RNA_par = forms.CharField(label="TAPIR RNAhybrid engine Parameters", required=False, initial=" ")
 
+    jobID = forms.CharField(
+        label='Launch functargets from previous miRNAconstarget finished job', required=False)
 
     def __init__(self, *args, **kwargs):
-        super(PMirconsForm, self).__init__(*args, **kwargs)
+        super(MirFuncForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            Fieldset(
-                'Choose miRNA input',
-                Field('mirfile', css_class='form-control'),
-                Field('mirtext', css_class='form-control')),
-            Fieldset(
-                'Choose target input',
-                Field('utrfile', css_class='form-control'),
-                'utrchoice',
-                'cdnachoice',
-                Field('utrtext', css_class='form-control')),
-            Fieldset(
-                'Choose programs and parameters',
-                'psRobot',
-                Field('psRobot_par', css_class='form-control'),
-                'tapir_fasta',
-                Field('tapir_fasta_par', css_class='form-control'),
-                'tapir_RNA',
-                Field('tapir_RNA_par', css_class='form-control'),
-
-            ),
-
-            ButtonHolder(
-                Submit('submit', 'RUN', css_class='btn btn-primary')
-            )
-        )
+            TabHolder(
+                Tab('Using jobID',
+                    Field('jobID', css_class='form-control')
+                    ),
+                Tab('Lolailo')
+            ))
+        #     Fieldset(
+        #         'Choose miRNA input',
+        #         Field('mirfile', css_class='form-control'),
+        #         Field('mirtext', css_class='form-control')),
+        #     Fieldset(
+        #         'Choose target input',
+        #         Field('utrfile', css_class='form-control'),
+        #         'utrchoice',
+        #         'cdnachoice',
+        #         Field('utrtext', css_class='form-control')),
+        #     Fieldset(
+        #         'Choose programs and parameters',
+        #         'psRobot',
+        #         Field('psRobot_par', css_class='form-control'),
+        #         'tapir_fasta',
+        #         Field('tapir_fasta_par', css_class='form-control'),
+        #         'tapir_RNA',
+        #         Field('tapir_RNA_par', css_class='form-control'),
+        #
+        #     ),
+        #
+        #     ButtonHolder(
+        #         Submit('submit', 'RUN', css_class='btn btn-primary')
+        #     )
+        # )
 
 
     def clean(self):
-        cleaned_data = super(PMirconsForm, self).clean()
+        cleaned_data = super(MirFuncForm, self).clean()
         if not cleaned_data.get('mirfile') and not cleaned_data.get('mirtext'):
             self.add_error('mirfile', 'miRNA input is required')
             self.add_error('mirtext', 'miRNA input is required')
-        if not cleaned_data.get('utrfile') and not cleaned_data.get('utrtext') and not cleaned_data.get('utrchoice'):
-            self.add_error('utrfile', 'UTR input is required')
-            self.add_error('utrtext', 'UTR input is required')
-            self.add_error('utrchoice', 'UTR input is required')
+        if not cleaned_data.get('utrfile') and not cleaned_data.get('utrtext') and not cleaned_data.get('utrchoice') and not cleaned_data.get('cdnachoice'):
+            self.add_error('utrfile', 'UTR or other target input is required')
+            self.add_error('utrtext', 'UTR or other target input is required')
+            self.add_error('utrchoice', 'UTR or other target input is required')
+            self.add_error('cdnachoice', 'UTR or other target input is required')
         if not cleaned_data.get('psRobot') and not cleaned_data.get('tapir_fasta') and not cleaned_data.get('tapir_RNA') :
             self.add_error('psRobot', 'At least one program should be chosen')
             self.add_error('tapir_fasta', 'At least one program should be chosen')
@@ -177,8 +186,10 @@ class PMirconsForm(forms.Form):
             content = ContentFile(utrtext)
             utrfile=FS.fileUpload.save('utrs.fa', content)
             FS.save()
-        else:
+        elif self.cleaned_data.get("utrchoice"):
             utrfile = self.cleaned_data.get('utrchoice')
+        else:
+            utrfile = self.cleaned_data.get('cdnachoice')
 
         name = pipeline_id + '_mirconstarget'
 
