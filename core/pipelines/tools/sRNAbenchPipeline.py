@@ -2,6 +2,9 @@ import os
 from time import strftime, gmtime
 
 from pipelines.pipelines import Pipeline
+#from progress.models import JobStatus
+import os
+import time
 
 
 class sRNAbenchPipeline(Pipeline):
@@ -14,7 +17,11 @@ class sRNAbenchPipeline(Pipeline):
         self.initialize_pipeline_status()
         self.call_srnabench()
         self.set_finish_time()
-        self.change_pipeline_status("Finished")
+        time.sleep(10)
+        if os.path.exists(os.path.join(self.outdir,"results.txt")):
+            self.change_pipeline_status("Finished")
+        else:
+            self.change_pipeline_status("Finished with Errors")
         # self.logger.close()
         self.error_logger.close()
 
