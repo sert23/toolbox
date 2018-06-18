@@ -7,7 +7,7 @@ from pipelines.pipelines import Pipeline
 
 
 class sRNAdePipeline(Pipeline):
-    def __init__(self, pipeline_key, job_name, outdir, input, groups, desc, nt, dt, iso, hmp, hmt, md, parameters="", media="/opt/sRNAtoolbox/sRNAtoolboxweb/upload/"):
+    def __init__(self, pipeline_key, job_name, outdir, input, groups, desc, nt, dt, iso, hmp, hmt, md, parameters="", media="/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/"):
         super(sRNAdePipeline, self).__init__(pipeline_key, job_name, outdir, "sRNAde", parameters)
 
         self.md = md
@@ -20,6 +20,7 @@ class sRNAdePipeline(Pipeline):
         self.input = input
         self.groups = groups
         self.outdir = os.path.join(self.outdir, 'output_directory')
+        self.media = media
         self.media = media
 
 
@@ -75,11 +76,11 @@ class sRNAdePipeline(Pipeline):
 
             if self.desc is not "":
 
-                cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.input + " grpString=" + self.groups + " iso=" + self.iso + " matrixDesc=" + self.desc + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " grpDesc=" + self.groups + " output=" + self.outdir + " minRCexpr=5"# rscripts=/shared/sRNAtoolbox/rscripts"
+                cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.input + " grpString=" + self.groups + " iso=" + self.iso + " matrixDesc=" + self.desc + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " grpDesc=" + self.groups + " output=" + self.outdir + "  "# rscripts=/shared/sRNAtoolbox/rscripts"
             else:
-                cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.configuration.media + " grpString=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " grpDesc=" + self.groups + " output=" + self.outdir + " minRCexpr=5 diffExpr=true"#rscripts=/shared/sRNAtoolbox/rscripts"
+                cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.configuration.media + " grpString=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " grpDesc=" + self.groups + " output=" + self.outdir + "   diffExpr=true"#rscripts=/shared/sRNAtoolbox/rscripts"
         else:
-            cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " matrixDesc=" + self.md.replace(":", ",") + " output=" + self.outdir + " minRCexpr=5 "#rscripts=/shared/sRNAtoolbox/rscripts"
+            cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " matrixDesc=" + self.md.replace(":", ",") + " output=" + self.outdir + "   "#rscripts=/shared/sRNAtoolbox/rscripts"
 
         self.set_java_command_line(cmd)
         print(cmd)
