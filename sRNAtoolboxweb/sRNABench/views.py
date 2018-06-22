@@ -400,7 +400,7 @@ def add_mapping_result(new_record, parameters, results):
     elif 'assignedRC' in parameters:
         raw = int(parameters["readsRaw"])
         mapping_results["Genome mapped reads:"] = str(int(parameters['assignedRC'])) + "(" + str(round(
-            int(parameters['Mapped reads:']) * 100.0 / raw, 2)) + "%)"
+            int(parameters['assignedRC']) * 100.0 / raw, 2)) + "%)"
 
     if len(mapping_results.keys()) > 0:
         results["mapping_results"] = mapping_results
