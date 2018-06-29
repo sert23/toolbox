@@ -408,7 +408,8 @@ def add_mapping_result(new_record, parameters, results):
 
 def add_libs(parameters, results,config):
     libs = {}
-    for i, lib in enumerate(config.params["libs"]):
+    for i, lib in enumerate(config.params.get("libs")):
+    #for i, lib in enumerate(config.params["libs"]):
         print(lib)
         val = lib.split("/")[-1].split(".")[0]
         if "desc" in config.params:
