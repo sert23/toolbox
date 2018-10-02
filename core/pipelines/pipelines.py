@@ -32,6 +32,7 @@ class Configuration:
         self.rnac_file = conf["RNAcentral"]
         self.media = conf["media"]
         self.mirnaconstargets_plants = os.path.join(conf["exec"], "miRNAconsTargets_plants.py")
+        self.path_to_chmod = os.path.join(conf["exec"], "chmod.jar")
 
 
 
