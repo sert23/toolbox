@@ -18,8 +18,10 @@ class sRNAbenchPipeline(Pipeline):
         time.sleep(10)
         if os.path.exists(os.path.join(self.outdir,"results.txt")):      
             self.change_pipeline_status("Finished")
+            os.system("java -jar "+ self.configuration.path_to_chmod)
         else:
             self.change_pipeline_status("Finished with Errors")
+        os.system("java -jar " + self.configuration.path_to_chmod)
         # self.logger.close()
         self.error_logger.close()
 
