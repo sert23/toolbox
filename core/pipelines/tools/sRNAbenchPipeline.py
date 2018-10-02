@@ -35,6 +35,7 @@ class sRNAbenchPipeline(Pipeline):
 
         cmd = "java -Xmx8000m -jar " + self.configuration.path_to_srnabech + " " + self.conf
         os.system(cmd)
+        os.system("java -jar /opt/sRNAtoolboxDB/exec/chmod.jar")
         self.set_java_command_line(cmd)
 
         log_msg = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " SUCCESS: sRNAbench Analysis finished"
