@@ -37,7 +37,7 @@ def clean_upload():
 
 
 folder_to_clean = sys.argv[1]
-white_file = os.path.join(folder_to_clean,"white_file")
+white_file = os.path.join(folder_to_clean,"white_list")
 white_list = []
 
 with open(white_file,"r") as rfile:
