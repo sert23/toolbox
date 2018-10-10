@@ -469,6 +469,8 @@ def result_new(request):
 
         if (new_record.job_status == "Finished" or new_record.job_status == "Running") and os.path.exists(os.path.join(new_record.outdir, "parameters.txt")) and os.path.exists(os.path.join(new_record.outdir, "results.txt")):
             params = ParamsBench(os.path.join(new_record.outdir, "parameters.txt"), os.path.join(new_record.outdir, "results.txt"),os.path.join(new_record.outdir, "conf.txt"))
+            os.system("chmod  -R 777 /opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/RE0PF00EYPTO6FU/")
+
             config_params = ParamsBench(os.path.join(new_record.outdir, "conf.txt"))
             if new_record.job_status == "Running":
                 results["running"] = True
