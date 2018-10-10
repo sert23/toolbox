@@ -3,7 +3,7 @@ import os
 
 import time
 import shutil
-numdays = 86400 * 15
+numdays = 86400 * 22
 now = time.time()
 
 def clean_upload():
