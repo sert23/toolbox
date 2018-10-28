@@ -400,7 +400,7 @@ def add_mapping_result(new_record, parameters, results):
     elif 'assignedRC' in parameters:
         raw = int(parameters["readsRaw"])
         mapping_results["Genome mapped reads:"] = str(int(parameters['assignedRC'])) + "(" + str(round(
-            int(parameters['Mapped reads:']) * 100.0 / raw, 2)) + "%)"
+            int(parameters['assignedRC']) * 100.0 / raw, 2)) + "%)"
 
     if len(mapping_results.keys()) > 0:
         results["mapping_results"] = mapping_results
@@ -408,38 +408,40 @@ def add_mapping_result(new_record, parameters, results):
 
 def add_libs(parameters, results,config):
     libs = {}
-    for i, lib in enumerate(config.params["libs"]):
-        print(lib)
-        val = lib.split("/")[-1].split(".")[0]
-        if "desc" in config.params:
-            #print(parameters["desc"][i])
-            try:
-                desc = parameters["desc"][i]
-                print(desc)
-            except:
-               desc = val
-        else:
-            desc = val
+    if config.params.get("libs"):
+        for i, lib in enumerate(config.params.get("libs")):
+        #for i, lib in enumerate(config.params["libs"]):
+            print(lib)
+            val = lib.split("/")[-1].split(".")[0]
+            if "desc" in config.params:
+                #print(parameters["desc"][i])
+                try:
+                    desc = parameters["desc"][i]
+                    print(desc)
+                except:
+                   desc = val
+            else:
+                desc = val
 
-        if "readsRC" + val + "Sense" in parameters:
-            libs[(desc, val)] = {}
-            print(val)
-            print("in sense")
-            try:
-                libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters["readsRC" + val + "Sense"]) + \
-                "(" + str(round(int(parameters["readsRC" + val + "Sense"]) * 100.0 / int(parameters['assignedRC']), 2)) + "%)"
-            except:
-                libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters[val + "Sense"]) + "(" + str(round(0)) + "%)"
- 
-        if "readsRC" +val + "ASense" in parameters:
-            try:
-                libs[(desc, val)]["Mapped reads in antisense direction:"] = str(parameters["readsRC"+val + "ASense"]) +\
-                "(" + str(round(int(parameters["readsRC" + val + "ASense"]) * 100.0 / int(parameters["assignedRC"]), 2)) + "%)"
-            except:
-                libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters[val + "ASense"]) + "(" + str(round(0)) + "%)"
+            if "readsRC" + val + "Sense" in parameters:
+                libs[(desc, val)] = {}
+                print(val)
+                print("in sense")
+                try:
+                    libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters["readsRC" + val + "Sense"]) + \
+                    "(" + str(round(int(parameters["readsRC" + val + "Sense"]) * 100.0 / int(parameters['assignedRC']), 2)) + "%)"
+                except:
+                    libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters[val + "Sense"]) + "(" + str(round(0)) + "%)"
+
+            if "readsRC" +val + "ASense" in parameters:
+                try:
+                    libs[(desc, val)]["Mapped reads in antisense direction:"] = str(parameters["readsRC"+val + "ASense"]) +\
+                    "(" + str(round(int(parameters["readsRC" + val + "ASense"]) * 100.0 / int(parameters["assignedRC"]), 2)) + "%)"
+                except:
+                    libs[(desc, val)]["Mapped reads in sense direction:"] = str(parameters[val + "ASense"]) + "(" + str(round(0)) + "%)"
 
     if len(list(libs.keys())) > 0:
-        results["libs"] = libs
+            results["libs"] = libs
 
 
 def add_novel(new_record, results):
@@ -467,6 +469,8 @@ def result_new(request):
 
         if (new_record.job_status == "Finished" or new_record.job_status == "Running") and os.path.exists(os.path.join(new_record.outdir, "parameters.txt")) and os.path.exists(os.path.join(new_record.outdir, "results.txt")):
             params = ParamsBench(os.path.join(new_record.outdir, "parameters.txt"), os.path.join(new_record.outdir, "results.txt"),os.path.join(new_record.outdir, "conf.txt"))
+            os.system("chmod  -R 777 /opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/RE0PF00EYPTO6FU/")
+
             config_params = ParamsBench(os.path.join(new_record.outdir, "conf.txt"))
             if new_record.job_status == "Running":
                 results["running"] = True

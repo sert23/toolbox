@@ -82,6 +82,7 @@ class sRNABenchForm(forms.Form):
 
     ifile = forms.FileField(label='Upload the reads (fastq.gz, fa.gz or rc.gz)' + render_modal('SRNAinput'),
                             required=False)
+    sra_input = forms.CharField(label='Or provide a SRA ID (starting with SRR or ERR)', required=False)
     url = forms.URLField(label=mark_safe('<strong >Or provide a URL for big files <strong class="text-success"> (recommended!)</strong>'), required=False)
     job_name = forms.CharField(label='Provide a Job Name.  (Leave blank to use fileName)',
                              required=False)
@@ -141,6 +142,7 @@ class sRNABenchForm(forms.Form):
             Fieldset(
                 '',
                 'ifile',
+                Field('sra_input', css_class='form-control'),
                 Field('url',css_class='form-control'),
                 Field('job_name', css_class='form-control'),
                 Field('species_hidden', name='species_hidden')
@@ -223,17 +225,16 @@ class sRNABenchForm(forms.Form):
         if not cleaned_data.get('species') and not cleaned_data.get('mirna_profiled'):
             self.add_error('species','Species or a miRBase short name tag are required')
             self.add_error('mirna_profiled', 'Species or a miRBase short name tag are required')
-        if not cleaned_data.get('ifile') and not cleaned_data.get('url'):
-            self.add_error('ifile', 'Choose either file or URL as input')
-            self.add_error('url', 'Choose either file or URL as input')
-            print(cleaned_data.get('ifile'))
-        if cleaned_data.get('ifile') and cleaned_data.get('url'):
-            self.add_error('ifile', 'Choose either file or URL as input')
-            self.add_error('url', 'Choose either file or URL as input')
+
+        if sum([bool(cleaned_data.get('ifile')), bool(cleaned_data.get('url')!=''), bool(cleaned_data.get('sra_input')!='')]) != 1:
+            self.add_error('ifile', 'Choose either file, SRA ID or URL as input')
+            self.add_error('url', 'Choose either file, SRA ID or URL as input')
+            self.add_error('sra_input', 'Choose either file, SRA ID or URL as input')
         if cleaned_data.get('predict_mirna') and cleaned_data.get('library_mode'):
             self.add_error('library_mode', 'Genome mode is needed for miRNA prediction')
         # if not cleaned_data.get('guess_adapter') and cleaned_data.get('adapter_chosen')=='' and cleaned_data.get('adapter_manual')=='':
-        if sum([bool(cleaned_data.get('guess_adapter')), bool(cleaned_data.get('adapter_chosen')==''), bool(cleaned_data.get('adapter_manual')=='')]) != 1:
+        if sum([bool(cleaned_data.get('guess_adapter')), bool(cleaned_data.get('adapter_chosen')!=''), bool(cleaned_data.get('adapter_manual')!='')]) != 1:
+            print(sum([bool(cleaned_data.get('guess_adapter')), bool(cleaned_data.get('adapter_chosen')==''), bool(cleaned_data.get('adapter_manual')=='')]))
             self.add_error('guess_adapter', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
             self.add_error('adapter_chosen', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
             self.add_error('adapter_manual', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
@@ -250,6 +251,7 @@ class sRNABenchForm(forms.Form):
         libs_files = []
         name_modifier = cleaned_data.get('job_name')
         url = cleaned_data.get('url')
+        sra_input = cleaned_data.get('sra_input')
         ifile = cleaned_data.get("ifile") or ''
         if ifile:
             file_to_update = ifile
@@ -271,6 +273,8 @@ class sRNABenchForm(forms.Form):
                 dest = os.path.join(FS.location, os.path.basename(url))
 
             ifile, headers = urllib.request.urlretrieve(url, filename=dest)
+        elif sra_input:
+            ifile = sra_input
 
         for i in range(1, 6):
             profile = cleaned_data.get('profile' + str(i))

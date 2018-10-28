@@ -102,10 +102,11 @@ class JobStatusDetail(DetailView):
     @staticmethod
     def get_running_context_for_srnabench(job_status):
         if os.path.exists(os.path.join(job_status.outdir, "parameters.txt")) and os.path.exists(os.path.join(job_status.outdir, "results.txt")):
-            #return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
-            return redirect("/jobstatus/" + job_status.pipeline_key)
-        else:
             return JobStatusDetail.get_context_with_messages(job_status)
+        #     #return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
+        #     return redirect("/jobstatus/" + job_status.pipeline_key)
+        # else:
+
 
     @staticmethod
     def get_context_finished_with_errors(job_status):
@@ -171,7 +172,9 @@ class JobStatusDetail(DetailView):
                 return self.get_context_qw(job_status)
             if job_status.job_status == 'Running':
                 if job_status.pipeline_type == 'sRNAbench':
-                    return self.get_running_context_for_srnabench(job_status)
+                    #return self.get_running_context_for_srnabench(job_status)
+                    print("lele")
+                    return self.get_context_with_messages(job_status)
                 else:
                     return self.get_context_with_messages(job_status)
             if job_status.job_status == 'Finished':
@@ -198,7 +201,8 @@ class JobStatusDetail(DetailView):
                     # return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
                     return {}
             elif job_status.job_status == "Finished with Errors":
-                return self.get_context_finished_with_errors(job_status)
+                #return self.get_context_finished_with_errors(job_status)
+                return self.get_error_context(job_status)
             else:
                 return self.get_error_context(job_status)
 
