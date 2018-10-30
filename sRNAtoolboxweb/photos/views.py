@@ -9,6 +9,12 @@ from .models import Photo
 from django.core.urlresolvers import reverse, reverse_lazy
 import string
 import random
+from django.views.generic import RedirectView
+
+
+class AboutView(RedirectView):
+    #template_name = 'home/about.html'
+    url = reverse_lazy('lolo')
 
 
 def generate_uniq_id(size=15, chars=string.ascii_uppercase + string.digits):
