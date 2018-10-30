@@ -23,19 +23,6 @@ class GetIDView(RedirectView):
 
 
 
-
-
-def give_ID(request):
-    request_path = str(request.path_info)
-
-    random_ID = generate_uniq_id()
-    response = redirect(reverse_lazy("lolo"))
-    # response = redirect(request_path+"/"+random_ID)
-    #response = redirect('/photos/'+random_ID)
-
-    return response
-
-
 class ProgressBarUploadView(View):
     def get(self, request):
         photos_list = Photo.objects.all()
