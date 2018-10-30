@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
 
-    url(r'^new$', views.add_page, name='multi_new'),
+    url(r'^new$', views.new_upload, name='multi_new'),
     #url(r'^(?P<query_id>[A-za-z0-9]+)', views.ProgressBarUploadView.as_view(),name='progress_bar_upload'),
     url(r'^[A-za-z0-9]+', views.ProgressBarUploadView.as_view(),name='progress_bar_upload'),
 

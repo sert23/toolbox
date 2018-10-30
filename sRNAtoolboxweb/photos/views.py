@@ -22,7 +22,7 @@ class GetIDView(RedirectView):
     #url = link + "new/" +random_ID
 
 
-def add_page(request):
+def new_upload(request):
     #request.session['error_message'] = 'test'
     random_ID = generate_uniq_id()
     url = reverse('photos:multi_start') + random_ID
