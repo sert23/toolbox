@@ -6,21 +6,20 @@ from django.views import View
 
 from .forms import PhotoForm
 from .models import Photo
+from django.core.urlresolvers import reverse, reverse_lazy
+import string
+import random
 
 
-class BasicUploadView(View):
-    def get(self, request):
-        photos_list = Photo.objects.all()
-        return render(self.request, 'photos/basic_upload/index.html', {'photos': photos_list})
+def generate_uniq_id(size=15, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
-    def post(self, request):
-        form = PhotoForm(self.request.POST, self.request.FILES)
-        if form.is_valid():
-            photo = form.save()
-            data = {'is_valid': True, 'name': photo.file.name, 'url': photo.file.url}
-        else:
-            data = {'is_valid': False}
-        return JsonResponse(data)
+from django.shortcuts import redirect
+
+def give_ID(request):
+    random_ID = generate_uniq_id()
+
+    return redirect(reverse_lazy('multi_start')+random_ID)
 
 
 class ProgressBarUploadView(View):
