@@ -19,7 +19,7 @@ class GetIDView(RedirectView):
     #template_name = 'home/about.html'
     random_ID = generate_uniq_id()
 
-    url = reverse_lazy('photos:progress_bar_upload') + "new/" +random_ID
+    url = reverse_lazy('photos:progress_bar_upload') # + "new/" +random_ID
 
 
 
