@@ -18,7 +18,8 @@ def generate_uniq_id(size=15, chars=string.ascii_uppercase + string.digits):
 class GetIDView(RedirectView):
     #template_name = 'home/about.html'
     random_ID = generate_uniq_id()
-    url = reverse_lazy('photos:progress_bar_upload') +random_ID
+    url = reverse_lazy('photos:progress_bar_upload') \
+          # +random_ID
 
 
 
