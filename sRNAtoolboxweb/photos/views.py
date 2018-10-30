@@ -19,7 +19,7 @@ from django.shortcuts import redirect
 def give_ID(request):
     random_ID = generate_uniq_id()
     #response = redirect(reverse_lazy("progress_bar_upload'"))
-    response = redirect(request+"/"+random_ID)
+    response = redirect(reverse_lazy("BENCH"))
     #response = redirect('/photos/'+random_ID)
 
     return response
