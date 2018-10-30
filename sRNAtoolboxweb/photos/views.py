@@ -17,9 +17,13 @@ def generate_uniq_id(size=15, chars=string.ascii_uppercase + string.digits):
 from django.shortcuts import redirect
 
 def give_ID(request):
+
+    def get_context_data(self, **kwargs):
+        request_path = str(self.request.path_info)
+
     random_ID = generate_uniq_id()
     #response = redirect(reverse_lazy("progress_bar_upload'"))
-    response = redirect(request+"/"+random_ID)
+    response = redirect(request_path+"/"+random_ID)
     #response = redirect('/photos/'+random_ID)
 
     return response
