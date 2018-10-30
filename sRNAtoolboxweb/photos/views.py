@@ -20,8 +20,8 @@ def give_ID(request):
     request_path = str(request.path_info)
 
     random_ID = generate_uniq_id()
-    #response = redirect(reverse_lazy("progress_bar_upload'"))
-    response = redirect(request_path+"/"+random_ID)
+    response = redirect(reverse_lazy("progress_bar_upload"))
+    # response = redirect(request_path+"/"+random_ID)
     #response = redirect('/photos/'+random_ID)
 
     return response
