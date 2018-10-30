@@ -27,6 +27,6 @@ urlpatterns =[
     url(r'^versionControl', views.version, name='versions'),
     url(r'^/*$', views.index, name='home'),
     url(r'^admin/', admin.site.urls),
-    url(r'^multiupload/', include('photos.urls')),
+    url(r'^multiupload/', include('photos.urls', namespace='photos')),
 ]
 
