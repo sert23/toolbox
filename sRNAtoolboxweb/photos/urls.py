@@ -1,5 +1,3 @@
-from photos.views import ProgressBarUploadView
-from sRNABench.views import Bench
 
 from django.conf.urls import url
 
