@@ -25,7 +25,8 @@ class GetIDView(RedirectView):
 def add_page(request):
     request.session['error_message'] = 'test'
     random_ID = generate_uniq_id()
-    return redirect('photos:multi_start') + random_ID
+    url = reverse_lazy('photos:multi_start') + random_ID
+    return redirect(url)
 
 
 
