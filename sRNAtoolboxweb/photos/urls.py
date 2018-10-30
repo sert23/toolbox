@@ -6,9 +6,9 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.AboutView.as_view() , name='multi_start'),
+    url(r'^$', views.GetIDView.as_view() , name='multi_start'),
     # url(r'^$', views.give_ID , name='multi_start'),
-    url(r'^meme', ProgressBarUploadView.as_view(), name='progress_bar_upload'),
+    url(r'^[A-za-z0-9]+', ProgressBarUploadView.as_view()),
     # url(r'^$', views.ProgressBarUploadView.as_view() , name='multi_start'),
     url(r'^clear/$', views.clear_database, name='clear_database'),
     url(r'^$', Bench.as_view(), name="lolo"),

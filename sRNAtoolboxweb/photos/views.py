@@ -10,17 +10,20 @@ from django.core.urlresolvers import reverse, reverse_lazy
 import string
 import random
 from django.views.generic import RedirectView
-
-
-class AboutView(RedirectView):
-    #template_name = 'home/about.html'
-    url = reverse_lazy('photos:progress_bar_upload')
-
+from django.shortcuts import redirect
 
 def generate_uniq_id(size=15, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
-from django.shortcuts import redirect
+class GetIDView(RedirectView):
+    #template_name = 'home/about.html'
+    random_ID = generate_uniq_id()
+    url = reverse_lazy('photos:multi_start')+random_ID
+
+
+
+
+
 
 def give_ID(request):
     request_path = str(request.path_info)
