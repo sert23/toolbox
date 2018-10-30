@@ -1,4 +1,4 @@
-from photos.url import ProgressBarUploadView
+from photos.views import ProgressBarUploadView
 
 from django.conf.urls import url
 
