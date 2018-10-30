@@ -20,7 +20,7 @@ def give_ID(request):
     request_path = str(request.path_info)
 
     random_ID = generate_uniq_id()
-    response = redirect(reverse_lazy("BENCH"))
+    response = redirect(reverse_lazy("lolo"))
     # response = redirect(request_path+"/"+random_ID)
     #response = redirect('/photos/'+random_ID)
 
