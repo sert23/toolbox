@@ -19,8 +19,13 @@ class GetIDView(RedirectView):
     #template_name = 'home/about.html'
     random_ID = generate_uniq_id()
     link = reverse_lazy('photos:progress_bar_upload')
-    url = link + "new/" +random_ID
+    #url = link + "new/" +random_ID
 
+
+def add_page(request):
+    request.session['error_message'] = 'test'
+    random_ID = generate_uniq_id()
+    return redirect('multistart') + random_ID
 
 
 
