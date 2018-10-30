@@ -18,8 +18,9 @@ from django.shortcuts import redirect
 
 def give_ID(request):
     random_ID = generate_uniq_id()
+    response = redirect('/photos/'+random_ID)
 
-    return redirect(reverse_lazy('multi_start')+random_ID, kwargs={})
+    return response
 
 
 class ProgressBarUploadView(View):
