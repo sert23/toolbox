@@ -41,7 +41,8 @@ class ProgressBarUploadView(View):
         form = PhotoForm(self.request.POST, self.request.FILES)
         if form.is_valid():
             photo = form.save()
-            data = {'is_valid': True, 'name': photo.file.name, 'url': photo.file.url}
+            name = photo.file.name.split("/")[-1]
+            data = {'is_valid': True, 'name': name, 'url': ""}
         else:
             data = {'is_valid': False}
         return JsonResponse(data)
