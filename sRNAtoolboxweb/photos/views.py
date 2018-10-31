@@ -57,7 +57,7 @@ class DragAndDropUploadView(View):
         form = PhotoForm(self.request.POST, self.request.FILES)
         if form.is_valid():
             photo = form.save()
-            data = {'is_valid': True, 'name': photo.file.name, 'url': photo.file.url}
+            data = {'is_valid': True, 'name': photo.file.name, 'url': photo.file.url, "files" : ["a","b"]}
         else:
             data = {'is_valid': False}
         return JsonResponse(data)
