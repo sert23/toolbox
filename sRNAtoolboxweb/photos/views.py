@@ -30,7 +30,7 @@ def new_upload(request):
 
 
 
-class ProgressBarUploadView(View):
+class MultiUploadView(View):
     def get(self, request):
         photos_list = Photo.objects.all()
 
