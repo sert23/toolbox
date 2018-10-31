@@ -11,7 +11,7 @@ class Photo2(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
 
-# class Photo(models.Model):
-#     title = models.CharField(max_length=255, blank=True)
-#     file = models.FileField(upload_to='photos2/')
-#     uploaded_at = models.DateTimeField(auto_now_add=True)
+class Photo(models.Model):
+    title = models.CharField(max_length=255, blank=True)
+    file = models.FileField(upload_to='photos2/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
