@@ -32,9 +32,12 @@ def new_upload(request):
 
 class MultiUploadView(View):
     def get(self, request):
-        photos_list = Photo.objects.all()
+        path = request.path
 
-        return render(self.request, 'multiupload.html', {'photos': photos_list})
+        #photos_list = Photo.objects.all()
+
+        #return render(self.request, 'multiupload.html', {'photos': photos_list})
+        return render(self.request, 'multiupload.html', {'path': [path,path]})
 
     def post(self, request):
         time.sleep(1)  # You don't need this line. This is just to delay the process so you can see the progress bar testing locally.
