@@ -66,7 +66,7 @@ class MultiUploadView(View):
         if form.is_valid():
             photo = form.save()
             name = photo.file.name.split("/")[-1]
-            shutil.copyfile(os.path.join(MEDIA_ROOT,photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
+            shutil.copyfile(os.path.join(MEDIA_ROOT,"multi",photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
             #shutil.move(os.path.join(MEDIA_ROOT,photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
             #os.rename(photo.file.name, os.path.join(MEDIA_ROOT, folder, name))
             data = {'is_valid': True, 'name': name, 'url': ""}
