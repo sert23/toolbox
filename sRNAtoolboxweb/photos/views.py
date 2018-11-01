@@ -11,9 +11,20 @@ import string
 import random
 from django.views.generic import RedirectView
 from django.shortcuts import redirect
+from os import listdir
+import os
+from sRNAtoolboxweb.settings import MEDIA_ROOT
+from progress.models import JobStatus
 
 def generate_uniq_id(size=15, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
+
+def generate_id(self):
+    is_new = True
+    while is_new:
+        pipeline_id = generate_uniq_id()
+        if not JobStatus.objects.filter(pipeline_key=pipeline_id):
+            return pipeline_id
 
 class GetIDView(RedirectView):
     #template_name = 'home/about.html'
@@ -24,7 +35,7 @@ class GetIDView(RedirectView):
 
 def new_upload(request):
     #request.session['error_message'] = 'test'
-    random_ID = generate_uniq_id()
+    random_ID = generate_id()
     url = reverse('photos:multi_start') + random_ID
     return redirect(url)
 
@@ -33,18 +44,26 @@ def new_upload(request):
 class MultiUploadView(View):
     def get(self, request):
         path = request.path
-
+        folder = path.split("/")[-1]
+        if os.path.exists(os.path.join(MEDIA_ROOT,folder )):
+            onlyfiles = [f for f in listdir(os.path.join(MEDIA_ROOT,folder)) if
+                     os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, folder), f))]
+        else:
+            onlyfiles = []
+            os.mkdir(os.path.join(MEDIA_ROOT,folder))
         #photos_list = Photo.objects.all()
-
         #return render(self.request, 'multiupload.html', {'photos': photos_list})
-        return render(self.request, 'multiupload.html', {'path': [path,path]})
+        return render(self.request, 'multiupload.html', {'file_list': onlyfiles})
 
     def post(self, request):
         time.sleep(1)  # You don't need this line. This is just to delay the process so you can see the progress bar testing locally.
         form = PhotoForm(self.request.POST, self.request.FILES)
+        path = request.path
+        folder = path.split("/")[-1]
         if form.is_valid():
             photo = form.save()
             name = photo.file.name.split("/")[-1]
+            os.rename(photo.file.name, os.path.join(MEDIA_ROOT, folder, name))
             data = {'is_valid': True, 'name': name, 'url': ""}
         else:
             data = {'is_valid': False}
