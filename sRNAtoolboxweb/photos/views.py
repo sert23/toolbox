@@ -55,8 +55,8 @@ class MultiUploadView(View):
             os.mkdir(os.path.join(MEDIA_ROOT,folder))
         #photos_list = Photo.objects.all()
         #return render(self.request, 'multiupload.html', {'photos': photos_list})
-        #return render(self.request, 'multiupload.html', {'file_list': onlyfiles})
-        return render(self.request, 'multiupload.html', {'file_list': [os.path.join(MEDIA_ROOT,folder),os.path.join(MEDIA_ROOT,folder)]})
+        return render(self.request, 'multiupload.html', {'file_list': onlyfiles})
+        #return render(self.request, 'multiupload.html', {'file_list': [os.path.join(MEDIA_ROOT,folder),os.path.join(MEDIA_ROOT,folder)]})
 
     def post(self, request):
         time.sleep(1)  # You don't need this line. This is just to delay the process so you can see the progress bar testing locally.
