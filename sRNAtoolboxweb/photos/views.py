@@ -15,6 +15,7 @@ from os import listdir
 import os
 from sRNAtoolboxweb.settings import MEDIA_ROOT
 from progress.models import JobStatus
+import shutil
 
 def generate_uniq_id(size=15, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -46,7 +47,7 @@ class MultiUploadView(View):
         path = request.path
         folder = path.split("/")[-1]
         onlyfiles = []
-        if os.path.exists(os.path.join(MEDIA_ROOT,folder )):
+        if os.path.exists(os.path.join(MEDIA_ROOT,folder)):
             onlyfiles = [f for f in listdir(os.path.join(MEDIA_ROOT,folder)) if
                      os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, folder), f))]
         else:
@@ -54,7 +55,8 @@ class MultiUploadView(View):
             os.mkdir(os.path.join(MEDIA_ROOT,folder))
         #photos_list = Photo.objects.all()
         #return render(self.request, 'multiupload.html', {'photos': photos_list})
-        return render(self.request, 'multiupload.html', {'file_list': onlyfiles})
+        #return render(self.request, 'multiupload.html', {'file_list': onlyfiles})
+        return render(self.request, 'multiupload.html', {'file_list': [os.path.join(MEDIA_ROOT,folder),os.path.join(MEDIA_ROOT,folder)]})
 
     def post(self, request):
         time.sleep(1)  # You don't need this line. This is just to delay the process so you can see the progress bar testing locally.
@@ -64,7 +66,8 @@ class MultiUploadView(View):
         if form.is_valid():
             photo = form.save()
             name = photo.file.name.split("/")[-1]
-            os.rename(photo.file.name, os.path.join(MEDIA_ROOT, folder, name))
+            shutil.move(photo.file.name, os.path.join(MEDIA_ROOT, folder, name))
+            #os.rename(photo.file.name, os.path.join(MEDIA_ROOT, folder, name))
             data = {'is_valid': True, 'name': name, 'url': ""}
         else:
             data = {'is_valid': False}
