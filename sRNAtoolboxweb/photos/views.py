@@ -45,6 +45,7 @@ class MultiUploadView(View):
     def get(self, request):
         path = request.path
         folder = path.split("/")[-1]
+        onlyfiles = []
         if os.path.exists(os.path.join(MEDIA_ROOT,folder )):
             onlyfiles = [f for f in listdir(os.path.join(MEDIA_ROOT,folder)) if
                      os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, folder), f))]
