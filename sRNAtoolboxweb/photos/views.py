@@ -43,6 +43,14 @@ def new_upload(request):
 
 
 class MultiUploadView(View):
+
+    def get_form_kwargs(self):
+        '''This goes in the Update view'''
+        kwargs = super(MultiUploadView, self).get_form_kwargs()  # put your view name in the super
+        kwargs["request_path"] = self.request.path
+
+        return kwargs
+
     def get(self, request):
         path = request.path
         folder = path.split("/")[-1]
