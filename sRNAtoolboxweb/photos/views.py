@@ -64,6 +64,10 @@ class MultiUploadView(View):
         path = request.path
         folder = path.split("/")[-1]
         if form.is_valid():
+            with open(
+                    os.path.join("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/test.txt"),
+                    "w") as text_file:
+                text_file.write("ups"+ "\n")
             photo = form.save()
             with open(
                     os.path.join("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/test.txt"),
