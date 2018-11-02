@@ -67,7 +67,7 @@ class MultiUploadView(View):
         #return render(self.request, 'multiupload.html', {'file_list': [os.path.join(MEDIA_ROOT,folder),os.path.join(MEDIA_ROOT,folder)]})
 
     def post(self, request):
-        time.sleep(1)  # You don't need this line. This is just to delay the process so you can see the progress bar testing locally.
+        #time.sleep(1)  # You don't need this line. This is just to delay the process so you can see the progress bar testing locally.
         form = PhotoForm(self.request.POST, self.request.FILES)
         path = request.path
         folder = path.split("/")[-1]
@@ -78,12 +78,12 @@ class MultiUploadView(View):
             with open(
                     os.path.join("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/test.txt"),
                     "w") as text_file:
-                text_file.write("shit"+ "\n")
+                text_file.write(photo.file.name )
 
 
             name = photo.file.name.split("/")[-1]
-            shutil.copyfile(os.path.join(MEDIA_ROOT,"multi",photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
-            #shutil.copyfile("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/multi/201811011701/metadata.json", os.path.join(MEDIA_ROOT, folder, name))
+            #shutil.copyfile(os.path.join(MEDIA_ROOT,"multi",photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
+            shutil.copyfile("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/multi/201811011701/metadata.json", os.path.join(MEDIA_ROOT, folder, name))
             with open(
                     os.path.join("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/test.txt"),
                     "w") as text_file:
