@@ -80,7 +80,9 @@ class MultiUploadView(View):
                     "w") as text_file:
                 name = photo.file.name.split("/")[-1]
                 #text_file.write(photo.file.name )
-                text_file.write(name)
+                text_file.write(os.path.join(MEDIA_ROOT,photo.file.name))
+                text_file.write(os.path.join(MEDIA_ROOT, folder, name))
+
 
 
 
