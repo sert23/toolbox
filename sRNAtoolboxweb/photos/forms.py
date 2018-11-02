@@ -20,6 +20,6 @@ class PhotoForm(forms.ModelForm):
     #     self.request_path = kwargs.pop("request_path", None)
     #     super(PhotoForm, self).__init__(*args, **kwargs)
 
-    title = models.CharField(max_length=255, blank=True)
+    #title = models.CharField(max_length=255, blank=True)
     file = models.FileField(upload_to= '%Y%m%d%H%M')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
+    #uploaded_at = models.DateTimeField(auto_now_add=True)
