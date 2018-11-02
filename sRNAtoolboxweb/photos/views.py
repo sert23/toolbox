@@ -82,8 +82,8 @@ class MultiUploadView(View):
 
 
             name = photo.file.name.split("/")[-1]
-            #shutil.copyfile(os.path.join(MEDIA_ROOT,"multi",photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
-            shutil.copyfile("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/multi/201811011701/metadata.json", os.path.join(MEDIA_ROOT, folder, name))
+            shutil.copyfile(os.path.join(MEDIA_ROOT,photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
+            #shutil.copyfile("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/multi/201811011701/metadata.json", os.path.join(MEDIA_ROOT, folder, name))
             with open(
                     os.path.join("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/test.txt"),
                     "w") as text_file:
