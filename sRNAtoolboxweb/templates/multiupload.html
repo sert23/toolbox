@@ -8,7 +8,7 @@
 
 <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
-{% block js %}
+
 {#{% block javascript %}#}
     <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
@@ -24,10 +24,45 @@
   {# PHOTOS PAGE SCRIPTS #}
 {#  <script src="{% static 'photos/js/progress-bar-upload.js' %}"></script>#}
 
-    {% endblock %}
 
 
 
+<script>$(function () {
+
+  $(".js-upload-photos").click(function () {
+    $("#fileupload").click();
+  });
+
+  $("#fileupload").fileupload({
+    dataType: 'json',
+    sequentialUploads: true,
+
+    start: function (e) {
+      $("#modal-progress").modal("show");
+    },
+
+    stop: function (e) {
+      $("#modal-progress").modal("hide");
+    },
+
+    progressall: function (e, data) {
+      var progress = parseInt(data.loaded / data.total * 100, 10);
+      var strProgress = progress + "%";
+      $(".progress-bar").css({"width": strProgress});
+      $(".progress-bar").text(strProgress);
+    },
+
+    done: function (e, data) {
+      if (data.result.is_valid) {
+        $("#gallery tbody").prepend(
+          "<tr><td><a href='" + data.result.url + "'>" + data.result.name + "</a></td></tr>"
+        )
+      }
+    }
+
+  });
+
+});</script>
 
 
 {#{% block photos_content %}#}
@@ -79,39 +114,3 @@
 {#{% endblock %}#}
 {% endblock %}
 
-<script>$(function () {
-
-  $(".js-upload-photos").click(function () {
-    $("#fileupload").click();
-  });
-
-  $("#fileupload").fileupload({
-    dataType: 'json',
-    sequentialUploads: true,
-
-    start: function (e) {
-      $("#modal-progress").modal("show");
-    },
-
-    stop: function (e) {
-      $("#modal-progress").modal("hide");
-    },
-
-    progressall: function (e, data) {
-      var progress = parseInt(data.loaded / data.total * 100, 10);
-      var strProgress = progress + "%";
-      $(".progress-bar").css({"width": strProgress});
-      $(".progress-bar").text(strProgress);
-    },
-
-    done: function (e, data) {
-      if (data.result.is_valid) {
-        $("#gallery tbody").prepend(
-          "<tr><td><a href='" + data.result.url + "'>" + data.result.name + "</a></td></tr>"
-        )
-      }
-    }
-
-  });
-
-});</script>
