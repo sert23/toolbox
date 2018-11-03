@@ -72,29 +72,11 @@ class MultiUploadView(View):
         path = request.path
         folder = path.split("/")[-1]
         if form.is_valid():
-            with open(os.path.join("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/test.txt"),"w") as text_file:
-                text_file.write("ups"+ "\n")
             photo = form.save()
-            with open(
-                    os.path.join("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/test.txt"),
-                    "w") as text_file:
-                name = photo.file.name.split("/")[-1]
-                #text_file.write(photo.file.name )
-                text_file.write(os.path.join(MEDIA_ROOT,photo.file.name))
-                text_file.write(os.path.join(MEDIA_ROOT, folder, name)+"\n")
-                text_file.write(path)
-
-
-
-
-
-            shutil.copyfile(os.path.join(MEDIA_ROOT,photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
+            name = photo.file.name.split("/")[-1]
+            shutil.move(os.path.join(MEDIA_ROOT,photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
             #shutil.copyfile("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/multi/201811011701/metadata.json", os.path.join(MEDIA_ROOT, folder, name))
-            with open(
-                    os.path.join("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/test.txt"),
-                    "w") as text_file:
-                text_file.write(os.path.join(MEDIA_ROOT,"multi",photo.file.name)+"\n")
-                text_file.write(os.path.join(MEDIA_ROOT, folder, name)+"\n")
+
 
             #shutil.copyfile(os.path.join(MEDIA_ROOT,"multi",photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
             #shutil.move(os.path.join(MEDIA_ROOT,photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
