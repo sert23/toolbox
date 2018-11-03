@@ -2,9 +2,10 @@
 {#{% extends 'photos/base.html' %}#}
 {% extends "base.html" %}
 {% load staticfiles %}
+
 {% block content %}
 
-{% load static %}
+{#{% load static %}#}
 
 <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
@@ -23,8 +24,6 @@
 
   {# PHOTOS PAGE SCRIPTS #}
 {#  <script src="{% static 'photos/js/progress-bar-upload.js' %}"></script>#}
-
-
 
 
 <script>$(function () {
@@ -64,7 +63,6 @@
 
 });</script>
 
-
 {#{% block photos_content %}#}
   <div style="margin-bottom: 20px;">
     <button type="button" class="btn btn-primary js-upload-photos">
@@ -84,11 +82,7 @@
       </tr>
     </thead>
     <tbody>
-{#      {% for photo in photos %}#}
-{#        <tr>#}
-{#          <td><a href="{{ photo.file.url }}">{{ photo.file.name }}</a></td>#}
-{#        </tr>#}
-{#      {% endfor %}#}
+
     {% for f in file_list %}
         <tr>
           <td><a href="{{ f }}">{{ f }}</a></td>
@@ -111,6 +105,6 @@
       </div>
     </div>
   </div>
-{#{% endblock %}#}
+
 {% endblock %}
 
