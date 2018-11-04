@@ -94,14 +94,14 @@
   <table id="gallery" class="table table-bordered">
     <thead>
       <tr>
-        <th>Files</th>
+        <th>Uploaded Files</th>
       </tr>
     </thead>
     <tbody>
 
-    {% for f in file_list %}
+    {% for f,url in file_list %}
         <tr>
-          <td><a href="{{ f }}">{{ f }}</a></td>
+          <td><a href="{{ url }}">{{ f }}</a></td>
         </tr>
       {% endfor %}
     </tbody>
