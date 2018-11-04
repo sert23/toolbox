@@ -16,6 +16,7 @@ import os
 from sRNAtoolboxweb.settings import MEDIA_ROOT, MEDIA_URL
 from progress.models import JobStatus
 import shutil
+import datetime
 
 def generate_uniq_id(size=15, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -48,7 +49,6 @@ class MultiUploadView(View):
         '''This goes in the Update view'''
         kwargs = super(MultiUploadView, self).get_form_kwargs()  # put your view name in the super
         kwargs["request_path"] = self.request.path
-
         return kwargs
 
     def get(self, request):
@@ -58,10 +58,15 @@ class MultiUploadView(View):
         if os.path.exists(os.path.join(MEDIA_ROOT,folder)):
             onlyfiles = [[f,os.path.join(MEDIA_URL, folder, f)] for f in listdir(os.path.join(MEDIA_ROOT,folder)) if
                      os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, folder), f))]
-
         else:
             onlyfiles = []
             os.mkdir(os.path.join(MEDIA_ROOT,folder))
+            JobStatus.objects.create(job_name=folder+"_multi", pipeline_key=folder, job_status="not_launched",
+                                 start_time=datetime.now(),
+                                 all_files="",
+                                 modules_files="",
+                                 pipeline_type="multiupload",
+                                 )
         #photos_list = Photo.objects.all()
         #return render(self.request, 'multiupload.html', {'photos': photos_list})
         return render(self.request, 'multiupload.html', {'file_list': onlyfiles, "request_path":path})
