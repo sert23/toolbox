@@ -13,7 +13,7 @@ from django.views.generic import RedirectView
 from django.shortcuts import redirect
 from os import listdir
 import os
-from sRNAtoolboxweb.settings import MEDIA_ROOT
+from sRNAtoolboxweb.settings import MEDIA_ROOT, MEDIA_URL
 from progress.models import JobStatus
 import shutil
 
@@ -56,8 +56,9 @@ class MultiUploadView(View):
         folder = path.split("/")[-1]
         onlyfiles = []
         if os.path.exists(os.path.join(MEDIA_ROOT,folder)):
-            onlyfiles = [f for f in listdir(os.path.join(MEDIA_ROOT,folder)) if
+            onlyfiles = [[f,os.path.join(MEDIA_URL, folder, f)] for f in listdir(os.path.join(MEDIA_ROOT,folder)) if
                      os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, folder), f))]
+
         else:
             onlyfiles = []
             os.mkdir(os.path.join(MEDIA_ROOT,folder))
@@ -76,8 +77,6 @@ class MultiUploadView(View):
             name = photo.file.name.split("/")[-1]
             shutil.move(os.path.join(MEDIA_ROOT,photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
             #shutil.copyfile("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/multi/201811011701/metadata.json", os.path.join(MEDIA_ROOT, folder, name))
-
-
             #shutil.copyfile(os.path.join(MEDIA_ROOT,"multi",photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
             #shutil.move(os.path.join(MEDIA_ROOT,photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
             #os.rename(photo.file.name, os.path.join(MEDIA_ROOT, folder, name))
