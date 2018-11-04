@@ -85,8 +85,8 @@ class MultiUploadView(View):
             #shutil.copyfile(os.path.join(MEDIA_ROOT,"multi",photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
             #shutil.move(os.path.join(MEDIA_ROOT,photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
             #os.rename(photo.file.name, os.path.join(MEDIA_ROOT, folder, name))
-            #data = {'is_valid': True, 'name': name, 'url': ""}
-            data = {}
+            data = {'is_valid': True, 'name': name, 'url': os.path.join(MEDIA_URL,folder,name)}
+            #data = {}
         else:
             data = {'is_valid': False}
         return JsonResponse(data)
