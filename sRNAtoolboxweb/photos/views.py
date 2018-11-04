@@ -62,7 +62,7 @@ class MultiUploadView(View):
             onlyfiles = []
             os.mkdir(os.path.join(MEDIA_ROOT,folder))
             JobStatus.objects.create(job_name=folder+"_multi", pipeline_key=folder, job_status="not_launched",
-                                 start_time=datetime.now(),
+                                 start_time=datetime.datetime.now(),
                                  all_files="",
                                  modules_files="",
                                  pipeline_type="multiupload",
