@@ -3,6 +3,7 @@ import time
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views import View
+from django.views.generic import FormView
 
 from .forms import PhotoForm
 from .models import Photo
@@ -43,7 +44,7 @@ def new_upload(request):
 
 
 
-class MultiUploadView(View):
+class MultiUploadView(FormView):
 
     def get_form_kwargs(self):
         '''This goes in the Update view'''
