@@ -112,10 +112,9 @@ class sRNABenchForm(forms.Form):
     highconf = forms.BooleanField(label='Use high confidence microRNAs from miRBase', required=False, initial=False)
     mirDB = forms.ChoiceField(label="", choices=mirdb_list, required=False)
     mirna_profiled = forms.CharField(
-        label='Specify the microRNAs that should be profiled (for example, hsa (human), mmu (mouse) or hsa:hsv1 '
-              '(human and herpes simplex virus):',
-        required=False, initial= ""
-    )
+        label='Specify your microRNA reference(s) using miRBase tags (same as selected genome by default)',
+        required=False, initial="", widget=forms.TextInput(attrs={'placeholder': "e.g: hsa (human),mmu (mouse) or hsa:hsv1(human and herpes simplex virus)"}))
+
     homologous = forms.CharField(label='Analyse homologous microRNAs (can be set to "all"):', required=False)
 
     # Parameters
