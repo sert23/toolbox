@@ -197,11 +197,12 @@
     <script>
     $('input[name="referenceDB"]').on("click", function(e) {
         x = document.getElementById("id_referenceDB_3").checked;
-        if (x==true){
-            document.getElementById("show-me-three").style.visibility="hidden";
+        if (x==false){
+            document.getElementById("div_id_mirDB").style.visibility="hidden";
+{#            document.getElementById("show-me-three").style.visibility="hidden";#}
         }
         else{
-            document.getElementById("show-me-three").style.visibility="visible";
+            document.getElementById("div_id_mirDB").style.visibility="visible";
         }
 {#    if (e.clientX === 0 && e.clientY === 0) {#}
 {#        console.log("keyboard");#}
