@@ -142,7 +142,6 @@ class sRNABenchForm(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Fieldset(
-                'referenceDB',
                 'ifile',
                 Field('sra_input', css_class='form-control'),
                 Field('url',css_class='form-control'),
@@ -177,7 +176,7 @@ class sRNABenchForm(forms.Form):
             create_collapsable_div(
                 Fieldset(
                 'Choose miRNA reference sequences',
-                    ''
+                'referenceDB',
                 'genome_mir',
                 'highconf',
                 Field('mirDB', css_class='form-control')
