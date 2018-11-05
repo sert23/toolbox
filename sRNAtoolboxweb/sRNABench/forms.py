@@ -106,7 +106,7 @@ class sRNABenchForm(forms.Form):
 
     # MicroRNA Analysis
 
-    referenceDB = forms.ChoiceField(label="", choices=[("miRBase","Use miRBase (default)"),("highconf","Use only high confidence miRNAs from miRBase"),("MirGeneDB","Use mirGeneDB")], required=False, widget=forms.RadioSelect())
+    referenceDB = forms.ChoiceField(label="", choices=[("miRBase","Use miRBase (default)"),("highconf","Use high confidence miRNAs from miRBase only"),("MirGeneDB","Use mirGeneDB")], required=False, widget=forms.RadioSelect())
     genome_mir = forms.BooleanField(label='Use the miRNAs for the species from the selected genomes', required=False)
     highconf = forms.BooleanField(label='Use high confidence microRNAs from miRBase', required=False, initial=False)
     mirDB = forms.ChoiceField(label="Select MirGeneDBv2.0 tag", choices=mirdb_list, required=False)
@@ -180,11 +180,11 @@ class sRNABenchForm(forms.Form):
                 Fieldset(
                 'Choose miRNA reference sequences',
 
-                'genome_mir',
-                'highconf',
+                # 'genome_mir',
+                # 'highconf',
                 # InlineRadios('referenceDB'),
                 Div(InlineRadios('referenceDB'), css_class="col-md-12"),
-                Field('mirDB', css_class='form-control')
+                Field('mirDB', css_class='form-control', style="visibility: hidden;")
                 ),
                 Fieldset(
                 'Species Selection',
