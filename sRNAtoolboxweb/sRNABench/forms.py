@@ -4,7 +4,7 @@ import os
 import urllib.request
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field, Div
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field, Div, Row
 from crispy_forms.bootstrap import InlineRadios
 
 from django import forms
@@ -183,8 +183,7 @@ class sRNABenchForm(forms.Form):
                 'genome_mir',
                 'highconf',
                 # InlineRadios('referenceDB'),
-                Div('referenceDB'),
-                Field('mirDB', css_class='form-control')
+                Row('referenceDB', Field('mirDB', css_class='form-control'))
                 ),
                 Fieldset(
                 'Species Selection',
