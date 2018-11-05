@@ -183,7 +183,7 @@ class sRNABenchForm(forms.Form):
                 'genome_mir',
                 'highconf',
                 # InlineRadios('referenceDB'),
-                Div(InlineRadios('referenceDB'), css_class="col-md-3"),
+                Div(InlineRadios('referenceDB'), css_class="col-md-12"),
                 Field('mirDB', css_class='form-control')
                 ),
                 Fieldset(
