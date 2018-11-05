@@ -103,6 +103,8 @@ class sRNABenchForm(forms.Form):
 
 
     # MicroRNA Analysis
+
+    referenceDB = forms.ChoiceField(choices=[("miRBase","Use miRBase (default)"),("highconf","Use only high confidence miRNAs from miRBase"),("MirGeneDB","Use mirGeneDB")], required=False, widget=forms.RadioSelect)
     genome_mir = forms.BooleanField(label='Use the miRNAs for the species from the selected genomes', required=False)
     highconf = forms.BooleanField(label='Use high confidence microRNAs from miRBase', required=False, initial=False)
     mirDB = forms.ChoiceField(label="Select MirGeneDBv2.0 tag", choices=mirdb_list, required=False)
@@ -140,7 +142,7 @@ class sRNABenchForm(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Fieldset(
-                '',
+                'referenceDB',
                 'ifile',
                 Field('sra_input', css_class='form-control'),
                 Field('url',css_class='form-control'),
@@ -174,7 +176,8 @@ class sRNABenchForm(forms.Form):
 
             create_collapsable_div(
                 Fieldset(
-                'miRNA Analysis Options',
+                'Choose miRNA reference sequences',
+                    ''
                 'genome_mir',
                 'highconf',
                 Field('mirDB', css_class='form-control')
@@ -182,13 +185,13 @@ class sRNABenchForm(forms.Form):
                 Fieldset(
                 'Species Selection',
                 Field('mirna_profiled',css_class='form-control'),
-                Field('homologous',css_class='form-control'),
+                # Field('homologous',css_class='form-control'),
                 ),
                 title='MicroRNA analysis', c_id='4'
             ),
 
             create_collapsable_div(
-                'is_solid',
+                #'is_solid',
                 'predict_mirna',
                 Field('aligment_type', css_class='form-control'),
                 Field('seed_length', css_class='form-control'),
