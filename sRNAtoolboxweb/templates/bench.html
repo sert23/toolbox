@@ -194,22 +194,17 @@
     </script>
 
     <script>
-
-    $("#id_referenceDB_3").click(function()
-  {
-    $("#show-me-three:hidden").show('slow');
-
-   $("#id_referenceDB_3").click(function()
-  {
-    if($('id_referenceDB_2').prop('checked')===false)
-   {
-    $('#show-me-three').hide();
-   }
-  });
-
- });
-
+    $('input[name="referenceDB"]').on("click", function(e) {
+        x = document.getElementById("id_referenceDB_3").value
+{#    if (e.clientX === 0 && e.clientY === 0) {#}
+{#        console.log("keyboard");#}
+{#    } else {#}
+{#        console.log("mouse");#}
+{#    };#}
+        alert(x)
+});
     </script>
+
 
 {% endblock %}
 
