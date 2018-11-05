@@ -144,6 +144,7 @@ class sRNABenchForm(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Fieldset(
+                '',
                 'ifile',
                 Field('sra_input', css_class='form-control'),
                 Field('url',css_class='form-control'),
@@ -181,7 +182,8 @@ class sRNABenchForm(forms.Form):
 
                 'genome_mir',
                 'highconf',
-                InlineRadios('referenceDB'),
+                # InlineRadios('referenceDB'),
+                Field('referenceDB'),
                 Field('mirDB', css_class='form-control')
                 ),
                 Fieldset(
