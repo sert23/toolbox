@@ -195,7 +195,10 @@
 
     <script>
     $('input[name="referenceDB"]').on("click", function(e) {
-        x = document.getElementById("id_referenceDB_3").checked
+        x = document.getElementById("id_referenceDB_3").checked;
+        if (x==true){
+            document.getElementById("show-me-three").style.visibility="hidden";
+        }
 {#    if (e.clientX === 0 && e.clientY === 0) {#}
 {#        console.log("keyboard");#}
 {#    } else {#}
