@@ -179,7 +179,7 @@ class sRNABenchForm(forms.Form):
 
                 'genome_mir',
                 'highconf',
-                Field('referenceDB', css_class='form-control'),
+                'referenceDB',
                 Field('mirDB', css_class='form-control')
                 ),
                 Fieldset(
