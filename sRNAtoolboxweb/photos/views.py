@@ -67,8 +67,6 @@ class MultiUploadView(View):
                                  modules_files="",
                                  pipeline_type="multiupload",
                                  )
-        #photos_list = Photo.objects.all()
-        #return render(self.request, 'multiupload.html', {'photos': photos_list})
         return render(self.request, 'multiupload.html', {'file_list': onlyfiles, "request_path":path})
         #return render(self.request, 'multiupload.html', {'file_list': [os.path.join(MEDIA_ROOT,folder),os.path.join(MEDIA_ROOT,folder)]})
 
@@ -78,15 +76,12 @@ class MultiUploadView(View):
         path = request.path
         folder = path.split("/")[-1]
         if form.is_valid():
-            photo = form.save()
-            name = photo.file.name.split("/")[-1]
-            shutil.move(os.path.join(MEDIA_ROOT,photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
-            #shutil.copyfile("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/multi/201811011701/metadata.json", os.path.join(MEDIA_ROOT, folder, name))
-            #shutil.copyfile(os.path.join(MEDIA_ROOT,"multi",photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
-            #shutil.move(os.path.join(MEDIA_ROOT,photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
-            #os.rename(photo.file.name, os.path.join(MEDIA_ROOT, folder, name))
-            data = {'is_valid': True, 'name': name, 'url': os.path.join(MEDIA_URL,folder,name)}
-            #data = {}
+            if "file" in self.request.FILES:
+                photo = form.save()
+                name = photo.file.name.split("/")[-1]
+                shutil.move(os.path.join(MEDIA_ROOT,photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
+                data = {'is_valid': True, 'name': name, 'url': os.path.join(MEDIA_URL,folder,name)}
+
         else:
             data = {'is_valid': False}
         return JsonResponse(data)
