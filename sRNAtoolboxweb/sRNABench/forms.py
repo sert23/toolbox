@@ -180,8 +180,8 @@ class sRNABenchForm(forms.Form):
                 Fieldset(
                 'Choose miRNA reference sequences',
 
-                'genome_mir',
-                'highconf',
+                # 'genome_mir',
+                # 'highconf',
                 # InlineRadios('referenceDB'),
                 Row('referenceDB', Field('mirDB', css_class='form-control'))
                 ),
