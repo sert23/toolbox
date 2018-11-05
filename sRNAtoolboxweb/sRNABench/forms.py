@@ -76,7 +76,8 @@ class sRNABenchForm(forms.Form):
         ('v', 'full read alignment(all mismatches count)'),
     )
 
-    mirdb_list = [(None, "Do not use MirGeneDB")]
+    #mirdb_list = [(None, "Do not use MirGeneDB")]
+    mirdb_list = []
     fh = open(CONF["mirDbPath"])
     for line in fh:
         mirdb_list.append((line.rstrip(), line.rstrip()))
