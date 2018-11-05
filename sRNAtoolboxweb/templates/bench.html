@@ -193,6 +193,23 @@
     }
     </script>
 
+    <script>
+
+    $("#id_referenceDB_3").click(function()
+  {
+    $("#show-me-three:hidden").show('slow');
+
+   $("#id_referenceDB_3").click(function()
+  {
+    if($('id_referenceDB_2').prop('checked')===false)
+   {
+    $('#show-me-three').hide();
+   }
+  });
+
+ });
+
+    </script>
 
 {% endblock %}
 
