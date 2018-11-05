@@ -79,9 +79,14 @@ class MultiUploadView(FormView):
         if form.is_valid():
             if "file" in self.request.FILES:
                 photo = form.save()
+                onlyfiles = [f for f in listdir(os.path.join(MEDIA_ROOT, folder))
+                             if os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, folder), f))]
                 name = photo.file.name.split("/")[-1]
                 shutil.move(os.path.join(MEDIA_ROOT,photo.file.name), os.path.join(MEDIA_ROOT, folder, name))
-                data = {'is_valid': True, 'name': name, 'url': os.path.join(MEDIA_URL,folder,name)}
+                if name in onlyfiles:
+                    data = {'is_valid': False}
+                else:
+                    data = {'is_valid': True, 'name': name, 'url': os.path.join(MEDIA_URL,folder,name)}
 
         else:
             data = {'is_valid': False}
