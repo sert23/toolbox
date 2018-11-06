@@ -48,7 +48,7 @@ def new_upload(request):
 class MultiUploadView(FormView):
     template_name = 'bench.html'
     form_class = sRNABenchForm
-    success_url = reverse('photos:multi_start')
+    #success_url = reverse('photos:multi_start')
 
     def get_form_kwargs(self):
         '''This goes in the Update view'''
