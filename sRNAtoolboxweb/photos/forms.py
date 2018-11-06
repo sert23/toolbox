@@ -26,7 +26,10 @@ class MultiURLForm(forms.Form):
         self.helper.layout = Layout(
                 'Choose miRNA input',
                 Field('SRRtext', css_class='form-control'),
-                Field('URLtext', css_class='form-control')
+                Field('URLtext', css_class='form-control'),
+                ButtonHolder(
+                Submit('submit', 'PROCEED', css_class='btn btn-primary')
+            )
         )
 
 
