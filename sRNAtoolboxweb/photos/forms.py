@@ -2,7 +2,8 @@ from django import forms
 
 from .models import Photo2
 from django.db import models
-
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Fieldset, Field, ButtonHolder, Submit
 
 class PhotoForm(forms.ModelForm):
     # def __init__(self, *args, **kwargs):
@@ -13,6 +14,18 @@ class PhotoForm(forms.ModelForm):
     class Meta:
         model = Photo2
         fields = ('file', )
+
+
+class MultiURLForm(forms.Form):
+    SRRtext = forms.CharField(label="", widget=forms.Textarea, required=False)
+
+    def __init__(self, *args, **kwargs):
+        super(MultiURLForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+                'Choose miRNA input',
+                Field('SRRtext', css_class='form-control'))
+
 
 
 # class PhotoForm(forms.ModelForm):

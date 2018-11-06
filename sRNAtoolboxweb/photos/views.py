@@ -6,7 +6,7 @@ from django.views import View
 from django.views.generic import FormView
 from sRNABench.forms import sRNABenchForm
 
-from .forms import PhotoForm
+from .forms import PhotoForm, MultiURLForm
 from .models import Photo
 from django.core.urlresolvers import reverse, reverse_lazy
 import string
@@ -72,7 +72,7 @@ class MultiUploadView(FormView):
                                  modules_files="",
                                  pipeline_type="multiupload",
                                  )
-        return render(self.request, 'multiupload.html', {'file_list': onlyfiles, "request_path":path, "form": sRNABenchForm })
+        return render(self.request, 'multiupload.html', {'file_list': onlyfiles, "request_path":path, "form": MultiURLForm })
         #return render(self.request, 'multiupload.html', {'file_list': [os.path.join(MEDIA_ROOT,folder),os.path.join(MEDIA_ROOT,folder)]})
 
     def post(self, request):
