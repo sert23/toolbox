@@ -72,7 +72,7 @@ class MultiUploadView(FormView):
                                  modules_files="",
                                  pipeline_type="multiupload",
                                  )
-        return render(self.request, 'multiupload.html', {'file_list': onlyfiles, "request_path":path})
+        return render(self.request, 'multiupload.html', {'file_list': onlyfiles, "request_path":path, "form": sRNABenchForm })
         #return render(self.request, 'multiupload.html', {'file_list': [os.path.join(MEDIA_ROOT,folder),os.path.join(MEDIA_ROOT,folder)]})
 
     def post(self, request):
