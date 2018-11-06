@@ -17,7 +17,7 @@ class PhotoForm(forms.ModelForm):
 
 
 class MultiURLForm(forms.Form):
-    SRRtext = forms.CharField(label="", widget=forms.Textarea, required=False)
+    SRRtext = forms.CharField(label="Paste SRA IDs (starting with SRR or ERR, one per line) ", widget=forms.Textarea, required=False)
 
     def __init__(self, *args, **kwargs):
         super(MultiURLForm, self).__init__(*args, **kwargs)
