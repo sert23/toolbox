@@ -18,13 +18,16 @@ class PhotoForm(forms.ModelForm):
 
 class MultiURLForm(forms.Form):
     SRRtext = forms.CharField(label="Paste SRA IDs (starting with SRR or ERR, one per line) ", widget=forms.Textarea, required=False)
+    URLtext = forms.CharField(label="Paste URL/links with the files (one per line) ", widget=forms.Textarea, required=False)
 
     def __init__(self, *args, **kwargs):
         super(MultiURLForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
                 'Choose miRNA input',
-                Field('SRRtext', css_class='form-control'))
+                Field('SRRtext', css_class='form-control'),
+                Field('URLtext', css_class='form-control')
+        )
 
 
 
