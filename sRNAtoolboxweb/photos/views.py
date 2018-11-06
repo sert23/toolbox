@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views import View
 from django.views.generic import FormView
+from sRNABench.forms import sRNABenchForm
 
 from .forms import PhotoForm
 from .models import Photo
@@ -45,6 +46,9 @@ def new_upload(request):
 
 
 class MultiUploadView(FormView):
+    template_name = 'bench.html'
+    form_class = sRNABenchForm
+    success_url = reverse('photos:multi_start')
 
     def get_form_kwargs(self):
         '''This goes in the Update view'''
