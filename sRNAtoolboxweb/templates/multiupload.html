@@ -74,7 +74,7 @@
         </h4>
 
 
-
+    {% include 'form_base.html' %}
 
 
     </div>
@@ -90,6 +90,7 @@
 {#           data-url="{% url 'photos:progress_bar_upload' %}"#}
            data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
   </div>
+
 
   <table id="gallery" class="table table-bordered">
     <thead>
