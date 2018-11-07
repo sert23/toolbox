@@ -40,7 +40,7 @@ class GetIDView(RedirectView):
 def new_upload(request):
     #request.session['error_message'] = 'test'
     random_ID = generate_id()
-    url = reverse('photos:multi_start') + random_ID
+    url = reverse('photos:multi_new') + random_ID
     return redirect(url)
 
 
@@ -95,7 +95,8 @@ class MultiUploadView(FormView):
                 return JsonResponse(data)
 
         else:
-            url = reverse('photos:multi_start')
+            url = reverse('photos:multi_new')
+            #url = reverse('photos:multi_start')
             return redirect(url)
 
 
