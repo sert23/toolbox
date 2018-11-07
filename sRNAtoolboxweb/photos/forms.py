@@ -21,6 +21,7 @@ class MultiURLForm(forms.Form):
     URLtext = forms.CharField(label="Paste URL/links with the files (one per line) ", widget=forms.Textarea, required=False)
 
     def __init__(self, *args, **kwargs):
+        self.folder = kwargs.pop('dest_folder', None)
         super(MultiURLForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
