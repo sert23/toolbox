@@ -5,7 +5,8 @@ from . import views
 urlpatterns = [
 
     url(r'^$', views.new_upload, name='multi_new'),
-    url(r'/launch/[A-za-z0-9]+', views.MultiUploadView.as_view(), name='multi_launch'),
+    url(r'^/launch', views.MultiUploadView.as_view(), name='multi_launch'),
+    # url(r'^/launch/[A-za-z0-9]+', views.MultiUploadView.as_view(), name='multi_launch'),
     #url(r'^(?P<query_id>[A-za-z0-9]+)', views.ProgressBarUploadView.as_view(),name='progress_bar_upload'),
     #url(r'^[A-za-z0-9]+', views.MultiUploadView.as_view(),name='progress_bar_upload'),
     #url(r'^', views.MultiUploadView.as_view(), name='multi_start'),
