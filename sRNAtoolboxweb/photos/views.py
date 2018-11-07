@@ -102,7 +102,7 @@ class MultiUploadView(FormView):
 
 
 class DragAndDropUploadView(View):
-    def get(self, request):
+    def get(self, request,**kwargs):
         photos_list = Photo.objects.all()
         return render(self.request, 'photos/drag_and_drop_upload/index.html', {'photos': photos_list})
 
