@@ -46,8 +46,8 @@ def new_upload(request):
 
 
 class MultiUploadView(FormView):
-    template_name = 'bench.html'
-    form_class = sRNABenchForm
+    #template_name = 'bench.html'
+    #form_class = sRNABenchForm
     #success_url = reverse('photos:multi_start')
 
     def get_form_kwargs(self):
@@ -56,7 +56,7 @@ class MultiUploadView(FormView):
         kwargs["request_path"] = self.request.path
         return kwargs
 
-    def get(self, request):
+    def get(self, request,**kwargs):
         path = request.path
         folder = path.split("/")[-1]
         onlyfiles = []
