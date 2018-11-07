@@ -97,6 +97,7 @@ class MultiUploadView(FormView):
 
         else:
             form = MultiURLForm(self.request.POST, self.request.FILES)
+            form.is_valid()
             form.clean()
             if form.is_valid():
                 url = reverse('photos:multi_launch') + folder
