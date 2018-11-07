@@ -95,7 +95,7 @@ class MultiUploadView(FormView):
                 return JsonResponse(data)
 
         else:
-            url = reverse('photos:multi_launch')
+            url = reverse('photos:multi_launch') + folder
             #url = reverse('photos:multi_start')
             return redirect(url)
 
