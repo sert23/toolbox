@@ -92,9 +92,11 @@ class MultiUploadView(FormView):
                 else:
                     data = {'is_valid': True, 'name': name, 'url': os.path.join(MEDIA_URL,folder,name)}
 
+                return JsonResponse(data)
+
         else:
             data = {'is_valid': False}
-        return JsonResponse(data)
+
 
 
 class DragAndDropUploadView(View):
