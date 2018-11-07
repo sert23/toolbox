@@ -9,7 +9,7 @@ urlpatterns = [
     #url(r'^(pick/[A-za-z0-9]+)', views.PickSample.as_view()),
     # url(r'^/launch/[A-za-z0-9]+', views.MultiUploadView.as_view(), name='multi_launch'),
     #url(r'^(?P<query_id>[A-za-z0-9]+)', views.ProgressBarUploadView.as_view(),name='progress_bar_upload'),
-    #url(r'^[A-za-z0-9]+', views.MultiUploadView.as_view(),name='progress_bar_upload'),
+    url(r'^[A-za-z0-9]+', views.MultiUploadView.as_view(),name='progress_bar_upload'),
     #url(r'^', views.MultiUploadView.as_view(), name='multi_start'),
 
     # url(r'^$', views.give_ID , name='multi_start'),
