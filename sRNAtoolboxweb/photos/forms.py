@@ -4,7 +4,7 @@ from .models import Photo2
 from django.db import models
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Field, ButtonHolder, Submit
-
+import os
 class PhotoForm(forms.ModelForm):
     # def __init__(self, *args, **kwargs):
     #     if kwargs.get("request_path"):
@@ -32,8 +32,16 @@ class MultiURLForm(forms.Form):
             )
         )
 
-    def clean(self):
+    def clean(self,dest_folder):
         cleaned_data = super(MultiURLForm, self).clean()
+
+        with open(os.path.join(dest_folder,"SRR_files.txt"),"w") as SRR_file:
+            SRR_file.write(cleaned_data.get('SRRtext'))
+
+        with open(os.path.join(dest_folder,"URL_files.txt"),"w") as URL_file:
+            URL_file.write(cleaned_data.get('URLtext'))
+
+
 
 # class PhotoForm(forms.ModelForm):
 #     # def __init__(self, *args, **kwargs):
