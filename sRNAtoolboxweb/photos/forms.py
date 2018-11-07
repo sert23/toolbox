@@ -32,7 +32,8 @@ class MultiURLForm(forms.Form):
             )
         )
 
-
+    def clean(self):
+        cleaned_data = super(MultiURLForm, self).clean()
 
 # class PhotoForm(forms.ModelForm):
 #     # def __init__(self, *args, **kwargs):
