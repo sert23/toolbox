@@ -33,9 +33,10 @@ class MultiURLForm(forms.Form):
             )
         )
 
-    def clean(self,dest_folder):
+    def clean(self):
 
         cleaned_data = super(MultiURLForm, self).clean()
+        dest_folder = self.folder
 
         with open(os.path.join(dest_folder,"SRR_files.txt"),"w") as SRR_file:
             SRR_file.write(cleaned_data.get('SRRtext'))
