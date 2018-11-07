@@ -97,9 +97,11 @@ class MultiUploadView(FormView):
 
         else:
             form = MultiURLForm(self.request.POST, self.request.FILES)
-            url = reverse('photos:multi_launch') + folder
+            form.clean()
+            if form.is_valid():
+                url = reverse('photos:multi_launch') + folder
             #url = reverse('photos:multi_start')
-            return redirect(url)
+                return redirect(url)
 
 class MultiLaunchView(FormView):
     template_name = 'multiupload.html'
