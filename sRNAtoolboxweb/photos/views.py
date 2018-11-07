@@ -80,8 +80,8 @@ class MultiUploadView(FormView):
         form = PhotoForm(self.request.POST, self.request.FILES)
         path = request.path
         folder = path.split("/")[-1]
-        if form.is_valid():
-            if "file" in self.request.FILES:
+        if "file" in self.request.FILES:
+            if form.is_valid():
                 photo = form.save()
                 onlyfiles = [f for f in listdir(os.path.join(MEDIA_ROOT, folder))
                              if os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, folder), f))]
@@ -94,7 +94,9 @@ class MultiUploadView(FormView):
 
                 return JsonResponse(data)
 
+
         else:
+            form = MultiURLForm(self.request.POST, self.request.FILES)
             url = reverse('photos:multi_launch') + folder
             #url = reverse('photos:multi_start')
             return redirect(url)
