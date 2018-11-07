@@ -95,10 +95,25 @@ class MultiUploadView(FormView):
                 return JsonResponse(data)
 
         else:
-            url = reverse('photos:multi_new')
+            url = reverse('photos:multi_launch')
             #url = reverse('photos:multi_start')
             return redirect(url)
 
+class MultiLaunchView(FormView):
+    template_name = 'multiupload.html'
+    form_class = MultiURLForm
+
+    def get_context_data(self, **kwargs):
+        context = super(FormView, self).get_context_data(**kwargs)
+        query_id = str(self.request.path_info).split("/")[-1]
+        # content_folder = os.path.join(MEDIA_ROOT, query_id, "queryOutput")
+        input_folder = os.path.join(MEDIA_ROOT, query_id)
+
+    def form_valid(self, form):
+        form.clean()
+
+        call, pipeline_id = form.create_call()
+        self.success_url = reverse_lazy('mirconstarget') + '?id=' + pipeline_id
 
 
 class DragAndDropUploadView(View):
