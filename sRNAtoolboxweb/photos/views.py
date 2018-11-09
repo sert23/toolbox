@@ -122,7 +122,7 @@ class MultiLaunchView(FormView):
         onlyfiles.remove("URL_files.txt")
         table_data=[]
         for ix,file in enumerate(onlyfiles):
-            id = "file_"+ ix
+            id = "file_"+ str(ix)
             status = "Not launched"
             checkbox = "<input type='checkbox' value='" + id + "' name='to_list'>"
             table_data.append([file, status, checkbox])
@@ -130,7 +130,7 @@ class MultiLaunchView(FormView):
         with open(os.path.join(MEDIA_ROOT, query_id, "SRR_files.txt"), "r") as SRR_file:
             for ix,SRR in enumerate(SRR_file.readlines()) :
                 file_name = SRR.rstrip()
-                id = "SRR_" + ix
+                id = "SRR_" + str(ix)
                 status = "Not launched"
                 checkbox = "<input type='checkbox' value='" + id + "' name='to_list'>"
                 table_data.append([file_name, status, checkbox])
@@ -138,17 +138,17 @@ class MultiLaunchView(FormView):
         with open(os.path.join(MEDIA_ROOT, query_id, "URL_files.txt"), "r") as URL_file:
             for URL in URL_file.readlines():
                 file_name = URL.rstrip()
-                id = "SRR_" + ix
+                id = "SRR_" + str(ix)
                 status = "Not launched"
                 checkbox = "<input type='checkbox' value='" + id + "' name='to_list'>"
                 table_data.append([file_name, status, checkbox])
 
-        table_data.append(["dummy","dummier","dummiest"])
+        #table_data.append(["dummy","dummier","dummiest"])
 
         js_data = json.dumps(table_data)
         js_headers = json.dumps([{ "title": " " },
-            { "title": "SRA Study" },
-            { "title": "Experiment" }])
+                                { "title": "SRA Study" },
+                                { "title": "Experiment" }])
         # print(js_data)
         context["table_data"] = js_data
         context["table_headers"] = js_headers
