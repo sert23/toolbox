@@ -19,6 +19,8 @@ from sRNAtoolboxweb.settings import MEDIA_ROOT, MEDIA_URL
 from progress.models import JobStatus
 import shutil
 import datetime
+import json
+
 
 def generate_uniq_id(size=15, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
@@ -94,7 +96,6 @@ class MultiUploadView(FormView):
 
                 return JsonResponse(data)
 
-
         else:
             dfolder = os.path.join(MEDIA_ROOT, folder)
             form = MultiURLForm(self.request.POST, self.request.FILES, dest_folder= dfolder)
@@ -106,7 +107,8 @@ class MultiUploadView(FormView):
                 return redirect(url)
 
 class MultiLaunchView(FormView):
-    template_name = 'multiupload.html'
+    template_name = 'multi_launch.html'
+    #template_name = 'multiupload.html'
     form_class = MultiURLForm
 
     def get_context_data(self, **kwargs):
@@ -114,12 +116,46 @@ class MultiLaunchView(FormView):
         query_id = str(self.request.path_info).split("/")[-1]
         # content_folder = os.path.join(MEDIA_ROOT, query_id, "queryOutput")
         input_folder = os.path.join(MEDIA_ROOT, query_id)
+        onlyfiles = [f for f in listdir(os.path.join(MEDIA_ROOT, query_id))
+                             if os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, query_id), f))]
+        onlyfiles.remove("SRR_files.txt")
+        onlyfiles.remove("URL_files.txt")
+        table_data=[]
+        for ix,file in enumerate(onlyfiles):
+            id = "file_"+ ix
+            status = "Not launched"
+            checkbox = "<input type='checkbox' value='" + id + "' name='to_list'>"
+            table_data.append([file, status, checkbox])
+
+        with open(os.path.join(MEDIA_ROOT, query_id, "SRR_files.txt"), "r") as SRR_file:
+            for ix,SRR in enumerate(SRR_file.readlines()) :
+                file_name = SRR.rstrip()
+                id = "SRR_" + ix
+                status = "Not launched"
+                checkbox = "<input type='checkbox' value='" + id + "' name='to_list'>"
+                table_data.append([file_name, status, checkbox])
+
+        with open(os.path.join(MEDIA_ROOT, query_id, "URL_files.txt"), "r") as URL_file:
+            for URL in URL_file.readlines():
+                file_name = URL.rstrip()
+                id = "SRR_" + ix
+                status = "Not launched"
+                checkbox = "<input type='checkbox' value='" + id + "' name='to_list'>"
+                table_data.append([file_name, status, checkbox])
+
+        js_data = json.dumps(table_data)
+        js_headers = json.dumps(["Input","Status","Select"])
+        # print(js_data)
+        context["table_data"] = js_data
+        context["table_headers"] = js_headers
+
+        return context
 
     def form_valid(self, form):
         form.clean()
 
-        call, pipeline_id = form.create_call()
-        self.success_url = reverse_lazy('mirconstarget') + '?id=' + pipeline_id
+        # call, pipeline_id = form.create_call()
+        # self.success_url = reverse_lazy('mirconstarget') + '?id=' + pipeline_id
 
 
 class DragAndDropUploadView(View):
