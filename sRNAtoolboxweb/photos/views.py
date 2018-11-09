@@ -143,6 +143,8 @@ class MultiLaunchView(FormView):
                 checkbox = "<input type='checkbox' value='" + id + "' name='to_list'>"
                 table_data.append([file_name, status, checkbox])
 
+        table_data.append(["dummy","dummier","dummiest"])
+
         js_data = json.dumps(table_data)
         js_headers = json.dumps(["Input","Status","Select"])
         # print(js_data)
