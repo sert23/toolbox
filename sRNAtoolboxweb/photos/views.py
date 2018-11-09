@@ -146,7 +146,9 @@ class MultiLaunchView(FormView):
         table_data.append(["dummy","dummier","dummiest"])
 
         js_data = json.dumps(table_data)
-        js_headers = json.dumps(["Input","Status","Select"])
+        js_headers = json.dumps([{ "title": " " },
+            { "title": "SRA Study" },
+            { "title": "Experiment" }])
         # print(js_data)
         context["table_data"] = js_data
         context["table_headers"] = js_headers
