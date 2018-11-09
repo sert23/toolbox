@@ -137,8 +137,8 @@ class MultiLaunchView(FormView):
 
         with open(os.path.join(MEDIA_ROOT, query_id, "URL_files.txt"), "r") as URL_file:
             for URL in URL_file.readlines():
-                file_name = URL.rstrip()
-                id = "SRR_" + str(ix)
+                file_name ="(...)" + URL.rstrip()[-20:]
+                id = "URL_" + str(ix)
                 status = "Not launched"
                 checkbox = "<input type='checkbox' value='" + id + "' name='to_list'>"
                 table_data.append([file_name, status, checkbox])
@@ -146,9 +146,9 @@ class MultiLaunchView(FormView):
         #table_data.append(["dummy","dummier","dummiest"])
 
         js_data = json.dumps(table_data)
-        js_headers = json.dumps([{ "title": " " },
-                                { "title": "SRA Study" },
-                                { "title": "Experiment" }])
+        js_headers = json.dumps([{ "title": "Input" },
+                                { "title": "Status" },
+                                { "title": "Select" }])
         # print(js_data)
         context["table_data"] = js_data
         context["table_headers"] = js_headers
