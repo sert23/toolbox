@@ -41,17 +41,11 @@
     <div id="collapseOne" class="panel-collapse collapse in">
         <div class="panel-body">
         <div style="margin-bottom: 20px;">
-    <button type="button" class="btn btn-primary js-upload-photos">
-      <span class="glyphicon glyphicon-cloud-upload"></span> Upload files
-    </button>
-    <input id="fileupload" type="file" name="file" multiple
-           style="display: none;"
-           data-url="{{ request_path }}"
-{#           data-url="{% url 'photos:progress_bar_upload' %}"#}
-           data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+
+            <table id="jobs" class="table table-striped table-bordered bulk_action"></table>
   </div>
 
-        <table id="jobs" class="table table-striped table-bordered bulk_action"></table>
+
 
 
   <div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false">
@@ -81,8 +75,23 @@
 
 {% endblock %}
 
-<script>
+<script src="/static/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="/static/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+  <script src="/static/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+  <script src="/static/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+  <script src="/static/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+  <script src="/static/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="/static/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+  <script src="/static/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
 
+<script src="http://cdn.datatables.net/plug-ins/1.10.12/api/processing().js"></script>
+
+
+<script>
     var received_data = {{ table_data|safe }};
     var received_cols = {{ table_headers|safe }}
 
