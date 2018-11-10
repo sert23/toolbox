@@ -109,7 +109,7 @@ class MultiUploadView(FormView):
 class MultiLaunchView(FormView):
     template_name = 'multi_launch.html'
     #template_name = 'multiupload.html'
-    form_class = MultiURLForm
+    form_class = sRNABenchForm
 
     def get_context_data(self, **kwargs):
         context = super(FormView, self).get_context_data(**kwargs)
