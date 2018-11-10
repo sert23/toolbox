@@ -123,25 +123,28 @@ class MultiLaunchView(FormView):
         table_data=[]
         for ix,file in enumerate(onlyfiles):
             id = "file_"+ str(ix)
+            link = '<a href="'+ os.path.join(MEDIA_URL,query_id,file) +'">'+file+'</a>'
             status = "Not launched"
             checkbox = "<input type='checkbox' value='" + id + "' name='to_list'>"
-            table_data.append([file, status, checkbox])
+            table_data.append([link, status, checkbox])
 
         with open(os.path.join(MEDIA_ROOT, query_id, "SRR_files.txt"), "r") as SRR_file:
             for ix,SRR in enumerate(SRR_file.readlines()) :
                 file_name = SRR.rstrip()
                 id = "SRR_" + str(ix)
+                link = '<a href="https://www.ncbi.nlm.nih.gov/sra/?term='+ file_name +'">'+file_name+'</a>'
                 status = "Not launched"
                 checkbox = "<input type='checkbox' value='" + id + "' name='to_list'>"
-                table_data.append([file_name, status, checkbox])
+                table_data.append([link, status, checkbox])
 
         with open(os.path.join(MEDIA_ROOT, query_id, "URL_files.txt"), "r") as URL_file:
             for URL in URL_file.readlines():
                 file_name ="(...)" + URL.rstrip()[-20:]
                 id = "URL_" + str(ix)
+                link = '<a href="' + URL.rstrip() + '">' + file_name + '</a>'
                 status = "Not launched"
                 checkbox = "<input type='checkbox' value='" + id + "' name='to_list'>"
-                table_data.append([file_name, status, checkbox])
+                table_data.append([link, status, checkbox])
 
         #table_data.append(["dummy","dummier","dummiest"])
 
