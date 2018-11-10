@@ -139,7 +139,10 @@ class MultiLaunchView(FormView):
 
         with open(os.path.join(MEDIA_ROOT, query_id, "URL_files.txt"), "r") as URL_file:
             for URL in URL_file.readlines():
-                file_name ="(...)" + URL.rstrip()[-20:]
+                if len(URL) > 19:
+                    file_name ="(...)" + URL.rstrip()[-20:]
+                else:
+                    file_name = URL.rstrip()
                 id = "URL_" + str(ix)
                 link = '<a href="' + URL.rstrip() + '">' + file_name + '</a>'
                 status = "Not launched"
