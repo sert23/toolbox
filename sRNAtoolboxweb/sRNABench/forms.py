@@ -145,6 +145,7 @@ class sRNABenchForm(forms.Form):
         self.helper.layout = Layout(
 
             create_collapsable_div(
+                "",
             Field('species_hidden', name='species_hidden'),
             TabHolder(
                 Tab('Upload',
