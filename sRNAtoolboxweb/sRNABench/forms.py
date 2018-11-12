@@ -144,7 +144,7 @@ class sRNABenchForm(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
 
-            Fieldset(
+            Fieldset("",
             TabHolder(
                 Tab('Upload',
                     'ifile',
