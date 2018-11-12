@@ -5,7 +5,7 @@ import urllib.request
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field, Div, Row
-from crispy_forms.bootstrap import InlineRadios
+from crispy_forms.bootstrap import InlineRadios, TabHolder, Tab
 
 from django import forms
 from django.core.files.storage import FileSystemStorage
@@ -143,14 +143,33 @@ class sRNABenchForm(forms.Form):
         super(sRNABenchForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            Fieldset(
-                '',
-                'ifile',
-                Field('sra_input', css_class='form-control'),
-                Field('url',css_class='form-control'),
-                Field('job_name', css_class='form-control'),
-                Field('species_hidden', name='species_hidden')
+
+            TabHolder(
+                Tab('Upload',
+                    'ifile',
+                    # Div('field_name_2')
+                    ),
+                Tab('URL/link',
+                    Field('field_name_3', css_class="form-control")
+                    ),
+                Tab('SRA Run ID',
+                    Field('sra_input', css_class="form-control")
+                    ),
+                Tab('Reuse Job',
+                    Field('job_name', css_class="form-control"),
+                    Field('species_hidden', name='species_hidden')
+                    )
+
             ),
+
+            # Fieldset(
+            #     '',
+            #     'ifile',
+            #     Field('sra_input', css_class='form-control'),
+            #     Field('url',css_class='form-control'),
+            #     Field('job_name', css_class='form-control'),
+            #     Field('species_hidden', name='species_hidden')
+            # ),
 
             create_collapsable_div(
                 'library_mode',
