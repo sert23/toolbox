@@ -150,13 +150,13 @@ class sRNABenchForm(forms.Form):
                     # Div('field_name_2')
                     ),
                 Tab('URL/link',
-                    Field('url', css_class="form-control")
+                    'url'
                     ),
                 Tab('SRA Run ID',
-                    Field('sra_input', css_class="form-control")
+                    'sra_input'
                     ),
                 Tab('Reuse Job',
-                    Field('job_name', css_class="form-control")
+                    'job_name'
                     )
 
             ),
