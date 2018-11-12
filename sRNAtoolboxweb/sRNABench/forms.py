@@ -5,7 +5,7 @@ import urllib.request
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field, Div, Row
-from crispy_forms.bootstrap import InlineRadios, TabHolder, Tab
+from crispy_forms.bootstrap import InlineRadios, TabHolder, Tab, Accordion,AccordionGroup
 
 from django import forms
 from django.core.files.storage import FileSystemStorage
@@ -144,9 +144,8 @@ class sRNABenchForm(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
 
-            Fieldset("",
-                     Field('species_hidden', name='species_hidden'),
-
+            Accordion(AccordionGroup('First Group',
+            Field('species_hidden', name='species_hidden'),
             TabHolder(
                 Tab('Upload',
                     'ifile',
@@ -162,7 +161,7 @@ class sRNABenchForm(forms.Form):
                     Field('job_name', css_class="form-control")
                     )
 
-            )),
+            ))),
 
             # Fieldset(
             #     '',
