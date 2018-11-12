@@ -144,9 +144,6 @@ class sRNABenchForm(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
 
-            create_collapsable_div(
-                "",
-            Field('species_hidden', name='species_hidden'),
             TabHolder(
                 Tab('Upload',
                     'ifile',
@@ -162,7 +159,7 @@ class sRNABenchForm(forms.Form):
                     Field('job_name', css_class="form-control")
                     )
 
-            )),
+            ),
 
             # Fieldset(
             #     '',
@@ -177,6 +174,7 @@ class sRNABenchForm(forms.Form):
                 'library_mode',
                 'no_libs',
                 Field('species'),
+                Field('species_hidden', name='species_hidden'),
                 title='Select species', c_id='2',
                 extra_title=render_modal('Species'),
                 open=True
