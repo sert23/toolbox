@@ -145,6 +145,7 @@ class sRNABenchForm(forms.Form):
         self.helper.layout = Layout(
 
             Fieldset("",
+                     Field('species_hidden', name='species_hidden'),
                      Div(
             TabHolder(
                 Tab('Upload',
@@ -158,8 +159,7 @@ class sRNABenchForm(forms.Form):
                     Field('sra_input', css_class="form-control")
                     ),
                 Tab('Reuse Job',
-                    Field('job_name', css_class="form-control"),
-                    Field('species_hidden', name='species_hidden')
+                    Field('job_name', css_class="form-control")
                     )
 
             ))),
