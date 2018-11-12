@@ -152,7 +152,7 @@ class sRNABenchForm(forms.Form):
                     # Div('field_name_2')
                     ),
                 Tab('URL/link',
-                    Field('field_name_3', css_class="form-control")
+                    Field('url', css_class="form-control")
                     ),
                 Tab('SRA Run ID',
                     Field('sra_input', css_class="form-control")
