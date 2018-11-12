@@ -144,7 +144,7 @@ class sRNABenchForm(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
 
-            Accordion(AccordionGroup('First Group',
+            create_collapsable_div(
             Field('species_hidden', name='species_hidden'),
             TabHolder(
                 Tab('Upload',
@@ -161,7 +161,7 @@ class sRNABenchForm(forms.Form):
                     Field('job_name', css_class="form-control")
                     )
 
-            ))),
+            )),
 
             # Fieldset(
             #     '',
