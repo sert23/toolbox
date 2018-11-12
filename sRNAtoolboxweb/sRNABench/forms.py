@@ -146,7 +146,7 @@ class sRNABenchForm(forms.Form):
 
             Fieldset("",
                      Field('species_hidden', name='species_hidden'),
-                     Div(
+
             TabHolder(
                 Tab('Upload',
                     'ifile',
@@ -162,7 +162,7 @@ class sRNABenchForm(forms.Form):
                     Field('job_name', css_class="form-control")
                     )
 
-            ))),
+            )),
 
             # Fieldset(
             #     '',
