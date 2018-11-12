@@ -145,6 +145,7 @@ class sRNABenchForm(forms.Form):
         self.helper.layout = Layout(
 
             Fieldset("",
+                     Div(
             TabHolder(
                 Tab('Upload',
                     'ifile',
@@ -161,7 +162,7 @@ class sRNABenchForm(forms.Form):
                     Field('species_hidden', name='species_hidden')
                     )
 
-            )),
+            ))),
 
             # Fieldset(
             #     '',
