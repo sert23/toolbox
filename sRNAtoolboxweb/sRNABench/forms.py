@@ -146,7 +146,7 @@ class sRNABenchForm(forms.Form):
 
             TabHolder(
                 Tab('Upload',
-                    'ifile',
+                    Div('ifile'),
                     # Div('field_name_2')
                     ),
                 Tab('URL/link',
