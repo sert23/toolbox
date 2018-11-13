@@ -163,7 +163,8 @@ class sRNABenchForm(forms.Form):
                     )
             ),
                 title="Choose your input",
-                c_id='1'
+                c_id='1',
+                open=True
                 ),
 
             # Fieldset(
