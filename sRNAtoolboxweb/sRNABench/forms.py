@@ -144,6 +144,8 @@ class sRNABenchForm(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
 
+            create_collapsable_div(
+
             TabHolder(
                 Tab('Upload',
                     # Div('ifile'),
@@ -159,8 +161,10 @@ class sRNABenchForm(forms.Form):
                 Tab('Reuse Job',
                     Field('job_name', css_class='form-control')
                     )
-
             ),
+                title="Choose your input",
+                c_id='1'
+                ),
 
             # Fieldset(
             #     '',
