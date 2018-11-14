@@ -118,8 +118,6 @@ class MultiLaunchView(FormView):
         folder = path.split("/")[-1]
         kwargs['dest_folder'] = folder
 
-        os.system("touch "+os.path.join(MEDIA_ROOT,folder,"get_kwarg"))
-
         return kwargs
 
     def get_context_data(self, **kwargs):
@@ -191,12 +189,10 @@ class MultiLaunchView(FormView):
 
     def form_valid(self, form):
 
-
         form.clean()
-        call, pipeline_id = form.create_call()
+        pipeline_id = form.create_call()
         self.success_url = reverse_lazy('srnabench') + '?id=' + pipeline_id
 
-        print(call)
         #os.system(call)
         js = JobStatus.objects.get(pipeline_key=pipeline_id)
         js.status.create(status_progress='sent_to_queue')
