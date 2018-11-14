@@ -75,7 +75,6 @@ class PhotoForm(forms.ModelForm):
         model = Photo2
         fields = ('file', )
 
-
 class MultiURLForm(forms.Form):
     SRRtext = forms.CharField(label="Paste SRA IDs (starting with SRR or ERR, one per line) ", widget=forms.Textarea, required=False)
     URLtext = forms.CharField(label="Paste URL/links with the files (one per line) ", widget=forms.Textarea, required=False)
@@ -193,6 +192,7 @@ class sRNABenchForm(forms.Form):
     species_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
 
     def __init__(self, *args, **kwargs):
+        self.folder = kwargs.pop('dest_folder', None)
         super(sRNABenchForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
@@ -288,11 +288,6 @@ class sRNABenchForm(forms.Form):
             self.add_error('species', 'Species or a miRBase short name tag are required')
             self.add_error('mirna_profiled', 'Species or a miRBase short name tag are required')
 
-        if sum([bool(cleaned_data.get('ifile')), bool(cleaned_data.get('url') != ''),
-                bool(cleaned_data.get('sra_input') != '')]) != 1:
-            self.add_error('ifile', 'Choose either file, SRA ID or URL as input')
-            self.add_error('url', 'Choose either file, SRA ID or URL as input')
-            self.add_error('sra_input', 'Choose either file, SRA ID or URL as input')
         if cleaned_data.get('predict_mirna') and cleaned_data.get('library_mode'):
             self.add_error('library_mode', 'Genome mode is needed for miRNA prediction')
         # if not cleaned_data.get('guess_adapter') and cleaned_data.get('adapter_chosen')=='' and cleaned_data.get('adapter_manual')=='':
@@ -366,12 +361,12 @@ class sRNABenchForm(forms.Form):
         conf['pipeline_id'] = pipeline_id
         FS = FileSystemStorage()
         FS.location = os.path.join(MEDIA_ROOT, pipeline_id)
-        os.system("mkdir " + FS.location)
+        # os.system("mkdir " + FS.location)
         out_dir = FS.location
         conf['out_dir'] = out_dir
-        ifile, libs_files = self.upload_files(cleaned_data, FS)
+        libs_files = self.upload_files(cleaned_data, FS)
         lib_mode = cleaned_data.get('library_mode')
-        is_solid = str(cleaned_data.get('is_solid')).lower()
+        # is_solid = str(cleaned_data.get('is_solid')).lower()
         guess_adapter = str(cleaned_data.get('guess_adapter')).lower()
         predict_mirna = str(cleaned_data.get('predict_mirna')).lower()
         no_libs = cleaned_data.get('no_libs')
@@ -396,12 +391,11 @@ class sRNABenchForm(forms.Form):
         min_read_length = str(cleaned_data['min_read_length'])
         max_multiple_mapping = str(cleaned_data['max_multiple_mapping'])
         homologous = cleaned_data['homologous'] if cleaned_data['homologous'] != '' else None
-
         species_annotation_file = SpeciesAnnotationParser(CONF["speciesAnnotation"])
         species_annotation = species_annotation_file.parse()
         db = CONF["db"]
 
-        new_conf = SRNABenchConfig(species_annotation, db, FS.location, ifile, iszip="true",
+        new_conf = SRNABenchConfig(species_annotation, db, FS.location, "EMPTY", iszip="true",
                                    # RNAfold="RNAfold2",
                                    bedGraph="true", writeGenomeDist="true", predict=predict_mirna,
                                    graphics="true",
@@ -413,7 +407,7 @@ class sRNABenchForm(forms.Form):
                                    adapterMinLength=adapter_length, adapterMM=adapter_mismatch,
                                    seed=seed_length,
                                    noMM=mismatches, alignType=aligment_type, minRC=min_read_count,
-                                   solid=is_solid,
+                                   solid="",
                                    guessAdapter=guess_adapter, highconf=highconf, mirDB=mirDB,
                                    homolog=homologous,
                                    user_files=libs_files, minReadLength=min_read_length,
@@ -422,45 +416,49 @@ class sRNABenchForm(forms.Form):
         conf_file_location = os.path.join(FS.location, "conf.txt")
         new_conf.write_conf_file(conf_file_location)
 
-        name = pipeline_id + '_bench'
-        configuration = {
-            'pipeline_id': pipeline_id,
-            'out_dir': out_dir,
-            'name': name,
-            'conf_input': conf_file_location,
-            'type': 'sRNAbench'
-        }
+        ####Remove input_line
 
-        JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not_launched",
-                                 start_time=datetime.now(),
-                                 all_files=ifile,
-                                 modules_files="",
-                                 pipeline_type="sRNAbench",
-                                 )
-        configuration_file_path = os.path.join(out_dir, 'conf.json')
-        with open(configuration_file_path, 'w') as conf_file:
-            json.dump(configuration, conf_file, indent=True)
-        return name, configuration_file_path
-
-    def generate_id(self):
-        is_new = True
-        while is_new:
-            pipeline_id = generate_uniq_id()
-            if not JobStatus.objects.filter(pipeline_key=pipeline_id):
-                return pipeline_id
+        # name = pipeline_id + '_bench'
+        # configuration = {
+        #     'pipeline_id': pipeline_id,
+        #     'out_dir': out_dir,
+        #     'name': name,
+        #     'conf_input': conf_file_location,
+        #     'type': 'sRNAbench'
+        # }
+        #
+        # JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not_launched",
+        #                          start_time=datetime.now(),
+        #                          all_files=ifile,
+        #                          modules_files="",
+        #                          pipeline_type="sRNAbench",
+        #                          )
+        # configuration_file_path = os.path.join(out_dir, 'conf.json')
+        # with open(configuration_file_path, 'w') as conf_file:
+        #     json.dump(configuration, conf_file, indent=True)
+        return pipeline_id
 
     def create_call(self):
-        pipeline_id = self.generate_id()
-        name, configuration_file_path = self.create_conf_file(self.cleaned_data, pipeline_id)
-        if QSUB:
-            return 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
-                configuration_file_path=configuration_file_path,
-                job_name=name,
-                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
-        else:
-            return '{sh} {configuration_file_path}'.format(
-                configuration_file_path=configuration_file_path,
-                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run.sh')), pipeline_id
+        pipeline_id = self.folder
+        pipeline_id = self.create_conf_file(self.cleaned_data, pipeline_id)
+
+        onlyfiles = [f for f in os.listdir(os.path.join(MEDIA_ROOT, pipeline_id))
+                     if os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, pipeline_id), f))]
+        onlyfiles.remove("SRR_files.txt")
+        onlyfiles.remove("URL_files.txt")
+        onlyfiles.remove("conf.txt")
+
+
+
+        # if QSUB:
+        #     return 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
+        #         configuration_file_path=configuration_file_path,
+        #         job_name=name,
+        #         sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
+        # else:
+        #     return '{sh} {configuration_file_path}'.format(
+        #         configuration_file_path=configuration_file_path,
+        #         sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run.sh')), pipeline_id
 
 
 # class PhotoForm(forms.ModelForm):

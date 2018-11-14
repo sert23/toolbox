@@ -45,7 +45,6 @@ def new_upload(request):
     return redirect(url)
 
 
-
 class MultiUploadView(FormView):
     #template_name = 'bench.html'
     #form_class = sRNABenchForm
@@ -119,6 +118,7 @@ class MultiLaunchView(FormView):
                              if os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, query_id), f))]
         onlyfiles.remove("SRR_files.txt")
         onlyfiles.remove("URL_files.txt")
+        onlyfiles.remove("conf.txt")
         table_data=[]
         for ix,file in enumerate(onlyfiles):
             id = "file_"+ str(ix)
@@ -157,11 +157,36 @@ class MultiLaunchView(FormView):
         # print(js_data)
         context["table_data"] = js_data
         context["table_headers"] = js_headers
+        context["job_id"] = query_id
 
         return context
 
+    def post(self, request, *args, **kwargs):
+        path = request.path
+        folder = path.split("/")[-1]
+        form = MultiURLForm(self.request.POST, self.request.FILES, dest_folder=folder)
+        request.POST._mutable = True
+        #print(SPECIES_PATH)
+        request.POST['species'] = request.POST['species_hidden'].split(',')
+        print(request.POST['species'])
+        print(request.POST['species_hidden'].split(','))
+        request.POST._mutable = False
+        return super(MultiLaunchView, self).post(request, *args, **kwargs)
+
     def form_valid(self, form):
         form.clean()
+
+        form.clean()
+        call, pipeline_id = form.create_call()
+        self.success_url = reverse_lazy('srnabench') + '?id=' + pipeline_id
+
+        print(call)
+        #os.system(call)
+        js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
+        return super(MultiLaunchView, self).form_valid(form)
 
         # call, pipeline_id = form.create_call()
         # self.success_url = reverse_lazy('mirconstarget') + '?id=' + pipeline_id
