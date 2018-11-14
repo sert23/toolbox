@@ -118,7 +118,8 @@ class MultiLaunchView(FormView):
                              if os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, query_id), f))]
         onlyfiles.remove("SRR_files.txt")
         onlyfiles.remove("URL_files.txt")
-        onlyfiles.remove("conf.txt")
+        if "conf.txt" in onlyfiles:
+            onlyfiles.remove("conf.txt")
         table_data=[]
         for ix,file in enumerate(onlyfiles):
             id = "file_"+ str(ix)
