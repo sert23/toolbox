@@ -419,7 +419,7 @@ class sRNABenchForm(forms.Form):
         f = open(conf_file_location, "r")
         lines = f.readlines()
         f.close()
-        f = open("yourfile.txt", "w")
+        f = open(conf_file_location, "w")
         for line in lines:
             if not line.startswith("input=EMPTY"):
                 f.write(line)
