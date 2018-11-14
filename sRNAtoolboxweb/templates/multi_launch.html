@@ -10,6 +10,111 @@
 <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
 
+{% block modals %}
+    {% include "Messages/bench/sRNAbenchInput.html" %}
+    {% include "Messages/bench/guess_Adapter.html" %}
+    {% include "Messages/bench/library_mode.html" %}
+    {% include "Messages/bench/minimum_adapter_length.html" %}
+    {% include "Messages/bench/mismatches_adapter.html" %}
+    {% include "Messages/bench/Not_profile.html" %}
+    {% include "Messages/bench/RecursiveAdaptorTrimming.html" %}
+    {% include "Messages/bench/speciesBench.html" %}
+    {% include "Messages/bench/UploadUserFiles.html" %}
+    {% include "Messages/bench/mirnas.html" %}
+{% endblock %}
+
+{% block js %}
+
+
+    <script>
+    jQuery(document).ready(function() {
+        jQuery('#id_species').multiselect({
+            enableCollapsibleOptGroups: true,
+            enableCaseInsensitiveFiltering: true,
+            filterBehavior: 'both',
+            maxHeight: 300,
+            onDropdownHidden: function (e) {
+
+                jQuery('#id_species_hidden').val(jQuery('#id_species').val().map(function(item) {
+                return item.split(':')[0];}).join(','));
+{#                alert(jQuery('#id_species').val().join(','));#}
+
+            }
+
+        });
+    });
+    </script>
+
+
+    <script>
+        // tooltip demo
+        $('.row').tooltip({
+            selector: "[data-toggle=tooltip]",
+            container: "body"
+        })
+
+    </script>
+
+    <script>
+    function myFunction() {
+        var x, text, message;
+        message = "There were some errors in your job. Please select your input again and check for invalid options"
+
+        x = document.getElementById("id_adapter_manual").value;
+
+
+        if (!document.getElementById("id_species").value && !document.getElementById("id_mirna_profiled").value) {
+            document.getElementById('id_ifile').value = "";
+            alert(message); return true
+{#            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true#}
+        }else if ((0 + Boolean(document.getElementById('id_ifile').value) + Boolean(document.getElementById('id_url').value) + Boolean(document.getElementById('id_sra_input').value )!=1)){
+            document.getElementById('id_ifile').value = "";
+{#            alert("id_file url");#}
+{#            return true;#}
+                        alert(message); return true
+        }else if (document.getElementById('id_predict_mirna').checked && document.getElementById('id_library_mode').checked){
+            document.getElementById('id_ifile').value = "";
+{#            alert( " predict and library mode"); return true#}
+            alert(message); return true
+        }else if ((0 + document.getElementById('id_guess_adapter').checked + Boolean(document.getElementById('id_adapter_chosen').value) + Boolean(document.getElementById('id_adapter_manual').value )!=1)){
+            document.getElementById('id_ifile').value = "";
+{#            alert(message); return true#}
+            alert("adapter row"); return true
+        }else if (document.getElementById('id_guess_adapter').checked && !document.getElementById('id_species')){
+            document.getElementById('id_ifile').value = "";
+            alert(message); return true
+{#            alert("guess without species"); return true#}
+        }else if (document.getElementById('id_highconf').checked && document.getElementById('id_mirDB').value){
+            document.getElementById('id_ifile').value = "";
+            alert(message); return true
+        }
+
+    }
+    </script>
+
+    <script>
+    $('input[name="referenceDB"]').on("click", function(e) {
+        x = document.getElementById("id_referenceDB_3").checked;
+        if (x==false){
+            document.getElementById("div_id_mirDB").style.visibility="hidden";
+            document.getElementById("id_mirDB").style.visibility="hidden";
+{#            document.getElementById("show-me-three").style.visibility="hidden";#}
+        }
+        else{
+            document.getElementById("div_id_mirDB").style.visibility="visible";
+            document.getElementById("id_mirDB").style.visibility="visible";
+        }
+{#    if (e.clientX === 0 && e.clientY === 0) {#}
+{#        console.log("keyboard");#}
+{#    } else {#}
+{#        console.log("mouse");#}
+{#    };#}
+{#        alert(x)#}
+});
+    </script>
+
+
+{% endblock %}
 
 {% block javascript %}
 {#    <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>#}
@@ -19,7 +124,7 @@
   <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
   <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
 
-    <script src="/static/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+  <script src="/static/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
   <script src="/static/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
   <script src="/static/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
   <script src="/static/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
