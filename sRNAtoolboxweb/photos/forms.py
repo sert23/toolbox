@@ -415,8 +415,17 @@ class sRNABenchForm(forms.Form):
 
         conf_file_location = os.path.join(FS.location, "conf.txt")
         new_conf.write_conf_file(conf_file_location)
-
         ####Remove input_line
+        f = open(conf_file_location, "r")
+        lines = f.readlines()
+        f.close()
+        f = open("yourfile.txt", "w")
+        for line in lines:
+            if not line.startswith("input=EMPTY"):
+                f.write(line)
+        f.close()
+
+
 
         # name = pipeline_id + '_bench'
         # configuration = {
@@ -448,7 +457,7 @@ class sRNABenchForm(forms.Form):
         onlyfiles.remove("URL_files.txt")
         onlyfiles.remove("conf.txt")
 
-
+        return pipeline_id
 
         # if QSUB:
         #     return 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
