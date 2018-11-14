@@ -192,7 +192,7 @@ class sRNABenchForm(forms.Form):
     species_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
 
     def __init__(self, *args, **kwargs):
-        self.folder = kwargs.pop('dest_folder', None)
+        #self.folder = kwargs.pop('dest_folder', None)
         super(sRNABenchForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
