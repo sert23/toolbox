@@ -110,7 +110,7 @@ class MultiUploadView(FormView):
 class MultiLaunchView(FormView):
     template_name = 'multi_launch.html'
     #template_name = 'multiupload.html'
-    #form_class = sRNABenchForm
+    form_class = sRNABenchForm
 
     # def get_form_kwargs(self):
     #     kwargs = super(MultiLaunchView, self).get_form_kwargs()
