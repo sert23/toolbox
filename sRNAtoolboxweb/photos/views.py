@@ -117,6 +117,9 @@ class MultiLaunchView(FormView):
         path = self.request.path
         folder = path.split("/")[-1]
         kwargs['folder'] = folder
+
+        os.system("touch "+os.path.join(MEDIA_ROOT,folder,"get_kwarg"))
+
         return kwargs
 
     def get_context_data(self, **kwargs):
