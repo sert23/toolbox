@@ -112,15 +112,15 @@ class MultiLaunchView(FormView):
     #template_name = 'multiupload.html'
     #form_class = sRNABenchForm
 
-    def get_form_kwargs(self):
-        kwargs = super(MultiLaunchView, self).get_form_kwargs()
-        path = self.request.path
-        folder = path.split("/")[-1]
-        kwargs['folder'] = folder
-
-        os.system("touch "+os.path.join(MEDIA_ROOT,folder,"get_kwarg"))
-
-        return kwargs
+    # def get_form_kwargs(self):
+    #     kwargs = super(MultiLaunchView, self).get_form_kwargs()
+    #     path = self.request.path
+    #     folder = path.split("/")[-1]
+    #     kwargs['folder'] = folder
+    #
+    #     os.system("touch "+os.path.join(MEDIA_ROOT,folder,"get_kwarg"))
+    #
+    #     return kwargs
 
     def get_context_data(self, **kwargs):
         context = super(FormView, self).get_context_data(**kwargs)
