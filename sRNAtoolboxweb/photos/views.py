@@ -116,7 +116,7 @@ class MultiLaunchView(FormView):
         kwargs = super(MultiLaunchView, self).get_form_kwargs()
         path = self.request.path
         folder = path.split("/")[-1]
-        kwargs['folder'] = folder
+        kwargs['dest_folder'] = folder
 
         os.system("touch "+os.path.join(MEDIA_ROOT,folder,"get_kwarg"))
 
