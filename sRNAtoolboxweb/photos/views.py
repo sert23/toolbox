@@ -4,9 +4,8 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views import View
 from django.views.generic import FormView
-from sRNABench.forms import sRNABenchForm
 
-from .forms import PhotoForm, MultiURLForm
+from .forms import PhotoForm, MultiURLForm,sRNABenchForm
 from .models import Photo
 from django.core.urlresolvers import reverse, reverse_lazy
 import string
