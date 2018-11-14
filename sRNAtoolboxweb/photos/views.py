@@ -56,7 +56,7 @@ class MultiUploadView(FormView):
 
 
 
-        kwargs["folder"] = self.request.path
+        #kwargs["folder"] = self.request.path
         return kwargs
 
     def get(self, request,**kwargs):
