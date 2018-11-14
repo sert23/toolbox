@@ -53,7 +53,10 @@ class MultiUploadView(FormView):
     def get_form_kwargs(self):
         '''This goes in the Update view'''
         kwargs = super(MultiUploadView, self).get_form_kwargs()  # put your view name in the super
-        kwargs["request_path"] = self.request.path
+
+
+
+        kwargs["folder"] = self.request.path
         return kwargs
 
     def get(self, request,**kwargs):
@@ -107,7 +110,14 @@ class MultiUploadView(FormView):
 class MultiLaunchView(FormView):
     template_name = 'multi_launch.html'
     #template_name = 'multiupload.html'
-    form_class = sRNABenchForm
+    #form_class = sRNABenchForm
+
+    def get_form_kwargs(self):
+        kwargs = super(MultiLaunchView, self).get_form_kwargs()
+        path = self.request.path
+        folder = path.split("/")[-1]
+        kwargs['folder'] = folder
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super(FormView, self).get_context_data(**kwargs)
@@ -163,9 +173,11 @@ class MultiLaunchView(FormView):
         return context
 
     def post(self, request, *args, **kwargs):
-        path = request.path
-        folder = path.split("/")[-1]
-        form = MultiURLForm(self.request.POST, self.request.FILES, dest_folder=folder)
+
+        # path = request.path
+        # folder = path.split("/")[-1]
+        # form = MultiURLForm(self.request.POST, self.request.FILES, dest_folder=folder)
+
         request.POST._mutable = True
         #print(SPECIES_PATH)
         request.POST['species'] = request.POST['species_hidden'].split(',')
@@ -175,7 +187,7 @@ class MultiLaunchView(FormView):
         return super(MultiLaunchView, self).post(request, *args, **kwargs)
 
     def form_valid(self, form):
-        form.clean()
+
 
         form.clean()
         call, pipeline_id = form.create_call()
