@@ -430,7 +430,7 @@ class sRNABenchForm(forms.Form):
         f.close()
 
         input_data = cleaned_data.get("input_hidden").split(",")
-        os.mkdir(MEDIA_ROOT,self.folder,"launched")
+        os.mkdir(os.path.join(MEDIA_ROOT,self.folder,"launched"))
         onlyfiles = [f for f in os.listdir(os.path.join(MEDIA_ROOT, pipeline_id))
                      if os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, pipeline_id), f))]
         onlyfiles.remove("SRR_files.txt")
