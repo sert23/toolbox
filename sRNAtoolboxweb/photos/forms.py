@@ -20,6 +20,8 @@ from sRNABench.models import Species
 from sRNAtoolboxweb.settings import MEDIA_ROOT, CONF, QSUB, BASE_DIR
 from sRNAtoolboxweb.utils import create_collapsable_div, render_modal
 from utils.pipeline_utils import generate_uniq_id
+import shutil
+
 
 
 class CategoriesField(forms.ModelMultipleChoiceField):
@@ -190,6 +192,7 @@ class sRNABenchForm(forms.Form):
     profile5 = forms.FileField(label='', required=False)
     profile_url1 = forms.CharField(label='Provide a URLs (one per line)', required=False, widget=forms.Textarea)
     species_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
+    input_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
 
     def __init__(self, *args, **kwargs):
         self.folder = kwargs.pop('dest_folder', None)
@@ -211,6 +214,7 @@ class sRNABenchForm(forms.Form):
                 'no_libs',
                 Field('species'),
                 Field('species_hidden', name='species_hidden'),
+                Field('input_hidden', name='input_hidden'),
                 title='Select species', c_id='2',
                 extra_title=render_modal('Species'),
                 open=True
@@ -425,8 +429,84 @@ class sRNABenchForm(forms.Form):
                 f.write(line)
         f.close()
 
+        input_data = cleaned_data.get("input_hidden").split(",")
+        os.mkdir(MEDIA_ROOT,self.folder,"launched")
+        onlyfiles = [f for f in os.listdir(os.path.join(MEDIA_ROOT, pipeline_id))
+                     if os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, pipeline_id), f))]
+        onlyfiles.remove("SRR_files.txt")
+        onlyfiles.remove("URL_files.txt")
+        onlyfiles.remove("conf.txt")
+
+        SRR_list = []
+        with open(os.path.join(MEDIA_ROOT, pipeline_id, "SRR_files.txt"), "r") as SRR_file:
+            for ix,SRR in enumerate(SRR_file.readlines()):
+                SRR_list.append(SRR.rstrip())
+        URL_list = []
+        with open(os.path.join(MEDIA_ROOT, pipeline_id, "URL_files.txt"), "r") as URL_file:
+            for ix, URL in enumerate(URL_file.readlines()):
+                URL_list.append(URL.rstrip())
+
+        general_config = " "
+        with open(os.path.join(MEDIA_ROOT,pipeline_id,"conf.txt"),"r") as conf_file:
+            general_config = conf_file.read()
+
+        job_list = []
+        for i in input_data:
+            new_id = generate_uniq_id()
+            out_dir = os.path.join(MEDIA_ROOT, new_id)
+            os.mkdir(out_dir)
+            clase, ix = i.rstrip().split("_")
+            if clase == "file":
+                input_file = onlyfiles[int(ix)]
+                full_path = os.path.join(MEDIA_ROOT,new_id,input_file)
+                shutil.copyfile(os.path.join(MEDIA_ROOT,new_id,input_file), os.path.join(out_dir,input_file))
+
+            if clase == "SRR":
+                input_file = SRR_list[int(ix)]
+                full_path = input_file
+
+            if clase == "URL":
+                url = URL_list[int(ix)]
+                dest = os.path.join(out_dir, os.path.basename(url))
+                ifile, headers = urllib.request.urlretrieve(url, filename=dest)
+                input_file = dest
+                full_path = input_file
 
 
+                #ifile, headers = urllib.request.urlretrieve(url, filename=dest)
+            line = "input=" + input_file + "\n"
+            config = line + general_config
+            conf_file_location = os.path.join(out_dir,new_id,"conf.txt")
+            with open(conf_file_location,"w") as conf_fi:
+                conf_fi.write(config)
+            name = new_id + '_bench'
+            configuration = {
+                'pipeline_id': new_id,
+                'out_dir': out_dir,
+                'name': name,
+                'conf_input': conf_file_location,
+                'type': 'sRNAbench'
+            }
+            configuration_file_path = os.path.join(out_dir, 'conf.json')
+            JobStatus.objects.create(job_name=name, pipeline_key=new_id, job_status="not_launched",
+                                     start_time=datetime.now(),
+                                     all_files=full_path,
+                                     modules_files="",
+                                     pipeline_type="sRNAbench",
+                                     )
+            with open(configuration_file_path, 'w') as conf_file:
+                json.dump(configuration, conf_file, indent=True)
+            if QSUB:
+                call = 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
+                    configuration_file_path=configuration_file_path,
+                    job_name=name,
+                    sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh'))
+                os.system(call)
+                js = JobStatus.objects.get(pipeline_key=new_id)
+                js.status.create(status_progress='sent_to_queue')
+                js.job_status = 'sent_to_queue'
+                js.save()
+            job_list.append(new_id)
         # name = pipeline_id + '_bench'
         # configuration = {
         #     'pipeline_id': pipeline_id,
