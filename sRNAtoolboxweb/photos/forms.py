@@ -508,6 +508,7 @@ class sRNABenchForm(forms.Form):
                 js.status.create(status_progress='sent_to_queue')
                 js.job_status = 'sent_to_queue'
                 js.save()
+            os.system("touch " + os.path.join(MEDIA_ROOT, self.folder, "launched", new_id))
             job_list.append(new_id)
         # name = pipeline_id + '_bench'
         # configuration = {
