@@ -158,7 +158,7 @@
     <div class="panel panel-default">
     <div class="panel-heading">
         <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapseOne">Input data</a>
+            <a data-toggle="collapse" href="#collapseOne">Uploaded data</a>
         </h4>
 
     </div>
@@ -218,3 +218,18 @@
 
 {% endblock %}
 
+<script>
+
+    var selectedItems=[];
+    function printChecked(){
+    $("input:checkbox[name=to_list]:checked").each(function() {
+    selectedItems.push($(this).val());
+    selectedItems=Array.from(new Set(selectedItems))
+    });
+    $("input:checkbox[name=to_list]:not(:checked)").each(function() {
+    selectedItems=selectedItems.filter(e => e !== $(this).val());
+    });
+    alert(selectedItems);
+    }
+
+</script>
