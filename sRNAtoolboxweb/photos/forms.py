@@ -426,7 +426,7 @@ class sRNABenchForm(forms.Form):
         f.close()
         f = open(conf_file_location, "w")
         for line in lines:
-            if not line.startswith("input=EMPTY"):
+            if not (line.startswith("input=EMPTY") or line.startswith("output=")):
                 f.write(line)
         f.close()
 
@@ -474,10 +474,10 @@ class sRNABenchForm(forms.Form):
                 input_file = dest
                 full_path = input_file
 
-
                 #ifile, headers = urllib.request.urlretrieve(url, filename=dest)
             line = "input=" + input_file + "\n"
-            config = line + general_config
+            line2= "output="+ out_dir + "\n"
+            config = line + line2 + general_config
             conf_file_location = os.path.join(out_dir,"conf.txt")
             with open(conf_file_location,"w") as conf_fi:
                 conf_fi.write(config)
