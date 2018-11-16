@@ -138,6 +138,22 @@
 });
     </script>
 
+    <script>
+
+    var selectedItems=[];
+    function printChecked(){
+    $("input:checkbox[name=to_list]:checked").each(function() {
+    selectedItems.push($(this).val());
+    selectedItems=Array.from(new Set(selectedItems))
+    });
+    $("input:checkbox[name=to_list]:not(:checked)").each(function() {
+    selectedItems=selectedItems.filter(e => e !== $(this).val());
+    });
+    alert(selectedItems);
+    }
+
+</script>
+
 
 {% endblock %}
 
@@ -218,18 +234,3 @@
 
 {% endblock %}
 
-<script>
-
-    var selectedItems=[];
-    function printChecked(){
-    $("input:checkbox[name=to_list]:checked").each(function() {
-    selectedItems.push($(this).val());
-    selectedItems=Array.from(new Set(selectedItems))
-    });
-    $("input:checkbox[name=to_list]:not(:checked)").each(function() {
-    selectedItems=selectedItems.filter(e => e !== $(this).val());
-    });
-    alert(selectedItems);
-    }
-
-</script>
