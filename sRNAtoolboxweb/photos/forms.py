@@ -478,7 +478,7 @@ class sRNABenchForm(forms.Form):
                 #ifile, headers = urllib.request.urlretrieve(url, filename=dest)
             line = "input=" + input_file + "\n"
             config = line + general_config
-            conf_file_location = os.path.join(out_dir,new_id,"conf.txt")
+            conf_file_location = os.path.join(out_dir,"conf.txt")
             with open(conf_file_location,"w") as conf_fi:
                 conf_fi.write(config)
             name = new_id + '_bench'
