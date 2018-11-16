@@ -149,8 +149,9 @@
     $("input:checkbox[name=to_list]:not(:checked)").each(function() {
     selectedItems=selectedItems.filter(e => e !== $(this).val());
     });
-    alert(selectedItems);
+{#    alert(selectedItems);#}
     document.getElementById('id_input_hidden').value = selectedItems.join();
+    alert(document.getElementById('id_input_hidden'))
     }
 
 </script>
