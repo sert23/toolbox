@@ -150,6 +150,7 @@
     selectedItems=selectedItems.filter(e => e !== $(this).val());
     });
     alert(selectedItems);
+    document.getElementById('id_input_hidden').value = selectedItems.join();
     }
 
 </script>
