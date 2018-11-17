@@ -106,7 +106,7 @@ class MultiUploadView(FormView):
             form.is_valid()
             form.clean()
             if form.is_valid():
-                url = reverse('photos:multi_launch') + folder
+                url = reverse('multi:multi_launch') + folder
             #url = reverse('photos:multi_start')
                 return redirect(url)
 
