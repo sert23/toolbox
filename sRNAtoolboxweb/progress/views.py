@@ -167,8 +167,9 @@ class JobStatusDetail(DetailView):
         context = super(JobStatusDetail, self).get_context_data(**kwargs)
         job_status = context.get('object')
         if job_status.pipeline_type == 'multiupload':
-            url = reverse('multi:multi_new')
-            return redirect(url)
+
+            context["type"] = "multi"
+            return context
 
         status = queue_Status(job_status.pipeline_key)
         if status == 'R' or status == 'E' or status == 'C':
@@ -212,6 +213,12 @@ class JobStatusDetail(DetailView):
 
     def render_to_response(self, context, **response_kwargs):
         if context:
+            if context.get("type"):
+                if context["type"] == "multi":
+                    url = reverse('multi:multi_new')
+                    return redirect(reverse(url))
+
+
             return super(JobStatusDetail, self).render_to_response(context, **response_kwargs)
 
         job_status = self.object
