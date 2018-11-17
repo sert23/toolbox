@@ -41,7 +41,7 @@ class GetIDView(RedirectView):
 def new_upload(request):
     #request.session['error_message'] = 'test'
     random_ID = generate_id()
-    url = reverse('photos:multi_new') + random_ID
+    url = reverse('multi:multi_new') + random_ID
     return redirect(url)
 
 
@@ -54,8 +54,6 @@ class MultiUploadView(FormView):
         '''This goes in the Update view'''
         kwargs = super(MultiUploadView, self).get_form_kwargs()  # put your view name in the super
 
-
-
         #kwargs["folder"] = self.request.path
         return kwargs
 
@@ -66,6 +64,11 @@ class MultiUploadView(FormView):
         if os.path.exists(os.path.join(MEDIA_ROOT,folder)):
             onlyfiles = [[f,os.path.join(MEDIA_URL, folder, f)] for f in listdir(os.path.join(MEDIA_ROOT,folder)) if
                      os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, folder), f))]
+
+            for x in ["conf.txt","SRR_files.txt","URL_files.txt"]:
+                if x in onlyfiles:
+                    onlyfiles.remove(x)
+
         else:
             onlyfiles = []
             os.mkdir(os.path.join(MEDIA_ROOT,folder))
@@ -117,7 +120,6 @@ class MultiLaunchView(FormView):
         path = self.request.path
         folder = path.split("/")[-1]
         kwargs['dest_folder'] = folder
-
         return kwargs
 
     def get_context_data(self, **kwargs):
