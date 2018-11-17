@@ -216,7 +216,7 @@ class JobStatusDetail(DetailView):
             if context.get("type"):
                 if context["type"] == "multi":
                     url = reverse('multi:multi_new')
-                    return redirect(reverse(url)+"A")
+                    return redirect(url)
 
 
             return super(JobStatusDetail, self).render_to_response(context, **response_kwargs)
