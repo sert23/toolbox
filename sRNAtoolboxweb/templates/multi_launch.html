@@ -150,10 +150,12 @@
     selectedItems=selectedItems.filter(e => e !== $(this).val());
     });
 {#    alert(selectedItems);#}
-    document.getElementById('id_input_hidden').value = selectedItems.join();
-    alert(document.getElementById('id_input_hidden').value)
-    }
 
+    }
+    function saveChecked() {
+        document.getElementById('id_input_hidden').value = selectedItems.join();
+        alert(document.getElementById('id_input_hidden').value)
+    }
 </script>
 
 
