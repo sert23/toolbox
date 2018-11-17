@@ -12,7 +12,7 @@ from rest_framework.generics import UpdateAPIView, RetrieveAPIView, CreateAPIVie
 from progress.models import JobStatus, Status
 from sRNAtoolboxweb.settings import CONF
 from progress.serializers import JobStatusSerializer, StatusSerializer
-
+from django.core.urlresolvers import reverse
 
 class Msg():
     """
@@ -166,6 +166,10 @@ class JobStatusDetail(DetailView):
         # Call the base implementation first to get a context
         context = super(JobStatusDetail, self).get_context_data(**kwargs)
         job_status = context.get('object')
+        if job_status.pipeline_type == 'multiupload':
+            url = reverse('multi:multi_new')
+            return redirect(url)
+
         status = queue_Status(job_status.pipeline_key)
         if status == 'R' or status == 'E' or status == 'C':
             if job_status.job_status == 'sent_to_queue':
