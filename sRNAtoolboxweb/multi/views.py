@@ -162,7 +162,8 @@ class MultiLaunchView(FormView):
         js_data = json.dumps(table_data)
         js_headers = json.dumps([{ "title": "Input" },
                                 { "title": "Status" },
-                                { "title": "Select" }])
+                                # { "title": "Select" }])
+                                { "title": '<input type="checkbox" id="flowcheckall" value="" />&nbsp;All' }])
         # print(js_data)
         context["table_data"] = js_data
         context["table_headers"] = js_headers
