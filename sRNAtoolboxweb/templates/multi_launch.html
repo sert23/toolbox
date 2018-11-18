@@ -226,19 +226,19 @@
     },
         columns: received_cols,
     } );
-        var allPages = table.fnGetNodes();
-        $('body').on('click', '#selectAll', function () {
-    if ($(this).hasClass('allChecked')) {
-        $('input[name="to_list"]', allPages).prop('checked', false);
+{#        var allPages = table.fnGetNodes();#}
+{#        $('body').on('click', '#selectAll', function () {#}
+{#    if ($(this).hasClass('allChecked')) {#}
+{#        $('input[name="to_list"]', allPages).prop('checked', false);#}
 {#        $('input[name="to_list"]', '#jobs').prop('checked', false);#}
 {#        $('input[type="checkbox"]', '#jobs').prop('checked', false);#}
-    } else {
-        $('input[name="to_list"]', all).prop('checked', true);
+{#    } else {#}
+{#        $('input[name="to_list"]', all).prop('checked', true);#}
 {#        $('input[name="to_list"]', '#jobs').prop('checked', true);#}
 {#        $('input[type="checkbox"]', '#jobs').prop('checked', true);#}
-    }
-    $(this).toggleClass('allChecked');
-  });
+{#    }#}
+{#    $(this).toggleClass('allChecked');#}
+{#  });#}
 
     $('#jobs tbody').on('click', 'tr', function () {
         var data = table.row( this ).data();
@@ -256,6 +256,8 @@
         	cols[i].querySelector("input[type='checkbox']").checked = state;
         }
 });
+
+
 
 </script>
 
