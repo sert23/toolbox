@@ -233,14 +233,16 @@
         printChecked();
     } );
 } );
-
+    var allPages = table.fnGetNodes();
     $(document).ready(function () {
   $('body').on('click', '#selectAll', function () {
     if ($(this).hasClass('allChecked')) {
-        $('input[name="to_list"]', '#jobs').prop('checked', false);
+        $('input[name="to_list"]', allPages).prop('checked', false);
+{#        $('input[name="to_list"]', '#jobs').prop('checked', false);#}
 {#        $('input[type="checkbox"]', '#jobs').prop('checked', false);#}
     } else {
-        $('input[name="to_list"]', '#jobs').prop('checked', true);
+        $('input[name="to_list"]', allPages).prop('checked', true);
+{#        $('input[name="to_list"]', '#jobs').prop('checked', true);#}
 {#        $('input[type="checkbox"]', '#jobs').prop('checked', true);#}
     }
     $(this).toggleClass('allChecked');
