@@ -226,8 +226,8 @@
     },
         columns: received_cols,
     } );
-{#    var allPages = table.fnGetNodes();#}
-    var allPages = table.cells( ).nodes( );
+    var allPages = table.fnGetNodes();
+{#    var allPages = table.cells( ).nodes( );#}
 
     $('body').on('click', '#selectAll', function () {
         if ($(this).hasClass('allChecked')) {
