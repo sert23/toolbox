@@ -226,20 +226,7 @@
     },
         columns: received_cols,
     } );
-
-    $('#jobs tbody').on('click', 'tr', function () {
-        var data = table.row( this ).data();
-//        alert( 'You clicked on '+data[2]+'\'s row' );
-        printChecked();
-    } );
-} );
-
-    $(document).ready(function () {
-    var oTable = $('#jobs').dataTable({
-        stateSave: true
-    });
-
-    var allPages = oTable.fnGetNodes();
+    var allPages = table.fnGetNodes();
 
     $('body').on('click', '#selectAll', function () {
         if ($(this).hasClass('allChecked')) {
@@ -249,7 +236,29 @@
         }
         $(this).toggleClass('allChecked');
     })
-});
+    $('#jobs tbody').on('click', 'tr', function () {
+        var data = table.row( this ).data();
+//        alert( 'You clicked on '+data[2]+'\'s row' );
+        printChecked();
+    } );
+} );
+
+{#    $(document).ready(function () {#}
+{#    var oTable = $('#jobs').dataTable({#}
+{#        stateSave: true#}
+{#    });#}
+{##}
+{#    var allPages = oTable.fnGetNodes();#}
+{##}
+{#    $('body').on('click', '#selectAll', function () {#}
+{#        if ($(this).hasClass('allChecked')) {#}
+{#            $('input[type="checkbox"]', allPages).prop('checked', false);#}
+{#        } else {#}
+{#            $('input[type="checkbox"]', allPages).prop('checked', true);#}
+{#        }#}
+{#        $(this).toggleClass('allChecked');#}
+{#    })#}
+{#});#}
 
 {#    var allPages = table.fnGetNodes();#}
 {#    $(document).ready(function () {#}
