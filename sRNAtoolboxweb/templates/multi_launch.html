@@ -242,7 +242,9 @@
 
         	if (state) {
                 selectedItems.push(cols[i].querySelector("input[type='checkbox']").value);
-                            }
+                            }else{
+        	    selectedItems =[];
+            }
 {#        	alert(cols[i].querySelector("input[type='checkbox']").value)#}
             alert(selectedItems)
         }
