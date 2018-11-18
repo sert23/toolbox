@@ -226,17 +226,17 @@
     },
         columns: received_cols,
     } );
-    var allPages = table.fnGetNodes();
+{#    var allPages = table.fnGetNodes();#}
 {#    var allPages = table.cells( ).nodes( );#}
-
-    $('body').on('click', '#selectAll', function () {
-        if ($(this).hasClass('allChecked')) {
-            $('input[type="checkbox"]', allPages).prop('checked', false);
-        } else {
-            $('input[type="checkbox"]', allPages).prop('checked', true);
-        }
-        $(this).toggleClass('allChecked');
-    })
+{##}
+{#    $('body').on('click', '#selectAll', function () {#}
+{#        if ($(this).hasClass('allChecked')) {#}
+{#            $('input[type="checkbox"]', allPages).prop('checked', false);#}
+{#        } else {#}
+{#            $('input[type="checkbox"]', allPages).prop('checked', true);#}
+{#        }#}
+{#        $(this).toggleClass('allChecked');#}
+{#    })#}
     $('#jobs tbody').on('click', 'tr', function () {
         var data = table.row( this ).data();
 //        alert( 'You clicked on '+data[2]+'\'s row' );
