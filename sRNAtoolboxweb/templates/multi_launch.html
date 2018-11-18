@@ -237,9 +237,9 @@
     $(document).ready(function () {
   $('#jobs tbody').on('click', '#selectAll', function () {
     if ($(this).hasClass('allChecked')) {
-        $('input[type="checkbox"]', '#example').prop('checked', false);
+        $('input[type="checkbox"]', '#jobs').prop('checked', false);
     } else {
-        $('input[type="checkbox"]', '#example').prop('checked', true);
+        $('input[type="checkbox"]', '#jobs').prop('checked', true);
     }
     $(this).toggleClass('allChecked');
   })
