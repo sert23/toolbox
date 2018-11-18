@@ -3,7 +3,7 @@ import time
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views import View
-from django.views.generic import FormView
+from django.views.generic import FormView, DetailView
 
 from .forms import PhotoForm, MultiURLForm,sRNABenchForm
 from .models import Photo
@@ -31,11 +31,6 @@ def generate_id():
         if not JobStatus.objects.filter(pipeline_key=pipeline_id):
             return pipeline_id
 
-class GetIDView(RedirectView):
-    #template_name = 'home/about.html'
-    random_ID = generate_uniq_id()
-    link = reverse_lazy('photos:progress_bar_upload')
-    #url = link + "new/" +random_ID
 
 
 def new_upload(request):
@@ -204,6 +199,13 @@ class MultiLaunchView(FormView):
 
         # call, pipeline_id = form.create_call()
         # self.success_url = reverse_lazy('mirconstarget') + '?id=' + pipeline_id
+
+
+class MultiStatusView(DetailView):
+    model = JobStatus
+    slug_field = 'pipeline_key'
+    slug_url_kwarg = 'pipeline_id'
+    template_name = 'progress.html'
 
 
 class DragAndDropUploadView(View):
