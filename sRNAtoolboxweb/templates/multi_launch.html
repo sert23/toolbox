@@ -149,7 +149,7 @@
     $("input:checkbox[name=to_list]:not(:checked)").each(function() {
     selectedItems=selectedItems.filter(e => e !== $(this).val());
     });
-{#    alert(selectedItems);#}
+    alert(selectedItems);
 
     }
     function saveChecked() {
