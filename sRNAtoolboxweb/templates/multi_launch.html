@@ -233,21 +233,39 @@
         printChecked();
     } );
 } );
-    var allPages = table.fnGetNodes();
+
     $(document).ready(function () {
-  $('body').on('click', '#selectAll', function () {
-    if ($(this).hasClass('allChecked')) {
-        $('input[name="to_list"]', allPages).prop('checked', false);
+    var oTable = $('#jobs').dataTable({
+        stateSave: true
+    });
+
+    var allPages = oTable.fnGetNodes();
+
+    $('body').on('click', '#selectAll', function () {
+        if ($(this).hasClass('allChecked')) {
+            $('input[type="checkbox"]', allPages).prop('checked', false);
+        } else {
+            $('input[type="checkbox"]', allPages).prop('checked', true);
+        }
+        $(this).toggleClass('allChecked');
+    })
+});
+
+{#    var allPages = table.fnGetNodes();#}
+{#    $(document).ready(function () {#}
+{#  $('body').on('click', '#selectAll', function () {#}
+{#    if ($(this).hasClass('allChecked')) {#}
+{#        $('input[name="to_list"]', allPages).prop('checked', false);#}
 {#        $('input[name="to_list"]', '#jobs').prop('checked', false);#}
 {#        $('input[type="checkbox"]', '#jobs').prop('checked', false);#}
-    } else {
-        $('input[name="to_list"]', allPages).prop('checked', true);
+{#    } else {#}
+{#        $('input[name="to_list"]', allPages).prop('checked', true);#}
 {#        $('input[name="to_list"]', '#jobs').prop('checked', true);#}
 {#        $('input[type="checkbox"]', '#jobs').prop('checked', true);#}
-    }
-    $(this).toggleClass('allChecked');
-  })
-});
+{#    }#}
+{#    $(this).toggleClass('allChecked');#}
+{#  })#}
+{#{);#}
 
 </script>
 
