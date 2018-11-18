@@ -215,7 +215,8 @@ class JobStatusDetail(DetailView):
         if context:
             if context.get("type"):
                 if context["type"] == "multi":
-                    url = reverse('multi:multi_new')
+                    job_status = context.get('object')
+                    url = reverse('multi:multi_status') + job_status.pipeline_key
                     return redirect(url)
 
 
