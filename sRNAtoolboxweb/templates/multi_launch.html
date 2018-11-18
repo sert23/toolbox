@@ -235,7 +235,7 @@
 } );
 
     $(document).ready(function () {
-  $('#jobs tbody').on('click', '#selectAll', function () {
+  $('body').on('click', '#selectAll', function () {
     if ($(this).hasClass('allChecked')) {
         $('input[type="checkbox"]', '#jobs').prop('checked', false);
     } else {
