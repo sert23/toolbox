@@ -245,9 +245,7 @@
 //        alert( 'You clicked on '+data[2]+'\'s row' );
         printChecked();
     } );
-} );
-
-     $("#flowcheckall").click(function () {
+    $("#flowcheckall").click(function () {
         //$('#flow-table tbody input[type="checkbox"]').prop('checked', this.checked);
         var cols = table.column(2).nodes(),
             state = this.checked;
@@ -256,6 +254,9 @@
         	cols[i].querySelector("input[type='checkbox']").checked = state;
         }
 });
+} );
+
+
 
 
 
