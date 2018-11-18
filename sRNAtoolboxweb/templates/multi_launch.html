@@ -226,7 +226,8 @@
     },
         columns: received_cols,
     } );
-    var allPages = table.fnGetNodes();
+{#    var allPages = table.fnGetNodes();#}
+    var allPages = table.cells( ).nodes( );
 
     $('body').on('click', '#selectAll', function () {
         if ($(this).hasClass('allChecked')) {
@@ -243,22 +244,22 @@
     } );
 } );
 
-{#    $(document).ready(function () {#}
-{#    var oTable = $('#jobs').dataTable({#}
-{#        stateSave: true#}
-{#    });#}
-{##}
-{#    var allPages = oTable.fnGetNodes();#}
-{##}
-{#    $('body').on('click', '#selectAll', function () {#}
-{#        if ($(this).hasClass('allChecked')) {#}
-{#            $('input[type="checkbox"]', allPages).prop('checked', false);#}
-{#        } else {#}
-{#            $('input[type="checkbox"]', allPages).prop('checked', true);#}
-{#        }#}
-{#        $(this).toggleClass('allChecked');#}
-{#    })#}
-{#});#}
+    $(document).ready(function () {
+    var oTable = $('#jobs').dataTable({
+        stateSave: true
+    });
+
+    var allPages = oTable.fnGetNodes();
+
+    $('body').on('click', '#selectAll', function () {
+        if ($(this).hasClass('allChecked')) {
+            $('input[type="checkbox"]', allPages).prop('checked', false);
+        } else {
+            $('input[type="checkbox"]', allPages).prop('checked', true);
+        }
+        $(this).toggleClass('allChecked');
+    })
+
 
 {#    var allPages = table.fnGetNodes();#}
 {#    $(document).ready(function () {#}
