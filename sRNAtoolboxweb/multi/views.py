@@ -225,7 +225,7 @@ class MultiStatusView(DetailView):
                 job_stat = "Sent to queue"
             if job_stat == "Running":
                 context["running"] = True
-            start = str(new_record.start_time)
+            start = new_record.start_time.strftime("%H:%M, %d %b %Y")
             finish = str(new_record.finish_time)
             # job_stat = "sent_to_queue"
             click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
