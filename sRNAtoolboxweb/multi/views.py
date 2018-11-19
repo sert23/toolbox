@@ -14,7 +14,7 @@ from django.views.generic import RedirectView
 from django.shortcuts import redirect
 from os import listdir
 import os
-from sRNAtoolboxweb.settings import MEDIA_ROOT, MEDIA_URL
+from sRNAtoolboxweb.settings import MEDIA_ROOT, MEDIA_URL, SUB_SITE
 from progress.models import JobStatus
 import shutil
 import datetime
@@ -217,11 +217,11 @@ class MultiStatusView(DetailView):
 
         jobs_tbody = []
         for id in launched_ids:
-            job = '<a href="'+MEDIA_URL+'/jobstatus/' + id +'" target="_blank" >' + id +'</a>'
+            job = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" >' + id +'</a>'
             new_record = JobStatus.objects.get(pipeline_key=id)
             job_stat = new_record.job_status
             # job_stat = "sent_to_queue"
-            click = '<a href="'+MEDIA_URL+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
+            click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
             jobs_tbody.append([job, job_stat, click])
 
         js_data = json.dumps(jobs_tbody)
