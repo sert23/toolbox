@@ -216,7 +216,7 @@ class MultiStatusView(DetailView):
         launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder,f))]
 
         jobs_tbody = []
-        running = False
+        context["running"] = False
         for id in launched_ids:
             job = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" >' + id +'</a>'
             new_record = JobStatus.objects.get(pipeline_key=id)
