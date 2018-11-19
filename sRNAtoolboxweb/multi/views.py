@@ -224,7 +224,7 @@ class MultiStatusView(DetailView):
             if job_stat == "sent_to_queue":
                 job_stat = "Sent to queue"
             if job_stat == "Running":
-                context["running"] = False
+                context["running"] = True
             # job_stat = "sent_to_queue"
             click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
             jobs_tbody.append([job, job_stat, click])
