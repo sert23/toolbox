@@ -208,7 +208,7 @@ class MultiStatusView(DetailView):
     slug_url_kwarg = 'pipeline_id'
     template_name = 'multi_status.html'
 
-    def render_to_response(self, context, readlines=f.readlines(), **response_kwargs):
+    def render_to_response(self, context,  **response_kwargs):
 
         job_status = context.get('object')
         pipeline_id = job_status.pipeline_key
