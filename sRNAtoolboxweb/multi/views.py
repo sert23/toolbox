@@ -208,7 +208,7 @@ class MultiStatusView(DetailView):
     slug_url_kwarg = 'pipeline_id'
     template_name = 'multi_status.html'
 
-    def render_to_response(self, context, **response_kwargs):
+    def render_to_response(self, context, readlines=f.readlines(), **response_kwargs):
 
         job_status = context.get('object')
         pipeline_id = job_status.pipeline_key
@@ -233,7 +233,7 @@ class MultiStatusView(DetailView):
                 finish = "-"
             input_config = os.path.join(MEDIA_ROOT,id,"conf.txt")
             with open(input_config) as f:
-                input_line = f[0]
+                input_line = readlines()[0]
             # job_stat = "sent_to_queue"
             click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
             jobs_tbody.append([job, job_stat, start, input_line, click])
