@@ -2,9 +2,9 @@
 {% load staticfiles %}
 
 {% block header %}
-
-<meta http-equiv="refresh" content="5" >
-
+{% if running %}
+<meta http-equiv="refresh" content="90" >
+{% endif %}
 {% endblock %}
 
 {% block js %}
