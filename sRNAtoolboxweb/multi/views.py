@@ -206,7 +206,21 @@ class MultiStatusView(DetailView):
     model = JobStatus
     slug_field = 'pipeline_key'
     slug_url_kwarg = 'pipeline_id'
-    template_name = 'progress.html'
+    template_name = 'multi_status.html'
+
+    def render_to_response(self, context, **response_kwargs):
+
+        job_status = context.get('object')
+        pipeline_id = job_status.pipeline_id
+        jobs_folder = os.path.join(MEDIA_ROOT,pipeline_id,"launched")
+        launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder,f))]
+
+        jobs_tbody = []
+        for id in launched_ids:
+            job = '<a href="/jobstatus/' + id +'" target="_blank" >' + id +'</a>'
+            new_record = JobStatus.objects.get(pipeline_key=id)
+            job_stat = new_record.job_status
+
 
 
 class DragAndDropUploadView(View):
