@@ -220,6 +220,20 @@ class MultiStatusView(DetailView):
             job = '<a href="/jobstatus/' + id +'" target="_blank" >' + id +'</a>'
             new_record = JobStatus.objects.get(pipeline_key=id)
             job_stat = new_record.job_status
+            click = '<a href="/jobstatus/' + id +'" target="_blank" > Go to results </a>'
+            jobs_tbody.append([job, job_status, click])
+
+        js_data = json.dumps(jobs_tbody)
+        js_headers = json.dumps([{"title": "job ID"},
+                                 {"title": "Status"},
+                                 # { "title": "Select" }])
+                                 {"title": 'Go to'}])
+        context["tbody"] = js_data
+        context["thead"] = js_headers
+        context["njobs"] = len(jobs_tbody)
+        context["id"] = pipeline_id
+
+        return super(MultiStatusView, self).render_to_response(context, **response_kwargs)
 
 
 
