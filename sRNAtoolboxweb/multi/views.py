@@ -236,7 +236,8 @@ class MultiStatusView(DetailView):
                 input_line = f.readlines()[0]
             # job_stat = "sent_to_queue"
             click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
-            jobs_tbody.append([job, job_stat, start, input_line, click])
+
+            jobs_tbody.append([job, job_stat, start, input_line[7:], click])
             #jobs_tbody.append([job, job_stat, start, finish, click])
 
         js_data = json.dumps(jobs_tbody)
