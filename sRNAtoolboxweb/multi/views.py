@@ -219,9 +219,10 @@ class MultiStatusView(DetailView):
         for id in launched_ids:
             job = '<a href="/jobstatus/' + id +'" target="_blank" >' + id +'</a>'
             new_record = JobStatus.objects.get(pipeline_key=id)
-            job_stat = str(new_record.job_status[-1])
+            job_stat = new_record.job_status
+            # job_stat = "sent_to_queue"
             click = '<a href="/jobstatus/' + id +'" target="_blank" > Go to results </a>'
-            jobs_tbody.append([job, job_status, click])
+            jobs_tbody.append([job, job_stat, click])
 
         js_data = json.dumps(jobs_tbody)
         js_headers = json.dumps([{"title": "job ID"},
