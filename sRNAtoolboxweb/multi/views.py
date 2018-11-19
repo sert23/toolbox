@@ -231,9 +231,13 @@ class MultiStatusView(DetailView):
                 finish = new_record.finish_time.strftime("%H:%M, %d %b %Y")
             else:
                 finish = "-"
+            input_config = os.path.join(MEDIA_ROOT,id,"conf.txt")
+            with open(input_config) as f:
+                input_line = f[0]
             # job_stat = "sent_to_queue"
             click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
-            jobs_tbody.append([job, job_stat, start, finish, click])
+            jobs_tbody.append([job, job_stat, start, input_line, click])
+            #jobs_tbody.append([job, job_stat, start, finish, click])
 
         js_data = json.dumps(jobs_tbody)
         js_headers = json.dumps([{"title": "job ID"},
