@@ -220,6 +220,8 @@ class MultiStatusView(DetailView):
             job = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" >' + id +'</a>'
             new_record = JobStatus.objects.get(pipeline_key=id)
             job_stat = new_record.job_status
+            if job_stat == "sent_to_queue":
+                job_stat = "Sent to queue"
             # job_stat = "sent_to_queue"
             click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
             jobs_tbody.append([job, job_stat, click])
