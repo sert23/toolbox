@@ -216,12 +216,15 @@ class MultiStatusView(DetailView):
         launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder,f))]
 
         jobs_tbody = []
+        running = False
         for id in launched_ids:
             job = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" >' + id +'</a>'
             new_record = JobStatus.objects.get(pipeline_key=id)
             job_stat = new_record.job_status
             if job_stat == "sent_to_queue":
                 job_stat = "Sent to queue"
+            if job_stat == "Running":
+                context["running"] = True
             # job_stat = "sent_to_queue"
             click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
             jobs_tbody.append([job, job_stat, click])
