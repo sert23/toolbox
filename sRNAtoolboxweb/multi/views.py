@@ -211,7 +211,7 @@ class MultiStatusView(DetailView):
     def render_to_response(self, context, **response_kwargs):
 
         job_status = context.get('object')
-        pipeline_id = job_status.pipeline_id
+        pipeline_id = job_status.pipeline_key
         jobs_folder = os.path.join(MEDIA_ROOT,pipeline_id,"launched")
         launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder,f))]
 
