@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block header %}
+{% if running %}
+<meta http-equiv="refresh" content="5" >
+{% endif %}
+{% endblock %}
+
+
+
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">{{ tool }}</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+
+            <div class="row">
+            <div class="col-lg-12">
+
+                {%  if url %}
+                    <p class="text-success"> The job has been launched. The result will appear in <a href="{{settings.SUB_SITE}}/jobstatus/{{ id }}"> this page.</a></p>
+                    <p class="text-primary"> Your Job ID is: {{ id }}</p>
+                      <p class="text-warning">  Some analysis may take time, please be patient. You can bookmark <a href="{{settings.SUB_SITE}}/jobstatus/{{ id }}"> <i class="fa fa-bookmark fa-fw"></i> this page.</a></p>
+                {% endif %}
+
+            </div>
+            </div>
+
+
+
+            <div class="col-lg-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                       <i class="fa fa-tasks fa-fw"></i> Job Progress
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        {% for msg in msgs %}
+                            {% if msg.type == "info" %}
+                                <div class="alert alert-info">
+                                    {{ msg.text }}
+                                </div>
+                            {% elif msg.type == "warning" %}
+                                <div class="alert alert-warning">
+                                    {{ msg.text }}
+                                </div>
+                            {% elif msg.type == "error" %}
+                                <div class="alert alert-danger">
+                                    {{ msg.text }}
+                                </div>
+                            {% elif msg.type == "success" %}
+                                <div class="alert alert-success">
+                                    {{ msg.text }}
+                                </div>
+                            {% endif %}
+                        {% empty %}
+                        {% endfor %}
+
+                    </div>
+                    <!-- .panel-body -->
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+
+
+{% endblock %}
+
+
