@@ -232,8 +232,8 @@ class MultiStatusView(DetailView):
             else:
                 finish = "-"
             input_config = os.path.join(MEDIA_ROOT,id,"conf.txt")
-            with open(input_config) as f:
-                input_line = readlines()[0]
+            with open(input_config,"r") as f:
+                input_line = f.readlines()[0]
             # job_stat = "sent_to_queue"
             click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
             jobs_tbody.append([job, job_stat, start, input_line, click])
