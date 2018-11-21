@@ -131,14 +131,15 @@
 
 function toggleFields() {
 {#    if ($("#age").val() <= 13)#}
-    if ( jQuery.isEmptyObject(jQuery('#id_species_hidden')))
-{#    if ( isEmpty($("#id_species")))#}
-        $("#genome-div").hide() , alert(jQuery('#id_species_hidden').val());
+    if ( document.getElementById('id_species_hidden').value){
 
-    else
         $("#genome-div").show();
-        alert(jQuery('#id_species_hidden').val());
-}
+                    }
+{#    if ( isEmpty($("#id_species")))#}
+
+    else{
+        $("#genome-div").hide();
+    }}
 
 </script>
 
@@ -158,9 +159,8 @@ function toggleFields() {
                 } else{
                     document.getElementById('id_species_hidden').value = "" ;
                 }
-                    alert(document.getElementById('id_species_hidden').value);
-
-{#                    toggleFields();#}
+{#                    alert(document.getElementById('id_species_hidden').value);#}
+                    toggleFields();
 {#                alert(jQuery('#id_species').val().join(','));#}
 
             }
