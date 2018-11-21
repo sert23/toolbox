@@ -131,10 +131,10 @@
 
 function toggleFields() {
 {#    if ($("#age").val() <= 13)#}
-    if ( 4 === 13)
-        $("#genome-div").show();
-    else
+    if ( isEmpty($("#id_species_hidden")))
         $("#genome-div").hide();
+    else
+        $("#genome-div").show();
 }
 
 </script>
