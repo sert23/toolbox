@@ -179,8 +179,8 @@ class sRNABenchForm(forms.Form):
             create_collapsable_div(
                 Field('species'),
                 Field('species_hidden', name='species_hidden'),
-                'library_mode',
-                'no_libs',
+                Div('library_mode', 'no_libs', css_id='genome-div'),
+
                 title='Select species', c_id='2',
                 extra_title=render_modal('Species'),
                 open=True
