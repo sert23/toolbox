@@ -4,12 +4,12 @@
     Choose Reads File Input
 {% endblock %}
 {% block text %}
-<p> There are 4 ways you can provide reads for sRNAbench to profile:</p><br />
+<p> There are 4 ways you can provide reads for sRNAbench to profile:</p>
     <ul>
   <li>Upload a file (typically fastq or fastq.gz)</li>
   <li>Provide a link/URL with your data (it will be downloaded and then profiled) </li>
   <li>Provide an accession for a SRA run (they start with SRR,ERR or DRR e.g. <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR1563062">SRR1563062</a>)</li>
-  <li>Provide an ID from a previous sRNAbench Job to reuse uploaded input. </li>
+  <li>Provide an ID from a previous sRNAbench Job to reuse uploaded input (e.g. <a href="{{ settings.SUB_SITE }}/jobstatus/UBNMV10I6X5S169">UBNMV10I6X5S169</a>) </li>
     </ul>
 
 
