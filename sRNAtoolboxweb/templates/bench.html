@@ -152,7 +152,7 @@ function toggleFields() {
             onDropdownHidden: function (e) {
                 document.getElementById('id_species_hidden').value = "None";
 
-                if(alert(document.getElementById('id_species').value)){
+                if(document.getElementById('id_species').value){
                     alert("Something inside")
                 }
 
