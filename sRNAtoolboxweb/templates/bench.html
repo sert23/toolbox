@@ -150,20 +150,17 @@ function toggleFields() {
             filterBehavior: 'both',
             maxHeight: 300,
             onDropdownHidden: function (e) {
-                document.getElementById('id_species_hidden').value = "None";
 
                 if(document.getElementById('id_species').value){
-                    alert("Something inside")
-                }
-
-                jQuery('#id_species_hidden').val(jQuery('#id_species').val().map(function(item) {
+                   jQuery('#id_species_hidden').val(jQuery('#id_species').val().map(function(item) {
 {#                    if (item){#}
-                    if ({}){
-                    alert("heeeey");
-                return item.split(':')[0];}
-                    else {
-                        return "None"}}).join(','));
-                    toggleFields();
+                return item.split(':')[0]}).join(','));
+                } else{
+                    document.getElementById('id_species_hidden').value = "" ;
+                }
+                    alert("id_species_hidden");
+
+{#                    toggleFields();#}
 {#                alert(jQuery('#id_species').val().join(','));#}
 
             }
