@@ -92,7 +92,7 @@ class sRNABenchForm(forms.Form):
     # species
     library_mode = forms.BooleanField(label='Do not map to genome (Library mode)', required=False)
     no_libs = forms.BooleanField(label='Do not profile other ncRNAs  (you are interested in known microRNAs only!)', required=False)
-    species = CategoriesField(queryset=m, required=False)
+    species = CategoriesField(queryset=m, required=False, label="Species"+ render_modal('species_dropdown'))
 
     # Adapter Trimming<div class="alert alert-danger">
     #guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence<strong style="color:Red;"> (not recommended!)</strong>'), required=False)
