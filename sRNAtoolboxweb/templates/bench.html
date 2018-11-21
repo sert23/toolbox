@@ -127,6 +127,17 @@
 
 {% block js %}
 
+<script>
+
+function toggleFields() {
+{#    if ($("#age").val() <= 13)#}
+    if ( 4 === 13)
+        $("#genome-div").show();
+    else
+        $("#genome-div").hide();
+}
+
+</script>
 
     <script>
     jQuery(document).ready(function() {
@@ -136,7 +147,7 @@
             filterBehavior: 'both',
             maxHeight: 300,
             onDropdownHidden: function (e) {
-
+                toggleFields();
                 jQuery('#id_species_hidden').val(jQuery('#id_species').val().map(function(item) {
                 return item.split(':')[0];}).join(','));
 {#                alert(jQuery('#id_species').val().join(','));#}
