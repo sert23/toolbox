@@ -131,7 +131,8 @@
 
 function toggleFields() {
 {#    if ($("#age").val() <= 13)#}
-    if ( isEmpty($("#id_species")))
+    if ( jQuery.isEmptyObject({}))
+{#    if ( isEmpty($("#id_species")))#}
         $("#genome-div").hide();
     else
         $("#genome-div").show();
