@@ -106,7 +106,7 @@ class sRNABenchForm(forms.Form):
 
     #Reads preprocessing
 
-    protocols = [("Illumina","Illumina TrueSeq (280916)" +render_modal('SRNAinput')),
+    protocols = [("Illumina","Illumina TrueSeq (280916)" + mark_safe(render_modal('SRNAinput'))),
                 ("NEBnext", "NEBnext"),
                 ("Bioo", "Bioo Scientific Nextflex (v2,v3)"),
                 ("SMARTer", "Clonetech SMARTer"),
