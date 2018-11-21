@@ -150,7 +150,7 @@ function toggleFields() {
             filterBehavior: 'both',
             maxHeight: 300,
             onDropdownHidden: function (e) {
-                jQuery('#id_species_hidden').value = "None";
+                jQuery('#id_species_hidden').val("None");
                 alert(jQuery('#id_species_hidden').value);
                 jQuery('#id_species_hidden').val(jQuery('#id_species').val().map(function(item) {
 {#                    if (item){#}
