@@ -90,7 +90,7 @@ class sRNABenchForm(forms.Form):
     job_name = forms.CharField(label='Reuse input from previous job using jobID',
                              required=False)
     # species
-    library_mode = forms.BooleanField(label='Do not map to genome (Library mode)', required=False)
+    library_mode = forms.BooleanField(label='Do not map to genome (Library mode)' + render_modal('library_mode'), required=False)
     no_libs = forms.BooleanField(label='Do not profile other ncRNAs  (you are interested in known microRNAs only!)', required=False)
     species = CategoriesField(queryset=m, required=False, label="Species"+ render_modal('species_dropdown'))
 
