@@ -163,7 +163,7 @@ class sRNABenchForm(forms.Form):
                     )
             ),
                 title="Choose your input",
-                extra_title=render_modal('Species'),
+                extra_title=render_modal('Choose_Input'),
                 c_id='1',
                 open=True
                 ),
