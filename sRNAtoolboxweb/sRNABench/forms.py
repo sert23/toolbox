@@ -199,7 +199,7 @@ class sRNABenchForm(forms.Form):
             create_collapsable_div(
                 Fieldset(
                     'Reads preprocessing',
-                    Div(InlineRadios('library_protocols'), css_class="col-md-12")),
+                    Div(InlineRadios('library_protocol'), css_class="col-md-12")),
                 title='Reads preprocessing', c_id='35',
                 open=True
             ),
