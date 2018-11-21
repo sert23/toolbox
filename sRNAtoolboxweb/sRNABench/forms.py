@@ -87,7 +87,7 @@ class sRNABenchForm(forms.Form):
                             required=False)
     sra_input = forms.CharField(label='Or provide a SRA ID (starting with SRR or ERR)', required=False)
     url = forms.URLField(label=mark_safe('Or provide a URL for big files <strong class="text-success"> (recommended!)</strong>'), required=False)
-    job_name = forms.CharField(label='Provide a Job Name.  (Leave blank to use fileName)',
+    job_name = forms.CharField(label='Reuse input from previous job using jobID',
                              required=False)
     # species
     library_mode = forms.BooleanField(label='Do not map to genome (Library mode)', required=False)
@@ -177,13 +177,14 @@ class sRNABenchForm(forms.Form):
             # ),
 
             create_collapsable_div(
-                'library_mode',
-                'no_libs',
                 Field('species'),
                 Field('species_hidden', name='species_hidden'),
+                'library_mode',
+                'no_libs',
                 title='Select species', c_id='2',
                 extra_title=render_modal('Species'),
                 open=True
+
             ),
 
             create_collapsable_div(
