@@ -200,7 +200,7 @@ class sRNABenchForm(forms.Form):
                 Fieldset(
                     'Reads preprocessing',
                     Div(InlineRadios('library_protocols'), css_class="col-md-12"),
-                title='Adapter Trimming', c_id='35',
+                title='Reads preprocessing', c_id='35',
                 open=True
             )),
 
