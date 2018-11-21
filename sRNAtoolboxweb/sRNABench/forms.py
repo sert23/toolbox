@@ -86,7 +86,7 @@ class sRNABenchForm(forms.Form):
     ifile = forms.FileField(label='Upload the reads (fastq.gz, fa.gz or rc.gz)' + render_modal('SRNAinput'),
                             required=False)
     sra_input = forms.CharField(label='Or provide a SRA ID (starting with SRR or ERR)', required=False)
-    url = forms.URLField(label=mark_safe('Or provide a URL for big files <strong class="text-success"> (recommended!)</strong>'), required=False)
+    url = forms.URLField(label=mark_safe('Or provide a URL for large files <strong class="text-success"> (recommended!)</strong>'), required=False)
     job_name = forms.CharField(label='Reuse input from previous job using jobID',
                              required=False)
     # species
@@ -163,6 +163,7 @@ class sRNABenchForm(forms.Form):
                     )
             ),
                 title="Choose your input",
+                extra_title=render_modal('Species'),
                 c_id='1',
                 open=True
                 ),
