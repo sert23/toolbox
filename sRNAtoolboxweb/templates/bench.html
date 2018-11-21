@@ -152,7 +152,9 @@ function toggleFields() {
             onDropdownHidden: function (e) {
                 toggleFields();
                 jQuery('#id_species_hidden').val(jQuery('#id_species').val().map(function(item) {
+                    alert(item);
                 return item.split(':')[0];}).join(','));
+
 {#                alert(jQuery('#id_species').val().join(','));#}
 
             }
