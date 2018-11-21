@@ -104,6 +104,15 @@ class sRNABenchForm(forms.Form):
     adapter_mismatch = forms.IntegerField(label='Max. mismatches in adapter detection', max_value=2, min_value=0, initial=1)
     adapter_recursive_trimming = forms.BooleanField(label='Recursive Adapter trimming', required=False, initial=False)
 
+    #Reads preprocessing
+
+    protocols = [("Illumina","Illumina TrueSeq (280916)"),
+                ("NEBnext", "NEBnext"),
+                ("Bioo", "Bioo Scientific Nextflex (v2,v3)"),
+                ("SMARTer", "Clonetech SMARTer"),
+                ("Qiagen", "Qiagen (with UMIs)"),
+                ("Custom", "Customized protocol")]
+    library_protocol = forms.ChoiceField(label="", choices=protocols, required=False, widget=forms.RadioSelect())
 
     # MicroRNA Analysis
 
@@ -187,6 +196,15 @@ class sRNABenchForm(forms.Form):
                 open=True
 
             ),
+            create_collapsable_div(
+                Fieldset(
+                    'Reads preprocessing',
+                    Div(InlineRadios('library_protocols'), css_class="col-md-12"),
+                title='Adapter Trimming', c_id='35',
+                open=True
+            )),
+
+
 
             create_collapsable_div(
                 Fieldset(
