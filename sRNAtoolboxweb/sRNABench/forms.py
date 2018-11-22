@@ -106,7 +106,7 @@ class sRNABenchForm(forms.Form):
 
     #Reads preprocessing
 
-    protocols = [("Illumina", mark_safe("Illumina TrueSeq (280916)" + render_modal('SRNAinput'))),
+    protocols = [("Illumina", mark_safe("Illumina &#153; TrueSeq (280916)" + render_modal('SRNAinput'))),
                 ("NEBnext", "NEBnext"),
                 ("Bioo", "Bioo Scientific Nextflex (v2,v3)"),
                 ("SMARTer", "Clonetech SMARTer"),
@@ -215,6 +215,7 @@ class sRNABenchForm(forms.Form):
                     'Trimming Options',
                 Field('adapter_length', css_class='form-control'),
                 Field('adapter_mismatch', css_class='form-control'),
+                Field('nucleotides_5_removed', css_class='form-control'),
                 'adapter_recursive_trimming'),
                 title='Custom Adapter Trimming', c_id='3',
                 open=True
@@ -246,7 +247,7 @@ class sRNABenchForm(forms.Form):
                 Field('min_read_count', css_class='form-control'),
                 Field('min_read_length', css_class='form-control'),
                 Field('mismatches', css_class='form-control'),
-                Field('nucleotides_5_removed', css_class='form-control'),
+
                 Field('max_multiple_mapping', css_class='form-control'),
                 title='Parameters', c_id='5'
             ),
