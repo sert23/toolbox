@@ -197,7 +197,7 @@ class sRNABenchForm(forms.Form):
             ),
             create_collapsable_div(
                 Fieldset(
-                    '',
+                    'Select sequencing library protocol',
                     Div(InlineRadios('library_protocol'), css_class="col-md-12")),
                 Div(Fieldset(
                     'Custom preprocessing options',
