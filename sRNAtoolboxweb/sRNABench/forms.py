@@ -199,27 +199,16 @@ class sRNABenchForm(forms.Form):
                 Fieldset(
                     '',
                     Div(InlineRadios('library_protocol'), css_class="col-md-12")),
-                title='Reads preprocessing', c_id='35',
+                Div(Fieldset(
+                    'Custom preprocessing options',
+                    Field('adapter_manual', css_class='form-control'),
+                    Field('adapter_length', css_class='form-control'),
+                    Field('adapter_mismatch', css_class='form-control'),
+                    Field('nucleotides_5_removed', css_class='form-control'),
+                    'adapter_recursive_trimming'),css_id="Adapter_Custom"),
+                title='Reads preprocessing', c_id='3',
                 open=True
             ),
-
-
-            Div(
-            create_collapsable_div(
-                Fieldset(
-                'Adapter Selection',
-                'guess_adapter',
-                Field('adapter_chosen', css_class='form-control'),
-                Field('adapter_manual', css_class='form-control')
-                ),Fieldset(
-                    'Trimming Options',
-                Field('adapter_length', css_class='form-control'),
-                Field('adapter_mismatch', css_class='form-control'),
-                Field('nucleotides_5_removed', css_class='form-control'),
-                'adapter_recursive_trimming'),
-                title='Custom Adapter Trimming', c_id='3',
-                open=True
-            ), css_id="Adapter_Custom"),
 
             create_collapsable_div(
                 Fieldset(
