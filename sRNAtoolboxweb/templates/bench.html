@@ -143,9 +143,7 @@ function toggleFields() {
         $("#genome-div").hide();
     }}
 
-    $('input[id="id_library_protocol"]').on("click", function(){
-        toggleAdapter();
-    }
+
 
 function toggleAdapter() {
 {#    if ($("#age").val() <= 13)#}
@@ -155,6 +153,8 @@ function toggleAdapter() {
     }else{
         $("#genome-div").hide();
     }}
+
+    toggleAdapter();
 </script>
 
     <script>
