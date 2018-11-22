@@ -143,6 +143,14 @@ function toggleFields() {
         $("#genome-div").hide();
     }}
 
+$('input[name="library_protocol"]').on("click", function(e) {
+    if ( document.getElementById('id_library_protocol_6')){
+        $("#genome-div").show();
+    }else{
+        $("#genome-div").hide();
+    }
+
+}
 
 
 function toggleAdapter() {
@@ -154,7 +162,7 @@ function toggleAdapter() {
         $("#genome-div").hide();
     }}
 
-    toggleAdapter();
+
 </script>
 
     <script>
