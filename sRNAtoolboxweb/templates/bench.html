@@ -144,7 +144,7 @@ function toggleFields() {
     }}
 
 $('input[name="library_protocol"]').on("click", function(e) {
-    if ( document.getElementById('id_library_protocol_6')){
+    if ( document.getElementById('id_library_protocol_6').value){
         $("#genome-div").show();
     }else{
         $("#genome-div").hide();
