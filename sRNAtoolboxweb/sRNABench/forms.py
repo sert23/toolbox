@@ -107,10 +107,10 @@ class sRNABenchForm(forms.Form):
     #Reads preprocessing
 
     protocols = [("Illumina", mark_safe("Illumina TrueSeq&#153; (280916)" + render_modal('SRNAinput'))),
-                ("NEBnext", "NEBnext&#153;"),
-                ("Bioo", "Bioo Scientific Nextflex&#153; (v2,v3)"),
-                ("SMARTer", "Clonetech SMARTer&#153;"),
-                ("Qiagen", "Qiagen&#153; (with UMIs)"),
+                ("NEBnext", mark_safe("NEBnext&#153;")),
+                ("Bioo", mark_safe("Bioo Scientific Nextflex&#153; (v2,v3)")),
+                ("SMARTer", mark_safe("Clonetech SMARTer&#153;")),
+                ("Qiagen", mark_safe("Qiagen&#153; (with UMIs)")),
                 ("Custom", "Customized protocol")]
     library_protocol = forms.ChoiceField(label="", choices=protocols, required=False, widget=forms.RadioSelect())
 
