@@ -115,7 +115,6 @@ class sRNABenchForm(forms.Form):
     library_protocol = forms.ChoiceField(label="", choices=protocols, required=False, widget=forms.RadioSelect())
 
     # MicroRNA Analysis
-
     referenceDB = forms.ChoiceField(label="", choices=[("miRBase","Use miRBase (default)"),("highconf","Use high-confidence miRNAs only (miRBase)"),("MirGeneDB","Use a MirGeneDBv2.0 tag")], required=False, widget=forms.RadioSelect())
     genome_mir = forms.BooleanField(label='Use the miRNAs for the species from the selected genomes', required=False)
     highconf = forms.BooleanField(label='Use high confidence microRNAs from miRBase', required=False, initial=False)
@@ -205,7 +204,7 @@ class sRNABenchForm(forms.Form):
             ),
 
 
-
+            Div(
             create_collapsable_div(
                 Fieldset(
                 'Adapter Selection',
@@ -217,9 +216,9 @@ class sRNABenchForm(forms.Form):
                 Field('adapter_length', css_class='form-control'),
                 Field('adapter_mismatch', css_class='form-control'),
                 'adapter_recursive_trimming'),
-                title='Adapter Trimming', c_id='3',
+                title='Custom Adapter Trimming', c_id='3',
                 open=True
-            ),
+            ), css_id="Adapter_Custom"),
 
             create_collapsable_div(
                 Fieldset(
