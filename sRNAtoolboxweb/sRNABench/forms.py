@@ -141,7 +141,7 @@ class sRNABenchForm(forms.Form):
     min_read_count = forms.IntegerField(label='Minimum Read Count: ', max_value=10, min_value=1, initial=2)
     min_read_length = forms.IntegerField(label='Min. Read Length ', max_value=17, min_value=15, initial=15)
     mismatches = forms.IntegerField(label='Allowed number of mismatches (either to the genome or libraries)', max_value=2, min_value=0, initial=2)
-    nucleotides_5_removed = forms.IntegerField(label='Remove 5\' barcode', max_value=6, min_value=0, initial=0)
+    nucleotides_5_removed = forms.IntegerField(label='Remove 5\' barcode (number of nucleotides) ', max_value=6, min_value=0, initial=0)
     max_multiple_mapping = forms.IntegerField(label='Maximum Number of Multiple Mappings', max_value=40, min_value=1, initial=10)
 
     #Profile
@@ -210,9 +210,10 @@ class sRNABenchForm(forms.Form):
                 Div(Fieldset(
                     'Custom preprocessing options',
                     Field('adapter_manual', css_class='form-control'),
-                    Field('adapter_length'),
-                    Field('adapter_mismatch'),
+                    'adapter_length',
+                    'adapter_mismatch',
                     'nucleotides_5_removed',
+                    'nucleotides_3_removed',
                     'adapter_recursive_trimming'),css_id="Adapter_Custom"),
                 title='Reads preprocessing', c_id='3',
                 open=True
