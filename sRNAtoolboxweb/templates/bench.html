@@ -143,6 +143,7 @@ function toggleFields() {
         $("#genome-div").hide();
     }}
 
+
 $('input[name="library_protocol"]').on("click", function(e) {
     if ( document.getElementById('id_library_protocol_6').checked){
         $("#Adapter_Custom").show();
@@ -151,6 +152,15 @@ $('input[name="library_protocol"]').on("click", function(e) {
     }
 
 })
+
+$("#id_quality_method").change(function () {
+{#    if ( document.getElementById('id_library_protocol_6').checked){#}
+    if ( document.getElementById('id_quality_method').value === "min"){
+        $("#Div_max").show();
+    }else{
+        $("#Div_max").hide();
+    }
+    });
 
 $('input[name="library_protocol"]').on("click", function(e) {
 {#    if ( document.getElementById('id_quality_method').value === "min"){#}
