@@ -1,0 +1,14 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}quality_filter{% endblock %}
+{% block title %}
+    Quality filtering methods
+{% endblock %}
+{% block text %}
+<p> There are two methods to filter out reads of low quality:
+<ul>
+    <li><u>mean-based:</u> a read is accepted if the mean phred score is above a set threshold;</li>
+    <li><u>minimum per nucleotide:</u> first N (0 by default) bases with phred score below a set threshold are allowed, all nucleotides after this are
+      trimmed off. N can be defined by the user. </li>
+    </ul>
+</p>
+{% endblock %}
