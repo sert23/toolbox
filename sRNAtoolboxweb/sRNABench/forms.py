@@ -120,7 +120,7 @@ class sRNABenchForm(forms.Form):
     quality_method = forms.ChoiceField(label="Filtering method", choices=[(None, "No quality filter"),("mean","Use minimum mean quality score"),
                                                    ("min","Use minimum quality score threshold per sequenced nucleotide")], required=False)
     quality_threshold = forms.IntegerField(label='Phred Score Threshold', max_value=35, min_value=20, initial=0, required=False)
-    maximum_positions = forms.IntegerField(label='Maximum number of positions allowed below quality threshold', max_value=3, min_value=0, initial=0)
+    maximum_positions = forms.IntegerField(label='Maximum number of positions allowed below quality threshold', max_value=3, min_value=0, initial=0,required=False)
 
     # MicroRNA Analysis
     referenceDB = forms.ChoiceField(label="", choices=[("miRBase","Use miRBase (default)"),("highconf","Use high-confidence miRNAs only (miRBase)"),("MirGeneDB","Use a MirGeneDBv2.0 tag")], required=False, widget=forms.RadioSelect())
@@ -210,9 +210,9 @@ class sRNABenchForm(forms.Form):
                 Div(Fieldset(
                     'Custom preprocessing options',
                     Field('adapter_manual', css_class='form-control'),
-                    Field('adapter_length', css_class='form-control'),
-                    Field('adapter_mismatch', css_class='form-control'),
-                    Field('nucleotides_5_removed', css_class='form-control'),
+                    Field('adapter_length'),
+                    Field('adapter_mismatch'),
+                    'nucleotides_5_removed',
                     'adapter_recursive_trimming'),css_id="Adapter_Custom"),
                 title='Reads preprocessing', c_id='3',
                 open=True
@@ -223,7 +223,7 @@ class sRNABenchForm(forms.Form):
                     '<strong class="text-danger"> These parameters only apply if you provide fastq formatted input </strong>',
                     Field('quality_method', css_class='form-control'),
                     Field('quality_threshold'),
-                    Div(Field('maximum_positions', css_class='form-control'),
+                    Div(Field('maximum_positions'),
                         css_id="Div_max")),
                 title='Quality Control', c_id='35',
             ),
