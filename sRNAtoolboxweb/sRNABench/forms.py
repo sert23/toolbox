@@ -225,8 +225,7 @@ class sRNABenchForm(forms.Form):
                     Field('quality_threshold', css_class='form-control'),
                     Div(Field('maximum_positions', css_class='form-control'),
                         css_id="Div_max")),
-                title='Quality Control', c_id='35',
-                open=True
+                title='Quality Control', c_id='35'
             ),
 
             create_collapsable_div(
