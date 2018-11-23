@@ -99,10 +99,11 @@ class sRNABenchForm(forms.Form):
     guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence <strong class="text-danger"> (not recommended!)</strong>'), required=False)
     #guess_adapter = forms.BooleanField(label='Guess the adapter sequence  (not recommended!)', required=False) <strong>My Condition is</strong>
     adapter_chosen = forms.ChoiceField(choices=ADAPTERS, required=False)
-    adapter_manual = forms.CharField(label='Or Provide adapter sequence', required=False)
+    adapter_manual = forms.CharField(label='Provide adapter sequence', required=False)
     adapter_length = forms.IntegerField(label='Minimum Adapter Length', max_value=12, min_value=6, initial=10)
     adapter_mismatch = forms.IntegerField(label='Max. mismatches in adapter detection', max_value=2, min_value=0, initial=1)
     adapter_recursive_trimming = forms.BooleanField(label='Recursive Adapter trimming', required=False, initial=False)
+    nucleotides_3_removed = forms.IntegerField(label='Remove 3\' nucleotides from random adapter', max_value=15, min_value=0, initial=0)
 
     #Reads preprocessing
 
@@ -113,6 +114,13 @@ class sRNABenchForm(forms.Form):
                 ("Qiagen", mark_safe("Qiagen&#153; (with UMIs)")),
                 ("Custom", "Customized protocol")]
     library_protocol = forms.ChoiceField(label="", choices=protocols, required=False, widget=forms.RadioSelect())
+
+    #Quality Control
+
+    quality_method = forms.ChoiceField(label="Filtering method", choices=[(None, "No quality filter"),("mean","Use minimum mean quality score"),
+                                                   ("min","Use minimum quality score threshold")], required=False)
+    quality_threshold = forms.IntegerField(label='Phred Score Threshold', max_value=35, min_value=20, initial=0)
+    maximum_positions = forms.IntegerField(label='Maximum number of positions allowed below quality threshold', max_value=3, min_value=0, initial=0)
 
     # MicroRNA Analysis
     referenceDB = forms.ChoiceField(label="", choices=[("miRBase","Use miRBase (default)"),("highconf","Use high-confidence miRNAs only (miRBase)"),("MirGeneDB","Use a MirGeneDBv2.0 tag")], required=False, widget=forms.RadioSelect())
@@ -207,6 +215,17 @@ class sRNABenchForm(forms.Form):
                     Field('nucleotides_5_removed', css_class='form-control'),
                     'adapter_recursive_trimming'),css_id="Adapter_Custom"),
                 title='Reads preprocessing', c_id='3',
+                open=True
+            ),
+
+            create_collapsable_div(
+                Fieldset(
+                    '<strong class="text-danger"> These parameters only apply if you provide fastq formatted input </strong>',
+                    Field('quality_method', css_class='form-control'),
+                    Field('quality_threshold', css_class='form-control'),
+                    Div(Field('maximum_positions', css_class='form-control'),
+                        css_id="Div_max")),
+                title='Quality Control', c_id='35',
                 open=True
             ),
 
