@@ -152,6 +152,15 @@ $('input[name="library_protocol"]').on("click", function(e) {
 
 })
 
+$('input[name="id_quality_method"]').on("click", function(e) {
+    if ( document.getElementById('id_quality_method').value){
+        $("#Div_max").show();
+    }else{
+        $("#Div_max").hide();
+    }
+
+})
+
 
 function toggleAdapter() {
 {#    if ($("#age").val() <= 13)#}
@@ -190,7 +199,11 @@ function toggleAdapter() {
         jQuery("#Adapter_Custom").hide();
     });
     </script>
-
+    <script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip_quality"]').tooltip();
+    });
+    </script>
 
     <script>
         // tooltip demo
