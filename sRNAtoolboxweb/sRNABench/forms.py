@@ -240,7 +240,7 @@ class sRNABenchForm(forms.Form):
                 Field('mirDB', css_class='form-control', style="visibility: hidden;")
                 ),
                 Fieldset(
-                'Species Selection' + render_modal('Choose_input'),
+                'Species Selection' + render_modal('mirna_species'),
                 Field('mirna_profiled',css_class='form-control'),
                 # Field('homologous',css_class='form-control'),
                 ),
