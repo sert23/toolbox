@@ -171,7 +171,7 @@ class JobStatusDetail(DetailView):
             return context
 
         if job_status.job_status == 'Finished':
-            return context
+            return {}
 
         status = queue_Status(job_status.pipeline_key)
         if status == 'R' or status == 'E' or status == 'C':
