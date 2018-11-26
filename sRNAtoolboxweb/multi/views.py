@@ -222,13 +222,13 @@ class MultiStatusView(DetailView):
             new_record = JobStatus.objects.get(pipeline_key=id)
             job_stat = new_record.job_status
             if job_stat == "sent_to_queue":
-                job_stat = "Sent to queue"
+                job_stat = "In queue"
             if job_stat == "Running":
                 context["running"] = True
-            start = new_record.start_time.strftime("%H:%M, %d %b %Y")
+            start = new_record.start_time.strftime("%d %b %Y, %H:%M")
             #finish = new_record.finish_time.strftime("%H:%M, %d %b %Y")
             if new_record.finish_time:
-                finish = new_record.finish_time.strftime("%H:%M, %d %b %Y")
+                finish = new_record.finish_time.strftime("%H:%M:$S, %d %b %Y")
             else:
                 finish = "-"
             input_config = os.path.join(MEDIA_ROOT,id,"conf.txt")
@@ -236,8 +236,9 @@ class MultiStatusView(DetailView):
                 input_line = f.readlines()[0]
             # job_stat = "sent_to_queue"
             click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
+            outdir = new_record.outdir
 
-            jobs_tbody.append([job, job_stat, start,finish ,input_line[6:], click])
+            jobs_tbody.append([job, job_stat, start,finish ,input_line[6:], click, outdir])
             #jobs_tbody.append([job, job_stat, start, finish, click])
 
         js_data = json.dumps(jobs_tbody)
@@ -247,7 +248,10 @@ class MultiStatusView(DetailView):
                                  {"title": "Finished"},
                                  {"title": "Input"},
                                  # { "title": "Select" }])
-                                 {"title": 'Go to'}])
+                                 {"title": 'Go to'},
+                                 {"title": 'Outdir'}
+                                 ]
+                                )
         context["tbody"] = js_data
         context["thead"] = js_headers
         context["njobs"] = len(jobs_tbody)
