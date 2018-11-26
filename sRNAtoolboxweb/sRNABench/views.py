@@ -466,9 +466,9 @@ def result_new(request):
 
         results = {}
         results["id"] = job_id
-
+        print(os.path.join(new_record.outdir, "results.txt"))
         # if (new_record.job_status == "Finished" and os.path.exists(os.path.join(new_record.outdir, "results.txt"))):
-        if (os.path.exists(os.path.join(new_record.outdir, "results.txt"))):
+        if (new_record.job_status == "Finished"):
             params = ParamsBench(os.path.join(new_record.outdir, "parameters.txt"), os.path.join(new_record.outdir, "results.txt"),os.path.join(new_record.outdir, "conf.txt"))
 
             config_params = ParamsBench(os.path.join(new_record.outdir, "conf.txt"))
