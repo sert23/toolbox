@@ -429,7 +429,6 @@ class sRNABenchForm(forms.Form):
             if not (line.startswith("input=EMPTY") or line.startswith("output=")):
                 f.write(line)
         f.close()
-
         input_data = cleaned_data.get("input_hidden").split(",")
         if not os.path.exists(os.path.join(MEDIA_ROOT,self.folder,"launched")):
             os.mkdir(os.path.join(MEDIA_ROOT,self.folder,"launched"))
@@ -494,6 +493,7 @@ class sRNABenchForm(forms.Form):
                                      start_time=datetime.now(),
                                      all_files=full_path,
                                      modules_files="",
+                                     outdir = out_dir,
                                      pipeline_type="sRNAbench",
                                      )
             with open(configuration_file_path, 'w') as conf_file:
@@ -510,24 +510,7 @@ class sRNABenchForm(forms.Form):
                 js.save()
             os.system("touch " + os.path.join(MEDIA_ROOT, self.folder, "launched", new_id))
             job_list.append(new_id)
-        # name = pipeline_id + '_bench'
-        # configuration = {
-        #     'pipeline_id': pipeline_id,
-        #     'out_dir': out_dir,
-        #     'name': name,
-        #     'conf_input': conf_file_location,
-        #     'type': 'sRNAbench'
-        # }
-        #
-        # JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not_launched",
-        #                          start_time=datetime.now(),
-        #                          all_files=ifile,
-        #                          modules_files="",
-        #                          pipeline_type="sRNAbench",
-        #                          )
-        # configuration_file_path = os.path.join(out_dir, 'conf.json')
-        # with open(configuration_file_path, 'w') as conf_file:
-        #     json.dump(configuration, conf_file, indent=True)
+
         return pipeline_id
 
     def create_call(self):
@@ -542,15 +525,6 @@ class sRNABenchForm(forms.Form):
 
         return pipeline_id
 
-        # if QSUB:
-        #     return 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
-        #         configuration_file_path=configuration_file_path,
-        #         job_name=name,
-        #         sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
-        # else:
-        #     return '{sh} {configuration_file_path}'.format(
-        #         configuration_file_path=configuration_file_path,
-        #         sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run.sh')), pipeline_id
 
 
 # class PhotoForm(forms.ModelForm):
