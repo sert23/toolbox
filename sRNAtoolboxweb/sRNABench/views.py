@@ -526,6 +526,7 @@ def result_new(request):
             return render(request, "srnabench_result.html", results)
 
         else:
+            print("not detectibol")
             return redirect(reverse_lazy('progress', kwargs={"pipeline_id": job_id}))
     else:
         return redirect(reverse_lazy('BENCH'))
