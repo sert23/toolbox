@@ -9,7 +9,7 @@ class JobStatus (models.Model):
     #job_status_progress = ListField(models.CharField(max_length=400))
     job_status = models.CharField(max_length=100)
     start_time = models.DateTimeField(default=django.utils.timezone.now)
-    finish_time = models.DateTimeField(null=True, default=None)
+    finish_time = models.DateTimeField(null=True, blank=True)
     all_files = models.CharField(max_length=1000, null=True)
     modules_files = models.CharField(max_length=1000)
     pipeline_type = models.CharField(max_length=100)
