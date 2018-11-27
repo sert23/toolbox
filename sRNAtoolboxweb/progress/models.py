@@ -1,5 +1,6 @@
 from django.db import models
 import datetime
+import django.utils
 
 class JobStatus (models.Model):
     job_name = models.CharField(max_length=100)
@@ -7,7 +8,7 @@ class JobStatus (models.Model):
     pipeline_key = models.CharField(max_length=100)
     #job_status_progress = ListField(models.CharField(max_length=400))
     job_status = models.CharField(max_length=100)
-    start_time = models.DateTimeField(default=datetime.datetime.now())
+    start_time = models.DateTimeField(default=django.utils.timezone.now)
     finish_time = models.DateTimeField(null=True)
     all_files = models.CharField(max_length=1000, null=True)
     modules_files = models.CharField(max_length=1000)
