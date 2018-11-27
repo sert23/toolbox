@@ -69,8 +69,8 @@ class MultiUploadView(FormView):
             os.mkdir(os.path.join(MEDIA_ROOT,folder))
             JobStatus.objects.create(job_name=folder+"_multi", pipeline_key=folder, job_status="not_launched",
                                  start_time=datetime.datetime.now(),
-                                 all_files="",
-                                 modules_files="",
+                                 all_files=" ",
+                                 modules_files=" ",
                                  pipeline_type="multiupload",
                                  )
         return render(self.request, 'multiupload.html', {'file_list': onlyfiles, "request_path":path, "form": MultiURLForm })
@@ -225,10 +225,10 @@ class MultiStatusView(DetailView):
                 job_stat = "In queue"
             if job_stat == "Running":
                 context["running"] = True
-            start = new_record.start_time.strftime("%d %b %Y, %H:%M")
+            start = new_record.start_time.strftime("%H:%M:$s, %d %b %Y")
             #finish = new_record.finish_time.strftime("%H:%M, %d %b %Y")
             if new_record.finish_time:
-                finish = new_record.finish_time.strftime("%H:%M:$S, %d %b %Y")
+                finish = new_record.finish_time.strftime("%H:%M, %d %b %Y")
             else:
                 finish = "-"
             input_config = os.path.join(MEDIA_ROOT,id,"conf.txt")
