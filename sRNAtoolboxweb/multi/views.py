@@ -225,7 +225,7 @@ class MultiStatusView(DetailView):
                 job_stat = "In queue"
             if job_stat == "Running":
                 context["running"] = True
-            start = new_record.start_time.strftime("%H:%M:$s, %d %b %Y")
+            start = new_record.start_time.strftime("%H:%M:%S, %d %b %Y")
             #finish = new_record.finish_time.strftime("%H:%M, %d %b %Y")
             if new_record.finish_time:
                 finish = new_record.finish_time.strftime("%H:%M, %d %b %Y")
