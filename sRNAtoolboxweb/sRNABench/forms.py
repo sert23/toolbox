@@ -107,7 +107,8 @@ class sRNABenchForm(forms.Form):
 
     #Reads preprocessing
 
-    protocols = [("Illumina", mark_safe("Illumina TrueSeq&#153; (280916)" + render_modal('SRNAinput'))),
+    protocols = [("EMPTY", mark_safe("Input reads are already trimmed")),
+                ("Illumina", mark_safe("Illumina TrueSeq&#153; (280916)" + render_modal('SRNAinput'))),
                 ("NEBnext", mark_safe("NEBnext&#153;")),
                 ("Bioo", mark_safe("Bioo Scientific Nextflex&#153; (v2,v3)")),
                 ("SMARTer", mark_safe("Clonetech SMARTer&#153;")),
@@ -119,6 +120,7 @@ class sRNABenchForm(forms.Form):
 
     quality_method = forms.ChoiceField(label="Filtering method" + render_modal('quality_filter'), choices=[(None, "No quality filter"),("mean","Use minimum mean quality score"),
                                                    ("min","Use minimum quality score threshold per sequenced nucleotide")], required=False)
+    phred_encode = forms.ChoiceField(label="Phred Score Encoding" + render_modal('quality_filter'), choices=[(33, "Phred+33"),(64,"Phred+33")], required=False)
     quality_threshold = forms.IntegerField(label='Phred Score Threshold', max_value=35, min_value=20, initial=0, required=False)
     maximum_positions = forms.IntegerField(label='Maximum number of positions allowed below quality threshold', max_value=3, min_value=0, initial=0,required=False)
 
@@ -221,8 +223,9 @@ class sRNABenchForm(forms.Form):
 
             create_collapsable_div(
                 Fieldset(
-                    '<strong class="text-danger"> These parameters only apply if you provide fastq formatted input </strong>. If you don\'t know what this is, please ignore it.',
+                    '<small class="text-danger"> These parameters only apply if you provide fastq formatted input </small>.',
                     Field('quality_method', css_class='form-control'),
+                    Field("phred_encode",  css_class='form-control'),
                     Field('quality_threshold'),
                     Div(Field('maximum_positions'),
                         css_id="Div_max")),
