@@ -232,7 +232,7 @@ class sRNABenchForm(forms.Form):
                     Div(Field('maximum_positions'),
                         css_id="Div_max"),
                 title='Quality Control', c_id='35',
-                extra_title='<small class="text-danger"> These parameters only apply if you provide fastq formatted input. </small>'
+                extra_title='<strong class="text-danger"> These parameters only apply if you provide fastq formatted input. </strong>'
             ),
 
             create_collapsable_div(
