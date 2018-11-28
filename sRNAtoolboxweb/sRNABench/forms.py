@@ -120,7 +120,7 @@ class sRNABenchForm(forms.Form):
 
     quality_method = forms.ChoiceField(label="Filtering method" + render_modal('quality_filter'), choices=[(None, "No quality filter"),("mean","Use minimum mean quality score"),
                                                    ("min","Use minimum quality score threshold per sequenced nucleotide")], required=False)
-    phred_encode = forms.ChoiceField(label="Phred Score Encoding" + render_modal('quality_filter'), choices=[(33, "Phred+33 (Default)"),(64,"Phred+64")], required=False)
+    phred_encode = forms.ChoiceField(label="Phred Score Encoding" + render_modal('phred_encode'), choices=[(33, "Phred+33 (Default)"),(64,"Phred+64")], required=False)
     quality_threshold = forms.IntegerField(label='Phred Score Threshold', max_value=35, min_value=20, initial=0, required=False)
     maximum_positions = forms.IntegerField(label='Maximum number of positions allowed below quality threshold', max_value=3, min_value=0, initial=0,required=False)
 
