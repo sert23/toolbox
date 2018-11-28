@@ -211,6 +211,7 @@ class sRNABenchForm(forms.Form):
                     Div(InlineRadios('library_protocol'), css_class="col-md-12")),
                 Div(Fieldset(
                     'Custom preprocessing options',
+                    Field('adapter_chosen', css_class='form-control'),
                     Field('adapter_manual', css_class='form-control'),
                     'adapter_length',
                     'adapter_mismatch',
