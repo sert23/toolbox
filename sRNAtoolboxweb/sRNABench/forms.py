@@ -222,16 +222,17 @@ class sRNABenchForm(forms.Form):
             ),
 
             create_collapsable_div(
-                Fieldset(
+
                     # '<small class="text-danger"> These parameters only apply if you provide fastq formatted input </small>.',
-                    '<p class="text-danger"> These parameters only apply if you provide fastq formatted input </p>.',
+                    #'<p class="text-danger"> These parameters only apply if you provide fastq formatted input </p>.',
 
                     Field('quality_method', css_class='form-control'),
                     Field("phred_encode",  css_class='form-control'),
                     Field('quality_threshold'),
                     Div(Field('maximum_positions'),
-                        css_id="Div_max")),
+                        css_id="Div_max"),
                 title='Quality Control', c_id='35',
+                extra_title='<small class="text-danger"> These parameters only apply if you provide fastq formatted input. </small>'
             ),
 
             create_collapsable_div(
