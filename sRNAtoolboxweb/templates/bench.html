@@ -149,7 +149,6 @@ function toggleFields() {
 
 $('input[name="library_protocol"]').on("click", function(e) {
     if (document.getElementById('id_library_protocol_6').checked) {
-        alert("checked");
         $("#Adapter_Custom").show();
     } else {
         $("#Adapter_Custom").hide();
@@ -182,7 +181,7 @@ $('input[name="guess_adapter"]').on("click", function(e) {
 
 })
 
-$('input[name="adapter_manual"]').on("click", function(e) {
+$('input[name="gues_adapter"]').on("click", function(e) {
     if ( document.getElementById('id_adapter_manual').length > 0 ){
         document.getElementById("id_adapter_chosen").disabled = true;
         document.getElementById("id_guess_adapter").disabled = true;
