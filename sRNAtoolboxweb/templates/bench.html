@@ -181,7 +181,7 @@ $('input[name="guess_adapter"]').on("click", function(e) {
 
 })
 
-$('input[name="adapter_manual"]').on("change", function(e) {
+$('input[name="adapter_manual"]').on("mouseout", function(e) {
     alert("on_click");
     if ( document.getElementById('id_adapter_manual').value.length > 0 ){
         alert("works");
