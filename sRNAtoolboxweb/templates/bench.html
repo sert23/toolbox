@@ -182,6 +182,7 @@ $('input[name="guess_adapter"]').on("click", function(e) {
 })
 
 $('input[name="gues_adapter"]').on("click", function(e) {
+    alert("on_click");
     if ( document.getElementById('id_adapter_manual').value.length > 0 ){
         alert("works");
         document.getElementById("id_adapter_chosen").disabled = true;
