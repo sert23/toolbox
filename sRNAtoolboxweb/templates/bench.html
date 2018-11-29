@@ -181,6 +181,7 @@ $('input[name="library_protocol"]').on("click", function(e) {
 $('input[name="guess_adapter"]').on("click", function(e) {
 {#    if ( document.getElementById('id_quality_method').value === "min"){#}
     if ( document.getElementById('id_guess_adapter').checked){
+        alert("checked");
         document.getElementById("id_adapter_chosen").disabled = true;
         document.getElementById("id_adapter_manual").disabled = true;
     }else{
