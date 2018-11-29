@@ -252,14 +252,16 @@ class sRNABenchForm(forms.Form):
                 Fieldset(
                 'Species Selection' + render_modal('mirna_species'),
                 Field('mirna_profiled',css_class='form-control'),
+                Field('predict_mirna',css_class='form-control'),
                 # Field('homologous',css_class='form-control'),
+
                 ),
                 title='MicroRNA analysis', c_id='4'
             ),
 
             create_collapsable_div(
                 #'is_solid',
-                'predict_mirna',
+
                 Field('aligment_type', css_class='form-control'),
                 Field('seed_length', css_class='form-control'),
                 Field('min_read_count', css_class='form-control'),
@@ -297,10 +299,16 @@ class sRNABenchForm(forms.Form):
             self.add_error('sra_input', 'Choose either file, URL, SRA Run ID or previous JobID as input')
             self.add_error('job_reuse', 'Choose either file, URL, SRA Run ID or previous JobID as input')
 
+        #species
         print(cleaned_data.get('species'))
-        if not cleaned_data.get('species') and not cleaned_data.get('mirna_profiled'):
-            self.add_error('species','Species or a miRBase short name tag are required')
-            self.add_error('mirna_profiled', 'Species or a miRBase short name tag are required')
+        if sum([bool(cleaned_data.get('species')), bool(cleaned_data.get('mirna_profiled')), cleaned_data.get("referenceDB")== "MirGeneDB" ]) < 1:
+            self.add_error('species','Species or miRBase/MirGeneDB short name tag(s) are required')
+            self.add_error('referenceDB','Species or miRBase/MirGeneDB short name tag(s) are required')
+            self.add_error('mirna_profiled', 'Species or miRBase/MirGeneDB short name tag(s) are required')
+
+        #preprocessing
+        if not cleaned_data.get("library_protocol"):
+            self.add_error('library_protocol', 'Choose one provided or custom protocol ')
 
 
         if cleaned_data.get('predict_mirna') and cleaned_data.get('library_mode'):
