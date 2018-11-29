@@ -252,9 +252,8 @@ class sRNABenchForm(forms.Form):
                 Fieldset(
                 'Species Selection' + render_modal('mirna_species'),
                 Field('mirna_profiled',css_class='form-control'),
-                Field('predict_mirna',css_class='form-control'),
+                'predict_mirna'
                 # Field('homologous',css_class='form-control'),
-
                 ),
                 title='MicroRNA analysis', c_id='4'
             ),
