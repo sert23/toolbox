@@ -64,7 +64,7 @@ def m():
 
 class sRNABenchForm(forms.Form):
     ADAPTERS = (
-        (None, "Select Adapter to trim off"),
+        # (None, "Select Adapter to trim off"),
         ("EMPTY", "Input reads are already trimmed"),
         ("TGGAATTCTCGGGTGCCAAGG", "Illumina RA3 - TGGAATTCTCGGGTGCCAAGG"),
         ("UCGUAUGCCGUCUUCUGCUUGU", "Illumina(alternative) - UCGUAUGCCGUCUUCUGCUUGU", ),
@@ -87,7 +87,7 @@ class sRNABenchForm(forms.Form):
                             required=False)
     sra_input = forms.CharField(label='Or provide a SRA ID (starting with SRR or ERR)', required=False)
     url = forms.URLField(label=mark_safe('Or provide a URL for large files <strong class="text-success"> (recommended!)</strong>'), required=False)
-    job_name = forms.CharField(label='Reuse input from previous job using jobID',
+    job_reuse = forms.CharField(label='Reuse input from previous job using jobID',
                              required=False)
     # species
     library_mode = forms.BooleanField(label='Do not map to genome (Library mode)' + render_modal('library_mode'), required=False)
@@ -107,7 +107,9 @@ class sRNABenchForm(forms.Form):
 
     #Reads preprocessing
 
-    protocols = [("EMPTY", mark_safe("Input reads are already trimmed")),
+    protocols = [
+        # ("EMPTY", mark_safe("Input reads are already trimmed")),
+
                 ("Illumina", mark_safe("Illumina TrueSeq&#153; (280916)" + render_modal('SRNAinput'))),
                 ("NEBnext", mark_safe("NEBnext&#153;")),
                 ("Bioo", mark_safe("Bioo Scientific Nextflex&#153; (v2,v3)")),
@@ -125,7 +127,7 @@ class sRNABenchForm(forms.Form):
     maximum_positions = forms.IntegerField(label='Maximum number of positions allowed below quality threshold', max_value=3, min_value=0, initial=0,required=False)
 
     # MicroRNA Analysis
-    referenceDB = forms.ChoiceField(label="", choices=[("miRBase","Use miRBase (default)"),("highconf","Use high-confidence miRNAs only (miRBase)"),("MirGeneDB","Use a MirGeneDBv2.0 tag")], required=False, widget=forms.RadioSelect())
+    referenceDB = forms.ChoiceField(label="", choices=[("miRBase","Use miRBase (default)"),("highconf","Use high-confidence miRNAs only (miRBase)"),("MirGeneDB","Use a MirGeneDBv2.0 tag")], initial="miRBase", required=False, widget=forms.RadioSelect())
     genome_mir = forms.BooleanField(label='Use the miRNAs for the species from the selected genomes', required=False)
     highconf = forms.BooleanField(label='Use high confidence microRNAs from miRBase', required=False, initial=False)
     mirDB = forms.ChoiceField(label="", choices=mirdb_list, required=False)
@@ -177,7 +179,7 @@ class sRNABenchForm(forms.Form):
                     Field('sra_input', css_class='form-control'),
                     ),
                 Tab('Reuse Job',
-                    Field('job_name', css_class='form-control')
+                    Field('job_reuse', css_class='form-control')
                     )
             ),
                 title="Choose your input",
@@ -211,6 +213,7 @@ class sRNABenchForm(forms.Form):
                     Div(InlineRadios('library_protocol'), css_class="col-md-12")),
                 Div(Fieldset(
                     'Custom preprocessing options',
+                    "guess_adapter",
                     Field('adapter_chosen', css_class='form-control'),
                     Field('adapter_manual', css_class='form-control'),
                     'adapter_length',
@@ -286,17 +289,20 @@ class sRNABenchForm(forms.Form):
         )
 
     def clean(self):
-
         cleaned_data = super(sRNABenchForm, self).clean()
+        #Input files
+        if sum([bool(cleaned_data.get('ifile')), bool(cleaned_data.get('url')!=''), bool(cleaned_data.get('sra_input')!=''),bool(cleaned_data.get('job_reuse')!='')]) != 1:
+            self.add_error('ifile', 'Choose either file, URL, SRA Run ID or previous JobID as input')
+            self.add_error('url', 'Choose either file, URL, SRA Run ID or previous JobID as input')
+            self.add_error('sra_input', 'Choose either file, URL, SRA Run ID or previous JobID as input')
+            self.add_error('job_reuse', 'Choose either file, URL, SRA Run ID or previous JobID as input')
+
         print(cleaned_data.get('species'))
         if not cleaned_data.get('species') and not cleaned_data.get('mirna_profiled'):
             self.add_error('species','Species or a miRBase short name tag are required')
             self.add_error('mirna_profiled', 'Species or a miRBase short name tag are required')
 
-        if sum([bool(cleaned_data.get('ifile')), bool(cleaned_data.get('url')!=''), bool(cleaned_data.get('sra_input')!='')]) != 1:
-            self.add_error('ifile', 'Choose either file, SRA ID or URL as input')
-            self.add_error('url', 'Choose either file, SRA ID or URL as input')
-            self.add_error('sra_input', 'Choose either file, SRA ID or URL as input')
+
         if cleaned_data.get('predict_mirna') and cleaned_data.get('library_mode'):
             self.add_error('library_mode', 'Genome mode is needed for miRNA prediction')
         # if not cleaned_data.get('guess_adapter') and cleaned_data.get('adapter_chosen')=='' and cleaned_data.get('adapter_manual')=='':
