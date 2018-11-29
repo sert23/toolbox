@@ -147,13 +147,14 @@ function toggleFields() {
     }}
 
 
-{#$('input[name="library_protocol"]').on("click", function(e) {#}
-{#    if ( document.getElementById('id_library_protocol_6').checked){#}
-{#        $("#Adapter_Custom").show();#}
-{#    }else{#}
-{#        $("#Adapter_Custom").hide();#}
-{#    }#}
-{##}
+$('input[name="library_protocol"]').on("click", function(e) {
+    if (document.getElementById('id_library_protocol_6').checked) {
+        $("#Adapter_Custom").show();
+    } else {
+        $("#Adapter_Custom").hide();
+    }
+})
+
 
 
 $("#id_quality_method").change(function () {
@@ -165,15 +166,6 @@ $("#id_quality_method").change(function () {
     }
     });
 
-$('input[name="library_protocol"]').on("click", function(e) {
-{#    if ( document.getElementById('id_quality_method').value === "min"){#}
-    if ( document.getElementById('id_library_protocol_6').checked){
-        $("#Div_max").show();
-    }else{
-        $("#Div_max").hide();
-    }
-
-})
         {##}
         {# Adapter options #}
         {##}
