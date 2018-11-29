@@ -147,14 +147,14 @@ function toggleFields() {
     }}
 
 
-$('input[name="library_protocol"]').on("click", function(e) {
-    if ( document.getElementById('id_library_protocol_6').checked){
-        $("#Adapter_Custom").show();
-    }else{
-        $("#Adapter_Custom").hide();
-    }
+{#$('input[name="library_protocol"]').on("click", function(e) {#}
+{#    if ( document.getElementById('id_library_protocol_6').checked){#}
+{#        $("#Adapter_Custom").show();#}
+{#    }else{#}
+{#        $("#Adapter_Custom").hide();#}
+{#    }#}
+{##}
 
-})
 
 $("#id_quality_method").change(function () {
 {#    if ( document.getElementById('id_library_protocol_6').checked){#}
@@ -179,14 +179,23 @@ $('input[name="library_protocol"]').on("click", function(e) {
         {##}
 
 $('input[name="guess_adapter"]').on("click", function(e) {
-{#    if ( document.getElementById('id_quality_method').value === "min"){#}
     if ( document.getElementById('id_guess_adapter').checked){
-        alert("checked");
         document.getElementById("id_adapter_chosen").disabled = true;
         document.getElementById("id_adapter_manual").disabled = true;
     }else{
         document.getElementById("id_adapter_chosen").disabled = false;
         document.getElementById("id_adapter_manual").disabled = false;
+    }
+
+})
+
+$('input[name="adapter_manual"]').on("click", function(e) {
+    if ( document.getElementById('id_adapter_manual').length > 0 ){
+        document.getElementById("id_adapter_chosen").disabled = true;
+        document.getElementById("id_guess_adapter").disabled = true;
+    }else{
+        document.getElementById("id_adapter_chosen").disabled = false;
+        document.getElementById("id_guess_adapter").disabled = false;
     }
 
 })
