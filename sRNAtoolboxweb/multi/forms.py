@@ -86,7 +86,6 @@ class MultiURLForm(forms.Form):
         super(MultiURLForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-                'Choose miRNA input',
                 Field('SRRtext', css_class='form-control'),
                 Field('URLtext', css_class='form-control'),
                 ButtonHolder(
@@ -460,7 +459,7 @@ class sRNABenchForm(forms.Form):
             if clase == "file":
                 input_file = onlyfiles[int(ix)]
                 full_path = os.path.join(MEDIA_ROOT,new_id,input_file)
-                shutil.copyfile(os.path.join(MEDIA_ROOT,new_id,input_file), os.path.join(out_dir,input_file))
+                shutil.copyfile(os.path.join(MEDIA_ROOT,pipeline_id,input_file), os.path.join(out_dir,input_file))
 
             if clase == "SRR":
                 input_file = SRR_list[int(ix)]
