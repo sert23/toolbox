@@ -206,9 +206,9 @@ $('input[name="adapter_manual"]').on("change", function(e) {
 
 })
 
-$('input[name="ifile"]').on("change", function(e) {
-    alert("cucu");
-}
+$("input[type=file]").on('change',function(){
+    alert(this.files[0].name);
+});
 
 function toggleAdapter() {
 {#    if ($("#age").val() <= 13)#}
