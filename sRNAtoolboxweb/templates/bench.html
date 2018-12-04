@@ -210,6 +210,8 @@ $("input[type=file]").on('change',function(){
     var extensions = ["xls","xlsx","doc","docx"]
     if (extensions.includes(this.files[0].name.split('.').pop()) ){
         alert("hey yo")
+        document.getElementById('id_ifile').value = "";
+
     }else{
          alert(this.files[0].name.split('.').pop())
     }
