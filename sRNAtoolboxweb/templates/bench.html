@@ -207,7 +207,8 @@ $('input[name="adapter_manual"]').on("change", function(e) {
 })
 
 $("input[type=file]").on('change',function(){
-    alert(this.files[0].name.split('.').pop());
+    if (this.files[0].name.split('.').pop() == "xlsx")
+    alert("hey yo");
 {#    filename.split('.').pop();#}
 });
 
