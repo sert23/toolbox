@@ -207,7 +207,8 @@ $('input[name="adapter_manual"]').on("change", function(e) {
 })
 
 $("input[type=file]").on('change',function(){
-    alert(this.files[0].name);
+    alert(this.files[0].split('.').pop());
+{#    filename.split('.').pop();#}
 });
 
 function toggleAdapter() {
