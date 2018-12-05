@@ -129,8 +129,10 @@ class DEForm(forms.Form):
                 # TODO: Antonio control this error
                 raise Http404
             conf['input'] = ifile
+
         elif cleaned_data.get("listofIDs"):
             conf['input'] = cleaned_data.get("listofIDs")
+            ifile = " "
         else:
             return Http404
 
