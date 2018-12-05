@@ -85,33 +85,54 @@
         var x, text, message;
         message = "There were some errors in your job. Please select your input again and check for invalid options"
 
+        $("#divPageContent").hide();
+        $("#loadpage").css("visibility", "visible");
+
         x = document.getElementById("id_adapter_manual").value;
 
 
         if (!document.getElementById("id_species").value && !document.getElementById("id_mirna_profiled").value) {
             document.getElementById('id_ifile').value = "";
-            alert(message); return true
+            alert(message);
+            $("#divPageContent").css("visibility", "visible");
+            $("#loadpage").hide();
+            return true
 {#            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true#}
         }else if ((0 + Boolean(document.getElementById('id_ifile').value) + Boolean(document.getElementById('id_url').value) + Boolean(document.getElementById('id_sra_input').value )!=1)){
             document.getElementById('id_ifile').value = "";
 {#            alert("id_file url");#}
 {#            return true;#}
-                        alert(message); return true
+            alert(message);
+            $("#divPageContent").css("visibility", "visible");
+            $("#loadpage").hide();
+            return true
         }else if (document.getElementById('id_predict_mirna').checked && document.getElementById('id_library_mode').checked){
             document.getElementById('id_ifile').value = "";
 {#            alert( " predict and library mode"); return true#}
-            alert(message); return true
+            alert(message);
+            $("#divPageContent").css("visibility", "visible");
+            $("#loadpage").hide();
+            return true
         }else if ((0 + document.getElementById('id_guess_adapter').checked + Boolean(document.getElementById('id_adapter_chosen').value) + Boolean(document.getElementById('id_adapter_manual').value )!=1)){
             document.getElementById('id_ifile').value = "";
 {#            alert(message); return true#}
-            alert("adapter row"); return true
+            alert("adapter row");
+            $("#divPageContent").css("visibility", "visible");
+            $("#loadpage").hide();
+            return true
         }else if (document.getElementById('id_guess_adapter').checked && !document.getElementById('id_species')){
             document.getElementById('id_ifile').value = "";
-            alert(message); return true
+            alert(message);
+            $("#divPageContent").css("visibility", "visible");
+            $("#loadpage").hide();
+            return true
 {#            alert("guess without species"); return true#}
         }else if (document.getElementById('id_highconf').checked && document.getElementById('id_mirDB').value){
             document.getElementById('id_ifile').value = "";
-            alert(message); return true
+            alert(message);
+            $("#divPageContent").css("visibility", "visible");
+            $("#loadpage").hide();
+            return true
         }
 
     }
@@ -153,6 +174,8 @@
 
     }
     function saveChecked() {
+        $("#divPageContent").hide();
+        $("#loadpage").css("visibility", "visible");
         document.getElementById('id_input_hidden').value = selectedItems.join();
 {#        alert(document.getElementById('id_input_hidden').value)#}
     }
@@ -171,41 +194,47 @@
   {# PHOTOS PAGE SCRIPTS #}
 {#  <script src="{% static 'photos/js/progress-bar-upload.js' %}"></script>#}
 
-<div id="page-wrapper">
-    <div class="row">
-    <div class="col-md-9">
+<div id="loadpage" style="position:absolute;
+    left:0px; top:0px; background-color:white;
+    layer-background-color:white; height:100%;
+    width:100%; visibility: hidden;">
+       <img style="position:relative; left:12%; top:5%; display:flex; width:12%;" class="center" src="{% static 'gif/Multibench_spinner.gif' %}">
+</div>
 
-    <div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapseOne">Uploaded data</a>
-        </h4>
+<div id="divPageContent" style="visibility: visible;">
+    <div id="page-wrapper">
+        <div class="row">
+        <div class="col-md-9">
 
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in">
-        <div class="panel-body">
-        <div style="margin-bottom: 20px;">
-
-
-{#            <table id="jobs" class="table table-striped table-bordered bulk_action"></table>#}
-
-            <table id="jobs" class="table table-striped table-bordered table-hover dataTable no-footer"></table>
-  </div>
-
-            {% load crispy_forms_tags %}
-            {% crispy form %}
+        <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+                <a data-toggle="collapse" href="#collapseOne">Uploaded data</a>
+            </h4>
 
         </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body">
+            <div style="margin-bottom: 20px;">
 
-    </div>
-</div>
-    </div>
+
+    {#            <table id="jobs" class="table table-striped table-bordered bulk_action"></table>#}
+
+                <table id="jobs" class="table table-striped table-bordered table-hover dataTable no-footer"></table>
+            </div>
+
+                {% load crispy_forms_tags %}
+                {% crispy form %}
+
+            </div>
+
+        </div>
+        </div>
+        </div>
+        </div>
     </div>
 </div>
 {#{% block photos_content %}#}
-
-
-
 
 <script>
     var received_data = {{ table_data|safe }};
