@@ -513,7 +513,7 @@ class sRNABenchForm(forms.Form):
                                   guessAdapter=guess_adapter, highconf=highconf, mirDB=mirDB,
                                   user_files=libs_files, minReadLength=min_read_length, mBowtie=max_multiple_mapping,
                                    remove3pBases= None, umi=True, iterative5pTrimming= True,
-                                   qualityType=qualityType,minQ=minQ, phred=True, maxQfailure=maximum_positions)
+                                   qualityType=True, minQ=True, phred=True, maxQfailure=True)
 
         conf_file_location = os.path.join(FS.location, "conf.txt")
         new_conf.write_conf_file(conf_file_location)
