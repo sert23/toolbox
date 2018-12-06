@@ -87,7 +87,7 @@ class sRNABenchForm(forms.Form):
                             required=False)
     sra_input = forms.CharField(label='Or provide a SRA ID (starting with SRR or ERR)', required=False)
     url = forms.URLField(label=mark_safe('Or provide a URL for large files <strong class="text-success"> (recommended!)</strong>'), required=False)
-    job_reuse = forms.CharField(label='Reuse input from previous job using jobID',
+    job_reuse = forms.CharField(label='Reuse input from previous sRNAbench job using jobID',
                              required=False)
     # species
     library_mode = forms.BooleanField(label='Do not map to genome (Library mode)' + render_modal('library_mode'), required=False)
@@ -229,7 +229,6 @@ class sRNABenchForm(forms.Form):
 
                     # '<small class="text-danger"> These parameters only apply if you provide fastq formatted input </small>.',
                     #'<p class="text-danger"> These parameters only apply if you provide fastq formatted input </p>.',
-
                     Field('quality_method', css_class='form-control'),
                     Field("phred_encode",  css_class='form-control'),
                     Field('quality_threshold'),
@@ -283,7 +282,8 @@ class sRNABenchForm(forms.Form):
 
             ButtonHolder(
                 #Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
-                Submit('submit', 'RUN', css_class='btn btn-primary', onclick="return myFunction()")
+                Submit('submit', 'RUN', css_class='btn btn-primary')
+                #Submit('submit', 'RUN', css_class='btn btn-primary', onclick="return myFunction()")
                        #onsubmit="alert('Neat!'); return false")
 
             )
@@ -298,6 +298,19 @@ class sRNABenchForm(forms.Form):
             self.add_error('sra_input', 'Choose either file, URL, SRA Run ID or previous JobID as input')
             self.add_error('job_reuse', 'Choose either file, URL, SRA Run ID or previous JobID as input')
 
+        jobID = cleaned_data.get("job_reuse")
+        if jobID:
+            record = JobStatus.objects.get(pipeline_key=jobID)
+            if not record:
+                self.add_error('ifile', 'The jobID you provided could not be found')
+                self.add_error('job_reuse', 'The jobID you provided could not be found')
+            elif not (os.path.exists(record.outdir)):
+                self.add_error('ifile', 'The jobID you provided must be older than 15 days so it was deleted')
+                self.add_error('job_reuse', 'The jobID you provided must be older than 15 days so it was deleted')
+            elif not record.pipeline_type == "sRNAbench":
+                self.add_error('ifile', 'The jobID you provided is not an sRNAbench job')
+                self.add_error('job_reuse', 'The jobID you provided is not an sRNAbench job')
+
         #species
         print(cleaned_data.get('species'))
         if sum([bool(cleaned_data.get('species')), bool(cleaned_data.get('mirna_profiled')), cleaned_data.get("referenceDB")== "MirGeneDB" ]) < 1:
@@ -309,20 +322,19 @@ class sRNABenchForm(forms.Form):
         if not cleaned_data.get("library_protocol"):
             self.add_error('library_protocol', 'Choose one provided or custom protocol ')
 
-
+        #predict
         if cleaned_data.get('predict_mirna') and cleaned_data.get('library_mode'):
-            self.add_error('library_mode', 'Genome mode is needed for miRNA prediction')
+            self.add_error('library_mode', 'Mapping to genome is necessary for miRNA prediction')
+            self.add_error('predict_mirna', 'Mapping to genome is necessary for miRNA prediction')
+
         # if not cleaned_data.get('guess_adapter') and cleaned_data.get('adapter_chosen')=='' and cleaned_data.get('adapter_manual')=='':
-        if sum([bool(cleaned_data.get('guess_adapter')), bool(cleaned_data.get('adapter_chosen')!=''), bool(cleaned_data.get('adapter_manual')!='')]) != 1:
-            print(sum([bool(cleaned_data.get('guess_adapter')), bool(cleaned_data.get('adapter_chosen')==''), bool(cleaned_data.get('adapter_manual')=='')]))
-            self.add_error('guess_adapter', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
-            self.add_error('adapter_chosen', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
-            self.add_error('adapter_manual', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
-        if cleaned_data.get('guess_adapter') and not cleaned_data.get('species'):
-            self.add_error('species', 'if `guess the adapter sequence`, an input genome is required')
-        if cleaned_data.get('highconf') and cleaned_data.get('mirDB') :
-            self.add_error('highconf', 'Choose either miRBase or MirGeneDB for high confidence annotation')
-            self.add_error('mirDB', 'Choose either miRBase or MirGeneDB for high confidence annotation')
+        # if sum([bool(cleaned_data.get('guess_adapter')), bool(cleaned_data.get('adapter_chosen')!=''), bool(cleaned_data.get('adapter_manual')!='')]) != 1:
+        #     print(sum([bool(cleaned_data.get('guess_adapter')), bool(cleaned_data.get('adapter_chosen')==''), bool(cleaned_data.get('adapter_manual')=='')]))
+        #     self.add_error('guess_adapter', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
+        #     self.add_error('adapter_chosen', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
+        #     self.add_error('adapter_manual', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
+        # if cleaned_data.get('guess_adapter') and not cleaned_data.get('species'):
+        #     self.add_error('species', 'if `guess the adapter sequence`, an input genome is required')
 
         return cleaned_data
 
@@ -332,6 +344,7 @@ class sRNABenchForm(forms.Form):
         name_modifier = cleaned_data.get('job_name')
         url = cleaned_data.get('url')
         sra_input = cleaned_data.get('sra_input')
+        job_reuse = cleaned_data.get("job_reuse")
         ifile = cleaned_data.get("ifile") or ''
         if ifile:
             file_to_update = ifile
@@ -345,16 +358,27 @@ class sRNABenchForm(forms.Form):
             ifile = os.path.join(FS.location, uploaded_file)
 
         elif url:
-
             extension = os.path.basename(url).split('.')[-1]
             if name_modifier is not None:
                 dest = os.path.join(FS.location, str(name_modifier) + "." + extension).replace(" ", "")
             else:
                 dest = os.path.join(FS.location, os.path.basename(url))
 
-            ifile, headers = urllib.request.urlretrieve(url, filename=dest)
+            #ifile, headers = urllib.request.urlretrieve(url, filename=dest)
+            ifile = "input=URL@"+url
         elif sra_input:
             ifile = sra_input
+        elif job_reuse:
+            jobID = job_reuse
+            new_record = JobStatus.objects.get(pipeline_key=jobID)
+            conf = os.path.join(new_record.outdir,"conf.txt")
+            input_f = ""
+            with open(conf, "r") as conf_file:
+                lines = conf_file.readlines()
+                for line in lines:
+                    if line.startswith("input="):
+                        input_f = line.rstrip().split("=")[1]
+            ifile = input_f
 
         for i in range(1, 6):
             profile = cleaned_data.get('profile' + str(i))
@@ -381,33 +405,96 @@ class sRNABenchForm(forms.Form):
         os.system("mkdir " + FS.location)
         out_dir = FS.location
         conf['out_dir'] = out_dir
+        #Input
         ifile, libs_files = self.upload_files(cleaned_data, FS)
-        lib_mode = cleaned_data.get('library_mode')
-        is_solid = str(cleaned_data.get('is_solid')).lower()
-        guess_adapter = str(cleaned_data.get('guess_adapter')).lower()
-        predict_mirna = str(cleaned_data.get('predict_mirna')).lower()
-        no_libs = cleaned_data.get('no_libs')
-        highconf = cleaned_data.get('highconf')
-        mirDB = cleaned_data.get('mirDB')
-        #recursive_adapter_trimming = str(cleaned_data.get('recursive_adapter_trimming')).lower()
-        recursive_adapter_trimming = str(cleaned_data.get('adapter_recursive_trimming')).lower()
+
+        #Species
         species = [i.db_ver for i in cleaned_data['species']]
         assemblies = [i.db for i in cleaned_data['species']]
         short_names = [i.shortName for i in cleaned_data['species']]
         micrornas_species = ':'.join(short_names)
-        adapter = cleaned_data['adapter_chosen'] or cleaned_data['adapter_manual']
-        if adapter== "EMPTY":
-            adapter = None
-        nucleotides_5_removed = str(cleaned_data['nucleotides_5_removed'])
+        if cleaned_data.get("mirna_profiled"):
+            micrornas_species = cleaned_data.get("mirna_profiled")
+        lib_mode = cleaned_data.get('library_mode')
+        no_libs = cleaned_data.get('no_libs')
+        is_solid = "false"
+
+        #Reads preprocessing
+        protocol = cleaned_data.get('library_protocol')
         adapter_length = str(cleaned_data['adapter_length'])
         adapter_mismatch = str(cleaned_data['adapter_mismatch'])
+        nucleotides_5_removed = str(cleaned_data['nucleotides_5_removed'])
+        remove3pBases = str(cleaned_data['nucleotides_3_removed'])
+        recursive_adapter_trimming = str(cleaned_data.get('adapter_recursive_trimming')).lower()
+
+        #initialize variables
+        umi = None
+        iterative5pTrimming = None
+
+        guess_adapter = "false"
+        if protocol == "Illumina":
+            adapter = "TGGAATTCTCGGGTGCCAAGGG"
+        elif protocol == "NEBnext":
+            adapter = "AGATCGGAAGAGCACACGTCT"
+        elif protocol == "Bioo":
+            adapter = "TGGAATTCTCGGGTGCCAAGGG"
+            remove3pBases = "4"
+            nucleotides_5_removed = "4"
+        elif protocol == "SMARTer":
+            adapter = "AAAAAAAAAA"
+            iterative5pTrimming = 4
+        elif protocol == "Qiagen":
+            umi = "3pA12"
+            adapter = "AACTGTAGGCACCATCAAT"
+        elif protocol == "Custom":
+            if cleaned_data.get('guess_adapter'):
+                guess_adapter = "true"
+                adapter = "EMPTY"
+            elif cleaned_data.get("adapter_manual"):
+                adapter = cleaned_data.get("adapter_manual")
+                guess_adapter = "false"
+            elif cleaned_data.get("adapter_chosen"):
+                adapter = cleaned_data.get("adapter_chosen")
+                guess_adapter = "false"
+
+        if adapter== "EMPTY":
+            adapter = None
+
+        #Quality Control
+
+        qualityType = cleaned_data.get("quality_method")
+        minQ = None
+        phred_encode = None
+        maximum_positions = None
+
+        if qualityType == "mean":
+            minQ = cleaned_data.get("quality_threshold")
+            phred_encode = cleaned_data.get("phred_encode")
+        if qualityType == "min":
+            minQ = cleaned_data.get("quality_threshold")
+            phred_encode = cleaned_data.get("phred_encode")
+            maximum_positions = cleaned_data.get("maximum_positions")
+
+
+        # Reference DB
+        if cleaned_data.get("referenceDB") == "highconf":
+            highconf = "true"
+        else:
+            highconf = "false"
+        if cleaned_data.get("referenceDB") == "MirGeneDB":
+            mirDB = cleaned_data.get('mirDB')
+        else:
+            mirDB = None
+        predict_mirna = str(cleaned_data.get('predict_mirna')).lower()
+
+        #Parameters
         seed_length = str(cleaned_data['seed_length'])
         mismatches = str(cleaned_data['mismatches'])
         aligment_type = str(cleaned_data['aligment_type'])
         min_read_count = str(cleaned_data['min_read_count'])
         min_read_length = str(cleaned_data['min_read_length'])
         max_multiple_mapping = str(cleaned_data['max_multiple_mapping'])
-        homologous = cleaned_data['homologous'] if cleaned_data['homologous'] != '' else None
+
 
         species_annotation_file = SpeciesAnnotationParser(CONF["speciesAnnotation"])
         species_annotation = species_annotation_file.parse()
@@ -423,8 +510,10 @@ class sRNABenchForm(forms.Form):
                                   adapterMinLength=adapter_length, adapterMM=adapter_mismatch,
                                   seed=seed_length,
                                   noMM=mismatches, alignType=aligment_type, minRC=min_read_count, solid=is_solid,
-                                  guessAdapter=guess_adapter, highconf=highconf, mirDB=mirDB, homolog=homologous,
-                                  user_files=libs_files, minReadLength=min_read_length, mBowtie=max_multiple_mapping)
+                                  guessAdapter=guess_adapter, highconf=highconf, mirDB=mirDB,
+                                  user_files=libs_files, minReadLength=min_read_length, mBowtie=max_multiple_mapping,
+                                   remove3pBases = remove3pBases, umi=umi, iterative5pTrimming=iterative5pTrimming,
+                                   qualityType=qualityType,minQ=minQ, phred=phred_encode, maxQfailure=maximum_positions)
 
         conf_file_location = os.path.join(FS.location, "conf.txt")
         new_conf.write_conf_file(conf_file_location)
