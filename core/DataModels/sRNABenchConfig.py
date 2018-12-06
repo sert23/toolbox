@@ -126,7 +126,8 @@ class SRNABenchConfig():
                  seed=None, noMM=None, alignType=None, minRC=None, solid=None, guessAdapter=False, highconf=False, mirDB=False,
                  homolog=None, user_files=None, minReadLength="15", mBowtie="10", **kwargs):
         for attr in kwargs.keys():
-            self.__dict__[attr] = kwargs[attr]
+            if kwargs.get(attr) is not None:
+                self.__dict__[attr] = kwargs[attr]
 
         self.mBowtie = mBowtie
         self.minReadLength = minReadLength
