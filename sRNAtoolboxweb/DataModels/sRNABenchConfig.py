@@ -3,7 +3,7 @@ import json
 __author__ = 'antonior'
 
 
-class SRNABenchConfig():
+class SRNABenchConfig2():
     def __init__(self, annot_dic, dbPath, output, ifile, iszip="true", bedGraph="true",
                  writeGenomeDist="true", predict=None,  graphics="true", species=None, assembly=None, short_names=(), adapter=None,
                  recursiveAdapterTrimming = "false", libmode=False, nolib=False, microRNA=None, removeBarcode=None, adapterMinLength=None, adapterMM=None,
