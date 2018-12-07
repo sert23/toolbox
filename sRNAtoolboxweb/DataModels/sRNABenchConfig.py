@@ -113,7 +113,7 @@ class SRNABenchConfig():
                     fdw.write("species" + "=" + ":".join(self.__dict__[attr]) + "\n")
             elif attr != "libs" and attr != "desc":
                 #print(attr)
-                fdw.write(attr + "=" + self.__dict__[attr] + "\n")
+                fdw.write(attr + "=" + str(self.__dict__[attr]) + "\n")
             else:
                 for value in self.__dict__[attr]:
                     fdw.write(attr + "=" + value + "\n")
