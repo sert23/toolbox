@@ -222,9 +222,6 @@ $("input[type=file]").on('change',function(){
     if (extensions.includes(this.files[0].name.split('.').pop()) ){
         alert('Spread-sheet or document extensions such as ".xls" or ".doc" are not supported. Please upload a different file. ')
         document.getElementById('id_ifile').value = "";
-
-    }else{
-         alert(this.files[0].name.split('.').pop())
     }
 
 {#    filename.split('.').pop();#}
