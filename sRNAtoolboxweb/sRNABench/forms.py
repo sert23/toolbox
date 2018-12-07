@@ -512,8 +512,8 @@ class sRNABenchForm(forms.Form):
                                   noMM=mismatches, alignType=aligment_type, minRC=min_read_count, solid=is_solid,
                                   guessAdapter=guess_adapter, highconf=highconf, mirDB=mirDB,
                                   user_files=libs_files, minReadLength=min_read_length, mBowtie=max_multiple_mapping,
-                                   remove3pBases= None, umi=True, iterative5pTrimming= True,
-                                   qualityType=True, minQ=True, phred=True, maxQfailure=True)
+                                   remove3pBases = remove3pBases, umi=umi, iterative5pTrimming=iterative5pTrimming,
+                                   qualityType=qualityType,minQ=minQ, phred=phred_encode, maxQfailure=maximum_positions)
 
         conf_file_location = os.path.join(FS.location, "conf.txt")
         new_conf.write_conf_file(conf_file_location)
