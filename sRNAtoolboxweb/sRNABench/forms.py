@@ -320,8 +320,9 @@ class sRNABenchForm(forms.Form):
             self.add_error('mirna_profiled', 'Species or miRBase/MirGeneDB short name tag(s) are required')
 
         #preprocessing
-        if cleaned_data.get("library_protocol"):
-            self.add_error('library_protocol', 'Choose one provided or custom protocol ')
+        if not cleaned_data.get("library_protocol"):
+            self.add_error(None, 'Choose one provided or custom protocol ')
+            # self.add_error('library_protocol', 'Choose one provided or custom protocol ')
 
         #predict
         if cleaned_data.get('predict_mirna') and cleaned_data.get('library_mode'):
