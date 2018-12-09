@@ -321,7 +321,7 @@ class sRNABenchForm(forms.Form):
 
         #preprocessing
         if not cleaned_data.get("library_protocol"):
-            self.add_error(None, mark_safe('Library failure<strong class="text-success"> (recommended!)</strong>'))
+            self.add_error('library_protocol', mark_safe('<strong class="text-danger"> Choose one provided or custom protocol</strong>'))
             # self.add_error(None, 'Choose one provided or custom protocol ')
             # self.add_error('library_protocol', 'Choose one provided or custom protocol ')
 
