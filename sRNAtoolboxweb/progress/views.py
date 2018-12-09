@@ -209,8 +209,13 @@ class JobStatusDetail(DetailView):
                     # return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
                     return {}
             elif job_status.job_status == "Finished with Errors":
+                if job_status.pipeline_type == "sRNAbench" and os.path.exists(
+                        os.path.join(job_status.outdir, "results.txt")):
+                    return {}
                 #return self.get_context_finished_with_errors(job_status)
-                return self.get_error_context(job_status)
+                else:
+                    return self.get_error_context(job_status)
+
             else:
                 # print("y qué voy a hacer")
                 return self.get_error_context(job_status)
