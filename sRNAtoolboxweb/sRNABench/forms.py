@@ -115,7 +115,7 @@ class sRNABenchForm(forms.Form):
                 ("Bioo", mark_safe("Bioo Scientific Nextflex&#153; (v2,v3)" + render_modal('Bioo'))),
                 ("SMARTer", mark_safe("Clonetech SMARTer&#153;" + render_modal('Smarter'))),
                 ("Qiagen", mark_safe("Qiagen&#153; (with UMIs)" + render_modal('Qiagen'))),
-                ("Custom", "Customized protocol") + render_modal('Custom')]
+                ("Custom", "Customized protocol" + render_modal('Custom'))]
     library_protocol = forms.ChoiceField(label="", choices=protocols, required=False, widget=forms.RadioSelect())
 
     #Quality Control
