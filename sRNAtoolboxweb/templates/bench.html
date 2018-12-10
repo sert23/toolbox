@@ -2,15 +2,19 @@
 {% load staticfiles %}
 {% block content %}
 
-<div id="loadpage" style="position:absolute;
-    left:0px; top:0px; background-color:white;
-    layer-background-color:white; height:100%;
-    width:100%; visibility: hidden;">
-       <img style="position:relative; left:18%; top:5%; display:flex; width:12%;" class="center" src="{% static 'gif/sRNAbench_spinner.gif' %}">
-       <p style="position:relative; left:21%; top:5%; display:flex; width:12%;"><b><big>Uploading file...</big></b></p>
+
+<!-- Modal -->
+<div class="modal fade" id="spinner" tabindex="-1" role="dialog" aria-labelledby="spinnerLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <img style="display:block; margin-left:auto; margin-right:auto; width:50%;" src="{% static 'gif/sRNAbench_spinner.gif' %}">
+          <h1 style="text-align: center;">Uploading file...</h1>
+        </div>
+      </div>
+    </div>
 </div>
 
-<div id="divPageContent" style="visibility: visible;">
 
     <div id="page-wrapper">
     <div class="row">
@@ -116,7 +120,7 @@
 
 
     <!-- /#page-wrapper -->
-    </div>
+    
 
 {% endblock %}
 
@@ -288,18 +292,12 @@ function toggleAdapter() {
         function validation() {
         var x, text, message;
         message = "There were some errors in your job. Please select your input again and check for invalid options"
-        
-        $("#divPageContent").hide();
-        $("#loadpage").css("visibility", "visible");
 
         x = document.getElementById("id_adapter_manual").value;
-
 
         if (!document.getElementById("id_species").value && !document.getElementById("id_mirna_profiled").value) {
             document.getElementById('id_ifile').value = "";
             alert(message);
-            $("#divPageContent").css("visibility", "visible");
-            $("#loadpage").hide();
             return true
 {#            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true#}
         }else if ((0 + Boolean(document.getElementById('id_ifile').value) + Boolean(document.getElementById('id_url').value) + Boolean(document.getElementById('id_sra_input').value ) + Boolean(document.getElementById('id_job_reuse').value)!=1)){
@@ -307,34 +305,28 @@ function toggleAdapter() {
 {#            alert("id_file url"); #}
 {#            return true;#}
             alert(message); 
-            $("#divPageContent").css("visibility", "visible");
-            $("#loadpage").hide();
             return true
         }else if (! document.getElementsByName('library_protocol').some(Boolean)) {
             document.getElementById('id_ifile').value = "";
             {#            alert( " predict and library mode"); return true#}
             alert(message);
-            $("#divPageContent").css("visibility", "visible");
-            $("#loadpage").hide();
             return true
         }else if ((0+ Boolean(document.getElementById('id_species_hidden')) + Boolean(document.getElementById('id_mirna_profiled')) + Boolean(document.getElementById('id_referenceDB') === "MirGeneDB"))<1  ) {
             document.getElementById('id_ifile').value = "";
             {#            alert( " predict and library mode"); return true#}
             alert(message);
-            $("#divPageContent").css("visibility", "visible");
-            $("#loadpage").hide();
             return true
 
 {#        }else if (document.getElementById('id_predict_mirna').checked && document.getElementById('id_library_mode').checked) {#}
 {#            document.getElementById('id_ifile').value = "";#}
             {#            alert( " predict and library mode"); return true#}
 {#            alert(message);#}
-{#            $("#divPageContent").css("visibility", "visible");#}
-{#            $("#loadpage").hide();#}
 {#            return true#}
 
 
         }
+
+        $('#spinner').modal('show');
 
     }
     </script>

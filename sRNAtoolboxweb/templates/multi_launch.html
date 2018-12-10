@@ -85,17 +85,11 @@
         var x, text, message;
         message = "There were some errors in your job. Please select your input again and check for invalid options"
 
-        $("#divPageContent").hide();
-        $("#loadpage").css("visibility", "visible");
-
         x = document.getElementById("id_adapter_manual").value;
-
 
         if (!document.getElementById("id_species").value && !document.getElementById("id_mirna_profiled").value) {
             document.getElementById('id_ifile').value = "";
             alert(message);
-            $("#divPageContent").css("visibility", "visible");
-            $("#loadpage").hide();
             return true
 {#            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true#}
         }else if ((0 + Boolean(document.getElementById('id_ifile').value) + Boolean(document.getElementById('id_url').value) + Boolean(document.getElementById('id_sra_input').value )!=1)){
@@ -103,38 +97,23 @@
 {#            alert("id_file url");#}
 {#            return true;#}
             alert(message);
-            $("#divPageContent").css("visibility", "visible");
-            $("#loadpage").hide();
             return true
         }else if (document.getElementById('id_predict_mirna').checked && document.getElementById('id_library_mode').checked){
             document.getElementById('id_ifile').value = "";
 {#            alert( " predict and library mode"); return true#}
             alert(message);
-            $("#divPageContent").css("visibility", "visible");
-            $("#loadpage").hide();
             return true
         }else if ((0 + document.getElementById('id_guess_adapter').checked + Boolean(document.getElementById('id_adapter_chosen').value) + Boolean(document.getElementById('id_adapter_manual').value )!=1)){
             document.getElementById('id_ifile').value = "";
 {#            alert(message); return true#}
             alert("adapter row");
-            $("#divPageContent").css("visibility", "visible");
-            $("#loadpage").hide();
             return true
         }else if (document.getElementById('id_guess_adapter').checked && !document.getElementById('id_species')){
             document.getElementById('id_ifile').value = "";
             alert(message);
-            $("#divPageContent").css("visibility", "visible");
-            $("#loadpage").hide();
             return true
 {#            alert("guess without species"); return true#}
-        }else if (document.getElementById('id_highconf').checked && document.getElementById('id_mirDB').value){
-            document.getElementById('id_ifile').value = "";
-            alert(message);
-            $("#divPageContent").css("visibility", "visible");
-            $("#loadpage").hide();
-            return true
         }
-
     }
     </script>
 
@@ -174,8 +153,7 @@
 
     }
     function saveChecked() {
-        $("#divPageContent").hide();
-        $("#loadpage").css("visibility", "visible");
+        $('#spinner').modal('show');
         document.getElementById('id_input_hidden').value = selectedItems.join();
 {#        alert(document.getElementById('id_input_hidden').value)#}
     }
@@ -191,17 +169,20 @@
 {#    <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>#}
 {#    <script src="{% static 'js/bootstrap.min.js' %}"></script>#}
 
+<!-- Modal -->
+<div class="modal fade" id="spinner" tabindex="-1" role="dialog" aria-labelledby="spinnerLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <img style="display:block; margin-left:auto; margin-right:auto; width:50%;" src="{% static 'gif/Multibench_spinner.gif' %}">
+        </div>
+      </div>
+    </div>
+</div>
+
   {# PHOTOS PAGE SCRIPTS #}
 {#  <script src="{% static 'photos/js/progress-bar-upload.js' %}"></script>#}
 
-<div id="loadpage" style="position:absolute;
-    left:0px; top:0px; background-color:white;
-    layer-background-color:white; height:100%;
-    width:100%; visibility: hidden;">
-       <img style="position:relative; left:12%; top:5%; display:flex; width:12%;" class="center" src="{% static 'gif/Multibench_spinner.gif' %}">
-</div>
-
-<div id="divPageContent" style="visibility: visible;">
     <div id="page-wrapper">
         <div class="row">
         <div class="col-md-9">
@@ -233,7 +214,7 @@
         </div>
         </div>
     </div>
-</div>
+
 {#{% block photos_content %}#}
 
 <script>
