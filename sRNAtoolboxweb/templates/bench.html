@@ -139,6 +139,14 @@
     {% include "Messages/bench/UploadUserFiles.html" %}
     {% include "Messages/bench/mirnas.html" %}
 
+{#    Protocols      #}
+    {% include "Messages/protocols/Illumina.html" %}
+    {% include "Messages/protocols/NEB.html" %}
+    {% include "Messages/protocols/Bioo.html" %}
+    {% include "Messages/protocols/Smarter.html" %}
+    {% include "Messages/protocols/Qiagen.html" %}
+    {% include "Messages/protocols/Custom.html" %}
+
 
 {% endblock %}
 
@@ -294,7 +302,7 @@ function toggleAdapter() {
             $("#loadpage").hide();
             return true
 {#            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true#}
-        }else if ((0 + Boolean(document.getElementById('id_ifile').value) + Boolean(document.getElementById('id_url').value) + Boolean(document.getElementById('id_sra_input').value )!=1)){
+        }else if ((0 + Boolean(document.getElementById('id_ifile').value) + Boolean(document.getElementById('id_url').value) + Boolean(document.getElementById('id_sra_input').value ) + Boolean(document.getElementById('id_job_reuse').value)!=1)){
             document.getElementById('id_ifile').value = "";
 {#            alert("id_file url"); #}
 {#            return true;#}
@@ -302,33 +310,30 @@ function toggleAdapter() {
             $("#divPageContent").css("visibility", "visible");
             $("#loadpage").hide();
             return true
-        }else if (document.getElementById('id_predict_mirna').checked && document.getElementById('id_library_mode').checked){
+        }else if (! document.getElementsByName('library_protocol').some(Boolean)) {
             document.getElementById('id_ifile').value = "";
-{#            alert( " predict and library mode"); return true#}
+            {#            alert( " predict and library mode"); return true#}
             alert(message);
             $("#divPageContent").css("visibility", "visible");
             $("#loadpage").hide();
             return true
-        }else if ((0 + document.getElementById('id_guess_adapter').checked + Boolean(document.getElementById('id_adapter_chosen').value) + Boolean(document.getElementById('id_adapter_manual').value )!=1)){
+        }else if ((0+ Boolean(document.getElementById('id_species_hidden')) + Boolean(document.getElementById('id_mirna_profiled')) + Boolean(document.getElementById('id_referenceDB') === "MirGeneDB"))<1  ) {
             document.getElementById('id_ifile').value = "";
-{#            alert(message); return true#}
-            alert("adapter row");
-            $("#divPageContent").css("visibility", "visible");
-            $("#loadpage").hide();
-            return true
-        }else if (document.getElementById('id_guess_adapter').checked && !document.getElementById('id_species')){
-            document.getElementById('id_ifile').value = "";
+            {#            alert( " predict and library mode"); return true#}
             alert(message);
             $("#divPageContent").css("visibility", "visible");
             $("#loadpage").hide();
             return true
-{#            alert("guess without species"); return true#}
-        }else if (document.getElementById('id_highconf').checked && document.getElementById('id_mirDB').value){
-            document.getElementById('id_ifile').value = "";
-            alert(message);
-            $("#divPageContent").css("visibility", "visible");
-            $("#loadpage").hide();
-            return true
+
+{#        }else if (document.getElementById('id_predict_mirna').checked && document.getElementById('id_library_mode').checked) {#}
+{#            document.getElementById('id_ifile').value = "";#}
+            {#            alert( " predict and library mode"); return true#}
+{#            alert(message);#}
+{#            $("#divPageContent").css("visibility", "visible");#}
+{#            $("#loadpage").hide();#}
+{#            return true#}
+
+
         }
 
     }
