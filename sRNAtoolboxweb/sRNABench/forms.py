@@ -291,7 +291,7 @@ class sRNABenchForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(sRNABenchForm, self).clean()
-        self.add_error('ifile', 'Choose either file, URL, SRA Run ID or previous JobID as input')
+
         #Input files
         if sum([bool(cleaned_data.get('ifile')), bool(cleaned_data.get('url')!=''), bool(cleaned_data.get('sra_input')!=''),bool(cleaned_data.get('job_reuse')!='')]) != 1:
             self.add_error('ifile', 'Choose either file, URL, SRA Run ID or previous JobID as input')
