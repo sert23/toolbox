@@ -238,7 +238,7 @@ class MultiStatusView(DetailView):
             click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
             outdir = new_record.outdir
 
-            jobs_tbody.append([job, job_stat, start,finish ,input_line[6:], click, outdir])
+            jobs_tbody.append([job, job_stat, start,finish ,input_line[6:], click])
             #jobs_tbody.append([job, job_stat, start, finish, click])
 
         js_data = json.dumps(jobs_tbody)
@@ -248,8 +248,8 @@ class MultiStatusView(DetailView):
                                  {"title": "Finished"},
                                  {"title": "Input"},
                                  # { "title": "Select" }])
-                                 {"title": 'Go to'},
-                                 {"title": 'Outdir'}
+                                 {"title": 'Go to'}
+
                                  ]
                                 )
         context["tbody"] = js_data
