@@ -385,7 +385,8 @@ function toggleAdapter() {
         columns: received_cols,
     } );
 
-    $('#jobs tbody').on('click', 'tr', function () {
+    $('#jobs').on('click', 'tr', function () {
+{#    $('#jobs tbody').on('click', 'tr', function () {#}
         var data = table.row( this ).data();
 //        alert( 'You clicked on '+data[2]+'\'s row' );
         printChecked();
