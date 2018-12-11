@@ -823,6 +823,7 @@ class sRNABenchForm2(forms.Form):
             ),
 
             ButtonHolder(
+
                 # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
                 # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="return myFunction()")
                 Submit('submit', mark_safe('<a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>'),
