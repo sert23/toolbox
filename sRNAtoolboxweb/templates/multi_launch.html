@@ -184,6 +184,11 @@ function toggleAdapter() {
             }
 
         });
+        if (selectedItems.length>0){
+            document.getElementById("myBtn").disabled = false;
+        }else {
+            document.getElementById("myBtn").disabled = true;
+        }
         if ( document.getElementById('id_species_hidden').value){
             $("#genome-div").show();
         }else{
@@ -374,7 +379,9 @@ function toggleAdapter() {
 //        alert( 'You clicked on '+data[2]+'\'s row' );
         printChecked();
         if (selectedItems.length>0){
-            alert("hey hey")
+            document.getElementById("myBtn").disabled = false;
+        }else{
+            document.getElementById("myBtn").disabled = true;
         }
     } );
     $("#flowcheckall").click(function () {
