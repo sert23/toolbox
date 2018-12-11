@@ -157,9 +157,9 @@ function toggleAdapter() {
         $("#genome-div").hide();
     }}
 
-$('input[name="to_list"]').on("click", function(e) {
-    alert("hey hey hey")
-})
+
+
+
 
 </script>
 
@@ -262,6 +262,10 @@ $('input[name="to_list"]').on("click", function(e) {
     </script>
 
     <script>
+
+    $("input:checkbox[name=to_list]").on("click",function() {
+    alert("hey hey")
+    });
 
     var selectedItems=[];
     function printChecked(){
