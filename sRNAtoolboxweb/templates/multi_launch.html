@@ -268,6 +268,13 @@ function toggleAdapter() {
 
     <script>
 
+        $(document).ready(function(){
+            $("#button_div").attr("href","#");
+            $("#button_div").attr("data-toggle","tooltip");
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+
     $('#button_div').on('mouseover', function () {
         if (document.getElementById("submit-id-submit").disabled){
 {#            alert("heeeeeyooo");#}
@@ -275,13 +282,7 @@ function toggleAdapter() {
     });
 
 
-    $(document).ready(function(){
-        $("submit-id-submit").css("data-toggle", "tooltip");
-        if (document.getElementById("submit-id-submit").disabled) {
 
-            $('[data-toggle="tooltip"]').tooltip();
-        }
-    });
 
     var selectedItems=[];
     function printChecked(){
