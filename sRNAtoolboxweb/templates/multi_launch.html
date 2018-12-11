@@ -392,8 +392,11 @@ function toggleAdapter() {
         printChecked();
         if (selectedItems.length>0){
             document.getElementById("submit-id-submit").disabled = false;
+            $("#button_div").attr("title"," ");
+
         }else{
             document.getElementById("submit-id-submit").disabled = true;
+            $("#button_div").attr("title","Please select at least one sample");
         }
     } );
     $("#flowcheckall").click(function () {
