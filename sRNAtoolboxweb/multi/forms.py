@@ -199,6 +199,8 @@ class sRNABenchForm(forms.Form):
     profile_url1 = forms.CharField(label='Provide a URLs (one per line)', required=False, widget=forms.Textarea)
     species_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
 
+    input_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
+
     def __init__(self, *args, **kwargs):
         self.folder = kwargs.pop('dest_folder', None)
         super(sRNABenchForm, self).__init__(*args, **kwargs)
@@ -241,6 +243,7 @@ class sRNABenchForm(forms.Form):
             create_collapsable_div(
                 Field('species'),
                 Field('species_hidden', name='species_hidden'),
+                Field('input_hidden', name='input_hidden'),
                 Div('library_mode', 'no_libs', css_id='genome-div'),
 
                 title='Select species', c_id='2',
