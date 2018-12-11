@@ -276,7 +276,9 @@ function toggleAdapter() {
 
 
     $(document).ready(function(){
+        $("submit-id-submit").css("data-toggle", "tooltip");
         if (document.getElementById("submit-id-submit").disabled) {
+
             $('[data-toggle="tooltip"]').tooltip();
         }
     });
