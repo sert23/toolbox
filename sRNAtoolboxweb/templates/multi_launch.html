@@ -272,6 +272,7 @@ function toggleAdapter() {
             $("#button_div").attr("href","#");
             $("#button_div").attr("data-toggle","tooltip");
             $("#button_div").attr("style","display:inline-block");
+            $("#button_div").attr("data-placement","right");
 
             $('[data-toggle="tooltip"]').tooltip();
         });
@@ -279,7 +280,9 @@ function toggleAdapter() {
 
     $('#button_div').on('mouseover', function () {
         if (document.getElementById("submit-id-submit").disabled){
-{#            alert("heeeeeyooo");#}
+            $("#button_div").attr("title","Please select at least one sample");
+        }else{
+            $("#button_div").attr("title","Please select at least one sample");
         }
     });
 
