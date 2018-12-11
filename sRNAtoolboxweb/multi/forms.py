@@ -328,7 +328,7 @@ class sRNABenchForm(forms.Form):
                 #Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
                 # Submit('submit', 'RUN', css_class='btn btn-primary')
                 # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="return validation()")
-                Div(Submit('submit', 'RUN', css_class='btn btn-primary', onclick="return saveChecked()", css_id="button_div_new" ),
+                Div(Submit('submit', 'RUN', css_class='btn btn-primary', onclick="return saveChecked()" ),
                     css_id="button_div", title="Hooray")
         # Submit('submit', mark_safe('<a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>'),
         #        css_class='btn btn-primary', onclick="return saveChecked()")
