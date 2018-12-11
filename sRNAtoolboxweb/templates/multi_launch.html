@@ -11,16 +11,32 @@
 
 
 {% block modals %}
+    {% include "Messages/bench/Choose_input.html" %}
     {% include "Messages/bench/sRNAbenchInput.html" %}
-    {% include "Messages/bench/guess_Adapter.html" %}
+    {% include "Messages/bench/Species_dropdown.html" %}
     {% include "Messages/bench/library_mode.html" %}
+    {% include "Messages/bench/other_ncrnas.html" %}
+    {% include "Messages/bench/guess_Adapter.html" %}
     {% include "Messages/bench/minimum_adapter_length.html" %}
     {% include "Messages/bench/mismatches_adapter.html" %}
+    {% include "Messages/bench/quality_filter.html" %}
+    {% include "Messages/bench/phred_encode.html" %}
+    {% include "Messages/bench/mirna_species.html" %}
     {% include "Messages/bench/Not_profile.html" %}
     {% include "Messages/bench/RecursiveAdaptorTrimming.html" %}
     {% include "Messages/bench/speciesBench.html" %}
     {% include "Messages/bench/UploadUserFiles.html" %}
     {% include "Messages/bench/mirnas.html" %}
+
+{#    Protocols      #}
+    {% include "Messages/protocols/Illumina.html" %}
+    {% include "Messages/protocols/NEB.html" %}
+    {% include "Messages/protocols/Bioo.html" %}
+    {% include "Messages/protocols/Smarter.html" %}
+    {% include "Messages/protocols/Qiagen.html" %}
+    {% include "Messages/protocols/Custom.html" %}
+
+
 {% endblock %}
 
     {% block javascript %}
@@ -50,8 +66,101 @@
 
 {% block js %}
 
-
     <script>
+
+function toggleFields() {
+{#    if ($("#age").val() <= 13)#}
+    if ( document.getElementById('id_species_hidden').value){
+
+        $("#genome-div").show();
+    }else{
+        $("#genome-div").hide();
+    }}
+
+
+$('input[name="library_protocol"]').on("click", function(e) {
+    if (document.getElementById('id_library_protocol_6').checked) {
+        $("#Adapter_Custom").show();
+    } else {
+        $("#Adapter_Custom").hide();
+    }
+})
+
+
+
+$("#id_quality_method").change(function () {
+{#    if ( document.getElementById('id_library_protocol_6').checked){#}
+    if ( document.getElementById('id_quality_method').value === "min"){
+        $("#Div_max").show();
+    }else{
+        $("#Div_max").hide();
+    }
+    });
+
+
+        {##}
+        {# Adapter options #}
+        {##}
+
+$('input[name="guess_adapter"]').on("click", function(e) {
+    if ( document.getElementById('id_guess_adapter').checked){
+        document.getElementById("id_adapter_chosen").disabled = true;
+        document.getElementById("id_adapter_manual").disabled = true;
+    }else{
+        document.getElementById("id_adapter_chosen").disabled = false;
+        document.getElementById("id_adapter_manual").disabled = false;
+    }
+
+})
+
+$('input[name="adapter_manual"]').on("mouseout", function(e) {
+
+    if ( document.getElementById('id_adapter_manual').value.length > 0 ){
+
+        document.getElementById("id_adapter_chosen").disabled = true;
+        document.getElementById("id_guess_adapter").disabled = true;
+    }else{
+        document.getElementById("id_adapter_chosen").disabled = false;
+        document.getElementById("id_guess_adapter").disabled = false;
+    }
+
+})
+$('input[name="adapter_manual"]').on("change", function(e) {
+
+    if ( document.getElementById('id_adapter_manual').value.length > 0 ){
+
+        document.getElementById("id_adapter_chosen").disabled = true;
+        document.getElementById("id_guess_adapter").disabled = true;
+    }else{
+        document.getElementById("id_adapter_chosen").disabled = false;
+        document.getElementById("id_guess_adapter").disabled = false;
+    }
+
+})
+
+$("input[type=file]").on('change',function(){
+    var extensions = ["xls","xlsx","doc","docx"]
+    if (extensions.includes(this.files[0].name.split('.').pop()) ){
+        alert('Spread-sheet or document extensions such as ".xls" or ".doc" are not supported. Please upload a different file. ')
+        document.getElementById('id_ifile').value = "";
+    }
+
+{#    filename.split('.').pop();#}
+});
+
+function toggleAdapter() {
+{#    if ($("#age").val() <= 13)#}
+    if ( document.getElementById('id_library_protocol').value){
+
+        $("#genome-div").show();
+    }else{
+        $("#genome-div").hide();
+    }}
+
+
+</script>
+
+   <script>
     jQuery(document).ready(function() {
         jQuery('#id_species').multiselect({
             enableCollapsibleOptGroups: true,
@@ -59,26 +168,25 @@
             filterBehavior: 'both',
             maxHeight: 300,
             onDropdownHidden: function (e) {
-
-                jQuery('#id_species_hidden').val(jQuery('#id_species').val().map(function(item) {
-                return item.split(':')[0];}).join(','));
+                if(document.getElementById('id_species').value){
+                   jQuery('#id_species_hidden').val(jQuery('#id_species').val().map(function(item) {
+                        return item.split(':')[0]}).join(','));
+                } else{
+                        document.getElementById('id_species_hidden').value = "" ;
+                }
+{#                    alert(document.getElementById('id_species_hidden').value);#}
+                    toggleFields();
 {#                alert(jQuery('#id_species').val().join(','));#}
 
             }
 
         });
+        jQuery("#genome-div").hide();
+        jQuery("#Adapter_Custom").hide();
+        jQuery("#Div_max").hide();
     });
     </script>
 
-
-    <script>
-        // tooltip demo
-        $('.row').tooltip({
-            selector: "[data-toggle=tooltip]",
-            container: "body"
-        })
-
-    </script>
 
     <script>
     function myFunction() {
