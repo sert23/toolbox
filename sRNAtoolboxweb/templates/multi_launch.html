@@ -270,10 +270,16 @@ function toggleAdapter() {
 
     $('#button_div').on('mouseover', function () {
         if (document.getElementById("submit-id-submit").disabled){
-            alert("heeeeeyooo");
+{#            alert("heeeeeyooo");#}
         }
     });
 
+
+    $(document).ready(function(){
+        if (document.getElementById("submit-id-submit").disabled) {
+            $('[data-toggle="tooltip"]').tooltip();
+        }
+    });
 
     var selectedItems=[];
     function printChecked(){
