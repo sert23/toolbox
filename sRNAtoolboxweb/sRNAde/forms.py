@@ -190,7 +190,7 @@ class DEinputForm(forms.Form):
                                    widget=forms.TextInput(attrs={'placeholder': "e.g: Normal#TumorI#TumorII"}))
 
     def __init__(self, *args, **kwargs):
-        super(DEForm, self).__init__(*args, **kwargs)
+        super(DEinputForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
 
