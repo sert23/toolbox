@@ -273,6 +273,7 @@ function toggleAdapter() {
             $("#button_div").attr("data-toggle","tooltip");
             $("#button_div").attr("style","display:inline-block");
             $("#button_div").attr("data-placement","right");
+            $("#button_div").attr("data-original-title","Please select at least one sample to proceed");
 
             $('[data-toggle="tooltip"]').tooltip();
         });
@@ -397,7 +398,7 @@ function toggleAdapter() {
 
         }else{
             document.getElementById("submit-id-submit").disabled = true;
-            $("#button_div").attr("data-original-title","Please select at least one sample");
+            $("#button_div").attr("data-original-title","Please select at least one sample to proceed");
 {#            $('[rel=tooltip]').tooltip('enable')#}
         }
     } );
