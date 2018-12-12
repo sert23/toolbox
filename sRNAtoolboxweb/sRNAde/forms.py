@@ -200,6 +200,9 @@ class DEinputForm(forms.Form):
                 Tab("Group String",Field("listofIDs", css_class="form-control")),
 
             ),
-            Field("sampleGroups", css_class="form-control")
+            Field("sampleGroups", css_class="form-control"),
+            ButtonHolder(
+                Submit('submit', 'SUBMIT', css_class='btn btn-primary')
+            )
 
         )
