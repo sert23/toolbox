@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <h1>sRNAde: </h1>
+                    <h3>Consensus differential expression (DESeq, edgeR and NOISeq), visual cluster analysis and
+                        sequencing statistics. </h3>
+                </div>
+            </div>
+
+
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-9">
+
+
+                {% include 'form_base.html' %}
+
+
+            </div>
+
+
+            <div class="col-lg-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Help
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <a href="{{ settings.SUB_SITE }}/static/webmanual.pdf" target="_blank">Link to Web Manual</a>
+                        <br>
+                        <a href="http://bioinfo5.ugr.es/srnatoolbox/srnade/result?id=4LOC73A18CPD9KF" target="_blank">Link
+                            to Test Data Results</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Test Data Description
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        Exosome vs Cell fraction from a panel of human B cells.
+                        <br>
+                        <a href="https://doi.org/10.1016/j.celrep.2014.08.027" target="_blank">Link To
+                            Publication</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Test Data Parameters
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        List of sRNAbench IDs:
+                        <pre style=" white-space: nowrap; overflow-y: hidden">K56Y0CAK9O26CD6:HDG1DQUKS7SPJ31:CQOIYQ3JYXAKNN0#97NEH4N8C0KV1N6:JPNQE8YW41EM39R:C06ZT6VSLD139R8</pre>
+                        <br>
+                        Sample groups:
+                        <pre style="white-space: nowrap; overflow-y: hidden">exosome#cell</pre>
+                        Or you can use this expression matrix:
+                        <br>
+                        <a href="http://bioinfo5.ugr.es/srnatoolbox/media/4LOC73A18CPD9KF/output_directory/mature_sense_minExpr5_RCadj.mat" download> <i
+                                class="fa fa-download fa-fw"></i>Matrix File</a>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+
+{% endblock %}
+
+{% block modals %}
+    {% include "Messages/de/SampleDescription.html" %}
+    {% include "Messages/de/ListOfIDs.html" %}
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/sRNAde_form_control.js' %}"></script>
+{% endblock %}
