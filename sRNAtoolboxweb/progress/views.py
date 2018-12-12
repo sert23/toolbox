@@ -146,9 +146,16 @@ class JobStatusDetail(DetailView):
         :type job_status: JobStatus
         :return:
         """
-        return {'msgs': [Msg(
+        web_log = parse_web_log(job_status.pipeline_key)
+        if web_log:
+            return {'msgs': [Msg(
             "ERROR: An error occured with your job:" + job_status.pipeline_key + "\nPlease report it indicating the jobID")],
-            "id": job_status.pipeline_key, "web_log": parse_web_log(job_status.pipeline_key)}
+            "id": job_status.pipeline_key, "web_log": web_log }
+        else:
+            return {'msgs': [Msg(
+                "ERROR: An error occured with your job:" + job_status.pipeline_key + "\nPlease report it indicating the jobID")],
+                "id": job_status.pipeline_key}
+
 
 
     @staticmethod
