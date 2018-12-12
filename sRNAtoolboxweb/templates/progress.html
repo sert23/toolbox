@@ -63,11 +63,7 @@
                                 <div class="alert alert-danger">
                                     {{ msg.text }}
                                 </div>
-{#                                {% if web_log is None %}#}
-                                <div class="alert alert-danger">
-                                {{ web_log }}
-                                </div>
-{#                                {% endif %}#}
+
                             {% elif msg.type == "success" %}
                                 <div class="alert alert-success">
                                     {{ msg.text }}
@@ -75,6 +71,12 @@
                             {% endif %}
                         {% empty %}
                         {% endfor %}
+
+                     {% if web_log  %}
+                          <div class="alert alert-danger">
+                          {{ web_log }}
+                          </div>
+                     {% endif %}
 
                     </div>
                     <!-- .panel-body -->
