@@ -393,10 +393,12 @@ function toggleAdapter() {
         if (selectedItems.length>0){
             document.getElementById("submit-id-submit").disabled = false;
             $("#button_div").attr("data-original-title"," ");
+            $('[rel=tooltip]').tooltip('disable')
 
         }else{
             document.getElementById("submit-id-submit").disabled = true;
             $("#button_div").attr("data-original-title","Please select at least one sample");
+            $('[rel=tooltip]').tooltip('enable')
         }
     } );
     $("#flowcheckall").click(function () {
