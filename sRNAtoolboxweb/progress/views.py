@@ -73,7 +73,7 @@ def load_status_from_file(id):
 def parse_web_log(id):
     new_record = JobStatus.objects.get(pipeline_key=id)
     log_path = os.path.join(new_record.outdir,"logFile.txt")
-    tagged = " "
+    tagged = ""
     if os.path.exists(log_path):
         with open(log_path,"r") as log_file:
             for line in log_file.readlines():
