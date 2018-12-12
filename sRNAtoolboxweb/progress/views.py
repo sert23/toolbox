@@ -74,13 +74,16 @@ def parse_web_log(id):
     new_record = JobStatus.objects.get(pipeline_key=id)
     log_path = os.path.join(new_record.outdir,"logFile.txt")
     tagged = " "
-    with open(log_path,"r") as log_file:
-        for line in log_file.readlines():
-            if " WEB:" in line:
-                rem,keep = line.rstrip().split("WEB:")
-                tagged = tagged + keep +"\n"
+    if os.path.exists(log_path = os.path.join(new_record.outdir,"logFile.txt")):
+        with open(log_path,"r") as log_file:
+            for line in log_file.readlines():
+                if " WEB:" in line:
+                    rem,keep = line.rstrip().split("WEB:")
+                    tagged = tagged + keep +"\n"
 
-    return tagged
+        return tagged
+    else:
+        return None
 
 
 class JobStatusDetail(DetailView):
