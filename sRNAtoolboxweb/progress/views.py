@@ -14,6 +14,7 @@ from sRNAtoolboxweb.settings import CONF
 from progress.serializers import JobStatusSerializer, StatusSerializer
 from django.core.urlresolvers import reverse
 
+
 class Msg():
     """
     Class to manage texts of job status
@@ -69,6 +70,17 @@ def load_status_from_file(id):
 
     return  msgs
 
+def parse_web_log(id):
+    new_record = JobStatus.objects.get(pipeline_key=id)
+    log_path = os.path.join(new_record.outdir,"logFile.txt")
+    tagged = " "
+    with open(log_path,"r") as log_file:
+        for line in log_file.readlines():
+            if " WEB:" in line:
+                rem,keep = line.rstrip().split("WEB:")
+                tagged = tagged + keep +"\n"
+
+    return tagged
 
 
 class JobStatusDetail(DetailView):
@@ -133,7 +145,7 @@ class JobStatusDetail(DetailView):
         """
         return {'msgs': [Msg(
             "ERROR: An error occured with your job:" + job_status.pipeline_key + "\nPlease report it indicating the jobID")],
-            "id": job_status.pipeline_key}
+            "id": job_status.pipeline_key, "web_log": parse_web_log(job_status.pipeline_key)}
 
 
     @staticmethod
@@ -193,7 +205,11 @@ class JobStatusDetail(DetailView):
                 # return redirect("/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key)
                 return {}
             elif job_status.job_status == "Finished with Errors":
-                return self.get_context_finished_with_errors(job_status)
+                if job_status.pipeline_type == "sRNAbench" and os.path.exists(
+                        os.path.join(job_status.outdir, "results.txt")):
+                    return {}
+                else:
+                    return self.get_error_context(job_status)
             else:
                 return self.get_error_context(job_status)
         if status is not None:
