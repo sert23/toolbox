@@ -63,7 +63,7 @@
                                 <div class="alert alert-danger">
                                     {{ msg.text }}
                                 </div>
-                                {% if web_log %}
+                                {% if web_log is None %}
                                 <div class="alert alert-danger">
                                 {{ web_log }}
                                 </div>
