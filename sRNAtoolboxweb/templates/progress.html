@@ -62,6 +62,7 @@
                             {% elif msg.type == "error" %}
                                 <div class="alert alert-danger">
                                     {{ msg.text }}
+                                    {{ web_log }}
                                 </div>
                             {% elif msg.type == "success" %}
                                 <div class="alert alert-success">
