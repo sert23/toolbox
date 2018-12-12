@@ -3,6 +3,7 @@ import json
 
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Fieldset, Field, ButtonHolder, Submit
+from crispy_forms.bootstrap import InlineRadios, TabHolder, Tab, Accordion,AccordionGroup
 from django import forms
 from django.core.files.storage import FileSystemStorage
 from django.http import Http404
@@ -171,3 +172,34 @@ class DEForm(forms.Form):
             return '{sh} {configuration_file_path}'.format(
                 configuration_file_path=configuration_file_path,
                 sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run.sh')), pipeline_id
+
+class DEinputForm(forms.Form):
+
+    #Input
+    jobIDs = forms.CharField(
+        label='Use a list of sRNAbench IDs (comma separated):' + render_modal('idlist'),
+        required=False, widget=forms.TextInput(attrs={'placeholder': "e.g: id1,id2,id3..."}))
+    ifile = forms.FileField(label='Upload an expression matrix (tab delimited or comma separated):', required=False)
+    listofIDs = forms.CharField(
+        label='List of sRNAbench IDs (colon separated, separate groups by hashes):' + render_modal('becnhids'),
+        required=False, widget=forms.TextInput(attrs={'placeholder': "e.g: id1:id2#id3:id4#id5:id6:id7"}),
+    )
+    #Groups
+    sampleGroups = forms.CharField(label='Sample groups (hash separated):',
+                                   required=False,
+                                   widget=forms.TextInput(attrs={'placeholder': "e.g: Normal#TumorI#TumorII"}))
+
+    def __init__(self, *args, **kwargs):
+        super(DEForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+
+            TabHolder(
+                Tab("Job list",Field("jobIDs", css_class="form-control")),
+                Tab("Expression matrix","ifile"),
+                Tab("Group String",Field("listofIDs", css_class="form-control")),
+
+            ),
+            Field("sampleGroups", css_class="form-control")
+
+        )
