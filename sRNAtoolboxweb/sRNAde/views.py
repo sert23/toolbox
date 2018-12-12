@@ -9,7 +9,7 @@ import xlrd
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from pygal.style import LightGreenStyle
-from .forms import DEForm
+from .forms import DEForm, DEinputForm
 
 from FileModels.deStatsParser import DeStatsParser
 from FileModels.sRNAdeparser import SRNAdeParser
@@ -310,7 +310,7 @@ class De2(FormView):
 
 class De(FormView):
     template_name = 'de_input.html'
-    form_class = DEForm
+    form_class = DEinputForm
     success_url = reverse_lazy("DE")
 
     # def form_valid(self, form):
