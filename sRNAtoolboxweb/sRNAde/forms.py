@@ -14,7 +14,7 @@ from sRNAtoolboxweb.settings import MEDIA_ROOT
 from sRNAtoolboxweb.utils import render_modal
 from utils.pipeline_utils import generate_uniq_id
 from utils.sysUtils import *
-
+from django.utils.safestring import mark_safe
 
 def check_mat_file(mat):
     if istext(mat) and istabfile(mat):
@@ -184,6 +184,12 @@ class DEinputForm(forms.Form):
         label='List of sRNAbench IDs (colon separated, separate groups by hashes):' + render_modal('becnhids'),
         required=False, widget=forms.TextInput(attrs={'placeholder': "e.g: id1:id2#id3:id4#id5:id6:id7"}),
     )
+    sampleDescription = forms.CharField(label='Sample description (optional)' + render_modal('SampleDesc'),
+                                        required=False, widget=forms.TextInput(
+            attrs={'placeholder': "e.g: Normal_1:Normal_2:TumorI_1:TumorI_2:TumorII_1:TumorII_2:TumorII_3"}))
+    matDescription = forms.CharField(label=mark_safe('Sample description <strong>(required)</strong>:') + render_modal('SampleDesc'),
+                                     required=False, widget=forms.TextInput(
+            attrs={'placeholder': "e.g: Normal,Normal,TumorI,TumorI,TumorII,TumorII,TumorII"}))
     #Groups
     sampleGroups = forms.CharField(label='Sample groups (hash separated):',
                                    required=False,
@@ -195,8 +201,10 @@ class DEinputForm(forms.Form):
         self.helper.layout = Layout(
 
             TabHolder(
-                Tab("Job list",Field("jobIDs", css_class="form-control")),
-                Tab("Expression matrix","ifile"),
+                Tab("Job IDs (recommended)",Field("jobIDs", css_class="form-control"),
+                    Field('sampleDescription', css_class='form-control')
+                    ),
+                Tab("Expression matrix","ifile", Field("matDescription", css_class="form-control") ),
                 Tab("Group String",Field("listofIDs", css_class="form-control")),
 
             ),
