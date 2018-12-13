@@ -199,7 +199,7 @@ class DEinputForm(forms.Form):
         super(DEinputForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            Fieldset(
+
             TabHolder(
                 Tab("Job IDs (recommended)",
                     Field("jobIDs", css_class="form-control"),
@@ -211,7 +211,7 @@ class DEinputForm(forms.Form):
                     Field('sampleDescription', css_class='form-control')
                     ),
 
-            )),
+            ),
             Field("sampleGroups", css_class="form-control"),
             ButtonHolder(
                 Submit('submit', 'SUBMIT', css_class='btn btn-primary')
