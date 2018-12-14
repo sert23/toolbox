@@ -15,6 +15,7 @@ from sRNAtoolboxweb.utils import render_modal
 from utils.pipeline_utils import generate_uniq_id
 from utils.sysUtils import *
 from django.utils.safestring import mark_safe
+import os
 
 def check_mat_file(mat):
     if istext(mat) and istabfile(mat):
@@ -187,7 +188,7 @@ class DEinputForm(forms.Form):
     sampleDescription = forms.CharField(label='Sample description (optional)' + render_modal('SampleDesc'),
                                         required=False, widget=forms.TextInput(
             attrs={'placeholder': "e.g: Normal_1:Normal_2:TumorI_1:TumorI_2:TumorII_1:TumorII_2:TumorII_3"}))
-    matDescription = forms.CharField(label=mark_safe('Sample description <strong>(required)</strong>:') + render_modal('SampleDesc'),
+    matDescription = forms.CharField(label=mark_safe('Sample description <strong class="text-danger">(required)</strong>:') + render_modal('SampleDesc'),
                                      required=False, widget=forms.TextInput(
             attrs={'placeholder': "e.g: Normal,Normal,TumorI,TumorI,TumorII,TumorII,TumorII"}))
     #Groups
@@ -201,12 +202,12 @@ class DEinputForm(forms.Form):
         self.helper.layout = Layout(
 
             TabHolder(
-                Tab("Job IDs (recommended)",
+                Tab("Use Job IDs (recommended)",
                     Field("jobIDs", css_class="form-control"),
                     Field('sampleDescription', css_class='form-control')
                     ),
-                Tab("Expression matrix","ifile", Field("matDescription", css_class="form-control") ),
-                Tab("Group String",
+                Tab("Upload Expression Matrix","ifile", Field("matDescription", css_class="form-control") ),
+                Tab("Use Group String",
                     Field("listofIDs", css_class="form-control"),
                     Field('sampleDescription', css_class='form-control')
                     ),
@@ -218,3 +219,26 @@ class DEinputForm(forms.Form):
             )
 
         )
+
+        def clean(self):
+            cleaned_data = super(DEinputForm, self).clean()
+            if not cleaned_data.get('ifile') and not cleaned_data.get('listofIDs'):
+                self.add_error('ifile', 'One of these two fields is required')
+                self.add_error('listofIDs', 'One of these two fields is required')
+            if cleaned_data.get('ifile') and cleaned_data.get('listofIDs'):
+                self.add_error('ifile', 'Choose either List of IDs or matrix expression file')
+                self.add_error('listofIDs', 'Choose either List of IDs or matrix expression file')
+
+            return cleaned_data
+
+        def generate_id(self):
+            is_new = True
+            while is_new:
+                pipeline_id = generate_uniq_id()
+                if not JobStatus.objects.filter(pipeline_key=pipeline_id):
+                    return pipeline_id
+
+        def create_conf_file():
+            pipeline_id = self.generate_id()
+            cleaned_data = self.cleaned_data
+            os.mkdir(os.path.join(MEDIA_ROOT,pipeline_id))
