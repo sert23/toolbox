@@ -289,7 +289,7 @@ def test(request):
 
     return redirect("/srnatoolbox/jobstatus/srnade/?id=" + pipeline_id)
 
-class De2(FormView):
+class De_old(FormView):
     template_name = 'de.html'
     form_class = DEForm
     success_url = reverse_lazy("DE")
@@ -313,16 +313,22 @@ class De(FormView):
     form_class = DEinputForm
     success_url = reverse_lazy("DE")
 
-    # def form_valid(self, form):
-    #     # This method is called when valid form data has been POSTed.
-    #     # It should return an HttpResponse.
-    #     call, pipeline_id = form.create_call()
-    #     self.success_url = reverse_lazy('srnade') + '?id=' + pipeline_id
-    #
-    #     print(call)
-    #     os.system(call)
-    #     js = JobStatus.objects.get(pipeline_key=pipeline_id)
-    #     js.status.create(status_progress='sent_to_queue')
-    #     js.job_status = 'sent_to_queue'
-    #     js.save()
-    #     return super(De, self).form_valid(form)
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        #call, pipeline_id = form.create_call()
+        pipeline_id = form.create_config_file()
+        self.success_url = reverse_lazy('DE_launch') + pipeline_id
+
+        # print(call)
+        #os.system(call)
+        js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
+        return super(De, self).form_valid(form)
+
+class DeLaunch(FormView):
+    template_name = 'de_launch.html'
+    form_class = DEinputForm
+    success_url = reverse_lazy("DE_launch")
