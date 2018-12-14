@@ -507,7 +507,7 @@ class sRNABenchForm(forms.Form):
 
 
         new_conf = SRNABenchConfig(species_annotation, db, FS.location, ifile, iszip="true",
-                                  #RNAfold="RNAfold2",
+                                  RNAfold="/usr/bin/RNAfold2",
                                   bedGraph="true", writeGenomeDist="true", predict=predict_mirna, graphics="true",
                                   species=species, assembly=assemblies, short_names=short_names, adapter=adapter,
                                   recursiveAdapterTrimming=recursive_adapter_trimming, libmode=lib_mode, nolib=no_libs,
