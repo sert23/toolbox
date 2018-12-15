@@ -96,5 +96,19 @@
 {% endblock %}
 
 {% block js %}
-    <script src="{% static 'js/sRNAde_form_control.js' %}"></script>
+    <script src="{% static 'js/sRNAde_form_control.js' %}">
+
+    $("input[type=file]").on('change',function(){
+    var extensions = ["xls","xlsx","doc","docx"]
+    if (extensions.includes(this.files[0].name.split('.').pop()) ){
+        alert('Spread-sheet or document extensions such as ".xls" or ".doc" are not supported. Please upload a different file. ')
+        document.getElementById('id_ifile').value = "";
+    }
+
+{#    filename.split('.').pop();#}
+});
+
+
+    </script>
+
 {% endblock %}
