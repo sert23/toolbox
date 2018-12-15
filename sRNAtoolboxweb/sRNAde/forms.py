@@ -206,7 +206,9 @@ class DEinputForm(forms.Form):
                     Field("jobIDs", css_class="form-control"),
                     Field('sampleDescription', css_class='form-control')
                     ),
-                Tab("Upload Expression Matrix","ifile", Field("matDescription", css_class="form-control") ),
+                Tab("Upload Expression Matrix",
+                    "ifile",
+                    Field("matDescription", css_class="form-control") ),
                 Tab("Use Group String",
                     Field("listofIDs", css_class="form-control"),
                     Field('sampleDescription', css_class='form-control')
@@ -222,12 +224,16 @@ class DEinputForm(forms.Form):
 
         def clean(self):
             cleaned_data = super(DEinputForm, self).clean()
-            if not cleaned_data.get('ifile') and not cleaned_data.get('listofIDs'):
-                self.add_error('ifile', 'One of these two fields is required')
-                self.add_error('listofIDs', 'One of these two fields is required')
-            if cleaned_data.get('ifile') and cleaned_data.get('listofIDs'):
+            if not cleaned_data.get('ifile') and not cleaned_data.get('listofIDs') and not cleaned_data.get("jobIDs"):
+                self.add_error('ifile', 'One input field is required')
+                self.add_error('listofIDs', 'One input field is required')
+                self.add_error('jobIDs', 'One input field is required')
+            if sum([cleaned_data.get('ifile'),cleaned_data.get('listofIDs'),cleaned_data.get("jobIDs")]):
                 self.add_error('ifile', 'Choose either List of IDs or matrix expression file')
                 self.add_error('listofIDs', 'Choose either List of IDs or matrix expression file')
+                self.add_error('listofIDs', 'Choose either List of IDs or matrix expression file')
+
+
 
             return cleaned_data
 
@@ -242,3 +248,17 @@ class DEinputForm(forms.Form):
             pipeline_id = self.generate_id()
             cleaned_data = self.cleaned_data
             os.mkdir(os.path.join(MEDIA_ROOT,pipeline_id))
+            name = pipeline_id + '_de'
+            ifile = self.cleaned_data.get("ifile")
+            if not ifile:
+                ifile = " "
+
+            JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not_launched",
+                                     start_time=datetime.datetime.now(),
+                                     # finish_time=datetime.time(0, 0),
+                                     all_files=ifile,
+                                     modules_files="",
+                                     pipeline_type="sRNAde",
+                                     )
+
+            return pipeline_id
