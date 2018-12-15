@@ -95,8 +95,13 @@
     {% include "Messages/de/ListOfIDs.html" %}
 {% endblock %}
 
+
+
 {% block js %}
-    <script src="{% static 'js/sRNAde_form_control.js' %}">
+{#    <script src="{% static 'js/sRNAde_form_control.js' %}">#}
+
+    <script>
+    alert('Spread-sheet);
 
     $("input[type=file]").on('change',function(){
     var extensions = ["xls","xlsx","doc","docx"]
@@ -113,8 +118,3 @@
 
 {% endblock %}
 
-<script>
-
-     alert("This works");
-
-</script>
