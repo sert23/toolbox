@@ -228,7 +228,7 @@ class DEinputForm(forms.Form):
             self.add_error('ifile', 'One input field is required')
             self.add_error('listofIDs', 'One input field is required')
             self.add_error('jobIDs', 'One input field is required')
-        if sum([bool(cleaned_data.get('ifile')), bool(cleaned_data.get('listofIDs')),bool(cleaned_data.get("jobIDs"))]):
+        if sum([bool(cleaned_data.get('ifile')), bool(cleaned_data.get('listofIDs')),bool(cleaned_data.get("jobIDs"))]) >1:
             self.add_error('ifile', 'Choose either List of IDs or matrix expression file')
             self.add_error('listofIDs', 'Choose either List of IDs or matrix expression file')
             self.add_error('listofIDs', 'Choose either List of IDs or matrix expression file')
