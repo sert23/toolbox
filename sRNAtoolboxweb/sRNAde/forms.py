@@ -222,43 +222,43 @@ class DEinputForm(forms.Form):
 
         )
 
-        def clean(self):
-            cleaned_data = super(DEinputForm, self).clean()
-            if not cleaned_data.get('ifile') and not cleaned_data.get('listofIDs') and not cleaned_data.get("jobIDs"):
-                self.add_error('ifile', 'One input field is required')
-                self.add_error('listofIDs', 'One input field is required')
-                self.add_error('jobIDs', 'One input field is required')
-            if sum([cleaned_data.get('ifile'),cleaned_data.get('listofIDs'),cleaned_data.get("jobIDs")]):
-                self.add_error('ifile', 'Choose either List of IDs or matrix expression file')
-                self.add_error('listofIDs', 'Choose either List of IDs or matrix expression file')
-                self.add_error('listofIDs', 'Choose either List of IDs or matrix expression file')
+    def clean(self):
+        cleaned_data = super(DEinputForm, self).clean()
+        if not cleaned_data.get('ifile') and not cleaned_data.get('listofIDs') and not cleaned_data.get("jobIDs"):
+            self.add_error('ifile', 'One input field is required')
+            self.add_error('listofIDs', 'One input field is required')
+            self.add_error('jobIDs', 'One input field is required')
+        if sum([cleaned_data.get('ifile'),cleaned_data.get('listofIDs'),cleaned_data.get("jobIDs")]):
+            self.add_error('ifile', 'Choose either List of IDs or matrix expression file')
+            self.add_error('listofIDs', 'Choose either List of IDs or matrix expression file')
+            self.add_error('listofIDs', 'Choose either List of IDs or matrix expression file')
 
 
 
-            return cleaned_data
+        return cleaned_data
 
-        def generate_id(self):
-            is_new = True
-            while is_new:
-                pipeline_id = generate_uniq_id()
-                if not JobStatus.objects.filter(pipeline_key=pipeline_id):
-                    return pipeline_id
+    def generate_id(self):
+        is_new = True
+        while is_new:
+            pipeline_id = generate_uniq_id()
+            if not JobStatus.objects.filter(pipeline_key=pipeline_id):
+                return pipeline_id
 
-        def create_config_file(self):
-            pipeline_id = self.generate_id()
-            cleaned_data = self.cleaned_data
-            os.mkdir(os.path.join(MEDIA_ROOT,pipeline_id))
-            name = pipeline_id + '_de'
-            ifile = self.cleaned_data.get("ifile")
-            if not ifile:
-                ifile = " "
+    def create_config_file(self):
+        pipeline_id = self.generate_id()
+        cleaned_data = self.cleaned_data
+        os.mkdir(os.path.join(MEDIA_ROOT,pipeline_id))
+        name = pipeline_id + '_de'
+        ifile = self.cleaned_data.get("ifile")
+        if not ifile:
+            ifile = " "
 
-            JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not_launched",
-                                     start_time=datetime.datetime.now(),
-                                     # finish_time=datetime.time(0, 0),
-                                     all_files=ifile,
-                                     modules_files="",
-                                     pipeline_type="sRNAde",
-                                     )
+        JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not_launched",
+                                 start_time=datetime.datetime.now(),
+                                 # finish_time=datetime.time(0, 0),
+                                 all_files=ifile,
+                                 modules_files="",
+                                 pipeline_type="sRNAde",
+                                 )
 
-            return pipeline_id
+        return pipeline_id
