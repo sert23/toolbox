@@ -1,3 +1,5 @@
+alert("heeeeeo");
+
 $(window).bind("pageshow", function() {
     var form = $('form')[1];
     // let the browser natively reset defaults
