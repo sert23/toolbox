@@ -244,7 +244,7 @@ class DEinputForm(forms.Form):
                 if not JobStatus.objects.filter(pipeline_key=pipeline_id):
                     return pipeline_id
 
-        def create_config_file():
+        def create_config_file(self):
             pipeline_id = self.generate_id()
             cleaned_data = self.cleaned_data
             os.mkdir(os.path.join(MEDIA_ROOT,pipeline_id))
