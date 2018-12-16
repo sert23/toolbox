@@ -16,6 +16,7 @@ from utils.pipeline_utils import generate_uniq_id
 from utils.sysUtils import *
 from django.utils.safestring import mark_safe
 import os
+import json
 
 def check_mat_file(mat):
     if istext(mat) and istabfile(mat):
@@ -185,14 +186,15 @@ class DEinputForm(forms.Form):
         label='List of sRNAbench IDs (colon separated, separate groups by hashes):' + render_modal('becnhids'),
         required=False, widget=forms.TextInput(attrs={'placeholder': "e.g: id1:id2#id3:id4#id5:id6:id7"}),
     )
-    sampleDescription = forms.CharField(label='Sample description (optional)' + render_modal('SampleDesc'),
+    sampleDescription = forms.CharField(label='Sample description (provided names will replace jobIDs in analysis, optional)' + render_modal('SampleDesc'),
                                         required=False, widget=forms.TextInput(
             attrs={'placeholder': "e.g: Normal_1:Normal_2:TumorI_1:TumorI_2:TumorII_1:TumorII_2:TumorII_3"}))
     matDescription = forms.CharField(label=mark_safe('Sample description <strong class="text-danger">(required)</strong>:') + render_modal('SampleDesc'),
                                      required=False, widget=forms.TextInput(
             attrs={'placeholder': "e.g: Normal,Normal,TumorI,TumorI,TumorII,TumorII,TumorII"}))
     #Groups
-    sampleGroups = forms.CharField(label='Sample groups (hash separated):',
+
+    sampleGroups = forms.CharField(label=mark_safe('Sample groups (hash separated, <strong class="text-danger">required</strong>):'),
                                    required=False,
                                    widget=forms.TextInput(attrs={'placeholder': "e.g: Normal#TumorI#TumorII"}))
 
@@ -232,6 +234,14 @@ class DEinputForm(forms.Form):
             self.add_error('ifile', 'Choose either List of IDs or matrix expression file')
             self.add_error('listofIDs', 'Choose either List of IDs or matrix expression file')
             self.add_error('listofIDs', 'Choose either List of IDs or matrix expression file')
+        if not cleaned_data.get("melee"):
+            self.add_error('ifile', 'Choose either List of IDs or matrix expression file')
+
+        # if cleaned_data.get("ifile") and not cleaned_data.get("matDescription"):
+        #     self.add_error('ifile', 'Sample description is required when you upload a matrix')
+        #     self.add_error('listofIDs', 'Sample description is required when you upload a matrix')
+        #     self.add_error('jobIDs', 'Sample description is required when you upload a matrix')
+
 
 
 
@@ -249,9 +259,20 @@ class DEinputForm(forms.Form):
         cleaned_data = self.cleaned_data
         os.mkdir(os.path.join(MEDIA_ROOT,pipeline_id))
         name = pipeline_id + '_de'
+        out_dir = os.path.join(MEDIA_ROOT,pipeline_id)
+        json_path = os.path.join(MEDIA_ROOT,pipeline_id,"conf.json")
         ifile = self.cleaned_data.get("ifile")
         if not ifile:
             ifile = " "
+
+        parameters = {}
+        parameters["ifile"] = ifile
+        if cleaned_data.get("jobIDs"):
+            parameters["jobIDs"]= cleaned_data.get("jobIDs")
+        elif cleaned_data.get('listofIDs'):
+            parameters['listofIDs'] = cleaned_data.get('listofIDs')
+
+
 
         JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not_launched",
                                  start_time=datetime.datetime.now(),
