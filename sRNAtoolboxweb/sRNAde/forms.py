@@ -197,6 +197,10 @@ class DEinputForm(forms.Form):
     sampleGroups = forms.CharField(label=mark_safe('Sample groups (hash separated, <strong class="text-danger">required</strong>):'),
                                    required=False,
                                    widget=forms.TextInput(attrs={'placeholder': "e.g: Normal#TumorI#TumorII"}))
+    sampleGroupsNot = forms.CharField(
+        label=mark_safe('Sample groups (hash separated):'),
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': "e.g: Normal#TumorI#TumorII"}))
 
     def __init__(self, *args, **kwargs):
         super(DEinputForm, self).__init__(*args, **kwargs)
@@ -206,18 +210,21 @@ class DEinputForm(forms.Form):
             TabHolder(
                 Tab("Use Job IDs (recommended)",
                     Field("jobIDs", css_class="form-control"),
-                    Field('sampleDescription', css_class='form-control')
+                    Field('sampleDescription', css_class='form-control'),
+                    Field("sampleGroups", css_class="form-control")
                     ),
                 Tab("Upload Expression Matrix",
                     "ifile",
-                    Field("matDescription", css_class="form-control") ),
+                    Field("matDescription", css_class="form-control"),
+                    Field("sampleGroupsNot", css_class="form-control")
+                    ),
                 Tab("Use Group String",
                     Field("listofIDs", css_class="form-control"),
-                    Field('sampleDescription', css_class='form-control')
+                    Field('sampleDescription', css_class='form-control'),
+                    Field("sampleGroupsNot", css_class="form-control")
                     ),
-
             ),
-            Field("sampleGroups", css_class="form-control"),
+            # Field("sampleGroups", css_class="form-control"),
             ButtonHolder(
                 Submit('submit', 'SUBMIT', css_class='btn btn-primary')
             )
@@ -231,19 +238,31 @@ class DEinputForm(forms.Form):
             self.add_error('listofIDs', 'One input field is required')
             self.add_error('jobIDs', 'One input field is required')
         if sum([bool(cleaned_data.get('ifile')), bool(cleaned_data.get('listofIDs')),bool(cleaned_data.get("jobIDs"))]) >1:
-            self.add_error('ifile', 'Choose either List of IDs or matrix expression file')
-            self.add_error('listofIDs', 'Choose either List of IDs or matrix expression file')
-            self.add_error('listofIDs', 'Choose either List of IDs or matrix expression file')
-        if not cleaned_data.get("melee"):
-            self.add_error('ifile', 'Choose either List of IDs or matrix expression file')
+            self.add_error('ifile', 'Choose one input method')
+            self.add_error('listofIDs', 'Choose one input method')
+            self.add_error('jobIDs', 'Choose one input method')
+
+        if cleaned_data.get('ifile'):
+            if cleaned_data.get("matDescription"):
+                cleaned_data["skip"] = True
+            elif not cleaned_data.get("sampleGroupsNot"):
+                self.add_error("matDescription", 'At least Sample D')
+                self.add_error("sampleGroupsNot", 'At least Sample D')
+        elif cleaned_data.get('jobIDs'):
+            if cleaned_data.get("sampleGroups"):
+                cleaned_data["skip"] = False
+            else:
+                self.add_error("sampleGroups", 'Groups must be provided')
+        elif cleaned_data.get("listofIDs"):
+            cleaned_data["skip"] = True
+
+        if cleaned_data.get("sampleGroupsNot") and not cleaned_data.get("sampleGroups"):
+            cleaned_data["sampleGroups"] = cleaned_data.get("sampleGroupsNot")
 
         # if cleaned_data.get("ifile") and not cleaned_data.get("matDescription"):
         #     self.add_error('ifile', 'Sample description is required when you upload a matrix')
         #     self.add_error('listofIDs', 'Sample description is required when you upload a matrix')
         #     self.add_error('jobIDs', 'Sample description is required when you upload a matrix')
-
-
-
 
         return cleaned_data
 
@@ -260,19 +279,17 @@ class DEinputForm(forms.Form):
         os.mkdir(os.path.join(MEDIA_ROOT,pipeline_id))
         name = pipeline_id + '_de'
         out_dir = os.path.join(MEDIA_ROOT,pipeline_id)
-        json_path = os.path.join(MEDIA_ROOT,pipeline_id,"conf.json")
+        json_path = os.path.join(MEDIA_ROOT,pipeline_id,"init_par.json")
         ifile = self.cleaned_data.get("ifile")
         if not ifile:
             ifile = " "
 
         parameters = {}
+        for k in cleaned_data.keys():
+            if cleaned_data.get(k):
+                parameters[k] = cleaned_data[k]
         parameters["ifile"] = ifile
-        if cleaned_data.get("jobIDs"):
-            parameters["jobIDs"]= cleaned_data.get("jobIDs")
-        elif cleaned_data.get('listofIDs'):
-            parameters['listofIDs'] = cleaned_data.get('listofIDs')
-
-
+        json.dump(parameters,json_path)
 
         JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not_launched",
                                  start_time=datetime.datetime.now(),
@@ -283,3 +300,20 @@ class DEinputForm(forms.Form):
                                  )
 
         return pipeline_id
+
+class DElaunchForm(forms.Form):
+    pvalue = forms.CharField(label='Differential expression cutoff used by DESeq and EdgeR (p-value):',
+                             required=False, widget=forms.TextInput(attrs={'placeholder': "Default 0.05"}))
+    probability = forms.CharField(label='Differential expression cutoff used by NOISeq(probability):',
+                                  required=False, widget=forms.TextInput(attrs={'placeholder': "Default 0.8"}))
+    isomiRs = forms.BooleanField(label='isoMir Analysis', required=False)
+
+    def __init__(self, *args, **kwargs):
+        super(DElaunchForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            "pvalue",
+            "probability",
+            "isomiRs"
+
+        )

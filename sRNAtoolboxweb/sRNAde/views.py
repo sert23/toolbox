@@ -9,7 +9,7 @@ import xlrd
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from pygal.style import LightGreenStyle
-from .forms import DEForm, DEinputForm
+from .forms import DEForm, DEinputForm,DElaunchForm
 
 from FileModels.deStatsParser import DeStatsParser
 from FileModels.sRNAdeparser import SRNAdeParser
@@ -332,5 +332,5 @@ class De(FormView):
 class DeLaunch(FormView):
     template_name = 'de_launch.html'
     # form_class = DEinputForm
-    form_class = sRNABenchForm
+    form_class = DElaunchForm
     success_url = reverse_lazy("DE_launch")
