@@ -384,5 +384,7 @@ class DeLaunch(FormView):
             context["job_id"] = query_id
             return context
 
-        # elif params.get("skip"):
-        #     return context
+        elif params.get("skip"):
+            return context
+        else:
+            return context
