@@ -357,16 +357,20 @@ class DeLaunch(FormView):
 
             names = jobIDs
             headers = ["Sample"] + groups
-            selector = """<div class="form-group">
-                        <select class="form-control" id="sel1">
-                        <option>A very long option</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+            base_selector = """<div class="form-group">
+                        <select class="form-control" id="{sample_id}">
+                        
                         </select>
                         """
+
+            for group in groups:
+                new_option = "<option>"+group+"</option>"
+                to_rep= "</select>"
+                replacing = new_option + to_rep
+                base_selector = base_selector.replace(to_rep,replacing)
+
             for name in names:
-                buttons = [selector] * len(groups)
+                buttons = [base_selector] * len(groups)
                 row = [name] + buttons
                 sample_table.append(row)
 
