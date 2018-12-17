@@ -354,7 +354,6 @@ class DeLaunch(FormView):
                 #TODO something here
             else:
                 sampleDescription = None
-
             names = jobIDs
             headers = ["job ID", "Sample Name", "Group"]
             base_selector = """<div class="form-group">
@@ -362,7 +361,6 @@ class DeLaunch(FormView):
                         
                         </select>
                         """
-
             for group in groups:
                 new_option = "<option>"+group+"</option>"
                 to_rep= "</select>"
@@ -386,4 +384,5 @@ class DeLaunch(FormView):
             context["job_id"] = query_id
             return context
 
-
+        # elif params.get("skip"):
+        #     return context
