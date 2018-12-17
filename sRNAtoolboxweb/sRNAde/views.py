@@ -358,6 +358,8 @@ class DeLaunch(FormView):
             IDs = jobIDs
             if sampleDescription:
                 names = sampleDescription.split(",")
+            else:
+                names = IDs
             headers = ["Sample"] + groups
             base_selector = """<div class="form-group">
                         <select class="form-control" id="{sample_id}">
