@@ -319,10 +319,8 @@ class DElaunchForm(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
             "pvalue",
+            HTML("""<br>"""),
             "probability",
-            HTML("""<br>"""),
-            HTML("""<br>"""),
-            HTML("""<br>"""),
             HTML("""<br>"""),
             "isomiRs",
 
