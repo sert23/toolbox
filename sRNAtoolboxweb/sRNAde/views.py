@@ -356,7 +356,7 @@ class DeLaunch(FormView):
                 sampleDescription = None
 
             names = jobIDs
-            headers = ["Sample"] + groups
+            headers = ["job ID", "Sample Name", "Group"]
             base_selector = """<div class="form-group">
                         <select class="form-control" id="{sample_id}">
                         
