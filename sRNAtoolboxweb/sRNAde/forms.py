@@ -292,7 +292,7 @@ class DEinputForm(forms.Form):
 
         with open(json_path, 'w') as jf:
             json.dump(parameters, jf)
-        json.dump(parameters,json_path)
+
 
         JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not_launched",
                                  start_time=datetime.datetime.now(),
