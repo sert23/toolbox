@@ -390,7 +390,7 @@ class DeLaunch(FormView):
             for header in headers:
                 header_list.append({"title":header})
             body = []
-            for p in params.key():
+            for p in params.keys():
                 body.append([p,params[p]])
             js_headers = json.dumps(header_list)
             js_data = json.dumps(body)
