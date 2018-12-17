@@ -307,7 +307,7 @@ class DEinputForm(forms.Form):
 class DElaunchForm(forms.Form):
     pvalue = forms.CharField(label='Differential expression cutoff used by DESeq and EdgeR (p-value):',
                              required=False, widget=forms.TextInput(attrs={'placeholder': "Default 0.05"}))
-    probability = forms.CharField(label='Differential expression cutoff used by NOISeq(probability):',
+    probability = forms.CharField(label='Differential expression cutoff used by NOISeq (probability):',
                                   required=False, widget=forms.TextInput(attrs={'placeholder': "Default 0.8"}))
     isomiRs = forms.BooleanField(label='isoMir Analysis', required=False)
 
