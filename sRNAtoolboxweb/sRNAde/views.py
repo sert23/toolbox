@@ -385,6 +385,19 @@ class DeLaunch(FormView):
             return context
 
         elif params.get("skip"):
+            headers = ["key","value"]
+            header_list=[]
+            for header in headers:
+                header_list.append({"title":header})
+            body = []
+            for p in params.key():
+                body.append([p,params[p]])
+            js_headers = json.dumps(header_list)
+            js_data = json.dumps(body)
+
+            context["table_data"] = js_data
+            context["table_headers"] = js_headers
+
             return context
         else:
             return context
