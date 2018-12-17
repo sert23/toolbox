@@ -359,7 +359,7 @@ class DeLaunch(FormView):
             headers = ["Sample"] + groups
             selector = """<div class="form-group">
                         <select class="form-control" id="sel1">
-                        <option>1</option>
+                        <option>A very long option</option>
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
