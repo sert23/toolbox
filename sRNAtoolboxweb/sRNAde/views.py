@@ -370,8 +370,8 @@ class DeLaunch(FormView):
                 base_selector = base_selector.replace(to_rep,replacing)
 
             for name in names:
-                buttons = [base_selector.format(sample_id=name)] * len(groups)
-                row = [name] + buttons
+                buttons = base_selector.format(sample_id=name)
+                row = [name, name, buttons]
                 sample_table.append(row)
 
             header_list=[]
