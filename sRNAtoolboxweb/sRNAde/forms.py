@@ -197,6 +197,10 @@ class DEinputForm(forms.Form):
     sampleGroups = forms.CharField(label=mark_safe('Sample groups (hash separated, <strong class="text-danger">required</strong>):'),
                                    required=False,
                                    widget=forms.TextInput(attrs={'placeholder': "e.g: Normal#TumorI#TumorII"}))
+    sampleGroupsMat = forms.CharField(
+        label=mark_safe('Sample groups (hash separated):'),
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': "e.g: Normal#TumorI#TumorII"}))
     sampleGroupsNot = forms.CharField(
         label=mark_safe('Sample groups (hash separated):'),
         required=False,
@@ -216,7 +220,7 @@ class DEinputForm(forms.Form):
                 Tab("Upload Expression Matrix",
                     "ifile",
                     Field("matDescription", css_class="form-control"),
-                    Field("sampleGroupsNot", css_class="form-control")
+                    Field("sampleGroupsMat", css_class="form-control")
                     ),
                 Tab("Use Group String",
                     Field("listofIDs", css_class="form-control"),
@@ -248,7 +252,7 @@ class DEinputForm(forms.Form):
         if cleaned_data.get('ifile'):
             if cleaned_data.get("matDescription"):
                 cleaned_data["skip"] = True
-            elif cleaned_data.get("sampleGroupsNot"):
+            elif not cleaned_data.get("sampleGroupsMat"):
                 self.add_error("matDescription", 'At least Sample D')
                 self.add_error("sampleGroupsNot", 'At least Sample D')
         elif cleaned_data.get('jobIDs'):
