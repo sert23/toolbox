@@ -320,7 +320,12 @@ class DElaunchForm(forms.Form):
         self.helper.layout = Layout(
             "pvalue",
             "probability",
+            HTML("""<br>"""),
+            HTML("""<br>"""),
+            HTML("""<br>"""),
+            HTML("""<br>"""),
             "isomiRs",
+
             ButtonHolder(
                 Submit('submit', 'SUBMIT', css_class='btn btn-primary')
             )
