@@ -325,7 +325,7 @@ class DElaunchForm(forms.Form):
             "probability",
             HTML("""<br>"""),
             "minRCexpr",
-
+            HTML("""<br>"""),
             ButtonHolder(
                 Submit('submit', 'SUBMIT', css_class='btn btn-primary')
             )
