@@ -355,7 +355,9 @@ class DeLaunch(FormView):
             else:
                 sampleDescription = None
 
-            names = jobIDs
+            IDs = jobIDs
+            if sampleDescription:
+                names = sampleDescription.split(",")
             headers = ["Sample"] + groups
             base_selector = """<div class="form-group">
                         <select class="form-control" id="{sample_id}">
@@ -369,12 +371,12 @@ class DeLaunch(FormView):
                 replacing = new_option + to_rep
                 base_selector = base_selector.replace(to_rep,replacing)
 
-            for name in names:
-                buttons = [base_selector] * len(groups)
-                row = [name] + buttons
+            for ix,id in enumerate(IDs):
+                button = base_selector.format(id=id)
+                row = [id,names[ix],button]
                 sample_table.append(row)
 
-            header_list=[]
+            header_list=["job ID", "name", "Group"]
             for header in headers:
                 header_list.append({"title":header})
 
