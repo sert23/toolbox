@@ -232,6 +232,9 @@ class DEinputForm(forms.Form):
         )
 
     def clean(self):
+
+        #TODO check input format
+
         cleaned_data = super(DEinputForm, self).clean()
         if not cleaned_data.get('ifile') and not cleaned_data.get('listofIDs') and not cleaned_data.get("jobIDs"):
             self.add_error('ifile', 'One input field is required')
@@ -320,3 +323,5 @@ class DElaunchForm(forms.Form):
             "isomiRs"
 
         )
+    def create_call(selfs):
+        print("l")

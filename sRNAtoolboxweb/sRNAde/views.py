@@ -18,6 +18,9 @@ from utils import pipeline_utils
 from utils.sysUtils import *
 from django.views.generic import FormView
 from sRNABench.forms import sRNABenchForm
+from sRNAtoolboxweb.settings import MEDIA_ROOT
+import os
+import json
 
 counter = itertools.count()
 
@@ -334,3 +337,41 @@ class DeLaunch(FormView):
     # form_class = DEinputForm
     form_class = DElaunchForm
     success_url = reverse_lazy("DE_launch")
+    def get_context_data(self, **kwargs):
+        context = super(FormView, self).get_context_data(**kwargs)
+        query_id = str(self.request.path_info).split("/")[-1]
+        initial_path = os.path.join(MEDIA_ROOT, query_id, "init_par.json")
+        sample_table=[]
+
+        with open(initial_path,"r") as param_file:
+            params = json.load(param_file)
+
+        if params.get("jobIDs"):
+            jobIDs = params.get("jobIDs").split(",")
+            groups = params.get("sampleGroups").split("#")
+            if params.get('sampleDescription'):
+                sampleDescription = params.get('sampleDescription')
+                #TODO something here
+            else:
+                sampleDescription = None
+
+            names = jobIDs
+            headers = ["Sample"] + groups
+            for name in names:
+                buttons = [" "] * len(groups)
+                row = [name] + buttons
+                sample_table.append(row)
+
+            header_list=[]
+            for header in headers:
+                header_list.append({"title":header})
+
+            js_headers = json.dumps(header_list)
+            js_data = json.dumps(sample_table)
+
+            context["table_data"] = js_data
+            context["table_headers"] = js_headers
+            context["job_id"] = query_id
+            return context
+
+
