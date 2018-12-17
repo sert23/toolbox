@@ -286,6 +286,12 @@ class DEinputForm(forms.Form):
         ifile = self.cleaned_data.get("ifile")
         if not ifile:
             ifile = " "
+        elif ifile:
+            FS = FileSystemStorage()
+            FS.location = os.path.join(MEDIA_ROOT, pipeline_id)
+            file_to_update = ifile
+            uploaded_file = str(file_to_update)
+            ifile = os.path.join(out_dir, FS.save(uploaded_file, file_to_update))
 
         parameters = {}
         for k in cleaned_data.keys():
