@@ -371,7 +371,7 @@ class DeLaunch(FormView):
                 base_selector = base_selector.replace(to_rep,replacing)
 
             for ix,id in enumerate(IDs):
-                button = base_selector.format(sample_id=id)
+                button = base_selector#.format(sample_id=id)
                 row = [id,names[ix],button]
                 sample_table.append(row)
 
