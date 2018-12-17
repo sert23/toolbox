@@ -342,7 +342,7 @@ class DeLaunch(FormView):
         query_id = str(self.request.path_info).split("/")[-1]
         initial_path = os.path.join(MEDIA_ROOT, query_id, "init_par.json")
         sample_table=[]
-
+        context["form"] = DElaunchForm
         with open(initial_path,"r") as param_file:
             params = json.load(param_file)
 
