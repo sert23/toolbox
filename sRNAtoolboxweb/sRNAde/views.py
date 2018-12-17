@@ -355,14 +355,13 @@ class DeLaunch(FormView):
             else:
                 sampleDescription = None
 
-            IDs = jobIDs
-            if sampleDescription:
-                names = sampleDescription.split(",")
-            else:
-                names = IDs
+            names = jobIDs
             headers = ["Sample"] + groups
-            #id="{sample_id}"
-            base_selector = """<div class="form-group"> <select class="form-control" > </select>"""
+            base_selector = """<div class="form-group">
+                        <select class="form-control" id="{sample_id}">
+                        
+                        </select>
+                        """
 
             for group in groups:
                 new_option = "<option>"+group+"</option>"
@@ -370,12 +369,12 @@ class DeLaunch(FormView):
                 replacing = new_option + to_rep
                 base_selector = base_selector.replace(to_rep,replacing)
 
-            for ix,id in enumerate(IDs):
-                button = base_selector#.format(sample_id=id)
-                row = [id,id,button]
+            for name in names:
+                buttons = [base_selector.format(id=name)] * len(groups)
+                row = [name] + buttons
                 sample_table.append(row)
 
-            header_list=["job ID", "name", "Group"]
+            header_list=[]
             for header in headers:
                 header_list.append({"title":header})
 
