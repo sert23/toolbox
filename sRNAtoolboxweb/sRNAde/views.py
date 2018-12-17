@@ -372,7 +372,7 @@ class DeLaunch(FormView):
 
             for ix,id in enumerate(IDs):
                 button = base_selector#.format(sample_id=id)
-                row = [id,names[ix],button]
+                row = [id,id,button]
                 sample_table.append(row)
 
             header_list=["job ID", "name", "Group"]
