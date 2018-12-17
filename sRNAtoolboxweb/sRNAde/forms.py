@@ -248,7 +248,7 @@ class DEinputForm(forms.Form):
         if cleaned_data.get('ifile'):
             if cleaned_data.get("matDescription"):
                 cleaned_data["skip"] = True
-            elif not cleaned_data.get("sampleGroupsNot"):
+            elif cleaned_data.get("sampleGroupsNot"):
                 self.add_error("matDescription", 'At least Sample D')
                 self.add_error("sampleGroupsNot", 'At least Sample D')
         elif cleaned_data.get('jobIDs'):
