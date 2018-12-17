@@ -314,6 +314,8 @@ class DElaunchForm(forms.Form):
                                   required=False, widget=forms.TextInput(attrs={'placeholder': "Default 0.8"}))
     isomiRs = forms.BooleanField(label='isoMir Analysis', required=False)
 
+    minRCexpr = forms.IntegerField(label="Minimum Read Count", required=False, initial=1)
+
     def __init__(self, *args, **kwargs):
         super(DElaunchForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -322,7 +324,7 @@ class DElaunchForm(forms.Form):
             HTML("""<br>"""),
             "probability",
             HTML("""<br>"""),
-            "isomiRs",
+            "minRCexpr",
 
             ButtonHolder(
                 Submit('submit', 'SUBMIT', css_class='btn btn-primary')
