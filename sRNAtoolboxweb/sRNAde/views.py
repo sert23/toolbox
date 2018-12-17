@@ -361,7 +361,8 @@ class DeLaunch(FormView):
             else:
                 names = IDs
             headers = ["Sample"] + groups
-            base_selector = """<div class="form-group"> <select class="form-control" id="{sample_id}"> </select>"""
+            #id="{sample_id}"
+            base_selector = """<div class="form-group"> <select class="form-control" > </select>"""
 
             for group in groups:
                 new_option = "<option>"+group+"</option>"
