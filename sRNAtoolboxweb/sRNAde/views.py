@@ -358,7 +358,6 @@ class DeLaunch(FormView):
             names = jobIDs
             headers = ["Sample"] + groups
             selector = """<div class="form-group">
-                        <label for="sel1">Select list (select one):</label>
                         <select class="form-control" id="sel1">
                         <option>1</option>
                         <option>2</option>
