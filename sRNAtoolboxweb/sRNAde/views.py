@@ -357,8 +357,17 @@ class DeLaunch(FormView):
 
             names = jobIDs
             headers = ["Sample"] + groups
+            selector = """<div class="form-group">
+                        <label for="sel1">Select list (select one):</label>
+                        <select class="form-control" id="sel1">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        </select>
+                        """
             for name in names:
-                buttons = [" "] * len(groups)
+                buttons = [selector] * len(groups)
                 row = [name] + buttons
                 sample_table.append(row)
 
