@@ -2,7 +2,7 @@ import datetime
 import json
 
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, Field, ButtonHolder, Submit
+from crispy_forms.layout import Layout, Fieldset, Field, ButtonHolder, Submit, HTML
 from crispy_forms.bootstrap import InlineRadios, TabHolder, Tab, Accordion,AccordionGroup
 from django import forms
 from django.core.files.storage import FileSystemStorage
