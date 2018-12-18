@@ -445,6 +445,6 @@ class DeLaunch(FormView):
             context["table_data"] = js_data
             context["table_headers"] = js_headers
             context["job_id"] = query_id
-            context["group_data"] = group_dict
+            context["group_data"] = json.dumps(group_dict)
 
             return context
