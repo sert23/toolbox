@@ -133,7 +133,7 @@
         },
             columns: received_cols,
         } );
-        var data = table.$('Group').serializeArray();
+        var data = table.rows().nodes();
             alert(data.length);
     } );
 
