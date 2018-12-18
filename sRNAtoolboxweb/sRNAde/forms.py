@@ -206,6 +206,7 @@ class DEinputForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={'placeholder': "e.g: Normal#TumorI#TumorII"}))
 
+
     def __init__(self, *args, **kwargs):
         super(DEinputForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -326,10 +327,15 @@ class DElaunchForm(forms.Form):
 
     minRCexpr = forms.IntegerField(label="Minimum Read Count", required=False, initial=1)
 
+    samples_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
+    groups_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
+
+
     def __init__(self, *args, **kwargs):
         super(DElaunchForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
+
             "pvalue",
             HTML("""<br>"""),
             "probability",
