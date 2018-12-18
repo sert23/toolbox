@@ -351,7 +351,7 @@ class DElaunchForm(forms.Form):
             "minRCexpr",
             HTML("""<br>"""),
             ButtonHolder(
-                Submit('submit', 'SUBMIT', css_class='btn btn-primary')
+                Submit('submit', 'SUBMIT', css_class='btn btn-primary', onclick="add_hidden()")
             )
 
         )
@@ -402,7 +402,7 @@ class DElaunchForm(forms.Form):
             conf_params["grpDesc"] = initial_params.get("sampleGroups")
             conf_params["matrixDesc"] = cleaned_data.get("groups_hidden")
 
-        configuration_file_path = os.path.join(conf_params["outdir"], 'conf.json')
+        configuration_file_path = os.path.join(conf_params["out_dir"], 'conf.json')
         with open(configuration_file_path, 'w') as conf_file:
             json.dump(conf_params, conf_file, indent=True)
 
