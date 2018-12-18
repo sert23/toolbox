@@ -336,6 +336,8 @@ class DElaunchForm(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
 
+            "samples_hidden",
+            "groups_hidden",
             "pvalue",
             HTML("""<br>"""),
             "probability",
