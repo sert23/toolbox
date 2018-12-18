@@ -327,8 +327,8 @@ class DElaunchForm(forms.Form):
 
     minRCexpr = forms.IntegerField(label="Minimum Read Count", required=False, initial=1)
 
-    samples_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
-    groups_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
+    samples_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500, initial=" ")
+    groups_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500, initial=" ")
 
 
     def __init__(self, *args, **kwargs):
