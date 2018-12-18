@@ -133,11 +133,12 @@
         },
             columns: received_cols,
         } );
-        var data = table.rows().nodes();
-            alert(data.length);
+
     } );
 
-
-
+    $('#jobs').on('click', 'tr', function () {
+        var data = table.rows().nodes();
+        alert(data.length);
+    })
     </script>
 {% endblock %}
