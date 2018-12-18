@@ -337,6 +337,14 @@ class DeLaunch(FormView):
     # form_class = DEinputForm
     form_class = DElaunchForm
     success_url = reverse_lazy("DE_launch")
+
+    def get_form_kwargs(self):
+        kwargs = super(DeLaunch, self).get_form_kwargs()
+        path = self.request.path
+        folder = path.split("/")[-1]
+        kwargs['dest_folder'] = folder
+        return kwargs
+
     def get_context_data(self, **kwargs):
         context = super(FormView, self).get_context_data(**kwargs)
         query_id = str(self.request.path_info).split("/")[-1]
@@ -381,13 +389,17 @@ class DeLaunch(FormView):
             js_data = json.dumps(sample_table)
 
             group_dict = dict()
+            key_list = []
             for row in js_data:
                 group_dict[row[0]] = groups[0]
+                key_list.append(row[0])
 
             context["table_data"] = js_data
             context["table_headers"] = js_headers
             context["job_id"] = query_id
-            context["group_data"] = group_dict
+            context["group_data"] = json.dumps(group_dict)
+            context["group_keys"] = json.dumps(key_list)
+
             return context
 
         elif params.get("skip"):
@@ -439,12 +451,30 @@ class DeLaunch(FormView):
             js_data = json.dumps(sample_table)
 
             group_dict = dict()
-            for row in sample_table:
+            key_list = []
+            for row in js_data:
                 group_dict[row[0]] = groups[0]
+                key_list.append(row[0])
 
             context["table_data"] = js_data
             context["table_headers"] = js_headers
             context["job_id"] = query_id
             context["group_data"] = json.dumps(group_dict)
+            context["group_keys"] = json.dumps(key_list)
 
             return context
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        #call, pipeline_id = form.create_call()
+        pipeline_id,call = form.create_call()
+        self.success_url = reverse_lazy('srnade') + '?id=' + pipeline_id
+
+        # print(call)
+        os.system(call)
+        js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
+        return super(DeLaunch, self).form_valid(form)

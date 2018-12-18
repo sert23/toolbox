@@ -189,6 +189,11 @@ class DEinputForm(forms.Form):
     sampleDescription = forms.CharField(label='Sample description (provided names will replace jobIDs in analysis, optional)' + render_modal('SampleDesc'),
                                         required=False, widget=forms.TextInput(
             attrs={'placeholder': "e.g: Normal_1:Normal_2:TumorI_1:TumorI_2:TumorII_1:TumorII_2:TumorII_3"}))
+    sampleDescription2 = forms.CharField(
+        label='Sample description (provided names will replace jobIDs in analysis, optional)' + render_modal(
+            'SampleDesc'),
+        required=False, widget=forms.TextInput(
+            attrs={'placeholder': "e.g: Normal_1:Normal_2:TumorI_1:TumorI_2:TumorII_1:TumorII_2:TumorII_3"}))
     matDescription = forms.CharField(label=mark_safe('Sample description <strong class="text-danger">(required)</strong>:') + render_modal('SampleDesc'),
                                      required=False, widget=forms.TextInput(
             attrs={'placeholder': "e.g: Normal,Normal,TumorI,TumorI,TumorII,TumorII,TumorII"}))
@@ -225,7 +230,7 @@ class DEinputForm(forms.Form):
                     ),
                 Tab("Use Group String",
                     Field("listofIDs", css_class="form-control"),
-                    Field('sampleDescription', css_class='form-control'),
+                    Field('sampleDescription2', css_class='form-control'),
                     Field("sampleGroupsNot", css_class="form-control")
                     ),
             ),
@@ -319,28 +324,29 @@ class DEinputForm(forms.Form):
         return pipeline_id
 
 class DElaunchForm(forms.Form):
-    pvalue = forms.CharField(label='Differential expression cutoff used by DESeq and EdgeR (p-value):',
+    fdr = forms.CharField(label='Differential expression cutoff used by DESeq and EdgeR (p-value):',
                              required=False, widget=forms.TextInput(attrs={'placeholder': "Default 0.05"}))
-    probability = forms.CharField(label='Differential expression cutoff used by NOISeq (probability):',
+    noiseq = forms.CharField(label='Differential expression cutoff used by NOISeq (probability):',
                                   required=False, widget=forms.TextInput(attrs={'placeholder': "Default 0.8"}))
     isomiRs = forms.BooleanField(label='isoMir Analysis', required=False)
 
     minRCexpr = forms.IntegerField(label="Minimum Read Count", required=False, initial=1)
 
-    samples_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500, initial=" ")
-    groups_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500, initial=" ")
+    samples_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
+    groups_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
 
 
     def __init__(self, *args, **kwargs):
+        self.folder = kwargs.pop('dest_folder', None)
         super(DElaunchForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
 
             "samples_hidden",
             "groups_hidden",
-            "pvalue",
+            "fdr",
             HTML("""<br>"""),
-            "probability",
+            "noiseq",
             HTML("""<br>"""),
             "minRCexpr",
             HTML("""<br>"""),
@@ -349,5 +355,63 @@ class DElaunchForm(forms.Form):
             )
 
         )
-    def create_call(selfs):
-        print("l")
+
+    def clean(self):
+        cleaned_data = super(DElaunchForm, self).clean()
+
+
+
+    def create_call(self):
+        pipeline = self.folder
+        initial_path = os.path.join(MEDIA_ROOT,pipeline,"init_par.json")
+        with open(initial_path,"r") as param_file:
+            initial_params = json.load(param_file)
+        cleaned_data = self.cleaned_data
+
+        conf_params = dict()
+        conf_params["web"] = "true"
+        conf_params["input"] = MEDIA_ROOT
+        conf_params['pipeline_id'] = pipeline
+        conf_params['out_dir'] = os.path.join(MEDIA_ROOT,pipeline)
+        conf_params['name'] = pipeline + "_de"
+
+
+        for p in cleaned_data:
+            if cleaned_data.get(p):
+                conf_params[p] = cleaned_data.get(p)
+        if initial_params.get("listofIDs"):
+            conf_params["grpString"] = initial_params.get("listofIDs")
+            if initial_params.get("sampleGroups"):
+                conf_params["grpDesc"] = initial_params.get("sampleGroups")
+            if initial_params.get("sampleDescription2"):
+                conf_params["sampleDesc"] = initial_params.get("sampleDescription2")
+        elif initial_params.get("ifile") != " ":
+            conf_params["input"] = initial_params.get("ifile")
+            if initial_params.get("matDescription"):
+                conf_params["matrixDesc"] = initial_params.get("matDescription")
+            else:
+                conf_params["matrixDesc"] = cleaned_data.get("groups_hidden")
+            if conf_params.get("sampleGroupsMat"):
+                conf_params["grpDesc"] = initial_params.get("sampleGroupsMat")
+        elif initial_params.get("jobIDs"):
+            conf_params["grpString"] = initial_params.get("jobIDs")
+            if initial_params.get("sampleDescription"):
+                conf_params["sampleDesc"] = initial_params.get("sampleDescription")
+            conf_params["grpDesc"] = initial_params.get("sampleGroups")
+            conf_params["matrixDesc"] = cleaned_data.get("groups_hidden")
+
+        configuration_file_path = os.path.join(conf_params["outdir"], 'conf.json')
+        with open(configuration_file_path, 'w') as conf_file:
+            json.dump(conf_params, conf_file, indent=True)
+
+        if QSUB:
+            call= 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
+                configuration_file_path=configuration_file_path,
+                job_name= conf_params["name"],
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh'))
+        else:
+            call = '{sh} {configuration_file_path}'.format(
+                configuration_file_path=configuration_file_path,
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run.sh'))
+
+        return pipeline,call
