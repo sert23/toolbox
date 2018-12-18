@@ -139,7 +139,10 @@
 
     $('#jobs').on('click', 'tr', function () {
         var data = table.rows().nodes();
-        alert(data.length);
+         for(count = 0; count < data.length; count++){
+                alert(data[count]);
+            }
+
     })
     </script>
 {% endblock %}
