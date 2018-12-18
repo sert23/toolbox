@@ -144,13 +144,15 @@
 {#             alert([key,group_dict[key]]);#}
 {#            };#}
 
-    $('#jobs').on('click', 'tr', function () {
+    $('#jobs').on('click', 'tr', function (group_dict) {
+        group_dict = group_dict || group_dict;
         var new_data = document.getElementsByName("group_selector");
          for(count = 0; count < new_data.length; count++){
-                alert(new_data[count].id);
-                alert(new_data[count].value);
+                key = new_data[count].id;
+                value = new_data[count].value;
+                group_dict[key] = value;
+                alert(count);
             }
-
     });
 {#    $('#jobs').on('click', 'tr', function () {#}
 {#        #}
