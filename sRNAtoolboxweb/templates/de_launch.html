@@ -133,14 +133,11 @@
         },
             columns: received_cols,
         } );
-
+        var data = table.$('Group').serializeArray();
+            alert(data.length);
     } );
 
-        $(document).ready(function() {
-            var data = table.$('Group').serializeArray();
-            alert(data.length);
 
-        })
 
     </script>
 {% endblock %}
