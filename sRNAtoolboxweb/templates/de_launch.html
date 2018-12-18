@@ -115,9 +115,10 @@
 {#    <script src="{% static 'js/sRNAde_form_control.js' %}"></script>#}
 
     <script>
+        var group_dict = {{ group_data|safe }};
         var received_data = {{ table_data|safe }};
         var received_cols = {{ table_headers|safe }}
-        var table = null;
+        var group_dict = {} ;
         $(document).ready(function() {
 
 {#        var table = $('#jobs').DataTable( {#}
@@ -137,10 +138,18 @@
 
     } );
 
+
+{#    $('#jobs').on('click', 'tr', function () {#}
+{#        var data = table.rows().nodes();#}
+{#         for(count = 0; count < data.length; count++){#}
+{#                alert(data[count]);#}
+{#            }#}
+{##}
+{#    })#}
     $('#jobs').on('click', 'tr', function () {
-        var data = table.rows().nodes();
-         for(count = 0; count < data.length; count++){
-                alert(data[count]);
+        const keys = Object.keys(group_dict);
+         for(count = 0; count < keys.length; count++){
+                alert(keys[count]);
             }
 
     })
