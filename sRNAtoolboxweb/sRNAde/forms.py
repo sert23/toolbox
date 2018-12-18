@@ -356,8 +356,10 @@ class DElaunchForm(forms.Form):
 
         )
 
-    # def clean(self):
-    #     cleaned_data = super(DElaunchForm, self).clean()
+    def clean(self):
+        cleaned_data = super(DElaunchForm, self).clean()
+
+        return cleaned_data
 
 
 
