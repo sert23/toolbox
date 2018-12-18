@@ -135,7 +135,11 @@
         },
             columns: received_cols,
         } );
-
+        const keys = Object.keys(group_dict);
+         for(count = 0; count < keys.length; count++){
+             key = keys[count];
+             alert(key);
+            };
     } );
 
 
@@ -146,13 +150,9 @@
 {#            }#}
 {##}
 {#    })#}
-    $('#jobs').on('click', 'tr', function () {
-        const keys = Object.keys(group_dict);
-         for(count = 0; count < keys.length; count++){
-             key = keys[count];
-             alert(key);
-            }
-
-    })
+{#    $('#jobs').on('click', 'tr', function () {#}
+{#        #}
+{##}
+{#    })#}
     </script>
 {% endblock %}
