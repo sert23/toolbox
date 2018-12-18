@@ -368,7 +368,7 @@ class sRNABenchForm(forms.Form):
                 dest = os.path.join(FS.location, os.path.basename(url))
 
             #ifile, headers = urllib.request.urlretrieve(url, filename=dest)
-            ifile = "input=URL@"+url
+            ifile = url
         elif sra_input:
             ifile = sra_input
         elif job_reuse:
