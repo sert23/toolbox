@@ -438,8 +438,13 @@ class DeLaunch(FormView):
             js_headers = json.dumps(header_list)
             js_data = json.dumps(sample_table)
 
+            group_dict = dict()
+            for row in js_data:
+                group_dict[row[0]] = groups[0]
+
             context["table_data"] = js_data
             context["table_headers"] = js_headers
             context["job_id"] = query_id
+            context["group_data"] = group_dict
 
             return context
