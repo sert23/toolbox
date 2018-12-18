@@ -439,7 +439,7 @@ class DeLaunch(FormView):
             js_data = json.dumps(sample_table)
 
             group_dict = dict()
-            for row in js_data:
+            for row in sample_table:
                 group_dict[row[0]] = groups[0]
 
             context["table_data"] = js_data
