@@ -343,6 +343,11 @@ class DeLaunch(FormView):
         initial_path = os.path.join(MEDIA_ROOT, query_id, "init_par.json")
         sample_table=[]
         context["form"] = DElaunchForm
+        base_selector = """<div class="form-group">
+                                <select class="form-control" id="{sample_id}">
+
+                                </select>
+                                """
         with open(initial_path,"r") as param_file:
             params = json.load(param_file)
 
@@ -356,11 +361,7 @@ class DeLaunch(FormView):
                 sampleDescription = None
             names = jobIDs
             headers = ["job ID", "Sample Name", "Group"]
-            base_selector = """<div class="form-group">
-                        <select class="form-control" id="{sample_id}">
-                        
-                        </select>
-                        """
+
             for group in groups:
                 new_option = "<option>"+group+"</option>"
                 to_rep= "</select>"
@@ -402,5 +403,38 @@ class DeLaunch(FormView):
 
 
             return context
-        else:
-            return context
+        elif params.get("ifile") != " ":
+            with open(params.get("ifile"),"r") as input_f:
+                lines=input_f.readlines()
+                header =lines[0]
+            if "," in header:
+                sample_list=header.split(",")
+            else:
+                sample_list = header.split("\t")
+
+        groups = params.get("sampleGroupsMat").split("#")
+        names = sample_list[1:]
+        headers = ["Sample Name", "Group"]
+        for group in groups:
+            new_option = "<option>" + group + "</option>"
+            to_rep = "</select>"
+            replacing = new_option + to_rep
+            base_selector = base_selector.replace(to_rep, replacing)
+
+        for name in names:
+            buttons = base_selector.format(sample_id=name)
+            row = [name, buttons]
+            sample_table.append(row)
+
+        header_list = []
+        for header in headers:
+            header_list.append({"title": header})
+
+        js_headers = json.dumps(header_list)
+        js_data = json.dumps(sample_table)
+
+        context["table_data"] = js_data
+        context["table_headers"] = js_headers
+        context["job_id"] = query_id
+
+        return context
