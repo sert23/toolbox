@@ -344,7 +344,7 @@ class DeLaunch(FormView):
         sample_table=[]
         context["form"] = DElaunchForm
         base_selector = """<div class="form-group">
-                                <select class="form-control" id="{sample_id}">
+                                <select class="form-control" id="{sample_id}" name="group_selector">
 
                                 </select>
                                 """
@@ -412,29 +412,29 @@ class DeLaunch(FormView):
             else:
                 sample_list = header.split("\t")
 
-        groups = params.get("sampleGroupsMat").split("#")
-        names = sample_list[1:]
-        headers = ["Sample Name", "Group"]
-        for group in groups:
-            new_option = "<option>" + group + "</option>"
-            to_rep = "</select>"
-            replacing = new_option + to_rep
-            base_selector = base_selector.replace(to_rep, replacing)
+            groups = params.get("sampleGroupsMat").split("#")
+            names = sample_list[1:]
+            headers = ["Sample Name", "Group"]
+            for group in groups:
+                new_option = "<option>" + group + "</option>"
+                to_rep = "</select>"
+                replacing = new_option + to_rep
+                base_selector = base_selector.replace(to_rep, replacing)
 
-        for name in names:
-            buttons = base_selector.format(sample_id=name)
-            row = [name, buttons]
-            sample_table.append(row)
+            for name in names:
+                buttons = base_selector.format(sample_id=name)
+                row = [name, buttons]
+                sample_table.append(row)
 
-        header_list = []
-        for header in headers:
-            header_list.append({"title": header})
+            header_list = []
+            for header in headers:
+                header_list.append({"title": header})
 
-        js_headers = json.dumps(header_list)
-        js_data = json.dumps(sample_table)
+            js_headers = json.dumps(header_list)
+            js_data = json.dumps(sample_table)
 
-        context["table_data"] = js_data
-        context["table_headers"] = js_headers
-        context["job_id"] = query_id
+            context["table_data"] = js_data
+            context["table_headers"] = js_headers
+            context["job_id"] = query_id
 
-        return context
+            return context
