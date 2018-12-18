@@ -116,6 +116,7 @@
 
     <script>
         var group_dict = {{ group_data|safe }};
+        var sample_keys = {{ group_keys|safe }};
         var received_data = {{ table_data|safe }};
         var received_cols = {{ table_headers|safe }}
 
@@ -157,7 +158,7 @@
     });
 
     $('#submit-id-submit').on("click", function(e) {
-        const keys = Object.keys(group_dict);
+        const keys = sample_keys;
         var group_list = [];
         var sample_list = [];
         for(count = 0; count < keys.length; count++){
@@ -167,11 +168,6 @@
             };
         document.getElementById("id_samples_hidden").value = sample_list.join();
         document.getElementById("id_groups_hidden").value = group_list.join();
-
-        alert(document.getElementById("id_samples_hidden").value);
-        alert(document.getElementById("id_groups_hidden").value);
-
-
     })
 
 
