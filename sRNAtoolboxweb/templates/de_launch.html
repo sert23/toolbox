@@ -157,18 +157,21 @@
             }
     });
 
-{#    $('#submit-id-submit').on("click", function(e) {#}
-{#        const keys = sample_keys;#}
-{#        var group_list = [];#}
-{#        var sample_list = [];#}
-{#        for(count = 0; count < keys.length; count++){#}
-{#             key = keys[count];#}
-{#             sample_list.push(key);#}
-{#             group_list.push(group_dict[key]);#}
-{#            };#}
-{#        document.getElementById("id_samples_hidden").value = sample_list.join();#}
-{#        document.getElementById("id_groups_hidden").value = group_list.join();#}
-{#    })#}
+
+
+    function add_hidden() {
+        const keys = sample_keys;
+        var group_list = [];
+        var sample_list = [];
+        for(count = 0; count < keys.length; count++){
+             key = keys[count];
+             sample_list.push(key);
+             group_list.push(group_dict[key]);
+            };
+        document.getElementById("id_samples_hidden").value = sample_list.join();
+        document.getElementById("id_groups_hidden").value = group_list.join();
+        return true
+    };
 
 
     </script>
