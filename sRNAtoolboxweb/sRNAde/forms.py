@@ -351,7 +351,7 @@ class DElaunchForm(forms.Form):
             "minRCexpr",
             HTML("""<br>"""),
             ButtonHolder(
-                Submit('submit', 'SUBMIT', css_class='btn btn-primary', onclick="add_hidden()")
+                Submit('submit', 'SUBMIT', css_class='btn btn-primary', onclick="return add_hidden()")
             )
 
         )
