@@ -152,7 +152,7 @@
                 value = new_data[count].value;
                 alert(value);
                 group_dict[key] = value;
-                alert(group_dict[key]);
+
             }
     });
 
@@ -165,6 +165,8 @@
              sample_list.push(key);
              group_list.push(group_dict[key]);
             };
+        document.getElementById("id_samples_hidden").value = sample_list.join();
+        document.getElementById("id_groups_hidden").value = sample_list.join();
 
         alert(document.getElementById("id_samples_hidden").value);
         alert(document.getElementById("id_groups_hidden").value);
