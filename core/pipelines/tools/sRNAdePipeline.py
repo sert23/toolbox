@@ -72,20 +72,23 @@ class sRNAdePipeline(Pipeline):
         self.actualize_pipeline_progress(log_msg)
         # self.logger.write(log_msg + "\n")
 
-        if self.groups is not None:
-
-            if self.desc is not "":
-
-                cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.input + " grpString=" + self.groups + " iso=" + self.iso + " matrixDesc=" + self.desc + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " grpDesc=" + self.groups + " output=" + self.outdir + "  "# rscripts=/shared/sRNAtoolbox/rscripts"
-            else:
-                cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.configuration.media + " grpString=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " grpDesc=" + self.groups + " output=" + self.outdir + "   diffExpr=true"#rscripts=/shared/sRNAtoolbox/rscripts"
-        else:
-            cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " matrixDesc=" + self.md.replace(":", ",") + " output=" + self.outdir + "   "#rscripts=/shared/sRNAtoolbox/rscripts"
-
-        self.set_java_command_line(cmd)
-        print(cmd)
+        cmd = "java -Xmx8000m -jar " + self.configuration.path_to_makede + " " + self.conf
         os.system(cmd)
+        self.set_java_command_line(cmd)
 
+        # if self.groups is not None:
+        #
+        #     if self.desc is not "":
+        #
+        #         cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.input + " grpString=" + self.groups + " iso=" + self.iso + " matrixDesc=" + self.desc + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " grpDesc=" + self.groups + " output=" + self.outdir + "  "# rscripts=/shared/sRNAtoolbox/rscripts"
+        #     else:
+        #         cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.configuration.media + " grpString=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " grpDesc=" + self.groups + " output=" + self.outdir + "   diffExpr=true"#rscripts=/shared/sRNAtoolbox/rscripts"
+        # else:
+        #     cmd = "java -jar " + self.configuration.path_to_makede + " input=" + self.input + " iso=" + self.iso + " hmTop=" + self.hmt + " hmPerc=" + self.hmp + " fdr=" + self.dt + " noiseq=" + self.nt + " matrixDesc=" + self.md.replace(":", ",") + " output=" + self.outdir + "   "#rscripts=/shared/sRNAtoolbox/rscripts"
+        #
+        # self.set_java_command_line(cmd)
+        # print(cmd)
+        # os.system(cmd)
 
         log_msg = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " SUCCESS: Differential Expression Analysis finished"
         self.actualize_pipeline_progress(log_msg)
