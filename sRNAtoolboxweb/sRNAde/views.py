@@ -390,7 +390,7 @@ class DeLaunch(FormView):
 
             group_dict = dict()
             key_list = []
-            for row in js_data:
+            for row in sample_table:
                 group_dict[row[0]] = groups[0]
                 key_list.append(str(row[0]))
 
@@ -452,7 +452,7 @@ class DeLaunch(FormView):
 
             group_dict = dict()
             key_list = []
-            for row in js_data:
+            for row in sample_table:
                 group_dict[row[0]] = groups[0]
                 key_list.append(row[0])
 
