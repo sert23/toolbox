@@ -378,7 +378,7 @@ class DElaunchForm(forms.Form):
         conf_params['out_dir'] = os.path.join(MEDIA_ROOT,pipeline)
         conf_params['name'] = pipeline + "_de"
         conf_params['type'] = "sRNAde"
-
+        conf_params['conf_path'] = os.path.join(MEDIA_ROOT,pipeline,"conf.txt")
 
         for p in cleaned_data:
             if cleaned_data.get(p):
@@ -407,6 +407,9 @@ class DElaunchForm(forms.Form):
         configuration_file_path = os.path.join(conf_params["out_dir"], 'conf.json')
         with open(configuration_file_path, 'w') as conf_file:
             json.dump(conf_params, conf_file, indent=True)
+        with open(conf_params['conf_path'],"w") as conf_txt:
+            for k in conf_params.keys():
+                conf_txt.write(k + "=" + conf_params.get(k)+"\n")
 
         if QSUB:
             call= 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
