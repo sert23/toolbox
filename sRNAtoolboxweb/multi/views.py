@@ -214,6 +214,7 @@ class MultiStatusView(DetailView):
         pipeline_id = job_status.pipeline_key
         jobs_folder = os.path.join(MEDIA_ROOT,pipeline_id,"launched")
         launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder,f))]
+        context["ids_strings"] = ",".join(launched_ids)
 
         jobs_tbody = []
         context["running"] = False
