@@ -379,7 +379,7 @@ class DElaunchForm(forms.Form):
         conf_params['output'] = os.path.join(MEDIA_ROOT,pipeline)
         conf_params['name'] = pipeline + "_de"
         conf_params['type'] = "sRNAde"
-        conf_params['conf_path'] = os.path.join(MEDIA_ROOT,pipeline,"conf.txt")
+        conf_params['conf_input'] = os.path.join(MEDIA_ROOT,pipeline,"conf.txt")
 
         for p in cleaned_data:
             if cleaned_data.get(p):
