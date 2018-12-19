@@ -75,8 +75,9 @@ class sRNAdePipeline(Pipeline):
         # self.logger.write(log_msg + "\n")
 
         cmd = "java -Xmx8000m -jar " + self.configuration.path_to_makede + " " + self.conf
-        os.system(cmd)
         self.set_java_command_line(cmd)
+        os.system(cmd)
+
 
         # if self.groups is not None:
         #
