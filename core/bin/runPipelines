@@ -38,7 +38,7 @@ def bench(pipeline_id=None, name=None, out_dir=None, conf_input=None, **kwargs):
 
 
 def de(pipeline_id=None, name=None, out_dir=None, groups=None, probab=None, pval=None, isom=None,
-       perc=None, top=None, matdesc=None, input=None, **kwargs):
+       perc=None, top=None, matdesc=None, input=None, conf_input=None,**kwargs):
     parameters = "\n".join(["Input: "+ input.split("/")[-1], "Groups: "+str(groups), "Sample Description: " + str(matdesc),
                             "Threshold Noiseq: "+str(probab), "Thresholds deSeq/EdgeR: "+str(pval),
                             "IsoMir Analysis: "+ str(isom)])
@@ -46,7 +46,7 @@ def de(pipeline_id=None, name=None, out_dir=None, groups=None, probab=None, pval
 
     new_pipe = sRNAdePipeline(pipeline_id, name, out_dir, input, groups, matdesc,
                               probab, pval, isom, perc, top,
-                              matdesc, parameters)
+                              matdesc, conf_input, parameters)
     new_pipe.run()
 
 
