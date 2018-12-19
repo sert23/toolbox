@@ -19,7 +19,7 @@ class sRNAdePipeline(Pipeline):
         self.desc = desc
         self.input = input
         self.groups = groups
-        self.outdir = os.path.join(self.outdir, 'output_directory')
+        self.outdir = outdir
         self.media = media
         self.media = media
         self.conf = config_file
