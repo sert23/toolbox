@@ -376,6 +376,7 @@ class DElaunchForm(forms.Form):
         conf_params["input"] = MEDIA_ROOT
         conf_params['pipeline_id'] = pipeline
         conf_params['out_dir'] = os.path.join(MEDIA_ROOT,pipeline)
+        conf_params['output'] = os.path.join(MEDIA_ROOT,pipeline)
         conf_params['name'] = pipeline + "_de"
         conf_params['type'] = "sRNAde"
         conf_params['conf_path'] = os.path.join(MEDIA_ROOT,pipeline,"conf.txt")
