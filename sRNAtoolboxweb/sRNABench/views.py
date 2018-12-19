@@ -480,6 +480,10 @@ def result_new(request):
                 parameters = params.params
                  #Summary
                 add_sumimg(new_record, results)
+                if os.path.exists(os.path.join(new_record.outdir,"preprocWeb.txt")):
+                    with open(os.path.join(new_record.outdir,"preprocWeb.txt"),"r") as pre_f:
+                        p_summary = pre_f.read()
+                    results["preproc_sum"] = p_summary
 
                 #Preproc
                 if "inputFinished" in parameters:
