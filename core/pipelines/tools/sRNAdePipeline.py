@@ -7,7 +7,7 @@ from pipelines.pipelines import Pipeline
 
 
 class sRNAdePipeline(Pipeline):
-    def __init__(self, pipeline_key, job_name, outdir, input, groups, desc, nt, dt, iso, hmp, hmt, md, parameters="", media="/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/"):
+    def __init__(self, pipeline_key, job_name, outdir,  input, groups, desc, nt, dt, iso, hmp, hmt, md, config_file=None, parameters="", media="/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/"):
         super(sRNAdePipeline, self).__init__(pipeline_key, job_name, outdir, "sRNAde", parameters)
 
         self.md = md
@@ -22,6 +22,8 @@ class sRNAdePipeline(Pipeline):
         self.outdir = os.path.join(self.outdir, 'output_directory')
         self.media = media
         self.media = media
+        self.conf = config_file
+
 
 
     def run(self):
