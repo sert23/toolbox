@@ -392,7 +392,7 @@ class DeLaunch(FormView):
             key_list = []
             for row in js_data:
                 group_dict[row[0]] = groups[0]
-                key_list.append(row[0])
+                key_list.append(str(row[0]))
 
             context["table_data"] = js_data
             context["table_headers"] = js_headers
