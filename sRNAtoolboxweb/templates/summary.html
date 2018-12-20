@@ -31,24 +31,20 @@
         <div class="row row-grid">
             {% for img  in sumimgs %}
                 <div class="col-lg-6">
-                    <a href="{{ MEDIA_URL }}{{ img  }}" > <img src="{{ MEDIA_URL }}{{ img  }}" alt="img" style="width:100%;height:100%" /> </a>
+                   <img id="test_image" src="{{ MEDIA_URL }}{{ img  }}" alt="img" style="width:100%;height:100%" />
                 </div>
             {% endfor %}
 
         </div>
 
 
-        <div class="row row-grid">
-
-            <div class="modal fade" id="modal_test" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
+        <div class="modal fade" id="modal_test" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
 	    <div class="modal-dialog" role="document">
 	      <div class="modal-content">
 	        <div class="modal-body">
-	          <img style="display:block; margin-left:auto; margin-right:auto; width:50%;" src="{{ MEDIA_URL }}{{ sumimgs.0  }}">
-	          <h1 style="text-align: center;">hello there</h1>
+	          <img style="display:block; margin-left:auto; margin-right:auto; width:70%;" src="{{ MEDIA_URL }}{{ sumimgs.0  }}">
+{#	          <h1 style="text-align: center;">hello there</h1>#}
 	        </div>
 	      </div>
 	    </div>
 	</div>
-
-        </div>
