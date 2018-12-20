@@ -169,16 +169,7 @@
                 {% endif %}
 
 
-<div class="modal fade" id="modal_test" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
-	    <div class="modal-dialog" role="document">
-	      <div class="modal-content">
-	        <div class="modal-body">
-{#	          <img style="display:block; margin-left:auto; margin-right:auto; width:50%;" src="{{ MEDIA_URL }}{{ sumimgs.0  }}">#}
-	          <h1 style="text-align: center;">hello there</h1>
-	        </div>
-	      </div>
-	    </div>
-	</div>
+
             </div>
         </div>
     </div>
@@ -192,14 +183,12 @@
 {% block js %}
     <script>
 
-    $('html').mouseover(function() {
+    $('#test_image').mouseover(function() {
      $("#modal_test").modal('show');
 
     });
 
-    $(document).ready(function() {
 
-    });
 
         $(document).ready(function() {
             if(location.hash) {
