@@ -218,7 +218,7 @@ class DEinputForm(forms.Form):
         self.helper.layout = Layout(
 
             TabHolder(
-                Tab("Use Job IDs (recommended)",
+                Tab("Use Job IDs",
                     Field("jobIDs", css_class="form-control"),
                     Field('sampleDescription', css_class='form-control'),
                     Field("sampleGroups", css_class="form-control")
@@ -228,7 +228,7 @@ class DEinputForm(forms.Form):
                     Field("matDescription", css_class="form-control"),
                     Field("sampleGroupsMat", css_class="form-control")
                     ),
-                Tab("Use Group String",
+                Tab("Use Group String (advanced)",
                     Field("listofIDs", css_class="form-control"),
                     Field('sampleDescription2', css_class='form-control'),
                     Field("sampleGroupsNot", css_class="form-control")
