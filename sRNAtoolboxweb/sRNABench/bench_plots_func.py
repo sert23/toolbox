@@ -16,7 +16,10 @@ def Full_read_length_divs(input_folder, generate=True):
     out_path1 = os.path.join(input_folder,"stat","readLength_RC.png")
     out_path2 = os.path.join(input_folder,"stat","readLength_UR.png")
 
+    os.mkdir(os.path.join(input_folder, "stat", "1"))
+
     if not os.path.exists(out_path1):
+        os.mkdir(os.path.join(input_folder,"stat","2"))
         subprocess.Popen([os.path.join(PATH_TO_VENV,"python"), "readLength", input_folder])
 
     input_table = pandas.read_table(length_file, sep='\t')
