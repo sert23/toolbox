@@ -21,7 +21,7 @@ def Full_read_length_divs(input_folder):
     data = [go.Bar(x=x, y=y1)]
     layout = go.Layout(
         autosize=True,
-        margin=go.Margin(
+        margin=go.layout.Margin(
             l=50,
             r=50,
             b=150,
@@ -44,7 +44,7 @@ def Full_read_length_divs(input_folder):
     data = [go.Bar(x=x,y=y2)]
     layout = go.Layout(
         autosize=True,
-        margin=go.Margin(
+        margin=go.layout.Margin(
             l=50,
             r=50,
             b=150,
