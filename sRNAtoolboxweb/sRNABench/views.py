@@ -27,6 +27,7 @@ from progress.models import JobStatus
 from sRNABench.forms import sRNABenchForm
 from utils import pipeline_utils
 from utils.sysUtils import make_dir
+from sRNAbench.bench_plots import Full_read_length_divs
 
 #CONF = json.load(file("/shared/sRNAtoolbox/sRNAtoolbox.conf"))
 CONF = settings.CONF
@@ -484,6 +485,11 @@ def result_new(request):
                     with open(os.path.join(new_record.outdir,"preprocWeb.txt"),"r") as pre_f:
                         p_summary = pre_f.read()
                     results["preproc_sum"] = p_summary
+                try:
+                    results["readLen_sum"] = Full_read_length_divs(input_folder)
+                except:
+                    results["readLen_sum"] = None
+
 
                 #Preproc
                 if "inputFinished" in parameters:
