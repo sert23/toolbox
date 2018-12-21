@@ -19,12 +19,13 @@ def Full_read_length_divs(input_folder, generate=True):
     #os.mkdir(os.path.join(input_folder, "stat", "1"))
 
     if not os.path.exists(out_path1):
-        os.mkdir(os.path.join(input_folder,"stat","2"))
         os.system("touch " + os.path.join(input_folder, "stat", "2", "test.out", "w"))
-        subprocess.Popen([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder])
-        os.system("touch " + os.path.join(input_folder,"stat","2","test.out", "w"))
-        with open(os.path.join(input_folder,"stat","2","test.out", "w")) as test_f:
-            test_f.write(" ".join([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder]))
+        # os.mkdir(os.path.join(input_folder,"stat","2"))
+        #
+        # subprocess.Popen([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder])
+        # os.system("touch " + os.path.join(input_folder,"stat","2","test.out", "w"))
+        # with open(os.path.join(input_folder,"stat","2","test.out", "w")) as test_f:
+        #     test_f.write(" ".join([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder]))
 
     input_table = pandas.read_table(length_file, sep='\t')
     x = input_table["Read Length (nt)"].values
