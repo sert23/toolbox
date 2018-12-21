@@ -20,7 +20,7 @@ def Full_read_length_divs(input_folder, generate=True):
 
     if not os.path.exists(out_path1):
         os.mkdir(os.path.join(input_folder,"stat","2"))
-        subprocess.Popen([os.path.join(PATH_TO_VENV,"python"), "readLength", input_folder])
+        subprocess.Popen([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder])
 
     input_table = pandas.read_table(length_file, sep='\t')
     x = input_table["Read Length (nt)"].values
