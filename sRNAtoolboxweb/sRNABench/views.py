@@ -486,7 +486,7 @@ def result_new(request):
                         p_summary = pre_f.read()
                     results["preproc_sum"] = p_summary
                 try:
-                    results["readLen_sum"] = Full_read_length_divs(input_folder)
+                    results["readLen_sum"] = Full_read_length_divs(new_record.outdir)
                 except:
                     results["readLen_sum"] = None
 
