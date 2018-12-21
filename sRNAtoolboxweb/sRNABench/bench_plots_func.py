@@ -21,7 +21,7 @@ def Full_read_length_divs(input_folder, generate=True):
     if not os.path.exists(out_path1):
         os.mkdir(os.path.join(input_folder,"stat","2"))
         subprocess.Popen([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder])
-        with open(os.path.join(input_folder,"test.out", "w")) as test_f:
+        with open(os.path.join(input_folder,"stat","test.out", "w")) as test_f:
             test_f.write(" ".join([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder]))
 
     input_table = pandas.read_table(length_file, sep='\t')
