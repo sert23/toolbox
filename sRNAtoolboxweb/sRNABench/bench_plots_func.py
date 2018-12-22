@@ -56,7 +56,7 @@ def Full_read_length_divs(input_folder, generate=True):
     fig = go.Figure(data=data, layout=layout)
     # py.image.save_as({'data': data}, 'your_image_filename.png')
     #plot(fig, filename=out_path1, show_link=False, auto_open=False)
-    div_obj1 = plot(fig, show_link=False, auto_open=False, output_type='div')
+    div_obj1 = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
 
 
     data = [go.Bar(x=x,y=y2)]
