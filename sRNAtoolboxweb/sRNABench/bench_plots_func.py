@@ -68,6 +68,7 @@ def Full_read_length_divs(input_folder, png=False):
     # py.image.save_as({'data': data}, 'your_image_filename.png')
     #plot(fig, filename=out_path1, show_link=False, auto_open=False)
     div_obj1 = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
+    div_obj1_b = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
 
 
     data = [go.Bar(x=x,y=y2)]
@@ -107,11 +108,12 @@ def Full_read_length_divs(input_folder, png=False):
     out_path1 = out_path1.replace(MEDIA_ROOT,MEDIA_URL)
     out_path2 = out_path2.replace(MEDIA_ROOT,MEDIA_URL)
     id1 = div_obj1.split("\"")[1]
+    id1_b = div_obj1_b.split("\"")[1]
     id2 = div_obj2.split("\"")[1]
 
     # return [[div_obj1 ,out_path1, id1, "img_"+id1],[div_obj2, out_path2, id2, "img_"+id2]]
     # return [[div_obj2, out_path2, id2, "img_"+id2]]
-    return [[div_obj1 ,out_path1, id1, "img_"+id1],[div_obj1 ,out_path1, id1, "img_"+id1]]
+    return [[div_obj1 ,out_path1, id1, "img_"+id1],[div_obj1_b ,out_path1, id1, "img_"+id1]]
 
 #     plotly.io.write_image(fig, file, format=None,
 #                           scale=None, width=None, height=None)
