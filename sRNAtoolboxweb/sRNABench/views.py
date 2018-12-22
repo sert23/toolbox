@@ -491,6 +491,7 @@ def result_new(request):
                 #     results["readLen_sum"] = None
                 results["readLen_sum"] = Full_read_length_divs(new_record.outdir)
                 results["modal_test"] = results["readLen_sum"][0][0]
+                results["modal_id"] = results["readLen_sum"][0][2]
 
                 #Preproc
                 if "inputFinished" in parameters:
