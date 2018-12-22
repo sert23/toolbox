@@ -31,8 +31,8 @@ def Full_read_length_divs(input_folder, generate=True):
                                      stderr=subprocess.PIPE)
         [outStream, errStream] = plotter.communicate()
         with open(os.path.join(input_folder,"stat","err.out"), "w") as test_f:
-            test_f.write(outStream)
-            test_f.write(errStream)
+            test_f.write(str(outStream))
+            test_f.write(str(errStream))
 
 
         # subprocess.Popen([os.path.join(PATH_TO_VENV,"python3"), BENCH_PLOTLY ,"readLength", input_folder])
