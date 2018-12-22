@@ -68,7 +68,8 @@
 <script>
     $('#{{ img_id }}').click(function() {
      $("#modal_test_{{ div_id }}").modal('show');
-     Plotly.relayout( "{{ div_id }}", { 'xaxis.autorange': true, 'yaxis.autorange': true });
+     Plotly.relayout( "{{ div_id }}");
+{#     Plotly.relayout( "{{ div_id }}", { 'xaxis.autorange': true, 'yaxis.autorange': true });#}
 
     });
 </script>
