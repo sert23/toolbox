@@ -81,13 +81,13 @@ def Full_read_length_divs(input_folder, generate=True):
     )
     fig = go.Figure(data=data)
 
-    div_obj2 = plot(fig, show_link=False, auto_open=False, output_type='div')
-    plot({'data': [{'y': [4, 2, 3, 4]}],
-                  'layout': {'title': 'Test Plot',
-                             'font': dict(family='Comic Sans MS', size=16)}},
-                 auto_open=True, image='png', image_filename='plot_image',
-                 output_type='file', image_width=800, image_height=600,
-                 filename='temp-plot.html', validate=False)
+    div_obj2 = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
+    # plot({'data': [{'y': [4, 2, 3, 4]}],
+    #               'layout': {'title': 'Test Plot',
+    #                          'font': dict(family='Comic Sans MS', size=16)}},
+    #              auto_open=True, image='png', image_filename='plot_image',
+    #              output_type='file', image_width=800, image_height=600,
+    #              filename='temp-plot.html', validate=False)
 
     out_path1 = out_path1.replace(MEDIA_ROOT,MEDIA_URL)
     out_path2 = out_path2.replace(MEDIA_ROOT,MEDIA_URL)
