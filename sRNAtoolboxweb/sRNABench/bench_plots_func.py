@@ -45,7 +45,7 @@ def Full_read_length_divs(input_folder, generate=True):
         ),
         title="Read length distribution ",
         autosize=False,
-        height=1000,
+        height=600,
         width=1200,
         xaxis=dict(
             title='Read length (nt)',
