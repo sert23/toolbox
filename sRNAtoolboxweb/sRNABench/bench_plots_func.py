@@ -27,7 +27,14 @@ def Full_read_length_divs(input_folder, generate=True):
             test_f.write(call)
         #os.system(" ".join([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder]))
         #subprocess.call('source ' +os.path.join(PATH_TO_VENV,"activate") + ';' + call , shell=True)
-        subprocess.Popen([os.path.join(PATH_TO_VENV,"python3.5"), BENCH_PLOTLY ,"readLength", input_folder])
+        plotter = subprocess.Popen([os.path.join(PATH_TO_VENV,"python3.5"), BENCH_PLOTLY ,"readLength", input_folder],stdout=subprocess.PIPE,
+                                     stderr=subprocess.PIPE)
+        [outStream, errStream] = plotter.communicate()
+        with open(os.path.join(input_folder,"stat","err.out"), "w") as test_f:
+            test_f.write(outStream)
+            test_f.write(errStream)
+
+
         # subprocess.Popen([os.path.join(PATH_TO_VENV,"python3"), BENCH_PLOTLY ,"readLength", input_folder])
         # os.system("touch " + os.path.join(input_folder,"stat","2","test.out", "w"))
 
