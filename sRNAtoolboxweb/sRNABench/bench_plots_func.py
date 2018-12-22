@@ -113,7 +113,7 @@ def Full_read_length_divs(input_folder, png=False):
 
     # return [[div_obj1 ,out_path1, id1, "img_"+id1],[div_obj2, out_path2, id2, "img_"+id2]]
     # return [[div_obj2, out_path2, id2, "img_"+id2]]
-    return [[div_obj1 ,out_path1, id1, "img_"+id1],[div_obj1_b ,out_path1, id1, "img_"+id1]]
+    return [[div_obj1 ,out_path1, id1, "img_"+id1],[div_obj1_b ,out_path1, id1_b, "img_"+id1_b]]
 
 #     plotly.io.write_image(fig, file, format=None,
 #                           scale=None, width=None, height=None)
