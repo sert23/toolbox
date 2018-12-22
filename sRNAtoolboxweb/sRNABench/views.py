@@ -485,10 +485,11 @@ def result_new(request):
                     with open(os.path.join(new_record.outdir,"preprocWeb.txt"),"r") as pre_f:
                         p_summary = pre_f.read()
                     results["preproc_sum"] = p_summary
-                try:
-                    results["readLen_sum"] = Full_read_length_divs(new_record.outdir)
-                except:
-                    results["readLen_sum"] = None
+                # try:
+                #     results["readLen_sum"] = Full_read_length_divs(new_record.outdir)
+                # except:
+                #     results["readLen_sum"] = None
+                Full_read_length_divs(new_record.outdir)
 
 
                 #Preproc
