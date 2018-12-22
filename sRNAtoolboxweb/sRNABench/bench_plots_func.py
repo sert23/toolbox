@@ -39,7 +39,7 @@ def Full_read_length_divs(input_folder, generate=True):
         margin=go.Margin(
             l=50,
             r=50,
-            b=150,
+            b=100,
             t=100,
             pad=4
         ),
