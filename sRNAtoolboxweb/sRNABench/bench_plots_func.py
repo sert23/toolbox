@@ -89,8 +89,8 @@ def Full_read_length_divs(input_folder, generate=True):
                  output_type='file', image_width=800, image_height=600,
                  filename='temp-plot.html', validate=False)
 
-    out_path1.replace(MEDIA_ROOT,MEDIA_URL)
-    out_path2.replace(MEDIA_ROOT,MEDIA_URL)
+    out_path1 = out_path1.replace(MEDIA_ROOT,MEDIA_URL)
+    out_path2 = out_path2.replace(MEDIA_ROOT,MEDIA_URL)
 
     return [[div_obj1 ,out_path1],[div_obj2, out_path2]]
 
