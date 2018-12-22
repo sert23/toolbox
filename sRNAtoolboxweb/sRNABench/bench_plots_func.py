@@ -109,8 +109,8 @@ def Full_read_length_divs(input_folder, png=False):
     id1 = div_obj1.split("\"")[1]
     id2 = div_obj2.split("\"")[1]
 
-    # return [[div_obj1 ,out_path1, id1, "img_"+id1],[div_obj2, out_path2, id2, "img_"+id2]]
-    return [[" "," "," "," "],[div_obj2, out_path2, id2, "img_"+id2]]
+    return [[div_obj1 ,out_path1, id1, "img_"+id1],[div_obj2, out_path2, id2, "img_"+id2]]
+    # return [[" "," "," "," "],[div_obj2, out_path2, id2, "img_"+id2]]
 
 #     plotly.io.write_image(fig, file, format=None,
 #                           scale=None, width=None, height=None)
