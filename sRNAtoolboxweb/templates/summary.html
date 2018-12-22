@@ -8,7 +8,7 @@
       .modal-xl {
         width: 90%;
           height: 300%;
-{#       max-width:1200px;#}
+       max-width:1200px;
       }
     }
 </style>
@@ -52,9 +52,9 @@
         <div class="modal" id="modal_test" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
 {#	    <div class="modal-dialog" role="document">#}
 	    <div class="modal-dialog modal-xl" role="document">
-	      <div class="modal-content" style="height: 250%;">
-	        <div class="modal-body" style="height: 250%;">
-                <div id="test_div" style="width: 100%;">
+	      <div class="modal-content" >
+	        <div class="modal-body" >
+                <div id="test_div" >
                     {{ modal_test|safe }}
                     <!-- Plotly chart will be drawn inside this DIV --></div>
 {#	          <img style="display:block; margin-left:auto; margin-right:auto; width:100%;" src="{{ MEDIA_URL }}{{ sumimgs.0  }}">#}
