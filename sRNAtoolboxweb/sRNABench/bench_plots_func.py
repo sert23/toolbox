@@ -35,7 +35,7 @@ def Full_read_length_divs(input_folder, generate=True):
     y2 = input_table["Percentage_RC"].values
     data = [go.Bar(x=x, y=y1)]
     layout = go.Layout(
-        autosize=True,
+
         margin=go.Margin(
             l=50,
             r=50,
@@ -44,6 +44,8 @@ def Full_read_length_divs(input_folder, generate=True):
             pad=4
         ),
         title="Read length distribution ",
+        autosize=False,
+        height=2000,
         xaxis=dict(
             title='Read length (nt)',
             # tick0=0,
@@ -56,7 +58,7 @@ def Full_read_length_divs(input_folder, generate=True):
     fig = go.Figure(data=data, layout=layout)
     # py.image.save_as({'data': data}, 'your_image_filename.png')
     #plot(fig, filename=out_path1, show_link=False, auto_open=False)
-    div_obj1 = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False, image_height=6000)
+    div_obj1 = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
 
 
     data = [go.Bar(x=x,y=y2)]
