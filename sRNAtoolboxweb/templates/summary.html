@@ -1,5 +1,14 @@
 {% load static %}
 
+<style>
+    @media (min-width: 768px) {
+      .modal-xl {
+        width: 90%;
+       max-width:1200px;
+      }
+    }
+</style>
+
     {% if preproc_sum %}
     <div class="row row-grid">
             <div class="col-lg-6">
@@ -26,25 +35,14 @@
         </div>
     {% endif %}
 
-
-
         <div class="row row-grid">
-            {% for img  in sumimgs %}
+            {% for plot,img  in readLen_sum %}
                 <div class="col-lg-6">
                    <img id="test_image" src="{{ MEDIA_URL }}{{ img  }}" alt="img" style="width:100%;height:100%" />
                 </div>
             {% endfor %}
 
         </div>
-<style>
-    @media (min-width: 768px) {
-      .modal-xl {
-        width: 90%;
-       max-width:1200px;
-      }
-    }
-</style>
-
 
 {#        <div class="modal fade" id="modal_test" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">#}
         <div class="modal" id="modal_test" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
@@ -52,7 +50,9 @@
 	    <div class="modal-dialog modal-xl" role="document">
 	      <div class="modal-content">
 	        <div class="modal-body">
-                <div id="test_div" style="width: 100%;"><!-- Plotly chart will be drawn inside this DIV --></div>
+                <div id="test_div" style="width: 100%;">
+                    {{ modal_test }}
+                    <!-- Plotly chart will be drawn inside this DIV --></div>
 {#	          <img style="display:block; margin-left:auto; margin-right:auto; width:100%;" src="{{ MEDIA_URL }}{{ sumimgs.0  }}">#}
 {#	          <h1 style="text-align: center;">hello there</h1>#}
 	        </div>
@@ -60,30 +60,31 @@
 	    </div>
 	</div>
 
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-    <script>
-        var trace1 = {
-      x: [1, 2, 3, 4],
-      y: [10, 15, 13, 17],
-      mode: 'markers'
-    };
-
-    var trace2 = {
-      x: [2, 3, 4, 5],
-      y: [16, 5, 11, 10],
-      mode: 'lines'
-    };
-
-    var trace3 = {
-      x: [1, 2, 3, 4],
-      y: [12, 9, 15, 12],
-      mode: 'lines+markers'
-    };
-
-    var data = [ trace1, trace2, trace3 ];
-
-    var layout = {autosize: true};
-
-    Plotly.newPlot('test_div', data, layout);
-    </script>
+{#    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>#}
+{##}
+{#    <script>#}
+{#        var trace1 = {#}
+{#      x: [1, 2, 3, 4],#}
+{#      y: [10, 15, 13, 17],#}
+{#      mode: 'markers'#}
+{#    };#}
+{##}
+{#    var trace2 = {#}
+{#      x: [2, 3, 4, 5],#}
+{#      y: [16, 5, 11, 10],#}
+{#      mode: 'lines'#}
+{#    };#}
+{##}
+{#    var trace3 = {#}
+{#      x: [1, 2, 3, 4],#}
+{#      y: [12, 9, 15, 12],#}
+{#      mode: 'lines+markers'#}
+{#    };#}
+{##}
+{#    var data = [ trace1, trace2, trace3 ];#}
+{##}
+{#    var layout = {autosize: true};#}
+{##}
+{#    Plotly.newPlot('test_div', data, layout);#}
+{#    </script>#}
