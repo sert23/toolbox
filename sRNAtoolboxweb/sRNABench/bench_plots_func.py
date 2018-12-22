@@ -48,8 +48,8 @@ def Full_read_length_divs(input_folder, generate=True):
         #height=2000,
         xaxis=dict(
             title='Read length (nt)',
-            # tick0=0,
-            # dtick=1,
+            tick0=0,
+            dtick=1,
         ),
         yaxis=dict(
             # type='log',
