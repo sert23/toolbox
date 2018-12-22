@@ -71,8 +71,8 @@ def Full_read_length_divs(input_folder, png=False):
 
 
     data = [go.Bar(x=x,y=y2)]
+
     layout = go.Layout(
-        autosize=True,
         margin=go.layout.Margin(
             l=50,
             r=50,
@@ -81,15 +81,19 @@ def Full_read_length_divs(input_folder, png=False):
             pad=4
         ),
         title="Unique read length distribution ",
+        autosize=False,
+        height=650,
+        width=1150,
         xaxis=dict(
             title='Read length (nt)',
-            # tick0=0,
-            # dtick=1,
+            tick0=0,
+            dtick=1,
         ),
         yaxis=dict(
             # type='log',
             title='Percentage of reads')
     )
+
     fig = go.Figure(data=data)
 
     div_obj2 = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
