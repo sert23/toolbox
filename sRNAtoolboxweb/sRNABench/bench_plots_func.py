@@ -10,7 +10,7 @@ from sRNAtoolboxweb.settings import MEDIA_ROOT,BENCH_PLOTLY,PATH_TO_VENV, MEDIA_
 import subprocess
 
 
-def Full_read_length_divs(input_folder, generate=True):
+def Full_read_length_divs(input_folder, png=False):
 
     length_file = os.path.join(input_folder,"stat","readLengthFull.txt")
     out_path1 = os.path.join(input_folder,"stat","readLength_RC.png")
@@ -18,7 +18,7 @@ def Full_read_length_divs(input_folder, generate=True):
 
     #os.mkdir(os.path.join(input_folder, "stat", "1"))
 
-    if not os.path.exists(out_path1):
+    if False:
         # os.system("touch " + os.path.join(input_folder, "stat", "2", "test.out"))
         # os.mkdir(os.path.join(input_folder,"stat","2"))
         #
@@ -29,15 +29,14 @@ def Full_read_length_divs(input_folder, generate=True):
         #subprocess.call('source ' +os.path.join(PATH_TO_VENV,"activate") + ';' + call , shell=True)
         plotter = subprocess.Popen([os.path.join(PATH_TO_VENV,"python3.5"), BENCH_PLOTLY ,"readLength", input_folder],stdout=subprocess.PIPE,
                                      stderr=subprocess.PIPE)
-        [outStream, errStream] = plotter.communicate()
-        with open(os.path.join(input_folder,"stat","err.out"), "w") as test_f:
-            test_f.write(str(outStream))
-            test_f.write(str(errStream))
-
+        # [outStream, errStream] = plotter.communicate()
+        # with open(os.path.join(input_folder,"stat","err.out"), "w") as test_f:
+        #     test_f.write(str(outStream))
+        #     test_f.write(str(errStream))
 
         # subprocess.Popen([os.path.join(PATH_TO_VENV,"python3"), BENCH_PLOTLY ,"readLength", input_folder])
         # os.system("touch " + os.path.join(input_folder,"stat","2","test.out", "w"))
-
+    # elif not os.path.exists(out_path1) :
 
     input_table = pandas.read_table(length_file, sep='\t')
     x = input_table["Read Length (nt)"].values
@@ -45,8 +44,7 @@ def Full_read_length_divs(input_folder, generate=True):
     y2 = input_table["Percentage_RC"].values
     data = [go.Bar(x=x, y=y1)]
     layout = go.Layout(
-
-        margin=go.Margin(
+        margin=go.layout.Margin(
             l=50,
             r=50,
             b=100,
@@ -75,10 +73,10 @@ def Full_read_length_divs(input_folder, generate=True):
     data = [go.Bar(x=x,y=y2)]
     layout = go.Layout(
         autosize=True,
-        margin=go.Margin(
+        margin=go.layout.Margin(
             l=50,
             r=50,
-            b=150,
+            b=100,
             t=100,
             pad=4
         ),
@@ -107,7 +105,7 @@ def Full_read_length_divs(input_folder, generate=True):
     id1 = div_obj1.split("\"")[1]
     id2 = div_obj2.split("\"")[1]
 
-    return [[div_obj1 ,out_path1, id1],[div_obj2, out_path2, id2]]
+    return [[div_obj1 ,out_path1, id1, "img_"+id1],[div_obj2, out_path2, id2, "img_"+id2]]
 
 #     plotly.io.write_image(fig, file, format=None,
 #                           scale=None, width=None, height=None)
