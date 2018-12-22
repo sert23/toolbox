@@ -6,7 +6,7 @@ from plotly.offline import plot
 import plotly.plotly as py
 import plotly
 import plotly.io as pio
-from sRNAtoolboxweb.settings import MEDIA_ROOT,BENCH_PLOTLY,PATH_TO_VENV
+from sRNAtoolboxweb.settings import MEDIA_ROOT,BENCH_PLOTLY,PATH_TO_VENV, MEDIA_URL
 import subprocess
 
 
@@ -25,7 +25,7 @@ def Full_read_length_divs(input_folder, generate=True):
         with open(os.path.join(input_folder,"stat","test.out"), "w") as test_f:
             test_f.write(" ".join([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder]))
         #os.system(" ".join([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder]))
-        subprocess.Popen([os.path.join("python"), BENCH_PLOTLY ,"readLength", input_folder])
+        subprocess.Popen([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder])
         # os.system("touch " + os.path.join(input_folder,"stat","2","test.out", "w"))
 
 
@@ -89,7 +89,10 @@ def Full_read_length_divs(input_folder, generate=True):
                  output_type='file', image_width=800, image_height=600,
                  filename='temp-plot.html', validate=False)
 
-    # return div_obj1 ,div_obj2, out_path1, out_path2
+    out_path1.replace(MEDIA_ROOT,MEDIA_URL)
+    out_path2.replace(MEDIA_ROOT,MEDIA_URL)
+
+    return [[div_obj1 ,out_path1],[div_obj2, out_path2]]
 
 #     plotly.io.write_image(fig, file, format=None,
 #                           scale=None, width=None, height=None)
