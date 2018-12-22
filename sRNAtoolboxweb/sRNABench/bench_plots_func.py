@@ -24,7 +24,7 @@ def Full_read_length_divs(input_folder, generate=True):
         #
         with open(os.path.join(input_folder,"stat","test.out"), "w") as test_f:
             test_f.write(" ".join([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder]))
-        os.system(" ".join([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder]))
+        #os.system(" ".join([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder]))
         subprocess.Popen([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder])
         # os.system("touch " + os.path.join(input_folder,"stat","2","test.out", "w"))
 
