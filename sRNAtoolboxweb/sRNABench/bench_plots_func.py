@@ -95,7 +95,7 @@ def Full_read_length_divs(input_folder, png=False):
             title='Percentage of reads')
     )
 
-    fig = go.Figure(data=data)
+    fig = go.Figure(data=data, layout=layout)
 
     div_obj2 = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
     # plot({'data': [{'y': [4, 2, 3, 4]}],
