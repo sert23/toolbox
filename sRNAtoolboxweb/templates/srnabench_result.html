@@ -185,7 +185,7 @@
 
     $('#test_image').click(function() {
      $("#modal_test").modal('show');
-     Plotly.relayout( test_div, { 'xaxis.autorange': true, 'yaxis.autorange': true });
+     Plotly.relayout( {{ modal_id }}, { 'xaxis.autorange': true, 'yaxis.autorange': true });
 
     });
 
