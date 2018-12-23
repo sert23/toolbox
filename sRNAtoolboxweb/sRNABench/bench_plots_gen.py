@@ -202,6 +202,9 @@ print( "yo flipo")
 
 # print(plotly.__version__)
 #Full_read_length("C:/Users/Ernesto/Desktop/Colabo/Dani_platelets/")
+
+
+
 def main():
     print("pero esto que es")
     p_type = sys.argv[1]
@@ -211,7 +214,8 @@ def main():
         print("I see")
         Full_read_length_divs(input_par, png=True)
 
-
+if __name__ == "__main__":
+    main()
 
 #stest_ml()
 
