@@ -30,6 +30,8 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
         plotter = subprocess.Popen(call_list,
                                    stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE)
+        with open(os.path.join(input_folder, "stat", "test2.out"), "w") as test_f:
+            test_f.write(" ".join(call_list))
 
 
     #
