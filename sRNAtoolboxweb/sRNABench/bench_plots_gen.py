@@ -102,7 +102,7 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
             r=50,
             b=100,
             t=100,
-            pad=60
+            pad=5
         ),
 
         title="Unique read length distribution ",
@@ -120,7 +120,7 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
         yaxis=dict(
             ticksuffix='%',
             # type='log',
-            title='Percentage of reads')
+            title='Percentage of reads\\n')
     )
 
     fig = go.Figure(data=data, layout=layout)
