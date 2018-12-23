@@ -131,14 +131,14 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
     #              output_type='file', image_width=800, image_height=600,
     #              filename='temp-plot.html', validate=False)
 
-    if not png:
-        out_path1 = out_path1.replace(media_root,media_url)
-        out_path2 = out_path2.replace(media_root,media_url)
-        id1 = div_obj1.split("\"")[1]
-        #id1_b = div_obj1_b.split("\"")[1]
-        id2 = div_obj2.split("\"")[1]
 
-        return [[div_obj1 ,out_path1, id1, "img_"+id1],[div_obj2, out_path2, id2, "img_"+id2]]
+    out_path1 = out_path1.replace(media_root,media_url)
+    out_path2 = out_path2.replace(media_root,media_url)
+    id1 = div_obj1.split("\"")[1]
+    #id1_b = div_obj1_b.split("\"")[1]
+    id2 = div_obj2.split("\"")[1]
+
+    return [[div_obj1 ,out_path1, id1, "img_"+id1],[div_obj2, out_path2, id2, "img_"+id2]]
     # return [[div_obj2, out_path2, id2, "img_"+id2]]
     #return [[div_obj1 ,out_path1, id1, "img_"+id1],[div_obj1_b ,out_path1, id1_b, "img_"+id1_b]]
 
