@@ -102,7 +102,7 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
             r=50,
             b=100,
             t=100,
-            pad=4
+            pad=6
         ),
 
         title="Unique read length distribution ",
