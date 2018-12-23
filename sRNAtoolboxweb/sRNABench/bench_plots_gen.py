@@ -120,7 +120,7 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
         yaxis=dict(
             ticksuffix='%',
             # type='log',
-            title='Percentage of reads \\\n')
+            title='Percentage of reads \n&nbsp;\n&nbsp;\n&nbsp;')
     )
 
     fig = go.Figure(data=data, layout=layout)
