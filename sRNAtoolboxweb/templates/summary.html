@@ -73,7 +73,7 @@
     $('#{{ img_id }}').click(function() {
      $("#modal_test_{{ div_id }}").modal('show');
      alert("this is a test");
-     if (!document.getElementById({{ div_id }})){
+     if (!document.getElementById({{ "div_id" }})){
          $('#empty_div_{{ div_id }}').append('{{ plot|escapejs }}');
      }
     });
