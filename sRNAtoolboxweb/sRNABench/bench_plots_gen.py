@@ -201,10 +201,12 @@ def Full_read_length_divs(input_folder, MEDIA_ROOT=None,BENCH_PLOTLY=None,PATH_T
 # print(plotly.__version__)
 #Full_read_length("C:/Users/Ernesto/Desktop/Colabo/Dani_platelets/")
 def main():
+    print("pero esto que es")
     p_type = sys.argv[1]
     input_par = sys.argv[2]
 
     if p_type == "readLength":
+        print("I see")
         Full_read_length_divs(input_par, png=True)
 
 
