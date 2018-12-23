@@ -96,6 +96,8 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
 
     data = [go.Bar(x=x,y=y2)]
 
+
+
     layout = go.Layout(
         margin=go.layout.Margin(
             l=50,
@@ -113,6 +115,9 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
             title='Read length (nt)',
             tick0=0,
             dtick=1,
+            linecolor='black',
+            linewidth= 2,
+            mirror= True
         ),
         # yaxis: {
         #
