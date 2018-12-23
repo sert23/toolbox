@@ -13,6 +13,7 @@ import subprocess
 
 def Full_read_length_divs(input_folder, MEDIA_ROOT=None,BENCH_PLOTLY=None,PATH_TO_VENV=None,MEDIA_URL=None, png=False):
 
+    print("aqui entra")
     length_file = os.path.join(input_folder,"stat","readLengthFull.txt")
     out_path1 = os.path.join(input_folder,"stat","readLength_RC.png")
     out_path2 = os.path.join(input_folder,"stat","readLength_UR.png")
@@ -20,12 +21,14 @@ def Full_read_length_divs(input_folder, MEDIA_ROOT=None,BENCH_PLOTLY=None,PATH_T
     #os.mkdir(os.path.join(input_folder, "stat", "1"))
 
     if (not os.path.exists(out_path1)) and (not png):
+        print("aqui el if")
         call_list = [os.path.join(PATH_TO_VENV, "python"), BENCH_PLOTLY, "readLength", input_folder]
         with open(os.path.join(input_folder, "stat", "test.out"), "w") as test_f:
             test_f.write(" ".join(call_list))
         plotter = subprocess.Popen(call_list,
                                    stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE)
+
 
     #
     # if False:
@@ -47,6 +50,8 @@ def Full_read_length_divs(input_folder, MEDIA_ROOT=None,BENCH_PLOTLY=None,PATH_T
     #     # subprocess.Popen([os.path.join(PATH_TO_VENV,"python3"), BENCH_PLOTLY ,"readLength", input_folder])
     #     # os.system("touch " + os.path.join(input_folder,"stat","2","test.out", "w"))
     # elif not os.path.exists(out_path1) :
+
+    print("aqui sin if")
 
     input_table = pandas.read_table(length_file, sep='\t')
     x = input_table["Read Length (nt)"].values
