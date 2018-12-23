@@ -113,7 +113,7 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
         height=650,
         width=1150,
         xaxis=dict(
-            domain=[0.1, 0.9],
+            domain=[0.05, 1],
             title='Read length (nt)',
             tick0=0,
             dtick=1,
