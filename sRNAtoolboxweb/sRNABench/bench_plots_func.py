@@ -11,7 +11,7 @@ import subprocess
 import sys
 
 
-from sRNAbench.bench_plots_gen import Full_read_length_divs
+from .bench_plots_gen import Full_read_length_divs
 
 #     plotly.io.write_image(fig, file, format=None,
 #                           scale=None, width=None, height=None)
