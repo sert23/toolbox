@@ -115,7 +115,7 @@
                 <div class="tab-pane fade" id="Summary">
 
                     <div class="col-lg-12">
-                    {% include "summary.html" %}
+{#                    {% include "summary.html" %}#}
                         </div>
                 </div>
 
@@ -183,11 +183,7 @@
 {% block js %}
     <script>
 
-    $('#test_image').click(function() {
-     $("#modal_test").modal('show');
-     Plotly.relayout( "{{ modal_id }}", { 'xaxis.autorange': true, 'yaxis.autorange': true });
 
-    });
 
         $(document).ready(function() {
             if(location.hash) {
