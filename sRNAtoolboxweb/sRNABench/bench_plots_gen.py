@@ -81,6 +81,7 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
         ),
         yaxis=dict(
             # type='log',
+            ticksuffix='%',
             title='Percentage of reads')
     )
     fig = go.Figure(data=data, layout=layout)
@@ -97,7 +98,7 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
 
     layout = go.Layout(
         margin=go.layout.Margin(
-            l=50,
+            l=55,
             r=50,
             b=100,
             t=100,
