@@ -71,6 +71,7 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
             pad=4
         ),
         title="Read length distribution ",
+        font=dict(size=18),
         autosize=False,
         height=650,
         width=1150,
