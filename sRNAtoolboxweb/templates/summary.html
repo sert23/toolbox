@@ -54,7 +54,7 @@
 	    <div class="modal-dialog modal-xl" role="document">
 	      <div class="modal-content" >
 	        <div class="modal-body" >
-                <div id="empty_div_{{ div }}">
+                <div id="empty_div_{{ div_id }}">
 
                 </div>
 
@@ -72,7 +72,7 @@
     $('#{{ img_id }}').click(function() {
      $("#modal_test_{{ div_id }}").modal('show');
      alert("this is a test");
-     $('#empty_div_{{ div }}').append('{{ plot|escapejs }}');
+     $('#empty_div_{{ div_id }}').append('{{ plot|escapejs }}');
 
 {#     Plotly.relayout( "{{ div_id }}", { 'xaxis.autorange': true, 'yaxis.autorange': true });#}
 
