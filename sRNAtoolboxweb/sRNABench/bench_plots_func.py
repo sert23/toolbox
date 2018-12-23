@@ -158,9 +158,9 @@ def Full_read_length_divs(input_folder, png=False):
 #
 # print(plotly.__version__)
 #Full_read_length("C:/Users/Ernesto/Desktop/Colabo/Dani_platelets/")
+def main():
+    p_type = sys.argv[1]
+    input_par = sys.argv[2]
 
-p_type = sys.argv[1]
-input_par = sys.argv[2]
-
-if p_type == "readLength":
-    Full_read_length_divs(input_par, png=True )
+    if p_type == "readLength":
+        Full_read_length_divs(input_par, png=True )
