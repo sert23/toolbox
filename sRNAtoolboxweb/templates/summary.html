@@ -54,8 +54,11 @@
 	    <div class="modal-dialog modal-xl" role="document">
 	      <div class="modal-content" >
 	        <div class="modal-body" >
+                <div id="empty_div_{{ div }}">
 
-                    {{ plot|safe }}
+                </div>
+
+
                     <!-- Plotly chart will be drawn inside this DIV -->
 {#	          <img style="display:block; margin-left:auto; margin-right:auto; width:100%;" src="{{ MEDIA_URL }}{{ sumimgs.0  }}">#}
 {#	          <h1 style="text-align: center;">hello there</h1>#}
@@ -68,14 +71,18 @@
 <script>
     $('#{{ img_id }}').click(function() {
      $("#modal_test_{{ div_id }}").modal('show');
+     alert("this is a test");
+     $('#empty_div_{{ div }}').append({{ plot|safe }});
 
-     Plotly.relayout( "{{ div_id }}", { 'xaxis.autorange': true, 'yaxis.autorange': true });
+{#     Plotly.relayout( "{{ div_id }}", { 'xaxis.autorange': true, 'yaxis.autorange': true });#}
 
     });
 </script>
 
 {% endfor %}
         </div>
+
+
 {##}
 {#    <script>#}
 {#        var trace1 = {#}
