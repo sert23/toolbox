@@ -44,3 +44,4 @@ def main():
 
     if p_type == "readLength":
         Full_read_length_divs(input_par, png=True )
+        print("wtf")
