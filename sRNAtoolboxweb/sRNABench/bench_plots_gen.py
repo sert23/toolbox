@@ -98,7 +98,7 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
 
     layout = go.Layout(
         margin=go.layout.Margin(
-            l=55,
+            l=65,
             r=50,
             b=100,
             t=100,
