@@ -6,6 +6,8 @@ from plotly.offline import plot
 import plotly.plotly as py
 import plotly
 import sys
+import subprocess
+from .bench_plots_func import MEDIA_ROOT,BENCH_PLOTLY,PATH_TO_VENV, MEDIA_URL
 
 # from bench_plots_func import Full_read_length_divs
 
