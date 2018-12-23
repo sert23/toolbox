@@ -13,6 +13,10 @@ import sys
 
 from .bench_plots_gen import Full_read_length_divs
 
+def full_read_length(input_folder):
+    Full_read_length_divs(input_folder, MEDIA_ROOT=MEDIA_ROOT, BENCH_PLOTLY=BENCH_PLOTLY, PATH_TO_VENV=PATH_TO_VENV, MEDIA_URL=MEDIA_URL,
+                          png=False)
+
 #     plotly.io.write_image(fig, file, format=None,
 #                           scale=None, width=None, height=None)
 #     layout = go.Layout(
