@@ -11,6 +11,8 @@ import subprocess
 
 # from bench_plots_func import Full_read_length_divs
 
+print( "yo flipo")
+
 def Full_read_length_divs(input_folder, MEDIA_ROOT=None,BENCH_PLOTLY=None,PATH_TO_VENV=None,MEDIA_URL=None, png=False):
 
     print("aqui entra")
