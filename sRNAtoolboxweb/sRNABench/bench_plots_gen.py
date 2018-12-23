@@ -103,6 +103,7 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
             t=100,
             pad=4
         ),
+
         title="Unique read length distribution ",
         autosize=False,
         height=650,
@@ -112,7 +113,11 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
             tick0=0,
             dtick=1,
         ),
+        # yaxis: {
+        #
+        # range: [0, 1]
         yaxis=dict(
+            tickformat=',.0%',
             # type='log',
             title='Percentage of reads')
     )
