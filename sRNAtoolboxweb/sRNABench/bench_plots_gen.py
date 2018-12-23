@@ -13,7 +13,7 @@ import subprocess
 
 print( "yo flipo")
 
-def Full_read_length_divs(input_folder, MEDIA_ROOT=None,BENCH_PLOTLY=None,PATH_TO_VENV=None,MEDIA_URL=None, png=False):
+def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, media_url=None, media_root=None, png=False):
 
     print("aqui entra")
     length_file = os.path.join(input_folder,"stat","readLengthFull.txt")
@@ -24,7 +24,7 @@ def Full_read_length_divs(input_folder, MEDIA_ROOT=None,BENCH_PLOTLY=None,PATH_T
 
     if (not os.path.exists(out_path1)) and (not png):
         print("aqui el if")
-        call_list = [os.path.join(PATH_TO_VENV, "python"), BENCH_PLOTLY, "readLength", input_folder]
+        call_list = [os.path.join(path_to_venv, "python"), plotly_script, "readLength", input_folder]
         with open(os.path.join(input_folder, "stat", "test.out"), "w") as test_f:
             test_f.write(" ".join(call_list))
         plotter = subprocess.Popen(call_list,
@@ -37,7 +37,7 @@ def Full_read_length_divs(input_folder, MEDIA_ROOT=None,BENCH_PLOTLY=None,PATH_T
     #     # os.system("touch " + os.path.join(input_folder, "stat", "2", "test.out"))
     #     # os.mkdir(os.path.join(input_folder,"stat","2"))
     #     #
-    #     call = " ".join([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder])
+    #     call = " ".join([os.path.join(path_to_venv,"python"), BENCH_PLOTLY ,"readLength", input_folder])
     #     with open(os.path.join(input_folder,"stat","test.out"), "w") as test_f:
     #         test_f.write(call)
     #     #os.system(" ".join([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder]))
@@ -130,8 +130,8 @@ def Full_read_length_divs(input_folder, MEDIA_ROOT=None,BENCH_PLOTLY=None,PATH_T
     #              filename='temp-plot.html', validate=False)
 
     if not png:
-        out_path1 = out_path1.replace(MEDIA_ROOT,MEDIA_URL)
-        out_path2 = out_path2.replace(MEDIA_ROOT,MEDIA_URL)
+        out_path1 = out_path1.replace(media_root,media_url)
+        out_path2 = out_path2.replace(media_root,media_url)
         id1 = div_obj1.split("\"")[1]
         #id1_b = div_obj1_b.split("\"")[1]
         id2 = div_obj2.split("\"")[1]
