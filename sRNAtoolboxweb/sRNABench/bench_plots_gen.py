@@ -98,11 +98,11 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
 
     layout = go.Layout(
         margin=go.layout.Margin(
-            l=105,
+            l=50,
             r=50,
             b=100,
             t=100,
-            pad=6
+            pad=60
         ),
 
         title="Unique read length distribution ",
