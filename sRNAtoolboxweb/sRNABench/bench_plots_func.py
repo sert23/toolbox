@@ -14,8 +14,9 @@ import sys
 from .bench_plots_gen import Full_read_length_divs
 
 def full_read_length(input_folder):
-    Full_read_length_divs(input_folder, path_to_venv=PATH_TO_VENV, plotly_script=BENCH_PLOTLY, media_url=MEDIA_URL,
+    results_list = Full_read_length_divs(input_folder, path_to_venv=PATH_TO_VENV, plotly_script=BENCH_PLOTLY, media_url=MEDIA_URL,
                           media_root=MEDIA_ROOT, png=False)
+    return results_list
 
 #     plotly.io.write_image(fig, file, format=None,
 #                           scale=None, width=None, height=None)
