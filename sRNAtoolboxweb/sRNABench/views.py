@@ -27,7 +27,7 @@ from progress.models import JobStatus
 from sRNABench.forms import sRNABenchForm
 from utils import pipeline_utils
 from utils.sysUtils import make_dir
-from sRNABench.bench_plots_func import Full_read_length_divs
+from sRNABench.bench_plots_func import full_read_length
 
 #CONF = json.load(file("/shared/sRNAtoolbox/sRNAtoolbox.conf"))
 CONF = settings.CONF
@@ -489,7 +489,7 @@ def result_new(request):
                 #     results["readLen_sum"] = Full_read_length_divs(new_record.outdir)
                 # except:
                 #     results["readLen_sum"] = None
-                results["readLen_sum"] = Full_read_length_divs(new_record.outdir)
+                results["readLen_sum"] = full_read_length(new_record.outdir)
                 # results["modal_test"] = results["readLen_sum"][0][0]
                 # results["modal_id"] = results["readLen_sum"][0][2]
 
