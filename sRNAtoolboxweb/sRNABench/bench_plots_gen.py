@@ -11,7 +11,7 @@ from .bench_plots_func import MEDIA_ROOT,BENCH_PLOTLY,PATH_TO_VENV, MEDIA_URL
 
 # from bench_plots_func import Full_read_length_divs
 
-def Full_read_length_divs(input_folder, png=False):
+def Full_read_length_divs(input_folder, MEDIA_ROOT=None,BENCH_PLOTLY=None,PATH_TO_VENV=None,MEDIA_URL=None, png=False):
 
     length_file = os.path.join(input_folder,"stat","readLengthFull.txt")
     out_path1 = os.path.join(input_folder,"stat","readLength_RC.png")
