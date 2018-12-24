@@ -153,7 +153,7 @@
 {#            };#}
 
     $('#jobs').on('click', 'tr', function (group_dict) {
-        const keyl = Object.keys(group_dict);
+{#        const keyl = Object.keys(group_dict);#}
         var new_data = document.getElementsByName("group_selector");
          for(count = 0; count < new_data.length; count++){
                 key = String(new_data[count].id);
@@ -161,7 +161,7 @@
 {#                alert( [key,value]);#}
                 group_dict[key] = value;
 
-                alert(keyl);
+                alert(group_keys);
 
             }
 {#        var keys = sample_keys;#}
