@@ -172,7 +172,7 @@
 
 
     function add_hidden() {
-        const keys = sample_keys;
+        const keys = group_dict.keys();
 {#        const keys = sample_keys;#}
         var group_list = [];
         var sample_list = [];
@@ -180,7 +180,7 @@
              key = keys[count];
              sample_list.push(key);
              group_list.push(group_dict[key]);
-             alert([key,group_dict[key]])
+{#             alert([key,group_dict[key]])#}
 {#             alert(keys.length)#}
             };
         alert("it works");
