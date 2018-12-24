@@ -115,14 +115,9 @@
 {#    <script src="{% static 'js/sRNAde_form_control.js' %}"></script>#}
 
     <script>
-        var group_dict = {{ group_data|safe }};
+        var group_list = {{ group_data|safe }};
         var sample_keys = {{ group_keys|safe }};
-        var values = []
-        for(count = 0; count < sample_keys.length; count++){
-            key = sample_keys[count];
-            values.push(group_dict[key])
-        }
-        alert(values);
+
         var received_data = {{ table_data|safe }};
         var received_cols = {{ table_headers|safe }}
 
@@ -157,7 +152,10 @@
          for(count = 0; count < new_data.length; count++){
                 key = String(new_data[count].id);
                 value = String(new_data[count].value);
-                group_dict[key] = value;
+                c = sample_list.indexOf(key);
+                group_list[c] = value;
+                alert(group_list);
+
 
 
 {#                alert( [key,value]);#}
@@ -166,21 +164,21 @@
 {#        alert(group_keys);#}
 {#                alert(group_keys);#}
             }
-        var keys = sample_keys;
-        var group_list = [];
-        var sample_list = [];
-        for(count = 0; count < keys.length; count++){
-             key = keys[count];
+{#        var keys = sample_keys;#}
+{#        var group_list = [];#}
+{#        var sample_list = [];#}
+{#        for(count = 0; count < keys.length; count++){#}
+{#             key = keys[count];#}
 {#             alert([key,group_dict[key]]);#}
-             sample_list.push(key);
-             group_list.push(group_dict[key]);
-            };
-        document.getElementById("id_samples_hidden").value = sample_list.join();
-        document.getElementById("id_groups_hidden").value = group_list.join();
-        alert(sample_list.length);
-        alert(document.getElementById("id_samples_hidden").value);
-        alert(group_list.length);
-        alert(document.getElementById("id_groups_hidden").value);
+{#             sample_list.push(key);#}
+{#             group_list.push(group_dict[key]);#}
+{#            };#}
+{#        document.getElementById("id_samples_hidden").value = sample_list.join();#}
+{#        document.getElementById("id_groups_hidden").value = group_list.join();#}
+{#        alert(sample_list.length);#}
+{#        alert(document.getElementById("id_samples_hidden").value);#}
+{#        alert(group_list.length);#}
+{#        alert(document.getElementById("id_groups_hidden").value);#}
     });
 
 
