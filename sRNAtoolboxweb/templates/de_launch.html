@@ -116,13 +116,7 @@
 
     <script>
         var group_dict = {{ group_data|safe }};
-        var group_keys = [];
-        for(var key in group_dict) {
-            if(group_dict.hasOwnProperty(key)) { //to be safe
-                group_keys.push(key);
-                }
-                    }
-        alert(group_keys);
+
         var sample_keys = {{ group_keys|safe }};
         var received_data = {{ table_data|safe }};
         var received_cols = {{ table_headers|safe }}
@@ -160,8 +154,14 @@
                 value = String(new_data[count].value);
 {#                alert( [key,value]);#}
                 group_dict[key] = value;
-
-                alert(group_keys);
+                var group_keys = [];
+                for(var key1 in group_dict) {
+                    if(group_dict.hasOwnProperty(key1)) { //to be safe
+                        group_keys.push(key1);
+                }
+                    }
+        alert(group_keys);
+{#                alert(group_keys);#}
 
             }
 {#        var keys = sample_keys;#}
