@@ -154,8 +154,8 @@
                 value = String(new_data[count].value);
                 c = sample_keys.indexOf(key);
                 group_list[c] = value;
-                alert(group_list);
-
+{#                alert(group_list);#}
+                 window['group_list'] = group_list;
 
 
 {#                alert( [key,value]);#}
@@ -185,7 +185,7 @@
 
     function add_hidden() {
         document.getElementById("id_samples_hidden").value = sample_keys.join();
-        document.getElementById("id_groups_hidden").value = "merengue";
+        document.getElementById("id_groups_hidden").value = group_list.join();
         alert(document.getElementById("id_groups_hidden").value);
         return false
     }
