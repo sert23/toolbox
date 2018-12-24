@@ -353,7 +353,7 @@ class DElaunchForm(forms.Form):
             ButtonHolder(
                 # Submit('submit', 'SUBMIT', css_class='btn btn-primary')
                 # Submit('submit', 'SUBMIT', css_class='btn btn-primary', onclick="return add_hidden(); return alert('he')")
-                Submit('submit', 'SUBMIT', css_class='btn btn-primary', onclick='return alert(document.getElementById("id_groups_hidden").value);')
+                Submit('submit', 'SUBMIT', css_class='btn btn-primary', onclick='return add_hidden(); return alert(document.getElementById("id_groups_hidden").value);')
             )
 
         )
