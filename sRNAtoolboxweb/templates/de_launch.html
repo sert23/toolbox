@@ -184,20 +184,6 @@
 
 
     function add_hidden() {
-        alert(group_dict.keys());
-{#        alert(keys);#}
-{#        const keys = sample_keys;#}
-        var group_list = [];
-        var sample_list = [];
-        for(count = 0; count < keys.length; count++){
-             key = keys[count];
-             alert(key);
-             sample_list.push(key);
-             group_list.push(group_dict[key]);
-{#             alert([key,group_dict[key]])#}
-{#             alert(keys.length)#}
-            };
-        alert("it works");
         document.getElementById("id_samples_hidden").value = sample_list.join();
         document.getElementById("id_groups_hidden").value = group_list.join();
         return false
