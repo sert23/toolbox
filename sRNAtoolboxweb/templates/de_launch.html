@@ -118,7 +118,7 @@
         var group_dict = {{ group_data|safe }};
         var sample_keys = {{ group_keys|safe }};
         var values = []
-        for(count = 0; count < new_data.length; count++){
+        for(count = 0; count < sample_keys.length; count++){
             key = sample_keys[count];
             values.push(group_dict[key])
         }
