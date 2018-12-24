@@ -352,8 +352,8 @@ class DElaunchForm(forms.Form):
             HTML("""<br>"""),
             ButtonHolder(
                 # Submit('submit', 'SUBMIT', css_class='btn btn-primary')
-                # Submit('submit', 'SUBMIT', css_class='btn btn-primary', onclick="return add_hidden(); alert('he')")
-                Submit('submit', 'SUBMIT', css_class='btn btn-primary', onclick="return alert('he');")
+                # Submit('submit', 'SUBMIT', css_class='btn btn-primary', onclick="return add_hidden(); return alert('he')")
+                Submit('submit', 'SUBMIT', css_class='btn btn-primary', onclick="return alert(group_dict.keys());")
             )
 
         )
