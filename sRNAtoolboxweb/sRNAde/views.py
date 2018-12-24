@@ -388,16 +388,16 @@ class DeLaunch(FormView):
             js_headers = json.dumps(header_list)
             js_data = json.dumps(sample_table)
 
-            group_dict = dict()
+
             key_list = []
             for row in sample_table:
-                group_dict[row[0]] = groups[0]
+                #group_dict[row[0]] = groups[0]
                 key_list.append(str(row[0]))
-
+            group_list = [groups[0]]*len(key_list)
             context["table_data"] = js_data
             context["table_headers"] = js_headers
             context["job_id"] = query_id
-            context["group_data"] = json.dumps(group_dict)
+            context["group_data"] = json.dumps(group_list)
             context["group_keys"] = json.dumps(key_list)
 
             return context
@@ -450,16 +450,15 @@ class DeLaunch(FormView):
             js_headers = json.dumps(header_list)
             js_data = json.dumps(sample_table)
 
-            group_dict = dict()
             key_list = []
             for row in sample_table:
-                group_dict[row[0]] = groups[0]
-                key_list.append(row[0])
-
+                # group_dict[row[0]] = groups[0]
+                key_list.append(str(row[0]))
+            group_list = [groups[0]] * len(key_list)
             context["table_data"] = js_data
             context["table_headers"] = js_headers
             context["job_id"] = query_id
-            context["group_data"] = json.dumps(group_dict)
+            context["group_data"] = json.dumps(group_list)
             context["group_keys"] = json.dumps(key_list)
 
             return context
