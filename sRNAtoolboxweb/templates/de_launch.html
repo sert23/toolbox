@@ -116,8 +116,13 @@
 
     <script>
         var group_dict = {{ group_data|safe }};
-
         var sample_keys = {{ group_keys|safe }};
+        var values = []
+        for(count = 0; count < new_data.length; count++){
+            key = sample_keys[count];
+            values.push(group_dict[key])
+        }
+        alert(values);
         var received_data = {{ table_data|safe }};
         var received_cols = {{ table_headers|safe }}
 
@@ -173,7 +178,9 @@
         document.getElementById("id_samples_hidden").value = sample_list.join();
         document.getElementById("id_groups_hidden").value = group_list.join();
         alert(sample_list.length);
+        alert(document.getElementById("id_samples_hidden").value);
         alert(group_list.length);
+        alert(document.getElementById("id_groups_hidden").value);
     });
 
 
