@@ -151,6 +151,7 @@
         var new_data = document.getElementsByName("group_selector");
          for(count = 0; count < new_data.length; count++){
                 key = String(new_data[count].id);
+                alert(key);
                 value = String(new_data[count].value);
 {#                alert( [key,value]);#}
                 group_dict[key] = value;
@@ -160,7 +161,7 @@
                         group_keys.push(key1);
                 }
                     }
-        alert(group_keys);
+{#        alert(group_keys);#}
 {#                alert(group_keys);#}
 
             }
