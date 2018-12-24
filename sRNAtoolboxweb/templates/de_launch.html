@@ -116,6 +116,13 @@
 
     <script>
         var group_dict = {{ group_data|safe }};
+        var group_keys = [];
+        for(var key in group_dict) {
+            if(group_dict.hasOwnProperty(key)) { //to be safe
+                group_keys.push(key);
+                }
+                    }
+        alert(group_keys);
         var sample_keys = {{ group_keys|safe }};
         var received_data = {{ table_data|safe }};
         var received_cols = {{ table_headers|safe }}
