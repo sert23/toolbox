@@ -150,9 +150,10 @@
         var new_data = document.getElementsByName("group_selector");
          for(count = 0; count < new_data.length; count++){
                 key = String(new_data[count].id);
-                value = new_data[count].value;
+                value = String(new_data[count].value);
 {#                alert( [key,value]);#}
                 group_dict[key] = value;
+                alert(group_dict[key])
 
             }
 {#        var keys = sample_keys;#}
@@ -172,6 +173,7 @@
 
     function add_hidden() {
         const keys = sample_keys;
+{#        const keys = sample_keys;#}
         var group_list = [];
         var sample_list = [];
         for(count = 0; count < keys.length; count++){
