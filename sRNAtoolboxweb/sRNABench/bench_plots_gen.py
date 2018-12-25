@@ -11,11 +11,9 @@ import subprocess
 
 # from bench_plots_func import Full_read_length_divs
 
-print( "yo flipo")
 
 def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, media_url=None, media_root=None, png=False):
 
-    print("aqui entra")
     length_file = os.path.join(input_folder,"stat","readLengthFull.txt")
     out_path1 = os.path.join(input_folder,"stat","readLength_RC.png")
     out_path2 = os.path.join(input_folder,"stat","readLength_UR.png")
@@ -23,7 +21,7 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
     #os.mkdir(os.path.join(input_folder, "stat", "1"))
 
     if (not os.path.exists(out_path1)) and (not png):
-        print("aqui el if")
+
         call_list = [os.path.join(path_to_venv, "python"), plotly_script, "readLength", input_folder]
         with open(os.path.join(input_folder, "stat", "test.out"), "w") as test_f:
             test_f.write(" ".join(call_list))
@@ -32,8 +30,6 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
                                    stderr=subprocess.PIPE)
         with open(os.path.join(input_folder, "stat", "test2.out"), "w") as test_f:
             test_f.write(" ".join(call_list))
-
-
     #
     # if False:
     #     # os.system("touch " + os.path.join(input_folder, "stat", "2", "test.out"))
@@ -55,7 +51,6 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
     #     # os.system("touch " + os.path.join(input_folder,"stat","2","test.out", "w"))
     # elif not os.path.exists(out_path1) :
 
-    print("aqui sin if")
 
     input_table = pandas.read_table(length_file, sep='\t')
     x = input_table["Read Length (nt)"].values
@@ -163,77 +158,97 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
 
 
 
-# def Full_read_length_divs(input_folder):
-#
-#     length_file = os.path.join(input_folder,"stat","readLengthFull.txt")
-#     out_path1 = os.path.join(input_folder,"stat","readLength_RC.png")
-#     out_path2 = os.path.join(input_folder,"stat","readLength_UR.png")
-#
-#     input_table = pandas.read_table(length_file, sep='\t')
-#     x = input_table["Read Length (nt)"].values
-#     y1= input_table["Percentage_UR"].values
-#     y2 = input_table["Percentage_RC"].values
-#     data = [go.Bar(x=x, y=y1)]
-#     layout = go.Layout(
-#         autosize=True,
-#         margin=go.layout.Margin(
-#             l=50,
-#             r=50,
-#             b=150,
-#             t=100,
-#             pad=4
-#         ),
-#         title="Read length distribution ",
-#         xaxis=dict(
-#             title='Read length (nt)',
-#             tick0=0,
-#             dtick=1,
-#         ),
-#         yaxis=dict(
-#             # type='log',
-#             title='Percentage of reads (%)')
-#     )
-#     fig = go.Figure(data=data, layout=layout)
-#     plotly.io.write_image(fig, out_path1, format="png",width=None, height=None)
-#
-#     data = [go.Bar(x=x,y=y2)]
-#     layout = go.Layout(
-#         autosize=True,
-#         margin=go.layout.Margin(
-#             l=50,
-#             r=50,
-#             b=150,
-#             t=100,
-#             pad=4
-#         ),
-#         title="Unique read length distribution ",
-#         xaxis=dict(
-#             title='Read length (nt)',
-#             tick0=0,
-#             dtick=1,
-#         ),
-#         yaxis=dict(
-#             # type='log',
-#             title='Percentage of reads (%)')
-#     )
-#     fig = go.Figure(data=data)
-#     plotly.io.write_image(fig, out_path2, format="png", width=None, height=None)
-
-
-
 # print(plotly.__version__)
 #Full_read_length("C:/Users/Ernesto/Desktop/Colabo/Dani_platelets/")
 
+def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url=None, media_root=None,
+                          png=False):
+    length_file = os.path.join(input_folder, "stat", "rnaComposition_readLength_sensePref.txt")
+    out_path = os.path.join(input_folder, "stat", "rrnaComposition_readLength.png")
 
+    if False:
+    # if (not os.path.exists(out_path)) and (not png):
+        call_list = [os.path.join(path_to_venv, "python"), plotly_script, "lenType", input_folder]
+        with open(os.path.join(input_folder, "stat", "test.out"), "w") as test_f:
+            test_f.write(" ".join(call_list))
+        plotter = subprocess.Popen(call_list,
+                                   stdout=subprocess.PIPE,
+                                   stderr=subprocess.PIPE)
+        with open(os.path.join(input_folder, "stat", "test2.out"), "w") as test_f:
+            test_f.write(" ".join(call_list))
 
+    input_table = pandas.read_table(length_file, sep='\t')
+    lengths = input_table.iloc[:,0].values
+    names = list(input_table.columns.values)
+    #print(x)
+
+    print(input_table.shape[1])
+    data = []
+    for i in range(input_table.shape[1]-1):
+        print(input_table.iloc[:,i+1].values)
+        print(names[i + 1])
+
+        trace = go.Bar(
+            x = lengths,
+            y = input_table.iloc[:,i+1].values,
+            name = names[i+1],
+        )
+        data.append(trace)
+
+    layout = go.Layout(
+        margin=go.layout.Margin(
+            l=50,
+            r=50,
+            b=100,
+            t=100,
+            pad=4
+        ),
+        colorscale="Viridis",
+        barmode="stack",
+        title="Read length distribution ",
+        font=dict(size=18),
+        autosize=False,
+        height=650,
+        width=1150,
+        xaxis=dict(
+            automargin=True,
+            title='Read length (nt)',
+            tick0=0,
+            dtick=1,
+        ),
+        yaxis=dict(
+            # type='log',
+            automargin=True,
+            ticksuffix='%',
+            tickprefix="   ",
+            title='Percentage of reads')
+    )
+
+    fig = go.Figure(data=data, layout=layout)
+    # py.image.save_as({'data': data}, 'your_image_filename.png')
+    # plot(fig, filename=out_path1, show_link=False, auto_open=False)
+    if png:
+        plot(fig, out_path)
+        # plotly.io.write_image(fig, out_path, format="png", width=None, height=None)
+    else:
+        div_obj1 = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
+
+    out_path = out_path.replace(media_root, media_url)
+    id1 = div_obj1.split("\"")[1]
+    # id1_b = div_obj1_b.split("\"")[1]
+
+    return [[div_obj1, out_path, id1, "img_" + id1]]
+
+Read_len_type("/Users/ernesto/Desktop/toolbox/",png=True)
+exit()
 def main():
-    print("pero esto que es")
     p_type = sys.argv[1]
     input_par = sys.argv[2]
 
     if p_type == "readLength":
-        print("I see")
         Full_read_length_divs(input_par, png=True)
+    if p_type == "lenType":
+        Read_len_type(input_par, png=True, media_url=" ", media_root=" ")
 
 if __name__ == "__main__":
     main()

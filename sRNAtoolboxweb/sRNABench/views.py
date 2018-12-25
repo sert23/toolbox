@@ -490,6 +490,7 @@ def result_new(request):
                 # except:
                 #     results["readLen_sum"] = None
                 results["readLen_sum"] = full_read_length(new_record.outdir)
+                results["readLen_type"] = read_length_type(new_record.outdir)
                 # results["modal_test"] = results["readLen_sum"][0][0]
                 # results["modal_id"] = results["readLen_sum"][0][2]
 
