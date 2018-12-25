@@ -27,7 +27,7 @@ from progress.models import JobStatus
 from sRNABench.forms import sRNABenchForm
 from utils import pipeline_utils
 from utils.sysUtils import make_dir
-from sRNABench.bench_plots_func import full_read_length
+from sRNABench.bench_plots_func import full_read_length,read_length_type
 
 #CONF = json.load(file("/shared/sRNAtoolbox/sRNAtoolbox.conf"))
 CONF = settings.CONF
