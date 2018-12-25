@@ -169,7 +169,7 @@ def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url
     # if False:
     if (not os.path.exists(out_path)) and (not png):
         call_list = [os.path.join(path_to_venv, "python"), plotly_script, "lenType", input_folder]
-        with open(os.path.join(input_folder, "stat", "test.out"), "w") as test_f:
+        with open(os.path.join(input_folder, "stat", "testP.out"), "w") as test_f:
             test_f.write(" ".join(call_list))
         plotter = subprocess.Popen(call_list,
                                    stdout=subprocess.PIPE,
