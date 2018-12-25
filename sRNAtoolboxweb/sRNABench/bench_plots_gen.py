@@ -192,6 +192,9 @@ def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url
             x = lengths,
             y = input_table.iloc[:,i+1].values,
             name = names[i+1],
+            marker =dict(
+                colorscale="Viridis"
+            )
         )
         data.append(trace)
 
@@ -203,7 +206,7 @@ def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url
             t=100,
             pad=4
         ),
-        colorscale="Viridis",
+
         barmode="stack",
         title="Read length distribution ",
         font=dict(size=18),
@@ -214,7 +217,7 @@ def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url
             automargin=True,
             title='Read length (nt)',
             tick0=0,
-            dtick=1,
+            dtick=2,
         ),
         yaxis=dict(
             # type='log',
