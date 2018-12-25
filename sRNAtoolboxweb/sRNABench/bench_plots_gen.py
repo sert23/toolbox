@@ -239,8 +239,8 @@ def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url
 
     return [[div_obj1, out_path, id1, "img_" + id1]]
 
-Read_len_type("/Users/ernesto/Desktop/toolbox/",png=True)
-exit()
+# Read_len_type("/Users/ernesto/Desktop/toolbox/",png=True)
+# exit()
 def main():
     p_type = sys.argv[1]
     input_par = sys.argv[2]
