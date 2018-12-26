@@ -33,10 +33,6 @@
                     {{ preproc_sum }}
                         </pre>
                     </div>
-
-
-
-
         <div class="row row-grid">
             {% for plot,img,div_id, img_id  in readLen_sum %}
                 <div class="col-lg-6">
@@ -55,8 +51,6 @@
                 <div id="empty_div_{{ div_id }}">
 
                 </div>
-
-
                     <!-- Plotly chart will be drawn inside this DIV -->
 {#	          <img style="display:block; margin-left:auto; margin-right:auto; width:100%;" src="{{ MEDIA_URL }}{{ sumimgs.0  }}">#}
 {#	          <h1 style="text-align: center;">hello there</h1>#}
@@ -85,6 +79,16 @@
 
         </div>
 <br>
+
+            </div>
+        </div>
+        </div>
+            </div>
+
+        </div>
+
+
+{% if readLen_type %}
     <div class="row row-grid">
         {% for plot,img,div_id, img_id  in readLen_type %}
                 <div class="col-lg-6">
@@ -130,12 +134,6 @@
 
 {% endfor %}
     </div>
-            </div>
-        </div>
-        </div>
-            </div>
-
-        </div>
 {% endif %}
 
 {##}
