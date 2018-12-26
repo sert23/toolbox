@@ -463,7 +463,7 @@ import time
 
 def check_image_files(input_list, seconds=5):
     with open(os.path.join(MEDIA_ROOT,"test.txt"),"w") as test_file:
-        input_list = [f.replace(MEDIA_URL,MEDIA_ROOT) for f in input_list if os.path.isfile(f)]
+        input_list = [f.replace(MEDIA_URL,MEDIA_ROOT) for f in input_list]
         #out_path1 = out_path1.replace(media_root, media_url)
         for i in range(seconds):
             a_exist = [f for f in input_list if os.path.isfile(f)]
