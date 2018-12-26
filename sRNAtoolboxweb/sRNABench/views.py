@@ -513,9 +513,9 @@ def result_new(request):
                 # results["modal_id"] = results["readLen_sum"][0][2]
 
                 #Preproc
-                if "inputFinished" in parameters:
-                    add_preproc(params, results)
-                    add_preimg(new_record, results)
+                # if "inputFinished" in parameters:
+                #     add_preproc(params, results)
+                #     add_preimg(new_record, results)
 
                 #Genome Mapping
                 if "species" in parameters:
