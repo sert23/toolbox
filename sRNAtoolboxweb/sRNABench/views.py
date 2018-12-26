@@ -469,6 +469,7 @@ def check_image_files(input_list, seconds=5):
         if len(input_list) > len(a_exist):
             time.sleep(1)
         else:
+            time.sleep(1)
             return True
 
 def result_new(request):
