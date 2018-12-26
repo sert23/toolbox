@@ -127,6 +127,8 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
         yaxis=dict(
             automargin=True,
             ticksuffix='%',
+            tickprefix="   ",
+
             # type='log',
             title='Percentage of reads \n&nbsp;\n&nbsp;\n&nbsp;')
     )
