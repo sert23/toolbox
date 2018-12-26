@@ -88,6 +88,62 @@
 {% endif %}
 
 
+{% if profiling_lib %}
+<div class="row row-grid">
+            <div class="col-lg-12">
+            <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#Prof_lib" ><center>Profiling by library</center></a>
+                </h4>
+            </div>
+            <!-- .panel-heading -->
+            <div id="Prof_lib" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                    <div class="col-lg-10">
+                        <pre style="white-space: pre-line">
+                    {{ preproc_sum }}
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+</div>
+
+{% endif %}
+
+{% if profiling_type %}
+<div class="row row-grid">
+            <div class="col-lg-12">
+            <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#Prof_type" ><center>Profiling by RNA type</center></a>
+                </h4>
+            </div>
+            <!-- .panel-heading -->
+            <div id="Prof_type" class="panel-collapse collapse">
+                <div class="panel-body">
+
+                    <div class="col-lg-10">
+
+                        {% if mapping_stat_table %}
+                                    <h3>{{ mapping_stat_table.name }}</h3>
+                                        <div style="overflow: auto; margin-bottom: auto">
+                                            {% render_table mapping_stat_table.content %}
+                                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            </div>
+            </div>
+</div>
+
+{% endif %}
 
 {% if readLen_type %}
 
@@ -158,29 +214,5 @@
         </div>
 {% endif %}
 
-{##}
-{#    <script>#}
-{#        var trace1 = {#}
-{#      x: [1, 2, 3, 4],#}
-{#      y: [10, 15, 13, 17],#}
-{#      mode: 'markers'#}
-{#    };#}
-{##}
-{#    var trace2 = {#}
-{#      x: [2, 3, 4, 5],#}
-{#      y: [16, 5, 11, 10],#}
-{#      mode: 'lines'#}
-{#    };#}
-{##}
-{#    var trace3 = {#}
-{#      x: [1, 2, 3, 4],#}
-{#      y: [12, 9, 15, 12],#}
-{#      mode: 'lines+markers'#}
-{#    };#}
-{##}
-{#    var data = [ trace1, trace2, trace3 ];#}
-{##}
-{#    var layout = {autosize: true};#}
-{##}
-{#    Plotly.newPlot('test_div', data, layout);#}
-{#    </script>#}
+
+
