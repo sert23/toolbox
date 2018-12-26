@@ -458,6 +458,16 @@ def add_trna(results):
     trna = True
     results["trna"] = trna
 
+import time
+
+
+def check_image_files(input_list, seconds=5):
+    for i in range(seconds):
+        a_exist = [f for f in input_list if os.path.isfile(f)]
+        if len(input_list)>len(a_exist):
+            time.sleep(1)
+        else:
+            return True
 
 def result_new(request):
     if 'id' in request.GET:
@@ -466,6 +476,7 @@ def result_new(request):
         new_record = JobStatus.objects.get(pipeline_key=job_id)
 
         results = {}
+        image_list = []
         results["id"] = job_id
         print(os.path.join(new_record.outdir, "results.txt"))
         # if (new_record.job_status == "Finished" and os.path.exists(os.path.join(new_record.outdir, "results.txt"))):
@@ -490,7 +501,12 @@ def result_new(request):
                 # except:
                 #     results["readLen_sum"] = None
                 results["readLen_sum"] = full_read_length(new_record.outdir)
+                image_list.append(results["readLen_sum"][0][1])
+                image_list.append(results["readLen_sum"][1][1])
+
                 results["readLen_type"] = read_length_type(new_record.outdir)
+                image_list.append(results["readLen_type"][0][1])
+
                 # results["modal_test"] = results["readLen_sum"][0][0]
                 # results["modal_id"] = results["readLen_sum"][0][2]
 
@@ -539,68 +555,11 @@ def result_new(request):
                     pass
 
                 results["date"] = new_record.start_time + datetime.timedelta(days=15)
-
-            return render(request, "srnabench_result.html", results)
-        if (new_record.job_status == "Finished" and os.path.exists(os.path.join(new_record.outdir, "results.txt"))):
-            params = ParamsBench(os.path.join(new_record.outdir, "parameters.txt"), os.path.join(new_record.outdir, "results.txt"),os.path.join(new_record.outdir, "conf.txt"))
-
-            config_params = ParamsBench(os.path.join(new_record.outdir, "conf.txt"))
-            if new_record.job_status == "Running":
-                results["running"] = True
-
-            if os.path.exists(new_record.outdir):
-
-                parameters = params.params
-                 #Summary
-                add_sumimg(new_record, results)
-
-                #Preproc
-                if "inputFinished" in parameters:
-                    add_preproc(params, results)
-                    add_preimg(new_record, results)
-
-                #Genome Mapping
-                if "species" in parameters:
-                    add_mapping_result(new_record, parameters, results)
-
-                #MicroRNA summary (miRBase v21)
-                if "microRNA" in parameters:
-                    if "detectedMature" in parameters:
-                        add_mirimg(new_record, results)
-                        add_mirprof(params, results)
-
-                #sRNA summary
-                if "libs" in parameters:
-                    add_libs(parameters, results, config_params)
-
-                #New Mirna
-                if os.path.exists(os.path.join(new_record.outdir, "novel.txt")):
-                    add_novel(new_record, results)
-                if os.path.exists(os.path.join(new_record.outdir, "tRNA_mature_sense.grouped")):
-                    add_trna(results)
-
-                import glob
-                files = glob.glob(new_record.outdir + "/*.zip")
-                files.sort(key=os.path.getmtime)
-                zip_file = files[-1]
-
-                if os.path.exists(zip_file):
-                    #zip_file = os.path.join(new_record.outdir, "sRNAbench.zip")
-                    zip_file = "/".join(zip_file.split("/")[-2:])
-                    results["zip"] = zip_file
-
-                try:
-                    results["parameters"] = new_record.parameters
-                    results["parameters"]=results["parameters"].replace(MEDIA_ROOT,"")
-                except:
-                    pass
-
-                results["date"] = new_record.start_time + datetime.timedelta(days=15)
-
+            check_image_files(image_list, 15)
             return render(request, "srnabench_result.html", results)
 
         else:
-            print("not detectibol")
+
             return redirect(reverse_lazy('progress', kwargs={"pipeline_id": job_id}))
     else:
         return redirect(reverse_lazy('BENCH'))
