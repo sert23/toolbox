@@ -65,14 +65,13 @@
             <ul class="nav nav-pills" id="myTab">
 
 
-                <li><a href="#Summary" data-toggle="tab">Summary</a>
+                <li class="active"><a href="#Summary" data-toggle="tab">Summary</a>
                 </li>
 
-                {% if preproc %}
-                <li class="active" ><a href="#Preprocessing" data-toggle="tab">Preprocessing</a>
-                </li>
-                {% endif %}
-
+{#                {% if preproc %}#}
+{#                <li class="active" ><a href="#Preprocessing" data-toggle="tab">Preprocessing</a>#}
+{#                </li>#}
+{#                {% endif %}#}
 
                 {% if mapping_results %}
                 <li><a href="#Genome" data-toggle="tab">Genome/Library Mapping</a>
@@ -119,13 +118,13 @@
                         </div>
                 </div>
 
-                {% if preproc %}
-                <div class="tab-pane fade in active" id="Preprocessing">
-                <div class="col-lg-12">
-                    {% include "preprocessing.html" %}
-                </div>
-                </div>
-                {% endif %}
+{#                {% if preproc %}#}
+{#                <div class="tab-pane fade in active" id="Preprocessing">#}
+{#                <div class="col-lg-12">#}
+{#                    {% include "preprocessing.html" %}#}
+{#                </div>#}
+{#                </div>#}
+{#                {% endif %}#}
 
                 {% if  mapping_results %}
                 <div class="tab-pane fade" id="Genome">
