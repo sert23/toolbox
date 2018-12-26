@@ -558,7 +558,7 @@ def result_new(request):
                     pass
 
                 results["date"] = new_record.start_time + datetime.timedelta(days=15)
-            check_image_files(image_list, 15)
+            ex_out = check_image_files(image_list, 15)
             return render(request, "srnabench_result.html", results)
 
         else:
