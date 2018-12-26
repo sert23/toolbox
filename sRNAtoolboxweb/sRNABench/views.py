@@ -28,6 +28,8 @@ from sRNABench.forms import sRNABenchForm
 from utils import pipeline_utils
 from utils.sysUtils import make_dir
 from sRNABench.bench_plots_func import full_read_length,read_length_type
+from FileModels.deStatsParser import DeStatsParser
+import pandas as pd
 
 #CONF = json.load(file("/shared/sRNAtoolbox/sRNAtoolbox.conf"))
 CONF = settings.CONF
@@ -470,8 +472,14 @@ def check_image_files(input_list, seconds=5):
         if len(input_list) > len(a_exist):
             time.sleep(1)
         else:
-
             return True
+
+def load_table(input_file,title):
+   parser = DeStatsParser(input_file)
+   stats = [obj for obj in parser.parse()]
+   header = stats[0].get_sorted_attr()
+   stats_result = Result(title, define_table(header, 'TableResult')(stats))
+   return stats_result
 
 def result_new(request):
     if 'id' in request.GET:
@@ -511,6 +519,8 @@ def result_new(request):
                 results["readLen_type"] = read_length_type(new_record.outdir)
                 image_list.append(results["readLen_type"][0][1])
 
+                results["mapping_stat_table"] = load_table(os.path.join(new_record.outdir,"stat","mappingStat_libs_sensePref_web.txt") ,
+                                                 "Profiling results by RNA type.")
                 # results["modal_test"] = results["readLen_sum"][0][0]
                 # results["modal_id"] = results["readLen_sum"][0][2]
 
