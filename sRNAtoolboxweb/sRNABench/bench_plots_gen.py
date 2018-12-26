@@ -166,7 +166,7 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
 def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url=None, media_root=None,
                           png=False):
     length_file = os.path.join(input_folder, "stat", "rnaComposition_readLength_sensePref.txt")
-    out_path = os.path.join(input_folder, "stat", "rrnaComposition_readLength.png")
+    out_path = os.path.join(input_folder, "stat", "rnaComposition_readLength.png")
 
     # if False:
     if (not os.path.exists(out_path)) and (not png):
