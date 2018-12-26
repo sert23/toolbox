@@ -10,7 +10,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
-from sRNAtoolboxweb.settings import BASE_DIR,MEDIA_ROOT
+from sRNAtoolboxweb.settings import BASE_DIR,MEDIA_ROOT,MEDIA_URL
 from DataModels.params_bench import ParamsBench
 from DataModels.sRNABenchConfig import SRNABenchConfig
 from FileModels.IsomirParser import IsomirParser
@@ -462,9 +462,11 @@ import time
 
 
 def check_image_files(input_list, seconds=5):
+    input_list = [f.replace(MEDIA_URL,MEDIA_ROOT) for f in input_list if os.path.isfile(f)]
+    #out_path1 = out_path1.replace(media_root, media_url)
     for i in range(seconds):
         a_exist = [f for f in input_list if os.path.isfile(f)]
-        if len(input_list)>len(a_exist):
+        if len(input_list) > len(a_exist):
             time.sleep(1)
         else:
             return True
