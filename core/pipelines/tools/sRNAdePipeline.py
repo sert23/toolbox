@@ -28,12 +28,15 @@ class sRNAdePipeline(Pipeline):
 
     def run(self):
         self.initialize_pipeline_status()
-        if self.pre_checks():
-            self.call_make_de_analysis()
-            self.set_out_files()
-        if self.post_checks():
-            self.set_finish_time()
+        # if self.pre_checks():
+        self.call_make_de_analysis()
+        self.set_out_files()
+    # if self.post_checks():
+        self.set_finish_time()
+        if os.path.exists(os.path.join(self.outdir, "results.txt")):
             self.change_pipeline_status("Finished")
+        else:
+            self.change_pipeline_status("Finished with Errors")
             # self.logger.close()
         self.error_logger.close()
 
