@@ -64,7 +64,7 @@ class CategoriesField(forms.ModelMultipleChoiceField):
         return super(CategoriesField, self).clean(value)
 
 def m():
-    return Species.objects.all().order_by('sp_class')
+    return Species.objects.all().order_by('sp_class', 'specie')
 
 
 class PhotoForm(forms.ModelForm):
