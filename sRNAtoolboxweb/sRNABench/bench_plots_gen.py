@@ -244,8 +244,88 @@ def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url
 
         return [[div_obj1, out_path, id1, "img_" + id1]]
 
-# Read_len_type("/Users/ernesto/Desktop/toolbox/",png=True)
-# exit()
+
+
+def Mapping_stat_plot(input_folder, path_to_venv=None, plotly_script=None, media_url=None, media_root=None,
+                          png=False):
+    length_file = os.path.join(input_folder, "stat", "mappingStat_sensePref.txt")
+    out_path = os.path.join(input_folder, "stat", "mappingStat_sensePref.png")
+
+    # if False:
+    if (not os.path.exists(out_path)) and (not png):
+        call_list = [os.path.join(path_to_venv, "python"), plotly_script, "mapStat", input_folder]
+        with open(os.path.join(input_folder, "stat", "testP.out"), "w") as test_f:
+            test_f.write(" ".join(call_list))
+        plotter = subprocess.Popen(call_list,
+                                   stdout=subprocess.PIPE,
+                                   stderr=subprocess.PIPE)
+        with open(os.path.join(input_folder, "stat", "test2.out"), "w") as test_f:
+            test_f.write(" ".join(call_list))
+
+    input_table = pandas.read_table(length_file, sep='\t')
+    x = input_table["name"].values
+    y = input_table["RCperc"].values
+    trace = go.Bar(
+        x=x,
+        y=y,
+        marker=dict(
+            color=['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
+                         'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
+                         'rgb(148, 103, 189)', 'rgb(140, 86, 75)',
+                         'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
+                         'rgb(188, 189, 34)', 'rgb(23, 190, 207)'],
+            colorscale="Viridis"
+        ),
+
+        # marker=dict(
+        #
+        # )
+    )
+    data = [trace]
+    layout = go.Layout(
+        margin=go.layout.Margin(
+            l=50,
+            r=50,
+            b=100,
+            t=100,
+            pad=4
+        ),
+
+        # barmode="stack",
+        title="Read length distribution ",
+        font=dict(size=18),
+        autosize=False,
+        height=650,
+        width=1150,
+        xaxis=dict(
+            automargin=True,
+            title='Read length (nt)',
+            tick0=0,
+            # dtick=2,
+        ),
+        yaxis=dict(
+            # type='log',
+            automargin=True,
+            ticksuffix='%',
+            tickprefix="   ",
+            title='Percentage of reads')
+    )
+
+    fig = go.Figure(data=data, layout=layout)
+    if png:
+        plotly.io.write_image(fig, out_path, format="png", width=None, height=None)
+        # plotly.io.write_image(fig, out_path, format="png", width=None, height=None)
+    else:
+        div_obj1 = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
+
+        out_path = out_path.replace(media_root, media_url)
+        id1 = div_obj1.split("\"")[1]
+        # id1_b = div_obj1_b.split("\"")[1]
+
+        return [[div_obj1, out_path, id1, "img_" + id1]]
+
+
+
 def main():
     p_type = sys.argv[1]
     input_par = sys.argv[2]
@@ -253,7 +333,9 @@ def main():
     if p_type == "readLength":
         Full_read_length_divs(input_par, png=True)
     if p_type == "lenType":
-        Read_len_type(input_par, png=True, media_url=" ", media_root=" ")
+        Read_len_type(input_par, png=True)
+    if p_type == "mapStat":
+        Mapping_stat_plot(input_par, png=True)
 
 if __name__ == "__main__":
     main()

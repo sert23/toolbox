@@ -27,7 +27,7 @@ from progress.models import JobStatus
 from sRNABench.forms import sRNABenchForm
 from utils import pipeline_utils
 from utils.sysUtils import make_dir
-from sRNABench.bench_plots_func import full_read_length,read_length_type
+from sRNABench.bench_plots_func import full_read_length,read_length_type,mapping_stat
 from FileModels.deStatsParser import DeStatsParser
 import pandas as pd
 
@@ -521,6 +521,9 @@ def result_new(request):
 
                 results["mapping_stat_table"] = load_table(os.path.join(new_record.outdir,"stat","mappingStat_libs_sensePref_web.txt") ,
                                                  "Profiling results by RNA type.")
+                results["mapping_stat_plot"] = mapping_stat(new_record.outdir)
+                image_list.append(results["mapping_stat_plot"] [0][1])
+
                 # results["modal_test"] = results["readLen_sum"][0][0]
                 # results["modal_id"] = results["readLen_sum"][0][2]
 
