@@ -521,7 +521,7 @@ class sRNABenchForm(forms.Form):
                                   user_files=libs_files, minReadLength=min_read_length, mBowtie=max_multiple_mapping,
                                    remove3pBases = remove3pBases, umi=umi, iterative5pTrimming=iterative5pTrimming,
                                    qualityType=qualityType,minQ=minQ, phred=phred_encode, maxQfailure=maximum_positions,
-                                   protcol=protocol)
+                                   protocol=protocol)
 
         conf_file_location = os.path.join(FS.location, "conf.txt")
         new_conf.write_conf_file(conf_file_location)
