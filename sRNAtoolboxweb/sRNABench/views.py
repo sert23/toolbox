@@ -694,7 +694,7 @@ def render_table(request, mode, job_id, lib=""):
         id = "table"
         try:
             header = table[0].get_sorted_attr()
-            r = Result(id, define_table(["header1", "header2", "header3"], 'TableResult')(table[:500]))
+            r = Result(id, define_table(["header1", "header2", "header3"], 'TableResult')([["lelo","lalo","lilo"],["lelo","lalo","lilo"]]))
             #r = Result(id, define_table(header, 'TableResult')(table[:500]))
             result["table"] = r
             #result["sec"] = "novel"
