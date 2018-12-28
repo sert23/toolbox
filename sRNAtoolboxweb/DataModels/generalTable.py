@@ -1,22 +1,11 @@
 __author__ = 'antonior'
 
-import os
 
-
-
-
-class General():
-    def __init__(self, *args):
-        self.input_header = [*args]
-        for arg in [*args]:
-            self.__dict__[arg] = arg
-
-        # self.input_header=[*args]
-    # def __init__(self, **kwargs):
-    #     for attr in kwargs.keys():
-    #         if kwargs.get(attr) is not None:
-    #             self.__dict__[attr] = kwargs[attr]
-
+class General(object):
+    def __init__(self, input_header, *args):
+        self.input_header = input_header
+        for name, arg in zip(self.input_header, args):
+            self.__dict__[name] = arg
 
     def get_sorted_attr(self):
         return self.input_header
