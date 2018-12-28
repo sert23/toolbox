@@ -9,5 +9,5 @@ class GeneralParser(Parser):
         #header = fd.readline().replace("\n", "").split("\t")
         for line in fd:
             aline = line.replace("\n", "").split("\t")
-            yield General(aline)
+            yield General(*aline)
         fd.close()
