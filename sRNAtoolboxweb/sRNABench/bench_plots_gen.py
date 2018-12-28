@@ -329,9 +329,9 @@ def top_miRs_plot(input_file, title=".", path_to_venv=None, plotly_script=None, 
 
     no_ext = ".".join(input_file.split(".")[:-1])
     out_path = no_ext + ".png"
-    if False:
-    # if (not os.path.exists(out_path)) and (not png):
-        call_list = [os.path.join(path_to_venv, "python"), plotly_script, "mapStat", input_file, title]
+    # if False:
+    if (not os.path.exists(out_path)) and (not png):
+        call_list = [os.path.join(path_to_venv, "python"), plotly_script, "topMir", input_file, title]
         with open(no_ext + "testP.out", "w") as test_f:
             test_f.write(" ".join(call_list))
         plotter = subprocess.Popen(call_list,
@@ -390,7 +390,7 @@ def top_miRs_plot(input_file, title=".", path_to_venv=None, plotly_script=None, 
     # plot(fig, show_link=False, auto_open=True, output_type='div', include_plotlyjs=False)
 
 
-top_miRs_plot("C:/Users/Ernesto/Desktop/Colabo/Dani_platelets/mature_sense.grouped", title="Top 10 expressed miRNAs")
+#top_miRs_plot("C:/Users/Ernesto/Desktop/Colabo/Dani_platelets/mature_sense.grouped", title="Top 10 expressed miRNAs")
 exit()
 
 
