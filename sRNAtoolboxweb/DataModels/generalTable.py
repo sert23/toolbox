@@ -6,8 +6,8 @@ import os
 
 
 class General():
-    def __init__(self, input_header):
-        self.input_header=input_header
+    def __init__(self, *args):
+        self.input_header=[*args]
     # def __init__(self, **kwargs):
     #     for attr in kwargs.keys():
     #         if kwargs.get(attr) is not None:
