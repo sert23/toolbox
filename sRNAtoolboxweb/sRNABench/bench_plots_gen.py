@@ -391,7 +391,7 @@ def top_miRs_plot(input_file, title=".", path_to_venv=None, plotly_script=None, 
 
 
 #top_miRs_plot("C:/Users/Ernesto/Desktop/Colabo/Dani_platelets/mature_sense.grouped", title="Top 10 expressed miRNAs")
-exit()
+
 
 
 def main():
