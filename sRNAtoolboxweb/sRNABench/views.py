@@ -684,24 +684,39 @@ def render_table(request, mode, job_id, lib=""):
         except:
             pass
 
-    if mode == "novel":
-        result["title"] = "merengue"
-        # result["title"] = "Novel microRNAs"
+    if mode == "old_novel":
+        result["title"] = "Novel microRNAs"
         ifile = os.path.join(new_record.outdir, "novel.txt")
-        parser = NovelParser("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/UEJ0FFALDY63EJG/mappingStat_sensePref_minExpr0_4_grp1VSgrp2_ttest.tsv")
+        parser = NovelParser(ifile)
         #parser = MatureParser(ifile)
         #parser = TRNAParser(ifile)
         table = [obj for obj in parser.parse()]
         id = "table"
         try:
             header = table[0].get_sorted_attr()
-            #r = Result(id, define_table(["header1", "header2", "header3"], 'TableResult')([["lelo","lalo","lilo"],["lelo","lalo","lilo"]]))
+            #r = Result(id, define_table(["header1", "header2", "header3"], 'TableResult')(table[:500]))
             r = Result(id, define_table(header, 'TableResult')(table[:500]))
             result["table"] = r
             #result["sec"] = "novel"
             result["sec"] = "trna"
         except:
             pass
+
+    if mode == "novel":
+        result["title"] = "merengue"
+        ifile = os.path.join(new_record.outdir, "GRCh38_p10_RNAcentral_sense_SA.grouped")
+        parser = NovelParser(ifile)
+        #parser = MatureParser(ifile)
+        #parser = TRNAParser(ifile)
+        table = [obj for obj in parser.parse()]
+        id = "table"
+        header = table[0].get_sorted_attr()
+        r = Result(id, define_table(["header1", "header2", "header3"], 'TableResult')(table[:500]))
+        #r = Result(id, define_table(header, 'TableResult')(table[:500]))
+        result["table"] = r
+        #result["sec"] = "novel"
+        result["sec"] = "trna"
+
 
     if mode == "trna":
         result["title"] = "tRNA mapped reads as a function of anti-codon"
