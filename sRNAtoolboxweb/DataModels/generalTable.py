@@ -7,7 +7,11 @@ import os
 
 class General():
     def __init__(self, *args):
-        self.input_header=[*args]
+        self.input_header = [*args]
+        for arg in [*args]:
+            self.__dict__[arg] = arg
+
+        # self.input_header=[*args]
     # def __init__(self, **kwargs):
     #     for attr in kwargs.keys():
     #         if kwargs.get(attr) is not None:
