@@ -784,7 +784,6 @@ def render_table(request, mode, job_id, lib=""):
             header = table[0].get_sorted_attr()
             r = Result(id, define_table(header, 'TableResult')(table[:500]))
             result["table"] = r
-            result["table"] = False
             result["sec"] = "libs"
         except:
             pass
