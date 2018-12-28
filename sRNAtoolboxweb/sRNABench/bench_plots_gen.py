@@ -324,6 +324,74 @@ def Mapping_stat_plot(input_folder, path_to_venv=None, plotly_script=None, media
 
         return [[div_obj1, out_path, id1, "img_" + id1]]
 
+def top_miRs_plot(input_file, title=".", path_to_venv=None, plotly_script=None, media_url=None, media_root=None,
+                          png=False):
+
+    no_ext = ".".join(input_file.split(".")[:-1])
+    out_path = no_ext + ".png"
+    if False:
+    # if (not os.path.exists(out_path)) and (not png):
+        call_list = [os.path.join(path_to_venv, "python"), plotly_script, "mapStat", input_file, title]
+        with open(no_ext + "testP.out", "w") as test_f:
+            test_f.write(" ".join(call_list))
+        plotter = subprocess.Popen(call_list,
+                                   stdout=subprocess.PIPE,
+                                   stderr=subprocess.PIPE)
+    input_table = pandas.read_table(input_file, sep='\t')
+    ordered_table = input_table.sort_values(by=["RPM (total)"], ascending=False)
+    clean_table = ordered_table.drop_duplicates(subset=["name"])
+    x=clean_table["name"].values[:10]
+    y=clean_table["RPM (total)"].values[:10]
+
+    trace = go.Bar(
+        x=x,
+        y=y,
+        marker=dict(
+            color=['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
+                   'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
+                   'rgb(148, 103, 189)', 'rgb(140, 86, 75)',
+                   'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
+                   'rgb(188, 189, 34)', 'rgb(23, 190, 207)'],
+            colorscale="Viridis"
+        ))
+    data = [trace]
+    layout = go.Layout(
+        margin=go.layout.Margin(
+            l=50,
+            r=50,
+            b=100,
+            t=100,
+            pad=4
+        ),
+
+        # barmode="stack",
+        title=title,
+        font=dict(size=18),
+        autosize=False,
+        height=650,
+        width=1150,
+        xaxis=dict(
+            automargin=True,
+            # title='Read length (nt)',
+            tick0=0,
+            # dtick=2,
+        ),
+        yaxis=dict(
+            # type='log',
+            automargin=True,
+            ticksuffix=' RPM',
+            tickprefix="    ",
+            title='Reads Per Million (RPM)')
+    )
+
+    fig = go.Figure(data=data, layout=layout)
+
+    plot(fig, show_link=False, auto_open=True)
+    # plot(fig, show_link=False, auto_open=True, output_type='div', include_plotlyjs=False)
+
+
+top_miRs_plot("C:/Users/Ernesto/Desktop/Colabo/Dani_platelets/mature_sense.grouped", title="Top 10 expressed miRNAs")
+exit()
 
 
 def main():
