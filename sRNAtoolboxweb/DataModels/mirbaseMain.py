@@ -18,9 +18,10 @@ class MirBaseMain():
         self.UR = UR
 
         first_half = [coordinates.split(":")[0]]
-        second_half = coordinates.split(",")[:2]
+        second_half = coordinates.split(",")[1:]
 
-        self.align = name + "," + ",".join(first_half+second_half)+"pelocho"
+        self.align = name + "," + ",".join(first_half) + "," +",".join(second_half)
+        # self.align = name + "," + ",".join(first_half+second_half)
         # self.align = name + "_" + "_".join(coordinates.split("#")[:2])
 
     def get_sorted_attr(self):
