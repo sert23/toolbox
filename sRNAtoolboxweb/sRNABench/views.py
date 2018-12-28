@@ -563,7 +563,8 @@ def result_new(request):
                 results["readLen_type"] = read_length_type(new_record.outdir)
                 image_list.append(results["readLen_type"][0][1])
 
-                results["mapping_stat_table"] = make_table_gen(os.path.join(new_record.outdir,"stat","mappingStat_libs_sensePref_web.txt"))
+                results["mapping_stat_table"] = make_table_gen(os.path.join(new_record.outdir,"stat","mappingStat_libs_sensePref_web.txt"),
+                                                               "Profiling results by RNA type.")
                                                  #"Profiling results by RNA type.")
                 results["mapping_stat_plot"] = mapping_stat(new_record.outdir)
                 image_list.append(results["mapping_stat_plot"] [0][1])
@@ -792,7 +793,8 @@ def render_table(request, mode, job_id, lib=""):
     return render(request, "tables_srnabench.html", result)
 
 
-def make_table_gen(input_file):
+def make_table_gen(input_file,id):
+    id = id
     id = os.path.basename(input_file)
     ifile = input_file
     parser = GeneralParser(ifile)
