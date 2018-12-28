@@ -16,7 +16,12 @@ class MirBaseMain():
         self.RC_adj = round(float(RC_adj), 2)
         self.RC = RC
         self.UR = UR
-        self.align = name + "_" + "_".join(coordinates.split("#")[:2])
+
+        first_half = [coordinates.split(":")[0]]
+        second_half = [coordinates.split(",")[:2]]
+
+        self.align = name + "," + ",".join(first_half+second_half)
+        # self.align = name + "_" + "_".join(coordinates.split("#")[:2])
 
     def get_sorted_attr(self):
         return ["Name", "UR", "RC", "RC_adj", "coordinates","align"]
