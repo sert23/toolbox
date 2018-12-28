@@ -706,7 +706,7 @@ def render_table(request, mode, job_id, lib=""):
     if mode == "novel":
         result["title"] = "merengue"
         ifile = os.path.join(new_record.outdir, "GRCh38_p10_RNAcentral_sense_SA.grouped")
-        parser = NovelParser(ifile)
+        parser = GeneralParser(ifile)
         #parser = MatureParser(ifile)
         #parser = TRNAParser(ifile)
         table = [obj for obj in parser.parse()]
