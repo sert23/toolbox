@@ -16,6 +16,7 @@ from DataModels.sRNABenchConfig import SRNABenchConfig
 from FileModels.IsomirParser import IsomirParser
 from FileModels.MAParser import MAParser
 from FileModels.NovelParser import NovelParser
+from FileModels.GeneralParser import GeneralParser
 from FileModels.SAParser import SAParser
 from FileModels.TRNAParser import TRNAParser
 from FileModels.matureParser import MatureParser
