@@ -795,7 +795,6 @@ def render_table(request, mode, job_id, lib=""):
 
 def make_table_gen(input_file,id):
     id = id
-    id = os.path.basename(input_file)
     ifile = input_file
     parser = GeneralParser(ifile)
     table = [obj for obj in parser.parse()]
