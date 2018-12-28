@@ -1,5 +1,5 @@
-from sRNABench.views import result, test
-from sRNAde.views import De, DeLaunch
+from sRNABench.views import  test
+from sRNAde.views import De, DeLaunch, result
 
 __author__ = 'antonior'
 
