@@ -707,17 +707,12 @@ def render_table(request, mode, job_id, lib=""):
         result["title"] = "merengue"
         ifile = os.path.join(new_record.outdir, "GRCh38_p10_RNAcentral_sense_SA.grouped")
         parser = GeneralParser(ifile)
-        #parser = MatureParser(ifile)
-        #parser = TRNAParser(ifile)
         table = [obj for obj in parser.parse()]
         id = "table"
         header = table[0].get_sorted_attr()
         r = Result(id, define_table(header, 'TableResult')(table[:500]))
-        #r = Result(id, define_table(header, 'TableResult')(table[:500]))
         result["table"] = r
-        #result["sec"] = "novel"
         result["sec"] = "trna"
-
 
     if mode == "trna":
         result["title"] = "tRNA mapped reads as a function of anti-codon"
@@ -788,8 +783,6 @@ def render_table(request, mode, job_id, lib=""):
             result["sec"] = "libs"
         except:
             pass
-
-
 
     return render(request, "tables_srnabench.html", result)
 
