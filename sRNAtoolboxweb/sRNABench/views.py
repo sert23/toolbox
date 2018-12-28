@@ -563,8 +563,8 @@ def result_new(request):
                 results["readLen_type"] = read_length_type(new_record.outdir)
                 image_list.append(results["readLen_type"][0][1])
 
-                results["mapping_stat_table"] = load_table(os.path.join(new_record.outdir,"stat","mappingStat_libs_sensePref_web.txt") ,
-                                                 "Profiling results by RNA type.")
+                results["mapping_stat_table"] = make_table_gen(os.path.join(new_record.outdir,"stat","mappingStat_libs_sensePref_web.txt"))
+                                                 #"Profiling results by RNA type.")
                 results["mapping_stat_plot"] = mapping_stat(new_record.outdir)
                 image_list.append(results["mapping_stat_plot"] [0][1])
 
@@ -690,7 +690,7 @@ def render_table(request, mode, job_id, lib=""):
         except:
             pass
 
-    if mode == "old_novel":
+    if mode == "novel":
         result["title"] = "Novel microRNAs"
         ifile = os.path.join(new_record.outdir, "novel.txt")
         parser = NovelParser(ifile)
@@ -708,7 +708,7 @@ def render_table(request, mode, job_id, lib=""):
         except:
             pass
 
-    if mode == "novel":
+    if mode == "general":
         result["title"] = "merengue"
         ifile = os.path.join(new_record.outdir, "GRCh38_p10_RNAcentral_sense_SA.grouped")
         parser = GeneralParser(ifile)
@@ -792,6 +792,14 @@ def render_table(request, mode, job_id, lib=""):
     return render(request, "tables_srnabench.html", result)
 
 
+def make_table_gen(input_file):
+    id = os.path.basename(input_file)
+    ifile = input_file
+    parser = GeneralParser(ifile)
+    table = [obj for obj in parser.parse()]
+    header = table[0].get_sorted_attr()
+    r = Result(id, define_table(header, 'TableResult')(table[:500]))
+    return r
 
 
 
