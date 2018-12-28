@@ -15,5 +15,5 @@ class General():
 
 
     def get_sorted_attr(self):
-        return [self.input_header]
+        return self.input_header
 
