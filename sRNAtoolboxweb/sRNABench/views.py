@@ -73,6 +73,7 @@ def define_table(columns, typeTable):
 
     attrs = dict((c, tables.Column()) for c in columns if c != "align" and c != "align_")
     attrs2 = dict((c, tables.TemplateColumn('<a href="{% url "show_align" id "pre-microRNA" record.align %}">align</a>')) for c in columns if c == "align")
+    # attrs2 = dict((c, tables.TemplateColumn('<a href="{% url "show_align" id "pre-microRNA" record.align %}">align</a>')) for c in columns if c == "align")
     #attrs2 = dict((c, tables.TemplateColumn('<a href="{% url "sRNABench.views.show_align" id "hairpin" record.align %}">align</a>')) for c in columns if c == "align")
     attrs.update(attrs2)
     attrs3 = dict((c, tables.TemplateColumn('<a href="{% url "show_align" id "novel" record.align_ %}">align</a>')) for c in columns if c == "align_")
@@ -102,6 +103,43 @@ def define_table(columns, typeTable):
     klass = type('TableResult', (tables.Table,), attrs)
     return klass
 
+def define_table2(columns, typeTable):
+    """
+    :param columns: Array with names of columns to show
+    :return: a class of type TableResults
+    """
+
+    attrs = dict((c, tables.Column()) for c in columns)
+    # attrs2 = dict((c, tables.TemplateColumn('<a href="{% url "show_align" id "pre-microRNA" record.align %}">align</a>')) for c in columns if c == "align")
+    # # attrs2 = dict((c, tables.TemplateColumn('<a href="{% url "show_align" id "pre-microRNA" record.align %}">align</a>')) for c in columns if c == "align")
+    # #attrs2 = dict((c, tables.TemplateColumn('<a href="{% url "sRNABench.views.show_align" id "hairpin" record.align %}">align</a>')) for c in columns if c == "align")
+    # attrs.update(attrs2)
+    # attrs3 = dict((c, tables.TemplateColumn('<a href="{% url "show_align" id "novel" record.align_ %}">align</a>')) for c in columns if c == "align_")
+    # #attrs3 = dict((c, tables.TemplateColumn('<a href="{% url "sRNABench.views.show_align" id "novel" record.align_ %}">align</a>')) for c in columns if c == "align_")
+    # attrs.update(attrs3)
+
+
+
+
+    if typeTable == "TableResult":
+        attrs['Meta'] = type('Meta', (),
+                             dict(attrs={'class': 'table table-striped table-bordered table-hover dataTable no-footer',
+                                         "id": lambda: "table_%d" % next(counter)},
+                                  ordenable=False,
+                                  empty_text="Results not found!",
+                                  order_by=("name",)))
+    else:
+        attrs['Meta'] = type('Meta', (),
+                             dict(attrs={'class': 'table table-striped',
+                                         "id": "notformattable"},
+                                  ordenable=False,
+                                  empty_text="Results not found!",
+                                  order_by=("name",)))
+
+
+
+    klass = type('TableResult', (tables.Table,), attrs)
+    return klass
 
 class Result():
     """
@@ -649,14 +687,15 @@ def render_table(request, mode, job_id, lib=""):
     if mode == "novel":
         result["title"] = "Novel microRNAs"
         ifile = os.path.join(new_record.outdir, "novel.txt")
-        parser = NovelParser(ifile)
+        parser = NovelParser("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/UEJ0FFALDY63EJG/mappingStat_sensePref_minExpr0_4_grp1VSgrp2_ttest.tsv")
         #parser = MatureParser(ifile)
         #parser = TRNAParser(ifile)
         table = [obj for obj in parser.parse()]
         id = "table"
         try:
             header = table[0].get_sorted_attr()
-            r = Result(id, define_table(header, 'TableResult')(table[:500]))
+            r = Result(id, define_table(["header1", "header2", "header3"], 'TableResult')(table[:500]))
+            #r = Result(id, define_table(header, 'TableResult')(table[:500]))
             result["table"] = r
             #result["sec"] = "novel"
             result["sec"] = "trna"
@@ -733,7 +772,11 @@ def render_table(request, mode, job_id, lib=""):
         except:
             pass
 
+
+
     return render(request, "tables_srnabench.html", result)
+
+
 
 
 
