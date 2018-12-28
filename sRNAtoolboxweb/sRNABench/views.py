@@ -685,7 +685,8 @@ def render_table(request, mode, job_id, lib=""):
             pass
 
     if mode == "novel":
-        result["title"] = "Novel microRNAs"
+        result["title"] = "merengue"
+        # result["title"] = "Novel microRNAs"
         ifile = os.path.join(new_record.outdir, "novel.txt")
         parser = NovelParser("/opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/UEJ0FFALDY63EJG/mappingStat_sensePref_minExpr0_4_grp1VSgrp2_ttest.tsv")
         #parser = MatureParser(ifile)
