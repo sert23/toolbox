@@ -588,6 +588,7 @@ def result_new(request):
                         add_mirprof(params, results)
 
                     results["miRNA_plots"] = top_miRNA_plot(os.path.join(new_record.outdir,"stat","microRNA_top.txt"), "Top 10 miRNAs")
+                    image_list.append(results["miRNA_plots"][0][1])
 
                 #sRNA summary
                 if "libs" in parameters:
