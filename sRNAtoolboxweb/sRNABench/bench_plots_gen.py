@@ -347,7 +347,7 @@ def top_miRs_plot(input_file, title=".", path_to_venv=None, plotly_script=None, 
         x=x,
         y=y,
         marker=dict(
-            color=['rgb(31, 119, 180)'],
+            color=['rgb(31, 119, 180)']*len(x),
             colorscale="Viridis"
         ))
     data = [trace]
