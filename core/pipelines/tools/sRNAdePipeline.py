@@ -61,15 +61,15 @@ class sRNAdePipeline(Pipeline):
         else:
             return True
 
-    def post_checks(self):
-        xls_files = glob.glob(os.path.join(self.outdir, "*.xlsx"))
-        if len(xls_files) == 0:
-            log_msg = strftime("%Y-%m-%d %H:%M:%S",
-                               gmtime()) + " ERROR: Error found in Differential Expression Results, maybe input data have errors. Please report it indicating the jobID: " + self.pipeline_key
-            self.actualize_pipeline_progress(log_msg)
-            return False
-        else:
-            return True
+    # def post_checks(self):
+    #     xls_files = glob.glob(os.path.join(self.outdir, "*.xlsx"))
+    #     if len(xls_files) == 0:
+    #         log_msg = strftime("%Y-%m-%d %H:%M:%S",
+    #                            gmtime()) + " ERROR: Error found in Differential Expression Results, maybe input data have errors. Please report it indicating the jobID: " + self.pipeline_key
+    #         self.actualize_pipeline_progress(log_msg)
+    #         return False
+    #     else:
+    #         return True
 
 
     def call_make_de_analysis(self):
