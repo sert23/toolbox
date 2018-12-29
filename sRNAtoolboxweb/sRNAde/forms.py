@@ -410,7 +410,7 @@ class DElaunchForm(forms.Form):
         with open(configuration_file_path, 'w') as conf_file:
             json.dump(conf_params, conf_file, indent=True)
         with open(conf_params['conf_input'],"w") as conf_txt:
-            for k in sorted(conf_params.iterkeys()):
+            for k in sorted(conf_params.keys()):
                 conf_txt.write(k + "=" + str(conf_params.get(k))+"\n")
 
         if QSUB:
