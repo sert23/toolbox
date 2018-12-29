@@ -88,3 +88,51 @@
     </div>
 </div>
 
+{% if miRNA_plots %}
+
+<div class="row row-grid">
+            {% for plot,img,div_id, img_id  in miRNA_plots %}
+                <div class="col-lg-6">
+                    <a href="javascript:void(0)" ><img id="{{ img_id }}" src="{{ img  }}" alt="img" style="width:100%;height:100%;padding:1px;border:thin solid black;"  /> </a>
+                </div>
+
+
+
+
+{#        <div class="modal fade" id="modal_test" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">#}
+        <div class="modal" id="modal_test_{{ div_id }}" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
+{#	    <div class="modal-dialog" role="document">#}
+	    <div class="modal-dialog modal-xl" role="document">
+	      <div class="modal-content" >
+	        <div class="modal-body" >
+                <div id="empty_div_{{ div_id }}">
+
+                </div>
+                    <!-- Plotly chart will be drawn inside this DIV -->
+{#	          <img style="display:block; margin-left:auto; margin-right:auto; width:100%;" src="{{ MEDIA_URL }}{{ sumimgs.0  }}">#}
+{#	          <h1 style="text-align: center;">hello there</h1>#}
+	        </div>
+	      </div>
+	    </div>
+	</div>
+
+
+<script>
+    $('#{{ img_id }}').click(function() {
+     $("#modal_test_{{ div_id }}").modal('show');
+{#     alert("this is a test");#}
+     if (!document.getElementById("{{ div_id }}")){
+         $('#empty_div_{{ div_id }}').append('{{ plot|escapejs }}');
+     }
+    });
+
+
+{#     Plotly.relayout( "{{ div_id }}", { 'xaxis.autorange': true, 'yaxis.autorange': true });#}
+
+</script>
+
+
+{% endfor %}
+             </div>
+
+{% endif %}
