@@ -10,7 +10,7 @@ from sRNAtoolboxweb.settings import MEDIA_ROOT,BENCH_PLOTLY,PATH_TO_VENV, MEDIA_
 import subprocess
 import sys
 
-from .bench_plots_gen import Full_read_length_divs,Read_len_type, Mapping_stat_plot
+from .bench_plots_gen import Full_read_length_divs,Read_len_type, Mapping_stat_plot, top_miRs_plot
 
 def full_read_length(input_folder):
     results_list = Full_read_length_divs(input_folder, path_to_venv=PATH_TO_VENV, plotly_script=BENCH_PLOTLY, media_url=MEDIA_URL,
@@ -24,6 +24,11 @@ def read_length_type(input_folder):
 
 def mapping_stat(input_folder):
     results_list = Mapping_stat_plot(input_folder, path_to_venv=PATH_TO_VENV, plotly_script=BENCH_PLOTLY, media_url=MEDIA_URL,
+                          media_root=MEDIA_ROOT, png=False)
+    return results_list
+
+def top_miRNA_plot(input_file,title):
+    results_list = top_miRs_plot(input_file,title, path_to_venv=PATH_TO_VENV, plotly_script=BENCH_PLOTLY, media_url=MEDIA_URL,
                           media_root=MEDIA_ROOT, png=False)
     return results_list
 

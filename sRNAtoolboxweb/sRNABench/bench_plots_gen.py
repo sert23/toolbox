@@ -363,7 +363,6 @@ def top_miRs_plot(input_file, title=".", path_to_venv=None, plotly_script=None, 
             t=100,
             pad=4
         ),
-
         # barmode="stack",
         title=title,
         font=dict(size=18),
@@ -386,7 +385,11 @@ def top_miRs_plot(input_file, title=".", path_to_venv=None, plotly_script=None, 
 
     fig = go.Figure(data=data, layout=layout)
 
-    plot(fig, show_link=False, auto_open=True)
+    if png:
+        plotly.io.write_image(fig, out_path, format="png", width=None, height=None)
+        # plotly.io.write_image(fig, out_path, format="png", width=None, height=None)
+    else:
+        div_obj1 = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
     # plot(fig, show_link=False, auto_open=True, output_type='div', include_plotlyjs=False)
 
 
@@ -397,6 +400,7 @@ def top_miRs_plot(input_file, title=".", path_to_venv=None, plotly_script=None, 
 def main():
     p_type = sys.argv[1]
     input_par = sys.argv[2]
+    input_par2 = sys.argv[3]
 
     if p_type == "readLength":
         Full_read_length_divs(input_par, png=True)
@@ -404,6 +408,8 @@ def main():
         Read_len_type(input_par, png=True)
     if p_type == "mapStat":
         Mapping_stat_plot(input_par, png=True)
+    if p_type == "topMir":
+        top_miRs_plot(input_par, title=input_par2, png=True)
 
 if __name__ == "__main__":
     main()

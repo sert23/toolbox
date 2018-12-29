@@ -28,7 +28,7 @@ from progress.models import JobStatus
 from sRNABench.forms import sRNABenchForm
 from utils import pipeline_utils
 from utils.sysUtils import make_dir
-from sRNABench.bench_plots_func import full_read_length,read_length_type,mapping_stat
+from sRNABench.bench_plots_func import full_read_length,read_length_type,mapping_stat,top_miRNA_plot
 from FileModels.deStatsParser import DeStatsParser
 import pandas as pd
 
@@ -586,6 +586,8 @@ def result_new(request):
                     if "detectedMature" in parameters:
                         add_mirimg(new_record, results)
                         add_mirprof(params, results)
+
+                    result["miRNA_plots"] = top_miRNA_plot(os.path.join(new_record.outdir,"stat","microRNA_top.txt"), "Top 10 miRNAs")
 
                 #sRNA summary
                 if "libs" in parameters:
