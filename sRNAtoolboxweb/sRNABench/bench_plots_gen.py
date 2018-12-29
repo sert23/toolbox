@@ -403,7 +403,8 @@ def top_miRs_plot(input_file, title=".", path_to_venv=None, plotly_script=None, 
 def main():
     p_type = sys.argv[1]
     input_par = sys.argv[2]
-    input_par2 = sys.argv[3]
+    if len (sys.argv) > 2:
+        input_par2 = sys.argv[3]
 
     if p_type == "readLength":
         Full_read_length_divs(input_par, png=True)
