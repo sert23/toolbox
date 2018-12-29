@@ -10,7 +10,7 @@ from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from pygal.style import LightGreenStyle
 from .forms import DEForm, DEinputForm,DElaunchForm
-
+import pandas as pd
 from FileModels.deStatsParser import DeStatsParser
 from FileModels.sRNAdeparser import SRNAdeParser
 from FileModels.GeneralParser import GeneralParser
