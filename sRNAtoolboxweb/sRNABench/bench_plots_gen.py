@@ -390,6 +390,13 @@ def top_miRs_plot(input_file, title=".", path_to_venv=None, plotly_script=None, 
         # plotly.io.write_image(fig, out_path, format="png", width=None, height=None)
     else:
         div_obj1 = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
+
+        out_path = out_path.replace(media_root, media_url)
+        id1 = div_obj1.split("\"")[1]
+        # id1_b = div_obj1_b.split("\"")[1]
+
+        return [[div_obj1, out_path, id1, "img_" + id1]]
+
     # plot(fig, show_link=False, auto_open=True, output_type='div', include_plotlyjs=False)
 
 
