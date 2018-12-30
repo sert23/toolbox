@@ -17,7 +17,8 @@ from FileModels.GeneralParser import GeneralParser
 from progress.models import JobStatus
 from utils import pipeline_utils
 from utils.sysUtils import *
-from django.views.generic import FormView
+
+from django.views.generic import FormView, DetailView
 from sRNABench.forms import sRNABenchForm
 from sRNAtoolboxweb.settings import MEDIA_ROOT
 import os
@@ -364,6 +365,19 @@ def result(request):
     else:
         return redirect(reverse_lazy('srnade'))
 
+class De_method_view(DetailView):
+    model = JobStatus
+    slug_field = 'pipeline_key'
+    slug_url_kwarg = 'pipeline_id'
+    template_name = 'multi_status.html'
+
+
+    def get_context_data(self, **kwargs):
+        context = super(DetailView, self).get_context_data(**kwargs)
+        de_method = str(self.request.path_info).split("/")[-2]
+        context["njobs"] = de_method
+
+        return context
 
 
 def test(request):
