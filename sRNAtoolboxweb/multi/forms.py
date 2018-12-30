@@ -476,7 +476,7 @@ class sRNABenchForm(forms.Form):
             umi = "3pA12"
             adapter = "AACTGTAGGCACCATCAAT"
         elif protocol == "Custom":
-            protocol= " "
+            protocol= None
             if cleaned_data.get('guess_adapter'):
                 guess_adapter = "true"
                 adapter = "EMPTY"
