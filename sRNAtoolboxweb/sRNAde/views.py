@@ -387,7 +387,7 @@ class De_method_view(DetailView):
         sections_dir = dict()
         with open(os.path.join(folder,"sections.config"),"r") as sect_f:
             for line in sect_f.readlines():
-                row = line.split("\n")
+                row = line.split("\t")
                 sections_dir[row[0]] = row[1]
         section_list = set(sections_dir.values())
         section_list = [[x,x.replace(" ","_")] for x in section_list]
