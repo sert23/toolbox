@@ -105,7 +105,7 @@
 
             <ul class="nav nav-pills" id="myTab">
 
-                {
+                {% for tab_title, tab_id in sections %}
                     <li><a href="#{{ tab_id }}" data-toggle="tab">Summary</a>
                     </li>
                 {% endfor %}
