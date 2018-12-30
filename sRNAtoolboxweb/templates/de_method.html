@@ -105,7 +105,7 @@
 
             <ul class="nav nav-pills" id="myTab">
 
-            <li><a href="#{{ tab_id }}" data-toggle="tab">{{ tab_title }}</a>
+            <li><a href="#Summary" data-toggle="tab">Summary</a>
                     </li>
 
                 {% for tab_title, tab_id in sections %}
@@ -115,6 +115,14 @@
             </ul>
 
             <div class="tab-content">
+            <div class="tab-pane fade in active" id="Summary">
+
+                    <div class="col-lg-12">
+
+                        <p> ehehe</p>
+                    {% include "summary.html" %}
+                        </div>
+                </div>
 
                 {% for tab_title, tab_id in sections %}
                 <div class="tab-pane fade in" id="{{ tab_id }}">
