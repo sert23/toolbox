@@ -282,77 +282,79 @@ def old_result(request):
         return redirect(reverse_lazy('srnade'))
 
 def result(request):
+
     if 'id' in request.GET:
         job_id = request.GET['id']
-
         new_record = JobStatus.objects.get(pipeline_key=job_id)
-        results = dict()
-        results["id"] = job_id
-
-        # Graphs
-        config = pd.read_table(os.path.join(new_record.outdir, 'boxplot.config'), header=None)
-        for index, row in config.iterrows():
-            file, x_lab, y_lab, title = row[0:4]
-            tag = row[4] + '_plot'
-            results[tag] = general_plot(file, x_lab, y_lab, title)
-
-        # Sequencing statistics
-        try:
-            x_lab, y_lab, title = ['', 'Number of reads', 'Sequencing statistics']
-            seq_boxplot = general_plot_cols(os.path.join(new_record.outdir, 'sequencingStat.txt'), x_lab, y_lab, title)
-            results["seq_stats"] = seq_boxplot
-        except:
-            results["seq_stats"] = None
-
-        # Read length statistics
-        try:
-            length_full_plot = make_full_length_plot(os.path.join(new_record.outdir, 'readlen/readLengthFull_minExpr0_4.mat'))
-            results["read_length_full_plot"] = length_full_plot
-        except:
-            results["read_length_full_plot"] = None
-
-        try:
-            length_plot = make_length_plot(os.path.join(new_record.outdir, 'readlen/readLengthAnalysis_minExpr0_4.mat'))
-            results["read_length_analysis_plot"] = length_plot
-        except:
-            results["read_length_analysis_plot"] = None
-
-        try:
-            length_genome_plot = make_length_genome_plot(os.path.join(new_record.outdir, 'readlen/genomeMappedReads_minExpr0_4.mat'))
-            results["read_length_genome_plot"] = length_genome_plot
-        except:
-            results["read_length_genome_plot"] = None
-
-        # Tables
-        tables_config = pd.read_table(os.path.join(new_record.outdir, 'tables.config'), header=None)
-        for index, row in tables_config.iterrows():
-            file, name = row[0:2]
-            parser = GeneralParser(file)
-            table = [obj for obj in parser.parse()]
-            header = table[0].get_sorted_attr()
-            r = Result(name, define_table(header, 'TableResult')(table))
-            tag = row[2] + '_tab'
-            results[tag] = r
-
         if new_record.job_status == "Finished":
-            if new_record.stats_file and os.path.isfile(new_record.stats_file):
-                parser = DeStatsParser(new_record.stats_file)
-                stats = [obj for obj in parser.parse()]
-                header = stats[0].get_sorted_attr()
-                stats_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(stats))
-                results["stats"] = stats_result
 
-                labels = [obj.sample for obj in stats]
+            results = dict()
+            results["id"] = job_id
+
+            # Graphs
+            config = pd.read_table(os.path.join(new_record.outdir, 'boxplot.config'), header=None)
+            for index, row in config.iterrows():
+                file, x_lab, y_lab, title = row[0:4]
+                tag = row[4] + '_plot'
+                results[tag] = general_plot(file, x_lab, y_lab, title)
+
+            # Sequencing statistics
+            try:
+                x_lab, y_lab, title = ['', 'Number of reads', 'Sequencing statistics']
+                seq_boxplot = general_plot_cols(os.path.join(new_record.outdir, 'sequencingStat.txt'), x_lab, y_lab, title)
+                results["seq_stats"] = seq_boxplot
+            except:
+                results["seq_stats"] = None
+
+            # Read length statistics
+            try:
+                length_full_plot = make_full_length_plot(os.path.join(new_record.outdir, 'readlen/readLengthFull_minExpr0_4.mat'))
+                results["read_length_full_plot"] = length_full_plot
+            except:
+                results["read_length_full_plot"] = None
 
             try:
-                results["parameters"] = new_record.parameters
+                length_plot = make_length_plot(os.path.join(new_record.outdir, 'readlen/readLengthAnalysis_minExpr0_4.mat'))
+                results["read_length_analysis_plot"] = length_plot
             except:
-                pass
+                results["read_length_analysis_plot"] = None
 
-            results["id"] = job_id
-            results["date"] = new_record.start_time + datetime.timedelta(days=15)
+            try:
+                length_genome_plot = make_length_genome_plot(os.path.join(new_record.outdir, 'readlen/genomeMappedReads_minExpr0_4.mat'))
+                results["read_length_genome_plot"] = length_genome_plot
+            except:
+                results["read_length_genome_plot"] = None
 
-            return render(request, "de_result.html", results)
+            # Tables
+            tables_config = pd.read_table(os.path.join(new_record.outdir, 'tables.config'), header=None)
+            for index, row in tables_config.iterrows():
+                file, name = row[0:2]
+                parser = GeneralParser(file)
+                table = [obj for obj in parser.parse()]
+                header = table[0].get_sorted_attr()
+                r = Result(name, define_table(header, 'TableResult')(table))
+                tag = row[2] + '_tab'
+                results[tag] = r
+
+            if new_record.job_status == "Finished":
+                if new_record.stats_file and os.path.isfile(new_record.stats_file):
+                    parser = DeStatsParser(new_record.stats_file)
+                    stats = [obj for obj in parser.parse()]
+                    header = stats[0].get_sorted_attr()
+                    stats_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(stats))
+                    results["stats"] = stats_result
+
+                    labels = [obj.sample for obj in stats]
+
+                try:
+                    results["parameters"] = new_record.parameters
+                except:
+                    pass
+
+                results["id"] = job_id
+                results["date"] = new_record.start_time + datetime.timedelta(days=15)
+
+                return render(request, "de_result.html", results)
         else:
             return redirect(reverse_lazy('progress', kwargs={"pipeline_id": job_id}))
 
