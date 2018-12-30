@@ -10,9 +10,9 @@ urlpatterns = [
     #url(r'^ncbiparser', views.NCBI.as_view(), name="ncbi"),
 
 
-    url(r'de/(?P<pipeline_id>[A-za-z0-9]+)', De_method_view.as_view()),
-    # url(r'de/[A-za-z0-9]+/(?P<pipeline_id>[A-za-z0-9]+)', De_method_view),
-    url(r'de/', De_method_view, name='de_method'),
+    # url(r'de/(?P<pipeline_id>[A-za-z0-9]+)', De_method_view.as_view()),
+    url(r'de/[A-za-z0-9]+/(?P<pipeline_id>[A-za-z0-9]+)', De_method_view.as_view()),
+    url(r'de/', De_method_view.as_view(), name='de_method'),
     url(r'result', result, name='srnade'),
     url(r'^$', De.as_view(), name="DE"),
     url(r'launch/(?P<pipeline_id>[A-za-z0-9]+)', DeLaunch.as_view()),
