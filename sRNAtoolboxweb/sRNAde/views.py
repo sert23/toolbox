@@ -372,12 +372,12 @@ class De_method_view(DetailView):
     template_name = 'multi_status.html'
 
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(DetailView, self).get_context_data(**kwargs)
-    #     de_method = str(self.request.path_info).split("/")[-2]
-    #     context["njobs"] = de_method
-    #
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super(DetailView, self).get_context_data(**kwargs)
+        de_method = str(self.request.path_info).split("/")[-2]
+        context["njobs"] = de_method
+
+        return context
 
 
 def test(request):
