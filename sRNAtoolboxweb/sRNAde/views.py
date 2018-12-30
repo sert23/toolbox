@@ -382,7 +382,7 @@ class De_method_view(DetailView):
         context = super(DetailView, self).get_context_data(**kwargs)
         de_method = str(self.request.path_info).split("/")[-2]
         job_id = str(self.request.path_info).split("/")[-1]
-        new_record = JobStatus.objects.get(pipeline_key=id)
+        new_record = JobStatus.objects.get(pipeline_key=job_id)
         folder = os.path.join(new_record.outdir,"de",de_method)
         sections_dir = dict()
         with open(os.path.join(folder,"sections.config"),"r") as sect_f:
