@@ -17,6 +17,6 @@ class GeneralParser(Parser):
         header = fd.readline().replace("\n", "").split("\t")
         for line in fd:
             aline = line.replace("\n", "").split("\t")
-            aline = [round(float(x),2) for x in aline if is_numeric(x)]
+            aline = [round(float(x),2) if is_numeric(x) else x for x in aline]
             yield General(header, *aline)
         fd.close()
