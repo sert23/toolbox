@@ -369,7 +369,7 @@ class De_method_view(DetailView):
     model = JobStatus
     slug_field = 'pipeline_key'
     slug_url_kwarg = 'pipeline_id'
-    template_name = 'multi_status.html'
+    template_name = 'de_method.html'
 
 
     def get_context_data(self, **kwargs):
