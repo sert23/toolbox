@@ -390,7 +390,7 @@ class De_method_view(DetailView):
                 row = line.split("\n")
                 sections_dir[row[0]] = row[1]
         section_list = set(sections_dir.values())
-        section_list = [[x,x.rep(" ","_")] for x in section_list]
+        section_list = [[x,x.replace(" ","_")] for x in section_list]
         context["sections"] = section_list
         context["DE_method"] = de_dict.get(de_method)
 
