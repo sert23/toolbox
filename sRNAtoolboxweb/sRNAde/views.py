@@ -373,9 +373,27 @@ class De_method_view(DetailView):
 
 
     def get_context_data(self, **kwargs):
+        de_dict ={"ttest": "Two sided t-test on RPM",
+                  "de_noiseq" :"Noiseq",
+                  "de_edger" : "EdgeR",
+                  "de_deseq2": "DEseq2",
+                  "de_deseq":"DEseq"}
+
         context = super(DetailView, self).get_context_data(**kwargs)
         de_method = str(self.request.path_info).split("/")[-2]
-        context["njobs"] = de_method
+        job_id = str(self.request.path_info).split("/")[-1]
+        new_record = JobStatus.objects.get(pipeline_key=id)
+        folder = os.path.join(new_record.outdir,"de",de_method)
+        sections_dir = dict()
+        with open(os.path.join(folder,"sections.config"),"r") as sect_f:
+            for line in sect_f.readlines():
+                row = line.split("\n")
+                sections_dir[row[0]] = row[1]
+        section_list = set(sections_dir.values())
+        section_list = [[x,x.rep(" ","_")] for x in section_list]
+        context["sections"] = section_list
+        context["DE_method"] = de_dict.get(de_method)
+
 
         return context
 
