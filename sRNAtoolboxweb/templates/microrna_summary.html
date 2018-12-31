@@ -32,10 +32,10 @@
             <li><a href="{% url "table_bench" "maturesa" id %}">mature (SA)</a></li>
         </ul></dd>
 
-{#        <dt>isomiR details:</dt>#}
-{#        <dd><ul class="list-inline">#}
-{#            <li><a href="{% url "table_bench" "isomir" id %}"> isomiR summary </a></li>#}
-{#        </ul></dd>#}
+        <dt>isomiR details:</dt>
+        <dd><ul class="list-inline">
+            <li><a href="{% url "table_bench" "isomir" id %}"> isomiR summary </a></li>
+        </ul></dd>
     </dl>
 </div>
 
@@ -116,7 +116,6 @@
 	    </div>
 	</div>
 
-
 <script>
     $('#{{ img_id }}').click(function() {
      $("#modal_test_{{ div_id }}").modal('show');
@@ -130,7 +129,6 @@
 {#     Plotly.relayout( "{{ div_id }}", { 'xaxis.autorange': true, 'yaxis.autorange': true });#}
 
 </script>
-
 
 {% endfor %}
              </div>
