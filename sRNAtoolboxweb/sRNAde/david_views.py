@@ -9,23 +9,19 @@ import xlrd
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from pygal.style import LightGreenStyle
-from .forms import DEForm, DEinputForm,DElaunchForm
-import pandas as pd
+from .forms import DEForm
+
 from FileModels.deStatsParser import DeStatsParser
 from FileModels.sRNAdeparser import SRNAdeParser
 from FileModels.GeneralParser import GeneralParser
 from progress.models import JobStatus
 from utils import pipeline_utils
 from utils.sysUtils import *
-
-from django.views.generic import FormView, DetailView
-from sRNABench.forms import sRNABenchForm
-from sRNAtoolboxweb.settings import MEDIA_ROOT
-import os
-import json
+from django.views.generic import FormView
 from sRNAde.de_plots import make_seq_plot, make_length_plot, make_full_length_plot, make_length_genome_plot, \
                             make_genome_dist_plot, general_plot, general_plot_cols
-from sRNAde.summary_plots import makeDEbox
+import pandas as pd
+import json
 
 counter = itertools.count()
 
@@ -83,7 +79,7 @@ def define_table(columns, typeTable):
     return klass
 
 
-class Result():
+class Result:
     """
     Class to manage tables results and meta-info
     """
@@ -98,7 +94,6 @@ def de(request):
     return render(request, 'de.html', {})
 
 
-
 def check_ids_param(idlist, samples, desc, pvalue, prob):
     groups = idlist.split("#")
     samples = samples.split("#")
@@ -106,12 +101,12 @@ def check_ids_param(idlist, samples, desc, pvalue, prob):
 
     if not len(samples) == len(groups):
         errors['errors'].append(
-            'The number of samples group is different in "list of SRNAbench IDs" and "Sample groups". '
+            'The number of samples group is different in "list of sRNAbench IDs" and "Sample groups". '
             'Please use "#" in order to split samples')
 
     if (not len(idlist.replace("#", "").split(":")) != len(desc.split(":"))) and desc != "":
         errors['errors'].append(
-            'The number of samples is different in "list of SRNAbench IDs"  and "List of Sample Description". '
+            'The number of samples is different in "list of sRNAbench IDs"  and "List of Sample Description". '
             'Please use ":" in order to split samples')
 
     try:
@@ -143,7 +138,6 @@ def check_mat_file(mat):
 
 def old_result(request):
     if 'id' in request.GET:
-        print("hola")
         job_id = request.GET['id']
 
         new_record = JobStatus.objects.get(pipeline_key=job_id)
@@ -283,130 +277,84 @@ def old_result(request):
     else:
         return redirect(reverse_lazy('srnade'))
 
-def result(request):
 
+def result(request):
     if 'id' in request.GET:
         job_id = request.GET['id']
+
         new_record = JobStatus.objects.get(pipeline_key=job_id)
+        results = dict()
+        results["id"] = job_id
+
+        # Graphs
+        config = pd.read_table(os.path.join(new_record.outdir, 'boxplot.config'), header=None)
+        for index, row in config.iterrows():
+            file, x_lab, y_lab, title = row[0:4]
+            tag = row[4] + '_plot'
+            results[tag] = general_plot(file, x_lab, y_lab, title)
+
+        # Sequencing statistics
+        try:
+            x_lab, y_lab, title = ['', 'Number of reads', 'Sequencing statistics']
+            seq_boxplot = general_plot_cols(os.path.join(new_record.outdir, 'sequencingStat.txt'), x_lab, y_lab, title)
+            results["seq_stats"] = seq_boxplot
+        except:
+            results["seq_stats"] = None
+
+        # Read length statistics
+        try:
+            length_full_plot = make_full_length_plot(os.path.join(new_record.outdir, 'readlen/readLengthFull_minExpr0_4.mat'))
+            results["read_length_full_plot"] = length_full_plot
+        except:
+            results["read_length_full_plot"] = None
+
+        try:
+            length_plot = make_length_plot(os.path.join(new_record.outdir, 'readlen/readLengthAnalysis_minExpr0_4.mat'))
+            results["read_length_analysis_plot"] = length_plot
+        except:
+            results["read_length_analysis_plot"] = None
+
+        try:
+            length_genome_plot = make_length_genome_plot(os.path.join(new_record.outdir, 'readlen/genomeMappedReads_minExpr0_4.mat'))
+            results["read_length_genome_plot"] = length_genome_plot
+        except:
+            results["read_length_genome_plot"] = None
+
+        # Tables
+        tables_config = pd.read_table(os.path.join(new_record.outdir, 'tables.config'), header=None)
+        for index, row in tables_config.iterrows():
+            file, name = row[0:2]
+            parser = GeneralParser(file)
+            table = [obj for obj in parser.parse()]
+            header = table[0].get_sorted_attr()
+            r = Result(name, define_table(header, 'TableResult')(table))
+            tag = row[2] + '_tab'
+            results[tag] = r
+
         if new_record.job_status == "Finished":
+            if new_record.stats_file and os.path.isfile(new_record.stats_file):
+                parser = DeStatsParser(new_record.stats_file)
+                stats = [obj for obj in parser.parse()]
+                header = stats[0].get_sorted_attr()
+                stats_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(stats))
+                results["stats"] = stats_result
 
-            results = dict()
+                labels = [obj.sample for obj in stats]
+
+            try:
+                results["parameters"] = new_record.parameters
+            except:
+                pass
+
             results["id"] = job_id
+            results["date"] = new_record.start_time + datetime.timedelta(days=15)
 
-            # Graphs
-            config = pd.read_table(os.path.join(new_record.outdir, 'boxplot.config'), header=None)
-            for index, row in config.iterrows():
-                file, x_lab, y_lab, title = row[0:4]
-                tag = row[4] + '_plot'
-                results[tag] = general_plot(file, x_lab, y_lab, title)
-
-            # Sequencing statistics
-            try:
-                x_lab, y_lab, title = ['', 'Number of reads', 'Sequencing statistics']
-                seq_boxplot = general_plot_cols(os.path.join(new_record.outdir, 'sequencingStat.txt'), x_lab, y_lab, title)
-                results["seq_stats"] = seq_boxplot
-            except:
-                results["seq_stats"] = None
-
-            # Read length statistics
-            try:
-                length_full_plot = make_full_length_plot(os.path.join(new_record.outdir, 'readlen/readLengthFull_minExpr0_4.mat'))
-                results["read_length_full_plot"] = length_full_plot
-            except:
-                results["read_length_full_plot"] = None
-
-            try:
-                length_plot = make_length_plot(os.path.join(new_record.outdir, 'readlen/readLengthAnalysis_minExpr0_4.mat'))
-                results["read_length_analysis_plot"] = length_plot
-            except:
-                results["read_length_analysis_plot"] = None
-
-            try:
-                length_genome_plot = make_length_genome_plot(os.path.join(new_record.outdir, 'readlen/genomeMappedReads_minExpr0_4.mat'))
-                results["read_length_genome_plot"] = length_genome_plot
-            except:
-                results["read_length_genome_plot"] = None
-
-            # Tables
-            tables_config = pd.read_table(os.path.join(new_record.outdir, 'tables.config'), header=None)
-            for index, row in tables_config.iterrows():
-                try:
-                    file, name = row[0:2]
-                    parser = GeneralParser(file)
-                    table = [obj for obj in parser.parse()]
-                    header = table[0].get_sorted_attr()
-                    r = Result(name, define_table(header, 'TableResult')(table))
-                    tag = row[2] + '_tab'
-                    results[tag] = r
-                except:
-                    pass
-
-            if new_record.job_status == "Finished":
-                if new_record.stats_file and os.path.isfile(new_record.stats_file):
-                    parser = DeStatsParser(new_record.stats_file)
-                    stats = [obj for obj in parser.parse()]
-                    header = stats[0].get_sorted_attr()
-                    stats_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(stats))
-                    results["stats"] = stats_result
-
-                    labels = [obj.sample for obj in stats]
-
-                try:
-                    results["parameters"] = new_record.parameters
-                except:
-                    pass
-
-                results["id"] = job_id
-                results["date"] = new_record.start_time + datetime.timedelta(days=15)
-
-                return render(request, "de_result.html", results)
+            return render(request, "de_result.html", results)
         else:
             return redirect(reverse_lazy('progress', kwargs={"pipeline_id": job_id}))
 
     else:
         return redirect(reverse_lazy('srnade'))
-
-class De_method_view(DetailView):
-    model = JobStatus
-    slug_field = 'pipeline_key'
-    slug_url_kwarg = 'pipeline_id'
-    template_name = 'de_method.html'
-
-
-    def get_context_data(self, **kwargs):
-        de_dict ={"ttest": "Two sided t-test on RPM",
-                  "de_noiseq" :"Noiseq",
-                  "de_edger" : "EdgeR",
-                  "de_deseq2": "DEseq2",
-                  "de_deseq":"DEseq"}
-
-        context = super(DetailView, self).get_context_data(**kwargs)
-        de_method = str(self.request.path_info).split("/")[-2]
-        job_id = str(self.request.path_info).split("/")[-1]
-        new_record = JobStatus.objects.get(pipeline_key=job_id)
-        folder = os.path.join(new_record.outdir,"de",de_method)
-        sections_dic = dict()
-        with open(os.path.join(folder,"sections.config"),"r") as sect_f:
-            for line in sect_f.readlines():
-                row = line.split("\t")
-                sections_dic[row[0]] = row[1]
-        section_list = set(sections_dic.values())
-        section_list = [[x,x.replace(" ","_")] for x in section_list]
-        context["sections"] = section_list
-        context["DE_method"] = de_dict.get(de_method)
-        mbp_list = []
-        with open(os.path.join(folder,"multiboxplot.config"),"r") as multi_f:
-            for line in sect_f.readlines():
-                row = line.split("\t")
-                tag = row[-1].rstrip()
-                input_path = row[0]
-                plot = makeDEbox(input_path)
-                mbp_list.append([plot,sections_dic[tag]])
-
-        context["multiboxplots"] = mbp_list
-
-
-        return context
 
 
 def test(request):
@@ -423,7 +371,8 @@ def test(request):
 
     return redirect("/srnatoolbox/jobstatus/srnade/?id=" + pipeline_id)
 
-class De_old(FormView):
+
+class De(FormView):
     template_name = 'de.html'
     form_class = DEForm
     success_url = reverse_lazy("DE")
@@ -441,169 +390,3 @@ class De_old(FormView):
         js.job_status = 'sent_to_queue'
         js.save()
         return super(De, self).form_valid(form)
-
-class De(FormView):
-    template_name = 'de_input.html'
-    form_class = DEinputForm
-    success_url = reverse_lazy("DE")
-
-    def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        #call, pipeline_id = form.create_call()
-        pipeline_id = form.create_config_file()
-        self.success_url = reverse_lazy('DE_launch') + pipeline_id
-
-        # print(call)
-        #os.system(call)
-        # js = JobStatus.objects.get(pipeline_key=pipeline_id)
-        # js.status.create(status_progress='sent_to_queue')
-        # js.job_status = 'sent_to_queue'
-        # js.save()
-        return super(De, self).form_valid(form)
-
-class DeLaunch(FormView):
-    template_name = 'de_launch.html'
-    # form_class = DEinputForm
-    form_class = DElaunchForm
-    success_url = reverse_lazy("DE_launch")
-
-    def get_form_kwargs(self):
-        kwargs = super(DeLaunch, self).get_form_kwargs()
-        path = self.request.path
-        folder = path.split("/")[-1]
-        kwargs['dest_folder'] = folder
-        return kwargs
-
-    def get_context_data(self, **kwargs):
-        context = super(FormView, self).get_context_data(**kwargs)
-        query_id = str(self.request.path_info).split("/")[-1]
-        initial_path = os.path.join(MEDIA_ROOT, query_id, "init_par.json")
-        sample_table=[]
-        context["form"] = DElaunchForm
-        base_selector = """<div class="form-group">
-                                <select class="form-control" id="{sample_id}" name="group_selector">
-
-                                </select>
-                                """
-        with open(initial_path,"r") as param_file:
-            params = json.load(param_file)
-
-        if params.get("jobIDs"):
-            jobIDs = params.get("jobIDs").split(",")
-            groups = params.get("sampleGroups").split("#")
-            if params.get('sampleDescription'):
-                sampleDescription = params.get('sampleDescription')
-                #TODO something here
-            else:
-                sampleDescription = None
-            names = jobIDs
-            headers = ["job ID", "Sample Name", "Group"]
-
-            for group in groups:
-                new_option = "<option>"+group+"</option>"
-                to_rep= "</select>"
-                replacing = new_option + to_rep
-                base_selector = base_selector.replace(to_rep,replacing)
-
-            for name in names:
-                buttons = base_selector.format(sample_id=name)
-                row = [name, name, buttons]
-                sample_table.append(row)
-
-            header_list=[]
-            for header in headers:
-                header_list.append({"title":header})
-
-            js_headers = json.dumps(header_list)
-            js_data = json.dumps(sample_table)
-
-
-            key_list = []
-            for row in sample_table:
-                #group_dict[row[0]] = groups[0]
-                key_list.append(str(row[0]))
-            group_list = [groups[0]]*len(key_list)
-            context["table_data"] = js_data
-            context["table_headers"] = js_headers
-            context["job_id"] = query_id
-            context["group_data"] = json.dumps(group_list)
-            context["group_keys"] = json.dumps(key_list)
-
-            return context
-
-        elif params.get("skip"):
-
-            # headers = ["key", "value"]
-            # header_list = []
-            # for header in headers:
-            #     header_list.append({"title": header})
-            # body = []
-            # for p in params.keys():
-            #     body.append([p, params[p]])
-            # js_headers = json.dumps(header_list)
-            # js_data = json.dumps(body)
-            #
-            # context["table_data"] = js_data
-            # context["table_headers"] = js_headers
-
-
-
-            return context
-        elif params.get("ifile") != " ":
-            with open(params.get("ifile"),"r") as input_f:
-                lines=input_f.readlines()
-                header =lines[0]
-            if "," in header:
-                sample_list=header.split(",")
-            else:
-                sample_list = header.split("\t")
-
-            groups = params.get("sampleGroupsMat").split("#")
-            names = sample_list[1:]
-            headers = ["Sample Name", "Group"]
-            for group in groups:
-                new_option = "<option>" + group + "</option>"
-                to_rep = "</select>"
-                replacing = new_option + to_rep
-                base_selector = base_selector.replace(to_rep, replacing)
-
-            for name in names:
-                buttons = base_selector.format(sample_id=name)
-                row = [name, buttons]
-                sample_table.append(row)
-
-            header_list = []
-            for header in headers:
-                header_list.append({"title": header})
-
-            js_headers = json.dumps(header_list)
-            js_data = json.dumps(sample_table)
-
-            key_list = []
-            for row in sample_table:
-                # group_dict[row[0]] = groups[0]
-                key_list.append(str(row[0]))
-            group_list = [groups[0]] * len(key_list)
-            context["table_data"] = js_data
-            context["table_headers"] = js_headers
-            context["job_id"] = query_id
-            context["group_data"] = json.dumps(group_list)
-            context["group_keys"] = json.dumps(key_list)
-
-            return context
-
-    def form_valid(self, form):
-        # This method is called when valid form data has been POSTed.
-        # It should return an HttpResponse.
-        #call, pipeline_id = form.create_call()
-        pipeline_id,call = form.create_call()
-        self.success_url = reverse_lazy('srnade') + '?id=' + pipeline_id
-
-        # print(call)
-        os.system(call)
-        js = JobStatus.objects.get(pipeline_key=pipeline_id)
-        js.status.create(status_progress='sent_to_queue')
-        js.job_status = 'sent_to_queue'
-        js.save()
-        return super(DeLaunch, self).form_valid(form)
