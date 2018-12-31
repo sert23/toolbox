@@ -377,8 +377,8 @@ def add_mirimg(new_record, results):
         imgs.append(os.path.join(new_record.pipeline_key, "graphs", "microRNA_species.png"))
     if os.path.exists(os.path.join(new_record.outdir, "graphs", "microRNA_top.png")):
         imgs.append(os.path.join(new_record.pipeline_key, "graphs", "microRNA_top.png"))
-    if os.path.exists(os.path.join(new_record.outdir, "graphs", "isomiR_NTA.png")):
-        imgs.append(os.path.join(new_record.pipeline_key, "graphs", "isomiR_NTA.png"))
+    # if os.path.exists(os.path.join(new_record.outdir, "graphs", "isomiR_NTA.png")):
+    #     imgs.append(os.path.join(new_record.pipeline_key, "graphs", "isomiR_NTA.png"))
     if os.path.exists(os.path.join(new_record.outdir, "graphs", "miRBase_otherVariants.png")):
         imgs.append(os.path.join(new_record.pipeline_key, "graphs", "miRBase_otherVariants.png"))
     if len(imgs) != 0:
@@ -587,8 +587,8 @@ def result_new(request):
                         add_mirimg(new_record, results)
                         add_mirprof(params, results)
 
-                    results["miRNA_plots"] = top_miRNA_plot(os.path.join(new_record.outdir,"stat","microRNA_top.txt"), "Top 10 miRNAs")
-                    image_list.append(results["miRNA_plots"][0][1])
+                    # results["miRNA_plots"] = top_miRNA_plot(os.path.join(new_record.outdir,"stat","microRNA_top.txt"), "Top 10 miRNAs")
+                    # image_list.append(results["miRNA_plots"][0][1])
 
                 #sRNA summary
                 if "libs" in parameters:
