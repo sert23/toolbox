@@ -680,10 +680,24 @@ def render_table(request, mode, job_id, lib=""):
         except:
             pass
 
-    if mode == "isomir":
+    if mode == "old_isomir":
         result["title"] = "isomiR summary: (NTA: non-templated addition; lv=length variant; E=extension; T=trimmed; mv=multi-variant)"
         ifile = os.path.join(new_record.outdir, "stat", "isomiR_summary.txt")
         parser = IsomirParser(ifile)
+        table = [obj for obj in parser.parse()]
+        id = "table"
+        try:
+            header = table[0].get_sorted_attr()
+            r = Result(id, define_table(header, 'TableResult')(table[:500]))
+            result["table"] = r
+            result["sec"] = "microRNA"
+        except:
+            pass
+
+    if mode == "isomir":
+        result["title"] = "isomiR summary: (NTA: non-templated addition; lv=length variant; E=extension; T=trimmed; mv=multi-variant)"
+        ifile = os.path.join(new_record.outdir, "stat", "isomiR_summary.txt")
+        parser = GeneralParser(ifile)
         table = [obj for obj in parser.parse()]
         id = "table"
         try:
