@@ -396,7 +396,7 @@ class De_method_view(DetailView):
         context["DE_method"] = de_dict.get(de_method)
         mbp_list = []
         with open(os.path.join(folder,"multiboxplot.config"),"r") as multi_f:
-            for line in sect_f.readlines():
+            for line in multi_f.readlines():
                 row = line.split("\t")
                 tag = row[-1].rstrip()
                 input_path = row[0]
