@@ -38,6 +38,8 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#sRNAbench" data-toggle="tab">sRNAbench</a>
                 </li>
+                <li class="active"><a href="#batch" data-toggle="tab">sRNAbench</a>
+                </li>
                 <li class=""><a href="#sRNAde" data-toggle="tab">sRNAde</a>
                 </li>
                 <li class=""><a href="#sRNAblast" data-toggle="tab">sRNAblast</a>
@@ -57,22 +59,27 @@
             <div class="tab-content">
                 <div class="tab-pane fade active in" id="sRNAbench">
                     <a href="{{ settings.SUB_SITE }}/srnabench"> <h3>sRNAbench:</h3> <h4>Expression profiling of small RNAs and prediction of novel microRNAs from deep sequencing data</h4>  </a>
-                    <h4 style="line-height: 150%">sRNAbench is principally designed for the use in model species, or at least species with
-                        an available genome assembly or annotations is fasta format. It accepts several commonly
-                        used input formats like fastq, sra, fasta or read/count. It performs the expression
-                        profiling of known microRNAs and other types of small RNAs, detects and analysis
-                        isomiRs, prepares several graphical summaries and predicts novel microRNAs both in
-                        plants and animals.</h4>
+                    <h4 style="line-height: 150%">sRNAbench is mainly designed to be uses in model species, or at least species with
+                        an available genome assembly or fasta-formatted annotations. Several commonly used input formats like fastq, sra, fasta or read/count are supported.
+                        It performs expression profiling of known microRNAs and other types of small RNAs, detection and analysis of isomiRs,
+                        outputs several graphical summaries and predicts novel microRNAs both in plants and animals.</h4>
+                </div>
+
+                <div class="tab-pane fade" id="batch">
+                    <a href="{{ settings.SUB_SITE }}/multiupload"> <h3>sRNAbench (batch mode):</h3> <h4> Parallel expression profiling of small RNAs for several files at once</h4>  </a>
+                    <h4 style="line-height: 150%"> Batch mode is a new feature of sRNAbench that allows for intuitive profiling of several samples at once.
+                    If you have several samples with the same sequencing approach (library preparation) this tool will profile all these samples using the same
+                    bioinformatics protocol. This will also guarantee that all your samples are profiled following the exact same steps.</h4>
                 </div>
 
                 <div class="tab-pane fade" id="sRNAde">
                     <a href="{{ settings.SUB_SITE }}/srnade"> <h3>sRNAde:</h3> <h4>Differential expression analysis </h4></a>
                     <h4 style="line-height: 150%">sRNAde is a module for the detection of differentially expressed sRNA. The input is
                                 either a number of sRNAbench output folders or a user-given expression matrix.
-                                For the detection of differentially expressed RNAs it applies 3 widely used methods,
-                                edgeR, DEseq and noiseq. Apart of the output from the individual methods, it provides a
+                                For the detection of differentially expressed RNAs it applies 5 widely used methods:
+                                t-test on Reas per Million, edgeR, DEseq, DEseq2 and noiseq. Besides individual methods output, it provides a
                                 consensus differential expression file. Additionally, this tool can perform cluster
-                                analysis (heatmaps), isomiR analysis and it gives a summary on the sequencing statistic
+                                analysis (heatmaps), isomiR analysis and it gives a summary on the sequencing statistics
                                 of all used samples (if the input has been from sRNAbench).</h4>
                 </div>
 
@@ -89,7 +96,8 @@
                 </div>
 
                 <div class="tab-pane fade" id="sRNAblast">
-                    <a href="{{ settings.SUB_SITE }}/srnablast"> <h3>sRNAblast:</h3> <h4>Blast analysis of deep sequencing reads against a local nt/nr (NCBI link) database</h4>  </a>
+                    <a href="https://bioinfo5.ugr.es/srnatoolbox/srnablast"> <h3>sRNAblast:</h3> <h4>Blast analysis of deep sequencing reads against a local nt/nr (NCBI link) database</h4>  </a>
+{#                    <a href="{{ settings.SUB_SITE }}/srnablast"> <h3>sRNAblast:</h3> <h4>Blast analysis of deep sequencing reads against a local nt/nr (NCBI link) database</h4>  </a>#}
                     <h4 style="line-height: 150%">This tool is principally aimed for the analysis of reads that could not be mapped in
                                 sRNAbench or other profiling tools. The results could either point towards contamination
                                 sources or biological meaningful information like the presence of unexpected viral or
@@ -98,13 +106,15 @@
 
 
                 <div class="tab-pane fade" id="miRNAconsTarget">
-                    <a href="{{ settings.SUB_SITE }}/amirconstarget"> <h3>animalconsTarget:</h3> <h4>Predict microRNA targets on user defined sets of microRNAs and 3'UTRs </h4> </a>
+                    <a href="https://bioinfo5.ugr.es/srnatoolbox/amirconstarget"> <h3>animalconsTarget:</h3> <h4>Predict microRNA targets on user defined sets of microRNAs and 3'UTRs </h4> </a>
+{#                    <a href="{{ settings.SUB_SITE }}/amirconstarget"> <h3>animalconsTarget:</h3> <h4>Predict microRNA targets on user defined sets of microRNAs and 3'UTRs </h4> </a>#}
                     <h4 style="line-height: 150%">Most microRNA target prediction tools are implemented as webservers on a limited number of
                                 species, or do allow only the prediction of a limited number of microRNAs and/or mRNAs.
                                 miRNAconsTargets uses a selection microRNA target prediction programs and
                                 applies them to the user supplied sets of microRNAs and 3'UTRs. It reports both,
                                 individual predictions and a consensus prediction. </h4>
-                    <a href="{{ settings.SUB_SITE }}/pmirconstarget"> <h3>plantconsTarget:</h3> <h4>Predict microRNA targets on user defined sets of microRNAs and 3'UTRs or CDS sequences </h4> </a>
+                    <a href="https://bioinfo5.ugr.es/srnatoolbox/amirconstarget"> <h3>plantconsTarget:</h3> <h4>Predict microRNA targets on user defined sets of microRNAs and 3'UTRs or CDS sequences </h4> </a>
+{#                    <a href="{{ settings.SUB_SITE }}/pmirconstarget"> <h3>plantconsTarget:</h3> <h4>Predict microRNA targets on user defined sets of microRNAs and 3'UTRs or CDS sequences </h4> </a>#}
                     <h4 style="line-height: 150%">Most microRNA target prediction tools are implemented as webservers on a limited number of
                                 species, or do allow only the prediction of a limited number of microRNAs and/or mRNAs.
                                 miRNAconsTargets uses a selection microRNA target prediction programs and
@@ -145,33 +155,33 @@
         </div>
         </div>
 
-        <div class="panel panel-green">
-        <div class="panel-heading">
-            <h3>Workflows</h3>
-        </div>
-        <div class="panel-body">
-
-            <!-- Nav tabs -->
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#miRNAfuncTargets" data-toggle="tab">miRNAfuncTargets</a>
-                </li>
-            </ul>
-
-            <!-- Tab panes -->
-
-            <div class="tab-content">
-                <div class="tab-pane fade active in" id="miRNAfuncTargets">
-                    <a href=""> <h3>miRNAfuncTargets:</h3> <h4>Cross-species microRNA target prediction and enrichment analysis of functional annotations. (Currently not available)</h4>  </a>
+{#        <div class="panel panel-green">#}
+{#        <div class="panel-heading">#}
+{#            <h3>Workflows</h3>#}
+{#        </div>#}
+{#        <div class="panel-body">#}
+{##}
+{#            <!-- Nav tabs -->#}
+{#            <ul class="nav nav-tabs">#}
+{#                <li class="active"><a href="#miRNAfuncTargets" data-toggle="tab">miRNAfuncTargets</a>#}
+{#                </li>#}
+{#            </ul>#}
+{##}
+{#            <!-- Tab panes -->#}
+{##}
+{#            <div class="tab-content">#}
+{#                <div class="tab-pane fade active in" id="miRNAfuncTargets">#}
+{#                    <a href=""> <h3>miRNAfuncTargets:</h3> <h4>Cross-species microRNA target prediction and enrichment analysis of functional annotations. (Currently not available)</h4>  </a>#}
 {#                    <a href="{{ settings.SUB_SITE }}/mirnafunctargets/"> <h3>miRNAfuncTargets:</h3> <h4>Cross-species microRNA target prediction and enrichment analysis of functional annotations.</h4>  </a>#}
-                    <h4 style="line-height: 150%">This workflow connects directly sRNAconsTargets and sRNAfuncTerms.
-                        It allows the user to i) predict the putative target genes of a set of exogenous microRNAs and
-                        ii) determine the enriched functional annotations, i.e. which pathways or functions are enriched
-                        for the target genes.</h4>
-                </div>
-
-        </div>
-            </div>
-            </div>
+{#                    <h4 style="line-height: 150%">This workflow connects directly sRNAconsTargets and sRNAfuncTerms.#}
+{#                        It allows the user to i) predict the putative target genes of a set of exogenous microRNAs and#}
+{#                        ii) determine the enriched functional annotations, i.e. which pathways or functions are enriched#}
+{#                        for the target genes.</h4>#}
+{#                </div>#}
+{##}
+{#        </div>#}
+{#            </div>#}
+{#            </div>#}
 
         <div class="panel panel-info">
         <div class="panel-heading">
