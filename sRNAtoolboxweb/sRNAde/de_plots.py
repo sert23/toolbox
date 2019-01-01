@@ -1,5 +1,4 @@
 # Import libraries
-import os
 import itertools
 import plotly.graph_objs as go
 import pandas as pd
@@ -12,9 +11,12 @@ def general_plot(input_file, x_lab, y_lab, title):
     try:
         input_table = pd.read_table(input_file, sep='\t')
         col_names = list(input_table.columns[1:])
+        input_table.ix[:, 0] = input_table.ix[:, 0].apply(lambda x: x[:20] + '...' if len(x) > 20 else x)
 
         layout = go.Layout(
             autosize=True,
+            width=1050,
+            height=580,
             margin=go.layout.Margin(
                 l=100,
                 r=50,
@@ -59,9 +61,12 @@ def general_plot_cols(input_file, x_lab, y_lab, title):
         input_table = input_table.transpose().reset_index()
         input_table = input_table.rename(columns=input_table.iloc[0]).drop(input_table.index[0])
         col_names = list(input_table.columns[1:])
+        input_table.ix[:, 0] = input_table.ix[:, 0].apply(name_shorter)
 
         layout = go.Layout(
             autosize=True,
+            width=1050,
+            height=580,
             margin=go.layout.Margin(
                 l=100,
                 r=50,
@@ -418,6 +423,8 @@ def make_length_plot(input_file):
 
         layout = go.Layout(
             autosize=True,
+            width=1050,
+            height=580,
             margin=go.layout.Margin(
                 l=100,
                 r=50,
@@ -464,6 +471,8 @@ def make_full_length_plot(input_file):
 
         layout = go.Layout(
             autosize=True,
+            width=1050,
+            height=580,
             margin=go.layout.Margin(
                 l=100,
                 r=50,
@@ -482,7 +491,7 @@ def make_full_length_plot(input_file):
         )
 
         fig = go.Figure(data=data, layout=layout)
-        div_obj = plot(fig, show_link=False, auto_open=False, output_type='div')
+        div_obj = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
         return div_obj
 
     except:
@@ -510,6 +519,8 @@ def make_length_genome_plot(input_file):
 
         layout = go.Layout(
             autosize=True,
+            width=1050,
+            height=580,
             margin=go.layout.Margin(
                 l=100,
                 r=50,
