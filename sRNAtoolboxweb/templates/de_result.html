@@ -15,13 +15,11 @@
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
+
             <h3 class="page-header">sRNAde Results for job ID: <a href="{{ settings.SUB_SITE }}/jobstatus/{{ id }}" class="alert-link">{{ id }}</a> </h3>
+
         </div>
         <!-- /.col-lg-12 -->
-    </div>
-    <!-- /.row -->
-    <div class="row">
-
         <div class="col-lg-8">
 
             <p class="text-danger">The results will be stored for 15 days (This will be removed on:  {{ date|date:"D d M Y" }}).</p>
@@ -29,98 +27,188 @@
             <p class="text-primary">If you use the sRNAde please check <a data-toggle="modal" data-target="#HWTC" >How to Cite.</a></p>
 
         </div>
-
-        {% if parameters %}
-            <div class="col-lg-12">
-            <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    <a data-toggle="collapse" href="#parameters" >Parameters</a>
-                </h4>
-            </div>
-            <!-- .panel-heading -->
-            <div id="parameters" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <div class="col-lg-6">
-                        <pre style="white-space: pre-line">
-                            {{ parameters }}
-                        </pre>
-                    </div>
-                </div>
-            </div>
-            </div>
-            </div>
-        {% endif %}
+    </div>
+    <!-- /.row -->
+    <div class="row">
 
         <div class="col-lg-12">
-            <div class="tab" role="tabpanel" data-example-id="togglable-tabs">
-                <ul id="myTab" class="nav nav-tabs">
-                    
-                    <li role="presentation" class="active"><a href="#tab_summary" data-toggle="tab" aria-expanded="true">Results summary</a>
-                    </li>
-                    <li role="presentation" class=""><a href="#tab_preprocessing" data-toggle="tab" aria-expanded="false">Preprocessing/QC</a>
-                    </li>
-                    <li role="presentation" class=""><a href="#tab_mapping_stats" data-toggle="tab" aria-expanded="false">Mapping statistics</a>
-                    </li>
-                    <li role="presentation" class=""><a href="#tab_mirna_isomir_stats" data-toggle="tab" aria-expanded="false">miRNA and isomiR statistics</a>
-                    </li>
-                    <li role="presentation" class=""><a href="#tab_de" data-toggle="tab" aria-expanded="false">Differentially expression</a>
-                    </li>
-                    <li role="presentation" class=""><a href="#tab_seq_variation" data-toggle="tab" aria-expanded="false">Sequence variation</a>
-                    </li>
-                </ul>
+            <div class="row">
+            {% if parameters %}
+                <div class="col-lg-6">
+                <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#parameters">Parameters</a>
+                    </h4>
+                </div>
+                <!-- .panel-heading -->
+                <div id="parameters" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div class="col-lg-6">
+                            <pre style="white-space: pre-line">
+                                {{ parameters }}
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+            {% endif %}
+            </div>
 
-                <!-- Tab panes -->
-                <div class="tab-content">
+            <!-- Nav tabs -->
+            <div class="" role="tabpanel" data-example-id="togglable-tabs">
+            <ul id="myTab" class="nav nav-tabs">
 
-                    <div class="tab-pane fade active in" id="tab_summary" aria-labelledby="tab_summary">
-                        <div class="x-content">
+                <li class="active"><a href="#summary" data-toggle="tab">Results summary</a>
+                </li>
+                <li><a href="#preprocessing" data-toggle="tab">Preprocessing/QC</a>
+                </li>
+                <li><a href="#mapping_stats" data-toggle="tab">Mapping statistics</a>
+                </li>
+                <li><a href="#miRNA_isomiR_stats" data-toggle="tab">miRNA and isomiR statistics</a>
+                </li>
+                <li><a href="#DE" data-toggle="tab">Differentially expression</a>
+                </li>
+                <!--<li><a href="#seq_variation" data-toggle="tab">Sequence variation</a>-->
+                <!--</li>-->
+            </ul>
 
-                        <div class="panel panel-primary" id="mapping_stats">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" href="#mapping_stats_content" >Mapping statistics</a>
-                                </h4>
-                            </div>
-                            <!-- .panel-heading -->
-                            <div id="mapping_stats_content" class="panel-collapse collapse in">
-                                <div class="panel-body">
+            <!-- Tab panes -->
+            <div class="tab-content">
 
-                                    <div class="col-lg-12">
+                <div class="tab-pane fade in active" id="summary">
+                    <div class="x-content">
+                        <div class="col-lg-12">
 
-                                        <!-- Plots -->
-                                        {% if mapping_raw_plot %}
-                                            <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
-                                                {{ mapping_raw_plot|safe }}
+                            <div class="panel panel-primary" id="map_stats">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#map_stats_content">Mapping statistics</a>
+                                    </h4>
+                                </div>
+                                <!-- .panel-heading -->
+                                <div id="map_stats_content" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+
+                                        <!-- Number of mapped or assigned reads -->
+                                        {% if mapping_raw_bp or mapping_raw_t %}
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#mapping_raw">{{ mapping_raw_t.name }}</a>
+                                                </h4>
                                             </div>
+                                            <div id="mapping_raw" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+
+                                                    <div class="col-lg-12">
+                                                    {% if mapping_raw_bp %}
+                                                        <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
+                                                            {{ mapping_raw_bp|safe }}
+                                                        </div>
+                                                    {% endif %}
+                                                    <br>
+                                                    {% if mapping_raw_t %}
+                                                        <div style="overflow: auto; margin-top: auto">
+                                                            {% render_table mapping_raw_t.content %}
+                                                        </div>
+                                                    {% endif %}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                         {% endif %}
-                                        <br>
-                                        {% if mapping_perc_plot %}
-                                            <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
-                                                {{ mapping_perc_plot|safe }}
+
+                                        <!-- Percentage of mapped or assigned reads -->
+                                        {% if mapping_perc_bp or mapping_perc_t %}
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#mapping_perc">{{ mapping_perc_t.name }}</a>
+                                                </h4>
                                             </div>
+                                            <div id="mapping_perc" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+
+                                                    <div class="col-lg-12">
+                                                {% if mapping_perc_bp %}
+                                                    <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
+                                                        {{ mapping_perc_bp|safe }}
+                                                    </div>
+                                                {% endif %}
+                                                <br>
+                                                {% if mapping_perc_t %}
+                                                    <div style="overflow: auto; margin-top: auto">
+                                                        {% render_table mapping_perc_t.content %}
+                                                    </div>
+                                                {% endif %}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                         {% endif %}
 
-                                        <!-- Tables -->
-                                        {% if mapping_raw_tab %}
-                                        <h3>{{ mapping_raw_tab.name }}</h3>
-                                            <div style="overflow: auto; margin-top: auto">
-                                                {% render_table mapping_raw_tab.content %}
+                                        <!-- Percentage per detected RNA category -->
+                                        {% if mapping_stat_sensePref_bp or mapping_stat_sensePref_t %}
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#mapping_stat_sp">{{ mapping_stat_sensePref_t.name }}</a>
+                                                </h4>
                                             </div>
+                                            <div id="mapping_stat_sp" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+
+                                                    <div class="col-lg-12">
+                                                {% if mapping_stat_sensePref_bp %}
+                                                    <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
+                                                        {{ mapping_stat_sensePref_bp|safe }}
+                                                    </div>
+                                                {% endif %}
+                                                <br>
+                                                {% if mapping_stat_sensePref_t %}
+                                                    <div style="overflow: auto; margin-top: auto">
+                                                        {% render_table mapping_stat_sensePref_t.content %}
+                                                    </div>
+                                                {% endif %}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                         {% endif %}
 
-                                        {% if mapping_perc_tab %}
-                                        <h3>{{ mapping_perc_tab.name }}</h3>
-                                            <div style="overflow: auto; margin-top: auto">
-                                                {% render_table mapping_perc_tab.content %}
+                                        <!-- Detected number of miRNAs and precursor sequences -->
+                                        {% if miRNA_raw_bp or miRNA_raw_t %}
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#miRNA_raw">Detected number of miRNAs and precursor sequences</a>
+                                                </h4>
                                             </div>
-                                        {% endif %}
+                                            <div id="miRNA_raw" class="panel-collapse collapse in">
+                                                <div class="panel-body">
 
-                                        {% if mapping_stat_sensePref_t_tab %}
-                                        <h3>{{ mapping_stat_sensePref_t_tab.name }}</h3>
-                                            <div style="overflow: auto; margin-top: auto">
-                                                {% render_table mapping_stat_sensePref_t_tab.content %}
+                                                    <div class="col-lg-12">
+                                                    {% if miRNA_raw_bp %}
+                                                        <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
+                                                            {{ miRNA_raw_bp|safe }}
+                                                        </div>
+                                                    {% endif %}
+                                                    <br>
+                                                    {% if miRNA_raw_t %}
+                                                        <div style="overflow: auto; margin-top: auto">
+                                                            {% render_table miRNA_raw_t.content %}
+                                                        </div>
+                                                    {% endif %}
+                                                    </div>
+
+                                                </div>
                                             </div>
+                                        </div>
                                         {% endif %}
 
                                         <!--{% if mapping_stat_table %}-->
@@ -129,61 +217,93 @@
                                                 <!--{% render_table mapping_stat_table.content %}-->
                                             <!--</div>-->
                                         <!--{% endif %}-->
-                                    <br>
+                                        <br>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                         </div>
-                        </div>
-                        <div class="clearfix"></div>
                     </div>
+                </div>
 
-                    <div class="tab-pane fade active" id="tab_preprocessing" aria-labelledby="tab_summary">
-                        <div class="x-content">
+                <div class="tab-pane fade" id="preprocessing">
+                    <div class="x-content">
+                        <div class="col-lg-12">
 
                             <div class="panel panel-primary" id="preprocessing_summary">
                                 <div class="panel-heading">
                                     <h4 class="panel-title">
-                                        <a data-toggle="collapse" href="#summary_content" >Graphic Sequencing Statistics Summary</a>
+                                        <a data-toggle="collapse" href="#summary_content">Graphic Sequencing Statistics Summary</a>
                                     </h4>
                                 </div>
                                 <!-- .panel-heading -->
                                 <div id="summary_content" class="panel-collapse collapse in">
                                     <div class="panel-body">
 
-                                        <!-- Plots -->
-                                        {% if preproc_raw_plot %}
-                                            <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
-                                                {{ preproc_raw_plot|safe }}
-                                            </div>
-                                        {% endif %}
-                                        <br>
-                                        {% if preproc_perc_plot %}
-                                            <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
-                                                {{ preproc_perc_plot|safe }}
+                                        <!-- Sequencing stats -->
+                                        {% if sequencing_stat_t %}
+                                            <div style="overflow: auto; margin-top: auto">
+                                                {% render_table sequencing_stat_t.content %}
                                             </div>
                                         {% endif %}
 
-                                        <!-- Tables -->
-                                        {% if sequencing_stat_table %}
-                                        <h3>{{ sequencing_stat_table.name }}</h3>
-                                            <div style="overflow: auto; margin-top: auto">
-                                                {% render_table sequencing_stat_table.content %}
+                                        <!-- Preprocessing statistics -->
+                                        {% if preproc_raw_bp or preproc_raw_t %}
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#preproc_raw">{{ preproc_raw_t.name }}</a>
+                                                </h4>
                                             </div>
+                                            <div id="preproc_raw" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+
+                                                    <div class="col-lg-12">
+                                                     {% if preproc_raw_bp %}
+                                                        <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
+                                                            {{ preproc_raw_bp|safe }}
+                                                        </div>
+                                                    {% endif %}
+                                                    <br>
+                                                    {% if preproc_raw_t %}
+                                                        <div style="overflow: auto; margin-top: auto">
+                                                            {% render_table preproc_raw_t.content %}
+                                                        </div>
+                                                    {% endif %}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                         {% endif %}
 
-                                        {% if preproc_raw_tab %}
-                                        <h3>{{ preproc_raw_tab.name }}</h3>
-                                            <div style="overflow: auto; margin-top: auto">
-                                                {% render_table preproc_raw_tab.content %}
+                                        <!-- Preprocessing statistics -->
+                                        {% if preproc_raw_bp or preproc_raw_t %}
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#preproc_perc">{{ preproc_perc_t.name }}</a>
+                                                </h4>
                                             </div>
-                                        {% endif %}
+                                            <div id="preproc_perc" class="panel-collapse collapse in">
+                                                <div class="panel-body">
 
-                                        {% if preproc_perc_tab %}
-                                        <h3>{{ preproc_perc_tab.name }}</h3>
-                                            <div style="overflow: auto; margin-top: auto">
-                                                {% render_table preproc_perc_tab.content %}
+                                                    <div class="col-lg-12">
+                                                     {% if preproc_perc_bp %}
+                                                        <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
+                                                            {{ preproc_perc_bp|safe }}
+                                                        </div>
+                                                    {% endif %}
+                                                    <br>
+                                                    {% if preproc_perc_t %}
+                                                        <div style="overflow: auto; margin-top: auto">
+                                                            {% render_table preproc_perc_t.content %}
+                                                        </div>
+                                                    {% endif %}
+                                                    </div>
+
+                                                </div>
                                             </div>
+                                        </div>
                                         {% endif %}
 
                                         <!--{% if length_plot %}-->
@@ -204,127 +324,209 @@
                                 <div id="read_length_content" class="panel-collapse collapse in">
                                     <div class="panel-body">
 
-                                        <!-- Plots -->
-                                        {% if read_length_full_plot %}
-                                            <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
-                                                {{ read_length_full_plot|safe }}
+                                        <!-- Read length distribution (full) -->
+                                        {% if read_length_full_plot or read_length_full_t %}
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#read_length_full">{{ read_length_full_t.name }}</a>
+                                                </h4>
                                             </div>
-                                        {% endif %}
-                                        <br>
-                                        {% if read_length_analysis_plot %}
-                                            <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
-                                                {{ read_length_analysis_plot|safe }}
+                                            <div id="read_length_full" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+
+                                                    <div class="col-lg-12">
+                                                    {% if read_length_full_plot %}
+                                                        <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
+                                                            {{ read_length_full_plot|safe }}
+                                                        </div>
+                                                    {% endif %}
+                                                    <br>
+                                                    {% if read_length_full_t %}
+                                                        <div style="overflow: auto; margin-top: auto">
+                                                            {% render_table read_length_full_t.content %}
+                                                        </div>
+                                                    {% endif %}
+                                                    </div>
+
+                                                </div>
                                             </div>
-                                        {% endif %}
-                                        <br>
-                                        {% if read_length_genome_plot %}
-                                            <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
-                                                {{ read_length_genome_plot|safe }}
-                                            </div>
+                                        </div>
                                         {% endif %}
 
-                                        <!-- Tables -->
-                                        {% if read_length_full_t_tab %}
-                                        <h3>{{ read_length_full_t_tab.name }}</h3>
-                                            <div style="overflow: auto; margin-top: auto">
-                                                {% render_table read_length_full_t_tab.content %}
+                                        <!-- Read length distribution (analysis) -->
+                                        {% if read_length_analysis_plot or read_length_analysis_t %}
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#read_length_analysis">{{ read_length_analysis_t.name }}</a>
+                                                </h4>
                                             </div>
+                                            <div id="read_length_analysis" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+
+                                                    <div class="col-lg-12">
+                                                    {% if read_length_analysis_plot %}
+                                                        <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
+                                                            {{ read_length_analysis_plot|safe }}
+                                                        </div>
+                                                    {% endif %}
+                                                    <br>
+                                                    {% if read_length_analysis_t %}
+                                                    <h3>{{ read_length_analysis_t.name }}</h3>
+                                                        <div style="overflow: auto; margin-top: auto">
+                                                            {% render_table read_length_analysis_t.content %}
+                                                        </div>
+                                                    {% endif %}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                         {% endif %}
 
-                                        {% if read_length_analysis_t_tab %}
-                                        <h3>{{ read_length_analysis_t_tab.name }}</h3>
-                                            <div style="overflow: auto; margin-top: auto">
-                                                {% render_table read_length_analysis_t_tab.content %}
+                                        <!-- Read length distribution (genome mapped) -->
+                                        {% if read_length_genome_plot or read_length_genome_t %}
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#read_length_genome">{{ read_length_genome_t.name }}</a>
+                                                </h4>
                                             </div>
-                                        {% endif %}
+                                            <div id="read_length_genome" class="panel-collapse collapse in">
+                                                <div class="panel-body">
 
-                                        {% if genome_mapping_t_tab %}
-                                        <h3>{{ genome_mapping_t_tab.name }}</h3>
-                                            <div style="overflow: auto; margin-top: auto">
-                                                {% render_table genome_mapping_t_tab.content %}
+                                                    <div class="col-lg-12">
+                                                    {% if read_length_genome_plot %}
+                                                        <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
+                                                            {{ read_length_genome_plot|safe }}
+                                                        </div>
+                                                    {% endif %}
+                                                    <br>
+                                                    {% if read_length_genome_t %}
+                                                        <div style="overflow: auto; margin-top: auto">
+                                                            {% render_table read_length_genome_t.content %}
+                                                        </div>
+                                                    {% endif %}
+                                                    </div>
+
+                                                </div>
                                             </div>
+                                        </div>
                                         {% endif %}
 
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
-                    <div class="tab-pane fade active" id="tab_mapping_stats" aria-labelledby="tab_summary">
-                        <div class="x-content">
-                            <div class="col-lg-12">
-                                <br>
-                                <!-- Plots -->
-                                {% if mapping_stat_sensePref_bp_plot %}
-                                    <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
-                                        {{ mapping_stat_sensePref_bp_plot|safe }}
-                                    </div>
-                                {% endif %}
-                                <br>
-                                {% if genome_mapping_bp_plot %}
-                                    <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
-                                        {{ genome_mapping_bp_plot|safe }}
-                                    </div>
-                                {% endif %}
-
-                                <!-- Tables -->
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade active" id="tab_mirna_isomir_stats" aria-labelledby="tab_summary">
-                        <div class="x-content">
-                            <div class="col-lg-12">
-                                <br>
-                                <!-- Plots -->
-                                {% if iso_sample_bp_plot %}
-                                    <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
-                                        {{ iso_sample_bp_plot|safe }}
-                                    </div>
-                                {% endif %}
-
-                                <!-- Tables -->
-                                {% if iso_NTA_A_t_tab %}
-                                <h3>{{ iso_NTA_A_t_tab.name }}</h3>
-                                    <div style="overflow: auto; margin-top: auto">
-                                        {% render_table iso_NTA_A_t_tab.content %}
-                                    </div>
-                                {% endif %}
-
-                                {% if iso_NTA_U_t_tab %}
-                                <h3>{{ iso_NTA_U_t_tab.name }}</h3>
-                                    <div style="overflow: auto; margin-top: auto">
-                                        {% render_table iso_NTA_U_t_tab.content %}
-                                    </div>
-                                {% endif %}
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="tab_de" aria-labelledby="tab_summary">
-                        <div class="x-content">
-                        <p>Hi there DE!</p>
-                        </div>
-                    </div>
-
-                    <div class="tab-pane fade" id="tab_seq_variation" aria-labelledby="tab_summary">
-                        <div class="x-content">
-                        <p>Hi there sequence variation!</p>
-                        </div>
-                    </div>
-
                 </div>
+
+                <div class="tab-pane fade" id="mapping_stats">
+                    <div class="x-content">
+                        <div class="col-lg-12">
+
+                            <!-- Genome mapping distribution (HR=highly redundant reads) -->
+                            {% if genome_mapping_t %}
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#genome_mapping">{{ genome_mapping_t.name }}</a>
+                                    </h4>
+                                </div>
+                                <div id="genome_mapping" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+
+                                        <div class="col-lg-12">
+                                            {% if genome_mapping_bp %}
+                                                <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
+                                                    {{ genome_mapping_bp|safe }}
+                                                </div>
+                                            {% endif %}
+                                            <br>
+                                            {% if genome_mapping_t %}
+                                                <div style="overflow: auto; margin-top: auto">
+                                                    {% render_table genome_mapping_t.content %}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="miRNA_isomiR_stats">
+                    <div class="x-content">
+                        <div class="col-lg-12">
+
+                            <!-- Fraction of different isomiR classes per sample -->
+                            {% if iso_sample_bp %}
+                            <div class="panel panel-success">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" href="#iso_sample">Fraction of different isomiR classes per sample</a>
+                                    </h4>
+                                </div>
+                                <div id="iso_sample" class="panel-collapse collapse in">
+                                    <div class="panel-body">
+
+                                        <div class="col-lg-12">
+                                        {% if iso_sample_bp %}
+                                            <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
+                                                {{ iso_sample_bp|safe }}
+                                            </div>
+                                        {% endif %}
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+                            <!-- Tables -->
+                            {% if iso_NTA_A_t %}
+                            <h3>{{ iso_NTA_A_t.name }}</h3>
+                                <div style="overflow: auto; margin-top: auto">
+                                    {% render_table iso_NTA_A_t.content %}
+                                </div>
+                            {% endif %}
+
+                            {% if iso_NTA_U_t %}
+                            <h3>{{ iso_NTA_U_t.name }}</h3>
+                                <div style="overflow: auto; margin-top: auto">
+                                    {% render_table iso_NTA_U_t.content %}
+                                </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="DE">
+                    <div class="x-content">
+                        <div class="col-lg-12">
+                            <p>Hi there DE!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!--<div class="tab-pane fade" id="seq_variation">-->
+                    <!--<div class="x-content">-->
+                    <!--<p>Hi there sequence variation!</p>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            </div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- /.row -->
-<!-- /#page-wrapper -->
 {% endblock %}
 
 
@@ -358,6 +560,16 @@
         var anchor = location.hash || $("a[data-toggle=tab]").first().attr("href");
         $('a[href=' + anchor + ']').tab('show');
     });
+</script>
+
+<script>
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
+    // alert("before");
+        $('.plotly-graph-div').each(function(i, obj) {
+    // alert("in");
+        Plotly.relayout( obj.id, { 'xaxis.autorange': true, 'yaxis.autorange': true });
+        });
+    })
 </script>
 
 {% endblock %}
