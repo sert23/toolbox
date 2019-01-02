@@ -284,10 +284,10 @@ def old_result(request):
         return redirect(reverse_lazy('srnade'))
 
 def result(request):
-
     if 'id' in request.GET:
         job_id = request.GET['id']
         new_record = JobStatus.objects.get(pipeline_key=job_id)
+
         if new_record.job_status == "Finished":
 
             results = dict()
@@ -297,7 +297,7 @@ def result(request):
             config = pd.read_table(os.path.join(new_record.outdir, 'boxplot.config'), header=None)
             for index, row in config.iterrows():
                 file, x_lab, y_lab, title = row[0:4]
-                tag = row[4] + '_plot'
+                tag = row[4]
                 results[tag] = general_plot(file, x_lab, y_lab, title)
 
             # Sequencing statistics
@@ -330,16 +330,13 @@ def result(request):
             # Tables
             tables_config = pd.read_table(os.path.join(new_record.outdir, 'tables.config'), header=None)
             for index, row in tables_config.iterrows():
-                try:
-                    file, name = row[0:2]
-                    parser = GeneralParser(file)
-                    table = [obj for obj in parser.parse()]
-                    header = table[0].get_sorted_attr()
-                    r = Result(name, define_table(header, 'TableResult')(table))
-                    tag = row[2] + '_tab'
-                    results[tag] = r
-                except:
-                    pass
+                file, name = row[0:2]
+                parser = GeneralParser(file)
+                table = [obj for obj in parser.parse()]
+                header = table[0].get_sorted_attr()
+                r = Result(name, define_table(header, 'TableResult')(table))
+                tag = row[2]
+                results[tag] = r
 
             if new_record.job_status == "Finished":
                 if new_record.stats_file and os.path.isfile(new_record.stats_file):
