@@ -349,7 +349,11 @@ def result(request):
                     labels = [obj.sample for obj in stats]
 
                 try:
-                    results["parameters"] = new_record.parameters
+                    web_par_path = os.path.join(new_record.outdir, "parametersWeb.txt")
+                    with open(web_par_path,"r") as web_par_file:
+                        web_pars = web_par_file.read()
+                    results["parameters"] = web_pars
+                    results["parameters"]=results["parameters"].replace(MEDIA_ROOT,"")
                 except:
                     pass
 
