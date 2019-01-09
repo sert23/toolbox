@@ -1,7 +1,7 @@
 # Create your views here.
 import datetime
 import itertools
-
+from os import listdir
 from django.core.urlresolvers import reverse_lazy
 import django_tables2 as tables
 import pygal
@@ -14,6 +14,7 @@ import pandas as pd
 from FileModels.deStatsParser import DeStatsParser
 from FileModels.sRNAdeparser import SRNAdeParser
 from FileModels.GeneralParser import GeneralParser
+from FileModels.summaryParser import SummaryParser
 from progress.models import JobStatus
 from utils import pipeline_utils
 from utils.sysUtils import *
@@ -326,6 +327,23 @@ def result(request):
                 results["read_length_genome_plot"] = length_genome_plot
             except:
                 results["read_length_genome_plot"] = None
+
+            # Method Tables
+
+
+
+            # Summary Tables
+
+            table_files = [os.path.join(new_record.outdir,f) for f in listdir(new_record.outdir) if f.startswith("summary_simple")]
+            summary_list = []
+            for file in table_files:
+                parser = GeneralParser(file)
+                name = os.path.basename(file)
+                table = [obj for obj in parser.parse()]
+                header = table[0].get_sorted_attr()
+                r = Result(name, define_table(header, 'TableResult')(table))
+                summary_list.append(r)
+            results["summary_list"] = summary_list
 
             # Tables
             tables_config = pd.read_table(os.path.join(new_record.outdir, 'tables.config'), header=None)
