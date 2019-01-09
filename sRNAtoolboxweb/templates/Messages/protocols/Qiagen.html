@@ -4,12 +4,11 @@
     Qiagen™ (with UMIs)
 {% endblock %}
 {% block text %}
-<p> There are 4 ways you can provide reads for sRNAbench to profile:</p>
+<p> Preprocessing of samples prepared with <a href="https://www.qiagen.com/us/shop/sequencing/qiaseq-solutions/qiaseq-mirna-ngs/#orderinginformation" target="_blank">QIAseq (Qiagen)</a>):</p>
     <ul>
-  <li>Upload a file (typically fastq or fastq.gz)</li>
-  <li>Provide a link/URL with your data (it will be downloaded and then profiled) </li>
-  <li>Provide an accession for a SRA run (they start with SRR,ERR or DRR e.g. <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR1563062" target="_blank">SRR1563062</a>)</li>
-  <li>Provide an ID from a previous sRNAbench Job to reuse an uploaded file (e.g. <a href="{{ settings.SUB_SITE }}/jobstatus/UBNMV10I6X5S169" target="_blank">UBNMV10I6X5S169</a>) </li>
+  <li>Detect the adapter sequence AACTGTAGGCACCATCAAT and the position of the UMIs </li>
+  <li>Merge fragment and UMI sequences and remove duplicates </li>
+  <li>Remove UMIs from the reads </li>
     </ul>
 
 
