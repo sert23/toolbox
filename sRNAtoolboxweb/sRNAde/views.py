@@ -14,7 +14,7 @@ import pandas as pd
 from FileModels.deStatsParser import DeStatsParser
 from FileModels.sRNAdeparser import SRNAdeParser
 from FileModels.GeneralParser import GeneralParser
-from FileModels.summaryParser import SummaryParser
+
 from progress.models import JobStatus
 from utils import pipeline_utils
 from utils.sysUtils import *
