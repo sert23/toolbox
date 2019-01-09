@@ -334,7 +334,7 @@ def result(request):
 
             # Summary Tables
 
-            table_files = [os.path.join(new_record.outdir,f) for f in listdir(new_record.outdir) if f.startswith("summary_simple")]
+            table_files = [os.path.join(new_record.outdir,f) for f in listdir(new_record.outdir) if (f.startswith("summary_simple") and f.endswith("tsv"))]
             summary_list = []
             for file in table_files:
                 parser = GeneralParser(file)
