@@ -4,13 +4,15 @@
     Bioo Scientific Nextflex™ (v2,v3) protocol
 {% endblock %}
 {% block text %}
-<p> There are 4 ways you can provide reads for sRNAbench to profile:</p>
+<p> Preprocessing of samples prepared with <a href="https://perkinelmer-appliedgenomics.com/library-preparation-kits/small-rna-library-prep/nextflex-small-rna-seq-kit-v3/" target="_blank">NEXTFLEX v2/v3</a>):</p>
     <ul>
-  <li>Upload a file (typically fastq or fastq.gz)</li>
-  <li>Provide a link/URL with your data (it will be downloaded and then profiled) </li>
-  <li>Provide an accession for a SRA run (they start with SRR,ERR or DRR e.g. <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR1563062" target="_blank">SRR1563062</a>)</li>
-  <li>Provide an ID from a previous sRNAbench Job to reuse an uploaded file (e.g. <a href="{{ settings.SUB_SITE }}/jobstatus/UBNMV10I6X5S169" target="_blank">UBNMV10I6X5S169</a>) </li>
-    </ul>
+  <li>Remove 4 nt barcode from 5' end of reads </li>
+  <li>Detect the adapter sequence: TGGAATTCTCGGGTGCCAAGGG </li>
+  <li>Minimum length of adapter sequence that needs to be aligned: 10 </li>
+  <li>Allowed mismatches between adapter and reference sequences: 1 </li>
+  <li>Remove 4 nt random adapter from 3' end of adapter trimmed reads </li>
+  </ul>
+
 
 
 {% endblock %}
