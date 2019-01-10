@@ -334,18 +334,19 @@ def result(request):
 
             # Summary Tables
 
-            table_files = [os.path.join(new_record.outdir,f) for f in listdir(new_record.outdir) if (f.startswith("summary_simple") and f.endswith("tsv"))]
-            summary_list = []
-            for file in table_files:
-                parser = GeneralParser(file)
-                name = os.path.basename(file)
-                table = [obj for obj in parser.parse()]
-                header = table[0].get_sorted_attr()
-                r = Result(name, define_table(header, 'TableResult')(table))
-                summary_list.append(r)
-            results["summary_list"] = summary_list
+            # table_files = [os.path.join(new_record.outdir,f) for f in listdir(new_record.outdir) if (f.startswith("summary_simple") and f.endswith("tsv"))]
+            # summary_list = []
+            # for file in table_files:
+            #     parser = GeneralParser(file)
+            #     name = os.path.basename(file)
+            #     table = [obj for obj in parser.parse()]
+            #     header = table[0].get_sorted_attr()
+            #     r = Result(name, define_table(header, 'TableResult')(table))
+            #     summary_list.append(r)
+
 
             # Tables
+            summary_list = []
             tables_config = pd.read_table(os.path.join(new_record.outdir, 'tables.config'), header=None)
             for index, row in tables_config.iterrows():
                 file, name = row[0:2]
@@ -355,6 +356,9 @@ def result(request):
                 r = Result(name, define_table(header, 'TableResult')(table))
                 tag = row[2]
                 results[tag] = r
+                if (tag.startswith("summary_pvalue") or tag.startswith("summary_FC")):
+                    summary_list.append(r)
+                results["summary_list"] = summary_list
 
             if new_record.job_status == "Finished":
                 if new_record.stats_file and os.path.isfile(new_record.stats_file):
