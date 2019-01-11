@@ -27,7 +27,8 @@ PIPELINETYPES_URL = {
     "mirnafunctargets": "mirnafunctargets",
     "jBrowser": "jBrowser",
     "dejbrowser": "srnajbrowserde",
-    "gFree": "srnagfree"
+    "gFree": "srnagfree",
+    "multiupload" : "multiupload"
 }
 
 
