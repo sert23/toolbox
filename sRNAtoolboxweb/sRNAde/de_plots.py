@@ -36,15 +36,15 @@ def general_plot(input_file, x_lab, y_lab, title):
 
         data = []
         for index, row in input_table.iterrows():
-            if index > 0:
-                data.append(go.Box(
-                    y=row.values[1:],
-                    text=col_names,
-                    name=str(row.values[0]),
-                    marker=dict(
-                    ),
-                    hoverinfo='text+name+y'
-                ))
+
+            data.append(go.Box(
+                y=row.values[1:],
+                text=col_names,
+                name=str(row.values[0]),
+                marker=dict(
+                ),
+                hoverinfo='text+name+y'
+            ))
 
         fig = go.Figure(data=data, layout=layout)
         div_obj = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
@@ -86,15 +86,15 @@ def general_plot_cols(input_file, x_lab, y_lab, title):
 
         data = []
         for index, row in input_table.iterrows():
-            if index > 0:
-                data.append(go.Box(
-                    y=row.values[1:],
-                    text=col_names,
-                    name=str(row.values[0]),
-                    marker=dict(
-                    ),
-                    hoverinfo='text+name+y'
-                ))
+
+            data.append(go.Box(
+                y=row.values[1:],
+                text=col_names,
+                name=str(row.values[0]),
+                marker=dict(
+                ),
+                hoverinfo='text+name+y'
+            ))
 
         fig = go.Figure(data=data, layout=layout)
         div_obj = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
