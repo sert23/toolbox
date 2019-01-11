@@ -14,6 +14,7 @@ import pandas as pd
 from FileModels.deStatsParser import DeStatsParser
 from FileModels.sRNAdeparser import SRNAdeParser
 from FileModels.GeneralParser import GeneralParser
+from FileModels.summaryParser import LinksParser
 
 from progress.models import JobStatus
 from utils import pipeline_utils
@@ -329,8 +330,12 @@ def result(request):
                 results["read_length_genome_plot"] = None
 
             # Method Tables
-
-
+            meth_file = os.path.join(new_record.outdir,"de_methods.table")
+            parser = LinksParser(meth_file)
+            table = [obj for obj in parser.parse()]
+            header = table[0].get_sorted_attr()
+            r = Result("Methods Results Pages", define_table(header, 'TableResult')(table))
+            results["methods_table"] = r
 
             # Summary Tables
 
