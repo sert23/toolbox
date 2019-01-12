@@ -25,7 +25,7 @@ class LinksParser(Parser):
             aline = line.replace("\n", "").split("\t")
             rel_path = aline[-1].split("/")
             link = os.path.join(reverse_lazy('de_method'), rel_path[-1], rel_path[-3])
-            aline = aline[:-1] + ['\<a href=\"'+link+'\"\>Go to results\<\/a\>']
+            aline = aline[:-1] + [link]
             # aline = aline[:-1] + ['<a href="'+link+'" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Go to results</a>']
             yield General(header, *aline)
         fd.close()
