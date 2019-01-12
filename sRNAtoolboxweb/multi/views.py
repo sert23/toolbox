@@ -234,7 +234,7 @@ class MultiStatusView(DetailView):
                 finish = "-"
             input_config = os.path.join(MEDIA_ROOT,id,"conf.txt")
             with open(input_config,"r") as f:
-                input_line = f.readlines()[0]
+                input_line = os.path.basename(f.readlines()[0])
             # job_stat = "sent_to_queue"
             click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
             outdir = new_record.outdir
