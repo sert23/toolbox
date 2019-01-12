@@ -69,7 +69,7 @@ def define_table(columns, typeTable):
 
     attrs = dict((c, tables.Column()) for c in columns if c != "link")
     # attrs = dict((c, tables.Column()) for c in columns if c != "Link to results")
-    attrs2 = dict((c, tables.TemplateColumn('<a href="{{record.link}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Go to results</a>')) for c in columns if c == "link")
+    attrs2 = dict((c, tables.TemplateColumn('<a href="{{record.link}]" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Go to results</a>')) for c in columns if c == "link")
     # attrs2 = dict((c, tables.TemplateColumn('<a href="{{record.link}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Go to results</a>')) for c in columns if c == "Link to results")
     # attrs2 = dict((c, tables.TemplateColumn('<a href="{{ settings.SUB_SITE }}/{{record.method}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Go to results</a>')) for c in columns if c == "Link to results")
     attrs.update(attrs2)
