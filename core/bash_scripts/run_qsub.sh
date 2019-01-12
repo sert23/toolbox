@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l walltime=24:30:00,mem=6Gb
+#PBS -l walltime=24:30:00,mem=8Gb
 
 
 source /opt/venv/sRNAtoolbox2017/bin/activate
