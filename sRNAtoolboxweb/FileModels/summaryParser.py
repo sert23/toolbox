@@ -20,7 +20,8 @@ class LinksParser(Parser):
     def parse(self):
         fd = open(self.ipath)
         header = fd.readline().replace("\n", "").split("\t")
-        header = header[0:-1] + ["Link to results"]
+        header = header[0:-1] + ["link"]
+        #header = header[0:-1] + ["Link to results"]
         for line in fd:
             aline = line.replace("\n", "").split("\t")
             rel_path = aline[-1].split("/")
