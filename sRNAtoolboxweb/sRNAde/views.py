@@ -68,7 +68,7 @@ def define_table(columns, typeTable):
 
 
     attrs = dict((c, tables.Column()) for c in columns if c != "Link to results")
-    attrs2 = dict((c, tables.TemplateColumn()) for c in columns if c == "Link to results")
+    attrs2 = dict((c, tables.TemplateColumn('<a href=" ">Go to results</a>')) for c in columns if c == "Link to results")
     #attrs = dict((c, tables.Column()) for c in columns)
     if typeTable == "TableResult":
         attrs['Meta'] = type('Meta', (),
