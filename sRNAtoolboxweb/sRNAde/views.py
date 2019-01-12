@@ -65,7 +65,11 @@ def define_table(columns, typeTable):
     :param columns: Array with names of columns to show
     :return: a class of type TableResults
     """
-    attrs = dict((c, tables.Column()) for c in columns)
+
+
+    attrs = dict((c, tables.Column()) for c in columns if c != "Link to results")
+    attrs2 = dict((c, tables.TemplateColumn()) for c in columns if c == "Link to results")
+    #attrs = dict((c, tables.Column()) for c in columns)
     if typeTable == "TableResult":
         attrs['Meta'] = type('Meta', (),
                              dict(attrs={'class': 'table table-striped table-bordered table-hover dataTable no-footer',
