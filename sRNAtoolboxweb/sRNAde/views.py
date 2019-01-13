@@ -431,15 +431,16 @@ class De_method_view(DetailView):
         context["sections"] = section_list
         context["DE_method"] = de_dict.get(de_method)
         mbp_list = []
-        with open(os.path.join(folder,"multiboxplot.config"),"r") as multi_f:
-            for line in multi_f.readlines():
-                row = line.split("\t")
-                tag = row[-1].rstrip()
-                input_path = row[0]
-                plot = makeDEbox(input_path)
-                mbp_list.append([plot,sections_dic[tag]])
+        if os.path.exists(os.path.join(folder,"multiboxplot.config")):
+            with open(os.path.join(folder,"multiboxplot.config"),"r") as multi_f:
+                for line in multi_f.readlines():
+                    row = line.split("\t")
+                    tag = row[-1].rstrip()
+                    input_path = row[0]
+                    plot = makeDEbox(input_path)
+                    mbp_list.append([plot,sections_dic[tag]])
 
-        context["multiboxplots"] = mbp_list
+            context["multiboxplots"] = mbp_list
 
 
         return context
