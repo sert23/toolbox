@@ -2,7 +2,7 @@
 {#{% extends 'photos/base.html' %}#}
 {% extends "base.html" %}
 {% load staticfiles %}
-
+{% load render_table from django_tables2 %}
 {% block content %}
 
 {#{% load static %}#}
@@ -133,6 +133,14 @@
                             {{ plot|safe }}
                         {% endif %}
                         {% endfor %}
+                    {% for stable, section in table_list %}
+                        {% if section == tab_title %}
+                        <h4> {{ stable.name }}  </h4>
+                        {% render_table stable.content %}
+                        {% endif %}
+                    {% endfor %}
+
+
                         </div>
                 </div>
                 {% endfor %}
