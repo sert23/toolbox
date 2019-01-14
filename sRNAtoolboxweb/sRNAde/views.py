@@ -442,6 +442,21 @@ class De_method_view(DetailView):
 
             context["multiboxplots"] = mbp_list
 
+        if os.path.exists(os.path.join(folder, "tables.config")):
+            # Tables
+            table_list = []
+            tables_config = pd.read_table(os.path.join(folder, "tables.config"), header=None)
+            for index, row in tables_config.iterrows():
+                file, name = row[0:2]
+                parser = GeneralParser(file)
+                table = [obj for obj in parser.parse()]
+                header = table[0].get_sorted_attr()
+                r = Result(name, define_table(header, 'TableResult')(table))
+                tag = row[2]
+                context[tag] = r
+                table_list.append([r,sections_dic[tag]])
+            context["table_list"] = table_list
+
 
         return context
 
