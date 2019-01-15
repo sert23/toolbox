@@ -434,8 +434,7 @@ class De_method_view(DetailView):
         if os.path.exists(os.path.join(folder,"multiboxplot.config")):
             with open(os.path.join(folder,"multiboxplot.config"),"r") as multi_f:
                 for line in multi_f.readlines():
-                    row = line.rstrip().split("\t")
-                    input_path,xlab,ylab,title,tag = row[0]
+                    input_path, xlab, ylab, title, tag = line.rstrip().split("\t")
                     plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
                     mbp_list.append([plot,sections_dic[tag]])
 
