@@ -507,6 +507,7 @@ def makeDEbox_pval(input_file,de_file=None):
                 ),
                 yaxis=dict(
                     type='log',
+                    tickprefix="   ",
                     title='RPM+1')
             )
     fig = go.Figure(data=data, layout=layout)
