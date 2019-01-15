@@ -27,7 +27,7 @@ import os
 import json
 from sRNAde.de_plots import make_seq_plot, make_length_plot, make_full_length_plot, make_length_genome_plot, \
                             make_genome_dist_plot, general_plot, general_plot_cols
-from sRNAde.summary_plots import makeDEbox
+from sRNAde.summary_plots import makeDEbox, multiBP
 
 counter = itertools.count()
 
@@ -434,10 +434,9 @@ class De_method_view(DetailView):
         if os.path.exists(os.path.join(folder,"multiboxplot.config")):
             with open(os.path.join(folder,"multiboxplot.config"),"r") as multi_f:
                 for line in multi_f.readlines():
-                    row = line.split("\t")
-                    tag = row[-1].rstrip()
-                    input_path = row[0]
-                    plot = makeDEbox(input_path)
+                    row = line.rstrip().split("\t")
+                    input_path,xlab,ylab,title,tag = row[0]
+                    plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
                     mbp_list.append([plot,sections_dic[tag]])
 
             context["multiboxplots"] = mbp_list
