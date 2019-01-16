@@ -69,9 +69,9 @@
 {% block js %}
 
     <script>
-    if (window.location.href.indexOf("#") == -1) {
-    $('.nav-tabs a[href="#Summary"]').tab('show');
-        };
+    $(document).ready(function(){
+    $('a[href="#Summary"]').tab('show');
+});
 
     </script>
 <script src="{% static 'js/plugins/dataTables/jquery.dataTables.js' %}"></script>
