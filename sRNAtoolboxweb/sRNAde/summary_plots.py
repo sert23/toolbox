@@ -401,7 +401,7 @@ def multiBP(input_file, title=" ", xlab=" ", ylab=" "):
         layout = go.Layout(
                 boxmode='group',
                 autosize=True,
-                margin=go.Margin(
+                margin=go.layout.Margin(
                     l=50,
                     r=50,
                     b=150,
