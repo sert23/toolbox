@@ -417,8 +417,8 @@ def multiBP(input_file, title=" ", xlab=" ", ylab=" "):
                 ),
                 yaxis=dict(
                     type='log',
-                    tickprefix=".                 ",
-                    title=ylab + ' \n <br> TTTTT')
+                    tickprefix="",
+                    title=ylab + '')
             )
     fig = go.Figure(data=data, layout=layout)
     div_obj = plot(fig, show_link=False, auto_open=False, output_type='div')
