@@ -22,7 +22,7 @@ from utils.sysUtils import *
 
 from django.views.generic import FormView, DetailView
 from sRNABench.forms import sRNABenchForm
-from sRNAtoolboxweb.settings import MEDIA_ROOT
+from sRNAtoolboxweb.settings import MEDIA_ROOT, MEDIA_URL
 import os
 import json
 from sRNAde.de_plots import make_seq_plot, make_length_plot, make_full_length_plot, make_length_genome_plot, \
@@ -454,6 +454,16 @@ class De_method_view(DetailView):
                 context[tag] = r
                 table_list.append([r,sections_dic[tag]])
             context["table_list"] = table_list
+        if os.path.exists(os.path.join(folder, "plots.config")):
+            plot_list = []
+            plots_config = pd.read_table(os.path.join(folder, "plots.config"), header=None)
+            for index, row in plots_config.iterrows():
+                file, name,tag = row[0:3]
+                plot_source = file.replace(MEDIA_ROOT,MEDIA_URL)
+                plot_list.append([plot_source,name,sections_dic[tag]])
+            context["plot_list"] = plot_list
+
+
 
 
         return context
