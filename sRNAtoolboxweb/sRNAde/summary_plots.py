@@ -421,7 +421,7 @@ def multiBP(input_file, title=" ", xlab=" ", ylab=" "):
                     title=ylab + '')
             )
     fig = go.Figure(data=data, layout=layout)
-    div_obj = plot(fig, show_link=False, auto_open=False, output_type='div')
+    div_obj = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
     return div_obj
 
 def makeDEbox_pval(input_file,de_file=None):
