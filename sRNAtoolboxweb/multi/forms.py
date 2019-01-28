@@ -510,9 +510,9 @@ class sRNABenchForm(forms.Form):
 
         # Reference DB
         if cleaned_data.get("referenceDB") == "highconf":
-            highconf = "true"
+            highconf = True
         else:
-            highconf = "false"
+            highconf = False
         if cleaned_data.get("referenceDB") == "MirGeneDB":
             mirDB = cleaned_data.get('mirDB')
         else:
