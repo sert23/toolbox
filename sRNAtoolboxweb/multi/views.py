@@ -147,7 +147,7 @@ class MultiLaunchView(FormView):
 
         with open(os.path.join(MEDIA_ROOT, query_id, "URL_files.txt"), "r") as URL_file:
             for ix,URL in enumerate(URL_file.readlines()):
-                if len(URL) > 19:
+                if len(URL) > 20:
                     file_name ="(...)" + URL.rstrip()[-20:]
                 else:
                     file_name = URL.rstrip()
