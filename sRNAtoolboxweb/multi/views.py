@@ -146,7 +146,7 @@ class MultiLaunchView(FormView):
                 table_data.append([link, status, checkbox])
 
         with open(os.path.join(MEDIA_ROOT, query_id, "URL_files.txt"), "r") as URL_file:
-            for URL in URL_file.readlines():
+            for ix,URL in enumerate(URL_file.readlines()):
                 if len(URL) > 19:
                     file_name ="(...)" + URL.rstrip()[-20:]
                 else:
