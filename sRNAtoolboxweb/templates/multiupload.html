@@ -3,9 +3,7 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-{% block modals %}
-    {% include "Messages/bench/Choose_input.html" %}
-{% endblock %}
+
 
 {% block content %}
 
@@ -198,5 +196,9 @@
 {#{% block photos_content %}#}
 
 
+{% endblock %}
+
+{% block modals %}
+    {% include "Messages/bench/Choose_input.html" %}
 {% endblock %}
 
