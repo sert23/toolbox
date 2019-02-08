@@ -198,27 +198,35 @@ def result(request):
         #if True:
         if new_record.job_status == "Finished":
 
+            try:
+                parser = BlastParser(os.path.join(new_record.outdir, "blast.out"), "blast", 500)
+                # parser = BlastParser("/opt/sRNAtoolbox/sRNAtoolboxweb/upload/P19XKMOHJEZ09ZG/blast.out", "blast", 100)
+                blast = [obj for obj in parser.parse()]
+                print("here print")
+                print(blast)
+                header = blast[0].get_sorted_attr()
+                blast_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(blast))
+                results["blast"] = blast_result
+            except:
+                results["blast"] = Result("Read Processing Statistic", define_table([], 'TableResult')([]))
 
-            parser = BlastParser(os.path.join(new_record.outdir,"blast.out"), "blast", 500)
-            #parser = BlastParser("/opt/sRNAtoolbox/sRNAtoolboxweb/upload/P19XKMOHJEZ09ZG/blast.out", "blast", 100)
-            blast = [obj for obj in parser.parse()]
-            print("here print")
-            print(blast)
-            header = blast[0].get_sorted_attr()
-            blast_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(blast))
-            results["blast"] = blast_result
+            try:
+                parser = BlastParser(os.path.join(new_record.outdir, "species.out"), "species", 50)
+                species = [obj for obj in parser.parse()]
+                header = species[0].get_sorted_attr()
+                species_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(species))
+                results["species"] = species_result
+            except:
+                results["species"] = Result("Read Processing Statistic", define_table([], 'TableResult')([]))
 
-            parser = BlastParser(os.path.join(new_record.outdir,"species.out"), "species", 50)
-            species = [obj for obj in parser.parse()]
-            header = species[0].get_sorted_attr()
-            species_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(species))
-            results["species"] = species_result
-
-            parser = BlastParser(os.path.join(new_record.outdir,"tax.out"), "tax", 50)
-            tax = [obj for obj in parser.parse()]
-            header = tax[0].get_sorted_attr()
-            tax_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(tax))
-            results["taxonomy"] = tax_result
+            try:
+                parser = BlastParser(os.path.join(new_record.outdir, "tax.out"), "tax", 50)
+                tax = [obj for obj in parser.parse()]
+                header = tax[0].get_sorted_attr()
+                tax_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(tax))
+                results["taxonomy"] = tax_result
+            except:
+                results["taxonomy"] = Result("Read Processing Statistic", define_table([], 'TableResult')([]))
 
             results["zip"] =new_record.zip_file
 
