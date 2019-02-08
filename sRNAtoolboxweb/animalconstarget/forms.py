@@ -156,7 +156,7 @@ class AMirconsForm(forms.Form):
             mirtext=self.cleaned_data.get("mirtext")
             content = ContentFile(mirtext)
             mirfile=FS.save("mirs.fa", content)
-            FS.save()
+
         if utrfile:
             file_to_update = utrfile
             uploaded_file = str(file_to_update)
@@ -165,7 +165,7 @@ class AMirconsForm(forms.Form):
             utrtext = self.cleaned_data.get("utrtext")
             content = ContentFile(utrtext)
             utrfile=FS.save('utrs.fa', content)
-            FS.save()
+
         else:
             utrfile = self.cleaned_data.get('utrchoice')
 
