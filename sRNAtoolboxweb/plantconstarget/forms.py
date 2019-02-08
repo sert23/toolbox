@@ -166,8 +166,8 @@ class PMirconsForm(forms.Form):
         else:
             mirtext=self.cleaned_data.get("mirtext")
             content = ContentFile(mirtext)
-            mirfile=FS.fileUpload.save("mirs.fa", content)
-            FS.save()
+            mirfile=FS.save("mirs.fa", content)
+
         if utrfile:
             file_to_update = utrfile
             uploaded_file = str(file_to_update)
@@ -175,8 +175,8 @@ class PMirconsForm(forms.Form):
         elif self.cleaned_data.get("utrtext"):
             utrtext = self.cleaned_data.get("utrtext")
             content = ContentFile(utrtext)
-            utrfile=FS.fileUpload.save('utrs.fa', content)
-            FS.save()
+            utrfile=FS.save('utrs.fa', content)
+
         else:
             utrfile = self.cleaned_data.get('utrchoice')
 
