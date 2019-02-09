@@ -106,7 +106,7 @@
                             <a href="{% static '/example_matrix.tsv' %}" download> <i class="fa fa-download fa-fw"></i> example_matrix.tsv</a>
                             <br>
                             Sample description:<br>
-                            <pre style=" white-space: nowrap; overflow-y: hidden"> MUTU9_cell:IM_cell:BJAB_cell:MUTU3_cell:RN_cell:IK_cell:RN_exo:IM_exo:MUTU9_exo:IK_exo:BJAB_exo:MUTU3_exo </pre>
+                            <pre style=" white-space: nowrap; overflow-y: hidden"> cell:cell:cell:cell:cell:cell:exo:exo:exo:exo:exo:exo </pre>
 
 
                         </div>
@@ -156,6 +156,7 @@
 {% block modals %}
     {% include "Messages/de/SampleDescription.html" %}
     {% include "Messages/de/ListOfIDs.html" %}
+    {% include "Messages/de/IDlist.html" %}
 {% endblock %}
 
 
