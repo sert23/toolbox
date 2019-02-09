@@ -179,7 +179,7 @@ class DEinputForm(forms.Form):
 
     #Input
     jobIDs = forms.CharField(
-        label='Use a list of sRNAbench IDs (comma separated):' + render_modal('idlist'),
+        label='Use a list of sRNAbench IDs (comma separated):' + render_modal('listids'),
         required=False, widget=forms.TextInput(attrs={'placeholder': "e.g: id1,id2,id3..."}))
     ifile = forms.FileField(label='Upload an expression matrix (tab delimited or comma separated):', required=False)
     listofIDs = forms.CharField(
