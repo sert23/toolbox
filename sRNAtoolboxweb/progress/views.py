@@ -249,6 +249,9 @@ class JobStatusDetail(DetailView):
     def render_to_response(self, context, **response_kwargs):
         if context:
             if context.get("type"):
+                job_status = self.object
+                context["go_back_url"] = reverse_lazy(job_status.pipeline_type.lower())
+                # context["type_lower"] = job_status.pipeline_type.lower()
                 if context["type"] == "multi":
                     job_status = context.get('object')
                     url = reverse('multi:multi_status') + job_status.pipeline_key
