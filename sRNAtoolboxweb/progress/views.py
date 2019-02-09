@@ -155,7 +155,7 @@ class JobStatusDetail(DetailView):
         else:
             return {'msgs': [Msg(
                 "ERROR: An error occured with your job:" + job_status.pipeline_key + "\nPlease report it indicating the jobID")],
-                "id": job_status.pipeline_key}
+                "id": job_status.pipeline_key, "go_back_url": "memeee"  }
 
 
 
