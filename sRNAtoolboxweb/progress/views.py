@@ -150,7 +150,7 @@ class JobStatusDetail(DetailView):
         if web_log:
             return {'msgs': [Msg(
             "ERROR: An error occured with your job:" + job_status.pipeline_key + "\nPlease report it indicating the jobID")],
-            "id": job_status.pipeline_key, "web_log": web_log }
+            "id": job_status.pipeline_key, "web_log": web_log, "go_back_url": reverse_lazy(job_status.pipeline_type.lower())  }
         else:
             return {'msgs': [Msg(
                 "ERROR: An error occured with your job:" + job_status.pipeline_key + "\nPlease report it indicating the jobID")],
