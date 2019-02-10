@@ -81,6 +81,7 @@
                         <br>
                         These were unmapped reads from sRNAbench job: <a href="{{ settings.SUB_SITE }}/jobstatus/51GKXBGGWRXZ4QO" target="_blank">51GKXBGGWRXZ4QO</a>
                             <br>
+                            <br>
                             Unmapped reads from sRNABench jobs are already trimmed
 
 
@@ -97,6 +98,7 @@
 {% endblock %}
 
 {% block modals %}
+    {% include "Messages/bench/sRNAbenchInput.html" %}
     {% include "Messages/mirnaconstarget/ProgramsParameters.html" %}
     {% include "Messages/mirnaconstarget/tapir_hybrid_parameters.html" %}
     {% include "Messages/mirnaconstarget/tapir_parameters.html" %}
