@@ -94,7 +94,7 @@ class sRNAblastForm(forms.Form):
     ifile = forms.FileField(label='Upload the reads (fastq.gz, fa.gz or rc.gz)' + render_modal('SRNAinput'),
                             required=False)
     url = forms.URLField(label=mark_safe('<strong >Or provide a URL for big files <strong class="text-success"> (recommended!)</strong>'), required=False)
-    job_ID = forms.CharField(label='Or provide a sRNAbench jobID: ',
+    job_ID = forms.CharField(label='Or provide a sRNAbench jobID: (unmapped reads from the job will be used)',
                              required=False)
     maxReads=forms.ChoiceField(label='Number of unique unmapped reads to blast',choices= NUMBERS, required=False )
     dataBase=forms.ChoiceField(label= 'Database', choices=DATABASES, required=False)
