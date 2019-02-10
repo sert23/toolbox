@@ -95,7 +95,7 @@ class PMirconsForm(forms.Form):
                 'Choose target input',
                 Field('utrfile', css_class='form-control'),
                 'utrchoice',
-                'cdnachoice',
+                # 'cdnachoice',
                 Field('utrtext', css_class='form-control')),
             Fieldset(
                 'Choose programs and parameters',
@@ -119,7 +119,8 @@ class PMirconsForm(forms.Form):
         if not cleaned_data.get('mirfile') and not cleaned_data.get('mirtext'):
             self.add_error('mirfile', 'miRNA input is required')
             self.add_error('mirtext', 'miRNA input is required')
-        if not cleaned_data.get('utrfile') and not cleaned_data.get('utrtext') and not cleaned_data.get('utrchoice') and not cleaned_data.get('cdnachoice'):
+        if not cleaned_data.get('utrfile') and not cleaned_data.get('utrtext') and not cleaned_data.get('utrchoice'):
+        # if not cleaned_data.get('utrfile') and not cleaned_data.get('utrtext') and not cleaned_data.get('utrchoice') and not cleaned_data.get('cdnachoice'):
             self.add_error('utrfile', 'UTR input is required')
             self.add_error('utrtext', 'UTR input is required')
             self.add_error('utrchoice', 'UTR input is required')
