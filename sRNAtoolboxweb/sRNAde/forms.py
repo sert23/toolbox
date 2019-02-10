@@ -223,11 +223,11 @@ class DEinputForm(forms.Form):
                     Field('sampleDescription', css_class='form-control'),
                     Field("sampleGroups", css_class="form-control")
                     ),
-                Tab("Upload Expression Matrix",
-                    "ifile",
-                    Field("matDescription", css_class="form-control"),
-                    Field("sampleGroupsMat", css_class="form-control")
-                    ),
+                # Tab("Upload Expression Matrix",
+                #     "ifile",
+                #     Field("matDescription", css_class="form-control"),
+                #     Field("sampleGroupsMat", css_class="form-control")
+                #     ),
                 Tab("Use Group String (advanced)",
                     Field("listofIDs", css_class="form-control"),
                     Field('sampleDescription2', css_class='form-control'),
