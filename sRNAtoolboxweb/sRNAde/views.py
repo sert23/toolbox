@@ -362,16 +362,19 @@ def result(request):
             summary_list = []
             tables_config = pd.read_table(os.path.join(new_record.outdir, 'tables.config'), header=None)
             for index, row in tables_config.iterrows():
-                file, name = row[0:2]
-                parser = GeneralParser(file)
-                table = [obj for obj in parser.parse()]
-                header = table[0].get_sorted_attr()
-                r = Result(name, define_table(header, 'TableResult')(table))
-                tag = row[2]
-                results[tag] = r
-                if (tag.startswith("summary_pvalue") or tag.startswith("summary_FC")):
-                    summary_list.append(r)
-                results["summary_list"] = summary_list
+                try:
+                    file, name = row[0:2]
+                    parser = GeneralParser(file)
+                    table = [obj for obj in parser.parse()]
+                    header = table[0].get_sorted_attr()
+                    r = Result(name, define_table(header, 'TableResult')(table))
+                    tag = row[2]
+                    results[tag] = r
+                    if (tag.startswith("summary_pvalue") or tag.startswith("summary_FC")):
+                        summary_list.append(r)
+                    results["summary_list"] = summary_list
+                except:
+                    pass
 
             if new_record.job_status == "Finished":
                 if new_record.stats_file and os.path.isfile(new_record.stats_file):
