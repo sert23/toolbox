@@ -228,7 +228,7 @@ def test(request):
     return redirect("/srnatoolbox/jobstatus/mirconstarget/?id=" + pipeline_id)
 
 class PMirConsTarget(FormView):
-    template_name = 'miRNAtarget.html'
+    template_name = 'pmiRNAtarget.html'
     form_class = PMirconsForm
     success_url = reverse_lazy("MIRCONS")
 
