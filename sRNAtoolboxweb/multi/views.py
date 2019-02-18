@@ -34,7 +34,7 @@ def generate_id():
 
 
 def new_upload(request):
-    #request.session['error_message'] = 'test'
+    # request.session['error_message'] = 'test'
     random_ID = generate_id()
     url = reverse('multi:multi_new') + random_ID
     return redirect(url)
@@ -202,8 +202,10 @@ class MultiLaunchView(FormView):
         # self.success_url = reverse_lazy('mirconstarget') + '?id=' + pipeline_id
 
 def RelaunchMulti(request):
-    old_ID = request.path.split("/")[-1]
+    old_ID = str(request.path_info).path.split("/")[-1]
+
     random_ID = generate_id()
+    url = reverse('multi:multi_launch') + old_ID
     url = reverse('multi:multi_launch') + random_ID
     return redirect(url)
 
