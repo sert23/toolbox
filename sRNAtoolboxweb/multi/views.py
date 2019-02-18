@@ -206,7 +206,7 @@ def RelaunchMulti(request):
 
     random_ID = generate_id()
     url = reverse('multi:multi_launch') + old_ID
-    url = reverse('multi:multi_launch') + random_ID
+    # url = reverse('multi:multi_launch') + random_ID
     return redirect(url)
 
 class MultiStatusView(DetailView):
