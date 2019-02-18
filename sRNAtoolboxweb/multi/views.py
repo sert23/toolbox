@@ -205,6 +205,27 @@ def RelaunchMulti(request):
     old_ID = str(request.path_info).split("/")[-1]
 
     random_ID = generate_id()
+
+    if os.path.exists(os.path.join(MEDIA_ROOT, old_ID)):
+        os.mkdir(os.path.join(MEDIA_ROOT, random_ID))
+        JobStatus.objects.create(job_name=random_ID + "_multi", pipeline_key=random_ID, job_status="not_launched",
+                                 start_time=datetime.datetime.now(),
+                                 all_files=" ",
+                                 modules_files=" ",
+                                 pipeline_type="multiupload",
+                                 )
+        for f in listdir(os.path.join(MEDIA_ROOT, old_ID)):
+           if f != "conf.txt":
+               if os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, old_ID), f)):
+                   shutil.copy(os.path.join(MEDIA_ROOT, old_ID, f), os.path.join(MEDIA_ROOT, random_ID, f))
+
+    if os.path.exists(os.path.join(MEDIA_ROOT, random_ID)):
+        url = reverse('multi:multi_launch') + random_ID
+        return redirect(url)
+
+
+
+
     url = reverse('multi:multi_launch') + old_ID
     # url = reverse('multi:multi_launch') + random_ID
     return redirect(url)
