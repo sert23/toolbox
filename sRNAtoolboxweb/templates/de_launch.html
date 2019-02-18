@@ -181,10 +181,15 @@
 
     function keyDownTextField(e) {
       var keyCode = e.keyCode;
-        alert("You hit a key.");
-
+       var new_data = document.getElementsByName("group_selector");
+         for(count = 0; count < new_data.length; count++) {
+             key = String(new_data[count].id);
+             value = String(new_data[count].value);
+             c = sample_keys.indexOf(key);
+             group_list[c] = value;
+             window['group_list'] = group_list;
+         }
 }
-
 
 
     $('#jobs').on('click', 'tr', function (group_dict) {
