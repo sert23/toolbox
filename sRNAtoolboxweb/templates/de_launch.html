@@ -177,6 +177,28 @@
 {#        alert(document.getElementById("id_groups_hidden").value);#}
     });
 
+    document.addEventListener("keydown", keyDownTextField, false);
+
+    function keyDownTextField(e) {
+      var keyCode = e.keyCode;
+        alert("You hit a key.");
+
+}
+
+
+
+    $('#jobs').on('click', 'tr', function (group_dict) {
+{#        const keyl = Object.keys(group_dict);#}
+        var new_data = document.getElementsByName("group_selector");
+         for(count = 0; count < new_data.length; count++) {
+             key = String(new_data[count].id);
+             value = String(new_data[count].value);
+             c = sample_keys.indexOf(key);
+             group_list[c] = value;
+             {#                alert(group_list);#}
+             window['group_list'] = group_list;
+         }
+    })
 
 
     function add_hidden() {
