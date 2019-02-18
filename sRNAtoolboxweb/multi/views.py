@@ -204,7 +204,7 @@ class MultiLaunchView(FormView):
 def RelaunchMulti(request):
     old_ID = request.path.split("/")[-1]
     random_ID = generate_id()
-    url = reverse('multi:multi_status') + random_ID
+    url = reverse('multi:multi_launch') + random_ID
     return redirect(url)
 
 class MultiStatusView(DetailView):
