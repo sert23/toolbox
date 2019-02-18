@@ -268,15 +268,15 @@ function toggleAdapter() {
 
     <script>
 
-        $(document).ready(function(){
-            $("#button_div").attr("href","#");
-            $("#button_div").attr("data-toggle","tooltip");
-            $("#button_div").attr("style","display:inline-block");
-            $("#button_div").attr("data-placement","right");
-            $("#button_div").attr("data-original-title","Please select at least one sample to proceed");
-
-            $('[data-toggle="tooltip"]').tooltip();
-        });
+        {#$(document).ready(function(){#}
+        {#    $("#button_div").attr("href","#");#}
+        {#    $("#button_div").attr("data-toggle","tooltip");#}
+        {#    $("#button_div").attr("style","display:inline-block");#}
+        {#    $("#button_div").attr("data-placement","right");#}
+        {#    $("#button_div").attr("data-original-title","Please select at least one sample to proceed");#}
+        {##}
+        {#    $('[data-toggle="tooltip"]').tooltip();#}
+        {# });#}
 
 
 {#    $('#submit-id-submit').on('mouseover', function () {#}
@@ -483,14 +483,6 @@ function toggleAdapter() {
 {#        printChecked();#}
 });
 
-    var cols = table.column(2).nodes(),
-            state = this.checked;
-
-        for (var i = 0; i < cols.length; i += 1) {
-        	cols[i].querySelector("input[type='checkbox']").checked = state;
-
-        	if (state) {
-                selectedItems.push(cols[i].querySelector("input[type='checkbox']").value);}
 
 } );
 
