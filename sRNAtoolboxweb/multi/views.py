@@ -201,6 +201,11 @@ class MultiLaunchView(FormView):
         # call, pipeline_id = form.create_call()
         # self.success_url = reverse_lazy('mirconstarget') + '?id=' + pipeline_id
 
+def RelaunchMulti(request):
+    old_ID = request.path.split("/")[-1]
+    random_ID = generate_id()
+    url = reverse('multi:multi_status') + random_ID
+    return redirect(url)
 
 class MultiStatusView(DetailView):
     model = JobStatus
