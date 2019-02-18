@@ -154,7 +154,7 @@ class MultiLaunchView(FormView):
                 id = "URL_" + str(ix)
                 link = '<a href="' + URL.rstrip() + '">' + file_name + '</a>'
                 status = "Not launched"
-                checkbox = "<input type='checkbox' value='" + id + "' name='to_list'>"
+                checkbox = "<input type='checkbox' value='" + id + "' name='to_list' checked=true>"
                 table_data.append([link, status, checkbox])
 
         #table_data.append(["dummy","dummier","dummiest"])
