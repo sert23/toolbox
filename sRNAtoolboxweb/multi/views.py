@@ -202,7 +202,7 @@ class MultiLaunchView(FormView):
         # self.success_url = reverse_lazy('mirconstarget') + '?id=' + pipeline_id
 
 def RelaunchMulti(request):
-    old_ID = str(request.path_info).path.split("/")[-1]
+    old_ID = str(request.path_info).split("/")[-1]
 
     random_ID = generate_id()
     url = reverse('multi:multi_launch') + old_ID
