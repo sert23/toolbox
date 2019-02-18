@@ -3,7 +3,6 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-
     url(r'^$', views.new_upload, name='multi_new'),
     url(r'^relaunch/[A-za-z0-9]+', views.RelaunchMulti),
     url(r'^launch/[A-za-z0-9]+', views.MultiLaunchView.as_view()),
