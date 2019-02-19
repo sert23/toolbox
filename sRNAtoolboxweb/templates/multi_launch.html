@@ -446,7 +446,7 @@ function toggleAdapter() {
     },
         columns: received_cols,
     } );
-    printChecked();
+
     $('#jobs').on('click', 'tr', function () {
 {#    $('#jobs tbody').on('click', 'tr', function () {#}
         var data = table.row( this ).data();
@@ -479,9 +479,22 @@ function toggleAdapter() {
 {#        	alert(cols[i].querySelector("input[type='checkbox']").value)#}
 
         }
-{#        alert(selectedItems)#}
+        alert(selectedItems)
 {#        printChecked();#}
 });
+
+    var cols = table.column(2).nodes(),
+            state = this.checked;
+        for (var i = 0; i < cols.length; i += 1) {
+        	cols[i].querySelector("input[type='checkbox']").checked = state;
+
+        	if (state) {
+                selectedItems.push(cols[i].querySelector("input[type='checkbox']").value);
+                            }else{
+        	    selectedItems =[];
+            }
+{#        	alert(cols[i].querySelector("input[type='checkbox']").value)#}
+        }
 
 
 } );
