@@ -484,14 +484,13 @@ function toggleAdapter() {
 });
 
     var cols = table.column(2).nodes(),
-            state = this.checked;
+            state = true;
         for (var i = 0; i < cols.length; i += 1) {
         	cols[i].querySelector("input[type='checkbox']").checked = state;
 
         	if (state) {
                 selectedItems.push(cols[i].querySelector("input[type='checkbox']").value);
-                            }else{
-        	    selectedItems =[];
+                            }
             }
 {#        	alert(cols[i].querySelector("input[type='checkbox']").value)#}
         }
