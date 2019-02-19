@@ -556,7 +556,8 @@ class DeLaunch(FormView):
             jobIDs = params.get("jobIDs").split(",")
             groups = params.get("sampleGroups").split("#")
             if params.get('sampleDescription'):
-                sampleDescription = params.get('sampleDescription')
+                sampleDescription = params.get('sampleDescription').split(":")
+
                 #TODO something here
             else:
                 sampleDescription = None
@@ -569,9 +570,9 @@ class DeLaunch(FormView):
                 replacing = new_option + to_rep
                 base_selector = base_selector.replace(to_rep,replacing)
 
-            for name in names:
+            for i,name in enumerate(names):
                 buttons = base_selector.format(sample_id=name)
-                row = [name, name, buttons]
+                row = [name, sampleDescription[i], buttons]
                 sample_table.append(row)
 
             header_list=[]
