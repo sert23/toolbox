@@ -75,7 +75,7 @@
 
                      {% if web_log  %}
                           <div class="alert alert-danger">
-                          {{ web_log }}
+                          {{ web_log|safe }}
                           </div>
                      {% endif %}
 
