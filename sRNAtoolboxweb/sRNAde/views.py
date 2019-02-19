@@ -560,7 +560,7 @@ class DeLaunch(FormView):
 
                 #TODO something here
             else:
-                sampleDescription = None
+                sampleDescription = ["-"] * len(jobIDs)
             names = jobIDs
             headers = ["job ID", "Sample Name", "Group"]
 
