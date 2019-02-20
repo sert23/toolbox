@@ -9,7 +9,7 @@ import xlrd
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from pygal.style import LightGreenStyle
-from .forms import DEForm, DEinputForm,DElaunchForm
+from .forms import DEForm, DEinputForm,DElaunchForm,DEmultiForm
 import pandas as pd
 from FileModels.deStatsParser import DeStatsParser
 from FileModels.sRNAdeparser import SRNAdeParser
@@ -530,6 +530,13 @@ class DeFromMulti(FormView):
     form_class = DEinputForm
     success_url = reverse_lazy("DE_multi")
 
+    def get_form_kwargs(self):
+        kwargs = super(DeFromMulti, self).get_form_kwargs()
+        path = self.request.path
+        folder = path.split("/")[-1]
+        kwargs['orig_folder'] = folder
+        return kwargs
+
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
@@ -549,14 +556,14 @@ class DeFromMulti(FormView):
 class DeLaunch(FormView):
     template_name = 'de_launch.html'
     # form_class = DEinputForm
-    form_class = DElaunchForm
+    form_class = DEmultiForm
     success_url = reverse_lazy("DE_launch")
 
     def get_form_kwargs(self):
         kwargs = super(DeLaunch, self).get_form_kwargs()
         path = self.request.path
         folder = path.split("/")[-1]
-        kwargs['dest_folder'] = folder
+        kwargs['folder'] = folder
         return kwargs
 
     def get_context_data(self, **kwargs):
