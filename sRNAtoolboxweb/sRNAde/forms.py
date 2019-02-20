@@ -16,6 +16,7 @@ from utils.pipeline_utils import generate_uniq_id
 from utils.sysUtils import *
 from django.utils.safestring import mark_safe
 import os
+
 import json
 
 def check_mat_file(mat):
@@ -442,3 +443,42 @@ class DEmultiForm(forms.Form):
                 Submit('submit', 'SUBMIT', css_class='btn btn-primary')
             )
         )
+    def clean(self):
+
+        #TODO check input format
+
+        cleaned_data = super(DEmultiForm, self).clean()
+        if not cleaned_data.get("sampleGroups"):
+            self.add_error("sampleGroups", 'You need to provide Sample Groups')
+        else:
+            sampleGroups = cleaned_data.get("sampleGroups").replace("#",",")
+            if len(sampleGroups.split(",")) <2:
+                self.add_error("sampleGroups", 'You need to provide at least 2 groups')
+
+    def generate_id(self):
+        is_new = True
+        while is_new:
+            pipeline_id = generate_uniq_id()
+            if not JobStatus.objects.filter(pipeline_key=pipeline_id):
+                return pipeline_id
+
+    def create_config_file(self):
+        pipeline_id = self.generate_id()
+        cleaned_data = self.cleaned_data
+        os.mkdir(os.path.join(MEDIA_ROOT,pipeline_id))
+        name = pipeline_id + '_de'
+        out_dir = os.path.join(MEDIA_ROOT,pipeline_id)
+        json_path = os.path.join(MEDIA_ROOT,pipeline_id,"init_par.json")
+
+        #Get jobIDs
+        jobs_folder = os.path.join(MEDIA_ROOT,self.folder , "launched")
+        launched_ids = [f for f in os.listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder, f))]
+
+        parameters = {}
+        parameters["jobIDs"] = ",".join(launched_ids)
+        for k in cleaned_data.keys():
+            if cleaned_data.get(k):
+                parameters[k] = cleaned_data[k]
+
+        with open(json_path, 'w') as jf:
+            json.dump(parameters, jf)
