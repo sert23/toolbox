@@ -424,3 +424,18 @@ class DElaunchForm(forms.Form):
                 sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run.sh'))
 
         return pipeline,call
+
+
+class DEmultiForm(forms.Form):
+    sampleGroups = forms.CharField(
+        label=mark_safe('Sample groups (hash separated, <strong class="text-danger">required</strong>):'),
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': "e.g: Normal#TumorI#TumorII"}))
+
+    def __init__(self, *args, **kwargs):
+        self.folder = kwargs.pop('folder', None)
+        super(DEmultiForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            "sampleGroups"
+        )
