@@ -534,7 +534,7 @@ class DeFromMulti(FormView):
         kwargs = super(DeFromMulti, self).get_form_kwargs()
         path = self.request.path
         folder = path.split("/")[-1]
-        kwargs['orig_folder'] = folder
+        kwargs['dest_folder'] = folder
         return kwargs
 
     def form_valid(self, form):
