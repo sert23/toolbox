@@ -563,7 +563,7 @@ class DeLaunch(FormView):
         kwargs = super(DeLaunch, self).get_form_kwargs()
         path = self.request.path
         folder = path.split("/")[-1]
-        kwargs['folder'] = folder
+        kwargs['dest_folder'] = folder
         return kwargs
 
     def get_context_data(self, **kwargs):
