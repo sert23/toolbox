@@ -527,14 +527,14 @@ class De(FormView):
 
 class DeFromMulti(FormView):
     template_name = 'de_input.html'
-    form_class = DEinputForm
+    form_class = DEmultiForm
     success_url = reverse_lazy("DE_multi")
 
     def get_form_kwargs(self):
         kwargs = super(DeFromMulti, self).get_form_kwargs()
         path = self.request.path
         folder = path.split("/")[-1]
-        kwargs['dest_folder'] = folder
+        kwargs['orig_folder'] = folder
         return kwargs
 
     def form_valid(self, form):
