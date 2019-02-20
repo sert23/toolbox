@@ -433,7 +433,7 @@ class DEmultiForm(forms.Form):
         widget=forms.TextInput(attrs={'placeholder': "e.g: Normal#TumorI#TumorII"}))
 
     def __init__(self, *args, **kwargs):
-        self.folder = kwargs.pop('folder', None)
+        self.folder = kwargs.pop('orig_folder', None)
         super(DEmultiForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
