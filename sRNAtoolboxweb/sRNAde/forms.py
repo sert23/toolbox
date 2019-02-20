@@ -482,3 +482,13 @@ class DEmultiForm(forms.Form):
 
         with open(json_path, 'w') as jf:
             json.dump(parameters, jf)
+
+        JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not_launched",
+                                 start_time=datetime.datetime.now(),
+                                 # finish_time=datetime.time(0, 0),
+                                 all_files=" ",
+                                 modules_files="",
+                                 pipeline_type="sRNAde",
+                                 )
+
+        return pipeline_id
