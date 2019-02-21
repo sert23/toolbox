@@ -438,7 +438,7 @@ class DEmultiForm(forms.Form):
         super(DEmultiForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            "sampleGroups",
+            Field("sampleGroups", css_class="form-control"),
             ButtonHolder(
                 Submit('submit', 'SUBMIT', css_class='btn btn-primary')
             )
