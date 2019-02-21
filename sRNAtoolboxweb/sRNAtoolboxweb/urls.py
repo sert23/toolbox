@@ -3,6 +3,7 @@ from django.contrib import admin
 
 from sRNAtoolboxweb import views
 
+
 urlpatterns =[
     #url(r'^/*', views.index),
     url(r'^jobstatus/', include('progress.urls')),
