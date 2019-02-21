@@ -40,6 +40,12 @@ def benchInputFromID(benchID):
         return input_line
 
 
+def file2string(file_path):
+    with open(file_path, 'r') as whole_file:
+        data = whole_file.read()
+
+    return data
+
 class TableStatic(tables.Table):
     """
     Class to serialize table of results
@@ -472,6 +478,15 @@ class De_method_view(DetailView):
                 plot_list.append([plot_source,name,sections_dic[tag]])
             context["plot_list"] = plot_list
 
+        if os.path.exists(os.path.join(folder,"heatmap.config")):
+            with open(os.path.join(folder,"heatmap.config"),"r") as multi_f:
+                for line in multi_f.readlines():
+                    input_path, title, tag = line.rstrip().split("\t")
+                    plot = file2string(input_path)
+                    # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
+                    mbp_list.append([plot,sections_dic[tag]])
+
+            context["multiboxplots"] = mbp_list
 
 
 
