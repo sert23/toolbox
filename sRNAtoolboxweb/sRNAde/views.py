@@ -556,7 +556,7 @@ class DeFromMulti(FormView):
 class DeLaunch(FormView):
     template_name = 'de_launch.html'
     # form_class = DEinputForm
-    form_class = DEmultiForm
+    form_class = DElaunchForm
     success_url = reverse_lazy("DE_launch")
 
     def get_form_kwargs(self):
