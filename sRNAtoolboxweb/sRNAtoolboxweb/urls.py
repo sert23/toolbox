@@ -8,7 +8,7 @@ urlpatterns =[
     #url(r'^/*', views.index),
     url(r'^jobstatus/', include('progress.urls')),
     url(r'^srnafuncterms', include('sRNAfuncTerms.urls')),
-    url(r'^srnade/', include('sRNAde.urls', name="DE")),
+    url(r'^srnade/', include('sRNAde.urls', namespace="DE")),
     url(r'^srnablast/', include('sRNAblast.urls')),
     url(r'^srnabench/', include('sRNABench.urls')),
     url(r'^srnajbrowserde', include('sRNAdejBrowser.urls')),
