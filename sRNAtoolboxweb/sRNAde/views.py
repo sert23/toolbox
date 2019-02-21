@@ -596,7 +596,7 @@ class DeLaunch(FormView):
             else:
                 sampleDescription = ["-"] * len(jobIDs)
             names = jobIDs
-            headers = ["job ID", "Sample Name", "Group"]
+            headers = ["job ID", "Input",  "Sample Name", "Group"]
 
             for group in groups:
                 new_option = "<option>"+group+"</option>"
@@ -606,7 +606,7 @@ class DeLaunch(FormView):
 
             for i,name in enumerate(names):
                 buttons = base_selector.format(sample_id=name)
-                row = [name, sampleDescription[i], buttons]
+                row = [name, benchInputFromID(name),sampleDescription[i], buttons]
                 sample_table.append(row)
 
             header_list=[]
