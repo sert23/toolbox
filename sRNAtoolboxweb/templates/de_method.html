@@ -145,8 +145,10 @@
 
                 {% for tab_title, tab_id in sections %}
                 <div class="tab-pane fade active" id="{{ tab_id }}">
+                <br>
 
                     <div class="col-lg-12">
+                    <br>
                     {% for plot, section in multiboxplots %}
                         {% if section == tab_title %}
                             {{ plot|safe }}
