@@ -482,7 +482,7 @@ class De_method_view(DetailView):
             with open(os.path.join(folder,"heatmap.config"),"r") as multi_f:
                 for line in multi_f.readlines():
                     input_path, title, tag = line.rstrip().split("\t")
-                    plot='<iframe width="400" height="400" src="'+ input_path.replace(MEDIA_ROOT,MEDIA_URL)  +'"></iframe>'
+                    plot='<iframe width="1600" height="800" src="'+ input_path.replace(MEDIA_ROOT,MEDIA_URL)  +'"></iframe>'
                     #plot = file2string(input_path)
                     # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
                     mbp_list.append([plot,sections_dic[tag]])
