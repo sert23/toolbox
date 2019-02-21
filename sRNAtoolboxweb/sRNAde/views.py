@@ -297,7 +297,7 @@ def old_result(request):
             return redirect(reverse_lazy('progress', kwargs={"pipeline_id": job_id}))
 
     else:
-        return redirect(reverse_lazy('srnade'))
+        return redirect(reverse_lazy('DE:srnade'))
 
 def result(request):
     if 'id' in request.GET:
@@ -409,7 +409,7 @@ def result(request):
             return redirect(reverse_lazy('progress', kwargs={"pipeline_id": job_id}))
 
     else:
-        return redirect(reverse_lazy('srnade'))
+        return redirect(reverse_lazy('DE:srnade'))
 
 class De_method_view(DetailView):
     model = JobStatus
@@ -495,13 +495,13 @@ def test(request):
 class De_old(FormView):
     template_name = 'de.html'
     form_class = DEForm
-    success_url = reverse_lazy("DE")
+    success_url = reverse_lazy("DE:DE")
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         call, pipeline_id = form.create_call()
-        self.success_url = reverse_lazy('srnade') + '?id=' + pipeline_id
+        self.success_url = reverse_lazy('DE:srnade') + '?id=' + pipeline_id
 
         print(call)
         os.system(call)
@@ -514,14 +514,14 @@ class De_old(FormView):
 class De(FormView):
     template_name = 'de_input.html'
     form_class = DEinputForm
-    success_url = reverse_lazy("DE")
+    success_url = reverse_lazy("DE:DE")
 
     def form_valid(self, form):
         # This method is called when valid form data has been POSTed.
         # It should return an HttpResponse.
         #call, pipeline_id = form.create_call()
         pipeline_id = form.create_config_file()
-        self.success_url = reverse_lazy('DE_launch') + pipeline_id
+        self.success_url = reverse_lazy('DE:DE_launch') + pipeline_id
 
         # print(call)
         #os.system(call)
@@ -534,7 +534,7 @@ class De(FormView):
 class DeFromMulti(FormView):
     template_name = 'de_input.html'
     form_class = DEmultiForm
-    success_url = reverse_lazy("DE_multi")
+    success_url = reverse_lazy("DE:DE_multi")
 
     def get_form_kwargs(self):
         kwargs = super(DeFromMulti, self).get_form_kwargs()
@@ -563,7 +563,7 @@ class DeLaunch(FormView):
     template_name = 'de_launch.html'
     # form_class = DEinputForm
     form_class = DElaunchForm
-    success_url = reverse_lazy("DE_launch")
+    success_url = reverse_lazy("DE:DE_launch")
 
     def get_form_kwargs(self):
         kwargs = super(DeLaunch, self).get_form_kwargs()
@@ -696,7 +696,7 @@ class DeLaunch(FormView):
         # It should return an HttpResponse.
         #call, pipeline_id = form.create_call()
         pipeline_id,call = form.create_call()
-        self.success_url = reverse_lazy('srnade') + '?id=' + pipeline_id
+        self.success_url = reverse_lazy('DE:srnade') + '?id=' + pipeline_id
 
         # print(call)
         os.system(call)
