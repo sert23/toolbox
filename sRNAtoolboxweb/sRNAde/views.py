@@ -33,6 +33,12 @@ counter = itertools.count()
 
 FS = FileSystemStorage("/shared/sRNAtoolbox/webData")
 
+def benchInputFromID(benchID):
+    input_config = os.path.join(MEDIA_ROOT,benchID,"conf.txt")
+    with open(input_config,"r") as f:
+        input_line = os.path.basename(f.readlines()[0][6:])
+        return input_line
+
 
 class TableStatic(tables.Table):
     """
@@ -542,7 +548,7 @@ class DeFromMulti(FormView):
         # It should return an HttpResponse.
         #call, pipeline_id = form.create_call()
         pipeline_id = form.create_config_file()
-        self.success_url = reverse_lazy('DE_launch') + pipeline_id
+        self.success_url = reverse_lazy('DE:DE_launch') + pipeline_id
 
         # print(call)
         #os.system(call)
