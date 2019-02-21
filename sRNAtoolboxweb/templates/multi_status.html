@@ -80,8 +80,8 @@
 
                     <table id="jobs" class="table table-striped table-bordered table-hover dataTable no-footer"></table>
 
-                    <a href="http://google.com"><button type="button" class="btn btn-primary">Relaunch Jobs</button></a>
-                    <button type="button" class="btn btn-success">Launch sRNAde Jobs</button>
+                    <a href="{% url 'multi:multi_relaunch' %}{{ id }}"><button type="button" class="btn btn-primary">Relaunch Jobs</button></a>
+                    <a href="{% url 'srnade:DE_multi' %}{{ id }}"><button type="button" class="btn btn-success">Launch Jobs on sRNAde</button></a>
 
 
                         {% for msg in msgs %}
