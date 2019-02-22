@@ -437,13 +437,14 @@ class De_method_view(DetailView):
         new_record = JobStatus.objects.get(pipeline_key=job_id)
         folder = os.path.join(new_record.outdir,"de",de_method)
         sections_dic = dict()
+        section_list=[]
         with open(os.path.join(folder,"sections.config"),"r") as sect_f:
             for line in sect_f.readlines():
                 row = line.split("\t")
                 sections_dic[row[0]] = row[1]
-        section_list = set(sections_dic.values())
-        section_list = [[x,x.replace(" ","_")] for x in section_list]
-        context["sections"] = section_list
+                section_list.append(row[1])
+        section_set = set(section_list)
+        context["sections"] = section_set
         context["DE_method"] = de_dict.get(de_method)
         mbp_list = []
         if os.path.exists(os.path.join(folder,"multiboxplot.config")):
