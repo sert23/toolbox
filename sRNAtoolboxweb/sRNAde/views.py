@@ -480,11 +480,13 @@ class De_method_view(DetailView):
                 plot_list.append([plot_source,name,sections_dic[tag]])
             context["plot_list"] = plot_list
 
+        hm_list=[]
         if os.path.exists(os.path.join(folder,"heatmap.config")):
             with open(os.path.join(folder,"heatmap.config"),"r") as multi_f:
                 for line in multi_f.readlines():
                     input_path, title, tag = line.rstrip().split("\t")
-                    plot='<iframe width="1000" height="800" src="'+ input_path.replace(MEDIA_ROOT,MEDIA_URL)  +'"></iframe>'
+                    png_path = input_path.replace(".html",".png")
+                    plot ='<iframe width="1000" height="800" src="'+ png_path.replace(MEDIA_ROOT,MEDIA_URL)  +'"></iframe>'
                     #plot = file2string(input_path)
                     # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
                     mbp_list.append([plot,sections_dic[tag]])
