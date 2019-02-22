@@ -443,8 +443,9 @@ class De_method_view(DetailView):
                 row = line.split("\t")
                 sections_dic[row[0]] = row[1]
                 section_list.append(row[1])
-        section_set = set(section_list)
-        context["sections"] = section_set
+        section_list = set(section_list)
+        section_list = [[x,x.replace(" ","_")] for x in section_list]
+        context["sections"] = section_list
         context["DE_method"] = de_dict.get(de_method)
         mbp_list = []
         if os.path.exists(os.path.join(folder,"multiboxplot.config")):
