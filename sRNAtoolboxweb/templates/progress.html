@@ -44,7 +44,13 @@
 <div></div>
 
             <div class="col-lg-4">
+            {% for msg in msgs %}
+                {% if msg.type == "error" %}
+
             <a class="btn btn-default" href="{{ go_back_url }}"><i class="fa fa-arrow-left"></i>Back</a>
+                {% endif %}
+            {% endfor %}
+
                 <div class="panel panel-default">
                     <div class="panel-heading">
                        <i class="fa fa-tasks fa-fw"></i> Job Progress
