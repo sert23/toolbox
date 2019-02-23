@@ -494,7 +494,7 @@ class De_method_view(DetailView):
                     # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
                     hm_list.append([png_path,input_path, "hm_"+str(n),sections_dic[tag]])
 
-            context["heatmaps"] = hm_list
+            context["hm_list"] = hm_list
 
 
 
