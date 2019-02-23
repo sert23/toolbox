@@ -28,6 +28,7 @@ import json
 from sRNAde.de_plots import make_seq_plot, make_length_plot, make_full_length_plot, make_length_genome_plot, \
                             make_genome_dist_plot, general_plot, general_plot_cols
 from sRNAde.summary_plots import makeDEbox, multiBP
+from collections import OrderedDict
 
 counter = itertools.count()
 
@@ -444,7 +445,10 @@ class De_method_view(DetailView):
                 sections_dic[row[0]] = row[1]
                 section_list.append(row[1])
         context["init_tab"] = section_list[0]
-        section_list = set(section_list)
+
+        ordered_sections = list(OrderedDict.fromkeys(section_list))
+
+        section_list = ordered_sections
         section_list = [[x,x.replace(" ","_")] for x in section_list]
         context["sections"] = section_list
         context["DE_method"] = de_dict.get(de_method)
