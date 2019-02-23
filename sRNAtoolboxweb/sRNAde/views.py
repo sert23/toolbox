@@ -447,6 +447,7 @@ class De_method_view(DetailView):
         section_list = [[x,x.replace(" ","_")] for x in section_list]
         context["sections"] = section_list
         context["DE_method"] = de_dict.get(de_method)
+        context["init_tab"] = section_list[0][1]
         mbp_list = []
         if os.path.exists(os.path.join(folder,"multiboxplot.config")):
             with open(os.path.join(folder,"multiboxplot.config"),"r") as multi_f:
@@ -483,15 +484,17 @@ class De_method_view(DetailView):
         hm_list=[]
         if os.path.exists(os.path.join(folder,"heatmap.config")):
             with open(os.path.join(folder,"heatmap.config"),"r") as multi_f:
-                for line in multi_f.readlines():
+                for n,line in enumerate(multi_f.readlines()):
                     input_path, title, tag = line.rstrip().split("\t")
                     png_path = input_path.replace(".html",".png")
+                    png_path = png_path.replace(MEDIA_ROOT,MEDIA_URL)
+                    input_path = input_path.replace(MEDIA_ROOT,MEDIA_URL)
                     plot ='<iframe width="1000" height="800" src="'+ png_path.replace(MEDIA_ROOT,MEDIA_URL)  +'"></iframe>'
                     #plot = file2string(input_path)
                     # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
-                    mbp_list.append([plot,sections_dic[tag]])
+                    hm_list.append([png_path,input_path, "hm_"+str(n),sections_dic[tag]])
 
-            context["multiboxplots"] = mbp_list
+            context["heatmaps"] = hm_list
 
 
 
