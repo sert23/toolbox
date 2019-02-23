@@ -5,6 +5,17 @@
 {% load render_table from django_tables2 %}
 {% block content %}
 
+    <style>
+    @media (min-width: 768px) {
+{#    @media (min-width: 768px) {#}
+      .modal-xl {
+        width: 90%;
+          height: 300%;
+       max-width:1200px;
+      }
+    }
+</style>
+
 {#{% load static %}#}
 
 <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
