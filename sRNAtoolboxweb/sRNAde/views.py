@@ -493,7 +493,7 @@ class De_method_view(DetailView):
                     plot ='<iframe width="1000" height="800" src="'+ png_path.replace(MEDIA_ROOT,MEDIA_URL)  +'"></iframe>'
                     #plot = file2string(input_path)
                     # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
-                    hm_list.append([png_path,hm_path, "hm_"+str(n),sections_dic[tag]])
+                    hm_list.append([png_path, "/media/0B6Y6HNJI00MLQ5/de/ttest/mature_sense_minExpr1_RCadj_libraryRPM_heatmap_normalLog2CPM.html", "hm_"+str(n),sections_dic[tag]])
 
             context["hm_list"] = hm_list
 
