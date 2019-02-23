@@ -176,11 +176,22 @@
                 </div>
                     <div class="modal" id="modal_test_hm{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
         {#	    <div class="modal-dialog" role="document">#}
+                        <style>
+                            @media (min-width: 768px) {
+                        {#    @media (min-width: 768px) {#}
+                              .modal-xl {
+                                width: 200%;
+                                  height: 300%;
+                               max-width:1200px;
+                              }
+                            }
+                        </style>
                 <div class="modal-dialog modal-xl">
                   <div class="modal-content" >
                     <div class="modal-body" >
+
 {#                                <h3 align="center"> {{ name }}  </h3>#}
-                        <iframe width="1000" height="1000" src="{{ hm }}"></iframe>
+                        <iframe width="2000" height="1000" src="{{ hm }}"></iframe>
 
                             <!-- Plotly chart will be drawn inside this DIV -->
         {#	          <img style="display:block; margin-left:auto; margin-right:auto; width:100%;" src="{{ MEDIA_URL }}{{ sumimgs.0  }}">#}
