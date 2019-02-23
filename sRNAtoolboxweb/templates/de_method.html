@@ -1,20 +1,26 @@
 {#{% extends 'base.html' %}#}
 {#{% extends 'photos/base.html' %}#}
 {% extends "base.html" %}
+
+ <style>
+    @media (min-width: 768px) {
+{#    @media (min-width: 768px) {#}
+      .modal {
+        padding: 1%;
+    }
+
+    .modal-xl {
+    min-width: auto;
+    max-width: fit-content;
+    }
+    }
+</style>
+
 {% load staticfiles %}
 {% load render_table from django_tables2 %}
 {% block content %}
 
-    <style>
-    @media (min-width: 768px) {
-{#    @media (min-width: 768px) {#}
-      .modal-xl {
-        width: 90%;
-          height: 300%;
-       max-width:1200px;
-      }
-    }
-</style>
+
 
 {#{% load static %}#}
 
