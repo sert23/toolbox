@@ -82,7 +82,7 @@
                     </li>
 {#                    <li><a href="#matrix_tab" data-toggle="tab">matrix</a>#}
 {#                    </li>#}
-                    <li><a href="#orGroupString" data-toggle="tab">grpStr</a>
+                    <li><a href="#orGroupString" data-toggle="tab">group String</a>
                     </li>
 
                     <!--<li><a href="#seq_variation" data-toggle="tab">Sequence variation</a>-->
@@ -188,6 +188,9 @@
     <script>
     function loadParams() {
         $('a[href="#use-group-string-advanced"]').tab('show');
+        document.getElementById("id_listofIDs").value= "D42PPR3ZVTVQBK8:EYHC83BJX80ATIL:UWCUSRT3IZO3ME2:XXEYZ4EZ55BHKUG:YH5LQJZVNP9W3NX:5DZDVDGE0AZ5GQ0#51UQ20HBJ3XUWPJ:6IJISG8JIDJC0CA:FKZ2D88FZNWZCS5:OE1ZNRX2RSJ0OV1:OUSQYGT9V0V6ZA5:ZBM4WYEO1C80DTU";
+        document.getElementById("id_sampleDescription2").value= "MUTU9_cell:IM_cell:BJAB_cell:MUTU3_cell:RN_cell:IK_cell:RN_exo:IM_exo:MUTU9_exo:IK_exo:BJAB_exo:MUTU3_exo";
+        document.getElementById("id_sampleGroupsNot").value= "exosome#cell";
         return true   // The function returns the product of p1 and p2
     }
 
