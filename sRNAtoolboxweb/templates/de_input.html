@@ -71,7 +71,7 @@
 
                         <div class="" role="tabpanel" data-example-id="togglable-tabs">
                             <div class="text-center">
-                        <button type="button" class="btn btn-primary center-block">Load test Data</button>
+                        <button type="button" class="btn btn-primary center-block" onclick="loadParams()">Load test Data</button>
 
                             </div>
                             <div style="height:10px;font-size:1px;">&nbsp;</div>
@@ -181,6 +181,15 @@
 
 {#    filename.split('.').pop();#}
 });
+
+
+    </script>
+
+    <script>
+    function loadParams() {
+        $('a[href="#use-group-string-advanced"]').tab('show');
+        return true   // The function returns the product of p1 and p2
+    }
 
 
     </script>
