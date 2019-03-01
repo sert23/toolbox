@@ -30,6 +30,7 @@ from utils import pipeline_utils
 from utils.sysUtils import make_dir
 from sRNABench.bench_plots_func import full_read_length,read_length_type,mapping_stat,top_miRNA_plot
 from FileModels.deStatsParser import DeStatsParser
+from FileModels.summaryParser import LinksParser, BWParser
 import pandas as pd
 
 #CONF = json.load(file("/shared/sRNAtoolbox/sRNAtoolbox.conf"))
@@ -72,7 +73,7 @@ def define_table(columns, typeTable):
     :return: a class of type TableResults
     """
 
-    attrs = dict((c, tables.Column()) for c in columns if c != "align" and c != "align_")
+    attrs = dict((c, tables.Column()) for c in columns if c != "align" and c != "align_" and c != "link")
     attrs2 = dict((c, tables.TemplateColumn('<a href="{% url "show_align" id "pre-microRNA" record.align %}">align</a>')) for c in columns if c == "align")
     # attrs2 = dict((c, tables.TemplateColumn('<a href="{% url "show_align" id "pre-microRNA" record.align %}">align</a>')) for c in columns if c == "align")
     #attrs2 = dict((c, tables.TemplateColumn('<a href="{% url "sRNABench.views.show_align" id "hairpin" record.align %}">align</a>')) for c in columns if c == "align")
@@ -80,6 +81,9 @@ def define_table(columns, typeTable):
     attrs3 = dict((c, tables.TemplateColumn('<a href="{% url "show_align" id "novel" record.align_ %}">align</a>')) for c in columns if c == "align_")
     #attrs3 = dict((c, tables.TemplateColumn('<a href="{% url "sRNABench.views.show_align" id "novel" record.align_ %}">align</a>')) for c in columns if c == "align_")
     attrs.update(attrs3)
+    attrs4 = dict(
+        (c, tables.TemplateColumn('<a href="{{record.link}}" class="btn btn-primary btn-sm" target="_blank" role="button" aria-pressed="true">Download data</a>')) for c in
+        columns if c == "link")
 
 
 
@@ -141,6 +145,42 @@ def define_table2(columns, typeTable):
 
     klass = type('TableResult', (tables.Table,), attrs)
     return klass
+
+def define_table_BigWig(columns, typeTable):
+    """
+    :param columns: Array with names of columns to show
+    :return: a class of type TableResults
+    """
+
+    attrs = dict((c, tables.Column()) for c in columns if c != "link")
+    # attrs = dict((c, tables.Column()) for c in columns if c != "Link to results")
+    attrs2 = dict((c, tables.TemplateColumn(
+        '<a href="{{record.link}}" class="btn btn-primary btn-sm" target="_blank" role="button" aria-pressed="true">Download data</a>'))
+                  for c in columns if c == "link")
+    # attrs2 = dict((c, tables.TemplateColumn('<a href="{{record.link}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Go to results</a>')) for c in columns if c == "Link to results")
+    # attrs2 = dict((c, tables.TemplateColumn('<a href="{{ settings.SUB_SITE }}/{{record.method}}" class="btn btn-primary btn-sm" role="button" aria-pressed="true">Go to results</a>')) for c in columns if c == "Link to results")
+    attrs.update(attrs2)
+
+    if typeTable == "TableResult":
+        attrs['Meta'] = type('Meta', (),
+                             dict(attrs={'class': 'table table-striped table-bordered table-hover dataTable no-footer',
+                                         "id": lambda: "table_%d" % next(counter)},
+                                  ordenable=False,
+                                  empty_text="Results not found!",
+                                  order_by=("name",)))
+
+    else:
+        attrs['Meta'] = type('Meta', (),
+                             dict(attrs={'class': 'table table-striped',
+                                         "id": "notformattable"},
+                                  ordenable=False,
+                                  empty_text="Results not found!",
+                                  order_by=("name",)))
+
+
+    klass = type('TableResult', (tables.Table,), attrs)
+    return klass
+
 
 class Result():
     """
@@ -506,6 +546,9 @@ def add_trna(results):
 
 import time
 
+# def BW_download():
+
+
 
 def check_image_files(input_list, seconds=5):
 
@@ -581,6 +624,15 @@ def result_new(request):
                 if "species" in parameters:
                     add_mapping_result(new_record, parameters, results)
 
+                if os.path.exists(os.path.join(new_record.outdir,"bigwig","download.txt")):
+                    down_file = os.path.join(new_record.outdir,"bigwig","download.txt")
+                    parser = BWParser(down_file)
+                    table = [obj for obj in parser.parse()]
+                    header = table[0].get_sorted_attr()
+                    dt = Result("BigWig Download", define_table(header, 'TableResult')(table))
+                    results["down_table"] = dt
+
+
                 #MicroRNA summary (miRBase v21)
                 if "microRNA" in parameters:
                     if "detectedMature" in parameters:
@@ -635,6 +687,7 @@ def render_table(request, mode, job_id, lib=""):
     result={}
     result["id"] = job_id
     new_record = JobStatus.objects.get(pipeline_key=job_id)
+
 
     if mode == "pre-microRNA":
         result["title"] = "Mapping results to pre-microRNA"
