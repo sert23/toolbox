@@ -627,7 +627,7 @@ def result_new(request):
                 if os.path.exists(os.path.join(new_record.outdir,"bigwig","download.txt")):
                     down_file = os.path.join(new_record.outdir,"bigwig","download.txt")
                     parser = BWParser(down_file)
-                    table = [obj for obj in parser.parse()]
+                    table = [obj for obj in parser.parse(MEDIA_ROOT,MEDIA_URL)]
                     header = table[0].get_sorted_attr()
                     dt = Result("BigWig Download", define_table(header, 'TableResult')(table))
                     results["down_table"] = dt
