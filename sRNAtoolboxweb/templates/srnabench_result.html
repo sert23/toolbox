@@ -183,6 +183,14 @@
 
     <script src="{% static 'js/plugins/dataTables/jquery.dataTables.js' %}"></script>
     <script src="{% static 'js/plugins/dataTables/dataTables.bootstrap.js' %}"></script>
+    <script>
+    $('table').each(function() {
+        if (this.id != "notformattable"){
+            console.log(this.id);
+            $(this).dataTable();
+        }
+    });
+</script>
 
     <script>
 
