@@ -84,6 +84,7 @@ def define_table(columns, typeTable):
     attrs4 = dict(
         (c, tables.TemplateColumn('<a href="{{record.link}}" class="btn btn-primary btn-sm" target="_blank" role="button" aria-pressed="true">Download data</a>')) for c in
         columns if c == "link")
+    attrs.update(attrs4)
 
 
 
