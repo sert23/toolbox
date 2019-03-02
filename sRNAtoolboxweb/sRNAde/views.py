@@ -490,15 +490,16 @@ class De_method_view(DetailView):
         if os.path.exists(os.path.join(folder,"heatmap.config")):
             with open(os.path.join(folder,"heatmap.config"),"r") as multi_f:
                 for n,line in enumerate(multi_f.readlines()):
-                    input_path, title, tag = line.rstrip().split("\t")
+                    input_path, title, tag, mat_path = line.rstrip().split("\t")
                     hm_path = input_path
                     png_path = input_path.replace(".html",".png")
                     png_path = png_path.replace(MEDIA_ROOT,MEDIA_URL)
+                    mat_path = mat_path.replace(MEDIA_ROOT,MEDIA_URL)
                     input_path = input_path.replace(MEDIA_ROOT,MEDIA_URL)
-                    plot ='<iframe width="1000" height="800" src="'+ png_path.replace(MEDIA_ROOT,MEDIA_URL)  +'"></iframe>'
+                    plot ='<iframe width="1000" height="800" src="'+ png_path  +'"></iframe>'
                     #plot = file2string(input_path)
                     # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
-                    hm_list.append([png_path, "/srnatoolbox/media/0B6Y6HNJI00MLQ5/de/ttest/mature_sense_minExpr1_RCadj_libraryRPM_heatmap_normalLog2CPM.html", "hm_"+str(n),sections_dic.get(tag)])
+                    hm_list.append([png_path, plot, "hm_"+str(n),mat_path,sections_dic.get(tag)])
 
             context["hm_list"] = hm_list
 
