@@ -492,6 +492,7 @@ class De_method_view(DetailView):
                 for n,line in enumerate(multi_f.readlines()):
                     input_path, title, tag, mat_path = line.rstrip().split("\t")
                     hm_path = input_path
+                    hm_path = hm_path.replace(MEDIA_ROOT,MEDIA_URL)
                     png_path = input_path.replace(".html",".png")
                     png_path = png_path.replace(MEDIA_ROOT,MEDIA_URL)
                     mat_path = mat_path.replace(MEDIA_ROOT,MEDIA_URL)
