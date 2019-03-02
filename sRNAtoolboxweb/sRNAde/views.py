@@ -496,7 +496,7 @@ class De_method_view(DetailView):
                     png_path = png_path.replace(MEDIA_ROOT,MEDIA_URL)
                     mat_path = mat_path.replace(MEDIA_ROOT,MEDIA_URL)
                     input_path = input_path.replace(MEDIA_ROOT,MEDIA_URL)
-                    plot ='<iframe width="1000" height="800" src="'+ png_path  +'"></iframe>'
+                    plot ='<iframe width="1000" height="800" src="'+ hm_path  +'"></iframe>'
                     #plot = file2string(input_path)
                     # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
                     hm_list.append([png_path, plot, "hm_"+str(n),mat_path,sections_dic.get(tag)])
