@@ -500,7 +500,7 @@ class De_method_view(DetailView):
                     plot ='<iframe width="1000" height="800" src="'+ hm_path  +'"></iframe>'
                     #plot = file2string(input_path)
                     # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
-                    hm_list.append([png_path, plot, "hm_"+str(n),mat_path,sections_dic.get(tag)])
+                    hm_list.append([png_path, plot, "hm_"+str(n),mat_path,hm_path,sections_dic.get(tag)])
 
             context["hm_list"] = hm_list
 
