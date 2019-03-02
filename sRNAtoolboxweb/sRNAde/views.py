@@ -459,7 +459,7 @@ class De_method_view(DetailView):
                 for line in multi_f.readlines():
                     input_path, xlab, ylab, title, tag = line.rstrip().split("\t")
                     plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
-                    mbp_list.append([plot,sections_dic[tag]])
+                    mbp_list.append([plot,sections_dic.get(tag)])
 
             context["multiboxplots"] = mbp_list
 
@@ -475,7 +475,7 @@ class De_method_view(DetailView):
                 r = Result(name, define_table(header, 'TableResult')(table))
                 tag = row[2]
                 context[tag] = r
-                table_list.append([r,sections_dic[tag]])
+                table_list.append([r,sections_dic.get(tag)])
             context["table_list"] = table_list
         if os.path.exists(os.path.join(folder, "plots.config")):
             plot_list = []
@@ -483,7 +483,7 @@ class De_method_view(DetailView):
             for index, row in plots_config.iterrows():
                 file, name,tag = row[0:3]
                 plot_source = file.replace(MEDIA_ROOT,MEDIA_URL)
-                plot_list.append([plot_source,name,sections_dic[tag]])
+                plot_list.append([plot_source,name,sections_dic.get(tag)])
             context["plot_list"] = plot_list
 
         hm_list=[]
@@ -498,7 +498,7 @@ class De_method_view(DetailView):
                     plot ='<iframe width="1000" height="800" src="'+ png_path.replace(MEDIA_ROOT,MEDIA_URL)  +'"></iframe>'
                     #plot = file2string(input_path)
                     # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
-                    hm_list.append([png_path, "/srnatoolbox/media/0B6Y6HNJI00MLQ5/de/ttest/mature_sense_minExpr1_RCadj_libraryRPM_heatmap_normalLog2CPM.html", "hm_"+str(n),sections_dic[tag]])
+                    hm_list.append([png_path, "/srnatoolbox/media/0B6Y6HNJI00MLQ5/de/ttest/mature_sense_minExpr1_RCadj_libraryRPM_heatmap_normalLog2CPM.html", "hm_"+str(n),sections_dic.get(tag)])
 
             context["hm_list"] = hm_list
 
