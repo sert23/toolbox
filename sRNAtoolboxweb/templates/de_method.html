@@ -228,7 +228,9 @@
 
                     {% for plot, section in multiboxplots %}
                         {% if section == tab_title %}
+                            <div class="col-lg-12">
                             {{ plot|safe }}
+                            </div>
                         {% endif %}
                         {% endfor %}
                     {% for stable, section in table_list %}
