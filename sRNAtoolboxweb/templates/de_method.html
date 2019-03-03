@@ -192,7 +192,9 @@
 
 {#                                <h3 align="center"> {{ name }}  </h3>#}
 {#                        <iframe width="1150" height="1000" src="{{ hm }}"></iframe>#}
-                                {{ hm|safe }}
+                             <div class="row">
+                            {{ hm|safe }}
+                             </div>
                                 <a href="{{ mat_link }}" download><h4>Download input matrix</h4></a>
                                 <a href="{{ hm_path }}" download><h4>Download heatmap in html format</h4></a>
                             <!-- Plotly chart will be drawn inside this DIV -->
