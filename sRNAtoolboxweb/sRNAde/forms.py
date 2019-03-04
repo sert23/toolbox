@@ -476,6 +476,7 @@ class DEmultiForm(forms.Form):
 
         parameters = {}
         parameters["jobIDs"] = ",".join(launched_ids)
+        parameters["input"] = MEDIA_ROOT
         for k in cleaned_data.keys():
             if cleaned_data.get(k):
                 parameters[k] = cleaned_data[k]
