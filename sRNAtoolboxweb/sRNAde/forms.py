@@ -392,6 +392,7 @@ class DElaunchForm(forms.Form):
                 conf_params["grpDesc"] = initial_params.get("sampleGroups")
             if initial_params.get("sampleDescription2"):
                 conf_params["sampleDesc"] = initial_params.get("sampleDescription2")
+            conf_params["input"] = MEDIA_ROOT
         elif initial_params.get("ifile") != " ":
             conf_params["input"] = initial_params.get("ifile")
             if initial_params.get("matDescription"):
