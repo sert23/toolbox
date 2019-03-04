@@ -62,7 +62,7 @@ class MultiUploadView(FormView):
 
             for x in ["conf.txt","SRR_files.txt","URL_files.txt"]:
                 if [x,os.path.join(MEDIA_URL, folder, x)] in onlyfiles:
-                    onlyfiles.remove(x)
+                    onlyfiles.remove([x,os.path.join(MEDIA_URL, folder, x)])
 
         else:
             onlyfiles = []
