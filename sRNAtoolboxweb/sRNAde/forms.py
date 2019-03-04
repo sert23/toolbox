@@ -482,6 +482,7 @@ class DEmultiForm(forms.Form):
             if cleaned_data.get(k):
                 parameters[k] = cleaned_data[k]
         parameters["input"] = MEDIA_ROOT
+        parameters["ifile"] = " "
         with open(json_path, 'w') as jf:
             json.dump(parameters, jf)
 
