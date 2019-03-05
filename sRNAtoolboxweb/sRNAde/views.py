@@ -389,15 +389,15 @@ def result(request):
                     results["summary_list"] = summary_list
                     if (tag.startswith("consensus_over_pvalue") or tag.startswith("consensus_under_pvalue")):
                         consensus_list.append(r)
-                    results["consensus_list"] = summary_list
+                    results["consensus_list"] = consensus_list
 
                 except:
                     pass
             consensus_plots=[]
-            tables_config = pd.read_table(os.path.join(new_record.outdir, 'venn.config'), header=None)
-            for index, row in tables_config.iterrows():
+            venn_config = pd.read_table(os.path.join(new_record.outdir, 'venn.config'), header=None)
+            for index, row in venn_config.iterrows():
                 try:
-                    file, name, tag = row[:]
+                    file, name, tag = row[0:]
                     path_jpg = file.replace(".venn",".jpg").replace(MEDIA_ROOT,MEDIA_URL)
                     tables_config.append([path_jpg,name])
                 except:
