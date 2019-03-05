@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <h1>sRNAde: </h1>
+                    <h3>Consensus differential expression (DESeq, DEseq2, t-test, edgeR and NOISeq), visual cluster analysis and
+                        sequencing statistics. </h3>
+                </div>
+            </div>
+
+
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-lg-9">
+
+
+                {% include 'form_base.html' %}
+
+
+            </div>
+
+
+            <div class="col-lg-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Help
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <a href="{{ settings.MANUAL_URL }}" target="_blank">Link to Web Manual</a>
+                        <br>
+                        <a href="https://alu.ugr.es/srnatoolbox/srnade/result?id=CKV5GAOC5U3WKTN" target="_blank">Link
+                            to Test Data Results</a>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-3">
+                <div class="panel panel-green">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Test Data Description
+                        </h4>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Test Data Parameters
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        Sample groups:
+                        <pre style="white-space: nowrap; overflow-y: hidden">exosome#cell</pre>
+
+{#                        Sample groups:#}
+{#                        <pre style="white-space: nowrap; overflow-y: hidden">exosome#cell</pre>#}
+{#                        List of sRNAbench Job IDs:#}
+{#                        <pre style=" white-space: nowrap; overflow-y: hidden">D42PPR3ZVTVQBK8,EYHC83BJX80ATIL,UWCUSRT3IZO3ME2,XXEYZ4EZ55BHKUG,YH5LQJZVNP9W3NX,5DZDVDGE0AZ5GQ0,51UQ20HBJ3XUWPJ,6IJISG8JIDJC0CA,FKZ2D88FZNWZCS5,OE1ZNRX2RSJ0OV1,OUSQYGT9V0V6ZA5,ZBM4WYEO1C80DTU</pre>#}
+{##}
+{#                        Or use Group String (Advanced):#}
+{#                        <pre style=" white-space: nowrap; overflow-y: hidden">D42PPR3ZVTVQBK8:EYHC83BJX80ATIL:UWCUSRT3IZO3ME2:XXEYZ4EZ55BHKUG:YH5LQJZVNP9W3NX:5DZDVDGE0AZ5GQ0#51UQ20HBJ3XUWPJ:6IJISG8JIDJC0CA:FKZ2D88FZNWZCS5:OE1ZNRX2RSJ0OV1:OUSQYGT9V0V6ZA5:ZBM4WYEO1C80DTU</pre>#}
+{#                        Or you can use this expression matrix:#}
+{#                        <br>#}
+{#                        <a href="http://bioinfo5.ugr.es/srnatoolbox/media/4LOC73A18CPD9KF/output_directory/mature_sense_minExpr5_RCadj.mat" download> <i#}
+{#                                class="fa fa-download fa-fw"></i>Matrix File</a>#}
+
+
+                    </div>
+                </div>
+
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+
+{% endblock %}
+
+{% block modals %}
+    {% include "Messages/de/SampleDescription.html" %}
+    {% include "Messages/de/ListOfIDs.html" %}
+    {% include "Messages/de/IDlist.html" %}
+{% endblock %}
+
+
+
+{% block js %}
+{#    <script src="{% static 'js/sRNAde_form_control.js' %}">#}
+
+    <script>
+
+    $("input[type=file]").on('change',function(){
+    var extensions = ["xls","xlsx","doc","docx","XLSX","XLS","DOC","DOCX"]
+    if (extensions.includes(this.files[0].name.split('.').pop()) ){
+        alert('Spread-sheet or document extensions such as ".xls" or ".doc" are not supported. Please upload a different file. ')
+        document.getElementById('id_ifile').value = "";
+    }
+
+{#    filename.split('.').pop();#}
+});
+
+
+    </script>
+
+    <script>
+    function loadParams() {
+        $('a[href="#use-group-string-advanced"]').tab('show');
+        document.getElementById("id_listofIDs").value= "D42PPR3ZVTVQBK8:EYHC83BJX80ATIL:UWCUSRT3IZO3ME2:XXEYZ4EZ55BHKUG:YH5LQJZVNP9W3NX:5DZDVDGE0AZ5GQ0#51UQ20HBJ3XUWPJ:6IJISG8JIDJC0CA:FKZ2D88FZNWZCS5:OE1ZNRX2RSJ0OV1:OUSQYGT9V0V6ZA5:ZBM4WYEO1C80DTU";
+        document.getElementById("id_sampleDescription2").value= "MUTU9_cell:IM_cell:BJAB_cell:MUTU3_cell:RN_cell:IK_cell:RN_exo:IM_exo:MUTU9_exo:IK_exo:BJAB_exo:MUTU3_exo";
+        document.getElementById("id_sampleGroupsNot").value= "exosome#cell";
+        return true   // The function returns the product of p1 and p2
+    }
+
+
+    </script>
+
+{% endblock %}
+
