@@ -373,6 +373,7 @@ def result(request):
 
             # Tables
             summary_list = []
+            consensus_list = []
             tables_config = pd.read_table(os.path.join(new_record.outdir, 'tables.config'), header=None)
             for index, row in tables_config.iterrows():
                 try:
@@ -386,6 +387,19 @@ def result(request):
                     if (tag.startswith("summary_pvalue") or tag.startswith("summary_FC")):
                         summary_list.append(r)
                     results["summary_list"] = summary_list
+                    if (tag.startswith("consensus_over_pvalue") or tag.startswith("consensus_under_pvalue")):
+                        consensus_list.append(r)
+                    results["consensus_list"] = summary_list
+
+                except:
+                    pass
+            consensus_plots=[]
+            tables_config = pd.read_table(os.path.join(new_record.outdir, 'venn.config'), header=None)
+            for index, row in tables_config.iterrows():
+                try:
+                    file, name, tag = row[:]
+                    path_jpg = file.replace(".venn",".jpg").replace(MEDIA_ROOT,MEDIA_URL)
+                    tables_config.append([path_jpg,name])
                 except:
                     pass
 
