@@ -481,10 +481,10 @@ class DEmultiForm(forms.Form):
         for k in cleaned_data.keys():
             if cleaned_data.get(k):
                 parameters[k] = cleaned_data[k]
-        parameters["input"] = MEDIA_ROOT
+        # parameters["input"] = MEDIA_ROOT
         parameters["ifile"] = " "
         with open(json_path, 'w') as jf:
-            json.dump(parameters, jf)
+            json.dump(parameters, jf, sort_keys=True)
 
         JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not_launched",
                                  start_time=datetime.datetime.now(),
