@@ -563,7 +563,7 @@ class De(FormView):
         return super(De, self).form_valid(form)
 
 class DeFromMulti(FormView):
-    template_name = 'de_input.html'
+    template_name = 'de_multi.html'
     form_class = DEmultiForm
     success_url = reverse_lazy("DE_multi")
 
