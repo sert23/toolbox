@@ -396,12 +396,11 @@ def result(request):
             consensus_plots=[]
             venn_config = pd.read_table(os.path.join(new_record.outdir, 'venn.config'), header=None)
             for index, row in venn_config.iterrows():
-                try:
-                    file, name, tag = row[0:]
-                    path_jpg = file.replace(".venn",".jpg").replace(MEDIA_ROOT,MEDIA_URL)
-                    tables_config.append([path_jpg,name])
-                except:
-                    pass
+
+                file, name, tag = row[0:]
+                path_jpg = file.replace(".venn",".jpg").replace(MEDIA_ROOT,MEDIA_URL)
+                consensus_plots.append([path_jpg,name])
+                results["consensus_plots"] = consensus_plots
 
             if new_record.job_status == "Finished":
                 if new_record.stats_file and os.path.isfile(new_record.stats_file):
