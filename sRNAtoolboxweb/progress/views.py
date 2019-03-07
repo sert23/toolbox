@@ -150,7 +150,7 @@ class JobStatusDetail(DetailView):
 
         initial_url = reverse_lazy(job_status.pipeline_type.lower())
 
-        if job_status.pipeline_type == "sRNABench":
+        if job_status.pipeline_type == "sRNAbench":
             go_back_url = "meme"
         else:
             go_back_url = reverse_lazy(job_status.pipeline_type.lower())[:-6]
@@ -158,12 +158,12 @@ class JobStatusDetail(DetailView):
         if web_log:
             return {'msgs': [Msg(
             "ERROR: An error occured with your job:" + job_status.pipeline_key + "\nPlease report it indicating the jobID")],
-            "id": job_status.pipeline_key, "web_log": web_log, "go_back_url": reverse_lazy(job_status.pipeline_type.lower())[:-6]   }
+            "id": job_status.pipeline_key, "web_log": web_log, "go_back_url": go_back_url   }
             # "id": job_status.pipeline_key, "web_log": web_log, "go_back_url": "memeee"  }
         else:
             return {'msgs': [Msg(
                 "ERROR: An error occured with your job:" + job_status.pipeline_key + "\nPlease report it indicating the jobID")],
-                "id": job_status.pipeline_key, "go_back_url": reverse_lazy(job_status.pipeline_type.lower())[:-6]   }
+                "id": job_status.pipeline_key, "go_back_url": go_back_url   }
 
 
 
