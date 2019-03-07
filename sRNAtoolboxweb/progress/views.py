@@ -147,6 +147,14 @@ class JobStatusDetail(DetailView):
         :return:
         """
         web_log = parse_web_log(job_status.pipeline_key)
+
+        initial_url = reverse_lazy(job_status.pipeline_type.lower())
+
+        if job_status.pipeline_type == "sRNAbench":
+            go_back_url = "meme"
+        else:
+            go_back_url = reverse_lazy(job_status.pipeline_type.lower())[:-6]
+
         if web_log:
             return {'msgs': [Msg(
             "ERROR: An error occured with your job:" + job_status.pipeline_key + "\nPlease report it indicating the jobID")],
