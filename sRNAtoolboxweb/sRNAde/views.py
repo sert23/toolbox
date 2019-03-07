@@ -317,7 +317,8 @@ def result(request):
 
             results = dict()
             results["id"] = job_id
-
+            zip_path = os.path.join(new_record.outdir, "sRNAde_full_Result.zip")
+            results["zip"] = zip_path.replace(MEDIA_ROOT, MEDIA_URL)
             # Graphs
             config = pd.read_table(os.path.join(new_record.outdir, 'boxplot.config'), header=None)
             for index, row in config.iterrows():
