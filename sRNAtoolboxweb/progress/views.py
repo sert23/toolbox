@@ -151,7 +151,7 @@ class JobStatusDetail(DetailView):
         initial_url = reverse_lazy(job_status.pipeline_type.lower())
 
         if job_status.pipeline_type == "sRNAbench":
-            go_back_url = "meme"
+            go_back_url = reverse_lazy(job_status.pipeline_type.lower())[:-7]
         else:
             go_back_url = reverse_lazy(job_status.pipeline_type.lower())[:-6]
 
