@@ -590,7 +590,7 @@ def result_new(request):
             if os.path.exists(new_record.outdir):
 
                 parameters = params.params
-                if parameters.get("species"):
+                if parameters.get("species") != "NA":
                     results["Genome_mode"] = True
                  #Summary
                 add_sumimg(new_record, results)
