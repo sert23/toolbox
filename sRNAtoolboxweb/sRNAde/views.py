@@ -174,6 +174,8 @@ def old_result(request):
         results = {}
         results["id"] = job_id
         if new_record.job_status == "Finished":
+            zip_path = os.path.join(new_record.outdir, "sRNAde_full_Result.zip")
+            results["zip"] = zip_path.replace(MEDIA_ROOT, MEDIA_URL)
             new_record.xls_files = new_record.xls_files.split(',')
             new_record.heatmaps = new_record.heatmaps.split(',')
             for file in new_record.xls_files:
