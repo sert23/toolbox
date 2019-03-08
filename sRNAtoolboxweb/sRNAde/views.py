@@ -29,6 +29,7 @@ from sRNAde.de_plots import make_seq_plot, make_length_plot, make_full_length_pl
                             make_genome_dist_plot, general_plot, general_plot_cols
 from sRNAde.summary_plots import makeDEbox, multiBP, multiBP_fraction
 from collections import OrderedDict
+import imghdr
 
 counter = itertools.count()
 
@@ -520,12 +521,15 @@ class De_method_view(DetailView):
                     hm_path = input_path
                     hm_path = hm_path.replace(MEDIA_ROOT, MEDIA_URL)
                     png_path = input_path.replace(".html", ".png")
-                    with open(png_path) as png_f:
-                        first_line = png_f.readline()
-                    if first_line.startswith('{"detail"'):
+
+                    if imghdr.what(png_path) != "png":
                         hm_button = True
                     else:
                         hm_button = False
+                    # with open(png_path) as png_f:
+                    #     first_line = png_f.readline()
+                    # if first_line.startswith('{"detail"'):
+
                     png_path = png_path.replace(MEDIA_ROOT, MEDIA_URL)
                     mat_path = mat_path.replace(MEDIA_ROOT, MEDIA_URL)
                     input_path = input_path.replace(MEDIA_ROOT, MEDIA_URL)
