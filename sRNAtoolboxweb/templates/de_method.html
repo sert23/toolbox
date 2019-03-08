@@ -166,12 +166,18 @@
                     <div class="col-lg-12">
                     <br>
                     {% if hm_list %}
-                        {% for img, hm, name, mat_link, hm_path ,section in hm_list %}
+                        {% for img, hm_button ,title, hm, name, mat_link, hm_path ,section in hm_list %}
                             {% if section == tab_title %}
                 <div class="col-lg-12">
     {#                <a href="{{ MEDIA_URL }}{{ img  }}"  > <img src="{{ MEDIA_URL }}{{ img  }}"  alt="Heat Map" style="width:100%;height:100%" /> </a>#}
 {#                    <h3 align="center"> {{ name }}  </h3>#}
-                    <a href="javascript:void(0)" ><img id="hm_img{{ forloop.counter }}" src="{{ img  }}" alt="img" style="width:100%;height:100%;padding:1px;border:thin solid black;"  /> </a>
+                <h4> {{ title }}  </h4>
+                    {% if hm_button %}
+                        <a href="javascript:void(0)" > <button type="button" id="hm_img{{ forloop.counter }}" class="btn btn-primary">See heatmap</button> </a>
+                    {% else %}
+                        <a href="javascript:void(0)" ><img id="hm_img{{ forloop.counter }}" src="{{ img  }}" alt="img" style="width:100%;height:100%;padding:1px;border:thin solid black;"  /> </a>
+                    {% endif %}
+
 {#                    <a href="{{ hm }}" ><img id="hm_img{{ forloop.counter }}" src="{{ img  }}" alt="img" style="width:100%;height:100%;padding:1px;border:thin solid black;"  /> </a>#}
                 </div>
                     <div class="modal" id="modal_test_hm{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="label" aria-hidden="true">
@@ -195,6 +201,7 @@
                              <div class="row">
                                  <div class="text-center">
 {#                                 <div class="large-2 push-5 columns"> #}
+                             <h2> {{ title }}  </h2>
                             {{ hm|safe }}
                                  </div>
                              </div>

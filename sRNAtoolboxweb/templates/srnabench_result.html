@@ -73,13 +73,13 @@
 {#                </li>#}
 {#                {% endif %}#}
 
-                {% if mapping_results %}
+                {% if Genome_mode %}
                 <li><a href="#Genome" data-toggle="tab">Genome Mapping</a>
                 </li>
                 {% endif %}
 
                 {% if mirimg %}
-                <li><a href="#microRNA" data-toggle="tab">MicroRNA summary (miRBase v22)</a>
+                <li><a href="#microRNA" data-toggle="tab">MicroRNA summary ({{ mirna_ref }})</a>
                 </li>
                 {% endif %}
 

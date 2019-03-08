@@ -27,8 +27,9 @@ import os
 import json
 from sRNAde.de_plots import make_seq_plot, make_length_plot, make_full_length_plot, make_length_genome_plot, \
                             make_genome_dist_plot, general_plot, general_plot_cols
-from sRNAde.summary_plots import makeDEbox, multiBP
+from sRNAde.summary_plots import makeDEbox, multiBP, multiBP_fraction
 from collections import OrderedDict
+import imghdr
 
 counter = itertools.count()
 
@@ -174,6 +175,8 @@ def old_result(request):
         results = {}
         results["id"] = job_id
         if new_record.job_status == "Finished":
+            zip_path = os.path.join(new_record.outdir, "sRNAde_full_Result.zip")
+            results["zip"] = zip_path.replace(MEDIA_ROOT, MEDIA_URL)
             new_record.xls_files = new_record.xls_files.split(',')
             new_record.heatmaps = new_record.heatmaps.split(',')
             for file in new_record.xls_files:
@@ -315,6 +318,13 @@ def result(request):
 
             results = dict()
             results["id"] = job_id
+            zip_path = os.path.join(new_record.outdir, "sRNAde_full_Result.zip")
+            results["zip"] = zip_path.replace(MEDIA_ROOT, MEDIA_URL)
+
+            #seqVar
+            if os.path.exists(os.path.join(new_record.outdir, 'seqvar')):
+                results["seq_var_link"] = reverse_lazy("DE_seqvar") + job_id
+
 
             # Graphs
             config = pd.read_table(os.path.join(new_record.outdir, 'boxplot.config'), header=None)
@@ -474,7 +484,104 @@ class De_method_view(DetailView):
             with open(os.path.join(folder,"multiboxplot.config"),"r") as multi_f:
                 for line in multi_f.readlines():
                     input_path, xlab, ylab, title, tag = line.rstrip().split("\t")
+                    # plot = multiBP_fraction(input_path, title=title, xlab=xlab, ylab=ylab)
                     plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
+                    mbp_list.append([plot,sections_dic.get(tag)])
+
+            context["multiboxplots"] = mbp_list
+
+        if os.path.exists(os.path.join(folder, "tables.config")):
+            # Tables
+            table_list = []
+            tables_config = pd.read_table(os.path.join(folder, "tables.config"), header=None)
+            for index, row in tables_config.iterrows():
+                file, name = row[0:2]
+                parser = GeneralParser(file)
+                table = [obj for obj in parser.parse()]
+                header = table[0].get_sorted_attr()
+                r = Result(name, define_table(header, 'TableResult')(table))
+                tag = row[2]
+                context[tag] = r
+                table_list.append([r,sections_dic.get(tag)])
+            context["table_list"] = table_list
+        if os.path.exists(os.path.join(folder, "plots.config")):
+            plot_list = []
+            plots_config = pd.read_table(os.path.join(folder, "plots.config"), header=None)
+            for index, row in plots_config.iterrows():
+                file, name,tag = row[0:3]
+                plot_source = file.replace(MEDIA_ROOT,MEDIA_URL)
+                plot_list.append([plot_source,name,sections_dic.get(tag)])
+            context["plot_list"] = plot_list
+
+        hm_list = []
+        if os.path.exists(os.path.join(folder, "heatmap.config")):
+            with open(os.path.join(folder, "heatmap.config"), "r") as multi_f:
+                for n, line in enumerate(multi_f.readlines()):
+                    input_path, title, tag, mat_path = line.rstrip().split("\t")
+                    hm_path = input_path
+                    hm_path = hm_path.replace(MEDIA_ROOT, MEDIA_URL)
+                    png_path = input_path.replace(".html", ".png")
+
+                    if imghdr.what(png_path) != "png":
+                        hm_button = True
+                    else:
+                        hm_button = False
+                    # with open(png_path) as png_f:
+                    #     first_line = png_f.readline()
+                    # if first_line.startswith('{"detail"'):
+
+                    png_path = png_path.replace(MEDIA_ROOT, MEDIA_URL)
+                    mat_path = mat_path.replace(MEDIA_ROOT, MEDIA_URL)
+                    input_path = input_path.replace(MEDIA_ROOT, MEDIA_URL)
+                    plot = '<iframe width="1000" height="800" align="middle" src="' + hm_path + '"></iframe>'
+
+                    # plot = file2string(input_path)
+                    # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
+                    hm_list.append(
+                        [png_path, hm_button, title, plot, "hm_" + str(n), mat_path, hm_path, sections_dic.get(tag)])
+
+            context["hm_list"] = hm_list
+
+
+
+        return context
+
+class SeqVar_view(DetailView):
+    model = JobStatus
+    slug_field = 'pipeline_key'
+    slug_url_kwarg = 'pipeline_id'
+    template_name = 'de_method.html'
+
+    def get_context_data(self, **kwargs):
+
+        context = super(DetailView, self).get_context_data(**kwargs)
+        de_method = "seqvar"
+        job_id = str(self.request.path_info).split("/")[-1]
+        new_record = JobStatus.objects.get(pipeline_key=job_id)
+        folder = os.path.join(new_record.outdir,de_method)
+        sections_dic = dict()
+        section_list=[]
+        with open(os.path.join(folder,"sections.config"),"r") as sect_f:
+            for line in sect_f.readlines():
+                row = line.split("\t")
+                sections_dic[row[0]] = row[1]
+                section_list.append(row[1])
+        context["init_tab"] = section_list[0]
+
+        ordered_sections = list(OrderedDict.fromkeys(section_list))
+
+        section_list = ordered_sections
+        section_list = [[x,x.replace(" ","_")] for x in section_list]
+        context["sections"] = section_list
+        context["DE_method"] = "miRNA sequence variation"
+        # context["init_tab"] = section_list[0][1]
+        mbp_list = []
+        if os.path.exists(os.path.join(folder,"multiboxplot.config")):
+            with open(os.path.join(folder,"multiboxplot.config"),"r") as multi_f:
+                for line in multi_f.readlines():
+                    input_path, xlab, ylab, title, tag = line.rstrip().split("\t")
+                    plot = multiBP_fraction(input_path, title=title, xlab=xlab, ylab=ylab)
+                    # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
                     mbp_list.append([plot,sections_dic.get(tag)])
 
             context["multiboxplots"] = mbp_list
@@ -510,13 +617,20 @@ class De_method_view(DetailView):
                     hm_path = input_path
                     hm_path = hm_path.replace(MEDIA_ROOT,MEDIA_URL)
                     png_path = input_path.replace(".html",".png")
+                    with open(png_path) as png_f:
+                        first_line = png_f.readline()
+                    if first_line.startswith('{"detail"'):
+                        hm_button = True
+                    else:
+                        hm_button = False
                     png_path = png_path.replace(MEDIA_ROOT,MEDIA_URL)
                     mat_path = mat_path.replace(MEDIA_ROOT,MEDIA_URL)
                     input_path = input_path.replace(MEDIA_ROOT,MEDIA_URL)
                     plot ='<iframe width="1000" height="800" align="middle" src="'+ hm_path  +'"></iframe>'
+
                     #plot = file2string(input_path)
                     # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
-                    hm_list.append([png_path, plot, "hm_"+str(n),mat_path,hm_path,sections_dic.get(tag)])
+                    hm_list.append([png_path,hm_button,title, plot, "hm_"+str(n),mat_path,hm_path,sections_dic.get(tag)])
 
             context["hm_list"] = hm_list
 

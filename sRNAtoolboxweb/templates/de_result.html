@@ -35,6 +35,8 @@
     <div class="row">
 
         <div class="col-lg-12">
+
+
             <div class="row">
             {% if parameters %}
                 <div class="col-lg-6">
@@ -56,6 +58,17 @@
                 </div>
                 </div>
                 </div>
+
+                {% if zip %}
+                <div class="col-lg-6">
+                <div class="col-lg-12">
+                    <br>
+
+                <h4 class="text-success"> Download all results as zip file <a href="{{ zip }}" download> <i class="fa fa-file-zip-o fa-fw"></i> here</a></h4>
+                </div>
+                </div>
+                {% endif %}
+
             {% endif %}
             </div>
 
@@ -115,65 +128,9 @@
                                 <div id="map_stats_content" class="panel-collapse collapse in">
                                     <div class="panel-body">
 
-                                        <!-- Number of mapped or assigned reads -->
-                                        {% if mapping_raw_bp or mapping_raw_t %}
-                                        <div class="panel panel-success">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" href="#mapping_raw">{{ mapping_raw_t.name }}</a>
-                                                </h4>
-                                            </div>
-                                            <div id="mapping_raw" class="panel-collapse collapse in">
-                                                <div class="panel-body">
 
-                                                    <div class="col-lg-12">
-                                                    {% if mapping_raw_bp %}
-                                                        <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
-                                                            {{ mapping_raw_bp|safe }}
-                                                        </div>
-                                                    {% endif %}
-                                                    <br>
-                                                    {% if mapping_raw_t %}
-                                                        <div style="overflow: auto; margin-top: auto">
-                                                            {% render_table mapping_raw_t.content %}
-                                                        </div>
-                                                    {% endif %}
-                                                    </div>
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% endif %}
 
-                                        <!-- Percentage of mapped or assigned reads -->
-                                        {% if mapping_perc_bp or mapping_perc_t %}
-                                        <div class="panel panel-success">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" href="#mapping_perc">{{ mapping_perc_t.name }}</a>
-                                                </h4>
-                                            </div>
-                                            <div id="mapping_perc" class="panel-collapse collapse in">
-                                                <div class="panel-body">
-
-                                                    <div class="col-lg-12">
-                                                {% if mapping_perc_bp %}
-                                                    <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
-                                                        {{ mapping_perc_bp|safe }}
-                                                    </div>
-                                                {% endif %}
-                                                <br>
-                                                {% if mapping_perc_t %}
-                                                    <div style="overflow: auto; margin-top: auto">
-                                                        {% render_table mapping_perc_t.content %}
-                                                    </div>
-                                                {% endif %}
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% endif %}
 
                                         <!-- Percentage per detected RNA category -->
                                         {% if mapping_stat_sensePref_bp or mapping_stat_sensePref_t %}
@@ -205,35 +162,7 @@
                                         </div>
                                         {% endif %}
 
-                                        <!-- Detected number of miRNAs and precursor sequences -->
-                                        {% if miRNA_raw_bp or miRNA_raw_t %}
-                                        <div class="panel panel-success">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    <a data-toggle="collapse" href="#miRNA_raw">Detected number of miRNAs and precursor sequences</a>
-                                                </h4>
-                                            </div>
-                                            <div id="miRNA_raw" class="panel-collapse collapse in">
-                                                <div class="panel-body">
 
-                                                    <div class="col-lg-12">
-                                                    {% if miRNA_raw_bp %}
-                                                        <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
-                                                            {{ miRNA_raw_bp|safe }}
-                                                        </div>
-                                                    {% endif %}
-                                                    <br>
-                                                    {% if miRNA_raw_t %}
-                                                        <div style="overflow: auto; margin-top: auto">
-                                                            {% render_table miRNA_raw_t.content %}
-                                                        </div>
-                                                    {% endif %}
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {% endif %}
 
                                         <!--{% if mapping_stat_table %}-->
                                             <!--<h3>{{ mapping_stat_table.name }}</h3>-->
@@ -449,6 +378,65 @@
                 <div class="tab-pane fade" id="mapping_stats">
                     <div class="x-content">
                         <div class="col-lg-12">
+                            <!-- Number of mapped or assigned reads -->
+                                        {% if mapping_raw_bp or mapping_raw_t %}
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#mapping_raw">{{ mapping_raw_t.name }}</a>
+                                                </h4>
+                                            </div>
+                                            <div id="mapping_raw" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+
+                                                    <div class="col-lg-12">
+                                                    {% if mapping_raw_bp %}
+                                                        <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
+                                                            {{ mapping_raw_bp|safe }}
+                                                        </div>
+                                                    {% endif %}
+                                                    <br>
+                                                    {% if mapping_raw_t %}
+                                                        <div style="overflow: auto; margin-top: auto">
+                                                            {% render_table mapping_raw_t.content %}
+                                                        </div>
+                                                    {% endif %}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+
+                        <!-- Percentage of mapped or assigned reads -->
+                                        {% if mapping_perc_bp or mapping_perc_t %}
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#mapping_perc">{{ mapping_perc_t.name }}</a>
+                                                </h4>
+                                            </div>
+                                            <div id="mapping_perc" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+
+                                                    <div class="col-lg-12">
+                                                {% if mapping_perc_bp %}
+                                                    <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
+                                                        {{ mapping_perc_bp|safe }}
+                                                    </div>
+                                                {% endif %}
+                                                <br>
+                                                {% if mapping_perc_t %}
+                                                    <div style="overflow: auto; margin-top: auto">
+                                                        {% render_table mapping_perc_t.content %}
+                                                    </div>
+                                                {% endif %}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
 
                             <!-- Genome mapping distribution (HR=highly redundant reads) -->
                             {% if genome_mapping_t %}
@@ -487,6 +475,36 @@
                 <div class="tab-pane fade" id="miRNA_isomiR_stats">
                     <div class="x-content">
                         <div class="col-lg-12">
+
+                            <!-- Detected number of miRNAs and precursor sequences -->
+                                        {% if miRNA_raw_bp or miRNA_raw_t %}
+                                        <div class="panel panel-success">
+                                            <div class="panel-heading">
+                                                <h4 class="panel-title">
+                                                    <a data-toggle="collapse" href="#miRNA_raw">Detected number of miRNAs and precursor sequences</a>
+                                                </h4>
+                                            </div>
+                                            <div id="miRNA_raw" class="panel-collapse collapse in">
+                                                <div class="panel-body">
+
+                                                    <div class="col-lg-12">
+                                                    {% if miRNA_raw_bp %}
+                                                        <div style="width:100%; height:100%; padding:1px; border:thin solid black;">
+                                                            {{ miRNA_raw_bp|safe }}
+                                                        </div>
+                                                    {% endif %}
+                                                    <br>
+                                                    {% if miRNA_raw_t %}
+                                                        <div style="overflow: auto; margin-top: auto">
+                                                            {% render_table miRNA_raw_t.content %}
+                                                        </div>
+                                                    {% endif %}
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
 
                             <!-- Fraction of different isomiR classes per sample -->
                             {% if iso_sample_bp %}

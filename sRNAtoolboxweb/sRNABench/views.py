@@ -590,6 +590,16 @@ def result_new(request):
             if os.path.exists(new_record.outdir):
 
                 parameters = params.params
+                #Show Genome tab
+                if parameters.get("species") != "NA":
+                    results["Genome_mode"] = True
+
+                #Reference used
+                if parameters.get("miRNA_ref"):
+                    results["mirna_ref"] = parameters.get("miRNA_ref")
+                else:
+                    results["mirna_ref"] = "miRBase"
+
                  #Summary
                 add_sumimg(new_record, results)
                 if os.path.exists(os.path.join(new_record.outdir,"preprocWeb.txt")):
