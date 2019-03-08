@@ -557,7 +557,7 @@ def makeDEbox_pval(input_file,de_file=None):
                     #hovermode="compare",
                     # hoverinfo=label_dict.get(key),
                     #hoveron="points",
-                    name=key + " n=" + str(size_dict[key])
+                    name=key + " n=" + str(size_dict.get(key))
                 )
             data.append(trace)
         #    print(data)
