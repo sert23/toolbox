@@ -610,7 +610,7 @@ class SeqVar_view(DetailView):
 
                     #plot = file2string(input_path)
                     # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
-                    hm_list.append([png_path,hm_button, plot, "hm_"+str(n),mat_path,hm_path,sections_dic.get(tag)])
+                    hm_list.append([png_path,hm_button,title, plot, "hm_"+str(n),mat_path,hm_path,sections_dic.get(tag)])
 
             context["hm_list"] = hm_list
 
