@@ -477,8 +477,8 @@ class De_method_view(DetailView):
             with open(os.path.join(folder,"multiboxplot.config"),"r") as multi_f:
                 for line in multi_f.readlines():
                     input_path, xlab, ylab, title, tag = line.rstrip().split("\t")
-                    plot = multiBP_fraction(input_path, title=title, xlab=xlab, ylab=ylab)
-                    # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
+                    # plot = multiBP_fraction(input_path, title=title, xlab=xlab, ylab=ylab)
+                    plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
                     mbp_list.append([plot,sections_dic.get(tag)])
 
             context["multiboxplots"] = mbp_list
@@ -562,7 +562,8 @@ class SeqVar_view(DetailView):
             with open(os.path.join(folder,"multiboxplot.config"),"r") as multi_f:
                 for line in multi_f.readlines():
                     input_path, xlab, ylab, title, tag = line.rstrip().split("\t")
-                    plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
+                    plot = multiBP_fraction(input_path, title=title, xlab=xlab, ylab=ylab)
+                    # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
                     mbp_list.append([plot,sections_dic.get(tag)])
 
             context["multiboxplots"] = mbp_list
