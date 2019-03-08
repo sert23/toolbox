@@ -424,6 +424,79 @@ def multiBP(input_file, title=" ", xlab=" ", ylab=" "):
     div_obj = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
     return div_obj
 
+def multiBP_fraction(input_file, title=" ", xlab=" ", ylab=" "):
+    input_file = input_file.replace("\\","/")
+    #print((input_file))
+    #return None
+    #first_table = pandas.read_table(input_file, header=None ,sep='\t')
+    pval_dict=dict()
+    label_dict=dict()
+    color_list= ["red", "green","blue","yellow","purple","orange"]*10
+    with open(input_file, "r") as ifile:
+        lines = ifile.readlines()
+        x_dict = dict()
+        y_dict = dict()
+        x_list = []
+        size_dict = dict()
+        for i,line in enumerate(lines):
+            row = line.split("\t")
+            x,cond = row[0].split("#")
+            x_list.append(x)
+            if len(set(x_list))< 21:
+
+                if x_dict.get(cond):
+                    to_ap = [x]*(len(row)-1)
+                    if not size_dict.get(cond):
+                        size_dict[cond] = len(to_ap)
+                    x_dict[cond].extend(to_ap)
+                    y_dict[cond].extend(row[1:])
+                    label_dict[cond].extend([pval_dict.get(x)]*(len(row)-1))
+                else:
+                    x_dict[cond] = [x]*(len(row)-1)
+                    y_dict[cond] = row[1:]
+                    label_dict[cond] = [pval_dict.get(x)]*(len(row)-1)
+        data = []
+        for i,key in enumerate(x_dict.keys()):
+            to_y = numpy.array(list(map(float, y_dict[key])))
+            to_y.astype(float)
+            to_y = to_y
+            trace = go.Box(
+                    x=x_dict[key],
+                    #y=y_dict[key],
+                #numpy.ndarray.flatten(
+                    y=to_y,
+                    marker=dict(
+                        color= color_list[i]),
+                    text=label_dict.get(key),
+                    name=key + " n=" + str(size_dict[key])
+                )
+            data.append(trace)
+        #    print(data)
+        layout = go.Layout(
+                boxmode='group',
+                autosize=True,
+                margin=go.layout.Margin(
+                    l=50,
+                    r=50,
+                    b=150,
+                    t=100,
+                    pad=4
+                ),
+                title=title,
+                xaxis=dict(
+                    # title='Nulceotide added',
+                    title=xlab,
+                    tick0=0,
+                    dtick=1,
+                ),
+                yaxis=dict(
+                    tickprefix="",
+                    title=ylab + '')
+            )
+    fig = go.Figure(data=data, layout=layout)
+    div_obj = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
+    return div_obj
+
 def makeDEbox_pval(input_file,de_file=None):
     input_file = input_file.replace("\\","/")
     #print((input_file))
