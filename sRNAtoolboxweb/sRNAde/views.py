@@ -597,13 +597,20 @@ class SeqVar_view(DetailView):
                     hm_path = input_path
                     hm_path = hm_path.replace(MEDIA_ROOT,MEDIA_URL)
                     png_path = input_path.replace(".html",".png")
+                    with open('myfile.txt') as png_f:
+                        first_line = png_f.readline()
+                    if first_line.startswith('{"detail"'):
+                        hm_button = True
+                    else:
+                        hm_button = False
                     png_path = png_path.replace(MEDIA_ROOT,MEDIA_URL)
                     mat_path = mat_path.replace(MEDIA_ROOT,MEDIA_URL)
                     input_path = input_path.replace(MEDIA_ROOT,MEDIA_URL)
                     plot ='<iframe width="1000" height="800" align="middle" src="'+ hm_path  +'"></iframe>'
+
                     #plot = file2string(input_path)
                     # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
-                    hm_list.append([png_path, plot, "hm_"+str(n),mat_path,hm_path,sections_dic.get(tag)])
+                    hm_list.append([png_path,hm_button, plot, "hm_"+str(n),mat_path,hm_path,sections_dic.get(tag)])
 
             context["hm_list"] = hm_list
 
