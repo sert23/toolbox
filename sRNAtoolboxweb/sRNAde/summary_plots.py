@@ -394,7 +394,7 @@ def multiBP(input_file, title=" ", xlab=" ", ylab=" "):
                     marker=dict(
                         color= color_list[i]),
                     text=label_dict.get(key),
-                    name=key + " n=" + str(size_dict[key])
+                    name=key + " n=" + str(size_dict.get(key))
                 )
             data.append(trace)
         #    print(data)
