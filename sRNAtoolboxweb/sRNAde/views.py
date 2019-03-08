@@ -597,7 +597,7 @@ class SeqVar_view(DetailView):
                     hm_path = input_path
                     hm_path = hm_path.replace(MEDIA_ROOT,MEDIA_URL)
                     png_path = input_path.replace(".html",".png")
-                    with open('myfile.txt') as png_f:
+                    with open(png_path) as png_f:
                         first_line = png_f.readline()
                     if first_line.startswith('{"detail"'):
                         hm_button = True
