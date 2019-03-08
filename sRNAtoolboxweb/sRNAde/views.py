@@ -506,21 +506,29 @@ class De_method_view(DetailView):
                 plot_list.append([plot_source,name,sections_dic.get(tag)])
             context["plot_list"] = plot_list
 
-        hm_list=[]
-        if os.path.exists(os.path.join(folder,"heatmap.config")):
-            with open(os.path.join(folder,"heatmap.config"),"r") as multi_f:
-                for n,line in enumerate(multi_f.readlines()):
+        hm_list = []
+        if os.path.exists(os.path.join(folder, "heatmap.config")):
+            with open(os.path.join(folder, "heatmap.config"), "r") as multi_f:
+                for n, line in enumerate(multi_f.readlines()):
                     input_path, title, tag, mat_path = line.rstrip().split("\t")
                     hm_path = input_path
-                    hm_path = hm_path.replace(MEDIA_ROOT,MEDIA_URL)
-                    png_path = input_path.replace(".html",".png")
-                    png_path = png_path.replace(MEDIA_ROOT,MEDIA_URL)
-                    mat_path = mat_path.replace(MEDIA_ROOT,MEDIA_URL)
-                    input_path = input_path.replace(MEDIA_ROOT,MEDIA_URL)
-                    plot ='<iframe width="1000" height="800" align="middle" src="'+ hm_path  +'"></iframe>'
-                    #plot = file2string(input_path)
+                    hm_path = hm_path.replace(MEDIA_ROOT, MEDIA_URL)
+                    png_path = input_path.replace(".html", ".png")
+                    with open(png_path) as png_f:
+                        first_line = png_f.readline()
+                    if first_line.startswith('{"detail"'):
+                        hm_button = True
+                    else:
+                        hm_button = False
+                    png_path = png_path.replace(MEDIA_ROOT, MEDIA_URL)
+                    mat_path = mat_path.replace(MEDIA_ROOT, MEDIA_URL)
+                    input_path = input_path.replace(MEDIA_ROOT, MEDIA_URL)
+                    plot = '<iframe width="1000" height="800" align="middle" src="' + hm_path + '"></iframe>'
+
+                    # plot = file2string(input_path)
                     # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
-                    hm_list.append([png_path, plot, "hm_"+str(n),mat_path,hm_path,sections_dic.get(tag)])
+                    hm_list.append(
+                        [png_path, hm_button, title, plot, "hm_" + str(n), mat_path, hm_path, sections_dic.get(tag)])
 
             context["hm_list"] = hm_list
 
