@@ -319,6 +319,12 @@ def result(request):
             results["id"] = job_id
             zip_path = os.path.join(new_record.outdir, "sRNAde_full_Result.zip")
             results["zip"] = zip_path.replace(MEDIA_ROOT, MEDIA_URL)
+
+            #seqVar
+            if os.path.exists(os.path.join(new_record.outdir, 'seqvar')):
+                results["seq_var_link"] = reverse_lazy("DE_seqvar") + job_id
+
+
             # Graphs
             config = pd.read_table(os.path.join(new_record.outdir, 'boxplot.config'), header=None)
             for index, row in config.iterrows():
