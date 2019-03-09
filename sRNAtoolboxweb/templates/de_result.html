@@ -635,10 +635,12 @@
 
                                             {% endif %}
 {#                                        {% render_table methods_table.content %}#}
-
-                                        {% for stable in consensus_list %}
-                                            <p> </p>
+                                        <div>
+                                        <p> </p>
                                             <br>
+                                        </div>
+                                        {% for stable in consensus_list %}
+
                                             <div>
                                             <h4> {{ stable.name }}  </h4>
                                             {% render_table stable.content %}
