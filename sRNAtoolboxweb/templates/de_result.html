@@ -589,14 +589,8 @@
                                 </style>
 
                                         <br>
-{#                                        {% render_table methods_table.content %}#}
 
-                                        {% for stable in consensus_list %}
-                                            <h4> {{ stable.name }}  </h4>
-                                            {% render_table stable.content %}
-                                        {% endfor %}
-
-                                        {% if consensus_plots %}
+                                {% if consensus_plots %}
 
                                         {% for img,name in consensus_plots %}
 
@@ -639,6 +633,14 @@
             {% endfor %}
 
                                             {% endif %}
+{#                                        {% render_table methods_table.content %}#}
+
+                                        {% for stable in consensus_list %}
+                                            <h4> {{ stable.name }}  </h4>
+                                            {% render_table stable.content %}
+                                        {% endfor %}
+
+
 
 
 
