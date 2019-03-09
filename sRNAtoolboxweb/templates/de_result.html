@@ -632,14 +632,16 @@
 
     </script>
             {% endfor %}
-                                            <br>
+
                                             {% endif %}
 {#                                        {% render_table methods_table.content %}#}
 
                                         {% for stable in consensus_list %}
                                             <br>
+                                            <div>
                                             <h4> {{ stable.name }}  </h4>
                                             {% render_table stable.content %}
+                                            </div>
                                         {% endfor %}
 
 
