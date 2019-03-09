@@ -25,8 +25,9 @@
     <div class="col-lg-6">
     <h4>Download profiling results</h4>
         <dl class="dl-horizontal">
-            {% for key, value in mirprof.items %}
+            {% for key, value in mirdown.items %}
                 <dt style='text-align: left; margin-bottom: 0.25em; width: auto; padding-right: 1em;'>{{ key }}</dt>
+                <a href="value" class="alert-link">Download</a>
                 <dd style="margin-left: 0; margin-bottom: 0.25em;">{{ value }}</dd>
             {% endfor %}
         </dl>
