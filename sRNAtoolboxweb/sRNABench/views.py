@@ -468,7 +468,21 @@ def add_mirprof(params, results):
     if len(mirprof.keys()) > 0:
         results["mirprof"] = mirprof
 
+def add_mirdown(params, outdir ,results):
+    mirdown = {}
+    if os.path.exists(os.path.join(outdir,"mature_sense.grouped")):
+        mirdown["miRNA profile (Single Assignment):"] = os.path.join(outdir,"mature_sense.grouped").replace(MEDIA_ROOT,MEDIA_URL)
+    if os.path.exists(os.path.join(outdir, "mature_sense_SA.grouped")):
+        mirdown["miRNA profile (Multiple Assignment):"] = os.path.join(outdir, "mature_sense_SA.grouped").replace(MEDIA_ROOT,MEDIA_URL)
+    if os.path.exists(os.path.join(outdir, "microRNAannotation.txt")):
+        mirdown["isomiR profile:"] = os.path.join(outdir, "microRNAannotation.txt").replace(MEDIA_ROOT,MEDIA_URL)
+    if os.path.exists(os.path.join(outdir, "reads.annotation")):
+        mirdown["isomiR annotation:"] = os.path.join(outdir, "reads.annotation").replace(MEDIA_ROOT,MEDIA_URL)
 
+    if len(mirdown.keys()) > 0:
+        results["mirdown"] = mirdown
+
+        # int(params.params['detectedMature']) * 100.0 / int(params.params['matureDB']), 2)) + "%)"
 def add_mapping_result(new_record, parameters, results):
     mapping_results = {}
     if os.path.exists(os.path.join(new_record.outdir, "graphs", "genomeDistribution.png")):
@@ -648,11 +662,12 @@ def result_new(request):
 
 
 
-                #MicroRNA summary (miRBase v21)
+                #MicroRNA summary
                 if "microRNA" in parameters:
                     if "detectedMature" in parameters:
                         add_mirimg(new_record, results)
                         add_mirprof(params, results)
+                        add_mirdown(params, new_record.outdir ,results)
 
                     # results["miRNA_plots"] = top_miRNA_plot(os.path.join(new_record.outdir,"stat","microRNA_top.txt"), "Top 10 miRNAs")
                     # image_list.append(results["miRNA_plots"][0][1])
