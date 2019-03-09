@@ -27,8 +27,7 @@
         <dl class="dl-horizontal">
             {% for key, value in mirdown.items %}
                 <dt style='text-align: left; margin-bottom: 0.25em; width: auto; padding-right: 1em;'>{{ key }}</dt>
-                <a href="value" class="alert-link">Download</a>
-                <dd style="margin-left: 0; margin-bottom: 0.25em;">{{ value }}</dd>
+                <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{{ value }}" class="alert-link">Download</a></dd>
             {% endfor %}
         </dl>
     </div>
