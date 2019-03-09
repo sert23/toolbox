@@ -21,6 +21,16 @@
             {% endfor %}
         </dl>
     </div>
+
+    <div class="col-lg-6 well">
+    <h4>Download profiling results</h4>
+        <dl class="dl-horizontal">
+            {% for key, value in mirprof.items %}
+                <dt style='text-align: left; margin-bottom: 0.25em; width: auto; padding-right: 1em;'>{{ key }}</dt>
+                <dd style="margin-left: 0; margin-bottom: 0.25em;">{{ value }}</dd>
+            {% endfor %}
+        </dl>
+    </div>
 </div>
 
 <div class="row row-grid">
