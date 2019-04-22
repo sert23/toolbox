@@ -27,7 +27,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "sRNAtoolboxweb.settings")
 from django.core.wsgi import get_wsgi_application
 application = get_wsgi_application()
 
-# activate_env=os.path.expanduser("/opt/venv/srnatoolbox2019/bin/activate_this.py")
+# activate_env=os.path.expanduser("/opt/venv/sRNAtoolbox2019/bin/activate_this.py")
 # execfile(activate_env, dict(__file__=activate_env))
 
 # Apply WSGI middleware here.
