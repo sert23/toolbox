@@ -59,7 +59,7 @@
 
             <div class="tab-content">
                 <div class="tab-pane fade active in" id="sRNAbench">
-                    <a href="{{ settings.SUB_SITE }}/srnabench"> <h3>sRNAbench:</h3> <h4>Expression profiling of small RNAs and prediction of novel microRNAs from deep sequencing data</h4>  </a>
+                    <a href="{{ settings.SUB_SITE }}/srnabench/"> <h3>sRNAbench:</h3> <h4>Expression profiling of small RNAs and prediction of novel microRNAs from deep sequencing data</h4>  </a>
                     <h4 style="line-height: 150%">sRNAbench is mainly designed to be uses in model species, or at least species with
                         an available genome assembly or fasta-formatted annotations. Several commonly used input formats like fastq, sra, fasta or read/count are supported.
                         It performs expression profiling of known microRNAs and other types of small RNAs, detection and analysis of isomiRs,
@@ -67,14 +67,14 @@
                 </div>
 
                 <div class="tab-pane fade" id="batch">
-                    <a href="{{ settings.SUB_SITE }}/multiupload"> <h3>sRNAbench (batch mode):</h3> <h4> Parallel expression profiling of small RNAs for several files at once</h4>  </a>
+                    <a href="{{ settings.SUB_SITE }}/multiupload/"> <h3>sRNAbench (batch mode):</h3> <h4> Parallel expression profiling of small RNAs for several files at once</h4>  </a>
                     <h4 style="line-height: 150%"> Batch mode is a new feature of sRNAbench that allows for intuitive profiling of several samples at once.
                     If you have several samples with the same sequencing approach (library preparation) this tool will profile all these samples using the same
                     bioinformatics protocol. This will also guarantee that all your samples are profiled following the exact same steps.</h4>
                 </div>
 
                 <div class="tab-pane fade" id="sRNAde">
-                    <a href="{{ settings.SUB_SITE }}/srnade"> <h3>sRNAde:</h3> <h4>Differential expression analysis </h4></a>
+                    <a href="{{ settings.SUB_SITE }}/srnade/"> <h3>sRNAde:</h3> <h4>Differential expression analysis </h4></a>
                     <h4 style="line-height: 150%">sRNAde is a module for the detection of differentially expressed sRNA. The input is
                                 either a number of sRNAbench output folders or a user-given expression matrix.
                                 For the detection of differentially expressed RNAs it applies 5 widely used methods:
@@ -97,7 +97,7 @@
                 </div>
 
                 <div class="tab-pane fade" id="sRNAblast">
-                    <a href="{{ settings.SUB_SITE }}/srnablast"> <h3>sRNAblast:</h3> <h4>Blast analysis of deep sequencing reads against a local nt/nr (NCBI link) database</h4>  </a>
+                    <a href="{{ settings.SUB_SITE }}/srnablast/"> <h3>sRNAblast:</h3> <h4>Blast analysis of deep sequencing reads against a local nt/nr (NCBI link) database</h4>  </a>
 {#                    <a href="{{ settings.SUB_SITE }}/srnablast"> <h3>sRNAblast:</h3> <h4>Blast analysis of deep sequencing reads against a local nt/nr (NCBI link) database</h4>  </a>#}
                     <h4 style="line-height: 150%">This tool is principally aimed for the analysis of reads that could not be mapped in
                                 sRNAbench or other profiling tools. The results could either point towards contamination
@@ -107,14 +107,14 @@
 
 
                 <div class="tab-pane fade" id="miRNAconsTarget">
-                    <a href="{{ settings.SUB_SITE }}/amirconstarget"> <h3>animalconsTarget:</h3> <h4>Predict microRNA targets on user defined sets of microRNAs and 3'UTRs </h4> </a>
+                    <a href="{{ settings.SUB_SITE }}/amirconstarget/"> <h3>animalconsTarget:</h3> <h4>Predict microRNA targets on user defined sets of microRNAs and 3'UTRs </h4> </a>
 {#                    <a href="{{ settings.SUB_SITE }}/amirconstarget"> <h3>animalconsTarget:</h3> <h4>Predict microRNA targets on user defined sets of microRNAs and 3'UTRs </h4> </a>#}
                     <h4 style="line-height: 150%">Most microRNA target prediction tools are implemented as webservers on a limited number of
                                 species, or do allow only the prediction of a limited number of microRNAs and/or mRNAs.
                                 miRNAconsTargets uses a selection microRNA target prediction programs and
                                 applies them to the user supplied sets of microRNAs and 3'UTRs. It reports both,
                                 individual predictions and a consensus prediction. </h4>
-                    <a href="{{ settings.SUB_SITE }}/pmirconstarget"> <h3>plantconsTarget:</h3> <h4>Predict microRNA targets on user defined sets of microRNAs and 3'UTRs or CDS sequences </h4> </a>
+                    <a href="{{ settings.SUB_SITE }}/pmirconstarget/"> <h3>plantconsTarget:</h3> <h4>Predict microRNA targets on user defined sets of microRNAs and 3'UTRs or CDS sequences </h4> </a>
 {#                    <a href="{{ settings.SUB_SITE }}/pmirconstarget"> <h3>plantconsTarget:</h3> <h4>Predict microRNA targets on user defined sets of microRNAs and 3'UTRs or CDS sequences </h4> </a>#}
                     <h4 style="line-height: 150%">Most microRNA target prediction tools are implemented as webservers on a limited number of
                                 species, or do allow only the prediction of a limited number of microRNAs and/or mRNAs.
@@ -197,22 +197,22 @@
 <br><h4>Tools: </h4>
             <ul class="list-inline">
                                 <li>
-                                    <a href="{{ settings.SUB_SITE }}/helper/ensemlparser">Ensembl Parser</a>
+                                    <a href="{{ settings.SUB_SITE }}/helper/ensemlparser/">Ensembl Parser</a>
                                 </li>
                                 <li>
-                                    <a href="{{ settings.SUB_SITE }}/helper/ncbiparser">NCBI Parser</a>
+                                    <a href="{{ settings.SUB_SITE }}/helper/ncbiparser/">NCBI Parser</a>
                                 </li>
                                 <li>
-                                    <a href="{{ settings.SUB_SITE }}/helper/rnacentralparser">RNA central parser</a>
+                                    <a href="{{ settings.SUB_SITE }}/helper/rnacentralparser/">RNA central parser</a>
                                 </li>
                                 <li>
-                                    <a href="{{ settings.SUB_SITE }}/helper/trnaparser">Genomic tRNA database parser</a>
+                                    <a href="{{ settings.SUB_SITE }}/helper/trnaparser/">Genomic tRNA database parser</a>
                                 </li>
                                 <li>
-                                    <a href="{{ settings.SUB_SITE }}/helper/removedup">Remove duplicates from a fasta file</a>
+                                    <a href="{{ settings.SUB_SITE }}/helper/removedup/">Remove duplicates from a fasta file</a>
                                 </li>
                                 <li>
-                                    <a href="{{ settings.SUB_SITE }}/helper/extract">Extract Sequences from a fasta file</a>
+                                    <a href="{{ settings.SUB_SITE }}/helper/extract/">Extract Sequences from a fasta file</a>
                                 </li>
                             </ul>
         </div>
