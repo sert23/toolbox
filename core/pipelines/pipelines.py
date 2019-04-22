@@ -62,6 +62,21 @@ class Pipeline:
         conf = json.load(open(os.path.join(os.path.dirname(__file__), 'configuration', mode, 'conf_core.json')))
         self.configuration = Configuration(conf)
 
+    # def initialize_pipeline_status(self):
+    #
+    #     started_info = (strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " INFO: Analysis starts")
+    #     payload = {
+    #         "job_status": "Running",
+    #         "command_line": " ".join(sys.argv),
+    #         "parameters": self.parameters,
+    #         "outdir": self.outdir
+    #     }
+    #     try:
+    #         requests.patch(self.api_path_key, json=payload, timeout=10)
+    #         self.actualize_pipeline_progress(new_step=started_info)
+    #     except ConnectionError or ConnectTimeout:
+    #         logging.error('Connection error')
+
     def initialize_pipeline_status(self):
 
         started_info = (strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " INFO: Analysis starts")
@@ -71,11 +86,9 @@ class Pipeline:
             "parameters": self.parameters,
             "outdir": self.outdir
         }
-        try:
-            requests.patch(self.api_path_key, json=payload, timeout=10)
-            self.actualize_pipeline_progress(new_step=started_info)
-        except ConnectionError or ConnectTimeout:
-            logging.error('Connection error')
+        requests.patch(self.api_path_key, json=payload, timeout=10)
+        self.actualize_pipeline_progress(new_step=started_info)
+
 
     def actualize_pipeline_progress(self, new_step):
         payload = {
