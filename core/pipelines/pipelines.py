@@ -88,6 +88,7 @@ class Pipeline:
         }
         requests.patch(self.api_path_key, json=payload, timeout=10)
         self.actualize_pipeline_progress(new_step=started_info)
+        print("init")
 
 
     def actualize_pipeline_progress(self, new_step):
