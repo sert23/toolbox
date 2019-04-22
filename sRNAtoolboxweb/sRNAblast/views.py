@@ -314,7 +314,7 @@ class SRNABlast(FormView):
         self.success_url = reverse_lazy('srnablast') + '?id=' + pipeline_id
 
         print(call)
-        os.system("source /opt/venv/sRNAtoolbox2017/bin/activate")
+        os.system("source /opt/venv/srnatoolbox2019/bin/activate")
         os.system(call)
         js = JobStatus.objects.get(pipeline_key=pipeline_id)
         js.status.create(status_progress='sent_to_queue')
