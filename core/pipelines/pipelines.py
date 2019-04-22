@@ -53,8 +53,9 @@ class Pipeline:
 
         # Open logDB connection
         self.job_name = job_name
-        # self.api_server = 'http://127.0.0.1:8000'
-        self.api_server = 'https://arn.ugr.es:8012/srnatoolbox'
+        # self.api_server = ':8000'
+        self.api_server = 'http://127.0.0.1:8012'
+        #172.17.0.4
         self.api_path = os.path.join(self.api_server, 'jobstatus', 'api')
         self.api_path_key = os.path.join(self.api_path, self.pipeline_key)
         self.api_path_add_status = os.path.join(self.api_path, self.pipeline_key, 'add_status')
