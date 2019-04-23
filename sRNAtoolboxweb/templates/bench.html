@@ -294,7 +294,8 @@ function toggleAdapter() {
 
     <script>
         function validation() {
-        var x, text, message;
+        var x, text, message, stop;
+        stop = false
         message = "There were some errors in your job. Please select your input again and check for invalid options"
 
         x = document.getElementById("id_adapter_manual").value;
@@ -302,23 +303,27 @@ function toggleAdapter() {
         if (!document.getElementById("id_species").value && !document.getElementById("id_mirna_profiled").value) {
             document.getElementById('id_ifile').value = "";
             alert(message);
+            stop = true;
             return true
 {#            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true#}
         } else if ((0 + Boolean(document.getElementById('id_ifile').value) + Boolean(document.getElementById('id_url').value) + Boolean(document.getElementById('id_sra_input').value ) + Boolean(document.getElementById('id_job_reuse').value)!=1)) {
             document.getElementById('id_ifile').value = "";
 {#            alert("id_file url"); #}
 {#            return true;#}
-            alert(message); 
+            alert(message);
+            stop = true;
             return true
         } else if (!Array.from(document.getElementsByName('library_protocol')).some(Boolean)) {
             document.getElementById('id_ifile').value = "";
             {#            alert( " predict and library mode"); return true#}
             alert(message);
+            stop = true;
             return true
         } else if ((0+ Boolean(document.getElementById('id_species_hidden')) + Boolean(document.getElementById('id_mirna_profiled')) + Boolean(document.getElementById('id_referenceDB') === "MirGeneDB"))<1) {
             document.getElementById('id_ifile').value = "";
             {#            alert( " predict and library mode"); return true#}
             alert(message);
+            stop = true;
             return true
 
 {#        }else if (document.getElementById('id_predict_mirna').checked && document.getElementById('id_library_mode').checked) {#}
@@ -328,8 +333,10 @@ function toggleAdapter() {
 {#            return true#}
 
 		}
+        if (stop==false){
+            $('#spinner').modal('show');
+        }
 
-		$('#spinner').modal('show');
 
     }
     </script>
