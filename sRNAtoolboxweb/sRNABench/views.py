@@ -420,8 +420,8 @@ def add_mirimg(new_record, results):
         imgs.append(os.path.join(new_record.pipeline_key, "graphs", "microRNA_top.png"))
     if os.path.exists(os.path.join(new_record.outdir, "graphs", "isomiR_NTA.png")):
         imgs.append(os.path.join(new_record.pipeline_key, "graphs", "isomiR_NTA.png"))
-    if os.path.exists(os.path.join(new_record.outdir, "graphs", "miRBase_otherVariants.png")):
-        imgs.append(os.path.join(new_record.pipeline_key, "graphs", "miRBase_otherVariants.png"))
+    if os.path.exists(os.path.join(new_record.outdir, "graphs", "isomiR_otherVariants.png")):
+        imgs.append(os.path.join(new_record.pipeline_key, "graphs", "isomiR_otherVariants.png"))
     if len(imgs) != 0:
         results["mirimg"] = imgs
 
