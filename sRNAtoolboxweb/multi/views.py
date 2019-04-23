@@ -275,7 +275,7 @@ class MultiStatusView(DetailView):
             jobs_tbody.append([job, job_stat, start,finish ,input_line, click])
             #jobs_tbody.append([job, job_stat, start, finish, click])
 
-        if finished > 3:
+        if finished > 3 and (not context["running"]):
             context["launchDE"] = True
 
 
