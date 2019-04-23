@@ -157,13 +157,13 @@ class JobStatusDetail(DetailView):
 
         if web_log:
             return {'msgs': [Msg(
-            "ERROR: An error occured with your job:" + job_status.pipeline_key + "\nPlease report it indicating the jobID")],
+            "ERROR: An error occurred with your job:" + job_status.pipeline_key + "\nPlease report it indicating the jobID")],
             "id": job_status.pipeline_key, "web_log": web_log, "go_back_url": go_back_url   }
             # "id": job_status.pipeline_key, "web_log": web_log, "go_back_url": "memeee"  }
         else:
             return {'msgs': [Msg(
-                "ERROR: An error occured with your job:" + job_status.pipeline_key + "\nPlease report it indicating the jobID")],
-                "id": job_status.pipeline_key, "go_back_url": go_back_url   }
+            "ERROR: An error occurred with your job:" + job_status.pipeline_key + "\nPlease report it indicating the jobID")],
+            "id": job_status.pipeline_key, "go_back_url": go_back_url   }
 
 
 
