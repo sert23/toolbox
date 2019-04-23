@@ -246,8 +246,9 @@ class MultiStatusView(DetailView):
 
         jobs_tbody = []
         context["running"] = False
-        if len(launched_ids)>3:
-            context["launchDE"] = True
+        # if len(launched_ids)>3:
+        #     context["launchDE"] = True
+        finished = 0
         for id in launched_ids:
             job = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" >' + id +'</a>'
             new_record = JobStatus.objects.get(pipeline_key=id)
@@ -256,6 +257,8 @@ class MultiStatusView(DetailView):
                 job_stat = "In queue"
             if job_stat == "Running" or job_stat == "In queue":
                 context["running"] = True
+            if job_stat == "Finished":
+                finished = finished+1
             start = new_record.start_time.strftime("%H:%M:%S, %d %b %Y")
             #finish = new_record.finish_time.strftime("%H:%M, %d %b %Y")
             if new_record.finish_time:
@@ -271,6 +274,10 @@ class MultiStatusView(DetailView):
 
             jobs_tbody.append([job, job_stat, start,finish ,input_line, click])
             #jobs_tbody.append([job, job_stat, start, finish, click])
+
+        if finished > 3:
+            context["launchDE"] = True
+
 
         js_data = json.dumps(jobs_tbody)
         js_headers = json.dumps([{"title": "job ID"},
