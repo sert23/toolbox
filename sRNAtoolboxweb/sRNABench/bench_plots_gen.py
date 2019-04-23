@@ -292,14 +292,14 @@ def Mapping_stat_plot(input_folder, path_to_venv=None, plotly_script=None, media
         ),
 
         # barmode="stack",
-        title="Read length distribution ",
+        title="RNA distribution",
         font=dict(size=18),
         autosize=False,
         height=650,
         width=1150,
         xaxis=dict(
             automargin=True,
-            title='Read length (nt)',
+            title=' ',
             tick0=0,
             # dtick=2,
         ),
