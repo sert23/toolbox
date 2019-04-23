@@ -68,7 +68,7 @@ class PMirconsForm(forms.Form):
     mirfile = forms.FileField(label='Upload miRNAs file', required=False)
     utrfile = forms.FileField(label='Upload targets file', required=False)
 
-    utrchoice = forms.ChoiceField(label="Or choose UTR from the list",choices=choice_list,required=False)
+    utrchoice = forms.ChoiceField(label="Or choose UTR from Ensembl",choices=choice_list,required=False)
     cdnachoice = forms.ChoiceField(label="Or choose cDNA from Ensembl",choices=cdna_list,required=False)
 
     mirtext = forms.CharField(label="Or paste your miRNAs here",widget=forms.Textarea,required=False)
