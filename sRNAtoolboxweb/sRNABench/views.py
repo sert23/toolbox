@@ -489,12 +489,14 @@ def add_mapping_result(new_record, parameters, results):
         genomeDistribution = os.path.join(new_record.pipeline_key, "graphs", "genomeDistribution.png")
         results["genomeDistribution"] = genomeDistribution
     if 'readsRCgenomeMapped' in parameters:
-        raw = int(parameters["readsRaw"])
+        raw = int(parameters["reads"])
+        raw_unique = int(parameters["readsUnique"])
+
         mapping_results["Genome mapped reads:"] = str(int(parameters['readsRCgenomeMapped'])) + "(" + str(round(
             int(parameters['readsRCgenomeMapped']) * 100.0 / raw, 2)) + "%)"
 
         mapping_results["Unique Genome mapped reads:"] = str(int(parameters['readsURgenomeMapped'])) + "(" + str(round(
-            int(parameters['readsURgenomeMapped']) * 100.0 / raw, 2)) + "%)"
+            int(parameters['readsURgenomeMapped']) * 100.0 / raw_unique, 2)) + "%)"
 
 
         print(mapping_results)
