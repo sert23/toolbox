@@ -7,7 +7,7 @@ class TRNA():
         self.read_adjusted = read_adjusted
         self.read_count = round(float(read_count), 2)
         self.unique_reads = round(float(unique_reads), 2)
-        self.antiCodon = antiCodon
+        self.tRNA_gene = antiCodon
 
     def get_sorted_attr(self):
-        return ["antiCodon", "unique_reads", "read_count", "read_adjusted", "RPM_lib", "RPM_all"]
+        return ["tRNA_gene", "unique_reads", "read_count", "read_adjusted", "RPM_lib", "RPM_all"]
