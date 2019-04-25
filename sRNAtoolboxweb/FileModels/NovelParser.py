@@ -8,6 +8,6 @@ class NovelParser(Parser):
         fd = open(self.ipath)
         header = fd.readline().replace("\n", "").split("\t")
         for line in fd:
-            aline = line.replace("\n", "").split("\t")[:13]
+            aline = line.replace("\n", "").split("\t")
             yield Novel(*aline)
         fd.close()
