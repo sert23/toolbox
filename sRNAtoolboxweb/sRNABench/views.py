@@ -823,7 +823,7 @@ def render_table(request, mode, job_id, lib=""):
         result["sec"] = "trna"
 
     if mode == "trna":
-        result["title"] = "tRNA mapped reads as a function of anti-codon"
+        result["title"] = "tRNA mapped reads"
         ifile = os.path.join(new_record.outdir, "tRNA_mature_sense.grouped")
         parser = TRNAParser(ifile)
         table = [obj for obj in parser.parse()]
