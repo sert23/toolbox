@@ -10,4 +10,4 @@ class TRNA():
         self.tRNA_gene = antiCodon
 
     def get_sorted_attr(self):
-        return ["antiCodon", "unique_reads", "read_count", "read_adjusted", "RPM_lib", "RPM_all"]
+        return ["tRNA_gene", "unique_reads", "read_count", "read_adjusted", "RPM_lib", "RPM_all"]
