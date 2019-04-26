@@ -21,6 +21,25 @@ class RemovedupForm(forms.Form):
                              required=True)
     duplicates = forms.BooleanField(label='Remove also duplicate  SEQUENCES', required=False)
 
+    def __init__(self, *args, **kwargs):
+        super(RemovedupForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                "",
+                "ifile",
+                "url",
+                "string",
+                "duplicates",
+
+                HTML("""<br>"""),
+                ButtonHolder(
+                    # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
+                    Submit('submit', 'RUN', css_class='btn btn-primary'))
+
+            )
+        )
+
     def clean(self):
         cleaned_data = super(RemovedupForm, self).clean()
         if not cleaned_data.get('ifile') and not cleaned_data.get('url'):
@@ -94,6 +113,7 @@ class ExtractForm(forms.Form):
                 "url",
                 "string",
 
+                HTML("""<br>"""),
                 ButtonHolder(
                     # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
                     Submit('submit', 'RUN', css_class='btn btn-primary'))
@@ -280,6 +300,7 @@ class NcbiForm(forms.Form):
                 "ifile",
                 "url",
 
+                HTML("""<br>"""),
                 ButtonHolder(
                     # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
                     Submit('submit', 'RUN', css_class='btn btn-primary'))))
@@ -368,7 +389,7 @@ class RnacentralForm(forms.Form):
                 "",
                 "species",
                 "taxonomy",
-
+                HTML("""<br>"""),
                 ButtonHolder(
                     # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
                     Submit('submit', 'RUN', css_class='btn btn-primary'))))
@@ -445,6 +466,19 @@ class RnacentralForm(forms.Form):
 class TrnaparserForm(forms.Form):
     species = forms.CharField(label='Provide a Species Name  (Must be Scientific Name):',
                               required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(TrnaparserForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                "",
+                "species",
+                HTML("""<br>"""),
+                ButtonHolder(
+                    # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
+                    Submit('submit', 'RUN', css_class='btn btn-primary'))))
+
     def clean(self):
         cleaned_data = super(TrnaparserForm, self).clean()
         if not cleaned_data.get('species') :
