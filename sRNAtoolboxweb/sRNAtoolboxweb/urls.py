@@ -24,7 +24,7 @@ urlpatterns =[
     url(r'^manual', views.manual),
     url(r'^search', views.search),
     url(r'^barleyCultivar', views.cultivar),
-    url(r'^versionControl', views.version, name='versions'),
+    url(r'^statistics', views.version, name='versions'),
     url(r'^/*$', views.index, name='home'),
     url(r'^admin/', admin.site.urls),
     url(r'^multiupload/', include('multi.urls', namespace='multi')),
