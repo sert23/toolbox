@@ -522,8 +522,11 @@ class De_method_view(DetailView):
                     hm_path = hm_path.replace(MEDIA_ROOT, MEDIA_URL)
                     png_path = input_path.replace(".html", ".png")
 
-                    if imghdr.what(png_path) != "png":
-                        hm_button = True
+                    if os.path.exists(png_path):
+                        if imghdr.what(png_path) != "png":
+                            hm_button = True
+                        else:
+                            hm_button = False
                     else:
                         hm_button = False
                     # with open(png_path) as png_f:
