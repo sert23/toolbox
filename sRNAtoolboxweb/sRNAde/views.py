@@ -535,8 +535,12 @@ class De_method_view(DetailView):
 
                     png_path = png_path.replace(MEDIA_ROOT, MEDIA_URL)
                     mat_path = mat_path.replace(MEDIA_ROOT, MEDIA_URL)
+                    if os.path.exists(input_path):
+                        plot = '<iframe width="1000" height="800" align="middle" src="' + hm_path + '"></iframe>'
+                    else:
+                        plot = '<h1> Sorry, this heatmap is not available </h1>'
                     input_path = input_path.replace(MEDIA_ROOT, MEDIA_URL)
-                    plot = '<iframe width="1000" height="800" align="middle" src="' + hm_path + '"></iframe>'
+
 
                     # plot = file2string(input_path)
                     # plot = multiBP(input_path, title=title, xlab=xlab, ylab=ylab)
