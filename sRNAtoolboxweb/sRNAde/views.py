@@ -528,7 +528,7 @@ class De_method_view(DetailView):
                         else:
                             hm_button = False
                     else:
-                        hm_button = False
+                        hm_button = True
                     # with open(png_path) as png_f:
                     #     first_line = png_f.readline()
                     # if first_line.startswith('{"detail"'):
