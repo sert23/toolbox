@@ -539,6 +539,7 @@ class De_method_view(DetailView):
                         plot = '<iframe width="1000" height="800" align="middle" src="' + hm_path + '"></iframe>'
                     else:
                         plot = '<h1> Sorry, this heatmap is not available </h1>'
+                        title = " "
                     input_path = input_path.replace(MEDIA_ROOT, MEDIA_URL)
 
 
