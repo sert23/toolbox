@@ -11,7 +11,7 @@ from sRNAtoolboxweb.settings import BASE_DIR
 from sRNAtoolboxweb.settings import MEDIA_ROOT
 from utils.pipeline_utils import generate_uniq_id
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit, Field, HTML
 from sRNAtoolboxweb.settings import MEDIA_ROOT, CONF, QSUB, BASE_DIR
 
 class RemovedupForm(forms.Form):
@@ -191,7 +191,7 @@ class EnsemblForm(forms.Form):
                 "",
                 "ifile",
                 "url",
-
+                HTML("""<br>"""),
                 ButtonHolder(
                     # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
                     Submit('submit', 'RUN', css_class='btn btn-primary'))))
