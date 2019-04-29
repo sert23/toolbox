@@ -31,6 +31,7 @@ from utils.sysUtils import make_dir
 from sRNABench.bench_plots_func import full_read_length,read_length_type,mapping_stat,top_miRNA_plot
 from FileModels.deStatsParser import DeStatsParser
 from FileModels.summaryParser import LinksParser, BWParser
+from sRNAtoolboxweb.utils import render_modal
 import pandas as pd
 
 #CONF = json.load(file("/shared/sRNAtoolbox/sRNAtoolbox.conf"))
@@ -837,7 +838,7 @@ def render_table(request, mode, job_id, lib=""):
             pass
 
     if mode == "MA":
-        result["title"] = lib
+        result["title"] = lib + " (Multiple Assignment)" + render_modal('SRNAinput')
         ifile = os.path.join(new_record.outdir, lib + "_sense.grouped")
         parser = MAParser(ifile)
         table = [obj for obj in parser.parse()]
