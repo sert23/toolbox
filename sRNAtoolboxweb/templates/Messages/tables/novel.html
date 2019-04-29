@@ -4,8 +4,9 @@
     Novel microRNA Table
 {% endblock %}
 {% block text %}
-<p> You can find more info on how they were predicted on <a href="" target="_blank">sRNAbench original paper</a> and <a href="" target="_blank">full manual</a> </p>
-<p> Abbreviations: </p>
+<p> You can find more info on how they were predicted on <a href="{{ settings.SUB_SITE }}/static/sRNAbench_article.pdf" target="_blank">sRNAbench original paper</a> and <a href="{{ settings.SUB_SITE }}/static/sRNAtoolbox_manual.pdf" target="_blank">full manual</a> .</p>
+
+    <p> Abbreviations: </p>
 
     <ul>
   <li>seqName: </li>
@@ -16,7 +17,7 @@
   <li>5pname: name assigned to the 5' arm</li>
   <li>5pseq: sequence assigned to the 5' arm</li>
   <li>5pRC: Read Count assigned to the 5' arm</li>
-  <li>allign: allignment visualisation of the predicted miRNA</li>
+  <li>align: alignment visualisation of the predicted miRNA</li>
     </ul>
 
 
