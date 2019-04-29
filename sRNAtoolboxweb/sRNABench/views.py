@@ -796,7 +796,7 @@ def render_table(request, mode, job_id, lib=""):
             pass
 
     if mode == "novel":
-        result["title"] = "Novel microRNAs"
+        result["title"] = mark_safe("Novel microRNAs" + render_modal('novel_tab'))
         ifile = os.path.join(new_record.outdir, "novel.txt")
         parser = NovelParser(ifile)
         #parser = MatureParser(ifile)
@@ -840,6 +840,7 @@ def render_table(request, mode, job_id, lib=""):
 
     if mode == "MA":
         result["title"] = mark_safe(lib + " (Multiple Assignment)" + render_modal('SRNAinput'))
+
         ifile = os.path.join(new_record.outdir, lib + "_sense.grouped")
         parser = MAParser(ifile)
         table = [obj for obj in parser.parse()]
