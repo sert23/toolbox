@@ -164,6 +164,7 @@ def result(request):
         results = {}
 
         if new_record.job_status == "Finished":
+            return render(request, "mirconstarget_result.html", results)
             os.system("touch " + os.path.join(new_record.outdir, "hello.txt"))
             plants = False
             min = 2
