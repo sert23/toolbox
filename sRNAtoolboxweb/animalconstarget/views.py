@@ -159,11 +159,11 @@ def result(request):
         job_id = request.GET['id']
 
         new_record = JobStatus.objects.get(pipeline_key=job_id)
-        assert isinstance(new_record, JobStatus)
 
         results = {}
 
         if new_record.job_status == "Finished":
+            os.system("touch " + os.path.join(new_record.outdir,"hello.txt"))
             plants = False
             min = 2
 
