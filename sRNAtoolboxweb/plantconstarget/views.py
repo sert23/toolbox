@@ -185,8 +185,11 @@ def result(request):
             id = "table"
             try:
                 header = list_d[0].get_sorted_attr()
-                r = Result(id, define_table(header, 'TableResult', plants)(list_d))
-                results[id] = r
+                # r = Result(id, define_table(header, 'TableResult', plants)(list_d))
+                # r = Result(id, define_table(header, 'TableResult', plants)(list_d))
+                results[id] = Result(id, define_table(["Results"], 'TableResult', plants)(
+                    [{"Results": "Results not found!"}]))
+                # results[id] = r
             except:
                 results[id] = Result(id, define_table(["Results"], 'TableResult', plants)([{"Results": "Results not found!"}]))
 
