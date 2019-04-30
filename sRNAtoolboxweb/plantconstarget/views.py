@@ -168,18 +168,17 @@ def result(request):
             plants = False
             min = 2
 
-            try:
-                results["parameters"] = new_record.parameters
 
-                for param in new_record.parameters.split("\n"):
-                    if "Programs:" in param:
-                        min = len(param.split(" ")[1].split(":"))
+            results["parameters"] = new_record.parameters
 
-                if "PSROBOT" in new_record.parameters or "TAPIR_FASTA" in new_record.parameters or "TAPIR_HYBRID" in new_record.parameters:
-                    plants = True
-                    min = 1
-            except:
-                pass
+            for param in new_record.parameters.split("\n"):
+                if "Programs:" in param:
+                    min = len(param.split(" ")[1].split(":"))
+
+            if "PSROBOT" in new_record.parameters or "TAPIR_FASTA" in new_record.parameters or "TAPIR_HYBRID" in new_record.parameters:
+                plants = True
+                min = 1
+
 
             parser = TargetConsensusParser(new_record.consensus_file)
             list_d = [obj for obj in parser.get_by_n(min)]
