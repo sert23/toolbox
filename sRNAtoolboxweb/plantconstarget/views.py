@@ -164,7 +164,7 @@ def result(request):
         results = {}
 
         if new_record.job_status == "Finished":
-            return render(request, "mirconstarget_result.html", results)
+
             os.system("touch " + os.path.join(new_record.outdir, "hello.txt"))
             plants = False
             min = 2
@@ -179,7 +179,7 @@ def result(request):
             if "PSROBOT" in new_record.parameters or "TAPIR_FASTA" in new_record.parameters or "TAPIR_HYBRID" in new_record.parameters:
                 plants = True
                 min = 1
-
+            return render(request, "mirconstarget_result.html", results)
 
             parser = TargetConsensusParser(new_record.consensus_file)
             list_d = [obj for obj in parser.get_by_n(min)]
