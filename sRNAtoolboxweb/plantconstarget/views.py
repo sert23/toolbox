@@ -195,7 +195,7 @@ def result(request):
                 results[id] = Result(id, define_table(["Results"], 'TableResult', plants)([{"Results": "Results not found!"}]))
 
             results["zip"] = "/".join(new_record.zip_file.split("/")[-2:])
-            return render(request, "mirconstarget_result.html", results)
+            #return render(request, "mirconstarget_result.html", results)
             try:
                 results["parameters"] = new_record.parameters
             except:
