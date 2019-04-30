@@ -179,7 +179,7 @@ def result(request):
             if "PSROBOT" in new_record.parameters or "TAPIR_FASTA" in new_record.parameters or "TAPIR_HYBRID" in new_record.parameters:
                 plants = True
                 min = 1
-            return render(request, "mirconstarget_result.html", results)
+
 
             parser = TargetConsensusParser(new_record.consensus_file)
             list_d = [obj for obj in parser.get_by_n(min)]
@@ -195,6 +195,7 @@ def result(request):
                 results[id] = Result(id, define_table(["Results"], 'TableResult', plants)([{"Results": "Results not found!"}]))
 
             results["zip"] = "/".join(new_record.zip_file.split("/")[-2:])
+            return render(request, "mirconstarget_result.html", results)
             try:
                 results["parameters"] = new_record.parameters
             except:
