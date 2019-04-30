@@ -159,11 +159,12 @@ def result(request):
         job_id = request.GET['id']
 
         new_record = JobStatus.objects.get(pipeline_key=job_id)
-        assert isinstance(new_record, JobStatus)
+
 
         results = {}
 
         if new_record.job_status == "Finished":
+            os.system("touch " + os.path.join(new_record.outdir, "hello.txt"))
             plants = False
             min = 2
 
@@ -242,6 +243,7 @@ class PMirConsTarget(FormView):
         call, pipeline_id = form.create_call()
         self.success_url = reverse_lazy('mirconstarget') + '?id=' + pipeline_id
 
+
         print(call)
         os.system("source /opt/venv/sRNAtoolbox2019/bin/activate")
         os.system(call)
@@ -251,6 +253,8 @@ class PMirConsTarget(FormView):
         js.save()
 
         return super(PMirConsTarget, self).form_valid(form)
+
+
 
 
 # class Bench(FormView):
