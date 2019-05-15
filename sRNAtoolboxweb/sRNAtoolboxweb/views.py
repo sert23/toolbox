@@ -83,7 +83,7 @@ def management(request):
         results[key][0] = "%s days, %.2dh: %.2dm: %.2ds" % (results[key][0].days,results[key][0].seconds//3600,(results[key][0].seconds//60)%60, results[key][0].seconds%60)
 
 
-    return render(request, 'Common/VersionControlDonwloads.html', results)
+    return render(request, 'Common/Management.html', results)
 
 def search(request):
     errors = {'errors': []}
