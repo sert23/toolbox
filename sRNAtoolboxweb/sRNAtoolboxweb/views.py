@@ -64,6 +64,27 @@ def version(request):
 
     return render(request, 'Common/VersionControlDonwloads.html', results)
 
+def management(request):
+    results={}
+    #results["sRNAfuncTerms"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="sRNAfuncTerms", job_status="Finished")]
+    results["sRNAde"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="sRNAde", job_status="Finished") if job.finish_time]
+    results["sRNAbench"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="sRNAbench", job_status="Finished")if job.finish_time]
+    results["sRNAblast"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="sRNAblast", job_status="Finished")if job.finish_time]
+    #results["miRNAfuncTargets"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="mirnafunctargets", job_status="Finished")]
+    #results["jBrowser"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="jBrowser", job_status="Finished")]
+    #results["jBrowserDE"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="dejbrowser", job_status="Finished")]
+    results["miRNAconsTarget"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="mirconstarget", job_status="Finished")if job.finish_time]
+
+
+
+    for key in results:
+
+        results[key] = [reduce(lambda x, y: x + y, results[key]) / len(results[key]),  len(results[key])]
+        results[key][0] = "%s days, %.2dh: %.2dm: %.2ds" % (results[key][0].days,results[key][0].seconds//3600,(results[key][0].seconds//60)%60, results[key][0].seconds%60)
+
+
+    return render(request, 'Common/VersionControlDonwloads.html', results)
+
 def search(request):
     errors = {'errors': []}
 
