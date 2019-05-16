@@ -19,7 +19,7 @@ def stacked_bars_state_percentage():
 
     queries_month = JobStatus.objects.filter(start_time__range=(last_month, timezone.now()))
     estring = queries_month.values_list("job_status")
-    return(estring)
+    return(list(estring))
     print(queries_month)
     print(len(queries_month))
     exit()
