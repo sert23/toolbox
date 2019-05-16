@@ -40,7 +40,7 @@ def stacked_bars_state():
     tags_set = set(times_dict["always"])
 
     data = []
-    times = list(times_dict.keys())
+    times = ["last 24h", "last week", "last month", "always"]
     for tag in tags_set:
         x = times
         y = []
@@ -85,12 +85,15 @@ def stacked_bars_state_percentage():
     for tag in tags_set:
         x = times
         y = []
+        yl = []
         for t in times:
             curr_list = times_dict[t]
             y.append(curr_list.count(tag)/float(len(curr_list)))
+            yl.append(curr_list.count(tag))
 
         trace = go.Bar(x=x,
                        y= y,
+                       labels = yl,
                        name=tag)
         data.append(trace)
 
