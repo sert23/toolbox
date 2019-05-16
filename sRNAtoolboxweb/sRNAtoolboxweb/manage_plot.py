@@ -37,45 +37,24 @@ def stacked_bars_state_percentage():
     times_dict["last 24h"] = list(queries_day.values_list("job_status", flat=True))
     times_dict["always"] = list(queries_all.values_list("job_status", flat=True))
 
-    old_set = set()
-    for k in times_dict.keys():
-        old_set.update(times_dict[k])
+    tags_set = set(times_dict["always"])
 
-    return old_set
+    data = []
+    times = times_dict.keys()
+    for tag in tags_set:
+        x = times
+        y = []
+        for t in times:
+            curr_list = times_dict[t]
+            y.append(curr_list.count(t))
+        trace = go.Bar(x=x,
+                       y=y,
+                       name=tag)
+        data.append(trace)
 
-
-
-
-
-    #input_table = pandas.read_table(length_file, sep='\t')
-    x = input_table["Read Length (nt)"].values
-    y1= input_table["Percentage_UR"].values
-    y2 = input_table["Percentage_RC"].values
-    data = [go.Bar(x=x, y=y1)]
     layout = go.Layout(
-        margin=go.layout.Margin(
-            l=50,
-            r=50,
-            b=100,
-            t=100,
-            pad=4
-        ),
-        title="Unique read length distribution ",
-        font=dict(size=18),
-        autosize=False,
-        height=650,
-        width=1150,
-        xaxis=dict(
-            automargin=True,
-            title='Read length (nt)',
-            tick0=0,
-            dtick=2,
-        ),
-        yaxis=dict(
-            # type='log',
-            automargin=True,
-            ticksuffix='%',
-            tickprefix="   ",
-            title='Percentage of reads')
+        barmode='stack'
     )
     fig = go.Figure(data=data, layout=layout)
+    div_obj1 = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=False)
+    return div_obj1
