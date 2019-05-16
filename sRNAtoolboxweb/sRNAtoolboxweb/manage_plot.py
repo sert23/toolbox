@@ -46,7 +46,7 @@ def stacked_bars_state_percentage():
         y = []
         for t in times:
             curr_list = times_dict[t]
-            y.append(curr_list.count(t))
+            y.append(curr_list.count(tag))
         trace = go.Bar(x=x,
                        y=y,
                        name=tag)
