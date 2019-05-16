@@ -12,17 +12,39 @@ from django.utils import timezone
 from progress.models import JobStatus
 
 
+def list_counter(input_list):
+    uniques = set(input_list)
+    res_dict={}
+    for u in uniques:
+        res_dict[u] = input_list.count(u)
+    return res_dict
+
 def stacked_bars_state_percentage():
+
     last_month = timezone.now().date() - timedelta(days=30)
     last_week = timezone.now().date() - timedelta(days=7)
     last_day = timezone.now().date() - timedelta(days=1)
 
     queries_month = JobStatus.objects.filter(start_time__range=(last_month, timezone.now()))
-    estring = queries_month.values_list("job_status", flat = True)
-    return(list(estring))
-    print(queries_month)
-    print(len(queries_month))
-    exit()
+    queries_week = JobStatus.objects.filter(start_time__range=(last_week, timezone.now()))
+    queries_day = JobStatus.objects.filter(start_time__range=(last_day, timezone.now()))
+    queries_all = JobStatus.objects.all()
+
+    times_dict = {}
+
+    times_dict["last month"] = list(queries_month.values_list("job_status", flat=True))
+    times_dict["last week"] = list(queries_week.values_list("job_status", flat=True))
+    times_dict["last 24h"] = list(queries_day.values_list("job_status", flat=True))
+    times_dict["always"] = list(queries_all.values_list("job_status", flat=True))
+
+    old_set = set()
+    for k in times_dict.keys():
+        old_set.update(times_dict[k])
+
+    return old_set
+
+
+
 
 
     #input_table = pandas.read_table(length_file, sep='\t')
