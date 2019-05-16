@@ -17,6 +17,7 @@ __author__ = 'antonior'
 from django.shortcuts import render, redirect
 
 from django.conf import settings
+from sRNAtoolboxweb.manage_plot import stacked_bars_state_percentage
 
 PIPELINETYPES_URL = {
     "sRNAfuncTerms": "srnafuncterms",
@@ -74,14 +75,14 @@ def management(request):
     #results["jBrowser"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="jBrowser", job_status="Finished")]
     #results["jBrowserDE"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="dejbrowser", job_status="Finished")]
     results["miRNAconsTarget"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="mirconstarget", job_status="Finished")if job.finish_time]
+    results["number_of_jobs"] = stacked_bars_state_percentage()
 
 
-
-    for key in results:
-
-        results[key] = [reduce(lambda x, y: x + y, results[key]) / len(results[key]),  len(results[key])]
-        results[key][0] = "%s days, %.2dh: %.2dm: %.2ds" % (results[key][0].days,results[key][0].seconds//3600,(results[key][0].seconds//60)%60, results[key][0].seconds%60)
-
+    # for key in results:
+    #
+    #     results[key] = [reduce(lambda x, y: x + y, results[key]) / len(results[key]),  len(results[key])]
+    #     results[key][0] = "%s days, %.2dh: %.2dm: %.2ds" % (results[key][0].days,results[key][0].seconds//3600,(results[key][0].seconds//60)%60, results[key][0].seconds%60)
+    #
 
     return render(request, 'Common/Management.html', results)
 
