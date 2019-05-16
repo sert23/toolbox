@@ -53,7 +53,8 @@ def stacked_bars_state_percentage():
         data.append(trace)
 
     layout = go.Layout(
-        barmode='stack'
+        barmode='relative'
+        # barmode='stack'
     )
     fig = go.Figure(data=data, layout=layout)
     div_obj1 = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=True)
