@@ -77,6 +77,7 @@ def management(request):
     results["miRNAconsTarget"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="mirconstarget", job_status="Finished")if job.finish_time]
     results["status_plot"] = stacked_bars_state()
     results["status_plot_perc"] = stacked_bars_state_percentage()
+    results["type_plot_perc"] = stacked_bars_state_percentage()
 
 
     # for key in results:
