@@ -17,7 +17,7 @@ __author__ = 'antonior'
 from django.shortcuts import render, redirect
 
 from django.conf import settings
-from sRNAtoolboxweb.manage_plot import stacked_bars_state_percentage,stacked_bars_state
+from sRNAtoolboxweb.manage_plot import stacked_bars_state_percentage,stacked_bars_state,job_type
 
 PIPELINETYPES_URL = {
     "sRNAfuncTerms": "srnafuncterms",
@@ -77,7 +77,7 @@ def management(request):
     results["miRNAconsTarget"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="mirconstarget", job_status="Finished")if job.finish_time]
     results["status_plot"] = stacked_bars_state()
     results["status_plot_perc"] = stacked_bars_state_percentage()
-    results["type_plot_perc"] = stacked_bars_state_percentage()
+    results["type_plot_perc"] = job_type()
 
 
     # for key in results:
