@@ -93,7 +93,7 @@ def stacked_bars_state_percentage():
 
         trace = go.Bar(x=x,
                        y= y,
-                       labels = yl,
+                       text = yl,
                        name=tag)
         data.append(trace)
 
