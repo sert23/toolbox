@@ -229,15 +229,20 @@ def result(request):
         if new_record.job_status == "Finished":
             fd = open(os.path.join(new_record.outdir, "logFile.txt"))
             backvalue = "result"
+            info_string = ""
             for line in fd:
                 if "BACKVALUE" in line:
                     value = line.replace("\n", "").split(" ")[-1]
                     backvalue = value
+                if "INFO" in line or "SUCCESS" in line:
+                    info_string += line
 
             zip_file = os.path.join(backvalue + ".zip").split("/")[-1]
             if os.path.exists(backvalue+".zip"):
                 #results["result"] = os.path.join(new_record.outdir ,"mature.txt.zip")
                 results["result"] = os.path.join(new_record.pipeline_key,zip_file)
+                results["info"] = info_string
+
 
             return render(request, 'helper_result.html', results)
 
