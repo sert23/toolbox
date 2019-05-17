@@ -19,17 +19,34 @@
 
 
                 <div class="well">
-                    <h4>Remove Duplicates from a Fasta File :</h4>
-                    <p>The UCSC table browser allows to obtain 3' UTR sequences
-                        which are needed when searching for microRNA target genes. However the output files have the
-                        following format:
+                    <h4>Remove Duplicates from a Fasta File and manipulate names :</h4>
+                    <p>This tool can:
                     </p>
-
+                    <ul>
+                        <li>Detect and remove duplicated IDs</li>
+                        <li>Detect and remove duplicated sequences</li>
+                        <li>Detect and remove duplicated sequences & generate a new ID by pasting the sequence IDs that have the same sequence</li>
+                        <li>Manipulate the sequences names (eliminate a certain string)</li>
+                    </ul>
+                    <br>
+                    Consider the following input
                     <pre style="white-space: pre-line">
-                            >hg19_refGene_NM_001184906 range=chr17:37408897-37417712 5'pad=0 3'pad=0 strand=- repeatMasking=none
-                            CAATGGAGGTGGTCAACCTTGGCGAACTGAGTATTTAATGACACTTCTAG
-                            AGCTACCGTGGAGTCTCTCCAGTGGAAGCAACCCCAGTGTTCTGAGCAAG
+                        >seqA
+                        ATCACTA
+                        >seqA
+                        CACTG
+                        >seqB
+                        ATCACTA
                         </pre>
+                    1)Detect and remove duplicated IDs:
+                    <pre style="white-space: pre-line">
+                    Only the first ID is used, all others are ignored (not written to the output)
+                    After removing duplicated IDs, the output for the above example would be:
+                    >seqA
+                    ATCACTA
+                    >seqB
+                    CACTG
+                    </pre>
 
                     <p>The name of the sequence ' hg19_refGene_NM_001184906' would not be recognized by downstream
                         analysis programs (functional enrichment analysis). This parser allows to substitute certain
