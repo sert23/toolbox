@@ -168,6 +168,7 @@ class RemovedupForm2(forms.Form):
                                  all_files=ifile,
                                  modules_files="",
                                  pipeline_type="helper",
+                                 outdir=out_dir
                                 )
         config_location = os.path.join(out_dir, "conf.txt")
         configuration = {
@@ -285,7 +286,7 @@ class ExtractForm(forms.Form):
                                  all_files=ifile,
                                  modules_files="",
                                  pipeline_type="helper",
-                                 outdir=FS.location,
+                                 outdir=out_dir,
                                 )
         if QSUB:
             return 'qsub -q ff -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
