@@ -97,6 +97,103 @@ class RemovedupForm(forms.Form):
                 sh= os.path.join(BASE_DIR+ '/core/bash_scripts/run_helper_remove_duplicates.sh')
             ), pipeline_id
 
+class RemovedupForm2(forms.Form):
+    ifile = forms.FileField(label='Upload input file(Fasta file)', required=False)
+    url = forms.URLField(label='Or provide a URL for big files (recommended!)', required=False)
+    string = forms.CharField(label='Provide a string of characters to be dropped out from the sequence names',
+                             required=False)
+    duplicates = forms.BooleanField(label='Remove also duplicate  SEQUENCES', required=False)
+
+    def __init__(self, *args, **kwargs):
+        super(RemovedupForm2, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                "",
+                "ifile",
+                "url",
+                "string",
+                "duplicates",
+
+                HTML("""<br>"""),
+                ButtonHolder(
+                    # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
+                    Submit('submit', 'RUN', css_class='btn btn-primary'))
+
+            )
+        )
+
+    def clean(self):
+        cleaned_data = super(RemovedupForm, self).clean()
+        if not cleaned_data.get('ifile') and not cleaned_data.get('url'):
+            self.add_error('ifile', 'One of these two fields is required')
+            self.add_error('url', 'One of these two fields is required')
+        if cleaned_data.get('ifile') and cleaned_data.get('url'):
+            self.add_error('ifile', 'Choose either file or URL')
+            self.add_error('url', 'Choose either file or URL')
+        return cleaned_data
+
+    def generate_id(self):
+        is_new = True
+        while is_new:
+            pipeline_id = generate_uniq_id()
+            if not JobStatus.objects.filter(pipeline_key=pipeline_id):
+                return pipeline_id
+
+    def create_call(self):
+
+        pipeline_id = self.generate_id()
+        FS = FileSystemStorage()
+        FS.location = os.path.join(MEDIA_ROOT, pipeline_id)
+        os.system("mkdir " + FS.location)
+        out_dir = FS.location
+        ifile = self.cleaned_data.get("ifile")
+        if ifile:
+            file_to_update = ifile
+            uploaded_file = str(file_to_update)
+            ifile = FS.save(uploaded_file, file_to_update)
+        elif self.cleaned_data.get("url"):
+            url = self.cleaned_data.get("url")
+            extension = os.path.basename(url).split('.')[-1]
+            dest = os.path.join(FS.location, os.path.basename(url))
+            ifile, headers = urllib.request.urlretrieve(url, filename=dest)
+
+        else:
+            raise Http404
+
+        name = pipeline_id + '_h_rd'
+        JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not launched",
+                                 start_time=datetime.datetime.now(),
+                                 #finish_time=datetime.time(0, 0),
+                                 all_files=ifile,
+                                 modules_files="",
+                                 pipeline_type="helper",
+                                )
+        config_location = os.path.join(out_dir, "conf.txt")
+        configuration = {
+            'pipeline_id': pipeline_id,
+            'out_dir': out_dir,
+            'name': name,
+            'conf_input': config_location,
+            'type': 'helper'
+        }
+
+        with open(config_location, "w+") as file:
+            file.write("input=" + os.path.join(out_dir, ifile) + "\n")
+            file.write("mode=RD\n")
+            file.write("output=" + out_dir + "\n")
+            file.write("string=" + self.cleaned_data.get("string") + "\n")
+        import json
+        configuration_file_path = os.path.join(out_dir, 'conf.json')
+        with open(configuration_file_path, 'w') as conf_file:
+            json.dump(configuration, conf_file, indent=True)
+
+        if QSUB:
+            return 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
+                configuration_file_path=configuration_file_path,
+                job_name=name,
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
+
 class ExtractForm(forms.Form):
     ifile = forms.FileField(label='Upload input file(Fasta file)', required=False)
     url = forms.URLField(label='Or provide a URL for big files (recommended!)', required=False)
