@@ -124,7 +124,7 @@ class RemovedupForm2(forms.Form):
         )
 
     def clean(self):
-        cleaned_data = super(RemovedupForm, self).clean()
+        cleaned_data = super(RemovedupForm2, self).clean()
         if not cleaned_data.get('ifile') and not cleaned_data.get('url'):
             self.add_error('ifile', 'One of these two fields is required')
             self.add_error('url', 'One of these two fields is required')
