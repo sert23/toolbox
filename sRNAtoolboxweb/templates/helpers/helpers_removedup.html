@@ -39,6 +39,7 @@
                         ATCACTA
                         </pre>
                     1)Detect and remove duplicated IDs:
+                    <div id="moreInfo">
                     <pre style="white-space: pre-line">
                     Only the first ID is used, all others are ignored (not written to the output)
                     After removing duplicated IDs, the output for the above example would be:
@@ -47,19 +48,33 @@
                     >seqB
                     CACTG
                     </pre>
+                    2) Detect and remove duplicated sequences
+                    If this checkbox is activated, all entries with the same sequence are eliminated
+                    The result for the above example would be:
+                        <pre style="white-space: pre-line">
+                            >seqA
+                            ATCACTA
+                        </pre>
+                    3) Detect and remove duplicated sequences & generate a new ID by pasting the sequence IDs that have the same sequence (if this checkbox is activated → launch with mode RDG)
 
-                    <p>The name of the sequence ' hg19_refGene_NM_001184906' would not be recognized by downstream
-                        analysis programs (functional enrichment analysis). This parser allows to substitute certain
-                        parts of the sequence name in order to recover the name of the transcript ( NM_001184906 in this
-                        case). </p>
+                    If the "paste names" checkbox is activated, the output would be:
+                        <pre style="white-space: pre-line">
+                            >seqA=seqB
+                            ATCACTA
+                        </pre>
+                    4) Manipulate the sequences names (eliminate a certain string)
+                    The UCSC table browser allows to obtain 3' UTR sequences which are needed when searching for microRNA target genes.
+                        However the output files have the following format:
+                        <pre style="white-space: pre-line">
+                        >hg19_refGene_NM_001184906 range=chr17:37408897-37417712 5'pad=0 3'pad=0 strand=- repeatMasking=none
+                        CAATGGAGGTGGTCAACCTTGGCGAACTGAGTATTTAATGACACTTCTAG
+                        AGCTACCGTGGAGTCTCTCCAGTGGAAGCAACCCCAGTGTTCTGAGCAAG
+                        </pre>
+                    </div>
 
-                    <p>Specifying 'hg19_refGene_' in the textbox would make the parser to remove this string
-                        from the sequence name leaving only the name of the transcript.
-                        This parser removes also duplicated IDs and gives the additional possibility to remove
-                        duplicated sequence.
+
 
                          {% include 'form_base.html' %}
-
 
             </div>
                 </div>
