@@ -235,7 +235,7 @@ def result(request):
                     value = line.replace("\n", "").split(" ")[-1]
                     backvalue = value
                 if "INFO" in line or "SUCCESS" in line:
-                    info_string += line
+                    info_string += line + "\n"
 
             zip_file = os.path.join(backvalue + ".zip").split("/")[-1]
             if os.path.exists(backvalue+".zip"):
