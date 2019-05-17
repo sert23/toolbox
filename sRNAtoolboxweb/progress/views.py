@@ -10,7 +10,7 @@ from django.views.generic import DetailView
 from rest_framework import generics
 from rest_framework.generics import UpdateAPIView, RetrieveAPIView, CreateAPIView
 from progress.models import JobStatus, Status
-from sRNAtoolboxweb.settings import CONF
+from sRNAtoolboxweb.settings import CONF, SUB_SITE
 from progress.serializers import JobStatusSerializer, StatusSerializer
 from django.core.urlresolvers import reverse
 
@@ -152,6 +152,9 @@ class JobStatusDetail(DetailView):
 
         if job_status.pipeline_type == "sRNAbench":
             go_back_url = reverse_lazy(job_status.pipeline_type.lower())[:-7]
+
+        elif job_status.pipeline_type == "helper":
+            go_back_url = SUB_SITE
         else:
             go_back_url = reverse_lazy(job_status.pipeline_type.lower())[:-6]
 
