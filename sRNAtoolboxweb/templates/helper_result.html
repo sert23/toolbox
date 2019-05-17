@@ -16,13 +16,14 @@
                 {{ info }}
             </div>
 
-            <br>
 
+            <div class="row">
                 {% if result %}
             <p class="text-success"> Please, find your results in this <a href="{{ MEDIA_URL }}{{ result }}" download> link.</a></p>
                 {% else %}
             <p class="text-danger"> No results found for your job, please report it using jobID <b>{{ jobID }}</b></p>
                 {% endif %}
+            </div>
             </div>
             <!-- /.row -->
         </div>
