@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import FormView
 
 from helpers.forms import ExtractForm, NcbiForm
-from helpers.forms import RemovedupForm, EnsemblForm, RnacentralForm, TrnaparserForm
+from helpers.forms import RemovedupForm2, EnsemblForm, RnacentralForm, TrnaparserForm
 from progress.models import JobStatus
 from utils import pipeline_utils
 from utils.sysUtils import make_dir
@@ -251,7 +251,7 @@ class RemoveDup(FormView):
     #template_name = 'helpers/helpers_extract.html'
     template_name = 'helpers/helpers_removedup.html'
     #form_class = ExtractForm
-    form_class = RemovedupForm
+    form_class = RemovedupForm2
 
     success_url = reverse_lazy("removedup")
 
