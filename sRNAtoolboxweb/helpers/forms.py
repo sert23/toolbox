@@ -18,7 +18,7 @@ class RemovedupForm(forms.Form):
     ifile = forms.FileField(label='Upload input file(Fasta file)', required=False)
     url = forms.URLField(label='Or provide a URL for big files (recommended!)', required=False)
     string = forms.CharField(label='Provide a string of characters to be dropped out from the sequence names',
-                             required=True)
+                             required=False)
     duplicates = forms.BooleanField(label='Remove also duplicate  SEQUENCES', required=False)
 
     def __init__(self, *args, **kwargs):
@@ -95,7 +95,7 @@ class RemovedupForm(forms.Form):
                 name=name,
                 job_name=name,
                 sh= os.path.join(BASE_DIR+ '/core/bash_scripts/run_helper_remove_duplicates.sh')
-            )
+            ), pipeline_id
 
 class ExtractForm(forms.Form):
     ifile = forms.FileField(label='Upload input file(Fasta file)', required=False)
