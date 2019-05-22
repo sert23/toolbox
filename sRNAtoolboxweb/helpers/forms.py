@@ -186,11 +186,16 @@ class RemovedupForm2(forms.Form):
             mode = "RDG"
         else:
             mode = "RD"
+        rd_string = " "
+        if self.cleaned_data.get("duplicates"):
+           rd_string = "removeDupSeq=true\n"
+
         with open(config_location, "w+") as file:
             file.write("input=" + os.path.join(out_dir, ifile) + "\n")
             file.write("mode=" + mode + "\n")
             file.write("output=" + out_dir + "\n")
             file.write("string=" + self.cleaned_data.get("string") + "\n")
+            file.write(rd_string)
         import json
         configuration_file_path = os.path.join(out_dir, 'conf.json')
         with open(configuration_file_path, 'w') as conf_file:
