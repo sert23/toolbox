@@ -100,9 +100,12 @@ class RemovedupForm(forms.Form):
 class RemovedupForm2(forms.Form):
     ifile = forms.FileField(label='Upload input file(Fasta file)', required=False)
     url = forms.URLField(label='Or provide a URL for big files (recommended!)', required=False)
-    string = forms.CharField(label='Provide a string of characters to be dropped out from the sequence names',
+
+
+    duplicates = forms.BooleanField(label='Remove duplicate  SEQUENCES too', required=False)
+    paste_IDs = forms.BooleanField(label='Merge IDs from duplicate SEQUENCES', required=False)
+    string = forms.CharField(label='Manipulate the sequences names (remove certain string)',
                              required=False)
-    duplicates = forms.BooleanField(label='Remove also duplicate  SEQUENCES', required=False)
 
     def __init__(self, *args, **kwargs):
         super(RemovedupForm2, self).__init__(*args, **kwargs)
@@ -112,8 +115,9 @@ class RemovedupForm2(forms.Form):
                 "",
                 "ifile",
                 "url",
-                "string",
                 "duplicates",
+                "paste_IDs",
+                "string",
 
                 HTML("""<br>"""),
                 ButtonHolder(
@@ -178,10 +182,13 @@ class RemovedupForm2(forms.Form):
             'conf_input': config_location,
             'type': 'helper'
         }
-
+        if self.cleaned_data.get("paste_IDs"):
+            mode = "RDG"
+        else:
+            mode = "RD"
         with open(config_location, "w+") as file:
             file.write("input=" + os.path.join(out_dir, ifile) + "\n")
-            file.write("mode=RD\n")
+            file.write("mode=" + mode + "\n")
             file.write("output=" + out_dir + "\n")
             file.write("string=" + self.cleaned_data.get("string") + "\n")
         import json
