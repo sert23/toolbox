@@ -48,7 +48,7 @@ class sRNAblastPipeline(Pipeline):
 
     def create_graphics(self):
         tax_file = os.path.join(self.outdir, "tax.out")
-        species_file = os.path.join(self.outdir, "species.out")
+        species_file = os.path.join(self.outdir, "speciesSA.out")
         if os.path.isfile(tax_file):
             parser = BlastParser(tax_file, "tax",20000)
             tax = [obj for obj in parser.parse()]
@@ -86,7 +86,7 @@ class sRNAblastPipeline(Pipeline):
         query = {"pipeline_key": self.pipeline_key}
 
         blast_file = os.path.join(self.outdir, "blast.out")
-        species_file = os.path.join(self.outdir, "species.out")
+        species_file = os.path.join(self.outdir, "speciesSA.out")
         tax_file = os.path.join(self.outdir, "tax.out")
         tax_svg = os.path.join(self.outdir, "tax.svg")
         species_svg = os.path.join(self.outdir, "species.svg")
