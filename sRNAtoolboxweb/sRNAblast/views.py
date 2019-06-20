@@ -211,7 +211,7 @@ def result(request):
                 results["blast"] = Result("Read Processing Statistic", define_table([], 'TableResult')([]))
 
             try:
-                parser = BlastParser(os.path.join(new_record.outdir, "species.out"), "species", 50)
+                parser = BlastParser(os.path.join(new_record.outdir, "speciesSA.out"), "species", 50)
                 species = [obj for obj in parser.parse()]
                 header = species[0].get_sorted_attr()
                 species_result = Result("Read Processing Statistic", define_table(header, 'TableResult')(species))
