@@ -587,6 +587,11 @@ def load_table(input_file,title):
    stats_result = Result(title, define_table(header, 'TableResult')(stats))
    return stats_result
 
+def read_message(file_path):
+    with open(file_path, 'r') as file:
+        data = file.read().replace('\n', '<br>')
+    return data
+
 def result_new(request):
     if 'id' in request.GET:
         job_id = request.GET['id']
@@ -597,6 +602,8 @@ def result_new(request):
         image_list = []
         results["id"] = job_id
         print(os.path.join(new_record.outdir, "results.txt"))
+        results["user_message"] = read_message(os.path.join(new_record.outdir, "message.txt"))
+
         # if (new_record.job_status == "Finished" and os.path.exists(os.path.join(new_record.outdir, "results.txt"))):
         if os.path.exists(os.path.join(new_record.outdir, "results.txt")):
             params = ParamsBench(os.path.join(new_record.outdir, "parameters.txt"), os.path.join(new_record.outdir, "results.txt"),os.path.join(new_record.outdir, "conf.txt"))
