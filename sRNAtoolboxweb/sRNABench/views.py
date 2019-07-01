@@ -602,7 +602,8 @@ def result_new(request):
         image_list = []
         results["id"] = job_id
         print(os.path.join(new_record.outdir, "results.txt"))
-        results["user_message"] = read_message(os.path.join(new_record.outdir, "message.txt"))
+        if os.file.exists(os.path.join(new_record.outdir, "message.txt")):
+            results["user_message"] = read_message(os.path.join(new_record.outdir, "message.txt"))
 
         # if (new_record.job_status == "Finished" and os.path.exists(os.path.join(new_record.outdir, "results.txt"))):
         if os.path.exists(os.path.join(new_record.outdir, "results.txt")):
