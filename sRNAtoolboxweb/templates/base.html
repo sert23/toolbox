@@ -71,12 +71,21 @@
     <![endif]-->
 
 {#   Maintenance technical problem message#}
-{#    <p class="alert alert-danger" style="font-size:28px;"> <br> We are currently experimenting technical difficulties. <br>#}
+{#    <p class="alert alert-danger" style="font-size:28px;"> <br> We are currently experiencing technical difficulties. <br>#}
 {#        While we solve them, new jobs may not run or may be very slow but already finished jobs are still available.#}
 {#        In the meantime you might want to use <a href="https://bioinfo5.ugr.es/srnatoolbox/">the previous version of this tool hosted here.</a> <br>#}
 {#        Sorry for the inconvinience, we expect to be back shortly.#}
 {#        <br> </p>#}
 
+
+            {% if user_message %}
+
+                <p class="alert alert-danger" style="font-size:28px;"> <br>
+                {{ user_message }}
+                </p>
+
+
+            {% endif %}
 
     {% block header %}{% endblock %}
 
