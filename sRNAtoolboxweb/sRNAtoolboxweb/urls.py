@@ -23,6 +23,7 @@ urlpatterns =[
     url(r'^index', views.index),
     url(r'^manual', views.manual),
     url(r'^search', views.search),
+    url(r'^testing', views.testing),
     url(r'^barleyCultivar', views.cultivar),
     url(r'^statistics', views.version, name='versions'),
     url(r'^manage', views.management, name='manage'),
