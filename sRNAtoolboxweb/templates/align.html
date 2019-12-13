@@ -22,7 +22,8 @@
 
                 {% if align %}
 {#                    <pre style="white-space: pre-wrap">{{ align }}</pre>#}
-                    <pre style=" white-space: nowrap; overflow-y: hidden">{{ align|linebreaksbr }}</pre>
+{#                    <pre style=" white-space: nowrap; overflow-y: hidden">{{ align|linebreaksbr }}</pre>#}
+                    <pre style="overflow-y: hidden">{{ align|linebreaksbr }}</pre>
 
                 {% else %}
                     <h3 class="text-warning">No Results!</h3>
