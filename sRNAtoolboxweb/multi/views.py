@@ -238,7 +238,7 @@ def multiDownload(request):
     data = {}
     data["files"] = []
     for i in launched_ids:
-        new_record = JobStatus.objects.get(pipeline_key=id)
+        new_record = JobStatus.objects.get(pipeline_key=i)
         job_stat = new_record.job_status
         if job_stat == "Finished":
             full_path = os.path.join(MEDIA_ROOT, i)
