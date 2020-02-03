@@ -1,5 +1,5 @@
 import time
-
+import glob
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views import View
@@ -231,9 +231,18 @@ def RelaunchMulti(request):
     return redirect(url)
 
 def multiDownload(request):
+    path = request.path
+    folder = path.split("/")[-1]
+    full_path = os.path.join(MEDIA_ROOT,folder)
+    rexp = full_path + "/*.zip"
+
+
+
+    list_of_files = glob.glob(rexp)  # * means all if need specific format then *.csv
+    latest_file = max(list_of_files, key=os.path.getctime)
 
     data = {}
-    data["hehe"] = "haha"
+    data["latest"] = latest_file
 
     return JsonResponse(data)
 
