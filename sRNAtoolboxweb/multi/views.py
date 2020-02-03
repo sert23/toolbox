@@ -260,13 +260,33 @@ def multiDownload(request):
 
     return JsonResponse(data)
 
+def download_list(multi_id):
 
-
-
-
-
+    folder = multi_id
+    jobs_folder = os.path.join(MEDIA_ROOT, folder, "launched")
+    launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder, f))]
     data = {}
-    data["latest"] = latest_file
+    data["files"] = []
+    regex = re.compile(r'.*genome.parsed.zip')
+
+    for i in launched_ids:
+        new_record = JobStatus.objects.get(pipeline_key=i)
+        job_stat = new_record.job_status
+        if job_stat == "Finished":
+            full_path = os.path.join(MEDIA_ROOT, i)
+            rexp = full_path + "/*.zip"
+            list_of_files = sorted(glob.iglob(rexp), key=os.path.getctime, reverse=True)
+
+            # glob.iglob(files_path), key = os.path.getctime, reverse = True)
+            # list_of_files = glob.glob(rexp)  # * means all if need specific format then *.csv
+            # latest_file = max(list_of_files, key=os.path.getctime)
+            # list_of_files.remove('')
+            filtered = [e.replace(MEDIA_ROOT,MEDIA_URL) for e in list_of_files if not regex.match(e)]
+            latest_file = filtered[0]
+            data["files"].append(latest_file)
+
+
+    return data["files"]
 
 
 
@@ -334,7 +354,7 @@ class MultiStatusView(DetailView):
         context["thead"] = js_headers
         context["njobs"] = len(jobs_tbody)
         context["id"] = pipeline_id
-
+        context["download_list"] = download_list(pipeline_id)
         return super(MultiStatusView, self).render_to_response(context, **response_kwargs)
 
 
