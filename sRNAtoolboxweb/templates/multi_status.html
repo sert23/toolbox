@@ -147,9 +147,18 @@
 </script>
 
     <script>
+    {#var list = {{ array1|safe }} ;#}
+
+    var myStringArray = ['/srnabench','/srnatooolbox'];
+    var arrayLength = myStringArray.length;
+
 
     $(document).on('click', '#download_button', function() {
-    window.open('/srnabench');
+
+        for (var i = 0; i < arrayLength; i++) {
+            window.open(myStringArray[i]);
+            //Do something
+            }
 });
 
     </script>
