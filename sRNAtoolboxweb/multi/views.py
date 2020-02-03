@@ -243,8 +243,12 @@ def multiDownload(request):
         if job_stat == "Finished":
             full_path = os.path.join(MEDIA_ROOT, i)
             rexp = full_path + "/*.zip"
-            list_of_files = glob.glob(rexp)  # * means all if need specific format then *.csv
-            latest_file = max(list_of_files, key=os.path.getctime)
+            list_of_files = sorted(glob.iglob(rexp), key=os.path.getctime, reverse=True)
+
+            # glob.iglob(files_path), key = os.path.getctime, reverse = True)
+            # list_of_files = glob.glob(rexp)  # * means all if need specific format then *.csv
+            # latest_file = max(list_of_files, key=os.path.getctime)
+            latest_file = list_of_files[0]
             data["files"].append(latest_file)
 
 
