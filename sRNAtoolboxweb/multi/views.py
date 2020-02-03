@@ -232,7 +232,10 @@ def RelaunchMulti(request):
 
 def multiDownload(request):
 
-    return JsonResponse("hehe")
+    data = {}
+    data["hehe"] = "haha"
+
+    return JsonResponse(data)
 
 class MultiStatusView(DetailView):
     model = JobStatus
