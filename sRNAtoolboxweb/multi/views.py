@@ -19,6 +19,8 @@ from progress.models import JobStatus
 import shutil
 import datetime
 import json
+import re
+
 
 
 def generate_uniq_id(size=15, chars=string.ascii_uppercase + string.digits):
@@ -237,6 +239,9 @@ def multiDownload(request):
     launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder, f))]
     data = {}
     data["files"] = []
+    regex = re.compile(r'.*genome.parsed.zip')
+
+    print(filtered)
     for i in launched_ids:
         new_record = JobStatus.objects.get(pipeline_key=i)
         job_stat = new_record.job_status
@@ -248,7 +253,9 @@ def multiDownload(request):
             # glob.iglob(files_path), key = os.path.getctime, reverse = True)
             # list_of_files = glob.glob(rexp)  # * means all if need specific format then *.csv
             # latest_file = max(list_of_files, key=os.path.getctime)
-            latest_file = list_of_files[0]
+            # list_of_files.remove('')
+            filtered = [e for e in list_of_files if not regex.match(e)]
+            latest_file = filtered[0]
             data["files"].append(latest_file)
 
 
