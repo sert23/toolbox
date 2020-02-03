@@ -253,7 +253,7 @@ def multiDownload(request):
             # list_of_files = glob.glob(rexp)  # * means all if need specific format then *.csv
             # latest_file = max(list_of_files, key=os.path.getctime)
             # list_of_files.remove('')
-            filtered = [e for e in list_of_files if not regex.match(e)]
+            filtered = [e.replace(MEDIA_ROOT,MEDIA_URL) for e in list_of_files if not regex.match(e)]
             latest_file = filtered[0]
             data["files"].append(latest_file)
 
