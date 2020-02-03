@@ -230,6 +230,10 @@ def RelaunchMulti(request):
     # url = reverse('multi:multi_launch') + random_ID
     return redirect(url)
 
+def multiDownload(request):
+
+    return JsonResponse("hehe")
+
 class MultiStatusView(DetailView):
     model = JobStatus
     slug_field = 'pipeline_key'

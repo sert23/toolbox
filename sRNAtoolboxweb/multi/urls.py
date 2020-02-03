@@ -4,6 +4,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.new_upload, name='multi_new'),
+    url(r'^download/[A-za-z0-9]+', views.multiDownload),
     url(r'^relaunch/[A-za-z0-9]+', views.RelaunchMulti),
     url(r'^relaunch/', views.RelaunchMulti, name='multi_relaunch'),
     url(r'^launch/[A-za-z0-9]+', views.MultiLaunchView.as_view()),
