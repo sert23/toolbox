@@ -84,8 +84,9 @@
                      {% if launchDE %}
                         <a href="{% url 'DE_multi' %}{{ id }}" target="_blank"><button type="button" class="btn btn-success">Launch Jobs on sRNAde</button></a>
                      {% endif %}
-                    <a href="#"  id="download_button" ><button type="button" class="btn btn-success">Download button</button></a>
-
+                    {% if download_list %}
+                    <a href="#"  id="download_button" ><button type="button" class="btn btn-info">Download button</button></a>
+                    {% endif %}
                         {% for msg in msgs %}
                             {% if msg.type == "info" %}
                                 <div class="alert alert-info">
@@ -154,7 +155,7 @@
 
 
     $(document).on('click', '#download_button', function() {
-
+        alert("");
         for (var i = 0; i < arrayLength; i++) {
             window.open(myStringArray[i]);
             //Do something
