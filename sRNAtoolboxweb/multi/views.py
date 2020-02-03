@@ -235,18 +235,25 @@ def multiDownload(request):
     folder = path.split("/")[-1]
     jobs_folder = os.path.join(MEDIA_ROOT, folder, "launched")
     launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder, f))]
-
     data = {}
-    data["list_of_files"] = launched_ids
+    data["files"] = []
+    for i in launched_ids:
+        new_record = JobStatus.objects.get(pipeline_key=id)
+        job_stat = new_record.job_status
+        if job_stat == "Finished":
+            full_path = os.path.join(MEDIA_ROOT, i)
+            rexp = full_path + "/*.zip"
+            list_of_files = glob.glob(rexp)  # * means all if need specific format then *.csv
+            latest_file = max(list_of_files, key=os.path.getctime)
+            data["files"].append(latest_file)
+
 
     return JsonResponse(data)
 
 
 
-    full_path = os.path.join(MEDIA_ROOT,folder)
-    rexp = full_path + "/*.zip"
-    list_of_files = glob.glob(rexp)  # * means all if need specific format then *.csv
-    latest_file = max(list_of_files, key=os.path.getctime)
+
+
 
     data = {}
     data["latest"] = latest_file
