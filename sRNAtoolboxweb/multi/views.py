@@ -241,7 +241,6 @@ def multiDownload(request):
     data["files"] = []
     regex = re.compile(r'.*genome.parsed.zip')
 
-    print(filtered)
     for i in launched_ids:
         new_record = JobStatus.objects.get(pipeline_key=i)
         job_stat = new_record.job_status
