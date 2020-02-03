@@ -84,6 +84,7 @@
                      {% if launchDE %}
                         <a href="{% url 'DE_multi' %}{{ id }}" target="_blank"><button type="button" class="btn btn-success">Launch Jobs on sRNAde</button></a>
                      {% endif %}
+                    <a href="#"  id="download_button" ><button type="button" class="btn btn-success">Download button</button></a>
 
                         {% for msg in msgs %}
                             {% if msg.type == "info" %}
@@ -144,6 +145,14 @@
 
 
 </script>
+
+    <script>
+
+    $(document).on('click', '#download', function() {
+    window.open('http://www.google.com');
+});
+
+    </script>
 
 
 
