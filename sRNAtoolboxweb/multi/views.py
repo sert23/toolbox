@@ -233,18 +233,25 @@ def RelaunchMulti(request):
 def multiDownload(request):
     path = request.path
     folder = path.split("/")[-1]
+    jobs_folder = os.path.join(MEDIA_ROOT, folder, "launched")
+    launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder, f))]
+
+    data = {}
+    data["list_of_files"] = launched_ids
+
+    return JsonResponse(data)
+
+
+
     full_path = os.path.join(MEDIA_ROOT,folder)
     rexp = full_path + "/*.zip"
-
-
-
     list_of_files = glob.glob(rexp)  # * means all if need specific format then *.csv
     latest_file = max(list_of_files, key=os.path.getctime)
 
     data = {}
     data["latest"] = latest_file
 
-    return JsonResponse(data)
+
 
 class MultiStatusView(DetailView):
     model = JobStatus
