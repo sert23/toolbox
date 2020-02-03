@@ -149,7 +149,7 @@
     <script>
     {#var list = {{ array1|safe }} ;#}
 
-    var myStringArray = ['/srnabench','/srnatooolbox'];
+    var myStringArray = {{ download_list|safe }};
     var arrayLength = myStringArray.length;
 
 
