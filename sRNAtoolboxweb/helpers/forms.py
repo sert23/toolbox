@@ -561,7 +561,7 @@ class RnacentralForm(forms.Form):
         JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not launched",
                                  start_time=datetime.datetime.now(),
                                  # finish_time=datetime.time(0, 0),
-                                 #all_files=ifile,
+                                 all_files= " ",
                                  modules_files="",
                                  pipeline_type="helper",
                                  outdir=FS.location,
