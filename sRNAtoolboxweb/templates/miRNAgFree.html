@@ -501,7 +501,7 @@
 
                 $("#gallery tbody").prepend(
           "<tr><td><a target='blank' href='" + data.links[i] +  "'>" + data.samples[i] +
-             "</a></td> <td>" + data.input_type + "</td> <td name='"+ data.input_type+":"+ data.samples[i] +"'><i name='"+data.input_type+":"+ data.samples[i] +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
+             "</a></td> <td>" + "Dropbox" + "</td> <td><i name='"+ "dropbox" +":"+ data.samples[i] +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
                     );
                 {#alert("hey");#}
 
@@ -527,7 +527,6 @@
         {#    $('.modal').modal('hide');#}
         {# }#}
 
-    },
 
     // Optional. Called when the user closes the dialog without selecting a file
     // and does not include any parameters.
