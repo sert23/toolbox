@@ -479,7 +479,22 @@
 
     // Required. Called when a user selects an item in the Chooser.
     success: function(files) {
-        alert("Here's the file link: " + files[0].link)
+
+        var arrayLength = files.length;
+        $("#gallery").show();
+        if (arrayLength > 0) {
+            $("#gallery").show();
+            for (var i = 0; i < arrayLength; i++) {
+
+                $("#gallery tbody").prepend(
+          "<tr><td><a target='blank' href='" + files[i].link +  "'>" + files[i].name +
+             "</a></td> <td>" + "Dropbox file" + "</td> <td name='"+ "dropbox" +":"+ files[i].name +"'><i name='"+ "dropbox" +":"+ files[i].name +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
+        );
+
+            };
+            $('.modal').modal('hide');
+        }
+
     },
 
     // Optional. Called when the user closes the dialog without selecting a file
