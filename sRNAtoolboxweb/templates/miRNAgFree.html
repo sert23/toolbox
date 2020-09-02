@@ -1,0 +1,821 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+{#<script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>#}
+<!-- Modal -->
+<div class="modal fade" id="spinner" tabindex="-1" role="dialog" aria-labelledby="spinnerLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <img style="display:block; margin-left:auto; margin-right:auto; width:50%;" src="{% static 'gif/sRNAbench_spinner.gif' %}">
+          <h1 style="text-align: center;">Uploading file...</h1>
+        </div>
+      </div>
+    </div>
+</div>
+
+    <style>
+    .fa-clickable {
+    cursor:pointer;
+    outline:none;
+    }
+    </style>
+
+    <div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Uploading...</h4>
+        </div>
+        <div class="modal-body">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+            <a href="{{ settings.SUB_SITE }}/srnabench" target="_blank"> <h1>miRNAgFree: </h1></a>
+            <h3> You should probably not be here </h3>
+            </div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <input type="hidden" id="jobId" name="jobId" value="{{ jobID }}">
+        <form enctype="multipart/form-data"
+{#                                    id="fileupload" method="POST"#}
+{#                                      data-url="/mirqc"#}
+{#                                    id="id_ajax_upload_form" method="POST"#}
+                                                            novalidate="">
+                                    <input id="fileupload" type="file" name="file" multiple
+           style="display: none;"
+           data-url="{{ data_url }}"
+{#           data-url="{% url 'photos:progress_bar_upload' %}"#}
+           data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+                                <input type="submit" id="sub_button" style="display:none">
+
+
+                                </form>
+    <div class="row">
+    <div class="col-lg-9">
+        <div id="advanced_div2">
+        <input type="checkbox" id="advanced_options2" name="advanced_options" value="true" style="white-space:nowrap;">
+        <label for="advanced_options" style="white-space:nowrap;"> Display advanced options</label><br>
+        </div>
+
+
+        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" href="#collapseOne">Data to upload</a> <a  data-toggle="modal" data-target="#choose_input" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
+        </h4>
+
+
+
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+        <div class="panel-body">
+        <div style="margin-bottom: 20px;">
+{#    <button type="button" class="btn btn-primary js-upload-photos">#}
+    <a  data-toggle="modal" data-target="#add_samples" class="btn btn-link">
+            <button type="button" class="btn btn-success">
+                <span class="glyphicon glyphicon-cloud-upload"></span> Add sample(s)</button> </a>
+
+            <table id="gallery" class="table table-bordered" >
+    <thead>
+      <tr>
+        <th>Uploaded Files</th> <th>Type</th> <th onclick="delInput('ALL');" class="text-danger fa-clickable"> Delete all</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+    
+        </div>
+        </div>
+    </div>
+        </div>
+
+
+
+            <div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            Sequencing library protocol
+        </h4>
+    </div>
+                <div class="panel-body">
+
+                    <div class="col-md-12" > <div id="div_id_library_protocol" class="control-group">
+                        <div class="controls">
+                            <label class="radio inline"> <input type="radio" name="library_protocol" id="id_library_protocol_0" value="TRIMMED" > Reads are already trimmed <a  data-toggle="modal" data-target="#Illumina" class="btn btn-link" style="visibility: hidden;"><i class="fa fa-question-circle"> </i></a> </label>
+                            <label class="radio inline"> <input type="radio" name="library_protocol" id="id_library_protocol_G" value="GUESS" > Guess protocol <a  data-toggle="modal" data-target="#Illumina" class="btn btn-link" style="visibility: hidden;"><i class="fa fa-question-circle"> </i></a> </label>
+                            <label class="radio inline"> <input type="radio" name="library_protocol" id="id_library_protocol_1" value="Illumina" >Illumina TrueSeq&#153; (280916)<a  data-toggle="modal" data-target="#Illumina" class="btn btn-link"><i class="fa fa-question-circle"> </i></a> </label>
+                            <label class="radio inline"> <input type="radio" name="library_protocol" id="id_library_protocol_2" value="NEBnext" >NEBnext&#153;<a  data-toggle="modal" data-target="#NEB" class="btn btn-link"><i class="fa fa-question-circle"> </i></a> </label>
+                            <label class="radio inline"> <input type="radio" name="library_protocol" id="id_library_protocol_3" value="Bioo" >Bioo Scientific Nextflex&#153; (v2,v3)<a  data-toggle="modal" data-target="#Bioo" class="btn btn-link"><i class="fa fa-question-circle"> </i></a> </label>
+                            <label class="radio inline"> <input type="radio" name="library_protocol" id="id_library_protocol_4" value="SMARTer" >Clonetech SMARTer&#153;<a  data-toggle="modal" data-target="#Smarter" class="btn btn-link"><i class="fa fa-question-circle"> </i></a> </label>
+                            <label class="radio inline"> <input type="radio" name="library_protocol" id="id_library_protocol_5" value="Qiagen" >Qiagen&#153; (with UMIs)<a  data-toggle="modal" data-target="#Qiagen" class="btn btn-link"><i class="fa fa-question-circle"> </i></a> </label>
+                            <label class="radio inline"> <input type="radio" name="library_protocol" id="id_library_protocol_6" value="Custom" >Customized protocol<a  data-toggle="modal" data-target="#Custom" class="btn btn-link"><i class="fa fa-question-circle"> </i></a> </label> </div> </div>
+<p></p>
+
+
+
+                    <div id="Adapter_Custom" class="control-group">
+                        <fieldset>
+                            <legend>Custom preprocessing options</legend>
+                        <div id="div_id_guess_adapter" class="control-group"> <div class="controls"> <label for="id_guess_adapter" class="checkbox "> <input type="checkbox" name="guess_adapter" id="id_guess_adapter" class="checkboxinput" /> <strong >Guess the adapter sequence <strong class="text-danger"> (not recommended!)</strong> </label> </div> </div>
+                        <div id="div_id_adapter_chosen" class="control-group"> <label for="id_adapter_chosen" class="control-label ">
+                Adapter chosen
+            </label> <div class="controls"> <select name="adapter_chosen" id="id_adapter_chosen" class="form-control select">
+                            <option value="EMPTY">Input reads are already trimmed</option>
+                            <option value="TGGAATTCTCGGGTGCCAAGG">Illumina RA3 - TGGAATTCTCGGGTGCCAAGG</option>
+                            <option value="UCGUAUGCCGUCUUCUGCUUGU">Illumina(alternative) - UCGUAUGCCGUCUUCUGCUUGU</option>
+                            <option value="330201030313112312">SOLiD(SREK) - 330201030313112312</option>
+
+</select> </div> </div>
+                            <div id="div_id_adapter_manual" class="control-group"> <label for="id_adapter_manual" class="control-label ">
+                Provide adapter sequence
+            </label> <div class="controls"> <input type="text" name="adapter_manual" id="id_adapter_manual" class="form-control textinput textInput" /> </div> </div> <div id="div_id_adapter_length" class="control-group"> <label for="id_adapter_length" class="control-label requiredField">
+                Minimum Adapter Length<span class="asteriskField">*</span> </label> <div class="controls"> <input type="number" name="adapter_length" value="10" required min="6" id="id_adapter_length" max="12" class="numberinput" /> </div> </div> <div id="div_id_adapter_mismatch" class="control-group"> <label for="id_adapter_mismatch" class="control-label requiredField">
+                Max. mismatches in adapter detection<span class="asteriskField">*</span> </label> <div class="controls"> <input type="number" name="adapter_mismatch" value="1" required min="0" id="id_adapter_mismatch" max="2" class="numberinput" /> </div> </div> <div id="div_id_nucleotides_5_removed" class="control-group"> <label for="id_nucleotides_5_removed" class="control-label requiredField">
+                Remove 5' barcode (number of nucleotides) <span class="asteriskField">*</span> </label> <div class="controls"> <input type="number" name="nucleotides_5_removed" value="0" required min="0" id="id_nucleotides_5_removed" max="6" class="numberinput" /> </div> </div> <div id="div_id_nucleotides_3_removed" class="control-group"> <label for="id_nucleotides_3_removed" class="control-label requiredField">
+                Remove 3' nucleotides from random adapter<span class="asteriskField">*</span> </label> <div class="controls"> <input type="number" name="nucleotides_3_removed" value="0" required min="0" id="id_nucleotides_3_removed" max="15" class="numberinput" /> </div> </div> <div id="div_id_adapter_recursive_trimming" class="control-group"> <div class="controls"> <label for="id_adapter_recursive_trimming" class="checkbox "> <input type="checkbox" name="adapter_recursive_trimming" id="id_adapter_recursive_trimming" class="checkboxinput" />
+                        Recursive Adapter trimming
+                    </label> </div>
+                            </div> </fieldset>
+                    </div>
+
+</div>
+
+</div>
+
+</div>
+
+         <div id="advanced_panel" style="display: none;" class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            Advanced options
+        </h4>
+    </div>
+             <div class="panel-body">
+
+                 <div id="div_id_species" class="control-group"> <label for="id_species" class="control-label ">
+                Related species for annotation of predicted miRNAs<a  data-toggle="modal" data-target="#species_dropdown" class="btn btn-link"><i class="fa fa-question-circle"> </i></a> </label> <div class="controls">
+                     <select name="species" multiple="multiple" id="id_species" class="selectmultiple">
+                     <optgroup label="animal"> <option value="1561:Aedes aegypti">Aedes aegypti(AaegL3)</option>
+                         <option value="1562:Vicugna pacos">Alpaca(vicPac1)</option>
+                         <option value="1563:Poecilia formosa">Amazon molly(Poecilia_formosa-5_1_2)</option>
+                     </optgroup>
+                 </select>
+                 </div>
+                     <input type="hidden" name="species_hidden" id="id_species_hidden" />
+                 </div>
+                 <br>
+                 <div class="control-group">
+                     <input type="checkbox" id="use_pasted" name="use_pasted" value="true" style="white-space:nowrap;">
+                    <label for="use_pasted" style="white-space:nowrap;"> Provide your own annotation for a species not included in MirGeneDB</label><br>
+                     <br>
+                     <div id="div_pasted">
+                     <label for="paste_mirnas"> Paste the fasta-formated mature miRNA sequences here:</label>
+                     <div class="controls"> <textarea name="paste_mirnas" rows="5" class="form-control textarea" cols="40" id="paste_mirnas">
+                    </textarea> </div>
+
+                     <label for="paste_hairpins"> Paste the fasta-formated hairpin sequences here:</label>
+                    <div class="controls"> <textarea name="paste_hairpins" rows="5" class="form-control textarea" cols="40" id="paste_hairpins">
+                    </textarea> </div>
+                     </div>
+                 </div>
+
+                </div>
+         </div>
+
+        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            Run your job
+        </h4>
+    </div>
+                <div class="panel-body">
+                    <div class="row">
+    <div class="col-lg-6">
+        <div id="advanced_div">
+        <input type="checkbox" id="advanced_options" name="advanced_options" value="true" style="white-space:nowrap;">
+        <label for="advanced_options" style="white-space:nowrap;"> Display advanced options</label><br>
+            </div>
+</div>
+                        <div class="col-lg-6 text-right" > <button type="button" class="btn btn-success" style="display: inline-block;"> RUN </button> </div>
+
+                    </div>
+
+
+
+                </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+        <div class="col-lg-3">
+            <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Help
+                </h4>
+            </div>
+            <div class="panel-body">
+                <a href="{{ settings.MANUAL_URL }}" target="_blank">Link to Web Manual</a>
+{#                <a href="http://bioinfo5.ugr.es/sRNAbench/sRNAbench_web.pdf" target="_blank">Link to Web Manual</a>#}
+                <br/>
+                <a href="{{ settings.SUB_SITE }}/jobstatus/ZAPFTBMPBGCPIDM" target="_blank">Link to Test Data Results</a>
+                </div>
+
+                </div>
+
+    </div>
+
+    <div class="col-lg-3">
+            <div class="panel panel-green">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Test Data Description
+                </h4>
+            </div>
+            <div class="panel-body">
+                Secreted exosomes of an Epstein-Barr virus (EBV)-transformed lymphoblastoid cell line (LCLs). Small RNAs of human and virus origin can be detected.
+                <br>
+                <a href="http://www.cell.com/cell-reports/fulltext/S2211-1247%2814%2900703-7"  target="_blank">Link To Publication</a>
+            </div>
+            </div>
+
+    </div>
+
+    <div class="col-lg-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Test Data Parameters
+                </h4>
+            </div>
+            <div class="panel-body">
+                Input File: <a href="{% static '/IK_exosomes.fastq.gz' %}" download> <i class="fa fa-download fa-fw"></i> IK_exo.fastq.gz</a>
+                <br>
+                Or use SRA ID: SRR1563060
+                <br>
+                Species: <pre style=" white-space: nowrap; overflow-y: hidden">Human(GRCh38_p10),Epstein Barr Virus(NC_007605)</pre>
+                Protocol: Illumina
+
+
+
+
+            </div>
+
+        </div>
+
+
+
+
+
+            </div>
+
+
+    </div>
+
+
+
+
+    </div>
+    <!-- /.row -->
+
+
+
+    <!-- /#page-wrapper -->
+    
+
+{% endblock %}
+
+
+{% block modals %}
+    {% include "Messages/miRgFree/Choose_input.html" %}
+    {% include "Messages/miRgFree/upload_samples.html" %}
+    {% include "Messages/bench/sRNAbenchInput.html" %}
+    {% include "Messages/miRgFree/Species_dropdown.html" %}
+    {% include "Messages/bench/library_mode.html" %}
+    {% include "Messages/bench/other_ncrnas.html" %}
+    {% include "Messages/bench/guess_Adapter.html" %}
+    {% include "Messages/bench/minimum_adapter_length.html" %}
+    {% include "Messages/bench/mismatches_adapter.html" %}
+    {% include "Messages/bench/quality_filter.html" %}
+    {% include "Messages/bench/phred_encode.html" %}
+    {% include "Messages/bench/mirna_species.html" %}
+    {% include "Messages/bench/Not_profile.html" %}
+    {% include "Messages/bench/RecursiveAdaptorTrimming.html" %}
+    {% include "Messages/bench/speciesBench.html" %}
+    {% include "Messages/bench/UploadUserFiles.html" %}
+    {% include "Messages/bench/mirnas.html" %}
+
+{#    Protocols      #}
+    {% include "Messages/protocols/Illumina.html" %}
+    {% include "Messages/protocols/NEB.html" %}
+    {% include "Messages/protocols/Bioo.html" %}
+    {% include "Messages/protocols/Smarter.html" %}
+    {% include "Messages/protocols/Qiagen.html" %}
+    {% include "Messages/protocols/Custom.html" %}
+
+
+{% endblock %}
+
+</div>
+
+{% block js %}
+
+    <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+
+    <script>
+
+        $("#div_pasted").hide();
+        $("#gallery").hide();
+
+        $("#use_pasted").click(function () {
+            if (document.getElementById('use_pasted').checked){
+                $("#div_id_species").hide();
+                $("#div_pasted").show();
+
+            } else {
+                $("#div_id_species").show();
+                $("#div_pasted").hide();
+            }
+
+
+        });
+
+    </script>
+
+    <script>
+
+    var delInput = function(del_string) {
+
+        {#alert(del_string);#}
+        $.ajax({
+        url: '{% url "ajax_del" %}',
+        data: {
+            "id" : "{{ jobID }}",
+            "to_del" :  del_string,
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (del_string=="ALL"){
+                $("#gallery tbody tr").remove();
+            }
+            if (data.message){
+                alert(data.message);
+            }
+        },
+    });
+    };
+
+    $('table').on('click','tr i',function(e){
+
+        e.preventDefault();
+        {#var row=$(e.target).closest("tr");#}
+        {#alert($(this).attr('name'));#}
+        delInput($(this).attr('name'));
+
+
+        $(this).parents('tr').remove();
+      });
+
+    </script>
+
+    <script>$(function () {
+
+        $(".js-upload-photos").click(function () {
+
+            $("#fileupload").click();
+        });
+
+    {# });#}
+
+  $("#fileupload").fileupload({
+    dataType: 'json',
+    sequentialUploads: true,
+
+    start: function (e) {
+      $('.modal').modal('hide');
+      $("#modal-progress").modal("show");
+    },
+
+    stop: function (e) {
+      $("#modal-progress").modal("hide");
+    },
+
+    progressall: function (e, data) {
+      var progress = parseInt(data.loaded / data.total * 100, 10);
+      var strProgress = progress + "%";
+      $(".progress-bar").css({"width": strProgress});
+      $(".progress-bar").text(strProgress);
+    },
+
+    done: function (e, data) {
+         $("#modal-progress").modal("hide");
+      if (data.alert){
+       alert("something went wrong");
+      }
+        if (data.result.is_valid) {
+            $("#something_up").val("true");
+          {#alert("hello");#}
+         $("#modal-progress").modal("hide");
+          $("#uploaded_card").show();
+          {#alert(data.result.name);#}
+          {#alert(data.result.url);#}
+         $("#modal-progress").modal("hide");
+        $("#gallery").show();
+         $("#gallery tbody").prepend(
+          "<tr><td><a target='_blank' href='" + data.result.url + "'>" + data.result.name +
+             "</a></td> <td> Uploaded file </td> <td><i name='uploaded:"+ data.result.name +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
+        )
+      }
+    }
+
+  });
+
+ });</script>
+
+
+        {#</script>#}
+   {#  Dropbox code   #}
+
+    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs"
+            data-app-key="vaiq8bxw40wiwhn"></script>
+
+    <script>
+    options = {
+
+    // Required. Called when a user selects an item in the Chooser.
+    success: function(files) {
+        alert("Here's the file link: " + files[0].link)
+    },
+
+    // Optional. Called when the user closes the dialog without selecting a file
+    // and does not include any parameters.
+    cancel: function() {
+
+    },
+
+    // Optional. "preview" (default) is a preview link to the document for sharing,
+    // "direct" is an expiring link to download the contents of the file. For more
+    // information about link types, see Link types below.
+    linkType: "direct", // or "direct"
+
+    // Optional. A value of false (default) limits selection to a single file, while
+    // true enables multiple file selection.
+    multiselect: true, // or true
+
+    // Optional. This is a list of file extensions. If specified, the user will
+    // only be able to select files with these extensions. You may also specify
+    // file types, such as "video" or "images" in the list. For more information,
+    // see File types below. By default, all extensions are allowed.
+    {# extensions: ['.pdf', '.doc', '.docx'],#}
+
+    // Optional. A value of false (default) limits selection to files,
+    // while true allows the user to select both folders and files.
+    // You cannot specify `linkType: "direct"` when using `folderselect: true`.
+    folderselect: false, // or true
+
+    // Optional. A limit on the size of each file that may be selected, in bytes.
+    // If specified, the user will only be able to select files with size
+    // less than or equal to this limit.
+    // For the purposes of this option, folders have size zero.
+     {# sizeLimit: 1024, // or any positive number#}
+};
+    var DBbutton = Dropbox.createChooseButton(options);
+    {#document.getElementById("dropbox-container").appendChild(DBbutton);#}
+    </script>
+
+ {#  Google drive code   #}
+    <script type="text/javascript">
+
+            // The Browser API key obtained from the Google Developers Console.
+            var developerKey = 'AIzaSyBG_apmyiqz0PVwA6FO_GionR-e1Zz7DlI';
+
+            // The Client ID obtained from the Google Developers Console. Replace with your own Client ID.
+            var clientId = "926118481098-crke10cc1ombemh7b7v0l8gsstm966r0.apps.googleusercontent.com";
+
+            // Scope to use to access user's photos.
+            var scope = ['https://www.googleapis.com/auth/drive.file'];
+
+            var pickerApiLoaded = false;
+            var oauthToken;
+
+            // Use the API Loader script to load google.picker and gapi.auth.
+            function onApiLoad() {
+                gapi.load('auth', {'callback': onAuthApiLoad});
+                gapi.load('picker', {'callback': onPickerApiLoad});
+            }
+
+            function onAuthApiLoad() {
+                window.gapi.auth.authorize(
+                        {
+                            'client_id': clientId,
+                            'scope': scope,
+                            'immediate': false
+                        },
+                handleAuthResult);
+            }
+
+            function onPickerApiLoad() {
+                pickerApiLoaded = true;
+                createPicker();
+            }
+
+            function handleAuthResult(authResult) {
+                if (authResult && !authResult.error) {
+                    oauthToken = authResult.access_token;
+                    createPicker();
+                }
+            }
+
+            // Create and render a Picker object for picking user Photos.
+            function createPicker() {
+                if (pickerApiLoaded && oauthToken) {
+                    var picker = new google.picker.PickerBuilder().
+                            addViewGroup(
+                                    new google.picker.ViewGroup(google.picker.ViewId.DOCS).
+                                    addView(google.picker.ViewId.DOCUMENTS).
+                                    addView(google.picker.ViewId.PRESENTATIONS)).
+                            setOAuthToken(oauthToken).
+                            setDeveloperKey(developerKey).
+                            setCallback(pickerCallback).
+                            build();
+                    picker.setVisible(true);
+                }
+            }
+
+            // A simple callback implementation.
+            function pickerCallback(data) {
+                var url = 'nothing';
+                var name = 'nothing';
+                if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
+                    var doc = data[google.picker.Response.DOCUMENTS][0];
+                    url = doc[google.picker.Document.URL];
+                    name = doc.name;
+                    var param = {'fileId': doc.id, 'oAuthToken': oauthToken, 'name': name}
+                    console.log(param);
+                    document.getElementById('result').innerHTML = "Downloading...";
+                    $.post('download.php', param,
+                            function (returnedData) {
+                                document.getElementById('result').innerHTML = "Download completed";
+                            });
+
+
+//
+                }
+//
+            }
+        </script>
+<script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
+
+<script>
+
+
+$('input[name="advanced_options"]').on("change", function(e) {
+    if (document.getElementById('advanced_options').checked || document.getElementById('advanced_options2').checked){
+        $("#advanced_panel").show();
+        $("#advanced_div").hide();
+        $("#advanced_div2").hide();
+        }
+});
+
+$("#advanced_options").change(function() {
+    $("#advanced_options2").prop("checked", this.checked);
+});
+
+$("#advanced_options2").change(function() {
+    $("#advanced_options").prop("checked", this.checked);
+});
+
+
+
+$('input[name="library_protocol"]').on("click", function(e) {
+    if (document.getElementById('id_library_protocol_6').checked) {
+        $("#Adapter_Custom").show();
+    } else {
+        $("#Adapter_Custom").hide();
+    }
+});
+
+
+
+$("#id_quality_method").change(function () {
+{#    if ( document.getElementById('id_library_protocol_6').checked){#}
+    if ( document.getElementById('id_quality_method').value === "min"){
+        $("#Div_max").show();
+    }else{
+        $("#Div_max").hide();
+    }
+    });
+
+
+        {##}
+        {# Adapter options #}
+        {##}
+
+$('input[name="guess_adapter"]').on("click", function(e) {
+    if ( document.getElementById('id_guess_adapter').checked){
+        document.getElementById("id_adapter_chosen").disabled = true;
+        document.getElementById("id_adapter_manual").disabled = true;
+    }else{
+        document.getElementById("id_adapter_chosen").disabled = false;
+        document.getElementById("id_adapter_manual").disabled = false;
+    }
+
+})
+
+$('input[name="adapter_manual"]').on("mouseout", function(e) {
+
+    if ( document.getElementById('id_adapter_manual').value.length > 0 ){
+
+        document.getElementById("id_adapter_chosen").disabled = true;
+        document.getElementById("id_guess_adapter").disabled = true;
+    }else{
+        document.getElementById("id_adapter_chosen").disabled = false;
+        document.getElementById("id_guess_adapter").disabled = false;
+    }
+
+})
+$('input[name="adapter_manual"]').on("change", function(e) {
+
+    if ( document.getElementById('id_adapter_manual').value.length > 0 ){
+
+        document.getElementById("id_adapter_chosen").disabled = true;
+        document.getElementById("id_guess_adapter").disabled = true;
+    }else{
+        document.getElementById("id_adapter_chosen").disabled = false;
+        document.getElementById("id_guess_adapter").disabled = false;
+    }
+
+})
+
+$("input[type=file]").on('change',function(){
+    var extensions = ["xls","xlsx","doc","docx"]
+    if (extensions.includes(this.files[0].name.split('.').pop()) ){
+        alert('Spread-sheet or document extensions such as ".xls" or ".doc" are not supported. Please upload a different file. ')
+        document.getElementById('id_ifile').value = "";
+    }
+
+{#    filename.split('.').pop();#}
+});
+
+function toggleAdapter() {
+{#    if ($("#age").val() <= 13)#}
+    if ( document.getElementById('id_library_protocol').value){
+
+        $("#genome-div").show();
+    }else{
+        $("#genome-div").hide();
+    }}
+
+
+</script>
+
+    <script>
+
+    jQuery("#Adapter_Custom").hide();
+
+    </script>
+
+    <script>
+    jQuery(document).ready(function() {
+        jQuery('#id_species').multiselect({
+            enableCollapsibleOptGroups: true,
+            enableCaseInsensitiveFiltering: true,
+            filterBehavior: 'both',
+            maxHeight: 300,
+            onDropdownHidden: function (e) {
+                if(document.getElementById('id_species').value){
+                   jQuery('#id_species_hidden').val(jQuery('#id_species').val().map(function(item) {
+                        return item.split(':')[0]}).join(','));
+                } else{
+                        document.getElementById('id_species_hidden').value = "" ;
+                }
+{#                    alert(document.getElementById('id_species_hidden').value);#}
+{#                    toggleFields();#}
+{#                alert(jQuery('#id_species').val().join(','));#}
+
+            }
+
+        });
+        jQuery("#genome-div").hide();
+        jQuery("#Adapter_Custom").hide();
+        jQuery("#Div_max").hide();
+    });
+    </script>
+
+    <script>
+        // tooltip demo
+        $('.row').tooltip({
+            selector: "[data-toggle=tooltip]",
+            container: "body"
+        })
+
+    </script>
+
+    <script>
+        function validation() {
+        var x, text, message, stop;
+        stop = false
+        message = "There were some errors in your job. Please select your input again and check for invalid options"
+
+        x = document.getElementById("id_adapter_manual").value;
+
+        if (!document.getElementById("id_species").value && !document.getElementById("id_mirna_profiled").value) {
+            document.getElementById('id_ifile').value = "";
+            alert(message);
+            stop = true;
+            return true
+{#            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true#}
+        } else if ((0 + Boolean(document.getElementById('id_ifile').value) + Boolean(document.getElementById('id_url').value) + Boolean(document.getElementById('id_sra_input').value ) + Boolean(document.getElementById('id_job_reuse').value)!=1)) {
+            document.getElementById('id_ifile').value = "";
+{#            alert("id_file url"); #}
+{#            return true;#}
+            alert(message);
+            stop = true;
+            return true
+        } else if (!Array.from(document.getElementsByName('library_protocol')).some(Boolean)) {
+            document.getElementById('id_ifile').value = "";
+            {#            alert( " predict and library mode"); return true#}
+            alert(message);
+            stop = true;
+            return true
+        } else if ((0+ Boolean(document.getElementById('id_species_hidden')) + Boolean(document.getElementById('id_mirna_profiled')) + Boolean(document.getElementById('id_referenceDB') === "MirGeneDB"))<1) {
+            document.getElementById('id_ifile').value = "";
+            {#            alert( " predict and library mode"); return true#}
+            alert(message);
+            stop = true;
+            return true
+
+{#        }else if (document.getElementById('id_predict_mirna').checked && document.getElementById('id_library_mode').checked) {#}
+{#            document.getElementById('id_ifile').value = "";#}
+            {#            alert( " predict and library mode"); return true#}
+{#            alert(message);#}
+{#            return true#}
+
+		}
+        if (stop==false){
+            $('#spinner').modal('show');
+        }
+
+
+    }
+    </script>
+
+    <script>
+    $('input[name="referenceDB"]').on("click", function(e) {
+        x = document.getElementById("id_referenceDB_3").checked;
+        if (x==false){
+            document.getElementById("div_id_mirDB").style.visibility="hidden";
+            document.getElementById("id_mirDB").style.visibility="hidden";
+{#            document.getElementById("show-me-three").style.visibility="hidden";#}
+        }
+        else{
+            document.getElementById("div_id_mirDB").style.visibility="visible";
+            document.getElementById("id_mirDB").style.visibility="visible";
+        }
+{#    if (e.clientX === 0 && e.clientY === 0) {#}
+{#        console.log("keyboard");#}
+{#    } else {#}
+{#        console.log("mouse");#}
+{#    };#}
+{#        alert(x)#}
+});
+    </script>
+
+
+{% endblock %}
+

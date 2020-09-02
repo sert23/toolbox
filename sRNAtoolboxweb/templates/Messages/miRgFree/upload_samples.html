@@ -1,0 +1,125 @@
+{% extends "Messages/modal_xl.html" %}
+{% block id %}add_samples{% endblock %}
+{% block title %}
+    Add samples to be analyzed
+{% endblock %}
+{% block text %}
+
+    <button type="button" class="btn btn-primary js-upload-photos">
+         Upload file(s)</button>
+    <button type="button" id="SRA_button" class="btn btn-primary">
+         SRA accession(s)</button>
+    <button type="button" id="links_button" class="btn btn-primary">
+         Link to file(s)</button>
+    <button type="button" class="btn btn-primary" onclick="onApiLoad()">
+         <i class="fab fa-google-drive"></i> Choose from Drive</button>
+    <button type="button" class="btn btn-primary" onclick="Dropbox.choose(options);">
+         <i class="fab fa-dropbox"></i> Choose from Dropbox</button>
+
+{#    <div style="display: inline-block" id="dropbox-container"></div>#}
+{#    <button onclick="onApiLoad()"><i class="fab fa-google-drive"></i></button>#}
+{#    <button onclick="onApiLoad()">Pick From Google Drive</button>#}
+
+{#  AIzaSyBG_apmyiqz0PVwA6FO_GionR-e1Zz7DlI  GOOGLE API KEY  #}
+
+<p></p>
+<p> There are 5 ways you can provide read files:</p>
+    <ul>
+  <li>Upload a file (typically fastq or fastq.gz)</li>
+  <li>Provide a link/URL with the data </li>
+  <li>Provide an accession for a SRA run (they start with SRR,ERR or DRR e.g. <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR1563062" target="_blank">SRR1563062</a>)</li>
+  <li>You can also use files from your Dropbox or Google Drive accounts</li>
+
+    </ul>
+
+    <div id="SRA_info">
+    <label for="paste_mirnas"> Paste the SRA accessions (one per line) and click on ADD</label>
+        <div class="controls"> <textarea id="SRA_ids" placeholder="SRR1563062
+SRR1563063
+etc." name="SRA" rows="5" class="form-control" cols="40"  ></textarea> </div>
+    <button type="button" id="SRA_submit" onclick="loadInput();" class="btn btn-success">ADD</button>
+    </div>
+
+    <div id="links_info">
+    <label for="paste_mirnas"> Paste the file links here (one per line) and click on ADD</label>
+        <div class="controls"> <textarea placeholder="http://example.server.com/file1.fastq
+http://example.server.com/file2.fastq.gz" name="links" rows="5" class="form-control textarea" cols="40" id="links"></textarea> </div>
+        <button type="button" id="links_submit" onclick="loadInput();" class="btn btn-success">ADD</button>
+    </div>
+
+    <script>
+
+    $('#SRA_info').hide();
+
+    $('#SRA_button').on("click", function(e) {
+        $('#links_info').hide();
+        $('#SRA_info').show();
+        $("#links").val("");
+    });
+
+    </script>
+
+    <script>
+
+     var loadInput = function(e) {
+
+        {#$('#upload_info').html("");#}
+
+         {#$('.modal').modal('hide');#}
+        {#alert("eyo");#}
+        $.ajax({
+        url: '{% url "ajax_input" %}',
+        data: {
+            "id" : "{{ jobID }}",
+            "SRA_input" :  $("#SRA_ids").val(),
+            "links_input" :  $("#links").val(),
+             {#"comp_set": $("#comp_set").val(),#}
+             {#"variables": hmselected.join(","),#}
+        },
+        dataType: 'json',
+        success: function (data) {
+            var arrayLength = data.samples.length;
+            $("#gallery").show();
+            if(arrayLength >0){
+                for (var i = 0; i < arrayLength; i++) {
+
+                $("#gallery tbody").prepend(
+          "<tr><td><a target='blank' href='" + data.links[i] +  "'>" + data.samples[i] +
+             "</a></td> <td>" + data.input_type + "</td> <td name='"+ data.input_type+":"+ data.samples[i] +"'><i name='"+data.input_type+":"+ data.samples[i] +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
+        );
+                {#alert("hey");#}
+
+                    }
+            };
+            $('.modal').modal('hide');
+             $("#SRA_ids").val("");
+             $("#links").val("");
+             $('#links_info').hide();
+            $('#SRA_info').hide();
+
+
+        }
+      });
+     };
+
+
+
+
+
+</script>
+
+
+    <script>
+
+    $('#links_info').hide();
+    $('#links_button').on("click", function(e) {
+
+        $('#links_info').show();
+        $('#SRA_info').hide();
+        $("#SRA_ids").val("");
+
+    });
+
+    </script>
+
+{% endblock %}
