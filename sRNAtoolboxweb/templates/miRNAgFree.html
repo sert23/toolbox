@@ -475,25 +475,57 @@
             data-app-key="vaiq8bxw40wiwhn"></script>
 
     <script>
+
+
+
+
+
     options = {
 
     // Required. Called when a user selects an item in the Chooser.
     success: function(files) {
 
-        var arrayLength = files.length;
-        $("#gallery").show();
-        if (arrayLength > 0) {
-            $("#gallery").show();
-            for (var i = 0; i < arrayLength; i++) {
+        var links = files.map(e => e.link).join(",");
+        $.ajax({
+        url: '{% url "ajax_drop" %}',
+        data: {
+            "id" : "{{ jobID }}",
+            "files" :  links,
+        },
+        dataType: 'json',
+            success: function (data) {
+                $("#gallery").show();
+                var arrayLength = data.samples.length;
+                if(arrayLength >0){
+                for (var i = 0; i < arrayLength; i++) {
 
                 $("#gallery tbody").prepend(
-          "<tr><td><a target='blank' href='" + files[i].link +  "'>" + files[i].name +
-             "</a></td> <td>" + "Dropbox file" + "</td> <td name='"+ "dropbox" +":"+ files[i].name +"'><i name='"+ "dropbox" +":"+ files[i].name +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
-        );
+          "<tr><td><a target='blank' href='" + data.links[i] +  "'>" + data.samples[i] +
+             "</a></td> <td>" + data.input_type + "</td> <td name='"+ data.input_type+":"+ data.samples[i] +"'><i name='"+data.input_type+":"+ data.samples[i] +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
+                    );
+                {#alert("hey");#}
 
-            };
-            $('.modal').modal('hide');
-        }
+                    }
+                };
+                $('.modal').modal('hide');
+            },
+        });
+    },
+
+
+
+        {#if (arrayLength > 0) {#}
+        {#    $("#gallery").show();#}
+        {#    for (var i = 0; i < arrayLength; i++) {#}
+        {##}
+        {#        $("#gallery tbody").prepend(#}
+        {#  "<tr><td><a target='blank' href='" + files[i].link +  "'>" + files[i].name +#}
+        {#     "</a></td> <td>" + "Dropbox file" + "</td> <td name='"+ "dropbox" +":"+ files[i].name +"'><i name='"+ "dropbox" +":"+ files[i].name +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"#}
+        {#);#}
+        {##}
+        {#    };#}
+        {#    $('.modal').modal('hide');#}
+        {# }#}
 
     },
 

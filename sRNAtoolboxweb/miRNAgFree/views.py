@@ -997,6 +997,33 @@ class upload_files(FormView):
                 data["alert"] = True
                 return JsonResponse(data)
 
+def ajax_dropbox(request):
+    data ={}
+    folder = request.GET.get('id', None)
+    files = request.GET.get('files', None)
+    dest_folder = os.path.join(MEDIA_ROOT, folder)
+    make_folder(dest_folder)
+    dest_file = os.path.join(dest_folder, "dropbox.txt")
+    sample_list = files.split(",")
+    sample_list = [x.strip(' ') for x in sample_list]
+    sample_list = list(filter(None, sample_list))
+    if os.path.exists(dest_file):
+        with open(dest_file,"r") as sf:
+            lines = sf.read().split("\n")
+        c_samples = []
+        for s in sample_list:
+            if s not in lines:
+                c_samples.append(s)
+        sample_list = c_samples
+    with open(dest_file, "a") as lf:
+        for s in set(sample_list):
+            lf.write(s + "\n")
+
+    unique_samples = list(set(sample_list))
+    data["links"] = unique_samples
+    data["samples"] = [x.split("/")[-1] for x in unique_samples]
+    return JsonResponse(data)
+
 
 def ajax_receive_input(request):
 
@@ -1017,6 +1044,7 @@ def ajax_receive_input(request):
     sample_list = [x.strip(' ') for x in sample_list]
     sample_list = list(filter(None, sample_list))
 
+
     if os.path.exists(dest_file):
         with open(dest_file,"r") as sf:
             lines = sf.read().split("\n")
@@ -1024,8 +1052,6 @@ def ajax_receive_input(request):
         for s in sample_list:
             if s not in lines:
                 c_samples.append(s)
-        print(c_samples)
-        print(sample_list)
         sample_list = c_samples
     with open(dest_file, "a") as lf:
         for s in set(sample_list):
