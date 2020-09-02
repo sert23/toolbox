@@ -1088,6 +1088,8 @@ def ajax_del(request):
         samples_file = os.path.join(dest_folder,"SRA.txt")
     elif input_type == "filelink":
         samples_file = os.path.join(dest_folder, "links.txt")
+    elif input_type == "dropbox":
+        samples_file = os.path.join(dest_folder, "dropbox.txt")
     while os.path.exists(writing_file):
         time.sleep(1)
     with open(samples_file, "r") as f:
