@@ -13,6 +13,7 @@ urlpatterns =[
     url(r'^srnajbrowserde', include('sRNAdejBrowser.urls')),
     url(r'^srnajbrowser', include('sRNAjBrowser.urls')),
     url(r'^srnagfree', include('sRNAgFree.urls')),
+    url(r'^mirgfree/', include('miRNAgFree.urls')),
     url(r'^mirconstarget', include('miRNAconstarget.urls')),
     url(r'^amirconstarget/', include('animalconstarget.urls')),
     url(r'^pmirconstarget/', include('plantconstarget.urls')),
