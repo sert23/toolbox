@@ -611,11 +611,11 @@
             function createPicker() {
                 if (pickerApiLoaded && oauthToken) {
                     var picker = new google.picker.PickerBuilder()
-                        .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
                         .addViewGroup(
                                     new google.picker.ViewGroup(google.picker.ViewId.DOCS).
                                     addView(google.picker.ViewId.DOCUMENTS).
                                     addView(google.picker.ViewId.PRESENTATIONS)).
+                        enableFeature(google.picker.Feature.MULTISELECT_ENABLED).
                             setOAuthToken(oauthToken).
                             setDeveloperKey(developerKey).
                             setCallback(pickerCallback).
