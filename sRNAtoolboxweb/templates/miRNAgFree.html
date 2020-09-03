@@ -564,6 +564,8 @@
     {#document.getElementById("dropbox-container").appendChild(DBbutton);#}
     </script>
 
+
+
  {#  Google drive code   #}
     <script type="text/javascript">
 
@@ -573,6 +575,8 @@
             // The Client ID obtained from the Google Developers Console. Replace with your own Client ID.
             var clientId = "926118481098-crke10cc1ombemh7b7v0l8gsstm966r0.apps.googleusercontent.com";
 
+            var appId = "926118481098";
+
             // Scope to use to access user's photos.
             var scope = ['https://www.googleapis.com/auth/drive.file'];
 
@@ -580,7 +584,7 @@
             var oauthToken;
 
             // Use the API Loader script to load google.picker and gapi.auth.
-            function onApiLoad() {
+            function loadPicker() {
                 gapi.load('auth', {'callback': onAuthApiLoad});
                 gapi.load('picker', {'callback': onPickerApiLoad});
             }
@@ -605,46 +609,56 @@
                     oauthToken = authResult.access_token;
 
                     createPicker();
-            }
-
-            // Create and render a Picker object for picking user Photos.
-            function createPicker() {
-                if (pickerApiLoaded && oauthToken) {
-                    var picker = new google.picker.PickerBuilder().
-                            addViewGroup(
-                                    new google.picker.ViewGroup(google.picker.ViewId.DOCS).
-                                    addView(google.picker.ViewId.DOCUMENTS).
-                                    addView(google.picker.ViewId.PRESENTATIONS)).
-                            setOAuthToken(oauthToken).
-                            setDeveloperKey(developerKey).
-                            setCallback(pickerCallback).
-                            build();
-                    picker.setVisible(true);
                 }
-            }
 
-            // A simple callback implementation.
-            function pickerCallback(data) {
-                var url = 'nothing';
-                var name = 'nothing';
+                // Create and render a Picker object for searching images.
+                function createPicker() {
+                    if (pickerApiLoaded && oauthToken) {
+                        var view = new google.picker.View(google.picker.ViewId.DOCS);
+                        view.setMimeTypes("image/png,image/jpeg,image/jpg");
+                        var picker = new google.picker.PickerBuilder()
+                            .enableFeature(google.picker.Feature.NAV_HIDDEN)
+                            .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
+                            .setAppId(appId)
+                            .setOAuthToken(oauthToken)
+                            .addView(view)
+                            .addView(new google.picker.DocsUploadView())
+                            .setDeveloperKey(developerKey)
+                            .setCallback(pickerCallback)
+                            .build();
+                        picker.setVisible(true);
+                    }
+                }
 
-                if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
-                    var doc = data[google.picker.Response.DOCUMENTS][0];
-                    url = doc[google.picker.Document.URL];
-                    name = doc.name;
-                    var param = {'fileId': doc.id, 'oAuthToken': oauthToken, 'name': name}
-                    console.log(param);
-                    document.getElementById('result').innerHTML = "Downloading...";
-                    $.post('download.php', param,
+                // A simple callback implementation.
+                function pickerCallback(data) {
+                    var url = 'nothing';
+                    var name = 'nothing';
+                    alert("callback!");
+                    if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
+                        var doc = data[google.picker.Response.DOCUMENTS][0];
+                        url = doc[google.picker.Document.URL];
+                        name = doc.name;
+                        var param = {'fileId': doc.id, 'oAuthToken': oauthToken, 'name': name}
+                        console.log(param);
+                        document.getElementById('result').innerHTML = "Downloading...";
+                        $.post('download.php', param,
                             function (returnedData) {
                                 document.getElementById('result').innerHTML = "Download completed";
                             });
 
 
 //
-                }
+                    }
 //
+                }
             }
+
+            function showPickerDialog(){
+                $('.modal').modal('hide');
+                loadPicker();
+            }
+
         </script>
 <script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
 
