@@ -603,8 +603,8 @@
             function handleAuthResult(authResult) {
                 if (authResult && !authResult.error) {
                     oauthToken = authResult.access_token;
+
                     createPicker();
-                }
             }
 
             // Create and render a Picker object for picking user Photos.
@@ -617,7 +617,7 @@
                                     addView(google.picker.ViewId.PRESENTATIONS)).
                             setOAuthToken(oauthToken).
                             setDeveloperKey(developerKey).
-                            setCallback(pickerCallback).
+                            setCallback(pickerCallback).enableFeature(google.picker.Feature.MULTISELECT_ENABLED).
                             build();
                     picker.setVisible(true);
                 }
