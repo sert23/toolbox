@@ -634,10 +634,11 @@
                 function pickerCallback(data) {
                     var url = 'nothing';
                     var name = 'nothing';
-                    alert("callback!");
+
                     if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
                         var doc = data[google.picker.Response.DOCUMENTS][0];
                         url = doc[google.picker.Document.URL];
+                        alert(url);
                         name = doc.name;
                         var param = {'fileId': doc.id, 'oAuthToken': oauthToken, 'name': name}
                         console.log(param);
