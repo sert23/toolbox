@@ -610,12 +610,11 @@
             // Create and render a Picker object for picking user Photos.
             function createPicker() {
                 if (pickerApiLoaded && oauthToken) {
-                    var picker = new google.picker.PickerBuilder()
-                        .addViewGroup(
+                    var picker = new google.picker.PickerBuilder().
+                            addViewGroup(
                                     new google.picker.ViewGroup(google.picker.ViewId.DOCS).
                                     addView(google.picker.ViewId.DOCUMENTS).
                                     addView(google.picker.ViewId.PRESENTATIONS)).
-                        enableFeature(google.picker.Feature.MULTISELECT_ENABLED).
                             setOAuthToken(oauthToken).
                             setDeveloperKey(developerKey).
                             setCallback(pickerCallback).
@@ -628,6 +627,7 @@
             function pickerCallback(data) {
                 var url = 'nothing';
                 var name = 'nothing';
+
                 if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
                     var doc = data[google.picker.Response.DOCUMENTS][0];
                     url = doc[google.picker.Document.URL];
