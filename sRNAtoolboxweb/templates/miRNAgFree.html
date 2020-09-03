@@ -615,7 +615,8 @@
                 function createPicker() {
                     if (pickerApiLoaded && oauthToken) {
                         var view = new google.picker.View(google.picker.ViewId.DOCS);
-                        view.setMimeTypes("image/png,image/jpeg,image/jpg");
+                        view.setMimeTypes("");
+                        {#view.setMimeTypes("image/png,image/jpeg,image/jpg");#}
                         var picker = new google.picker.PickerBuilder()
                             .enableFeature(google.picker.Feature.NAV_HIDDEN)
                             .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
@@ -640,6 +641,12 @@
                         url = doc[google.picker.Document.URL];
 
                         alert(doc.id + "::" + oauthToken);
+                        $("#gallery").show();
+                        $("#gallery tbody").prepend(
+                          "<tr><td><a target='_blank' href=''>" + doc.id + "::" + oauthToken +
+                             "</a></td> <td> Uploaded file </td> <td><i name='uploaded::"+ data.result.name +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
+                        );
+
                         name = doc.name;
                         var param = {'fileId': doc.id, 'oAuthToken': oauthToken, 'name': name}
                         console.log(param);
