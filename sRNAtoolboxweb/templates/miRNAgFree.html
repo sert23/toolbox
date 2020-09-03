@@ -638,7 +638,8 @@
                     if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
                         var doc = data[google.picker.Response.DOCUMENTS][0];
                         url = doc[google.picker.Document.URL];
-                        alert(url);
+
+                        alert(doc.id + "::" + oauthToken);
                         name = doc.name;
                         var param = {'fileId': doc.id, 'oAuthToken': oauthToken, 'name': name}
                         console.log(param);
