@@ -1078,7 +1078,7 @@ def ajax_del(request):
         make_folder(dest_folder)
         return JsonResponse(data)
 
-    input_type,in_string = del_string.split(":")
+    input_type,in_string = del_string.split("::")
     writing_file = os.path.join(dest_folder,"writing")
 
     if input_type == "uploaded":
