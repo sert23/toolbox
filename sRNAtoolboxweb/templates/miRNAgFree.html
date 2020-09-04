@@ -637,10 +637,28 @@
                     var name = 'nothing';
 
                     if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
+                        var docs = data[google.picker.Response.DOCUMENTS];
                         var doc = data[google.picker.Response.DOCUMENTS][0];
                         url = doc[google.picker.Document.URL];
 
-                        alert(doc.id + "::" + oauthToken);
+                        var arrayLength = docs.length;
+                        var ids = [];
+                        var urls = [];
+                        var names = [];
+                            if(arrayLength >0){
+                            for (var i = 0; i < arrayLength; i++) {
+                                var d = docs[i];
+                                ids[i] = d.id;
+
+                                names[i] = d.name;
+
+                                urls[i] = d[google.picker.Document.URL];
+                                alert([ids[i],names[i],urls[i]]);
+
+                                    }
+                            };
+
+
                         $("#gallery").show();
                         $("#gallery tbody").prepend(
                           "<tr><td><a target='_blank' href=''>" + doc.id + "::" + oauthToken +
