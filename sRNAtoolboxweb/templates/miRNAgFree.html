@@ -622,7 +622,7 @@
             $('.modal').on('hide.bs.modal', function (e) {
 
                 if (drive_running === false){
-                    alert("test");
+                    alert(names);
                     driveAjax(ids,names,urls,token);
                 }
 
@@ -631,7 +631,7 @@
 
              $('.btn').on('click', function (e) {
                 if (drive_running === false){
-                    alert("test");
+                    alert(names);
                     driveAjax(ids,names,urls,token);
                 }
             });
@@ -756,8 +756,7 @@
             function showPickerDialog(){
                 $('.modal').modal('hide');
                 loadPicker();
-                alert(ids);
-                driveAjax(ids,names,urls,token);
+
             }
 
         </script>
