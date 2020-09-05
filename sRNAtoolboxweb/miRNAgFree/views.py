@@ -1077,9 +1077,9 @@ def ajax_drive(request):
     make_folder(dest_folder)
     dest_file = os.path.join(dest_folder, "drive.json")
 
-    ids = request.GET.get('ids', None)
-    sample_list = request.GET.get('names', None)
-    urls = request.GET.get('urls', None)
+    ids = request.GET.get('ids[]', None)
+    sample_list = request.GET.get('names[]', None)
+    urls = request.GET.get('urls[]', None)
     token = request.GET.get('token', None)
 
     sample_dict = dict()
