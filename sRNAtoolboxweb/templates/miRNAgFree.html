@@ -567,6 +567,51 @@
 
 
  {#  Google drive code   #}
+
+    <script>
+    // Ajax function
+
+    var driveAjax = function(ids,names,urls,token) {
+
+                    {#alert(del_string);#}
+                    $.ajax({
+                    url: '{% url "ajax_drive" %}',
+                    data: {
+                        "id" : "{{ jobID }}",
+                        "ids" : ids,
+                        "names" : names,
+                        "urls" : urls,
+                        "token" : token,
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var arrayLength = data.samples_k.length;
+                        for (var i = 0; i < arrayLength; i++) {
+                            var k = data.unrepeated_keys[i];
+                            var row = data.samples[k];
+                             {# [i, ids[n], urls[n], token] #}
+                            $("#gallery tbody").prepend(
+                          "<tr><td><a target='_blank' href='" + row[2] + "'>" + k +
+                             "</a></td> <td> Drive</td> <td><i name='drive::" + k +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
+                        );
+                        $("#gallery").show();
+                        }
+                    },
+                });
+                };
+
+                        var ids = [];
+                        var urls = [];
+                        var names = [];
+                        var token = "";
+
+    </script>
+
+
+
+
+
+
     <script type="text/javascript">
 
             // The Browser API key obtained from the Google Developers Console.
@@ -634,37 +679,7 @@
 
                 //Ajax function
 
-                var driveAjax = function(ids,names,urls,token) {
 
-                    {#alert(del_string);#}
-                    $.ajax({
-                    url: '{% url "ajax_drive" %}',
-                    data: {
-                        "id" : "{{ jobID }}",
-                        "ids" : ids,
-                        "names" : names,
-                        "urls" : urls,
-                        "token" : token,
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-
-
-
-                        var arrayLength = data.samples_k.length;
-                        for (var i = 0; i < arrayLength; i++) {
-                            var k = data.unrepeated_keys[i];
-                            var row = data.samples[k];
-                             {# [i, ids[n], urls[n], token] #}
-                            $("#gallery tbody").prepend(
-                          "<tr><td><a target='_blank' href='" + row[2] + "'>" + k +
-                             "</a></td> <td> Drive</td> <td><i name='drive::" + k +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
-                        );
-                        $("#gallery").show();
-                        }
-                    },
-                });
-                };
 
 
                 // A simple callback implementation.
@@ -678,9 +693,10 @@
                         url = doc[google.picker.Document.URL];
 
                         var arrayLength = docs.length;
-                        var ids = [];
-                        var urls = [];
-                        var names = [];
+                        ids = [];
+                        urls = [];
+                        names = [];
+                        token = oauthToken;
                             if(arrayLength >0){
                             for (var i = 0; i < arrayLength; i++) {
                                 var d = docs[i];
@@ -689,8 +705,8 @@
                                 urls[i] = d[google.picker.Document.URL];
                                     }
                             };
-                            alert(names);
-                            driveAjax(ids,names,urls,oauthToken);
+                            {#alert(names);#}
+                            {# driveAjax(ids,names,urls,oauthToken);#}
 
 
                         {#$("#gallery").show();#}
@@ -712,6 +728,7 @@
             function showPickerDialog(){
                 $('.modal').modal('hide');
                 loadPicker();
+                driveAjax(ids,names,urls,token);
             }
 
         </script>
