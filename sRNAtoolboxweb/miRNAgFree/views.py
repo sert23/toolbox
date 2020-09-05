@@ -1071,6 +1071,11 @@ def ajax_receive_input(request):
 def ajax_drive(request):
     data = {}
 
+    folder = request.GET.get('id', None)
+    dest_folder = os.path.join(MEDIA_ROOT, folder)
+    make_folder(dest_folder)
+    os.system("touch " + os.path.join(dest_folder,"drive.txt"))
+
     return JsonResponse(data)
 
 def ajax_del(request):
