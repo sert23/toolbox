@@ -622,7 +622,7 @@
             $('.modal').on('hide.bs.modal', function (e) {
 
                 if (drive_running === false){
-                    if(names){
+                    if(names.length>0){
                         alert(names);
                         driveAjax(ids,names,urls,token);
                     }
@@ -634,7 +634,7 @@
              $('.btn').on('click', function (e) {
 
                 if (drive_running === false){
-                    if(names){
+                    if(names.length>0){
                         alert(names);
                         driveAjax(ids,names,urls,token);
                     }
