@@ -589,7 +589,7 @@
                     success: function (data) {
                         var arrayLength = data.samples_k.length;
                         for (var i = 0; i < arrayLength; i++) {
-                            var k = data.unrepeated_keys[i];
+                            var k = data.samples_k[i];
                             var row = data.samples[k];
                              {# [i, ids[n], urls[n], token] #}
                             $("#gallery tbody").prepend(
