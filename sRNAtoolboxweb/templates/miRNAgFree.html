@@ -647,12 +647,17 @@
                     },
                     dataType: 'json',
                     success: function (data) {
-                        var arrayLength = names.length;
-                        for (var i = 0; i < arrayLength; i++) {
 
+
+
+                        var arrayLength = data.samples_k.length;
+                        for (var i = 0; i < arrayLength; i++) {
+                            var k = data.unrepeated_keys[i];
+                            var row = data.samples[k];
+                             {# [i, ids[n], urls[n], token] #}
                             $("#gallery tbody").prepend(
-                          "<tr><td><a target='_blank' href='" + urls[i] + "'>" + names[i] +
-                             "</a></td> <td> Drive</td> <td><i name='drive::" + names[i] +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
+                          "<tr><td><a target='_blank' href='" + row[2] + "'>" + k +
+                             "</a></td> <td> Drive</td> <td><i name='drive::" + k +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
                         );
 
                         }
