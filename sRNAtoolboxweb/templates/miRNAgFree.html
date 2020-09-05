@@ -631,6 +631,36 @@
                     }
                 }
 
+                //Ajax function
+
+                var driveAjax = function(ids,names,urls,token) {
+                    $("#gallery").show();
+                    {#alert(del_string);#}
+                    $.ajax({
+                    url: '{% url "ajax_drive" %}',
+                    data: {
+                        "id" : "{{ jobID }}",
+                        "ids" : ids,
+                        "names" : names,
+                        "urls" : urls,
+                        "token" : token,
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var arrayLength = names.length;
+                        for (var i = 0; i < arrayLength; i++) {
+
+                            $("#gallery tbody").prepend(
+                          "<tr><td><a target='_blank' href='" + urls[i] + "'>" + names[i] +
+                             "</a></td> <td> Drive</td> <td><i name='drive::" + names[i] +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
+                        );
+
+                        }
+                    },
+                });
+                };
+
+
                 // A simple callback implementation.
                 function pickerCallback(data) {
                     var url = 'nothing';
@@ -649,30 +679,20 @@
                             for (var i = 0; i < arrayLength; i++) {
                                 var d = docs[i];
                                 ids[i] = d.id;
-
                                 names[i] = d.name;
-
                                 urls[i] = d[google.picker.Document.URL];
-                                alert([ids[i],names[i],urls[i]]);
-
                                     }
                             };
 
 
-                        $("#gallery").show();
-                        $("#gallery tbody").prepend(
-                          "<tr><td><a target='_blank' href=''>" + doc.id + "::" + oauthToken +
-                             "</a></td> <td> D</td> <td><iclass='fas fa-trash fa-clickable' ></i></td>  </tr>"
-                        );
+                        {#$("#gallery").show();#}
+                        {#$("#gallery tbody").prepend(#}
+                        {#  "<tr><td><a target='_blank' href=''>" + doc.id + "::" + oauthToken +#}
+                        {#     "</a></td> <td> D</td> <td><iclass='fas fa-trash fa-clickable' ></i></td>  </tr>"#}
+                        {#);#}
 
                         name = doc.name;
-                        var param = {'fileId': doc.id, 'oAuthToken': oauthToken, 'name': name}
-                        console.log(param);
-                        document.getElementById('result').innerHTML = "Downloading...";
-                        $.post('download.php', param,
-                            function (returnedData) {
-                                document.getElementById('result').innerHTML = "Download completed";
-                            });
+                        var param = {'fileId': doc.id, 'oAuthToken': oauthToken, 'name': name};
 
 
 //

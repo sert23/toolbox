@@ -1068,6 +1068,11 @@ def ajax_receive_input(request):
     data["input_type"] = input_type
     return JsonResponse(data)
 
+def ajax_drive(request):
+    data = {}
+
+    return JsonResponse(data)
+
 def ajax_del(request):
     data = {}
     folder = request.GET.get('id', None)

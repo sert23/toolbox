@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^ajax_input$', views.ajax_receive_input, name='ajax_input'),
     url(r'^ajax_del$', views.ajax_del, name='ajax_del'),
     url(r'^ajax_drop$', views.ajax_dropbox, name='ajax_drop'),
+    url(r'^ajax_drive$', views.ajax_drive, name='ajax_drive'),
     url(r'add_sample/', views.upload_files, name='upload'),
     url(r'align/(.+)/(.+)/(.+)', views.show_align, name='show_align'),
     # url(r'run$', views.run, name='run_bench'),
