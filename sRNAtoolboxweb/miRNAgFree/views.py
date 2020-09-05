@@ -38,6 +38,7 @@ import string
 import random
 import shutil
 from django.http import JsonResponse
+import json
 
 #CONF = json.load(file("/shared/sRNAtoolbox/sRNAtoolbox.conf"))
 CONF = settings.CONF
@@ -1074,7 +1075,39 @@ def ajax_drive(request):
     folder = request.GET.get('id', None)
     dest_folder = os.path.join(MEDIA_ROOT, folder)
     make_folder(dest_folder)
-    os.system("touch " + os.path.join(dest_folder,"drive.txt"))
+    dest_file = os.path.join(dest_folder, "drive.json")
+
+    ids = request.GET.get('ids', None)
+    sample_list = request.GET.get('names', None)
+    urls = request.GET.get('urls', None)
+    token = request.GET.get('token', None)
+
+    sample_dict = dict()
+
+    for n,i in enumerate(sample_list):
+
+        sample_dict[i] = [i, ids[n], urls[n], token]
+
+    if os.path.exists(dest_file):
+        try:
+            with open(dest_file, "r") as read_file:
+                old_samples = json.load(read_file)
+        except:
+            old_samples = {}
+
+        unrepeated_keys = [k for k in sample_dict if k not in old_samples.keys()]
+
+        if len(old_samples.keys()) > 0:
+            old_keep = {k : old_samples[k] for k in old_samples.keys() if k not in unrepeated_keys}
+            sample_dict.update(old_keep)
+
+    with open(dest_file, "w") as write_file:
+        json.dump(sample_dict,write_file)
+
+    # samples_req = {k : sample_dict[k] for k in sample_dict.keys() if k in unrepeated_keys}
+
+    data["samples"] = sample_dict
+    data["samples_k"] = unrepeated_keys
 
     return JsonResponse(data)
 
