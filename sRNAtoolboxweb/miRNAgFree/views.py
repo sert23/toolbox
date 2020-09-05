@@ -1103,6 +1103,8 @@ def ajax_drive(request):
         if len(old_samples.keys()) > 0:
             old_keep = {k : old_samples[k] for k in old_samples.keys() if k not in unrepeated_keys}
             sample_dict.update(old_keep)
+    else:
+        unrepeated_keys = sample_dict.keys()
 
     with open(dest_file, "w") as write_file:
         json.dump(sample_dict,write_file)
