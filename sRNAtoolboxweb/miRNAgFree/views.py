@@ -1086,7 +1086,10 @@ def ajax_drive(request):
 
     for n,i in enumerate(sample_list):
 
-        sample_dict[i] = [i, ids[n], urls[n], token]
+        sample_dict[i] = [i,
+                          ids[n],
+                          urls[n],
+                          token]
 
     if os.path.exists(dest_file):
         try:
