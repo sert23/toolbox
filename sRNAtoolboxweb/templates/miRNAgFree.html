@@ -622,17 +622,23 @@
             $('.modal').on('hide.bs.modal', function (e) {
 
                 if (drive_running === false){
-                    alert(names);
-                    driveAjax(ids,names,urls,token);
-                }
+                    if(names){
+                        alert(names);
+                        driveAjax(ids,names,urls,token);
+                    }
 
+                }
 
             });
 
              $('.btn').on('click', function (e) {
+
                 if (drive_running === false){
-                    alert(names);
-                    driveAjax(ids,names,urls,token);
+                    if(names){
+                        alert(names);
+                        driveAjax(ids,names,urls,token);
+                    }
+
                 }
             });
 
