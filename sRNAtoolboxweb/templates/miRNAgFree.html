@@ -634,7 +634,7 @@
                 //Ajax function
 
                 var driveAjax = function(ids,names,urls,token) {
-                    $("#gallery").show();
+
                     {#alert(del_string);#}
                     $.ajax({
                     url: '{% url "ajax_drive" %}',
@@ -659,7 +659,7 @@
                           "<tr><td><a target='_blank' href='" + row[2] + "'>" + k +
                              "</a></td> <td> Drive</td> <td><i name='drive::" + k +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
                         );
-
+                        $("#gallery").show();
                         }
                     },
                 });
@@ -688,7 +688,8 @@
                                 urls[i] = d[google.picker.Document.URL];
                                     }
                             };
-                            driveAjax(ids,names,urls,oauthToken)
+                            alert(names);
+                            driveAjax(ids,names,urls,oauthToken);
 
 
                         {#$("#gallery").show();#}
