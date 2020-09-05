@@ -1113,8 +1113,8 @@ def ajax_drive(request):
 
     data["samples"] = sample_dict
     data["samples_k"] = unrepeated_keys
-
-    return JsonResponse({})
+    js_string = json.dumps(sample_dict)
+    return js_string
 
 def ajax_del(request):
     data = {}
