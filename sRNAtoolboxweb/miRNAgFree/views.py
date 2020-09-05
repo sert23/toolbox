@@ -1112,9 +1112,9 @@ def ajax_drive(request):
     # samples_req = {k : sample_dict[k] for k in sample_dict.keys() if k in unrepeated_keys}
 
     data["samples"] = sample_dict
-    data["samples_k"] = unrepeated_keys
-    js_string = json.dumps(data)
-    data = json.loads(js_string)
+    data["samples_k"] = list(unrepeated_keys)
+    # js_string = json.dumps(data)
+    # data = json.loads(js_string)
     return JsonResponse(data)
 
 def ajax_del(request):
