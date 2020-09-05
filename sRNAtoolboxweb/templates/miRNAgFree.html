@@ -644,7 +644,17 @@
                 handleAuthResult);
             }
 
+            function onPickerApiLoad() {
+                pickerApiLoaded = true;
+                createPicker();
+            }
 
+            function handleAuthResult(authResult) {
+                if (authResult && !authResult.error) {
+                    oauthToken = authResult.access_token;
+
+                    createPicker();
+                }
 
                 // Create and render a Picker object for searching images.
                 function createPicker() {
@@ -666,20 +676,6 @@
                         picker.setVisible(true);
                     }
                 }
-
-
-                 function onPickerApiLoad() {
-                pickerApiLoaded = true;
-                createPicker();
-            }
-
-            function handleAuthResult(authResult) {
-                if (authResult && !authResult.error) {
-                    oauthToken = authResult.access_token;
-
-                    createPicker();
-                }
-
 
                 //Ajax function
 
