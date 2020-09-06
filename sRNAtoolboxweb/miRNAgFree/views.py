@@ -1117,6 +1117,17 @@ def ajax_drive(request):
     # data = json.loads(js_string)
     return JsonResponse(data)
 
+def drive_del(folder,input_name):
+
+    dest_file = os.path.join(folder, "drive.json")
+    with open(dest_file, "r") as read_file:
+        old_samples = json.load(read_file)
+    old_samples.pop(input_name)
+
+    with open(dest_file, "w") as write_file:
+        json.dump(old_samples,write_file)
+
+
 def ajax_del(request):
     data = {}
     folder = request.GET.get('id', None)
@@ -1132,6 +1143,9 @@ def ajax_del(request):
 
     if input_type == "uploaded":
         os.remove(os.path.join(dest_folder,in_string))
+        return JsonResponse(data)
+    elif input_type == "drive":
+        drive_del(in_string)
         return JsonResponse(data)
     elif input_type == "SRA":
         samples_file = os.path.join(dest_folder,"SRA.txt")
