@@ -687,7 +687,7 @@
                             .setParent('root')
                             .setSelectFolderEnabled(true);
                         {#var view = new google.picker.View(google.picker.ViewId.DOCS);#}
-                        view.setMimeTypes("");
+                        {#view.setMimeTypes("");#}
                         {#view.setMimeTypes("image/png,image/jpeg,image/jpg");#}
                         var picker = new google.picker.PickerBuilder()
                             .enableFeature(google.picker.Feature.NAV_HIDDEN)
