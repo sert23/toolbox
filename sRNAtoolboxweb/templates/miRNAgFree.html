@@ -683,9 +683,9 @@
                 function createPicker() {
                     $('.modal').modal('hide');
                     if (pickerApiLoaded && oauthToken) {
-                        var view = new google.picker.DocsView(google.picker.ViewId.FOLDERS)
+                        var view = new google.picker.View(google.picker.ViewId.DOCS)
                             .setParent('root')
-                            .setSelectFolderEnabled(true);
+                            .setSelectFolderEnabled(false);
                         {#var view = new google.picker.View(google.picker.ViewId.DOCS);#}
                         {#view.setMimeTypes("");#}
                         {#view.setMimeTypes("image/png,image/jpeg,image/jpg");#}
@@ -695,6 +695,7 @@
                             .setAppId(appId)
                             .setOAuthToken(oauthToken)
                             .addView(view)
+                            .setTitle("Select file(s) to upload")
                             .addView(new google.picker.DocsUploadView())
                             .setDeveloperKey(developerKey)
                             .setCallback(pickerCallback)
