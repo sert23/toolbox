@@ -687,7 +687,7 @@
 
                         {#    .setSelectFolderEnabled(false);#}
                         {#var view = new google.picker.View(google.picker.ViewId.DOCS);#}
-                        var view = new google.picker.DocsView().setMimeTypes('application/vnd.google-apps.folder');
+                        var view = new google.picker.DocsView().setMimeTypes('*');
 
                         view.setMode(google.picker.DocsViewMode.LIST);
                         view.setIncludeFolders(true);
