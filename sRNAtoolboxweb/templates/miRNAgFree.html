@@ -696,6 +696,7 @@
                             .setOAuthToken(oauthToken)
                             .addView(view)
                             .setTitle("Select file(s) to upload")
+                            .enableFeature(google.picker.Feature.SUPPORT_DRIVES)
                             .addView(new google.picker.DocsUploadView())
                             .setDeveloperKey(developerKey)
                             .setCallback(pickerCallback)
