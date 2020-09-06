@@ -1148,7 +1148,7 @@ def ajax_del(request):
         os.remove(os.path.join(dest_folder,in_string))
         return JsonResponse(data)
     elif input_type == "drive":
-        drive_del(in_string)
+        drive_del(folder,in_string)
         return JsonResponse(data)
     elif input_type == "SRA":
         samples_file = os.path.join(dest_folder,"SRA.txt")
