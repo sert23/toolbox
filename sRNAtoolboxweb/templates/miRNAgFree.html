@@ -699,6 +699,8 @@
                         var picker = new google.picker.PickerBuilder()
                             .enableFeature(google.picker.Feature.NAV_HIDDEN)
                             .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
+                            .enableFeature(google.picker.Feature.SUPPORT_TEAM_DRIVES)
+                            .enableFeature(google.picker.Feature.SUPPORT_DRIVES)
                             .setAppId(appId)
                             .setOAuthToken(oauthToken)
                             .addView(view)
@@ -707,6 +709,7 @@
                             {#.setEnableDrives(true)#}
                             .addView(new google.picker.DocsUploadView())
                             .setDeveloperKey(developerKey)
+
                             .setCallback(pickerCallback)
                             .build();
                         picker.setVisible(true);
