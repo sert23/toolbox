@@ -1124,7 +1124,7 @@ def drive_del(folder,input_name):
         old_samples = json.load(read_file)
     old_samples.pop(input_name)
 
-    if len(old_samples.keys()>0):
+    if len(old_samples.keys()) > 0:
         with open(dest_file, "w") as write_file:
             json.dump(old_samples,write_file)
     else:
