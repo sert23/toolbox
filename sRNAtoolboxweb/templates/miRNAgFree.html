@@ -684,7 +684,7 @@
                     $('.modal').modal('hide');
                     if (pickerApiLoaded && oauthToken) {
                         var view = new google.picker.View(google.picker.ViewId.DOCS)
-                            .setParent('root')
+                            {#.setParent('root')#}
                             .setSelectFolderEnabled(false);
                         {#var view = new google.picker.View(google.picker.ViewId.DOCS);#}
                         {#view.setMimeTypes("");#}
