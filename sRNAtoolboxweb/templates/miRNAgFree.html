@@ -574,8 +574,7 @@
     // Ajax function
 
     var driveAjax = function(ids,names,urls,token) {
-                    drive_running = true;
-                    {#alert(del_string);#}
+
                     $.ajax({
                     url: '{% url "ajax_drive" %}',
                     data: {
@@ -598,51 +597,41 @@
                         );
                         $("#gallery").show();
                         }
-                        ids = [];
-                        urls = [];
-                        names = [];
-                        token = "";
-                        drive_running = false;
 
                     },
                 });
                 };
 
-                        var ids = [];
-                        var urls = [];
-                        var names = [];
-                        var token = "";
-                        var drive_running = false;
 
     </script>
 
 
-    <script>
-
-            $('.modal').on('hide.bs.modal', function (e) {
-
-                if (drive_running === false){
-                    if(names.length>0){
-                        alert(names);
-                        driveAjax(ids,names,urls,token);
-                    }
-
-                }
-
-            });
-
-             $('.btn').on('click', function (e) {
-
-                if (drive_running === false){
-                    if(names.length>0){
-                        alert(names);
-                        driveAjax(ids,names,urls,token);
-                    }
-
-                }
-            });
-
-        </script>
+{#    <script>#}
+{##}
+{#            $('.modal').on('hide.bs.modal', function (e) {#}
+{##}
+{#                if (drive_running === false){#}
+{#                    if(names.length>0){#}
+{#                        alert(names);#}
+{#                        driveAjax(ids,names,urls,token);#}
+{#                    }#}
+{##}
+{#                }#}
+{##}
+{#            });#}
+{##}
+{#             $('.btn').on('click', function (e) {#}
+{##}
+{#                if (drive_running === false){#}
+{#                    if(names.length>0){#}
+{#                        alert(names);#}
+{#                        driveAjax(ids,names,urls,token);#}
+{#                    }#}
+{##}
+{#                }#}
+{#            });#}
+{##}
+{#        </script>#}
 
 
 
@@ -740,7 +729,7 @@
                                     }
                             };
                             {#alert(names);#}
-                            {# driveAjax(ids,names,urls,oauthToken);#}
+                             driveAjax(ids,names,urls,oauthToken);
 
 
                         {#$("#gallery").show();#}
@@ -762,7 +751,6 @@
             function showPickerDialog(){
                 $('.modal').modal('hide');
                 loadPicker();
-
             }
 
         </script>
