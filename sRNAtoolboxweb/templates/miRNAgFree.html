@@ -683,10 +683,10 @@
                 function createPicker() {
                     $('.modal').modal('hide');
                     if (pickerApiLoaded && oauthToken) {
-                        var view = new google.picker.DocsView(google.picker.ViewId.FOLDERS)
-                            .setParent('root')
-                            .setSelectFolderEnabled(false);
-                        {#var view = new google.picker.View(google.picker.ViewId.DOCS);#}
+                        {#var view = new google.picker.DocsView(google.picker.ViewId.FOLDERS)#}
+                        {#    .setParent('root')#}
+                        {#    .setSelectFolderEnabled(false);#}
+                        var view = new google.picker.View(google.picker.ViewId.DOCS);
                         {#view.setMimeTypes("");#}
                         {#view.setMimeTypes("image/png,image/jpeg,image/jpg");#}
                         var picker = new google.picker.PickerBuilder()
