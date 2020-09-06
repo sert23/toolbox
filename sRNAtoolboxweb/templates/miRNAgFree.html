@@ -684,10 +684,15 @@
                     $('.modal').modal('hide');
                     if (pickerApiLoaded && oauthToken) {
                         {#var view = new google.picker.DocsView(google.picker.ViewId.FOLDERS)#}
-                        {#    .setParent('root')#}
+
                         {#    .setSelectFolderEnabled(false);#}
-                        var view = new google.picker.View(google.picker.ViewId.DOCS)
-                            ;
+                        {#var view = new google.picker.View(google.picker.ViewId.DOCS);#}
+                        var view = new google.picker.View(google.picker.ViewId.FOLDERS);
+                        view.setMode(google.picker.DocsViewMode.LIST);
+                        view.setIncludeFolders(true);
+                        view.setSelectFolderEnabled(false);
+                        view.setEnableSharedDrives(true);
+                        view.setParent('root');
                         {#view.setMimeTypes("");#}
                         {#view.setMimeTypes("image/png,image/jpeg,image/jpg");#}
                         var picker = new google.picker.PickerBuilder()
