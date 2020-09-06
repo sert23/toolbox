@@ -690,7 +690,7 @@
                         var view = new google.picker.DocsView().setMimeTypes('pdf');
 
                         view.setMode(google.picker.DocsViewMode.LIST);
-                        view.setIncludeFolders(true);
+                        {#view.setIncludeFolders(true);#}
                         view.setSelectFolderEnabled(false);
                         view.setEnableDrives(true);
                         {#view.setEnableTeamDrives(true);#}
