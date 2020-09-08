@@ -21,6 +21,9 @@ import datetime
 import json
 import re
 
+def make_folder(path):
+    if not os.path.exists(path):
+        os.mkdir(path)
 
 
 def generate_uniq_id(size=15, chars=string.ascii_uppercase + string.digits):
@@ -83,6 +86,7 @@ class MultiUploadView(FormView):
         form = PhotoForm(self.request.POST, self.request.FILES)
         path = request.path
         folder = path.split("/")[-1]
+        make_folder(os.path.join(MEDIA_ROOT,folder))
         if "file" in self.request.FILES:
             if form.is_valid():
                 photo = form.save()
