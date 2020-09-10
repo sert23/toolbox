@@ -1446,6 +1446,7 @@ class MirGLaunch(FormView):
                 new_record = JobStatus.objects.get(pipeline_key=i[0])
                 job_stat = new_record.job_status
 
+
                 ### launching job
                 if job_stat == "not_launched":
 
@@ -1463,6 +1464,7 @@ class MirGLaunch(FormView):
                     c_path = make_config_json(i[0])
                     comm = create_call(i[0], config_path)
                     os.system(comm)
+                    new_record.job_status = 'sent_to_queue'
 
                 if job_stat != "Finished":
                     data["running"] = True
@@ -1489,6 +1491,7 @@ class MirGLaunch(FormView):
 
             data["thead"] = js_headers
             data["id"] = jobID
+            data["refresh_rate"] = 90
             return render(self.request, 'miRNAgFree/multi_status.html', data)
 
 
