@@ -12,7 +12,7 @@ from pipelines.tools.sRNAblastPipeline import sRNAblastPipeline
 from pipelines.tools.sRNAdePipeline import sRNAdePipeline
 from pipelines.tools.sRNAfuncTermsPipeline import sRNAfuncTermsPipeline
 from pipelines.tools.sRNAgFreePipeline import sRNAgFreePipeline
-from pipelines.tools.miRNAgFreePipeline import miRNAgFreePipe
+from pipelines.tools.miRNAgfreePipeline import miRNAgFreePipe
 from pipelines.tools.sRNAjBrowserPipeline import sRNAjBrowserPipeline, sRNAdejBrowserPipeline
 
 __author__ = 'antonior'
