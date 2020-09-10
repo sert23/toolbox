@@ -1454,7 +1454,7 @@ class MirGLaunch(FormView):
                     dest_folder = os.path.join(MEDIA_ROOT,i[0])
                     make_folder(dest_folder)
                     # new config
-                    config_path = os.path.join(dest_folder,"conifg.txt")
+                    config_path = os.path.join(dest_folder,"config.txt")
                     input_line = make_input_line(folder_path, i[0], i[2], i[1])
                     output_line = "output=" + os.path.join(MEDIA_ROOT,i[0]) + "\n"
                     new_content = input_line + output_line + config_content
