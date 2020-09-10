@@ -12,6 +12,7 @@ from pipelines.tools.sRNAblastPipeline import sRNAblastPipeline
 from pipelines.tools.sRNAdePipeline import sRNAdePipeline
 from pipelines.tools.sRNAfuncTermsPipeline import sRNAfuncTermsPipeline
 from pipelines.tools.sRNAgFreePipeline import sRNAgFreePipeline
+from pipelines.tools.miRNAgFreePipeline import miRNAgFreePipe
 from pipelines.tools.sRNAjBrowserPipeline import sRNAjBrowserPipeline, sRNAdejBrowserPipeline
 
 __author__ = 'antonior'
@@ -88,9 +89,25 @@ def gfree(args):
 
 def helper(pipeline_id=None, name=None, out_dir=None, conf_input=None, **kwargs):
 
-    os.system("touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/N7UCWY7O5FT48KY/este.txt")
+
     new_pipe = helpersPipelines(pipeline_id, name, out_dir, conf_input)
     new_pipe.run()
+
+def mirg(pipeline_id=None, name=None, out_dir=None, conf_input=None, **kwargs):
+
+    new_pipe = miRNAgFreePipe(pipeline_id, name, out_dir, conf_input, {})
+    new_pipe.run()
+
+
+def bench(pipeline_id=None, name=None, out_dir=None, conf_input=None, **kwargs):
+    parameters = "".join([line for line in open(conf_input).readlines()
+                          if "desc" not in line and "libs" not in line
+                          and not "maintaingOrig" in line and not "zip" in line
+                          and not "graphics" in line]
+                         ).replace("=", ": ").replace("/shared/", "").replace("sRNAtoolbox/webData/", "")
+    new_pipe = sRNAbenchPipeline(pipeline_id, name, out_dir, conf_input, parameters)
+    new_pipe.run()
+
 
 def helper2(args):
     dic_arg={}
@@ -244,7 +261,7 @@ def dejbrowser(args):
 #         helper(args)
 
 def main():
-    os.system("touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/N7UCWY7O5FT48KY/este1.txt")
+    # os.system("touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/N7UCWY7O5FT48KY/este1.txt")
     parser = argparse.ArgumentParser(description='Launch all sRNAtoolbox Pipelines')
     parser.add_argument('configuration', help='configuration file')
     args = parser.parse_args()
@@ -252,6 +269,8 @@ def main():
         conf = json.load(j)
     if conf['type'] == 'sRNAde':
         de(**conf)
+    if conf['type'] == 'miRNAgFree':
+        mirg(**conf)
     if conf['type'] == 'sRNAbench':
         bench(**conf)
     if conf['type'] == 'miRNAconstarget':

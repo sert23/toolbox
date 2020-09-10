@@ -33,6 +33,7 @@ class Configuration:
         self.media = conf["media"]
         self.mirnaconstargets_plants = os.path.join(conf["exec"], "miRNAconsTargets_plants.py")
         self.path_to_chmod = os.path.join(conf["exec"], "chmod.jar")
+        self.path_to_mirg = os.path.join(conf["exec"], "miRgFree.jar")
 
 
 
@@ -86,7 +87,7 @@ class Pipeline:
             "parameters": self.parameters,
             "outdir": self.outdir
         }
-        requests.patch(self.api_path_key, json=payload, timeout=10)
+        r=requests.patch(self.api_path_key, json=payload, timeout=10)
         self.actualize_pipeline_progress(new_step=started_info)
         print("init")
 
