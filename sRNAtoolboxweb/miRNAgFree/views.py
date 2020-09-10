@@ -1353,7 +1353,7 @@ def make_config_json(pipeline_id):
     with open(os.path.join(MEDIA_ROOT, pipeline_id,"config.json"), "w") as write_file:
         json.dump(cdict, write_file)
 
-    return os.path.join(MEDIA_ROOT, pipeline_id)
+    return os.path.join(MEDIA_ROOT, pipeline_id, "config.json")
 
 class MirGLaunch(FormView):
 
