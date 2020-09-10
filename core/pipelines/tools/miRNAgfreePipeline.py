@@ -9,7 +9,7 @@ import urllib.request
 
 class miRNAgFreePipe(Pipeline):
     def __init__(self, pipeline_key, job_name, outdir, config_file=None, parameters=""):
-        super(miRNAgFree, self).__init__(pipeline_key, job_name, outdir, "miRNAgFree", parameters)
+        super(miRNAgFreePipe, self).__init__(pipeline_key, job_name, outdir, "miRNAgFree", parameters)
 
         self.conf = config_file
         self.outdir = outdir
