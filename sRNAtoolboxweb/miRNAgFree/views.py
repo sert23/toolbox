@@ -1350,7 +1350,7 @@ def make_config_json(pipeline_id):
              "conf_input": os.path.join(MEDIA_ROOT, pipeline_id, "conf.txt"),
              "out_dir": os.path.join(MEDIA_ROOT, pipeline_id)}
 
-    with open(os.path.join(MEDIA_ROOT, pipeline_id), "w") as write_file:
+    with open(os.path.join(MEDIA_ROOT, pipeline_id,"config.json"), "w") as write_file:
         json.dump(cdict, write_file)
 
     return os.path.join(MEDIA_ROOT, pipeline_id)
@@ -1424,6 +1424,8 @@ class MirGLaunch(FormView):
             data["thead"] = js_headers
             data["id"] = jobID
             data["running"] = True
+            data["refresh_rate"] = 1
+
             return render(self.request, 'miRNAgFree/multi_status.html', data)
 
         else:
