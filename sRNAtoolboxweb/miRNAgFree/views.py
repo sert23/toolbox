@@ -1340,7 +1340,7 @@ def create_call(pipeline_id, configuration_file_path):
     return 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
         configuration_file_path=configuration_file_path,
         job_name=name,
-        sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
+        sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh'))
 
 
 def make_config_json(pipeline_id):
