@@ -1424,7 +1424,7 @@ class MirGLaunch(FormView):
             data["thead"] = js_headers
             data["id"] = jobID
             data["running"] = True
-            data["refresh_rate"] = 1
+            data["refresh_rate"] = 5
 
             return render(self.request, 'miRNAgFree/multi_status.html', data)
 
@@ -1454,7 +1454,7 @@ class MirGLaunch(FormView):
                     dest_folder = os.path.join(MEDIA_ROOT,i[0])
                     make_folder(dest_folder)
                     # new config
-                    config_path = os.path.join(dest_folder,"condifg.txt")
+                    config_path = os.path.join(dest_folder,"conifg.txt")
                     input_line = make_input_line(folder_path, i[0], i[2], i[1])
                     output_line = "output=" + os.path.join(MEDIA_ROOT,i[0]) + "\n"
                     new_content = input_line + output_line + config_content
