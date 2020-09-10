@@ -1423,6 +1423,7 @@ class MirGLaunch(FormView):
             data["tbody"] = json.dumps(jobs_tbody)
             data["thead"] = js_headers
             data["id"] = jobID
+            data["running"] = True
             return render(self.request, 'miRNAgFree/multi_status.html', data)
 
         else:
