@@ -118,7 +118,7 @@
                     <div class="col-md-12" > <div id="div_id_library_protocol" class="control-group">
                         <div class="controls">
                             <label class="radio inline"> <input type="radio" name="library_protocol" id="id_library_protocol_0" value="TRIMMED" > Reads are already trimmed <a  data-toggle="modal" data-target="#Illumina" class="btn btn-link" style="visibility: hidden;"><i class="fa fa-question-circle"> </i></a> </label>
-                            <label class="radio inline"> <input type="radio" name="library_protocol" id="id_library_protocol_G" value="GUESS" > Guess protocol <a  data-toggle="modal" data-target="#Illumina" class="btn btn-link" style="visibility: hidden;"><i class="fa fa-question-circle"> </i></a> </label>
+                            <label class="radio inline"> <input type="radio" name="library_protocol" id="id_library_protocol_G" value="GUESS" checked="checked" > Guess protocol <a  data-toggle="modal" data-target="#Illumina" class="btn btn-link" style="visibility: hidden;"><i class="fa fa-question-circle"> </i></a> </label>
                             <label class="radio inline"> <input type="radio" name="library_protocol" id="id_library_protocol_1" value="Illumina" >Illumina TrueSeq&#153; (280916)<a  data-toggle="modal" data-target="#Illumina" class="btn btn-link"><i class="fa fa-question-circle"> </i></a> </label>
                             <label class="radio inline"> <input type="radio" name="library_protocol" id="id_library_protocol_2" value="NEBnext" >NEBnext&#153;<a  data-toggle="modal" data-target="#NEB" class="btn btn-link"><i class="fa fa-question-circle"> </i></a> </label>
                             <label class="radio inline"> <input type="radio" name="library_protocol" id="id_library_protocol_3" value="Bioo" >Bioo Scientific Nextflex&#153; (v2,v3)<a  data-toggle="modal" data-target="#Bioo" class="btn btn-link"><i class="fa fa-question-circle"> </i></a> </label>
@@ -212,7 +212,11 @@
         <label for="advanced_options" style="white-space:nowrap;"> Display advanced options</label><br>
             </div>
 </div>
-                        <div class="col-lg-6 text-right" > <button type="button" class="btn btn-success" style="display: inline-block;"> RUN </button> </div>
+                        <div class="col-lg-6 text-right" ><a id="run_link" href="#" > <button onclick="redirLaunch();" id="run_id" type="button" class="btn btn-success" style="display: inline-block;"> RUN </button> </a>  </div>
+{#                        <div class="col-lg-6 text-right" ><a id="run_link2" href="#" > test </a>  </div>#}
+{#                        <div class="col-lg-6 text-right" ><a onclick="alert('no idea');" id="run_link3" href="#" > test2 </a>  </div>#}
+{#                        <div class="col-lg-6 text-right" ><a id="run_link" target="_blank" href="#" onclick="location.replace('http://google.com/'),'_top'"> </a> <button onclick="location.replace('http://google.com/'),'_top'" id="run_id" type="button" class="btn btn-success" style="display: inline-block;"> RUN </button> </div>#}
+{#                        <div class="col-lg-6 text-right" ><a id="run_link" target="_blank" href="#"> </a> <a id="run_id"> hehehe</a> </div>#}
 
                     </div>
 
@@ -402,7 +406,7 @@
 
     $('table').on('click','tr i',function(e){
 
-        e.preventDefault();
+        {#e.preventDefault();#}
         {#var row=$(e.target).closest("tr");#}
         {#alert($(this).attr('name'));#}
         delInput($(this).attr('name'));
@@ -604,34 +608,6 @@
 
 
     </script>
-
-
-{#    <script>#}
-{##}
-{#            $('.modal').on('hide.bs.modal', function (e) {#}
-{##}
-{#                if (drive_running === false){#}
-{#                    if(names.length>0){#}
-{#                        alert(names);#}
-{#                        driveAjax(ids,names,urls,token);#}
-{#                    }#}
-{##}
-{#                }#}
-{##}
-{#            });#}
-{##}
-{#             $('.btn').on('click', function (e) {#}
-{##}
-{#                if (drive_running === false){#}
-{#                    if(names.length>0){#}
-{#                        alert(names);#}
-{#                        driveAjax(ids,names,urls,token);#}
-{#                    }#}
-{##}
-{#                }#}
-{#            });#}
-{##}
-{#        </script>#}
 
 
 
@@ -986,6 +962,26 @@ function toggleAdapter() {
 {#    };#}
 {#        alert(x)#}
 });
+    </script>
+
+    <script>
+
+    var redirLaunch = function(e) {
+
+        var launch_url = "{% url 'launch' %}?";
+            $("#protocol").val($("input[name=library_protocol]:checked").val());
+            var pars = $("#id_species_hidden,#jobId,#protocol").serialize();
+                    {#alert(pars);#}
+                        {#alert(pars);#}
+             alert(launch_url.concat(pars));
+            $("#run_link").attr("href", launch_url.concat(pars));
+            {#$("#run_link2").trigger('click');#}
+
+
+    };
+
+
+
     </script>
 
 

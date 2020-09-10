@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block header %}
+{% if running %}
+<meta http-equiv="refresh" content="90" >
+{% endif %}
+{% endblock %}
+
+{% block js %}
+{#    <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>#}
+{#    <script src="{% static 'js/bootstrap.min.js' %}"></script>#}
+  {# JQUERY FILE UPLOAD SCRIPTS #}
+  <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+
+  <script src="{% static 'vendors/datatables.net/js/jquery.dataTables.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-bs/js/dataTables.bootstrap.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-buttons/js/dataTables.buttons.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-buttons/js/buttons.flash.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-buttons/js/buttons.html5.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-buttons/js/buttons.print.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-keytable/js/dataTables.keyTable.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-responsive/js/dataTables.responsive.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-scroller/js/dataTables.scroller.min.js'%} "></script>
+
+<script src="http://cdn.datatables.net/plug-ins/1.10.12/api/processing().js'%} "></script>
+
+{% endblock %}
+
+
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">{{ tool }}</h1>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+
+            <div class="row">
+            <div class="col-lg-12">
+
+
+                    <p class="text-success"> Your jobs will be launched soon. Links to your results will appear in <a href="{{settings.SUB_SITE}}/jobstatus/{{ id }}"> this page.</a></p>
+                    <p class="text-primary"> Your Job ID is: {{ id }}</p>
+                      <p class="text-warning">  Some analysis may take time, please be patient. You can bookmark <a href="{{settings.SUB_SITE}}/jobstatus/{{ id }}"> <i class="fa fa-bookmark fa-fw"></i> this page.</a></p>
+
+
+            </div>
+            </div>
+
+
+
+            <div class="col-lg-9">
+
+
+
+                  </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                       <i class="fa fa-tasks fa-fw"></i> Jobs Progress
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+
+{#                    <h3 class="panel-title"> List of Job IDs</h3>#}
+{#                    <div style="height:7px;font-size:3px;">&nbsp;</div>#}
+{#                        <pre style="white-space: pre-line">#}
+{#                              {{ ids_strings }}#}
+{#                        </pre>#}
+{#                        <br>#}
+
+                    <table id="jobs" class="table table-striped table-bordered table-hover dataTable no-footer"></table>
+
+{#                    <a href="{% url 'multi:multi_relaunch' %}{{ id }}"><button type="button" class="btn btn-primary">Relaunch Jobs</button></a>#}
+                     {% if launchDE %}
+                        <a href="{% url 'DE_multi' %}{{ id }}" target="_blank"><button type="button" class="btn btn-success">Launch Jobs on sRNAde</button></a>
+                     {% endif %}
+                    {% if download_list %}
+                    <a href="#"  id="download_button" ><button type="button" class="btn btn-info">Bulk download results</button></a>
+                    {% endif %}
+                        {% for msg in msgs %}
+                            {% if msg.type == "info" %}
+                                <div class="alert alert-info">
+                                    {{ msg.text }}
+                                </div>
+                            {% elif msg.type == "warning" %}
+                                <div class="alert alert-warning">
+                                    {{ msg.text }}
+                                </div>
+                            {% elif msg.type == "error" %}
+                                <div class="alert alert-danger">
+                                    {{ msg.text }}
+                                </div>
+                            {% elif msg.type == "success" %}
+                                <div class="alert alert-success">
+                                    {{ msg.text }}
+                                </div>
+                            {% endif %}
+                        {% empty %}
+                        {% endfor %}
+
+                    </div>
+                    <!-- .panel-body -->
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+
+<script>
+    var received_data = {{ tbody|safe }};
+    var received_cols = {{ thead|safe }};
+
+    $(document).ready(function() {
+
+    var table = $('#jobs').DataTable( {
+
+//        'responsive': true,
+        data: received_data,
+//        processing: true,
+//        serverSide: true,
+//        deferRender: false,
+        'language':{
+       "loadingRecords": "&nbsp;",
+      "processing": "Loading..."
+    },
+        columns: received_cols,
+    } );
+
+} );
+
+
+
+
+
+</script>
+
+    <script>
+    {#var list = {{ array1|safe }} ;#}
+
+    var myStringArray = {{ download_list|safe }};
+    var arrayLength = myStringArray.length;
+
+
+    $(document).on('click', '#download_button', function() {
+        alert("To allow bulk download, pop-up windows must be allowed for this page.");
+        for (var i = 0; i < arrayLength; i++) {
+            window.open(myStringArray[i]);
+            //Do something
+            }
+});
+
+    </script>
+
+
+
+{% endblock %}
+
+
