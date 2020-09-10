@@ -1420,7 +1420,7 @@ class MirGLaunch(FormView):
                                      # { "title": "Select" }])
                                      {"title": 'Go to'}
                                      ])
-            data["tbdody"] = json.dumps(jobs_tbody)
+            data["tbody"] = json.dumps(jobs_tbody)
             data["thead"] = js_headers
             data["id"] = jobID
             return render(self.request, 'miRNAgFree/multi_status.html', data)
