@@ -1184,7 +1184,7 @@ def make_config(req_obj):
     outID = param_dict.get("jobId")
     make_folder(os.path.join(MEDIA_ROOT,outID))
     uploadID = param_dict.get("uploadID")
-    dest_file = os.path.join(MEDIA_ROOT, outID, "config.txt")
+    dest_file = os.path.join(MEDIA_ROOT, outID, "conf.txt")
     # free lines
     config_lines.append("maxUR=-1")
     config_lines.append("maxUR=mm=1")
@@ -1226,7 +1226,7 @@ def make_config(req_obj):
 
 def assign_IDs(input_folder):
 
-    ignore_list = ["dropbox.txt", "drive.json", "links.txt", "SRA.txt", "config.txt", "launched"]
+    ignore_list = ["dropbox.txt", "drive.json", "links.txt", "SRA.txt", "conf.txt", "launched"]
     to_launch = []
     all_files = [f for f in os.listdir(input_folder) if os.path.isfile(os.path.join(input_folder, f)) ]
     # generate_id()
@@ -1367,7 +1367,7 @@ class MirGLaunch(FormView):
 
         # ignore_list = ["dropbox.txt", "drive.json","links.txt", "SRA.txt", "config.txt", "IDs"]
         files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
-        if not "config.txt" in files:
+        if not "conf.txt" in files:
             make_config(request)
             IDs = assign_IDs(folder_path)
             for line in IDs:
@@ -1437,7 +1437,7 @@ class MirGLaunch(FormView):
                 for line in lines:
                     IDs.append(line.rstrip().split("\t"))
 
-            with open(os.path.join(folder_path, "config.txt"), "r") as cfile:
+            with open(os.path.join(folder_path, "conf.txt"), "r") as cfile:
                 config_content = cfile.read()
 
             jobs_tbody = []
@@ -1454,7 +1454,7 @@ class MirGLaunch(FormView):
                     dest_folder = os.path.join(MEDIA_ROOT,i[0])
                     make_folder(dest_folder)
                     # new config
-                    config_path = os.path.join(dest_folder,"config.txt")
+                    config_path = os.path.join(dest_folder,"conf.txt")
                     input_line = make_input_line(folder_path, i[0], i[2], i[1])
                     output_line = "output=" + os.path.join(MEDIA_ROOT,i[0]) + "\n"
                     new_content = input_line + output_line + config_content
