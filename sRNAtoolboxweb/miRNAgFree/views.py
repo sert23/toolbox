@@ -10,7 +10,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
-from sRNAtoolboxweb.settings import BASE_DIR,MEDIA_ROOT,MEDIA_URL
+from sRNAtoolboxweb.settings import BASE_DIR,MEDIA_ROOT,MEDIA_URL, SUB_SITE
 from DataModels.params_bench import ParamsBench
 from DataModels.sRNABenchConfig import SRNABenchConfig
 from FileModels.IsomirParser import IsomirParser
@@ -39,6 +39,8 @@ import random
 import shutil
 from django.http import JsonResponse
 import json
+import subprocess
+
 
 #CONF = json.load(file("/shared/sRNAtoolbox/sRNAtoolbox.conf"))
 CONF = settings.CONF
@@ -1171,6 +1173,102 @@ def ajax_del(request):
 
 
 
+
+def make_config(req_obj):
+
+    param_dict = req_obj.GET
+    config_lines = []
+    #input parameters
+    # sra_string = param_dict.get("sra_input")
+    # jobID = param_dict.get("jobId")
+    outID = param_dict.get("jobId")
+    make_folder(os.path.join(MEDIA_ROOT,outID))
+    uploadID = param_dict.get("uploadID")
+    dest_file = os.path.join(MEDIA_ROOT, outID, "config.txt")
+    # free lines
+    config_lines.append("maxUR=-1")
+    config_lines.append("maxUR=mm=1")
+    config_lines.append("type=rules")
+    config_lines.append("mode=lax")
+    config_lines.append("onlyCluster=true")
+    config_lines.append("miRdb=2")
+    config_lines.append("minAlignLength=20")
+    config_lines.append("minNrReadsInFamily=3")
+    config_lines.append("minNrMismatchesFamily=2")
+    config_lines.append("bindings=16")
+    config_lines.append("thresholdCluster=0.9")
+
+    #advanced parameters
+
+    ref_species = param_dict.get("species")
+    if ref_species:
+        short, assembly = ref_species.split(",")
+        # config_lines.append("species="+assembly)
+        config_lines.append("microRNA="+short)
+    else:
+        config_lines.append("guessSpecies=true")
+
+    protocol = param_dict.get("protocol")
+
+    if protocol:
+        line = "protocol=" + protocol
+        config_lines.append(line)
+
+    #output folder
+    # results_folder = os.path.join(MEDIA_ROOT, jobID, "query")
+    # config_lines.append("output=" + results_folder)
+    # config_lines.append("p=6")
+    file_content = "\n".join(config_lines)
+    with open(dest_file,"w") as cf:
+        cf.write(file_content)
+
+    return outID
+
+def assign_IDs(input_folder):
+
+    ignore_list = ["dropbox.txt", "drive.json", "links.txt", "SRA.txt", "config.txt", "launched"]
+    to_launch = []
+    all_files = [f for f in os.listdir(input_folder) if os.path.isfile(os.path.join(input_folder, f)) ]
+    # generate_id()
+    #files
+    files = [f for f in os.listdir(input_folder) if (os.path.isfile(os.path.join(input_folder, f)) and f not in ignore_list)]
+    if files:
+        for f in files:
+            to_launch.append([ generate_id(), os.path.join(input_folder,f) , "file"  ])
+    if "SRA.txt" in all_files:
+        with open(os.path.join(input_folder,"SRA.txt"), 'r') as rfile:
+            lines = rfile.readlines()
+        for line in lines:
+            to_launch.append([generate_id(), line.rstrip(), "SRA"])
+
+    if "links.txt" in all_files:
+        with open(os.path.join(input_folder,"links.txt"), 'r') as rfile:
+            lines = rfile.readlines()
+        for line in lines:
+            to_launch.append([generate_id(), line.rstrip(), "filelink"])
+
+    if "dropbox.txt" in all_files:
+        with open(os.path.join(input_folder,"dropbox.txt"), 'r') as rfile:
+            lines = rfile.readlines()
+        for line in lines:
+            to_launch.append([generate_id(), line.rstrip(), "Dropbox"])
+
+    if "drive.txt" in all_files:
+        with open(os.path.join(input_folder,"drive.txt"), 'r') as rfile:
+            data = json.load(rfile)
+        for k in list(data.keys()):
+            to_launch.append([generate_id(), k.rstrip(),"Drive"])
+
+    dest_file = os.path.join(input_folder,"IDs")
+    with open(dest_file, 'w') as wfile:
+        for line in to_launch:
+            wfile.write( "\t".join(line)+"\n" )
+
+
+    return to_launch
+
+
+
 class MirG(FormView):
     template_name = 'miRNAgFree.html'
     # template_name = 'Messages/miRgFree/drive_test.html'
@@ -1215,74 +1313,179 @@ class MirG(FormView):
         print(form.cleaned_data)
 
 
+def make_input_line(init_folder, id, itype, input_field):
+
+    if itype == "SRA" or itype == "filelink" or itype == "Dropbox" or itype == "file":
+        input_line = "input=" + input_field + "\n"
+        return input_line
+    elif itype == "Drive":
+        dest_file = os.path.join(init_folder, "drive.json")
+        with open(dest_file, "r") as read_file:
+            samples = json.load(read_file)
+
+        try:
+            name, fileid, url, token = samples.get(input_field)
+            res_file = os.path.join(MEDIA_ROOT,id,name)
+            os.system('curl -H "Authorization: Bearer ' + token + '"'
+                      + " " + url + " -o " + res_file + '"')
+            input_line = "input=" + res_file + "\n"
+            return input_line
+        except:
+            return None
 
 
+def create_call(pipeline_id, configuration_file_path):
+    # pipeline_id = self.generate_id()
+    name = pipeline_id + '_mirg'
+    return 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
+        configuration_file_path=configuration_file_path,
+        job_name=name,
+        sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
 
 
+def make_config_json(pipeline_id):
+    cdict = {"pipeline_id": pipeline_id,
+             "name": pipeline_id + "_miRg",
+             "type": "miRNAgFree",
+             "conf_input": os.path.join(MEDIA_ROOT, pipeline_id, "conf.txt"),
+             "out_dir": os.path.join(MEDIA_ROOT, pipeline_id)}
+
+    with open(os.path.join(MEDIA_ROOT, pipeline_id), "w") as write_file:
+        json.dump(cdict, write_file)
+
+    return os.path.join(MEDIA_ROOT, pipeline_id)
+
+class MirGLaunch(FormView):
+
+    template_name = 'miRNAgFree/multi_status.html'
+
+    def get(self, request, **kwargs):
+        path = request.path
+
+        jobID = request.GET.get('jobId', None)
+        folder_path = os.path.join(MEDIA_ROOT,jobID)
+
+        # ignore_list = ["dropbox.txt", "drive.json","links.txt", "SRA.txt", "config.txt", "IDs"]
+        files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
+        if not "config.txt" in files:
+            make_config(request)
+            IDs = assign_IDs(folder_path)
+            for line in IDs:
+                print(line)
+                ik, ifile, itype = line
+                # to_launch.append([generate_id(), k.rstrip(), "Drive"])
+
+                JobStatus.objects.create(job_name=" ", pipeline_key=ik, job_status="not_launched",
+                                         start_time=datetime.datetime.now(),
+                                         all_files=ifile,
+                                         modules_files="",
+                                         pipeline_type="miRNAgFree",
+                                         )
+            JobStatus.objects.create(job_name=" ", pipeline_key=jobID, job_status="not_launched",
+                                     start_time=datetime.datetime.now(),
+                                     all_files=" ",
+                                     modules_files="",
+                                     pipeline_type="multiupload",
+                                     )
+            data = dict()
+            data["running"] = False
+            IDs = []
+            with open(os.path.join(folder_path, "IDs"), 'r') as rfile:
+                lines = rfile.readlines()
+                for line in lines:
+                    IDs.append(line.rstrip().split("\t"))
+
+            jobs_tbody = []
+            for i in IDs:
+                # print(i[0])
+                new_record = JobStatus.objects.get(pipeline_key=i[0])
+                job_stat = new_record.job_status
+                if job_stat != "Finished":
+                    data["running"] = False
+                if job_stat == "sent_to_queue":
+                    job_stat = "In queue"
+                start = new_record.start_time.strftime("%H:%M:%S, %d %b %Y")
+                if new_record.finish_time:
+                    finish = new_record.finish_time.strftime("%H:%M, %d %b %Y")
+                else:
+                    finish = "-"
+                click = '<a href="' + SUB_SITE + '/jobstatus/' + i[0] + '" target="_blank" > Go to results </a>'
+                jobs_tbody.append([i[0], job_stat, start, finish, i[1], click])
+
+            js_headers = json.dumps([{"title": "job ID"},
+                                     {"title": "Status"},
+                                     {"title": "Started"},
+                                     {"title": "Finished"},
+                                     {"title": "Input"},
+                                     # { "title": "Select" }])
+                                     {"title": 'Go to'}
+                                     ])
+            data["tbdody"] = json.dumps(jobs_tbody)
+            data["thead"] = js_headers
+            data["id"] = jobID
+            return render(self.request, 'miRNAgFree/multi_status.html', data)
+
+        else:
+            data = dict()
+            data["running"] = False
+            IDs = []
+            with open(os.path.join(folder_path,"IDs"), 'r') as rfile:
+                lines = rfile.readlines()
+                for line in lines:
+                    IDs.append(line.rstrip().split("\t"))
+
+            with open(os.path.join(folder_path, "config.txt"), "r") as cfile:
+                config_content = cfile.read()
+
+            jobs_tbody = []
+            for i in IDs:
+                # print(i[0])
+                new_record = JobStatus.objects.get(pipeline_key=i[0])
+                job_stat = new_record.job_status
+
+                ### launching job
+                if job_stat == "not_launched":
+
+                    # new folder
+                    dest_folder = os.path.join(MEDIA_ROOT,i[0])
+                    make_folder(dest_folder)
+                    # new config
+                    config_path = os.path.join(dest_folder,"condifg.txt")
+                    input_line = make_input_line(folder_path, i[0], i[2], i[1])
+                    output_line = "output=" + os.path.join(MEDIA_ROOT,i[0]) + "\n"
+                    new_content = input_line + output_line + config_content
+                    with open(config_path,"w") as cf:
+                        cf.write(new_content)
+                    # launch
+                    c_path = make_config_json(i[0])
+                    comm = create_call(i[0], config_path)
+                    os.system(comm)
+
+                if job_stat != "Finished":
+                    data["running"] = True
+                if job_stat == "sent_to_queue":
+                    job_stat = "In queue"
+                start = new_record.start_time.strftime("%H:%M:%S, %d %b %Y")
+                if new_record.finish_time:
+                    finish = new_record.finish_time.strftime("%H:%M, %d %b %Y")
+                else:
+                    finish = "-"
+                click = '<a href="' + SUB_SITE + '/jobstatus/' + i[0] + '" target="_blank" > Go to results </a>'
+                jobs_tbody.append([i[0], job_stat, start, finish, i[1], click])
+
+            js_headers = json.dumps([{"title": "job ID"},
+                                     {"title": "Status"},
+                                     {"title": "Started"},
+                                     {"title": "Finished"},
+                                     {"title": "Input"},
+                                     # { "title": "Select" }])
+                                     {"title": 'Go to'}
+                                     ])
+            # print(jobs_tbody)
+            data["tbody"] = json.dumps(jobs_tbody)
+
+            data["thead"] = js_headers
+            data["id"] = jobID
+            return render(self.request, 'miRNAgFree/multi_status.html', data)
 
 
-
-
-
-
-
-
-
-
-
-
-def test(request):
-    pipeline_id = pipeline_utils.generate_uniq_id()
-    FS.location = os.path.join("/shared/sRNAtoolbox/webData", pipeline_id)
-    make_dir(FS.location)
-
-    libs_files = []
-    lib_mode = False
-    no_libs = False
-    guess_adapter = None
-    recursive_adapter_trimming = None
-    high_conf = False
-    solid = None
-    ifile = "/shared/sRNAtoolbox/testData/IK_exo.fastq.gz"
-
-    adapter = "TGGAATTCTCGGGTGCCAAGG"
-    species = ["hg19_5_mp", "NC_007605"]
-    assemblies = ["hg19", "NC_007605"]
-    mircro_names = ["hsa", "ebv"]
-
-    mir = ":".join(mircro_names)
-    homolog = ""
-
-    adapter_minLength = "10"
-    adapterMM = "1"
-
-    outdir = FS.location
-
-    rc = "2"
-    mm = "0"
-    seed = "20"
-    align_type = "n"
-    remove_barcode = "0"
-
-    species_annotation_file = SpeciesAnnotationParser(SPECIES_ANNOTATION_PATH)
-    species_annotation = species_annotation_file.parse()
-
-    newConf = SRNABenchConfig(species_annotation, DB, FS.location, ifile, iszip="true",
-                              RNAfold="RNAfold2",
-                              bedGraph="true", writeGenomeDist="true", predict="true", graphics="true",
-                              species=species, assembly=assemblies, adapter=adapter,
-                              recursiveAdapterTrimming=recursive_adapter_trimming, libmode=lib_mode, nolib=no_libs,
-                              microRNA=mir, removeBarcode=str(remove_barcode),
-                              adapterMinLength=str(adapter_minLength), adapterMM=str(adapterMM), seed=str(seed),
-                              noMM=str(mm), alignType=str(align_type), rc=str(rc), solid=solid,
-                              guessAdapter=guess_adapter, highconf=high_conf, homolog=homolog,
-                              user_files=libs_files)
-
-    conf_file_location = os.path.join(FS.location, "conf.txt")
-    newConf.write_conf_file(conf_file_location)
-
-    os.system(
-        'qsub -v pipeline="bench",configure="' + conf_file_location + '",key="' + pipeline_id + '",outdir="' + outdir + '",name="' + pipeline_id
-        + '_sRNAbench' + '" -N ' + pipeline_id + '_sRNAbench /shared/sRNAtoolbox/core/bash_scripts/run_sRNAbench.sh')
-
-    return redirect("/srnatoolbox/jobstatus/srnabench/?id=" + pipeline_id)
