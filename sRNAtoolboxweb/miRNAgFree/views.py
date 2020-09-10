@@ -1463,6 +1463,8 @@ class MirGLaunch(FormView):
                     # launch
                     c_path = make_config_json(i[0])
                     comm = create_call(i[0], c_path)
+                    print("HERE")
+                    print(comm)
                     os.system(comm)
                     new_record.job_status = 'sent_to_queue'
 
