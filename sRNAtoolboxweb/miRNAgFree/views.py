@@ -1361,8 +1361,11 @@ def make_input_line(init_folder, id, itype, input_field):
 
         try:
             name, fileid, url, token = samples.get(input_field)
-            res_file = os.path.join(MEDIA_ROOT,id,name)
+
             g_url = "https://www.googleapis.com/drive/v3/files/{}?alt=media".format(fileid)
+            res_file = os.path.join(MEDIA_ROOT, id, name)
+            input_line = "input=@drive;" + ";".join([g_url,res_file,token]) + "\n"
+
             touch_file = os.path.join(MEDIA_ROOT,id, "drive_downloaded")
             make_folder(os.path.join(MEDIA_ROOT,id))
             command = 'curl -H "Authorization: Bearer ' + token + '"' + " " + g_url + ' -o "' + res_file + '";touch ' + touch_file
@@ -1370,14 +1373,15 @@ def make_input_line(init_folder, id, itype, input_field):
             comand_list = ["curl","-H", '"Authorization: Bearer ' + token + '"', g_url, "-o", '"{}"'.format(res_file)]
             comand_list = ["touch", os.path.join(MEDIA_ROOT,id, "test")]
             # time.sleep(1)
-            subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                       shell=True)
+            #
+            # subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            #                            shell=True)
 
             # with open(touch_file,"w") as tf:
             #     tf.write(command)
             # subprocess.Popen(comand_list)
             # os.system(command)
-            input_line = "input=" + res_file + "\n"
+            # input_line = + res_file + "\n"
 
             return input_line
         except:
@@ -1496,16 +1500,15 @@ class MirGLaunch(FormView):
                 new_record = JobStatus.objects.get(pipeline_key=i[0])
                 job_stat = new_record.job_status
 
-
                 ### launching job
-                if job_stat == "downloading":
-                    # launch
-                    c_path = make_config_json(i[0])
-                    comm = create_call(i[0], c_path)
-                    # print("HERE")
-                    # print(comm)
-                    os.system(comm)
-                    new_record.job_status = 'sent_to_queue'
+                # if job_stat == "downloading":
+                #     # launch
+                #     c_path = make_config_json(i[0])
+                #     comm = create_call(i[0], c_path)
+                #     # print("HERE")
+                #     # print(comm)
+                #     os.system(comm)
+                #     new_record.job_status = 'sent_to_queue'
 
 
                 if job_stat == "not_launched":
@@ -1522,16 +1525,14 @@ class MirGLaunch(FormView):
                     new_content = input_line + output_line + config_content
                     with open(config_path,"w") as cf:
                         cf.write(new_content)
-                    if input_type == "Drive":
-                        new_record.job_status = 'downloading'
-                    else:
-                        # launch
-                        c_path = make_config_json(i[0])
-                        comm = create_call(i[0], c_path)
-                        print("HERE")
-                        print(comm)
-                        os.system(comm)
-                        new_record.job_status = 'sent_to_queue'
+
+                    # launch
+                    c_path = make_config_json(i[0])
+                    comm = create_call(i[0], c_path)
+                    print("HERE")
+                    print(comm)
+                    os.system(comm)
+                    new_record.job_status = 'sent_to_queue'
 
                 if job_stat != "Finished":
                     data["running"] = True

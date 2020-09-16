@@ -17,6 +17,7 @@ class miRNAgFreePipe(Pipeline):
     def run(self):
         self.initialize_pipeline_status()
         self.download_url()
+        self.download_drive()
         self.call_mirg()
         self.set_finish_time()
         time.sleep(10)
@@ -26,6 +27,25 @@ class miRNAgFreePipe(Pipeline):
             self.change_pipeline_status("Finished with Errors")
         # self.logger.close()
         self.error_logger.close()
+
+    def download_drive(self):
+        is_drive = False
+        with open(self.conf, "r") as  config_r:
+            lines = config_r.readlines()
+        for line in lines:
+            if line.startswith("input=@drive"):
+                is_drive = True
+                dparams = line.split(";")
+                command = 'curl -H "Authorization: Bearer ' + dparams[3] + '"' + " " + dparams[1] + ' -o "' + dparams[2] + '"'
+                os.system(command)
+                new_line = "input=" + dparams[2] + "\n"
+        if is_drive:
+            with open(self.conf, "w") as config_w:
+                for line in lines:
+                    if line.startswith("input="):
+                        config_w.write(new_line)
+                    else:
+                        config_w.write(line)
 
     def download_url(self):
         with open(self.conf, "r") as  config_r:
