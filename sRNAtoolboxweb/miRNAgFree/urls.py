@@ -4,7 +4,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-    url(r'results', views.result_new, name='srnabench'),
+    # url(r'results', views.result_new, name='srnabench'),
     #url(r'results', views.result),
     url(r'table/(.+)/(.+)/(.+)*', views.render_table, name='table_bench'),
     url(r'^upload/[A-za-z0-9]+', views.upload_files.as_view(), name="upload"),
