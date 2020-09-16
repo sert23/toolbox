@@ -1368,6 +1368,7 @@ def make_input_line(init_folder, id, itype, input_field):
             # command = 'curl -H "Authorization: Bearer ' + token + '"' + " " + g_url + ' -o "' + res_file + '";touch ' + touch_file
             command = 'curl -H "Authorization: Bearer ' + token + '"' + " " + g_url + ' -o "' + res_file + '"'
             comand_list = ["curl","-H", '"Authorization: Bearer ' + token + '"', g_url, "-o", '"{}"'.format(res_file)]
+            time.sleep(1)
             with open(touch_file,"w") as tf:
                 tf.write(command)
             subprocess.Popen(comand_list)
