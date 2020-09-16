@@ -1368,6 +1368,7 @@ def make_input_line(init_folder, id, itype, input_field):
             comand_list = command.split(" ")
             subprocess.Popen(comand_list)
             input_line = "input=" + res_file + "\n"
+
             return input_line
         except:
             return None
@@ -1487,25 +1488,40 @@ class MirGLaunch(FormView):
 
 
                 ### launching job
+                if job_stat == "downloading":
+                    # launch
+                    c_path = make_config_json(i[0])
+                    comm = create_call(i[0], c_path)
+                    # print("HERE")
+                    # print(comm)
+                    os.system(comm)
+                    new_record.job_status = 'sent_to_queue'
+
+
                 if job_stat == "not_launched":
 
                     # new folder
                     dest_folder = os.path.join(MEDIA_ROOT,i[0])
                     make_folder(dest_folder)
                     # new config
+
                     config_path = os.path.join(dest_folder,"conf.txt")
-                    input_line = make_input_line(folder_path, i[0], i[2], i[1])
+                    input_type = i[2]
+                    input_line = make_input_line(folder_path, i[0], input_type, i[1])
                     output_line = "output=" + os.path.join(MEDIA_ROOT,i[0]) + "\n"
                     new_content = input_line + output_line + config_content
                     with open(config_path,"w") as cf:
                         cf.write(new_content)
-                    # launch
-                    c_path = make_config_json(i[0])
-                    comm = create_call(i[0], c_path)
-                    print("HERE")
-                    print(comm)
-                    os.system(comm)
-                    new_record.job_status = 'sent_to_queue'
+                    if input_type == "Drive":
+                        new_record.job_status = 'downloading'
+                    else:
+                        # launch
+                        c_path = make_config_json(i[0])
+                        comm = create_call(i[0], c_path)
+                        print("HERE")
+                        print(comm)
+                        os.system(comm)
+                        new_record.job_status = 'sent_to_queue'
 
                 if job_stat != "Finished":
                     data["running"] = True
