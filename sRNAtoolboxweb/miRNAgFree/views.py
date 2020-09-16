@@ -1271,8 +1271,8 @@ def assign_IDs(input_folder):
         for line in lines:
             to_launch.append([generate_id(), line.rstrip(), "Dropbox"])
 
-    if "drive.txt" in all_files:
-        with open(os.path.join(input_folder,"drive.txt"), 'r') as rfile:
+    if "drive.json" in all_files:
+        with open(os.path.join(input_folder,"drive.json"), 'r') as rfile:
             data = json.load(rfile)
         for k in list(data.keys()):
             to_launch.append([generate_id(), k.rstrip(),"Drive"])
