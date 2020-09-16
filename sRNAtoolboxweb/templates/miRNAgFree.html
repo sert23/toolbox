@@ -132,14 +132,14 @@
                     <div id="Adapter_Custom" class="control-group">
                         <fieldset>
                             <legend>Custom preprocessing options</legend>
-                        <div id="div_id_guess_adapter" class="control-group"> <div class="controls"> <label for="id_guess_adapter" class="checkbox "> <input type="checkbox" name="guess_adapter" id="id_guess_adapter" class="checkboxinput" /> <strong >Guess the adapter sequence <strong class="text-danger"> (not recommended!)</strong> </label> </div> </div>
+{#                        <div id="div_id_guess_adapter" class="control-group"> <div class="controls"> <label for="id_guess_adapter" class="checkbox "> <input type="checkbox" name="guess_adapter" id="id_guess_adapter" class="checkboxinput" /> <strong >Guess the adapter sequence <strong class="text-danger"> (not recommended!)</strong> </label> </div> </div>#}
                         <div id="div_id_adapter_chosen" class="control-group"> <label for="id_adapter_chosen" class="control-label ">
-                Adapter chosen
+                Choose Adapter
             </label> <div class="controls"> <select name="adapter_chosen" id="id_adapter_chosen" class="form-control select">
-                            <option value="EMPTY">Input reads are already trimmed</option>
+                            <option value="OTHER">Other (sequence provided below)</option>
                             <option value="TGGAATTCTCGGGTGCCAAGG">Illumina RA3 - TGGAATTCTCGGGTGCCAAGG</option>
                             <option value="UCGUAUGCCGUCUUCUGCUUGU">Illumina(alternative) - UCGUAUGCCGUCUUCUGCUUGU</option>
-                            <option value="330201030313112312">SOLiD(SREK) - 330201030313112312</option>
+{#                            <option value="330201030313112312">SOLiD(SREK) - 330201030313112312</option>#}
 
 </select> </div> </div>
                             <div id="div_id_adapter_manual" class="control-group"> <label for="id_adapter_manual" class="control-label ">
@@ -171,9 +171,9 @@
                  <div id="div_id_species" class="control-group"> <label for="id_species" class="control-label ">
                 Related species for annotation of predicted miRNAs<a  data-toggle="modal" data-target="#species_dropdown" class="btn btn-link"><i class="fa fa-question-circle"> </i></a> </label> <div class="controls">
                      <select name="species" multiple="multiple" id="id_species" class="selectmultiple">
-                     <optgroup label="animal"> <option value="1561:Aedes aegypti">Aedes aegypti(AaegL3)</option>
-                         <option value="1562:Vicugna pacos">Alpaca(vicPac1)</option>
-                         <option value="1563:Poecilia formosa">Amazon molly(Poecilia_formosa-5_1_2)</option>
+                        {% for short,scientific in mirgenedb_list %}
+                         <option value="{{ short }}">{{ scientific }}</option>
+                         {% endfor %}
                      </optgroup>
                  </select>
                  </div>
@@ -780,65 +780,6 @@ $('input[name="library_protocol"]').on("click", function(e) {
 
 
 
-$("#id_quality_method").change(function () {
-{#    if ( document.getElementById('id_library_protocol_6').checked){#}
-    if ( document.getElementById('id_quality_method').value === "min"){
-        $("#Div_max").show();
-    }else{
-        $("#Div_max").hide();
-    }
-    });
-
-
-        {##}
-        {# Adapter options #}
-        {##}
-
-$('input[name="guess_adapter"]').on("click", function(e) {
-    if ( document.getElementById('id_guess_adapter').checked){
-        document.getElementById("id_adapter_chosen").disabled = true;
-        document.getElementById("id_adapter_manual").disabled = true;
-    }else{
-        document.getElementById("id_adapter_chosen").disabled = false;
-        document.getElementById("id_adapter_manual").disabled = false;
-    }
-
-})
-
-$('input[name="adapter_manual"]').on("mouseout", function(e) {
-
-    if ( document.getElementById('id_adapter_manual').value.length > 0 ){
-
-        document.getElementById("id_adapter_chosen").disabled = true;
-        document.getElementById("id_guess_adapter").disabled = true;
-    }else{
-        document.getElementById("id_adapter_chosen").disabled = false;
-        document.getElementById("id_guess_adapter").disabled = false;
-    }
-
-})
-$('input[name="adapter_manual"]').on("change", function(e) {
-
-    if ( document.getElementById('id_adapter_manual').value.length > 0 ){
-
-        document.getElementById("id_adapter_chosen").disabled = true;
-        document.getElementById("id_guess_adapter").disabled = true;
-    }else{
-        document.getElementById("id_adapter_chosen").disabled = false;
-        document.getElementById("id_guess_adapter").disabled = false;
-    }
-
-})
-
-$("input[type=file]").on('change',function(){
-    var extensions = ["xls","xlsx","doc","docx"]
-    if (extensions.includes(this.files[0].name.split('.').pop()) ){
-        alert('Spread-sheet or document extensions such as ".xls" or ".doc" are not supported. Please upload a different file. ')
-        document.getElementById('id_ifile').value = "";
-    }
-
-{#    filename.split('.').pop();#}
-});
 
 function toggleAdapter() {
 {#    if ($("#age").val() <= 13)#}
@@ -943,26 +884,6 @@ function toggleAdapter() {
     }
     </script>
 
-    <script>
-    $('input[name="referenceDB"]').on("click", function(e) {
-        x = document.getElementById("id_referenceDB_3").checked;
-        if (x==false){
-            document.getElementById("div_id_mirDB").style.visibility="hidden";
-            document.getElementById("id_mirDB").style.visibility="hidden";
-{#            document.getElementById("show-me-three").style.visibility="hidden";#}
-        }
-        else{
-            document.getElementById("div_id_mirDB").style.visibility="visible";
-            document.getElementById("id_mirDB").style.visibility="visible";
-        }
-{#    if (e.clientX === 0 && e.clientY === 0) {#}
-{#        console.log("keyboard");#}
-{#    } else {#}
-{#        console.log("mouse");#}
-{#    };#}
-{#        alert(x)#}
-});
-    </script>
 
     <script>
 
@@ -970,8 +891,17 @@ function toggleAdapter() {
 
         var launch_url = "{% url 'launch' %}?";
             $("#protocol").val($("input[name=library_protocol]:checked").val());
-            var pars = $("#id_species_hidden,#jobId,#protocol").serialize();
-                    {#alert(pars);#}
+            var pars = $("#id_species_hidden,#jobId,#protocol,#id_adapter_chosen,#id_adapter_manual,#id_adapter_length,#id_adapter_mismatch,#id_nucleotides_5_removed,#id_nucleotides_3_removed,#id_adapter_recursive_trimming").serialize();
+                    alert(pars);
+                          {#adapter chosen #}
+{#                            adapter sequence #}
+{#                            minLen #}
+{#                            mm  #}
+{#                            5' barcode    #}
+{#                            3' N   #}
+{#                            recursive   #}
+{#                            species#}
+{#                            #}
                         {#alert(pars);#}
              alert(launch_url.concat(pars));
             $("#run_link").attr("href", launch_url.concat(pars));
