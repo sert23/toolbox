@@ -1366,6 +1366,8 @@ def make_input_line(init_folder, id, itype, input_field):
             touch_file = os.path.join(MEDIA_ROOT,id, "drive_downloaded")
             command = 'curl -H "Authorization: Bearer ' + token + '"' + " " + g_url + " -o " + res_file + '";touch ' + touch_file
             comand_list = command.split(" ")
+            with open(touch_file,"w") as tf:
+                tf.write(command)
             subprocess.Popen(comand_list)
             input_line = "input=" + res_file + "\n"
 
