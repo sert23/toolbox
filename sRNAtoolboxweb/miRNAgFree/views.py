@@ -1368,7 +1368,8 @@ def make_input_line(init_folder, id, itype, input_field):
             comand_list = command.split(" ")
             with open(touch_file,"w") as tf:
                 tf.write(command)
-            subprocess.Popen(comand_list)
+            # subprocess.Popen(comand_list)
+            os.system(command)
             input_line = "input=" + res_file + "\n"
 
             return input_line
