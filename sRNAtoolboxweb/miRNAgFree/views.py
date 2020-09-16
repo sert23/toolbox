@@ -1370,9 +1370,12 @@ def make_input_line(init_folder, id, itype, input_field):
             comand_list = ["curl","-H", '"Authorization: Bearer ' + token + '"', g_url, "-o", '"{}"'.format(res_file)]
             comand_list = ["touch", os.path.join(MEDIA_ROOT,id, "test")]
             # time.sleep(1)
+            subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                       shell=True)
+
             with open(touch_file,"w") as tf:
                 tf.write(command)
-            subprocess.Popen(comand_list)
+            # subprocess.Popen(comand_list)
             # os.system(command)
             input_line = "input=" + res_file + "\n"
 
