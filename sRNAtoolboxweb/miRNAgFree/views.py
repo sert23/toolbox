@@ -1210,6 +1210,24 @@ def make_config(req_obj):
 
     protocol = param_dict.get("protocol")
 
+    if protocol == "TRIMMED":
+        protocol = None
+    if protocol == "Custom":
+        protocol = None
+        adapter_manual = param_dict.get("adapter_manual")
+        if adapter_manual:
+            config_lines.append("adapter=" + adapter_manual)
+        else:
+            config_lines.append("adapter=" + param_dict.get("adapter_chosen"))
+
+        # adapter length
+        config_lines.append("adapter=" + str(param_dict.get("adapter_length")))
+        config_lines.append("adapter=" + str(param_dict.get("adapter_mismatch")))
+        config_lines.append("adapter=" + str(param_dict.get("nucleotides_5_removed")))
+        config_lines.append("adapter=" + str(param_dict.get("nucleotides_3_removed")))
+        config_lines.append("adapter=" + str(param_dict.get('adapter_recursive_trimming')).lower())
+
+
     if protocol:
         line = "protocol=" + protocol
         config_lines.append(line)
@@ -1268,6 +1286,19 @@ def assign_IDs(input_folder):
     return to_launch
 
 
+def parse_mirgeneDB():
+    file_path = CONF.get("MirGeneDB_data")
+    with open(file_path, "r") as read_file:
+        lines = read_file.readlines()
+
+    db_list = []
+    for line in lines[1:]:
+        row = line.rstrip().split("\t")
+        db_list.append([":".join([row[1].capitalize(),row[3],row[5]]), row[2]])
+
+    return db_list
+
+
 
 class MirG(FormView):
     template_name = 'miRNAgFree.html'
@@ -1281,8 +1312,13 @@ class MirG(FormView):
         folder_path = os.path.join(MEDIA_ROOT,jobID)
         # os.mkdir(folder_path)
         data_url = reverse_lazy("multi:multi_new") + jobID
+        mirgeneDB = parse_mirgeneDB()
         print(data_url)
-        return render(self.request, 'miRNAgFree.html', { "jobID":jobID, "data_url": data_url })
+        return render(self.request, 'miRNAgFree.html', { "jobID":jobID,
+                                                         "data_url": data_url,
+                                                         "mirgenedb_list": mirgeneDB,
+
+                                                         })
 
     def post(self, request, *args, **kwargs):
         request.POST._mutable = True
@@ -1326,8 +1362,11 @@ def make_input_line(init_folder, id, itype, input_field):
         try:
             name, fileid, url, token = samples.get(input_field)
             res_file = os.path.join(MEDIA_ROOT,id,name)
-            os.system('curl -H "Authorization: Bearer ' + token + '"'
-                      + " " + url + " -o " + res_file + '"')
+            g_url = "https://www.googleapis.com/drive/v3/files/{}?alt=media".format(fileid)
+            touch_file = os.path.join(MEDIA_ROOT,id, "drive_downloaded")
+            command = 'curl -H "Authorization: Bearer ' + token + '"' + " " + g_url + " -o " + res_file + '";touch ' + touch_file
+            comand_list = command.split(" ")
+            subprocess.Popen(comand_list)
             input_line = "input=" + res_file + "\n"
             return input_line
         except:
@@ -1353,7 +1392,7 @@ def make_config_json(pipeline_id):
     with open(os.path.join(MEDIA_ROOT, pipeline_id,"config.json"), "w") as write_file:
         json.dump(cdict, write_file)
 
-    return os.path.join(MEDIA_ROOT, pipeline_id, "config.json")
+    return os.path.join(MEDIA_ROOT, pipeline_id, "config.json"  )
 
 class MirGLaunch(FormView):
 
