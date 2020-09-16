@@ -16,6 +16,7 @@ class miRNAgFreePipe(Pipeline):
 
     def run(self):
         self.initialize_pipeline_status()
+        self.change_pipeline_status("Running")
         self.download_url()
         self.download_drive()
         self.call_mirg()

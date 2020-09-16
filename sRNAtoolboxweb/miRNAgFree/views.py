@@ -1534,7 +1534,7 @@ class MirGLaunch(FormView):
                     os.system(comm)
                     new_record.job_status = 'sent_to_queue'
                     new_record.save()
-                if job_stat != "Finished":
+                if job_stat != "Finished" and job_stat != "Finished with Errors":
                     data["running"] = True
                 if job_stat == "sent_to_queue":
                     job_stat = "In queue"
