@@ -1543,6 +1543,7 @@ class MirGLaunch(FormView):
                     finish = new_record.finish_time.strftime("%H:%M, %d %b %Y")
                 else:
                     finish = "-"
+                job_stat = new_record.job_status
                 click = '<a href="' + SUB_SITE + '/jobstatus/' + i[0] + '" target="_blank" > Go to results </a>'
                 jobs_tbody.append([i[0], job_stat, start, finish, i[1], click])
 
