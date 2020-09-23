@@ -178,6 +178,7 @@
                  </select>
                  </div>
                      <input type="hidden" name="species_hidden" id="id_species_hidden" />
+                     <input type="hidden" name="protocol" id="protocol" />
                  </div>
                  <br>
                  <div class="control-group">
@@ -891,8 +892,9 @@ function toggleAdapter() {
 
         var launch_url = "{% url 'launch' %}?";
             $("#protocol").val($("input[name=library_protocol]:checked").val());
+            alert($("#protocol").val());
             var pars = $("#id_species_hidden,#jobId,#protocol,#id_adapter_chosen,#id_adapter_manual,#id_adapter_length,#id_adapter_mismatch,#id_nucleotides_5_removed,#id_nucleotides_3_removed,#id_adapter_recursive_trimming").serialize();
-                    alert(pars);
+                    {#alert(pars);#}
                           {#adapter chosen #}
 {#                            adapter sequence #}
 {#                            minLen #}
@@ -903,9 +905,9 @@ function toggleAdapter() {
 {#                            species#}
 {#                            #}
                         {#alert(pars);#}
-             alert(launch_url.concat(pars));
+             {#alert(launch_url.concat(pars));#}
             $("#run_link").attr("href", launch_url.concat(pars));
-            {#$("#run_link2").trigger('click');#}
+            $("#run_link2").trigger('click');
 
 
     };
