@@ -1212,6 +1212,9 @@ def make_config(req_obj):
 
     if protocol == "TRIMMED":
         protocol = None
+    if protocol == "GUESS":
+        protocol = "guess"
+
     if protocol == "Custom":
         protocol = None
         adapter_manual = param_dict.get("adapter_manual")
