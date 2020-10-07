@@ -1555,7 +1555,7 @@ class MirGLaunch(FormView):
                     finish = "-"
                 job_stat = new_record.job_status
                 click = '<a href="' + SUB_SITE + '/jobstatus/' + i[0] + '" target="_blank" > Go to results </a>'
-                jobs_tbody.append([i[0], job_stat, start, finish, i[1], click])
+                jobs_tbody.append([i[0], job_stat.replace("_"," "), start, finish, i[1], click])
 
             js_headers = json.dumps([{"title": "job ID"},
                                      {"title": "Status"},
