@@ -1424,6 +1424,9 @@ class MirGLaunch(FormView):
 
         # ignore_list = ["dropbox.txt", "drive.json","links.txt", "SRA.txt", "config.txt", "IDs"]
         files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
+
+        param_dict = request.GET
+
         if not "conf.txt" in files:
             make_config(request)
             IDs = assign_IDs(folder_path)
@@ -1484,6 +1487,10 @@ class MirGLaunch(FormView):
             data["refresh_rate"] = 5
 
             return render(self.request, 'miRNAgFree/multi_status.html', data)
+
+        elif param_dict.get("protocol"):
+
+            return redirect(reverse_lazy("launch" )+ "?jobId=" + jobID)
 
         else:
             data = dict()
