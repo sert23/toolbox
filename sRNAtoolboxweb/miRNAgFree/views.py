@@ -1461,7 +1461,7 @@ class MirGLaunch(FormView):
                 new_record = JobStatus.objects.get(pipeline_key=i[0])
                 job_stat = new_record.job_status
                 if job_stat != "Finished":
-                    data["running"] = False
+                    data["running"] = True
                 if job_stat == "sent_to_queue":
                     job_stat = "In queue"
                 start = new_record.start_time.strftime("%H:%M:%S, %d %b %Y")
@@ -1470,7 +1470,7 @@ class MirGLaunch(FormView):
                 else:
                     finish = "-"
                 click = '<a href="' + SUB_SITE + '/jobstatus/' + i[0] + '" target="_blank" > Go to results </a>'
-                jobs_tbody.append([i[0], job_stat, start, finish, i[1], click])
+                jobs_tbody.append([i[0], job_stat.replace("_"," "), start, finish, i[1], click])
 
             js_headers = json.dumps([{"title": "job ID"},
                                      {"title": "Status"},
@@ -1483,7 +1483,6 @@ class MirGLaunch(FormView):
             data["tbody"] = json.dumps(jobs_tbody)
             data["thead"] = js_headers
             data["id"] = jobID
-            data["running"] = True
             data["refresh_rate"] = 5
 
             return render(self.request, 'miRNAgFree/multi_status.html', data)
