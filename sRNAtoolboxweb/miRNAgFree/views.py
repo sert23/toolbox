@@ -610,15 +610,6 @@ def read_message(file_path):
         data = file.read().replace('\n', '<br>')
     return data
 
-def results(request):
-    if 'id' in request.GET:
-        job_id = request.GET['id']
-        new_record = JobStatus.objects.get(pipeline_key=job_id)
-
-        context = {}
-        context["id"] = job_id
-
-        return render(request, "srnabench_result.html", context)
 
 
 def result_new(request):
@@ -1583,4 +1574,20 @@ class MirGLaunch(FormView):
             data["refresh_rate"] = 90
             return render(self.request, 'miRNAgFree/multi_status.html', data)
 
+
+def results(request):
+    if 'id' in request.GET:
+        job_id = request.GET['id']
+        new_record = JobStatus.objects.get(pipeline_key=job_id)
+
+        context = {}
+        context["id"] = job_id
+        context["date"] = new_record.start_time + datetime.timedelta(days=15)
+        # parameters
+        web_par_path = os.path.join(new_record.outdir, "conf.txt")
+        with open(web_par_path, "r") as web_par_file:
+            web_pars = web_par_file.read()
+        results["parameters"] = web_pars.replace(MEDIA_ROOT, "")
+
+        return render(request, "mirnagfree_result.html", context)
 
