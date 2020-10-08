@@ -1598,7 +1598,7 @@ def results(request):
 
         #explore predictions
 
-        expression_file = os.path.join(new_record.outdir)
+        expression_file = os.path.join(new_record.outdir,"microRNAs.txt")
         with open(expression_file,"r") as ef:
             expression_df = pd.read_csv(ef, sep="\t")
         pred_names = expression_df['name'].tolist()
