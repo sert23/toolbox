@@ -305,6 +305,10 @@ class MultiStatusView(DetailView):
         job_status = context.get('object')
         pipeline_id = job_status.pipeline_key
         jobs_folder = os.path.join(MEDIA_ROOT,pipeline_id,"launched")
+        if not os.path.exists(jobs_folder):
+            return redirect(reverse_lazy("mirgfree:launch")+ "?jobId=" + pipeline_id)
+
+
         launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder,f))]
         context["ids_strings"] = ",".join(launched_ids)
 
@@ -314,8 +318,14 @@ class MultiStatusView(DetailView):
         #     context["launchDE"] = True
         finished = 0
         for id in launched_ids:
+
             job = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" >' + id +'</a>'
             new_record = JobStatus.objects.get(pipeline_key=id)
+
+            # ptype = new_record.pipeline_type
+            # if ptype == "miRNAgFree":
+            #     return redirect(reverse_lazy("mirgfree:"))
+
             job_stat = new_record.job_status
             if job_stat == "sent_to_queue":
                 job_stat = "In queue"
