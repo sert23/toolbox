@@ -1588,7 +1588,8 @@ def results(request):
         web_par_path = os.path.join(new_record.outdir, "conf.txt")
         with open(web_par_path, "r") as web_par_file:
             web_pars = web_par_file.read()
-        results["parameters"] = web_pars.replace(MEDIA_ROOT, "")
+
+        context["parameters"] = web_pars.replace(MEDIA_ROOT, "")
 
         return render(request, "mirnagfree_result.html", context)
 
