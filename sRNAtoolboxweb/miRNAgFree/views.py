@@ -1599,7 +1599,8 @@ def results(request):
         #explore predictions
 
         expression_file = os.path.join(new_record.outdir)
-        expression_df = pd.read_csv(expression_file, sep="\t")
+        with open(expression_file,"r") as ef:
+            expression_df = pd.read_csv(ef, sep="\t")
         pred_names = expression_df['name'].tolist()
         context["prediction_list"] = pred_names
         return render(request, "mirnagfree_result.html", context)
