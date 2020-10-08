@@ -618,7 +618,7 @@ def results(request):
         context = {}
         context["id"] = job_id
 
-        return render(request, "srnabench_result.html", results)
+        return render(request, "srnabench_result.html", context)
 
 
 def result_new(request):
