@@ -1442,6 +1442,7 @@ class MirGLaunch(FormView):
                                          all_files=ifile,
                                          modules_files="",
                                          pipeline_type="miRNAgFree",
+                                         outdir = os.path.join(MEDIA_ROOT,ik)
                                          )
             JobStatus.objects.create(job_name=" ", pipeline_key=jobID, job_status="not_launched",
                                      start_time=datetime.datetime.now(),
