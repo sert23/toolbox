@@ -610,6 +610,17 @@ def read_message(file_path):
         data = file.read().replace('\n', '<br>')
     return data
 
+def results(request):
+    if 'id' in request.GET:
+        job_id = request.GET['id']
+        new_record = JobStatus.objects.get(pipeline_key=job_id)
+
+        context = {}
+        context["id"] = job_id
+
+        return render(request, "srnabench_result.html", results)
+
+
 def result_new(request):
     if 'id' in request.GET:
         job_id = request.GET['id']
