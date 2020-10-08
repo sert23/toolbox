@@ -306,7 +306,7 @@ class MultiStatusView(DetailView):
         pipeline_id = job_status.pipeline_key
         jobs_folder = os.path.join(MEDIA_ROOT,pipeline_id,"launched")
         if not os.path.exists(jobs_folder):
-            return redirect(reverse_lazy("mirgfree:launch")+ "?jobId=" + pipeline_id)
+            return redirect(reverse_lazy("launch")+ "?jobId=" + pipeline_id)
 
 
         launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder,f))]
