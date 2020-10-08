@@ -68,40 +68,18 @@
                 <li class="active"><a href="#Summary" data-toggle="tab">Summary</a>
                 </li>
 
+                <li ><a href="#explore" data-toggle="tab">Explore predictions</a>
+                </li>
+
+                <li ><a href="#expression" data-toggle="tab">Expression levels</a>
+                </li>
+
 {#                {% if preproc %}#}
 {#                <li class="active" ><a href="#Preprocessing" data-toggle="tab">Preprocessing</a>#}
 {#                </li>#}
 {#                {% endif %}#}
 
-                {% if Genome_mode %}
-                <li><a href="#Genome" data-toggle="tab">Genome Mapping</a>
-                </li>
-                {% endif %}
-
-                {% if mirimg %}
-                <li><a href="#microRNA" data-toggle="tab">MicroRNA summary ({{ mirna_ref }})</a>
-                </li>
-                {% endif %}
-
-                {% if libs %}
-                <li><a href="#libs" data-toggle="tab">sRNA summary</a>
-                </li>
-                {% endif %}
-
-                {% if novel %}
-                <li><a href="#novel" data-toggle="tab">Novel microRNAs</a>
-                </li>
-                {% endif %}
-
-                {% if trna %}
-                <li><a href="#trna" data-toggle="tab">Other features</a>
-                </li>
-                {% endif %}
-
-
             </ul>
-
-
 
 
 
@@ -123,6 +101,32 @@
 
                 </div>
 
+
+            <div class="tab-pane fade" id="explore">
+
+                    <div class="col-lg-10">
+
+                        Choose a prediction  </label> <div class="controls">
+                     <select name="choose_predictions" multiple="multiple" id="id_choose_predictions" class="selectmultiple">
+                        {% for  name in prediction_list %}
+{#                         <option value="{{ value }}">{{ name }}</option>#}
+                         <option value="{{ name }}">{{ name }}</option>
+                         {% endfor %}
+
+                     </select>
+                    </div>
+
+
+                </div>
+
+            <div class="tab-pane fade" id="expression">
+
+                    <div class="col-lg-10">
+
+                    </div>
+
+
+                </div>
 {#                {% if preproc %}#}
 {#                <div class="tab-pane fade in active" id="Preprocessing">#}
 {#                <div class="col-lg-12">#}
