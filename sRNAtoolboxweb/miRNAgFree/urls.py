@@ -7,6 +7,7 @@ urlpatterns = [
     # url(r'results', views.result_new, name='srnabench'),
     #url(r'results', views.result),
     url(r'results', views.results, name='mirnagfree'),
+    url(r'pile', views.ajax_fetch_pile, name='pile'),
     url(r'table/(.+)/(.+)/(.+)*', views.render_table, name='table_bench'),
     url(r'^upload/[A-za-z0-9]+', views.upload_files.as_view(), name="upload"),
     url(r'^ajax_input$', views.ajax_receive_input, name='ajax_input'),
