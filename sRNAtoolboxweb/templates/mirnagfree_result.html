@@ -112,9 +112,9 @@
 {#                         <option value="{{ value }}">{{ name }}</option>#}
                          <option value="{{ name }}">{{ name }}</option>
                          {% endfor %}
-                    <input>
+
                      </select>
-                    <input type="hidden" name='choose_predictions_hidden' id='id_choose_predictions_hidden' />
+                    <input type="hidden" name='choose_predictions_hidden' id='id_choose_predictions_hidden'/>
                     </div>
 
 
@@ -210,6 +210,12 @@
             enableCaseInsensitiveFiltering: true,
             filterBehavior: 'both',
             maxHeight: 300,
+            onClick: function() {
+
+                 var clickedOption = $(this);
+                 alert(clickedOption);
+
+            },
             onDropdownHidden: function (e) {
                 if(document.getElementById('id_choose_predictions').value){
                    jQuery('#id_choose_predictions_hidden').val(jQuery('#id_choose_predictions').val().map(function(item) {
