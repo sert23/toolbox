@@ -225,10 +225,10 @@
             }
 
         });
-
-        $('#id_choose_predictions').change(function(){
-              alert( $('#id_choose_predictions').val() );
-            });
+       $('#id_choose_predictions').click(function(){
+            lastSelected = this.value;
+            alert(lastSelected);
+        });
 
 
     });
