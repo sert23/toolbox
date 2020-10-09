@@ -1576,6 +1576,22 @@ class MirGLaunch(FormView):
             return render(self.request, 'miRNAgFree/multi_status.html', data)
 
 
+
+
+
+def ajax_fetch_pile(request):
+    name = request.GET.get('name', None)
+    jobID = request.GET.get('jobID', None)
+    filename = os.path.join(MEDIA_ROOT,jobID,"align",name+".salign")
+    with open(filename,"r") as af:
+        lines = af.readlines()
+    lines[0] = "<b>" + lines[0] + "</b>"
+
+    data = {}
+    data["pile"] = "".join(lines)
+    return JsonResponse(data)
+
+
 def results(request):
     if 'id' in request.GET:
         job_id = request.GET['id']
