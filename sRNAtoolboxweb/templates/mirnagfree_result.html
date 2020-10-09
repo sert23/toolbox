@@ -210,12 +210,7 @@
             enableCaseInsensitiveFiltering: true,
             filterBehavior: 'both',
             maxHeight: 300,
-            onClick: function(e) {
 
-                 var clickedOption = $(this);
-                 alert(clickedOption);
-
-            },
             onDropdownHidden: function (e) {
                 if(document.getElementById('id_choose_predictions').value){
                    jQuery('#id_choose_predictions_hidden').val(jQuery('#id_choose_predictions').val().map(function(item) {
@@ -230,10 +225,16 @@
             }
 
         });
-        jQuery("#genome-div").hide();
-        jQuery("#Adapter_Custom").hide();
-        jQuery("#Div_max").hide();
+
+        $('#id_choose_predictions').change(function(){
+              alert("The text has been changed.");
+            });
+
+
     });
+
+
+
     </script>
 
 
