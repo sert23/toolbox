@@ -112,8 +112,9 @@
 {#                         <option value="{{ value }}">{{ name }}</option>#}
                          <option value="{{ name }}">{{ name }}</option>
                          {% endfor %}
-
+                    <input>
                      </select>
+                    <input type="hidden" name='choose_predictions_hidden' id='id_choose_predictions_hidden' />
                     </div>
 
 
@@ -200,6 +201,36 @@
         }
     });
 </script>
+
+    <script>
+
+    jQuery(document).ready(function() {
+        jQuery('#id_choose_predictions').multiselect({
+            enableCollapsibleOptGroups: true,
+            enableCaseInsensitiveFiltering: true,
+            filterBehavior: 'both',
+            maxHeight: 300,
+            onDropdownHidden: function (e) {
+                if(document.getElementById('id_choose_predictions').value){
+                   jQuery('#id_choose_predictions_hidden').val(jQuery('#id_choose_predictions').val().map(function(item) {
+                        return item.split(':')[0]}).join(','));
+                } else{
+                        document.getElementById('id_choose_predictions_hidden').value = "" ;
+                }
+{#                    alert(document.getElementById('id_species_hidden').value);#}
+{#                    toggleFields();#}
+{#                alert(jQuery('#id_species').val().join(','));#}
+
+            }
+
+        });
+        jQuery("#genome-div").hide();
+        jQuery("#Adapter_Custom").hide();
+        jQuery("#Div_max").hide();
+    });
+    </script>
+
+
 
     <script>
 
