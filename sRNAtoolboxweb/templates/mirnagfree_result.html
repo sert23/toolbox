@@ -106,7 +106,7 @@
 
                     <div class="col-lg-4">
 
-                        Choose a prediction  </label> <div class="controls">
+                      <label>  Choose a prediction  </label> <div class="controls">
                      <select name="choose_predictions" id="id_choose_predictions" class="selectmultiple">
                         <option value="" disabled selected> </option>
                          {% for  name in prediction_list %}
@@ -121,7 +121,25 @@
 
                 </div>
             <div class="col-lg-4" id="explore_div">
+               <label>   Sequence: </label>
                 <pre> ATCGGACGTCAGTTCGAGTCA </pre>
+                <label>   Pile: </label>
+                <pre> TTGAGACTCTGAAATCTGATT	6
+                       TTGAGACTCTGGGTCTGAGTGAA	1
+                       GTGAGACTCCTCTTGCTCG	1
+                       CTGAGACTTGAACTTGGGG	1
+                       TTGAGACTCTGAAATCTAATT	1
+                       CTGAGACTGTGGAGTAATAGCC	1
+                       ATGAGACTGCAGACCTGCCATGC	1
+                       ATGAGACTGTTATTTGTAGAAC	1
+                       TTGAGACTCGGACTGGCTCTCCT	1
+                       ATGAGACTTCCCTCGGGACT	1
+                       CTGAGACTCTGAGGGCCTTGGG	1
+                       TTGAGACTCACTTATCCCT	1
+                       TTGAGACTGAGCAAGGCTACT	1
+                       GTGAGACTGCTGCTCCTCGGGCCA	1
+                       CTGAGACTTTTAACCTCTGAGCCT	1
+                     TGTTGAGACTCTGAAATCTGATT	1 </pre>
             </div>
 
             <div class="tab-pane fade" id="expression">
