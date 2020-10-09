@@ -108,7 +108,8 @@
 
                         Choose a prediction  </label> <div class="controls">
                      <select name="choose_predictions" id="id_choose_predictions" class="selectmultiple">
-                        {% for  name in prediction_list %}
+                        <option value="" disabled selected>-</option>
+                         {% for  name in prediction_list %}
 {#                         <option value="{{ value }}">{{ name }}</option>#}
                          <option value="{{ name }}">{{ name }}</option>
                          {% endfor %}
