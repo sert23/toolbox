@@ -107,7 +107,7 @@
                     <div class="col-lg-10">
 
                         Choose a prediction  </label> <div class="controls">
-                     <select name="choose_predictions" multiple="multiple" id="id_choose_predictions" class="selectmultiple">
+                     <select name="choose_predictions" id="id_choose_predictions" class="selectmultiple">
                         {% for  name in prediction_list %}
 {#                         <option value="{{ value }}">{{ name }}</option>#}
                          <option value="{{ name }}">{{ name }}</option>
@@ -202,41 +202,37 @@
     });
 </script>
 
-    <script>
-
-    jQuery(document).ready(function() {
-        jQuery('#id_choose_predictions').multiselect({
-            enableCollapsibleOptGroups: true,
-            enableCaseInsensitiveFiltering: true,
-            filterBehavior: 'both',
-            maxHeight: 300,
-
-            onDropdownHidden: function (e) {
-                if(document.getElementById('id_choose_predictions').value){
-                   jQuery('#id_choose_predictions_hidden').val(jQuery('#id_choose_predictions').val().map(function(item) {
-                        return item.split(':')[0]}).join(','));
-                } else{
-                        document.getElementById('id_choose_predictions_hidden').value = "" ;
-                }
+{#    <script>#}
+{##}
+{#    jQuery(document).ready(function() {#}
+{#        jQuery('#id_choose_predictions').multiselect({#}
+{#            enableCollapsibleOptGroups: true,#}
+{#            enableCaseInsensitiveFiltering: true,#}
+{#            filterBehavior: 'both',#}
+{#            maxHeight: 300,#}
+{##}
+{#            onDropdownHidden: function (e) {#}
+{#                if(document.getElementById('id_choose_predictions').value){#}
+{#                   jQuery('#id_choose_predictions_hidden').val(jQuery('#id_choose_predictions').val().map(function(item) {#}
+{#                        return item.split(':')[0]}).join(','));#}
+{#                } else{#}
+{#                        document.getElementById('id_choose_predictions_hidden').value = "" ;#}
+{#                }#}
 {#                    alert(document.getElementById('id_species_hidden').value);#}
 {#                    toggleFields();#}
 {#                alert(jQuery('#id_species').val().join(','));#}
-
-            }
-
-        });
-       $('#id_choose_predictions').click(function(){
-           alert("eo");
-           lastSelected = this.value;
-            alert(lastSelected);
-        });
-
-
-    });
-
-
-
-    </script>
+{##}
+{#            }#}
+{##}
+{#        });#}
+{##}
+{##}
+{##}
+{#    });#}
+{##}
+{##}
+{##}
+{#    </script>#}
 
 
 
