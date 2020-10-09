@@ -104,11 +104,11 @@
 
             <div class="tab-pane fade" id="explore">
 
-                    <div class="col-lg-10">
+                    <div class="col-lg-4">
 
                         Choose a prediction  </label> <div class="controls">
                      <select name="choose_predictions" id="id_choose_predictions" class="selectmultiple">
-                        <option value="" disabled selected>-</option>
+                        <option value="" disabled selected> </option>
                          {% for  name in prediction_list %}
 {#                         <option value="{{ value }}">{{ name }}</option>#}
                          <option value="{{ name }}">{{ name }}</option>
@@ -120,6 +120,9 @@
 
 
                 </div>
+            <div class="col-lg-4" id="explore_div">
+                <pre> ATCGGACGTCAGTTCGAGTCA </pre>
+            </div>
 
             <div class="tab-pane fade" id="expression">
 
