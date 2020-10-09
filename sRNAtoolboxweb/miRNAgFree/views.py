@@ -1581,6 +1581,8 @@ class MirGLaunch(FormView):
 
 def ajax_fetch_pile(request):
     name = request.GET.get('name', None)
+    names = name.split("_")
+    name = names[0]
     jobID = request.GET.get('jobID', None)
     filename = os.path.join(MEDIA_ROOT,jobID,"align",name+".salign")
     with open(filename,"r") as af:
