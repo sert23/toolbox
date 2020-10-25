@@ -125,88 +125,36 @@
             </div>
             <div class="col-lg-7" id="explore_div">
                <label>   Sequence: </label>
-                <pre> ATCGGACGTCAGTTCGAGTCA </pre>
-                <label>   Pile: </label>
-                <pre>
-                    <b>TTGAGACTCTGAAATCTGATT	6</b>
-                       TTGAGACTCTGGGTCTGAGTGAA	1
-                       GTGAGACTCCTCTTGCTCG	1
-                       CTGAGACTTGAACTTGGGG	1
-                       TTGAGACTCTGAAATCTAATT	1
-                       CTGAGACTGTGGAGTAATAGCC	1
-                       ATGAGACTGCAGACCTGCCATGC	1
-                       ATGAGACTGTTATTTGTAGAAC	1
-                       TTGAGACTCGGACTGGCTCTCCT	1
-                       ATGAGACTTCCCTCGGGACT	1
-                       CTGAGACTCTGAGGGCCTTGGG	1
-                       TTGAGACTCACTTATCCCT	1
-                       TTGAGACTGAGCAAGGCTACT	1
-                       GTGAGACTGCTGCTCCTCGGGCCA	1
-                       CTGAGACTTTTAACCTCTGAGCCT	1
-                     TGTTGAGACTCTGAAATCTGATT	1 </pre>
+                <pre id="seq_pre">  </pre>
+                <label>   Alignment pile: </label>
+{#                <pre>#}
+{#                    <b>TTGAGACTCTGAAATCTGATT	6</b>#}
+{#                       TTGAGACTCTGGGTCTGAGTGAA	1#}
+{#                       GTGAGACTCCTCTTGCTCG	1#}
+{#                       CTGAGACTTGAACTTGGGG	1#}
+{#                        </pre>#}
+                <pre id="pile_pre" ></pre>
+            </div>
+
+
+
+
+
             </div>
 
             <div class="tab-pane fade" id="expression">
 
                     <div class="col-lg-10">
-
+                    <table id="exp_table" class="table table-striped table-bordered table-hover dataTable no-footer"></table>
                     </div>
 
 
                 </div>
-{#                {% if preproc %}#}
-{#                <div class="tab-pane fade in active" id="Preprocessing">#}
-{#                <div class="col-lg-12">#}
-{#                    {% include "preprocessing.html" %}#}
-{#                </div>#}
-{#                </div>#}
-{#                {% endif %}#}
 
-                {% if  mapping_results %}
-                <div class="tab-pane fade" id="Genome">
-                <div class="col-lg-12">
-                    {% include "Genome.html" %}
-                </div>
-                </div>
-                {% endif %}
-
-                {% if mirimg %}
-
-                <div class="tab-pane fade" id="microRNA">
-                <div class="col-lg-12">
-                    {% include "microrna_summary.html" %}
-                </div>
-                </div>
-                {% endif %}
-
-                {% if libs %}
-                <div class="tab-pane fade" id="libs">
-                <div class="col-lg-12">
-                    {% include "libs.html" %}
-                </div>
-                </div>
-                {% endif %}
-
-                {% if novel %}
-                <div class="tab-pane fade" id="novel">
-                <div class="col-lg-12">
-                    {% include "novel.html" %}
-                </div>
-                </div>
-                {% endif %}
-
-                {% if trna %}
-                <div class="tab-pane fade" id="trna">
-                <div class="col-lg-12">
-                    {% include "trna.html" %}
-                </div>
-                </div>
-                {% endif %}
-
-
-
+{#            <div class="tab-pane fade" id="expression">#}
+{#                <pre>HELO</pre>#}
+{#            </div>#}
             </div>
-        </div>
     </div>
 
 {% endblock %}
@@ -219,57 +167,64 @@
 
     <script src="{% static 'js/plugins/dataTables/jquery.dataTables.js' %}"></script>
     <script src="{% static 'js/plugins/dataTables/dataTables.bootstrap.js' %}"></script>
+
+
     <script>
-    $('table').each(function() {
-        if (this.id != "notformattable"){
-            console.log(this.id);
-            $(this).dataTable();
-        }
-    });
-</script>
+        $('#explore_div').hide();
+    </script>
 
     <script>
 
-    $('#id_choose_predictions').change(function(){
+        $('#id_choose_predictions').change(function(){
 
-        alert($('#id_choose_predictions').val());
+            $.ajax({
+                url: '{% url "pile" %}',
+                data: {
+                    "id" : "{{ id }}",
+                    "name": $('#id_choose_predictions').val(),
+                },
+                dataType: 'json',
+                success: function (data) {
+
+                    {#alert(data.pile);#}
+
+                    $('#pile_pre').html(data.pile);
+                    $('#seq_pre').html(data.seq);
+                    $('#explore_div').show();
+
+                },
+            });
 
     });
 
 
     </script>
 
-{#    <script>#}
-{##}
-{#    jQuery(document).ready(function() {#}
-{#        jQuery('#id_choose_predictions').multiselect({#}
-{#            enableCollapsibleOptGroups: true,#}
-{#            enableCaseInsensitiveFiltering: true,#}
-{#            filterBehavior: 'both',#}
-{#            maxHeight: 300,#}
-{##}
-{#            onDropdownHidden: function (e) {#}
-{#                if(document.getElementById('id_choose_predictions').value){#}
-{#                   jQuery('#id_choose_predictions_hidden').val(jQuery('#id_choose_predictions').val().map(function(item) {#}
-{#                        return item.split(':')[0]}).join(','));#}
-{#                } else{#}
-{#                        document.getElementById('id_choose_predictions_hidden').value = "" ;#}
-{#                }#}
-{#                    alert(document.getElementById('id_species_hidden').value);#}
-{#                    toggleFields();#}
-{#                alert(jQuery('#id_species').val().join(','));#}
-{##}
-{#            }#}
-{##}
-{#        });#}
-{##}
-{##}
-{##}
-{#    });#}
-{##}
-{##}
-{##}
-{#    </script>#}
+
+    <script>
+
+    var received_data = {{ exp_body|safe }};
+    var received_cols = {{ exp_headers|safe }}
+
+    $(document).ready(function() {
+
+        var table = $('#exp_table').DataTable({
+
+//        'responsive': true,
+            data: received_data,
+//        processing: true,
+//        serverSide: true,
+//        deferRender: false,
+            'language': {
+                "loadingRecords": "&nbsp;",
+                "processing": "Loading..."
+            },
+            columns: received_cols,
+        });
+
+    });
+
+    </script>
 
 
 
