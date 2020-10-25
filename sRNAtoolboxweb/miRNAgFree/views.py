@@ -40,7 +40,7 @@ import shutil
 from django.http import JsonResponse
 import json
 import subprocess
-
+import re
 
 #CONF = json.load(file("/shared/sRNAtoolbox/sRNAtoolbox.conf"))
 CONF = settings.CONF
@@ -1541,11 +1541,11 @@ class MirGLaunch(FormView):
                     # launch
                     c_path = make_config_json(i[0])
                     comm = create_call(i[0], c_path)
-                    print("HERE")
-                    print(comm)
                     os.system(comm)
                     new_record.job_status = 'sent_to_queue'
                     new_record.save()
+                    if len(IDs) == 1:
+                        return redirect(reverse_lazy('progress', kwargs={"pipeline_id": i[0]}))
                 if job_stat != "Finished" and job_stat != "Finished with Errors":
                     data["running"] = True
                 if job_stat == "sent_to_queue":
@@ -1583,15 +1583,36 @@ def ajax_fetch_pile(request):
     name = request.GET.get('name', None)
     names = name.split("_")
     name = names[0]
-    jobID = request.GET.get('jobID', None)
+    print(name)
+    jobID = request.GET.get('id', None)
+    print(jobID)
     filename = os.path.join(MEDIA_ROOT,jobID,"align",name+".salign")
     with open(filename,"r") as af:
         lines = af.readlines()
+    seq = lines[0]
+    seq = re.sub("[0-9]+", "", seq)
     lines[0] = "<b>" + lines[0] + "</b>"
 
     data = {}
     data["pile"] = "".join(lines)
+    data["seq"] = seq
     return JsonResponse(data)
+
+def jsonTabler(input_tsv,drops=[]):
+    with open(input_tsv, "r") as ef:
+        table_df = pd.read_csv(ef, sep="\t")
+        table_df = table_df.drop(drops,axis=1)
+        headers = list(table_df.columns.values)
+        values = table_df.values.tolist()
+        header_list = []
+        for h in headers:
+            header_list.append({"title": h})
+
+        js_headers = json.dumps(header_list)
+        js_body = json.dumps(values)
+
+        return js_headers,js_body
+
 
 
 def results(request):
@@ -1621,5 +1642,10 @@ def results(request):
             expression_df = pd.read_csv(ef, sep="\t")
         pred_names = expression_df['name'].tolist()
         context["prediction_list"] = pred_names
+
+        context["exp_headers"],context["exp_body"] = jsonTabler(expression_file)
+
+        print(context["exp_headers"])
+        print(context["exp_body"])
         return render(request, "mirnagfree_result.html", context)
 
