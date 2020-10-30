@@ -1208,7 +1208,8 @@ def make_config(req_obj):
             config_lines.append("guessSpecies=true")
             # print("GUESS")
         else:
-            short, assembly = ref_species.split(",")
+            # short, assembly = ref_species.split(",")
+            short = ref_species
             # config_lines.append("species="+assembly)
             config_lines.append("microRNA="+short)
 
