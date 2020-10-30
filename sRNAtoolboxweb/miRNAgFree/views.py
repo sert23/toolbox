@@ -1204,11 +1204,12 @@ def make_config(req_obj):
 
     ref_species = param_dict.get("species")
     if ref_species:
-        short, assembly = ref_species.split(",")
-        # config_lines.append("species="+assembly)
-        config_lines.append("microRNA="+short)
-    else:
-        config_lines.append("guessSpecies=true")
+        if ref_species == "GUESS":
+            config_lines.append("guessSpecies=true")
+        else:
+            short, assembly = ref_species.split(",")
+            # config_lines.append("species="+assembly)
+            config_lines.append("microRNA="+short)
 
     protocol = param_dict.get("protocol")
 
