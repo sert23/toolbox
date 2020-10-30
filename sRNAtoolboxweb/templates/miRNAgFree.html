@@ -171,7 +171,8 @@
                  <div id="div_id_species" class="control-group"> <label for="id_species" class="control-label ">
                 Related species for annotation of predicted miRNAs<a  data-toggle="modal" data-target="#species_dropdown" class="btn btn-link"><i class="fa fa-question-circle"> </i></a> </label> <div class="controls">
                      <select name="species" multiple="multiple" id="id_species" class="selectmultiple">
-                        {% for short,scientific in mirgenedb_list %}
+                        <option value="GUESS">Use whole MirGeneDB</option>
+                         {% for short,scientific in mirgenedb_list %}
                          <option value="{{ short }}">{{ scientific }}</option>
                          {% endfor %}
                      </optgroup>
