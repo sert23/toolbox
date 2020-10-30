@@ -1202,10 +1202,11 @@ def make_config(req_obj):
 
     #advanced parameters
 
-    ref_species = param_dict.get("species")
+    ref_species = param_dict.get("species_hidden")
     if ref_species:
         if ref_species == "GUESS":
             config_lines.append("guessSpecies=true")
+            # print("GUESS")
         else:
             short, assembly = ref_species.split(",")
             # config_lines.append("species="+assembly)
