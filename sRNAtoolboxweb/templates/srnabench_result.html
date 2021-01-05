@@ -94,10 +94,12 @@
                 {% endif %}
 
                 {% if trna %}
-                <li><a href="#trna" data-toggle="tab">Other features</a>
+                <li><a href="#trna" data-toggle="tab">tRNA</a>
                 </li>
                 {% endif %}
 
+                <li><a href="#more" data-toggle="tab">More</a>
+                </li>
 
             </ul>
 
@@ -166,7 +168,11 @@
                 </div>
                 </div>
                 {% endif %}
-
+                <div class="tab-pane fade" id="more">
+                <div class="col-lg-12">
+                    {% include "bench_tabs/more.html" %}
+                </div>
+                </div>
 
 
             </div>

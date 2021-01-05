@@ -1,0 +1,20 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}genecodis{% endblock %}
+{% block title %}
+    Send top expressed miRNAs to GeneCodis for co-annotation analysis
+{% endblock %}
+{% block text %}
+        <div class="control-group"> <label class="control-label ">
+                    Select top: </label>
+            <div class="controls"> <select name="quality_method" class="form-control select" id="id_quality_method">
+                <option value="5" selected>5</option>
+                <option value="10">10</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+
+    </select>
+        </div>
+        </div>
+    <button type="button" class="btn btn-primary" data-dismiss="modal">Send to GeneCodis</button>
+{% endblock %}
