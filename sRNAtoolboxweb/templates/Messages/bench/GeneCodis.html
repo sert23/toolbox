@@ -24,12 +24,17 @@
         </div>
         <div class="col-lg-4">
             <br>
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Send to GeneCodis</button>
+            <button type="button" class="btn btn-success" id="GC_button">Send to GeneCodis</button>
         </div>
         <div class="col-lg-4">
         </div>
-
     </div>
-
     </form>
+
+    <script>
+        $("#GC_button").click(function(){
+            alert("button");
+        });
+    </script>
+
 {% endblock %}
