@@ -34,6 +34,7 @@ from FileModels.summaryParser import LinksParser, BWParser
 from sRNAtoolboxweb.utils import render_modal
 from django.utils.safestring import mark_safe
 import pandas as pd
+from django.http import JsonResponse
 
 #CONF = json.load(file("/shared/sRNAtoolbox/sRNAtoolbox.conf"))
 CONF = settings.CONF
@@ -947,6 +948,15 @@ def show_align(request, job_id, type, name):
         result["align"] = "".join(content)
 
         return render(request, "align.html", result)
+
+def ajax_GeneCodis_top(request):
+    jobID = request.GET.get("jobID")
+    topN = request.GET.get("top")
+
+    data = {}
+    data["jobID"] = jobID
+    data["topN"] = topN
+    return JsonResponse(data)
 
 class Bench(FormView):
     template_name = 'bench.html'
