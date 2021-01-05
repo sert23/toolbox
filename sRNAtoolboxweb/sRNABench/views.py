@@ -953,9 +953,18 @@ def ajax_GeneCodis_top(request):
     jobID = request.GET.get("jobID")
     topN = request.GET.get("top")
 
+    new_record = JobStatus.objects.get(pipeline_key=jobID)
+    outdir = new_record.outdir
+    miRNA_file = os.path.join(outdir, "mature_sense.grouped")
+    with open(miRNA_file, "r") as mf:
+        miRNA_df = pd.read_csv(mf, sep="\t")
+
+    names = miRNA_df["name"].unique()
+
     data = {}
     data["jobID"] = jobID
     data["topN"] = topN
+    data["names"] = names
     return JsonResponse(data)
 
 class Bench(FormView):
