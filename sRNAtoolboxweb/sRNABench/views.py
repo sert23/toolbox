@@ -964,7 +964,7 @@ def ajax_GeneCodis_top(request):
     data = {}
     data["jobID"] = jobID
     data["topN"] = topN
-    data["names"] = names
+    data["names"] = list(names)
     return JsonResponse(data)
 
 class Bench(FormView):
