@@ -5,19 +5,28 @@
 {% endblock %}
 {% block text %}
 
-    <div class="form-group">
-        <span style="white-space: nowrap">
-          <label for="top">Select top: </label>
-          <select class="form-control" id="top" style="display:inline-block">
-                <option value="5" selected>5 miRNAs</option>
-                <option value="10">10 miRNAs</option>
-                <option value="25">25 miRNAs</option>
-                <option value="50">50 miRNAs</option>
-                <option value="100">100 miRNAs</option>
-          </select>
-        </span>
-      </div>
+    <form class="form-inline">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="control-group"> <label class="control-label">
+                    Select top: </label>
+                <div class="controls">
+                    <select name="quality_method" class="form-control select">
+                    <option value="5" selected>5 miRNAs</option>
+                    <option value="10">10 miRNAs</option>
+                    <option value="25">25 miRNAs</option>
+                    <option value="50">50 miRNAs</option>
+                    <option value="100">100 miRNAs</option>
 
-    <button type="button" class="btn btn-primary" data-dismiss="modal">Send to GeneCodis</button>
+    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Send to GeneCodis</button>
+        </div>
+
+    </div>
+
     </form>
 {% endblock %}
