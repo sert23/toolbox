@@ -11,7 +11,7 @@
             <div class="control-group"> <label class="control-label">
                     Select top: </label>
                 <div class="controls">
-                    <select name="quality_method" class="form-control select">
+                    <select name="top_GC" class="form-control select">
                     <option value="5" selected>5 miRNAs</option>
                     <option value="10">10 miRNAs</option>
                     <option value="25">25 miRNAs</option>
@@ -33,11 +33,12 @@
 
     <script>
         $("#GC_button").click(function(){
-            alert("button");
+            alert($("#top_GC").val());
             $.ajax({
         url: '{% url "ajax_GC" %}',
         data: {
             "jobID" : "{{ id }}",
+            "top" : $("#top_GC").val(),
         },
         dataType: 'json',
         success: function (data) {
