@@ -960,6 +960,7 @@ def ajax_GeneCodis_top(request):
         miRNA_df = pd.read_csv(mf, sep="\t")
 
     names = list(miRNA_df["name"].unique())
+    names = [i for i in names if i.startswith("hsa")]
     maxi = len(names)
     if topN < maxi:
         result = names[:topN]
