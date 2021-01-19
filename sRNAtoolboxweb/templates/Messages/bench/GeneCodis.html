@@ -34,7 +34,19 @@
     <script>
         $("#GC_button").click(function(){
             alert("button");
+            $.ajax({
+        url: '{% url "ajax_GC" %}',
+        data: {
+            "id" : "{{ jobID }}",
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (data.jobID){
+                alert(data.jobID);
+            }
+            },
         });
+            });
     </script>
 
 {% endblock %}
