@@ -37,7 +37,7 @@
             $.ajax({
         url: '{% url "ajax_GC" %}',
         data: {
-            "id" : "{{ jobID }}",
+            "jobID" : "{{ id }}",
         },
         dataType: 'json',
         success: function (data) {
