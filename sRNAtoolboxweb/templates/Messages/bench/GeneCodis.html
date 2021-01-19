@@ -43,7 +43,7 @@
         dataType: 'json',
         success: function (data) {
             if (data.jobID){
-                alert(data.url);
+                window.open(data.url, '_blank');
             }
             },
         });
