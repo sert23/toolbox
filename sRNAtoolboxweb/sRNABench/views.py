@@ -951,7 +951,7 @@ def show_align(request, job_id, type, name):
 
 def ajax_GeneCodis_top(request):
     jobID = request.GET.get("jobID")
-    topN = request.GET.get("top")
+    topN = int(request.GET.get("top"))
 
     new_record = JobStatus.objects.get(pipeline_key=jobID)
     outdir = new_record.outdir
@@ -959,12 +959,17 @@ def ajax_GeneCodis_top(request):
     with open(miRNA_file, "r") as mf:
         miRNA_df = pd.read_csv(mf, sep="\t")
 
-    names = miRNA_df["name"].unique()
+    names = list(miRNA_df["name"].unique())
+    maxi = len(names)
+    if topN < maxi:
+        result = names[:topN]
+    else:
+        result = names
 
     data = {}
     data["jobID"] = jobID
     data["topN"] = topN
-    data["names"] = list(names)
+    data["names"] = result
     return JsonResponse(data)
 
 class Bench(FormView):
