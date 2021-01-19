@@ -966,10 +966,13 @@ def ajax_GeneCodis_top(request):
     else:
         result = names
 
+    # https://genecodis.genyo.es/gc4/externalquery&org=9606&genes=1,2,13,14,5
+
     data = {}
     data["jobID"] = jobID
     data["topN"] = topN
     data["names"] = result
+    data["url"] = "https://genecodis.genyo.es/gc4/externalquery&org=9606&genes=" + ",".join(result)
     return JsonResponse(data)
 
 class Bench(FormView):
