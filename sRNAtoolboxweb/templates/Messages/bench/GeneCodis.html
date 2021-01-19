@@ -33,7 +33,7 @@
 
     <script>
         $("#GC_button").click(function(){
-            alert($("#top_GC").val());
+            {#alert($("#top_GC").val());#}
             $.ajax({
         url: '{% url "ajax_GC" %}',
         data: {
