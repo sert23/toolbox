@@ -598,10 +598,10 @@ class sRNABenchForm(forms.Form):
 
             if clase == "URL":
                 url = URL_list[int(ix)]
-                dest = os.path.join(out_dir, os.path.basename(url))
-                ifile, headers = urllib.request.urlretrieve(url, filename=dest)
-                input_file = dest
-                full_path = input_file
+                # dest = os.path.join(out_dir, os.path.basename(url))
+                # ifile, headers = urllib.request.urlretrieve(url, filename=dest)
+                # input_file = dest
+                full_path = url
 
                 # ifile, headers = urllib.request.urlretrieve(url, filename=dest)
             line = "input=" + full_path + "\n"
