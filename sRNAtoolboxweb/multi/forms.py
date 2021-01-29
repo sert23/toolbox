@@ -1024,7 +1024,8 @@ class sRNABenchForm2(forms.Form):
                 full_path = url
 
                 #ifile, headers = urllib.request.urlretrieve(url, filename=dest)
-            line = "input=" + input_file + "\n"
+            # line = "input=" + input_file + "\n"
+            line = "input=" + full_path + "\n"
             line2= "output="+ out_dir + "\n"
             config = line + line2 + general_config
             conf_file_location = os.path.join(out_dir,"conf.txt")
