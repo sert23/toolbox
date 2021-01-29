@@ -11,15 +11,21 @@ class ParamsBench():
         for ifile in self.ifiles:
             fd = open(ifile)
             for line in fd:
-                if '=' in line:
-                    [key, value] = line.rstrip("\n").split("=")
-                    if key == "libs" or key == "desc":
-                        if key in values:
-                            values[key].append(value)
+                try:
+                    if '=' in line:
+                        args = line.rstrip("\n").split("=")
+                        key = args.pop(0)
+                        value = "=".join(args)
+                        if key == "libs" or key == "desc":
+                            if key in values:
+                                values[key].append(value)
+                            else:
+                                values[key] = [value]
                         else:
-                            values[key] = [value]
-                    else:
-                        values[key] = value
+                            values[key] = value
+                except:
+                    pass
+
         return values
 
 
