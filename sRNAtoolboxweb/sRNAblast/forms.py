@@ -175,13 +175,14 @@ class sRNAblastForm(forms.Form):
 
         elif url:
 
-            extension = os.path.basename(url).split('.')[-1]
-            if name_modifier is not None:
-                dest = os.path.join(FS.location, str(name_modifier) + "." + extension).replace(" ", "")
-            else:
-                dest = os.path.join(FS.location, os.path.basename(url))
-
-            ifile, headers = urllib.request.urlretrieve(url, filename=dest)
+            # extension = os.path.basename(url).split('.')[-1]
+            # if name_modifier is not None:
+            #     dest = os.path.join(FS.location, str(name_modifier) + "." + extension).replace(" ", "")
+            # else:
+            #     dest = os.path.join(FS.location, os.path.basename(url))
+            #
+            # ifile, headers = urllib.request.urlretrieve(url, filename=dest)
+            ifile = url
 
         for i in range(1, 6):
             profile = cleaned_data.get('profile' + str(i))
