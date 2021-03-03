@@ -8,7 +8,7 @@ urlpatterns = [
     #url(r'results', views.result),
     url(r'results', views.results, name='mirnagfree'),
     url(r'pile', views.ajax_fetch_pile, name='pile'),
-    url(r'table/(.+)/(.+)/(.+)*', views.render_table, name='table_bench'),
+    url(r'table/(.+)/(.+)/(.+)*', views.render_table, name='table_mirg'),
     url(r'^upload/[A-za-z0-9]+', views.upload_files.as_view(), name="upload"),
     url(r'^ajax_input$', views.ajax_receive_input, name='ajax_input'),
     url(r'^ajax_del$', views.ajax_del, name='ajax_del'),
