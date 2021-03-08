@@ -1594,7 +1594,7 @@ def ajax_fetch_pile(request):
         lines = af.readlines()
     seq = lines[0]
     seq = re.sub("[0-9]+", "", seq)
-    # lines[0] = "<b>" + lines[0] + "</b>"
+    lines[0] = "<b>" + lines[0] + "</b>"
 
     new_lines = []
     for line in lines:
