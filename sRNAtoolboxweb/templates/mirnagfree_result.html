@@ -106,7 +106,7 @@
 
                     <div class="col-lg-2">
 
-                      <label>  Choose a prediction  </label> <div class="controls">
+                      <label>  Choose a prediction  </label> <div class="controls"> <a data-toggle="modal" data-target="#naming_info" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
                      <select name="choose_predictions" id="id_choose_predictions" class="selectmultiple">
                         <option value="" disabled selected> </option>
                          {% for  name in prediction_list %}
@@ -161,6 +161,7 @@
 
 {% block modals %}
     {% include "Messages/bench/HWTCbench.html" %}
+    {% include "Messages/miRgFree/candidate_naming.html" %}
 {% endblock %}
 
 {% block js %}
