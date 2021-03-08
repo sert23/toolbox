@@ -1579,7 +1579,10 @@ class MirGLaunch(FormView):
             return render(self.request, 'miRNAgFree/multi_status.html', data)
 
 
+def fill_blanks(input_seq, final_length):
 
+    blank_number = final_length - len(input_seq)
+    return input_seq + " " * blank_number
 
 
 def ajax_fetch_pile(request):
@@ -1597,9 +1600,18 @@ def ajax_fetch_pile(request):
     lines[0] = "<b>" + lines[0] + "</b>"
 
     new_lines = []
-    for line in lines:
+    lengths = []
+    for line in lines[1:]:
         sequence,count = line.split("\t")
-        new_lines.append(sequence)
+        # new_lines.append(sequence)
+        lengths.append(len(sequence))
+
+    m = max(lengths)
+    for line in lines[1:]:
+        n = fill_blanks(line, m)
+        to_paste = n + "9"
+        new_lines.append(to_paste)
+
 
     data = {}
     data["pile"] = "\n".join(new_lines)
