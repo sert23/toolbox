@@ -1613,7 +1613,6 @@ def ajax_fetch_pile(request):
         to_paste = n + "     " + count
         new_lines.append(to_paste)
 
-
     data = {}
     new_lines[0] = "<b>" + new_lines[0] + "</b>"
     data["pile"] = "".join(new_lines)
