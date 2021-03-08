@@ -1610,7 +1610,7 @@ def ajax_fetch_pile(request):
     for line in lines[1:]:
         sequence, count = line.split("\t")
         n = fill_blanks(sequence, m)
-        to_paste = n + "9"
+        to_paste = n + "     9"
         new_lines.append(to_paste)
 
 
