@@ -1597,7 +1597,7 @@ def ajax_fetch_pile(request):
         lines = af.readlines()
     seq = lines[0]
     seq = re.sub("[0-9]+", "", seq)
-    lines[0] = "<b>" + lines[0] + "</b>"
+    # lines[0] = "<b>" + lines[0] + "</b>"
 
     new_lines = []
     lengths = []
@@ -1607,15 +1607,16 @@ def ajax_fetch_pile(request):
         lengths.append(len(sequence))
 
     m = max(lengths)
-    for line in lines[1:]:
+    for i,line in enumerate(lines):
         sequence, count = line.split("\t")
         n = fill_blanks(sequence, m)
-        to_paste = n + "     9"
+        to_paste = n + "     " + count
         new_lines.append(to_paste)
 
 
     data = {}
-    data["pile"] = "\n".join(new_lines)
+    new_lines[0] = "<b>" + new_lines[0] + "</b>"
+    data["pile"] = "".join(new_lines)
     # data["pile"] = "".join(lines)
     data["seq"] = seq
     return JsonResponse(data)
