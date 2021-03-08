@@ -1602,7 +1602,7 @@ def ajax_fetch_pile(request):
         new_lines.append(sequence)
 
     data = {}
-    data["pile"] = "".join(new_lines)
+    data["pile"] = "\n".join(new_lines)
     # data["pile"] = "".join(lines)
     data["seq"] = seq
     return JsonResponse(data)
