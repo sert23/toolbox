@@ -1596,8 +1596,14 @@ def ajax_fetch_pile(request):
     seq = re.sub("[0-9]+", "", seq)
     lines[0] = "<b>" + lines[0] + "</b>"
 
+    new_lines = []
+    for line in lines:
+        sequence,count = line.split("\t")
+        new_lines.append(sequence)
+
     data = {}
-    data["pile"] = "".join(lines)
+    data["pile"] = "".join(new_lines)
+    # data["pile"] = "".join(lines)
     data["seq"] = seq
     return JsonResponse(data)
 
