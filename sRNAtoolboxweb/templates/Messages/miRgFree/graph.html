@@ -26,7 +26,7 @@
         </div>
         <div class="col-lg-4">
             <label >Select expression measurement:</label>
-                <select id="expression_select">
+                <select class="form-control" id="expression_select">
                     {% for  variable in expression_vars|slice:"1:" %}
                     <option value="{{ variable }}">{{ variable }}</option>
                     {% endfor %}
@@ -34,7 +34,7 @@
         </div>
         <div class="col-lg-2">
             <label >Select scale:</label>
-              <select class="form-control" id="perc_sca">
+              <select class="form-control" id="scale_select">
 
                     <option>Normal</option>
                     <option>log10</option>
