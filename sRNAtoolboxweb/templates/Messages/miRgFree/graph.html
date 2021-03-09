@@ -29,6 +29,7 @@
                 <select id="expression_select">
                     {% for  variable in exp_headers|slice:"1:" %}
                     <option value="{{ variable }}">{{ variable }}</option>
+                    {% endfor %}
                 </select>
         </div>
     </div>
