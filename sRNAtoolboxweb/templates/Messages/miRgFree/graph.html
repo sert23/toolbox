@@ -24,13 +24,22 @@
 {#        #}
                         </select>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <label >Select expression measurement:</label>
                 <select id="expression_select">
                     {% for  variable in expression_vars|slice:"1:" %}
                     <option value="{{ variable }}">{{ variable }}</option>
                     {% endfor %}
                 </select>
+        </div>
+        <div class="col-lg-2">
+            <label >Select scale:</label>
+              <select class="form-control" id="perc_sca">
+
+                    <option>Normal</option>
+                    <option>log10</option>
+
+  </select>
         </div>
     </div>
 
@@ -76,14 +85,15 @@
              "miRNAs": miRselected.join(","),
              {#"comp_set": $("#comp_set").val(),#}
              "variable": $("#expression_select").val(),
+             "scale": $("#scale_select").val(),
         },
         dataType: 'json',
         success: function (data) {
-            alert("step2");
+            alert(data.values);
             {#alert($("#heatmap_select").val().join(","));#}
             $("#add_graph").html("");
             $("#add_graph").html(data.plot);
-            {#alert("ea");#}
+
         }
       });
      };
