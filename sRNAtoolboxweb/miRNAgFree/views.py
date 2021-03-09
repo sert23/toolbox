@@ -1652,7 +1652,7 @@ def jsonTabler(input_tsv,drops=[]):
         js_headers = json.dumps(header_list)
         js_body = json.dumps(values)
 
-        return js_headers,js_body
+        return js_headers,js_body, headers
 
 
 
@@ -1684,9 +1684,13 @@ def results(request):
         pred_names = expression_df['name'].tolist()
         context["prediction_list"] = pred_names
 
-        context["exp_headers"],context["exp_body"] = jsonTabler(expression_file)
+        context["exp_headers"],context["exp_body"], context["expression_vars"] = jsonTabler(expression_file)
 
         print(context["exp_headers"])
         print(context["exp_body"])
+
+        #graphs
+
+
         return render(request, "mirnagfree_result.html", context)
 
