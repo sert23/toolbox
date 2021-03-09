@@ -43,6 +43,8 @@ import subprocess
 import re
 import plotly.graph_objs as go
 from plotly.offline import plot
+import math
+
 
 #CONF = json.load(file("/shared/sRNAtoolbox/sRNAtoolbox.conf"))
 CONF = settings.CONF
@@ -51,6 +53,12 @@ SPECIES_ANNOTATION_PATH = CONF["speciesAnnotation"]
 DB = CONF["db"]
 FS = FileSystemStorage(CONF["sRNAtoolboxSODataPath"])
 counter = itertools.count()
+
+def roundup100(x):
+    return int(math.ceil(x / 100.0)) * 100
+
+def roundup10(x):
+    return int(math.ceil(x / 10.0)) * 10
 
 def make_folder(path):
     if not os.path.exists(path):
@@ -1593,11 +1601,11 @@ def plot_barplot(input_mirna,input_values, scale=None, input_variable=None):
     if scale == "log10":
         scale = "log"
         # dtick = 500
-        dtick = 2
+        dtick = "D2"
     else:
         scale = "linear"
-        # dtick = float(max(input_values)/4)
-        dtick = 2
+        dtick = float(roundup100(max(input_values)/4))
+        # dtick = 1
 
     layout = go.Layout(
         margin=go.layout.Margin(
