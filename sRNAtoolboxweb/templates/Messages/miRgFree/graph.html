@@ -72,7 +72,7 @@
         $.ajax({
         url: '{% url "ajax_barplot" %}',
         data: {
-            "id" : "{{ jobID }}",
+            "id" : "{{ id }}",
              "miRNAs": miRselected.join(","),
              {#"comp_set": $("#comp_set").val(),#}
              "variable": $("#expression_select").val(),
