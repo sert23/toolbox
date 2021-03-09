@@ -1615,6 +1615,7 @@ def plot_barplot(input_mirna,input_values, scale=None, input_variable=None):
             automargin=True,
             # ticksuffix='%',
             tickprefix="   ",
+            dtick="D2",
             title=input_variable + "\n<br>")
     )
     fig = go.Figure(data=data, layout=layout)
