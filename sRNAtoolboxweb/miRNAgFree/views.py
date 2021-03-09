@@ -41,6 +41,8 @@ from django.http import JsonResponse
 import json
 import subprocess
 import re
+import plotly.graph_objs as go
+from plotly.offline import plot
 
 #CONF = json.load(file("/shared/sRNAtoolbox/sRNAtoolbox.conf"))
 CONF = settings.CONF
@@ -1578,6 +1580,24 @@ class MirGLaunch(FormView):
             data["refresh_rate"] = 90
             return render(self.request, 'miRNAgFree/multi_status.html', data)
 
+def plot_barplot(input_mirna,input_values, scale=None, input_variable=None):
+
+    data = [go.Bar(name=input_variable,
+                   x=input_mirna,
+                   y=input_values,
+                   # marker=dict(color=perc_df.bar_color.values),
+                   hovertemplate="%{x}p: %{y}",
+                   showlegend=False
+                   )]
+
+    fig = go.Figure(data=data)
+
+    # fig.update_layout(autosize=False)
+    # div = plot(fig, show_link=False, auto_open=False, include_plotlyjs=False, output_type="div")
+    div = plot(fig, show_link=False, auto_open=False, include_plotlyjs=False, output_type="div",
+               config={'editable': True})
+
+    return div
 
 def ajax_barplot(request):
 
@@ -1595,25 +1615,10 @@ def ajax_barplot(request):
     selected_df = selected_df[["name",variable]]
 
     data = {}
+    data["plot"] = plot_barplot(selected_df["name"].tolist(), selected_df[variable].tolist(), scale, variable)
     data["values"] = selected_df[variable].tolist()
     data["jobID"] = jobID
 
-    # perc_file = os.path.join(query_folder, "percentil.tsv")
-    # val_file = os.path.join(query_folder, "value.tsv")
-    # perc_df = pandas.read_csv(perc_file, sep="\t")[["sample", variable]]
-    # val_df = pandas.read_csv(val_file, sep="\t")[["sample", variable]]
-    # val_df.columns = ["sample", "values"]
-    # perc_df = perc_df.join(val_df.set_index('sample'), on='sample')
-    # # perc_df = perc_df.set_index('sample').join(val_df.set_index('sample'))
-    # # print(perc_df.columns)
-    # # print(perc_df)
-    # # exit()
-    # filepath = os.path.join(query_folder, "percentiles", variable + "_percentiles.tsv")
-    # # read files into dfs
-    #
-    # data = {}
-    #
-    # data["plot"], data["desc"] = plot_percentiles(perc_df, filepath, scale, variable)
 
     return JsonResponse(data)
 
