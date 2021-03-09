@@ -24,6 +24,21 @@
         </div>
     </div>
 
+    <script>
+
+        $(document).ready(function() {
+            $('.group1').select2({
+                width: "100%",
+                templateSelection: function (data, container) {
+                    console.log(">>Selection", data);
+                    {#$(container).css("background-color", "#5c0000");#}
+                    {#$(container).css("color", "#f8f8ff");#}
+                    return data.text;
+                }
+            });
+        });
+
+    </script>
 
 
 
