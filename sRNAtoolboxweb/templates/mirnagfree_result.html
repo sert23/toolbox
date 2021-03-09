@@ -106,7 +106,7 @@
 
                     <div class="col-lg-2">
 
-                      <label>  Choose a prediction  </label> <div class="controls"> <a data-toggle="modal" data-target="#naming_info" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
+                      <label>  Choose a prediction  <a data-toggle="modal" data-target="#naming_info" class="btn btn-link"><i class="fa fa-question-circle"> </i></a></label> <div class="controls">
                      <select name="choose_predictions" id="id_choose_predictions" class="selectmultiple">
                         <option value="" disabled selected> </option>
                          {% for  name in prediction_list %}
@@ -212,6 +212,7 @@
         var table = $('#exp_table').DataTable({
 
 //        'responsive': true,
+            "aaSorting": [[2,'desc']],
             data: received_data,
 //        processing: true,
 //        serverSide: true,
