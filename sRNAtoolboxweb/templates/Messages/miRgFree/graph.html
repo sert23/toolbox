@@ -34,6 +34,12 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="add_graph">
+        </div>
+    </div>
+
     <script>
 
         $(document).ready(function() {
@@ -55,6 +61,50 @@
 
     </script>
 
+    <script>
+
+     var loadGraph = function(e) {
+
+         alert("step1");
+        var miRselected = $("#miRNA_select").val() || [];
+
+        {#alert("eyo");#}
+        $.ajax({
+        url: '{% url "ajax_barplot" %}',
+        data: {
+            "id" : "{{ jobID }}",
+             "miRNAs": miRselected.join(","),
+             {#"comp_set": $("#comp_set").val(),#}
+             "variable": $("#expression_select").val(),
+        },
+        dataType: 'json',
+        success: function (data) {
+            alert("step2");
+            {#alert($("#heatmap_select").val().join(","));#}
+            $("#add_graph").html("");
+            $("#add_graph").html(data.plot);
+            {#alert("ea");#}
+        }
+      });
+     };
+
+    $('#mirg_plot').on('shown.bs.modal', function (e) {
+        loadGraph();
+    });
+
+    $('#miRNA_select').on('change', function (e) {
+        loadGraph();
+    });
+
+    $('#expression_select').on('change', function (e) {
+        loadGraph();
+    });
+
+
+
+
+
+</script>
 
 
 {% endblock %}
