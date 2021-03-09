@@ -1581,18 +1581,38 @@ class MirGLaunch(FormView):
 
 def ajax_barplot(request):
 
-    miRNAs = request.GET.get('mirnas', None)
+    miRNAs = request.GET.get('miRNAs', None)
     jobID = request.GET.get('id', None)
     variable = request.GET.get('variable', None)
-
+    scale = request.GET.get('scale', None)
+    mirna_list = miRNAs.split(",")
     new_record = JobStatus.objects.get(pipeline_key=jobID)
     expression_file = os.path.join(new_record.outdir, "microRNAs.txt")
     with open(expression_file, "r") as ef:
         expression_df = pd.read_csv(ef, sep="\t")
 
+    selected_df = expression_df[expression_df["name"].isin(mirna_list)] [["sample",variable]]
+
     data = {}
-    data["values"] = [1,2,3]
+    data["values"] = selected_df[variable].to_list()
     data["jobID"] = jobID
+
+    # perc_file = os.path.join(query_folder, "percentil.tsv")
+    # val_file = os.path.join(query_folder, "value.tsv")
+    # perc_df = pandas.read_csv(perc_file, sep="\t")[["sample", variable]]
+    # val_df = pandas.read_csv(val_file, sep="\t")[["sample", variable]]
+    # val_df.columns = ["sample", "values"]
+    # perc_df = perc_df.join(val_df.set_index('sample'), on='sample')
+    # # perc_df = perc_df.set_index('sample').join(val_df.set_index('sample'))
+    # # print(perc_df.columns)
+    # # print(perc_df)
+    # # exit()
+    # filepath = os.path.join(query_folder, "percentiles", variable + "_percentiles.tsv")
+    # # read files into dfs
+    #
+    # data = {}
+    #
+    # data["plot"], data["desc"] = plot_percentiles(perc_df, filepath, scale, variable)
 
     return JsonResponse(data)
 
