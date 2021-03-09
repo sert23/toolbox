@@ -13,8 +13,10 @@
             <label >Select miRNAs:</label>
                 <select class="group1" name="group1" multiple="multiple" id="miRNA_select">
 
-                    <option value="1">1</option>
-                    <option value="2">2</option>
+                    {% for  name in prediction_list %}
+{#                         <option value="{{ value }}">{{ name }}</option>#}
+                         <option value="{{ name }}">{{ name }}</option>
+                    {% endfor %}
 {#                            {% for f,name in perc_list %}#}
         {#        <option>{{ f }}</option>#}
 {#                            <option value="{{ f }}">{{ name }}</option>#}
@@ -36,6 +38,11 @@
                     return data.text;
                 }
             });
+            miRs = {{ prediction_list }}
+                alert(miRs);
+            $('#miRNA_select').val(miRs.slice(0, 4));
+            $('#miRNA_select').trigger('change');
+
         });
 
     </script>
