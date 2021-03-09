@@ -1586,7 +1586,7 @@ def plot_barplot(input_mirna,input_values, scale=None, input_variable=None):
                    x=input_mirna,
                    y=input_values,
                    # marker=dict(color=perc_df.bar_color.values),
-                   hovertemplate="%{x}p: %{y}",
+                   # hovertemplate="%{x}p: %{y}",
                    showlegend=False
                    )]
 
