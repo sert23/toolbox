@@ -38,7 +38,7 @@
                     return data.text;
                 }
             });
-            miRs = {{ prediction_list }}
+            miRs = {{ prediction_list|safe }}
                 alert(miRs);
             $('#miRNA_select').val(miRs.slice(0, 4));
             $('#miRNA_select').trigger('change');
