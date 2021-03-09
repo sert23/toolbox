@@ -10,7 +10,7 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <label >Select miRNAs:</label>
+            <label >Select miRNA candidates:</label>
                 <select class="group1" name="group1" multiple="multiple" id="miRNA_select">
 
                     {% for  name in prediction_list %}
@@ -23,6 +23,13 @@
 {#                            {% endfor %}#}
 {#        #}
                         </select>
+        </div>
+        <div class="col-lg-6">
+            <label >Select expression measurement:</label>
+                <select id="expression_select">
+                    {% for  variable in exp_headers|slice:"1:" %}
+                    <option value="{{ variable }}">{{ variable }}</option>
+                </select>
         </div>
     </div>
 
@@ -39,8 +46,8 @@
                 }
             });
             miRs = {{ prediction_list|safe }}
-                alert(miRs);
-            $('#miRNA_select').val(miRs.slice(0, 4));
+                {#alert(miRs);#}
+            $('#miRNA_select').val(miRs.slice(0, 5));
             $('#miRNA_select').trigger('change');
 
         });
