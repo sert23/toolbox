@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'table/(.+)/(.+)/(.+)*', views.render_table, name='table_mirg'),
     url(r'^upload/[A-za-z0-9]+', views.upload_files.as_view(), name="upload"),
     url(r'^ajax_input$', views.ajax_receive_input, name='ajax_input'),
+    url(r'^ajax_barplot$', views.ajax_barplot, name='ajax_barplot'),
     url(r'^ajax_del$', views.ajax_del, name='ajax_del'),
     url(r'^ajax_drop$', views.ajax_dropbox, name='ajax_drop'),
     url(r'^ajax_drive$', views.ajax_drive, name='ajax_drive'),

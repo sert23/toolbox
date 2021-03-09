@@ -1579,6 +1579,25 @@ class MirGLaunch(FormView):
             return render(self.request, 'miRNAgFree/multi_status.html', data)
 
 
+def ajax_barplot(request):
+
+    miRNAs = request.GET.get('mirnas', None)
+    jobID = request.GET.get('id', None)
+    variable = request.GET.get('variable', None)
+
+    new_record = JobStatus.objects.get(pipeline_key=jobID)
+    expression_file = os.path.join(new_record.outdir, "microRNAs.txt")
+    with open(expression_file, "r") as ef:
+        expression_df = pd.read_csv(ef, sep="\t")
+
+    data = {}
+    data["values"] = [1,2,3]
+    data["jobID"] = jobID
+
+    return JsonResponse(data)
+
+
+
 def fill_blanks(input_seq, final_length):
 
     blank_number = final_length - len(input_seq)
