@@ -1591,7 +1591,8 @@ def ajax_barplot(request):
     with open(expression_file, "r") as ef:
         expression_df = pd.read_csv(ef, sep="\t")
 
-    selected_df = expression_df[expression_df["name"].isin(mirna_list)] [["sample",variable]]
+    selected_df = expression_df[expression_df["name"].isin(mirna_list)]
+    selected_df = selected_df[["name",variable]]
 
     data = {}
     data["values"] = selected_df[variable].to_list()
