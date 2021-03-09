@@ -1592,11 +1592,11 @@ def plot_barplot(input_mirna,input_values, scale=None, input_variable=None):
 
     if scale == "log10":
         scale = "log"
-        dtick = 500
-        # dtick = "D2"
+        # dtick = 500
+        dtick = "D2"
     else:
         scale = "linear"
-        dtick = 6
+        dtick = 500
 
     layout = go.Layout(
         margin=go.layout.Margin(
@@ -1618,7 +1618,7 @@ def plot_barplot(input_mirna,input_values, scale=None, input_variable=None):
             automargin=True,
             # ticksuffix='%',
             tickprefix="   ",
-            dtick="D2",
+            dtick=dtick,
             title=input_variable + "\n<br>")
     )
     fig = go.Figure(data=data, layout=layout)
