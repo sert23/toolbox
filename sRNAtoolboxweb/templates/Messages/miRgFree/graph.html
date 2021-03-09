@@ -63,7 +63,7 @@
             });
             miRs = {{ prediction_list|safe }}
                 {#alert(miRs);#}
-            $('#miRNA_select').val(miRs.slice(0, 5));
+            $('#miRNA_select').val(miRs.slice(0, 10));
             $('#miRNA_select').trigger('change');
 
         });
@@ -74,7 +74,7 @@
 
      var loadGraph = function(e) {
 
-         alert("step1");
+         {#alert("step1");#}
         var miRselected = $("#miRNA_select").val() || [];
 
         {#alert("eyo");#}
@@ -89,7 +89,7 @@
         },
         dataType: 'json',
         success: function (data) {
-            alert(data.values);
+            {#alert(data.values);#}
             {#alert($("#heatmap_select").val().join(","));#}
             $("#add_graph").html("");
             $("#add_graph").html(data.plot);
