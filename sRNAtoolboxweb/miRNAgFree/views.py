@@ -1596,7 +1596,7 @@ def plot_barplot(input_mirna,input_values, scale=None, input_variable=None):
         # dtick = "D2"
     else:
         scale = "linear"
-        dtick = None
+        dtick = 500
 
     layout = go.Layout(
         margin=go.layout.Margin(
