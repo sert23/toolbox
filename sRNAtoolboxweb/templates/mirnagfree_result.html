@@ -73,6 +73,8 @@
 
                 <li ><a href="#expression" data-toggle="tab">Expression levels</a>
                 </li>
+                <li ><a href="#plots" data-toggle="tab">Graphs</a>
+                </li>
 
 {#                {% if preproc %}#}
 {#                <li class="active" ><a href="#Preprocessing" data-toggle="tab">Preprocessing</a>#}
@@ -151,6 +153,19 @@
 
                 </div>
 
+
+
+
+            <div class="tab-pane fade" id="plots">
+
+                    <div class="col-lg-10">
+
+                    </div>
+
+                        <button class="btn btn-primary btn btn-primary"> Expression barplots </button>
+
+                </div>
+
 {#            <div class="tab-pane fade" id="expression">#}
 {#                <pre>HELO</pre>#}
 {#            </div>#}
@@ -162,6 +177,7 @@
 {% block modals %}
     {% include "Messages/bench/HWTCbench.html" %}
     {% include "Messages/miRgFree/candidate_naming.html" %}
+    {% include "Messages/miRgFree/graph.html" %}
 {% endblock %}
 
 {% block js %}
