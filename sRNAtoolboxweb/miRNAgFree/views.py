@@ -1598,27 +1598,27 @@ def plot_barplot(input_mirna,input_values, scale=None, input_variable=None):
     layout = go.Layout(
         margin=go.layout.Margin(
             l=50,
-            r=50,
+            r=100,
             b=200,
             t=100,
             pad=4
         ),
-        title= input_variable,
+        title=input_variable,
         font=dict(size=18),
         # autosize=False,
         # height=650,
         # width=1150,
+        xaxis=dict(
+            title=""),
         yaxis=dict(
             type=scale,
             automargin=True,
             # ticksuffix='%',
             tickprefix="   ",
-            title= input_variable + "\n<br>")
+            title=input_variable + "\n<br>")
     )
     fig = go.Figure(data=data, layout=layout)
 
-    # fig.update_layout(autosize=False)
-    # div = plot(fig, show_link=False, auto_open=False, include_plotlyjs=False, output_type="div")
     div = plot(fig, show_link=False, auto_open=False, include_plotlyjs=False, output_type="div",
                config={'editable': True})
 
