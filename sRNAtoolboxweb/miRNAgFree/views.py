@@ -1600,8 +1600,8 @@ def plot_barplot(input_mirna,input_values, scale=None, input_variable=None):
 
     if scale == "log10":
         scale = "log"
-        # dtick = 500
-        dtick = "D2"
+        # dtick = "D2"
+        dtick = 1
     else:
         scale = "linear"
         dtick = float(roundup100(max(input_values)/4))
