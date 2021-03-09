@@ -1595,7 +1595,7 @@ def ajax_barplot(request):
     selected_df = selected_df[["name",variable]]
 
     data = {}
-    data["values"] = selected_df[variable].to_list()
+    data["values"] = selected_df[variable].tolist()
     data["jobID"] = jobID
 
     # perc_file = os.path.join(query_folder, "percentil.tsv")
