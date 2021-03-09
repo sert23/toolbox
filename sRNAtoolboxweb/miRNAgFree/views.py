@@ -1592,8 +1592,10 @@ def plot_barplot(input_mirna,input_values, scale=None, input_variable=None):
 
     if scale == "log10":
         scale = "log"
+        dtick = "D2"
     else:
         scale = "linear"
+        dtick = 2
 
     layout = go.Layout(
         margin=go.layout.Margin(
