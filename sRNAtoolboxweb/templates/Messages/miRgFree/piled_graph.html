@@ -67,8 +67,8 @@
             });
             miRs = {{ prediction_list|safe }}
                 {#alert(miRs);#}
-            $('#miRNA_select').val(miRs.slice(0, 10));
-            $('#miRNA_select').trigger('change');
+            {#$('#miRNA_select').val(miRs.slice(0, 10));#}
+            {#$('#miRNA_select').trigger('change');#}
 
         });
 
