@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-lg-6">
             <label >Select miRNA candidates:</label>
-                <select class="group1" name="group1" multiple="multiple" id="miRNA_select">
+                <select class="group2" name="group2" multiple="multiple" id="miRNA_select">
 
                     {% for  name in prediction_list %}
 {#                         <option value="{{ value }}">{{ name }}</option>#}
@@ -56,7 +56,7 @@
     <script>
 
         $(document).ready(function() {
-            $('.group1').select2({
+            $('.group2').select2({
                 width: "100%",
                 templateSelection: function (data, container) {
                     console.log(">>Selection", data);
