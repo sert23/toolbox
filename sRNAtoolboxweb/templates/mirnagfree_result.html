@@ -162,8 +162,11 @@
 
             <div class="tab-pane fade" id="plots">
 
-                    <div class="col-lg-10">
-                        <button class="btn btn-primary btn btn-primary" onclick="$('#mirg_plot').modal('show');"> Expression barplots </button>
+                    <div class="col-lg-5">
+                        <button class="btn btn-secondary" onclick="$('#mirg_plot').modal('show');"> Expression barplots </button>
+                    </div>
+                    <div class="col-lg-5">
+                        <button class="btn btn-secondary" onclick="$('#mirg_piled').modal('show');"> Expression distribution </button>
                     </div>
 
 
@@ -182,6 +185,7 @@
     {% include "Messages/bench/HWTCbench.html" %}
     {% include "Messages/miRgFree/candidate_naming.html" %}
     {% include "Messages/miRgFree/graph.html" %}
+    {% include "Messages/miRgFree/piled_graph.html" %}
 {% endblock %}
 
 {% block js %}

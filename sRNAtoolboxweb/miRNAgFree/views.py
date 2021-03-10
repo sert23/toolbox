@@ -1637,6 +1637,31 @@ def plot_barplot(input_mirna,input_values, scale=None, input_variable=None):
 
     return div
 
+def ajax_pie(request):
+
+    miRNAs = request.GET.get('miRNAs', None)
+    jobID = request.GET.get('id', None)
+    variable = request.GET.get('variable', None)
+    mirna_list = miRNAs.split(",")
+    new_record = JobStatus.objects.get(pipeline_key=jobID)
+    expression_file = os.path.join(new_record.outdir, "microRNAs.txt")
+    with open(expression_file, "r") as ef:
+        expression_df = pd.read_csv(ef, sep="\t")
+
+    labels = ['Oxygen','Hydrogen','Carbon_Dioxide','Nitrogen']
+    values = [4500, 2500, 1053, 500]
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+    div = plot(fig, show_link=False, auto_open=False, include_plotlyjs=False, output_type="div",
+               config={'editable': True})
+    data = {}
+    data["plot"] = div
+    # data["values"] = selected_df[variable].tolist()
+    # data["jobID"] = jobID
+
+    return JsonResponse(data)
+
+
+
 def ajax_barplot(request):
 
     miRNAs = request.GET.get('miRNAs', None)

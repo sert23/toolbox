@@ -1,0 +1,125 @@
+{% extends "Messages/modal_xl.html" %}
+{% block id %}mirg_piled{% endblock %}
+{% block title %}
+    <div id="graph_title"></div>
+{% endblock %}
+{% block text %}
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <label >Select miRNA candidates:</label>
+                <select class="group1" name="group1" multiple="multiple" id="miRNA_select">
+
+                    {% for  name in prediction_list %}
+{#                         <option value="{{ value }}">{{ name }}</option>#}
+                         <option value="{{ name }}">{{ name }}</option>
+                    {% endfor %}
+{#                            {% for f,name in perc_list %}#}
+        {#        <option>{{ f }}</option>#}
+{#                            <option value="{{ f }}">{{ name }}</option>#}
+{#                            {% endfor %}#}
+{#        #}
+                        </select>
+        </div>
+        <div class="col-lg-4">
+            <label >Select expression measurement:</label>
+                <select class="form-control" id="expression_select">
+                    {% for  variable in expression_vars|slice:"1:" %}
+                    <option value="{{ variable }}"
+                    {% if variable == "read count" %}
+                        selected="selected"
+                    {% endif %}
+                    >{{ variable }}</option>
+                    {% endfor %}
+                </select>
+        </div>
+        <div class="col-lg-2">
+            <label >Select scale:</label>
+              <select class="form-control" id="scale_select">
+
+                    <option>Normal</option>
+                    <option>log10</option>
+
+  </select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="add_graph">
+        </div>
+    </div>
+
+    <script>
+
+        $(document).ready(function() {
+            $('.group1').select2({
+                width: "100%",
+                templateSelection: function (data, container) {
+                    console.log(">>Selection", data);
+                    {#$(container).css("background-color", "#5c0000");#}
+                    {#$(container).css("color", "#f8f8ff");#}
+                    return data.text;
+                }
+            });
+            miRs = {{ prediction_list|safe }}
+                {#alert(miRs);#}
+            $('#miRNA_select').val(miRs.slice(0, 10));
+            $('#miRNA_select').trigger('change');
+
+        });
+
+    </script>
+
+    <script>
+
+     var loadPie = function(e) {
+
+         {#alert("step1");#}
+        var miRselected = $("#miRNA_select").val() || [];
+
+        {#alert("eyo");#}
+        $.ajax({
+        url: '{% url "ajax_pie" %}',
+        data: {
+            "id" : "{{ id }}",
+             "miRNAs": miRselected.join(","),
+             {#"comp_set": $("#comp_set").val(),#}
+             "variable": $("#expression_select").val(),
+             "scale": $("#scale_select").val(),
+        },
+        dataType: 'json',
+        success: function (data) {
+            {#alert(data.values);#}
+            {#alert($("#heatmap_select").val().join(","));#}
+            $("#add_pie").html("");
+            $("#add_pie").html(data.plot);
+
+        }
+      });
+     };
+
+    $('#mirg_piled').on('shown.bs.modal', function (e) {
+        loadPie();
+    });
+
+    $('#miRNA_select').on('change', function (e) {
+        loadGraph();
+    });
+
+    $('#expression_select').on('change', function (e) {
+        loadGraph();
+    });
+
+
+
+
+
+
+</script>
+
+
+{% endblock %}
