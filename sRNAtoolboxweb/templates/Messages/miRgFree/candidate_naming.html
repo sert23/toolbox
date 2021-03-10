@@ -6,23 +6,29 @@
 {% block text %}
 
 
-
-{#    <div style="display: inline-block" id="dropbox-container"></div>#}
-{#    <button onclick="onApiLoad()"><i class="fab fa-google-drive"></i></button>#}
-{#    <button onclick="onApiLoad()">Pick From Google Drive</button>#}
-
-{#  AIzaSyBG_apmyiqz0PVwA6FO_GionR-e1Zz7DlI  GOOGLE API KEY  #}
-
-<p></p>
-    <p>One or several files can be used as input for miRgFree. There are 5 ways you can provide read files:</p>
+    <p>
+        Unless specified otherwise, miRgFree will detect the closest species in MirGeneDB using
+        the species detection functionality introduced in miRNAqc. microRNA sequences in MirGeneDB will be used to detect if the
+        predicted novel microRNAs are known in other species or at least if they belong to a known microRNA family.
+    </p>
+    <p>
+        Names will be assigned as follows:
     <ul>
-  <li>Upload a file (typically fastq or fastq.gz)</li>
-  <li>Provide a link/URL with the data </li>
-  <li>Provide an accession for a SRA run (they start with SRR,ERR or DRR e.g. <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR1563062" target="_blank">SRR1563062</a>)</li>
-  <li>You can also use files from your Dropbox or Google Drive accounts</li>
-
+        <li>
+            First, candidates that match perfectly a known microRNA sequence from any of the specified reference species
+            will receive that name.
+        </li>
+        <li>
+            Second, perfect matches from other reference sequences in MirGeneDB will be named accordingly
+        </li>
+        <li>
+            If a sequence match is not found, a seed match will be attempted. All microRNAs
+            from the whole database with the same seed sequence are considered, assigning in this order if a seed match is found:
+            <ul>
+                  <li>Name of that miRNA in any of the reference species</li>
+                  <li>The species with overall lowest number of mismatches between the candidate and mature sequences </li>
+            </ul>
+        </li>
     </ul>
-    <p>To start adding files, click on "Add sample(s)"</p>
-
-
+    </p>
 {% endblock %}
