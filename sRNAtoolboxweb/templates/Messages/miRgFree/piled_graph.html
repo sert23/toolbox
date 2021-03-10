@@ -53,26 +53,26 @@
         </div>
     </div>
 
-    <script>
-
-        $(document).ready(function() {
-            $('.group2').select2({
-                width: "100%",
-                templateSelection: function (data, container) {
-                    console.log(">>Selection", data);
+{#    <script>#}
+{##}
+{#        $(document).ready(function() {#}
+{#            $('.group2').select2({ #}
+{#                width: "100%",#}
+{#                templateSelection: function (data, container) {#}
+{#                    console.log(">>Selection", data);#}
                     {#$(container).css("background-color", "#5c0000");#}
                     {#$(container).css("color", "#f8f8ff");#}
-                    return data.text;
-                }
-            });
-            miRs = {{ prediction_list|safe }}
+{#                    return data.text;#}
+{#                }#}
+{#            });#}
+{#            miRs = {{ prediction_list|safe }}#}
                 {#alert(miRs);#}
             {#$('#miRNA_select').val(miRs.slice(0, 10));#}
             {#$('#miRNA_select').trigger('change');#}
-
-        });
-
-    </script>
+{##}
+{#        });#}
+{##}
+{#    </script>#}
 
     <script>
 
