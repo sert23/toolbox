@@ -28,7 +28,11 @@
             <label >Select expression measurement:</label>
                 <select class="form-control" id="expression_select">
                     {% for  variable in expression_vars|slice:"1:" %}
-                    <option value="{{ variable }}">{{ variable }}</option>
+                    <option value="{{ variable }}"
+                    {% if variable == "read count" %}
+                        selected="selected"
+                    {% endif %}
+                    >{{ variable }}</option>
                     {% endfor %}
                 </select>
         </div>
