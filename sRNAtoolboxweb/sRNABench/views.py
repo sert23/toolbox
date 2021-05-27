@@ -716,6 +716,7 @@ def result_new(request):
 
                 results["date"] = new_record.start_time + datetime.timedelta(days=15)
             ex_out = check_image_files(image_list, 15)
+            results["is_hsa"] = False
             return render(request, "srnabench_result.html", results)
 
         else:
