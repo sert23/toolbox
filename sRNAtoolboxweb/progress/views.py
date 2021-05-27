@@ -138,7 +138,8 @@ class JobStatusDetail(DetailView):
         return {'msgs': msgs,
                 #"url": "/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key,
                 "url": "/jobstatus/" + job_status.pipeline_key,
-                "id": job_status.pipeline_key}
+                "id": job_status.pipeline_key,
+                "pipe_type": job_status.pipeline_type}
 
     @staticmethod
     def get_error_context(job_status):
