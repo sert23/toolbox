@@ -107,12 +107,14 @@ class JobStatusDetail(DetailView):
             return {'msgs': msgs,
                     #"url": "/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key,
                     "url": "/jobstatus/" + job_status.pipeline_key,
-                    "id": job_status.pipeline_key}
+                    "id": job_status.pipeline_key,
+                    "pipe_type": job_status.pipeline_type}
         else:
             return {'running': True,
                     'msgs': msgs, "url": "/jobstatus/" + job_status.pipeline_key,
                     #'msgs': msgs, "url": "/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key,
-                    "id": job_status.pipeline_key}
+                    "id": job_status.pipeline_key,
+                    "pipe_type": job_status.pipeline_type}
 
     @staticmethod
     def get_running_context_for_srnabench(job_status):
