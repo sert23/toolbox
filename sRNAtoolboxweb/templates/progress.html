@@ -95,8 +95,9 @@
             </div>
         </div>
 
-            {% if error %}
-                <div class="row">
+            {% for msg in msgs %}
+                {% if msg.type == "error" %}
+                    <div class="row">
                     <div class="col-lg-4">
                         <div class="panel panel-default">
                     <div class="panel-heading">
@@ -108,7 +109,11 @@
                     </div>
                     </div>
                 </div>
-            {% endif %}
+
+                {% endif %}
+            {% endfor %}
+
+
         <!-- /.row -->
     </div>
     <!-- /#page-wrapper -->
