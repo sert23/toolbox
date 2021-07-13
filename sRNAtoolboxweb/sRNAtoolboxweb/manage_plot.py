@@ -11,6 +11,8 @@ import subprocess
 from datetime import timedelta
 from django.utils import timezone
 from progress.models import JobStatus
+from django.db.models.lookups import MonthTransform as Month, YearTransform as Year
+from django.db.models import Count
 
 
 def list_counter(input_list):
@@ -21,6 +23,13 @@ def list_counter(input_list):
     return res_dict
 
 ###
+
+def month_ranking():
+    JobStatus.objects.annotate(
+        year=Year('date'),
+        month=Month('date'),
+    ).values('year', 'month').annotate(count=Count('pk'))
+
 
 def stacked_bars_state():
 
@@ -151,3 +160,5 @@ def job_type():
     fig = go.Figure(data=data, layout=layout)
     div_obj1 = plot(fig, show_link=False, auto_open=False, output_type='div', include_plotlyjs=True)
     return div_obj1
+#
+# def number_finished():
