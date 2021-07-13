@@ -2,6 +2,8 @@ import itertools
 
 import django_tables2 as tables
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
+
 
 from progress.models import JobStatus
 
@@ -65,6 +67,7 @@ def version(request):
 
     return render(request, 'Common/VersionControlDonwloads.html', results)
 
+@login_required
 def management(request):
     results={}
     #results["sRNAfuncTerms"] = [(job.finish_time - job.start_time) for job in JobStatus.objects.filter(pipeline_type="sRNAfuncTerms", job_status="Finished")]
