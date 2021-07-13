@@ -49,7 +49,7 @@ def stacked_bars_state():
     times_dict["last 24h"] = list(queries_day.values_list("job_status", flat=True))
     times_dict["always"] = list(queries_all.values_list("job_status", flat=True))
 
-    tags_set = set(times_dict["always"])
+    tags_set = sorted(list(set(times_dict["always"])))
 
     data = []
     times = ["last 24h", "last week", "last month", "always"]
