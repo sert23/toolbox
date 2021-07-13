@@ -134,7 +134,7 @@ def job_type():
     times_dict["last 24h"] = list(queries_day.values_list("pipeline_type", flat=True))
     times_dict["always"] = list(queries_all.values_list("pipeline_type", flat=True))
 
-    tags_set = set(times_dict["always"])
+    tags_set = sorted(list(set(times_dict["always"])))
 
     data = []
     times = ["last 24h", "last week", "last month", "always"]
