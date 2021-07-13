@@ -27,9 +27,10 @@
                 </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">
+                    <div class="panel-heading" data-toggle="collapse" href="#job_types">
                         Jobs Types
                     </div>
+                    <div class="panel-collapse collapse in" id="job_types">
                     <div class="panel-body">
                         {{ type_plot_perc|safe }}
                         <div class="table-responsive">
@@ -41,45 +42,6 @@
                 </div>
 
             </div>
-
-{#              <div class="col-lg-4">#}
-{#                <div class="panel panel-default">#}
-{#                    <div class="panel-heading">#}
-{#                        <i class="fa fa-history fa-fw"></i> ChangeLog#}
-{#                    </div>#}
-{#                    <!-- /.panel-heading -->#}
-{#                    <div class="panel-body">#}
-{#                        <ul class="timeline">#}
-{#                            <li>#}
-{#                                <div class="timeline-badge"><i class="fa fa fa-code"></i>#}
-{#                                </div>#}
-{#                                <div class="timeline-panel">#}
-{#                                    <div class="timeline-heading">#}
-{#                                        <h4 class="timeline-title">sRNAtoolBox v1.0 released</h4>#}
-{#                                        <p><small class="text-muted"><i class="fa fa-clock-o"></i> Sat 02 May 2015</small>#}
-{#                                        </p>#}
-{#                                    </div>#}
-{#                                    <div class="timeline-body">#}
-{#                                        <p>This is The first version of this web application. Even though a big work of debugging was#}
-{#                                        done, errors can appear due to the complexity of input data. Any feedback is welcome.</p>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </li>#}
-{#                            <li class="timeline-inverted">#}
-{#                                <div class="timeline-badge success"><i class="fa fa-graduation-cap"></i>#}
-{#                                </div>#}
-{#                                <div class="timeline-panel">#}
-{#                                    <div class="timeline-heading">#}
-{#                                        <h4 class="timeline-title">sRNAtoolBox pubication</h4>#}
-{#                                        <p><small class="text-muted"><i class="fa fa-clock-o"></i> Thu 28 May 2015</small>#}
-{#                                        </p>#}
-{#                                    </div>#}
-{#                                    <div class="timeline-body">#}
-{#                                            <a href="http://nar.oxfordjournals.org/content/early/2015/05/26/nar.gkv555.abstract" target="_blank"><h5>sRNAtoolbox: an integrated collection of small RNA research tools</h5></a>#}
-{#                                            <p> Antonio Rueda; Guillermo Barturen; Ricardo Lebron; Cristina Gomez-Martin; Angel Alganza; Jose L. Oliver; Michael Hackenberg#}
-{#                                            Nucleic Acids Research 2015;#}
-{#                                            doi:<a href="http://nar.oxfordjournals.org/content/early/2015/05/26/nar.gkv555.abstract" target="_blank"> 10.1093/nar/gkv555 </a></p>#}
-{#                                    </div>#}
 
 
             </div>
