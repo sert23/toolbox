@@ -13,7 +13,7 @@ class Species (models.Model):
     hasTargetSequencesAndGO = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.specie + "(" + self.db + ")"
+        return self.specie + " (" + self.db + ")"
         #return self.specie + "(" + self.db + "), " + self.scientific
 
     def get_value(self):
