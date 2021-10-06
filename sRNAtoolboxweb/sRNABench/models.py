@@ -25,29 +25,29 @@ class Species (models.Model):
         with open(ifile) as i:
             for line in i:
                 a = line.replace('\n', '').split(',')
+                if a:
+                    if a[7] == 'true':
+                        a[7] = True
+                    else:
+                        a[7] = False
 
-                if a[7] == 'true':
-                    a[7] = True
-                else:
-                    a[7] = False
+                    if a[8] == 'true':
+                        a[8] = True
+                    else:
+                        a[8] = False
 
-                if a[8] == 'true':
-                    a[8] = True
-                else:
-                    a[8] = False
+                    Species.objects.create(
+                        sp_class=a[0],
+                        specie=a[1],
+                        shortName=a[2],
+                        db=a[3],
+                        db_ver=a[4],
+                        scientific=a[5],
+                        taxID=a[6],
+                        full=a[7],
+                        hasTargetSequencesAndGO=a[8]
 
-                Species.objects.create(
-                    sp_class=a[0],
-                    specie=a[1],
-                    shortName=a[2],
-                    db=a[3],
-                    db_ver=a[4],
-                    scientific=a[5],
-                    taxID=a[6],
-                    full=a[7],
-                    hasTargetSequencesAndGO=a[8]
-
-                )
+                    )
 
     @staticmethod
     def clear_species():
