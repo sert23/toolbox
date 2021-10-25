@@ -10,7 +10,9 @@ class Command(BaseCommand):
 
         CONF = settings.CONF
         path_to_species = CONF["species"]
-        print(path_to_species)
+        self.stdout.write(path_to_species)
+        # print(path_to_species)
+
 
     #     for poll_id in options['poll_ids']:
     #         try:
