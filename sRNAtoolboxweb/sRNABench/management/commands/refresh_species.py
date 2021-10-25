@@ -6,7 +6,7 @@ class Command(BaseCommand):
     help = 'refreshes the species database'
 
 
-    def handle(self):
+    def handle(self, *args, **options):
 
         CONF = settings.CONF
         path_to_species = CONF["species"]
