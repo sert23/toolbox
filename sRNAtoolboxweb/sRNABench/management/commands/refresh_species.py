@@ -16,7 +16,9 @@ class Command(BaseCommand):
             CONF = settings.CONF
             path_to_species = CONF["species"]
             Species.clear_species()
+            self.stdout.write(self.style.SUCCESS("old species database cleared"))
             Species.create_batch(path_to_species)
+            self.stdout.write(self.style.SUCCESS("updating new species"))
             self.stdout.write(self.style.SUCCESS("species database succesfully updated using:"))
             self.stdout.write(self.style.SUCCESS(path_to_species))
         except:
