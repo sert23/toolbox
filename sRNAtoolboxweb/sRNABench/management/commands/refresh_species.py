@@ -10,7 +10,7 @@ class Command(BaseCommand):
 
         CONF = settings.CONF
         path_to_species = CONF["species"]
-        self.stdout.write(path_to_species)
+        self.stdout.write(self.style.SUCCESS(path_to_species))
         # print(path_to_species)
 
 
