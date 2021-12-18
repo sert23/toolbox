@@ -1,0 +1,28 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}choose_input{% endblock %}
+{% block title %}
+    Accepted input format
+{% endblock %}
+{% block text %}
+
+
+
+{#    <div style="display: inline-block" id="dropbox-container"></div>#}
+{#    <button onclick="onApiLoad()"><i class="fab fa-google-drive"></i></button>#}
+{#    <button onclick="onApiLoad()">Pick From Google Drive</button>#}
+
+{#  AIzaSyBG_apmyiqz0PVwA6FO_GionR-e1Zz7DlI  GOOGLE API KEY  #}
+
+<p></p>
+    <p>One or several files can be used as input for sRNAbench. There are 5 ways you can provide read files:</p>
+    <ul>
+  <li>Upload a file (typically fastq or fastq.gz)</li>
+  <li>Provide a link/URL with the data </li>
+  <li>Provide an accession for a SRA run (they start with SRR,ERR or DRR e.g. <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR1563062" target="_blank">SRR1563062</a>)</li>
+  <li>You can also use files from your Dropbox or Google Drive accounts</li>
+
+    </ul>
+    <p>To start adding files, click on "Add sample(s)"</p>
+
+
+{% endblock %}
