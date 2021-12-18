@@ -1,0 +1,16 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}MA_lib{% endblock %}
+{% block title %}
+    Multiple Assignment Table
+{% endblock %}
+{% block text %}
+<p> There are 4 ways you can provide reads for sRNAbench to profile:</p>
+    <ul>
+  <li>Upload a file (typically fastq or fastq.gz)</li>
+  <li>Provide a link/URL with your data (it will be downloaded and then profiled) </li>
+  <li>Provide an accession for a SRA run (they start with SRR,ERR or DRR e.g. <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR1563062" target="_blank">SRR1563062</a>)</li>
+  <li>Provide an ID from a previous sRNAbench Job to reuse an uploaded file (e.g. <a href="{{ settings.SUB_SITE }}/jobstatus/51GKXBGGWRXZ4QO" target="_blank">51GKXBGGWRXZ4QO</a>) </li>
+    </ul>
+
+
+{% endblock %}
