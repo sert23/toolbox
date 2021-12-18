@@ -19,6 +19,7 @@ urlpatterns =[
     url(r'^pmirconstarget/', include('plantconstarget.urls')),
     url(r'^mirnafunctargets', include('miRNAfuncTargets.urls')),
     url(r'^multibench', include('multibench.urls')),
+    url(r'^newbench/', include('newbench.urls')),
     url(r'^helper/', include('helpers.urls')),
     url(r'^blank$', views.blank),
     url(r'^index', views.index),
