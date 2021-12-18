@@ -7,6 +7,7 @@ from . import views
 
 urlpatterns = [
     url(r'results', views.result, name='mirconstarget'),
+
     url(r'results', views.result, name='animalconstarget'),
     url(r'^$', AMirConsTarget.as_view(), name="MIRCONS"),
 
@@ -17,3 +18,4 @@ urlpatterns = [
     #url(r'result', views.result),
     url(r'test$', views.test),
 ]
+

@@ -1,6 +1,6 @@
 
 import os
-import magic
+# import magic
 
 __author__ = 'antonior'
 

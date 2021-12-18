@@ -58,3 +58,23 @@ class Status(models.Model):
              update_fields=None):
         super(Status, self).save()
         self.JobStatus.job_status = self.status_progress
+
+
+def default_delete_time():
+
+    return str(datetime.datetime.now() + datetime.timedelta(days=7) )
+
+
+class BenchFiles(models.Model):
+
+    # this model is to keep track of upload and deletion dates of bench files
+
+    pipeline_key = models.CharField(max_length=100)
+    input_string = models.CharField(max_length=1000)
+    sample_name = models.CharField(max_length=1000)
+    available = models.BooleanField(default=False)
+    input_type = models.CharField(max_length=1000)
+    upload_time = models.DateTimeField(default=django.utils.timezone.now)
+    deletion_time = models.DateTimeField(default=default_delete_time())
+    path_to_file = models.CharField(max_length=1000)
+    hash_value = models.CharField(max_length=1000)

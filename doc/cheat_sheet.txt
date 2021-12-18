@@ -1,3 +1,15 @@
+#log into the docker
+#switch user to www-data
+#run django command
+/opt/venv/sRNAtoolbox2019/bin/python3 /opt/sRNAtoolbox_prod/sRNAtoolboxweb/manage.py refresh_species
+
+#restart apache (requires root so logout of wwww-data)
+sudo service apache2 restart
+
+
+
+
+
 ###Load new entries from species.txt
 python manage.py shell
 

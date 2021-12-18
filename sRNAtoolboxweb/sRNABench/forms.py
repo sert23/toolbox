@@ -43,7 +43,7 @@ class CategoriesField(forms.ModelMultipleChoiceField):
                 else:
                     #list.append((category.id, str(category)))
                     # option value="2533:Danio rerio">Zebrafish(GRCz10)
-                    list.append((str(category.id) + ":" + category.scientific + " ", str(category)))
+                    list.append((str(category.id) + ":" + category.scientific, str(category)))
                     #list.append((str(category.id)+""+category.scientific, str(category)))
             try:
                 self.choices.append((group, list))

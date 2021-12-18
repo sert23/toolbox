@@ -1,0 +1,736 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+{#<script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>#}
+<!-- Modal -->
+<div class="modal fade" id="spinner" tabindex="-1" role="dialog" aria-labelledby="spinnerLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <img style="display:block; margin-left:auto; margin-right:auto; width:50%;" src="{% static 'gif/sRNAbench_spinner.gif' %}">
+          <h1 style="text-align: center;">Uploading file...</h1>
+        </div>
+      </div>
+    </div>
+</div>
+
+    <style>
+    .fa-clickable {
+    cursor:pointer;
+    outline:none;
+    }
+    </style>
+
+    <div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Uploading...</h4>
+        </div>
+        <div class="modal-body">
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    <div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+            <a href="{{ settings.SUB_SITE }}/newbench" target="_blank"> <h1>sRNAbench (beta): </h1></a>
+            <h3> You should probably not be here </h3>
+            </div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <input type="hidden" id="jobId" name="jobId" value="{{ jobID }}">
+        <form enctype="multipart/form-data"
+{#                                    id="fileupload" method="POST"#}
+{#                                      data-url="/mirqc"#}
+{#                                    id="id_ajax_upload_form" method="POST"#}
+                                                            novalidate="">
+                                    <input id="fileupload" type="file" name="file" multiple
+           style="display: none;"
+           data-url="{{ data_url }}"
+{#           data-url="{% url 'photos:progress_bar_upload' %}"#}
+           data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+                                <input type="submit" id="sub_button" style="display:none">
+
+
+                                </form>
+    <div class="row">
+    <div class="col-lg-9">
+
+
+
+        <div class="panel panel-default">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            <a data-toggle="collapse" href="#collapseOne">Data to upload</a> <a  data-toggle="modal" data-target="#choose_input" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
+        </h4>
+
+
+
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+        <div class="panel-body">
+        <div style="margin-bottom: 20px;">
+{#    <button type="button" class="btn btn-primary js-upload-photos">#}
+    <a  data-toggle="modal" data-target="#add_samples" class="btn btn-link">
+            <button type="button" class="btn btn-success">
+                <span class="glyphicon glyphicon-cloud-upload"></span> Add sample(s)</button> </a>
+
+            <table id="gallery" class="table table-bordered" >
+    <thead>
+      <tr>
+        <th>Uploaded Files</th> <th>Type</th> <th onclick="delInput('ALL');" class="text-danger fa-clickable"> Delete all</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+          </table>
+    
+        </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+
+                </div>
+                            <div class="col-lg-6 text-right" ><a id="run_link" href="#" > <button onclick="redirLaunch();" id="run_id" type="button" class="btn btn-primary" style="display: inline-block;"> NEXT </button> </a>  </div>
+    {#                        <div class="col-lg-6 text-right" ><a id="run_link2" href="#" > test </a>  </div>#}
+    {#                        <div class="col-lg-6 text-right" ><a onclick="alert('no idea');" id="run_link3" href="#" > test2 </a>  </div>#}
+    {#                        <div class="col-lg-6 text-right" ><a id="run_link" target="_blank" href="#" onclick="location.replace('http://google.com/'),'_top'"> </a> <button onclick="location.replace('http://google.com/'),'_top'" id="run_id" type="button" class="btn btn-success" style="display: inline-block;"> RUN </button> </div>#}
+    {#                        <div class="col-lg-6 text-right" ><a id="run_link" target="_blank" href="#"> </a> <a id="run_id"> hehehe</a> </div>#}
+
+                        </div>
+
+        </div>
+    </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+    </div>
+    <!-- /.row -->
+
+
+
+    <!-- /#page-wrapper -->
+    
+
+{% endblock %}
+
+
+{% block modals %}
+    {% include "Messages/newbench/Choose_input.html" %}
+    {% include "Messages/miRgFree/upload_samples.html" %}
+    {% include "Messages/bench/sRNAbenchInput.html" %}
+    {% include "Messages/miRgFree/Species_dropdown.html" %}
+    {% include "Messages/bench/library_mode.html" %}
+    {% include "Messages/bench/other_ncrnas.html" %}
+    {% include "Messages/bench/guess_Adapter.html" %}
+    {% include "Messages/bench/minimum_adapter_length.html" %}
+    {% include "Messages/bench/mismatches_adapter.html" %}
+    {% include "Messages/bench/quality_filter.html" %}
+    {% include "Messages/bench/phred_encode.html" %}
+    {% include "Messages/bench/mirna_species.html" %}
+    {% include "Messages/bench/Not_profile.html" %}
+    {% include "Messages/bench/RecursiveAdaptorTrimming.html" %}
+    {% include "Messages/bench/speciesBench.html" %}
+    {% include "Messages/bench/UploadUserFiles.html" %}
+    {% include "Messages/bench/mirnas.html" %}
+
+
+
+{% endblock %}
+
+</div>
+
+{% block js %}
+
+    <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
+  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
+
+    <script>
+
+        $("#div_pasted").hide();
+        $("#gallery").hide();
+
+        $("#use_pasted").click(function () {
+            if (document.getElementById('use_pasted').checked){
+                $("#div_id_species").hide();
+                $("#div_pasted").show();
+
+            } else {
+                $("#div_id_species").show();
+                $("#div_pasted").hide();
+            }
+
+
+        });
+
+    </script>
+
+    <script>
+
+    var delInput = function(del_string) {
+
+        {#alert(del_string);#}
+        $.ajax({
+        url: '{% url "ajax_del" %}',
+        data: {
+            "id" : "{{ jobID }}",
+            "to_del" :  del_string,
+        },
+        dataType: 'json',
+        success: function (data) {
+            if (del_string=="ALL"){
+                $("#gallery tbody tr").remove();
+            }
+            if (data.message){
+                alert(data.message);
+            }
+        },
+    });
+    };
+
+    $('table').on('click','tr i',function(e){
+
+        {#e.preventDefault();#}
+        {#var row=$(e.target).closest("tr");#}
+        {#alert($(this).attr('name'));#}
+        delInput($(this).attr('name'));
+
+
+        $(this).parents('tr').remove();
+      });
+
+    </script>
+
+    <script>$(function () {
+
+        $(".js-upload-photos").click(function () {
+
+            $("#fileupload").click();
+        });
+
+    {# });#}
+
+  $("#fileupload").fileupload({
+    dataType: 'json',
+    sequentialUploads: true,
+
+    start: function (e) {
+      $('.modal').modal('hide');
+      $("#modal-progress").modal("show");
+    },
+
+    stop: function (e) {
+      $("#modal-progress").modal("hide");
+    },
+
+    progressall: function (e, data) {
+      var progress = parseInt(data.loaded / data.total * 100, 10);
+      var strProgress = progress + "%";
+      $(".progress-bar").css({"width": strProgress});
+      $(".progress-bar").text(strProgress);
+    },
+
+    done: function (e, data) {
+         $("#modal-progress").modal("hide");
+      if (data.alert){
+       alert("something went wrong");
+      }
+        if (data.result.is_valid) {
+            $("#something_up").val("true");
+          {#alert("hello");#}
+         $("#modal-progress").modal("hide");
+          $("#uploaded_card").show();
+          {#alert(data.result.name);#}
+          {#alert(data.result.url);#}
+         $("#modal-progress").modal("hide");
+        $("#gallery").show();
+         $("#gallery tbody").prepend(
+          "<tr><td><a target='_blank' href='" + data.result.url + "'>" + data.result.name +
+             "</a></td> <td> Uploaded file </td> <td><i name='uploaded::"+ data.result.name +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
+        )
+      }
+    }
+
+  });
+
+ });</script>
+
+
+        {#</script>#}
+   {#  Dropbox code   #}
+
+    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs"
+            data-app-key="vaiq8bxw40wiwhn"></script>
+
+    <script>
+
+
+
+
+
+    options = {
+
+    // Required. Called when a user selects an item in the Chooser.
+    success: function(files) {
+
+        var links = files.map(e => e.link).join(",");
+        $.ajax({
+        url: '{% url "ajax_drop" %}',
+        data: {
+            "id" : "{{ jobID }}",
+            "files" :  links,
+        },
+        dataType: 'json',
+            success: function (data) {
+                $("#gallery").show();
+                var arrayLength = data.samples.length;
+                if(arrayLength >0){
+                for (var i = 0; i < arrayLength; i++) {
+
+                $("#gallery tbody").prepend(
+          "<tr><td><a target='blank' href='" + data.links[i] +  "'>" + data.samples[i] +
+             "</a></td> <td>" + "Dropbox" + "</td> <td><i name='"+ "dropbox" +"::"+ data.links[i] +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
+                    );
+                {#alert("hey");#}
+
+                    }
+                };
+                $('.modal').modal('hide');
+            },
+        });
+    },
+
+
+
+        {#if (arrayLength > 0) {#}
+        {#    $("#gallery").show();#}
+        {#    for (var i = 0; i < arrayLength; i++) {#}
+        {##}
+        {#        $("#gallery tbody").prepend(#}
+        {#  "<tr><td><a target='blank' href='" + files[i].link +  "'>" + files[i].name +#}
+        {#     "</a></td> <td>" + "Dropbox file" + "</td> <td name='"+ "dropbox" +":"+ files[i].name +"'><i name='"+ "dropbox" +":"+ files[i].name +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"#}
+        {#);#}
+        {##}
+        {#    };#}
+        {#    $('.modal').modal('hide');#}
+        {# }#}
+
+
+    // Optional. Called when the user closes the dialog without selecting a file
+    // and does not include any parameters.
+    cancel: function() {
+
+    },
+
+    // Optional. "preview" (default) is a preview link to the document for sharing,
+    // "direct" is an expiring link to download the contents of the file. For more
+    // information about link types, see Link types below.
+    linkType: "direct", // or "direct"
+
+    // Optional. A value of false (default) limits selection to a single file, while
+    // true enables multiple file selection.
+    multiselect: true, // or true
+
+    // Optional. This is a list of file extensions. If specified, the user will
+    // only be able to select files with these extensions. You may also specify
+    // file types, such as "video" or "images" in the list. For more information,
+    // see File types below. By default, all extensions are allowed.
+    {# extensions: ['.pdf', '.doc', '.docx'],#}
+
+    // Optional. A value of false (default) limits selection to files,
+    // while true allows the user to select both folders and files.
+    // You cannot specify `linkType: "direct"` when using `folderselect: true`.
+    folderselect: false, // or true
+
+    // Optional. A limit on the size of each file that may be selected, in bytes.
+    // If specified, the user will only be able to select files with size
+    // less than or equal to this limit.
+    // For the purposes of this option, folders have size zero.
+     {# sizeLimit: 1024, // or any positive number#}
+};
+    var DBbutton = Dropbox.createChooseButton(options);
+    {#document.getElementById("dropbox-container").appendChild(DBbutton);#}
+    </script>
+
+
+
+ {#  Google drive code   #}
+
+
+
+    <script>
+    // Ajax function
+
+    var driveAjax = function(ids,names,urls,token) {
+
+                    $.ajax({
+                    url: '{% url "ajax_drive" %}',
+                    data: {
+                        "id" : "{{ jobID }}",
+                        "ids" : ids,
+                        "names" : names,
+                        "urls" : urls,
+                        "token" : token,
+                    },
+                    dataType: 'json',
+                    success: function (data) {
+                        var arrayLength = data.samples_k.length;
+                        for (var i = 0; i < arrayLength; i++) {
+                            var k = data.samples_k[i];
+                            var row = data.samples[k];
+                             {# [i, ids[n], urls[n], token] #}
+                            $("#gallery tbody").prepend(
+                          "<tr><td><a target='_blank' href='" + row[2] + "'>" + k +
+                             "</a></td> <td> Drive</td> <td><i name='drive::" + k +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
+                        );
+                        $("#gallery").show();
+                        }
+
+                    },
+                });
+                };
+
+
+    </script>
+
+
+
+    <script type="text/javascript">
+
+            // The Browser API key obtained from the Google Developers Console.
+            var developerKey = 'AIzaSyBG_apmyiqz0PVwA6FO_GionR-e1Zz7DlI';
+
+            // The Client ID obtained from the Google Developers Console. Replace with your own Client ID.
+            var clientId = "926118481098-crke10cc1ombemh7b7v0l8gsstm966r0.apps.googleusercontent.com";
+
+            var appId = "926118481098";
+
+            // Scope to use to access user's photos.
+            var scope = ['https://www.googleapis.com/auth/drive.file'];
+
+            var pickerApiLoaded = false;
+            var oauthToken;
+
+            // Use the API Loader script to load google.picker and gapi.auth.
+            function loadPicker() {
+                gapi.load('auth', {'callback': onAuthApiLoad});
+                gapi.load('picker', {'callback': onPickerApiLoad});
+            }
+
+            function onAuthApiLoad() {
+                window.gapi.auth.authorize(
+                        {
+                            'client_id': clientId,
+                            'scope': scope,
+                            'immediate': false
+                        },
+                handleAuthResult);
+            }
+
+            function onPickerApiLoad() {
+                pickerApiLoaded = true;
+                createPicker();
+            }
+
+            function handleAuthResult(authResult) {
+                if (authResult && !authResult.error) {
+                    oauthToken = authResult.access_token;
+
+                    createPicker();
+                }
+
+                // Create and render a Picker object for searching images.
+                function createPicker() {
+                    $('.modal').modal('hide');
+                    if (pickerApiLoaded && oauthToken) {
+                        {#var view = new google.picker.DocsView(google.picker.ViewId.FOLDERS)#}
+
+                        {#    .setSelectFolderEnabled(false);#}
+                        {#var view = new google.picker.View(google.picker.ViewId.DOCS);#}
+                        var view = new google.picker.DocsView();
+
+                        view.setMode(google.picker.DocsViewMode.LIST);
+                        view.setIncludeFolders(true);
+                        view.setSelectFolderEnabled(false);
+                        view.setEnableDrives(false);
+                        {#view.setEnableTeamDrives(true);#}
+                        view.setParent('root');
+                        {#view.setMimeTypes("");#}
+                        {#view.setMimeTypes("image/png,image/jpeg,image/jpg");#}
+                        var picker = new google.picker.PickerBuilder()
+                            .enableFeature(google.picker.Feature.NAV_HIDDEN)
+                            .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
+                            .enableFeature(google.picker.Feature.SUPPORT_TEAM_DRIVES)
+                            .enableFeature(google.picker.Feature.SUPPORT_DRIVES)
+                            .setAppId(appId)
+                            .setOAuthToken(oauthToken)
+                            .addView(view)
+                            .setTitle("Select file(s) to upload")
+                            .enableFeature(google.picker.Feature.SUPPORT_DRIVES)
+                            {#.setEnableDrives(true)#}
+                            .addView(new google.picker.DocsUploadView())
+                            .setDeveloperKey(developerKey)
+
+                            .setCallback(pickerCallback)
+                            .build();
+                        picker.setVisible(true);
+                    }
+                }
+
+                //Ajax function
+
+
+
+
+                // A simple callback implementation.
+                function pickerCallback(data) {
+                    var url = 'nothing';
+                    var name = 'nothing';
+
+                    if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
+                        var docs = data[google.picker.Response.DOCUMENTS];
+                        var doc = data[google.picker.Response.DOCUMENTS][0];
+                        url = doc[google.picker.Document.URL];
+
+                        var arrayLength = docs.length;
+                        ids = [];
+                        urls = [];
+                        names = [];
+                        token = oauthToken;
+                            if(arrayLength >0){
+                            for (var i = 0; i < arrayLength; i++) {
+                                var d = docs[i];
+                                ids[i] = d.id;
+                                names[i] = d.name;
+                                urls[i] = d[google.picker.Document.URL];
+                                    }
+                            };
+                            {#alert(names);#}
+                             driveAjax(ids,names,urls,oauthToken);
+
+
+                        {#$("#gallery").show();#}
+                        {#$("#gallery tbody").prepend(#}
+                        {#  "<tr><td><a target='_blank' href=''>" + doc.id + "::" + oauthToken +#}
+                        {#     "</a></td> <td> D</td> <td><iclass='fas fa-trash fa-clickable' ></i></td>  </tr>"#}
+                        {#);#}
+
+                        name = doc.name;
+                        var param = {'fileId': doc.id, 'oAuthToken': oauthToken, 'name': name};
+
+
+//
+                    }
+//
+                }
+            }
+
+            function showPickerDialog(){
+                $('.modal').modal('hide');
+                loadPicker();
+            }
+
+        </script>
+<script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
+
+<script>
+
+
+$('input[name="advanced_options"]').on("change", function(e) {
+    if (document.getElementById('advanced_options').checked || document.getElementById('advanced_options2').checked){
+        $("#advanced_panel").show();
+        $("#advanced_div").hide();
+        $("#advanced_div2").hide();
+        }
+});
+
+$("#advanced_options").change(function() {
+    $("#advanced_options2").prop("checked", this.checked);
+});
+
+$("#advanced_options2").change(function() {
+    $("#advanced_options").prop("checked", this.checked);
+});
+
+
+
+$('input[name="library_protocol"]').on("click", function(e) {
+    if (document.getElementById('id_library_protocol_6').checked) {
+        $("#Adapter_Custom").show();
+    } else {
+        $("#Adapter_Custom").hide();
+    }
+});
+
+
+
+
+function toggleAdapter() {
+{#    if ($("#age").val() <= 13)#}
+    if ( document.getElementById('id_library_protocol').value){
+
+        $("#genome-div").show();
+    }else{
+        $("#genome-div").hide();
+    }}
+
+
+</script>
+
+    <script>
+
+    jQuery("#Adapter_Custom").hide();
+
+    </script>
+
+    <script>
+    jQuery(document).ready(function() {
+        jQuery('#id_species').multiselect({
+            enableCollapsibleOptGroups: true,
+            enableCaseInsensitiveFiltering: true,
+            filterBehavior: 'both',
+            maxHeight: 300,
+            onDropdownHidden: function (e) {
+                if(document.getElementById('id_species').value){
+                   jQuery('#id_species_hidden').val(jQuery('#id_species').val().map(function(item) {
+                        return item.split(':')[0]}).join(','));
+                } else{
+                        document.getElementById('id_species_hidden').value = "" ;
+                }
+{#                    alert(document.getElementById('id_species_hidden').value);#}
+{#                    toggleFields();#}
+{#                alert(jQuery('#id_species').val().join(','));#}
+
+            }
+
+        });
+        jQuery("#genome-div").hide();
+        jQuery("#Adapter_Custom").hide();
+        jQuery("#Div_max").hide();
+    });
+    </script>
+
+    <script>
+        // tooltip demo
+        $('.row').tooltip({
+            selector: "[data-toggle=tooltip]",
+            container: "body"
+        })
+
+    </script>
+
+    <script>
+        function validation() {
+        var x, text, message, stop;
+        stop = false
+        message = "There were some errors in your job. Please select your input again and check for invalid options"
+
+        x = document.getElementById("id_adapter_manual").value;
+
+        if (!document.getElementById("id_species").value && !document.getElementById("id_mirna_profiled").value) {
+            document.getElementById('id_ifile').value = "";
+            alert(message);
+            stop = true;
+            return true
+{#            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true#}
+        } else if ((0 + Boolean(document.getElementById('id_ifile').value) + Boolean(document.getElementById('id_url').value) + Boolean(document.getElementById('id_sra_input').value ) + Boolean(document.getElementById('id_job_reuse').value)!=1)) {
+            document.getElementById('id_ifile').value = "";
+{#            alert("id_file url"); #}
+{#            return true;#}
+            alert(message);
+            stop = true;
+            return true
+        } else if (!Array.from(document.getElementsByName('library_protocol')).some(Boolean)) {
+            document.getElementById('id_ifile').value = "";
+            {#            alert( " predict and library mode"); return true#}
+            alert(message);
+            stop = true;
+            return true
+        } else if ((0+ Boolean(document.getElementById('id_species_hidden')) + Boolean(document.getElementById('id_mirna_profiled')) + Boolean(document.getElementById('id_referenceDB') === "MirGeneDB"))<1) {
+            document.getElementById('id_ifile').value = "";
+            {#            alert( " predict and library mode"); return true#}
+            alert(message);
+            stop = true;
+            return true
+
+{#        }else if (document.getElementById('id_predict_mirna').checked && document.getElementById('id_library_mode').checked) {#}
+{#            document.getElementById('id_ifile').value = "";#}
+            {#            alert( " predict and library mode"); return true#}
+{#            alert(message);#}
+{#            return true#}
+
+		}
+        if (stop==false){
+            $('#spinner').modal('show');
+        }
+
+
+    }
+    </script>
+
+
+    <script>
+
+    var redirLaunch = function(e) {
+
+        var launch_url = "{% url 'launch' %}?";
+            $("#protocol").val($("input[name=library_protocol]:checked").val());
+            alert("clicked");
+            var pars = $("#jobId").serialize();
+            $("#run_link").attr("href", launch_url.concat(pars));
+            $("#run_link2").trigger('click');
+
+
+    };
+
+
+
+    </script>
+
+
+{% endblock %}
+

@@ -54,11 +54,30 @@ with open(os.path.join(folder_to_clean,"test1.txt") , "w") as testfile1:
 with open(os.path.join(folder_to_clean,"test.txt") , "w") as testfile:
     for dir in to_rem:
         timestamp = os.path.getmtime(dir)
-        #testfile.write(dir + " " + str(timestamp) +" " + str(now - numdays) + "\n")
-        if now - numdays > timestamp:
-            #testfile.write(dir + " " + str(timestamp) + "\n")
-            try:
-                testfile.write(dir+"\n")
-                shutil.rmtree(dir) #uncomment to use
-            except:
-                testfile.write("")
+        files = [x for x in os.listdir(folder_to_clean)]
+        if ("input.json" not in files) and ("time.json" not in files):
+            #testfile.write(dir + " " + str(timestamp) +" " + str(now - numdays) + "\n")
+            if now - numdays > timestamp:
+                #testfile.write(dir + " " + str(timestamp) + "\n")
+                try:
+                    testfile.write(dir+"\n")
+                    shutil.rmtree(dir) #uncomment to use
+                except:
+                    testfile.write("")
+
+
+
+shorter_days = 86400 * 5
+# temp
+folder_to_clean = os.path.join(sys.argv[1], "multi")
+folders = [x for x in os.listdir(folder_to_clean) if os.path.isdir(os.path.join(folder_to_clean, x))]
+for dir in to_rem:
+    timestamp = os.path.getmtime(dir)
+    # testfile.write(dir + " " + str(timestamp) +" " + str(now - numdays) + "\n")
+    if now - shorter_days > timestamp:
+        # testfile.write(dir + " " + str(timestamp) + "\n")
+        try:
+
+            shutil.rmtree(dir)  # uncomment to use
+        except:
+            print("")
