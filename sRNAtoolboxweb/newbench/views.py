@@ -110,15 +110,16 @@ def move_SRA(input_folder, output_folder):
     input_dict = json.load(json_file)
     json_file.close()
     SRA_file = os.path.join(input_folder,"SRA.txt")
-    with open(SRA_file, 'r') as rfile:
-        lines = rfile.readlines()
-        for line in lines:
-            s = line.rstrip()
-            input_dict[s] = {"input": s, "name": "", "input_type": "SRA"}
+    if os.path.exists(SRA_file):
+        with open(SRA_file, 'r') as rfile:
+            lines = rfile.readlines()
+            for line in lines:
+                s = line.rstrip()
+                input_dict[s] = {"input": s, "name": "", "input_type": "SRA"}
 
-    json_file = open(dict_path, "w")
-    json.dump(input_dict, json_file, indent=6)
-    json_file.close()
+        json_file = open(dict_path, "w")
+        json.dump(input_dict, json_file, indent=6)
+        json_file.close()
 
 
 
@@ -128,15 +129,16 @@ def move_link(input_folder, output_folder):
     input_dict = json.load(json_file)
     json_file.close()
     links_file = os.path.join(input_folder, "links.txt")
-    with open(links_file, 'r') as rfile:
-        lines = rfile.readlines()
-        for line in lines:
-            s = line.rstrip()
-            input_dict[s] = {"input": s, "name": "", "input_type": "download link"}
+    if os.path.exists(links_file):
+        with open(links_file, 'r') as rfile:
+            lines = rfile.readlines()
+            for line in lines:
+                s = line.rstrip()
+                input_dict[s] = {"input": s, "name": "", "input_type": "download link"}
 
-    json_file = open(dict_path, "w")
-    json.dump(input_dict, json_file, indent=6)
-    json_file.close()
+        json_file = open(dict_path, "w")
+        json.dump(input_dict, json_file, indent=6)
+        json_file.close()
 
 def move_dropbox(input_folder, output_folder):
     dict_path = os.path.join(output_folder, "input.json")
@@ -144,14 +146,15 @@ def move_dropbox(input_folder, output_folder):
     input_dict = json.load(json_file)
     json_file.close()
     dropbox_file = os.path.join(input_folder, "dropbox.txt")
-    with open(dropbox_file, 'r') as rfile:
-        lines = rfile.readlines()
-        for line in lines:
-            s = line.rstrip()
-            input_dict[s] = {"input": s, "name": "", "input_type": "download link"}
-    json_file = open(dict_path, "w")
-    json.dump(input_dict, json_file, indent=6)
-    json_file.close()
+    if os.path.exists(dropbox_file):
+        with open(dropbox_file, 'r') as rfile:
+            lines = rfile.readlines()
+            for line in lines:
+                s = line.rstrip()
+                input_dict[s] = {"input": s, "name": "", "input_type": "download link"}
+        json_file = open(dict_path, "w")
+        json.dump(input_dict, json_file, indent=6)
+        json_file.close()
 
 def move_drive(input_folder, output_folder):
     # curl - H
