@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Helper Result</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+
+
+
+            <div class="row">
+                {% if result %}
+            <p class="text-success"> Please, find your results in this <a href="{{ MEDIA_URL }}{{ result }}" > download link</a>.</p>
+                {% else %}
+            <p class="text-danger"> No results found for your job, please report it using jobID <b>{{ jobID }}</b></p>
+                {% endif %}
+                {% if mappings %}
+            <p class="text-success">Find the ID mappings in this <a href="{{ MEDIA_URL }}{{ mappings }}">download link </a> (only important if identical sequences were present)</p>
+                {% endif %}
+            </div>
+
+            <div class="row">
+
+            {% if info %}
+
+            <div class="col-lg-10">
+                        <pre style="white-space: pre-line">
+
+                    {{ info }}
+             </pre>
+            </div>
+
+            {% endif %}
+
+            </div>
+
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+
+
+{% endblock %}
+
+

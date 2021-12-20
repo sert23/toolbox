@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    {#                    <h1>Helper Tools: </h1>#}
+                    <h1>{{tool}} </h1>
+                </div>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-lg-9">
+
+                    <div class="well">
+                        <h4>Fasta Subsetter:</h4>
+                        <p>Description
+                        </p>
+
+                        <p><button type="button" class="btn btn-primary center-block" onclick="loadParams()">Load test Data</button>
+                        </p>
+                        {% include 'form_base.html' %}
+                </div>
+
+
+            </div>
+
+
+            <div class="col-lg-3">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Help
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <a href="{{ settings.MANUAL_URL }}" target="_blank">Link to Web Manual</a>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- /#page-wrapper -->
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        // tooltip demo
+        $('.row').tooltip({
+            selector: "[data-toggle=tooltip]",
+            container: "body"
+        })
+
+    </script>
+    <script>
+        function loadParams() {
+            document.getElementById("id_url").value= "https://www.bioinfo2.ugr.es/linkData.fa";
+            document.getElementById("id_faids").value= "example!";
+            return true   // The function returns the product of p1 and p2
+         }
+    </script>
+
+{% endblock %}
