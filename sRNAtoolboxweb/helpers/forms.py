@@ -308,7 +308,6 @@ class ExtractForm(forms.Form):
         #return pipeline_id, "touch /opt/sRNAtoolbox/sRNAtoolboxweb/upload/S3LLSLVRW36VI06/ele.txt"
         #return pipeline_id, "runPipelines " +configuration_file_path
 
-
 class EnsemblForm(forms.Form):
     ifile = forms.FileField(label='Upload input file(Ensembl file)', required=False)
     url = forms.URLField(label='Or provide a URL for big files (recommended!)', required=False)
@@ -395,7 +394,6 @@ class EnsemblForm(forms.Form):
                 configuration_file_path=configuration_file_path,
                 job_name=name,
                 sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
-
 
 class NcbiForm(forms.Form):
     ifile = forms.FileField(label='Upload input file(NCBI file)', required=False)
@@ -484,7 +482,6 @@ class NcbiForm(forms.Form):
                 job_name=name,
                 sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
 
-
 class RnacentralForm(forms.Form):
     species = forms.CharField(label='Provide a Species Name  (Must be Scientific Name):',
                              required=False)
@@ -572,7 +569,6 @@ class RnacentralForm(forms.Form):
                 job_name=name,
                 sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
 
-
 class TrnaparserForm(forms.Form):
     species = forms.CharField(label='Provide a Species Name  (Must be Scientific Name):',
                               required=True)
@@ -628,4 +624,94 @@ class TrnaparserForm(forms.Form):
                 sh=os.path.join(BASE_DIR + '/core/bash_scripts/run_helper_trna.sh')
             )
 
+class FasubsetForm(forms.Form):
+    ifile = forms.FileField(label='Upload input file(Fasta file)', required=False)
+    url = forms.URLField(label='Or provide a URL for big files (recommended!)', required=False)
+    faids = forms.CharField(label="Paste the fasta IDs you want to subset from file ", widget=forms.Textarea, required=False)
 
+    def __init__(self, *args, **kwargs):
+        super(FasubsetForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Fieldset(
+                "",
+                "ifile",
+                "url",
+                HTML("""<br>"""),
+                "faids",
+
+                HTML("""<br>"""),
+                ButtonHolder(
+                    # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
+                    Submit('submit', 'RUN', css_class='btn btn-primary'))))
+    def clean(self):
+        cleaned_data = super(FasubsetForm, self).clean()
+        if not cleaned_data.get('ifile') and not cleaned_data.get('url'):
+            self.add_error('ifile', 'One of these two fields is required')
+            self.add_error('url', 'One of these two fields is required')
+        if not cleaned_data.get('faids'):
+            self.add_error('faids', 'This field is required')
+        if cleaned_data.get('ifile') and cleaned_data.get('url'):
+            self.add_error('ifile', 'Choose either file or URL')
+            self.add_error('url', 'Choose either file or URL')
+        return cleaned_data
+
+    def generate_id(self):
+        is_new = True
+        while is_new:
+            pipeline_id = generate_uniq_id()
+            if not JobStatus.objects.filter(pipeline_key=pipeline_id):
+                return pipeline_id
+
+    def create_call(self):
+        pipeline_id = self.generate_id()
+        FS = FileSystemStorage()
+        FS.location = os.path.join(MEDIA_ROOT, pipeline_id)
+        os.system("mkdir " + FS.location)
+        out_dir = FS.location
+        ifile = self.cleaned_data.get("ifile")
+        if ifile:
+            file_to_update = ifile
+            uploaded_file = str(file_to_update)
+            ifile = FS.save(uploaded_file, file_to_update)
+        elif self.cleaned_data.get("url"):
+            url = self.cleaned_data.get("url")
+            extension = os.path.basename(url).split('.')[-1]
+            dest = os.path.join(FS.location, os.path.basename(url))
+            ifile, headers = urllib.request.urlretrieve(url, filename=dest)
+        else:
+            raise Http404
+        listfile = "listFile.txt"
+        with open(os.path.join(out_dir, listfile), "w+") as file:
+            file.write(self.cleaned_data.get("faids"))
+        name = pipeline_id + '_h_fasubset'
+        config_location = os.path.join(out_dir, "conf.txt")
+        configuration = {
+            'pipeline_id': pipeline_id,
+            'out_dir': out_dir,
+            'name': name,
+            'conf_input': config_location,
+            'type': 'helper'
+        }
+        with open(config_location, "w+") as file:
+            file.write("inputList=" + os.path.join(out_dir, listfile) + "\n")
+            file.write("inputFasta=" + os.path.join(out_dir, ifile) + "\n")
+            file.write("outBase=" + out_dir + "\n")
+
+        import json
+        configuration_file_path = os.path.join(out_dir, 'conf.json')
+        with open(configuration_file_path, 'w') as conf_file:
+            json.dump(configuration, conf_file, indent=True)
+        JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not launched",
+                                 start_time=datetime.datetime.now(),
+                                 # finish_time=datetime.time(0, 0),
+                                 all_files=ifile,
+                                 modules_files="",
+                                 pipeline_type="helper",
+                                 outdir=FS.location,
+                                 )
+        if QSUB:
+            return 'qsub -q fast -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
+                configuration_file_path=configuration_file_path,
+                job_name=name,
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id

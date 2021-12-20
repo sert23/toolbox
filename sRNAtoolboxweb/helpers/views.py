@@ -8,7 +8,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import FormView
 
 from helpers.forms import ExtractForm, NcbiForm
-from helpers.forms import RemovedupForm2, EnsemblForm, RnacentralForm, TrnaparserForm
+from helpers.forms import RemovedupForm2, EnsemblForm, RnacentralForm, TrnaparserForm, FasubsetForm
 from progress.models import JobStatus
 from utils import pipeline_utils
 from utils.sysUtils import make_dir
@@ -77,6 +77,15 @@ def extract(request):
     """
     return render(request, 'helpers.html', {"tool": "Extract Sequences from a fasta file",
                                             "tool_url": "extract", "input": "Fasta file", "extract": True})
+
+def fasubset(requestFasubset):
+    """
+    :rtype : render
+    :param request: posts and gets
+    :return: html with trna helper
+    """
+    return render(requestFasubset, 'helpers.html', {"tool": "Fasta subset", "tool_url": "fasubset"})
+
 
 
 def run(request, tool):
@@ -212,7 +221,28 @@ def run(request, tool):
                 '",species="' + species + '",name="' + pipeline_id + '_h_trna' + '" -N ' + pipeline_id +
                 '_h_trna /shared/sRNAtoolbox/core/bash_scripts/run_helper_trna.sh')
 
+    if tool == "fasubset":
 
+        if "ifile" in request.FILES:
+            file_to_update = request.FILES['ifile']
+            uploaded_file = str(file_to_update)
+            FS.save(uploaded_file, file_to_update)
+            ifile = os.path.join(FS.location, uploaded_file)
+
+        elif request.POST["url"].replace(" ", "") != "":
+            url_input = request.POST["url"]
+            dest = os.path.join(FS.location, os.path.basename(url_input))
+            handler = urllib.URLopener()
+            handler.retrieve(url_input, dest)
+            ifile = dest
+
+        else:
+            return render(request, "error_page.html", {"errors": ["URL of file must be provided"]})
+
+        os.system(
+                'qsub -v pipeline="helper",mode="fasubset",key="' + pipeline_id + '",outdir="' + FS.location +
+                '",inputfile="' + ifile + '",name="' + pipeline_id + '_h_fasubset' + '" -N ' + pipeline_id +
+                '_h_ncbi /shared/sRNAtoolbox/core/bash_scripts/run_helper_ncbi.sh')
     #return redirect("/srnatoolbox/jobstatus/helper/?id=" + pipeline_id)
     return redirect("/srnatoolbox_dev/")
 
@@ -223,6 +253,10 @@ def result(request):
 
         new_record = JobStatus.objects.get(pipeline_key=job_id)
         assert isinstance(new_record, JobStatus)
+
+        # check if fasubset and redirect to its results
+        if 'h_fasubset' in new_record.job_name:
+            return redirect(reverse_lazy('result_Fasubset', kwargs={"id": job_id}))
 
         results = {}
         results["jobID"]=new_record.pipeline_key
@@ -246,6 +280,43 @@ def result(request):
 
 
             return render(request, 'helper_result.html', results)
+
+        else:
+            return redirect(reverse_lazy('progress', kwargs={"pipeline_id": job_id}))
+    else:
+        return redirect(settings.SUB_SITE)
+
+def result_Fasubset(request):
+    if 'id' in request.GET:
+        job_id = request.GET['id']
+
+        new_record = JobStatus.objects.get(pipeline_key=job_id)
+        assert isinstance(new_record, JobStatus)
+
+        results = {}
+        results["jobID"]=new_record.pipeline_key
+        if new_record.job_status == "Finished":
+            fd = open(os.path.join(new_record.outdir, "log.txt"))
+            backvalue = "result"
+            info_string = ""
+            for line in fd:
+                if "Filtered fastafile" in line:
+                    value = line.replace("\n", "").split(",")[-1]
+                    backvalue = value
+                    
+                if "File: ID mappings" in line:
+                    mappings = line.replace("\n", "").split(",")[-1]
+                if "SUCCESS" in line:
+                    jumpline = line + "\n"
+                    info_string += line
+            zip_file = os.path.join(backvalue + ".zip").split("/")[-1]
+            if os.path.exists(backvalue+".zip"):
+                #results["result"] = os.path.join(new_record.outdir ,"mature.txt.zip")
+                results["result"] = os.path.join(new_record.pipeline_key,zip_file)
+                results["mappings"] = os.path.join(new_record.pipeline_key,mappings.split("/")[-1])
+                results["info"] = info_string
+
+            return render(request, 'helpers/helper_result_fasubset.html', results)
 
         else:
             return redirect(reverse_lazy('progress', kwargs={"pipeline_id": job_id}))
@@ -369,3 +440,20 @@ class Trna(FormView):
         js.save()
         self.success_url = reverse_lazy('helper') + '?id=' + pipeline_id
         return super(Trna, self).form_valid(form)
+
+class Fasubset(FormView):
+    template_name = 'helpers/helpers_fasubset.html'
+    form_class = FasubsetForm
+
+    success_url = reverse_lazy("fasubset")
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        call, pipeline_id = form.create_call()
+        os.system(call)
+        js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
+        self.success_url = reverse_lazy('helper') + '?id=' + pipeline_id
+        return super(Fasubset, self).form_valid(form)
