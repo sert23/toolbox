@@ -303,14 +303,14 @@ def result_Fasubset(request):
             fd = open(os.path.join(new_record.outdir, "log.txt"))
             backvalue = "result"
             info_string = ""
+            mappings = ""
             for line in fd:
                 if "Filtered fastafile" in line:
-                  value = line.replace("\n", "").split(",")[-1]
-                  backvalue = value
+                    value = line.replace("\n", "").split(",")[-1]
+                    backvalue = value
                 if "File: ID mappings" in line:
-                  mappings = line.replace("\n", "").split(",")[-1]
+                    mappings = line.replace("\n", "").split(",")[-1]
                 if "ERROR" in line:
-                    jumpline = line + "\n"
                     info_string += line
 #            zip_file = os.path.join(backvalue + ".zip").split("/")[-1]
  #           if os.path.exists(backvalue+".zip"):
@@ -460,4 +460,3 @@ class Fasubset(FormView):
         js.save()
         self.success_url = reverse_lazy('result_Fasubset') + '?id=' + pipeline_id
         return super(Fasubset, self).form_valid(form)
-
