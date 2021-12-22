@@ -256,8 +256,10 @@ def result(request):
 
         # check if fasubset and redirect to its results
         if 'h_fasubset' in new_record.job_name:
-            return redirect(reverse_lazy('result_Fasubset', kwargs={"id": job_id}))
-
+          print (job_id)
+          return redirect(reverse_lazy('result_Fasubset') + '?id=' + job_id)      
+          #return redirect(reverse_lazy('result_Fasubset', kwargs={"id": job_id}))
+            
         results = {}
         results["jobID"]=new_record.pipeline_key
         if new_record.job_status == "Finished":
@@ -301,23 +303,22 @@ def result_Fasubset(request):
             info_string = ""
             for line in fd:
                 if "Filtered fastafile" in line:
-                    value = line.replace("\n", "").split(",")[-1]
-                    backvalue = value
-                    
+                  value = line.replace("\n", "").split(",")[-1]
+                  backvalue = value
                 if "File: ID mappings" in line:
-                    mappings = line.replace("\n", "").split(",")[-1]
-                if "SUCCESS" in line:
+                  mappings = line.replace("\n", "").split(",")[-1]
+                if "ERROR" in line:
                     jumpline = line + "\n"
                     info_string += line
-            zip_file = os.path.join(backvalue + ".zip").split("/")[-1]
-            if os.path.exists(backvalue+".zip"):
+#            zip_file = os.path.join(backvalue + ".zip").split("/")[-1]
+ #           if os.path.exists(backvalue+".zip"):
                 #results["result"] = os.path.join(new_record.outdir ,"mature.txt.zip")
-                results["result"] = os.path.join(new_record.pipeline_key,zip_file)
+#                results["result"] = os.path.join(new_record.pipeline_key,zip_file)
+                results["result"] = os.path.join(new_record.pipeline_key,backvalue)
                 results["mappings"] = os.path.join(new_record.pipeline_key,mappings.split("/")[-1])
                 results["info"] = info_string
 
             return render(request, 'helpers/helper_result_fasubset.html', results)
-
         else:
             return redirect(reverse_lazy('progress', kwargs={"pipeline_id": job_id}))
     else:
@@ -455,5 +456,5 @@ class Fasubset(FormView):
         js.status.create(status_progress='sent_to_queue')
         js.job_status = 'sent_to_queue'
         js.save()
-        self.success_url = reverse_lazy('helper') + '?id=' + pipeline_id
+        self.success_url = reverse_lazy('result_Fasubset') + '?id=' + pipeline_id
         return super(Fasubset, self).form_valid(form)
