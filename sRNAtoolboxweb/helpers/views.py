@@ -458,3 +458,4 @@ class Fasubset(FormView):
         js.save()
         self.success_url = reverse_lazy('result_Fasubset') + '?id=' + pipeline_id
         return super(Fasubset, self).form_valid(form)
+
