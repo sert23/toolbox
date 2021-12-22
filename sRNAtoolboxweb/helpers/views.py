@@ -254,15 +254,17 @@ def result(request):
         new_record = JobStatus.objects.get(pipeline_key=job_id)
         assert isinstance(new_record, JobStatus)
 
-        # check if fasubset and redirect to its results
-        if 'h_fasubset' in new_record.job_name:
-          print (job_id)
-          return redirect(reverse_lazy('result_Fasubset') + '?id=' + job_id)      
-          #return redirect(reverse_lazy('result_Fasubset', kwargs={"id": job_id}))
+
             
         results = {}
         results["jobID"]=new_record.pipeline_key
         if new_record.job_status == "Finished":
+            # check if fasubset and redirect to its results
+            if 'h_fasubset' in new_record.job_name:
+                print(job_id)
+                return redirect(reverse_lazy('result_Fasubset') + '?id=' + job_id)
+                # return redirect(reverse_lazy('result_Fasubset', kwargs={"id": job_id}))
+
             fd = open(os.path.join(new_record.outdir, "logFile.txt"))
             backvalue = "result"
             info_string = ""
