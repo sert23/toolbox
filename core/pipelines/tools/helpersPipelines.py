@@ -21,6 +21,7 @@ class helpersPipelines(Pipeline):
         self.set_java_command_line(cmd)
         log_msg = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " SUCCESS: Helper tool finished"
         self.actualize_pipeline_progress(log_msg)
+        self.change_pipeline_status("Finished")
         if self.set_out_files():
             self.set_finish_time()
             sleep(4)
