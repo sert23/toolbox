@@ -17,6 +17,7 @@ class helpersPipelines(Pipeline):
         self.actualize_pipeline_progress(log_msg)
         cmd="sRNAhelper "+ self.conf_input
         os.system(cmd)
+        self.change_pipeline_status("Running")
         self.set_java_command_line(cmd)
         log_msg = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " SUCCESS: Helper tool finished"
         self.actualize_pipeline_progress(log_msg)
