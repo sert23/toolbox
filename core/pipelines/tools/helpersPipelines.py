@@ -19,15 +19,15 @@ class helpersPipelines(Pipeline):
         cmd = "java -jar " + self.configuration.path_to_helpers + " " + self.conf_input
         os.system(cmd)
         self.change_pipeline_status("Running")
-        self.change_pipeline_status("Finished")
+        # self.change_pipeline_status("Finished")
         self.set_java_command_line(cmd)
         log_msg = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " SUCCESS: Helper tool finished"
         self.actualize_pipeline_progress(log_msg)
-        self.change_pipeline_status("Finished")
-        # if self.set_out_files():
-        #     self.set_finish_time()
-        #     sleep(4)
-        #     self.change_pipeline_status("Finished")
+        # self.change_pipeline_status("Finished")
+        if self.set_out_files():
+            self.set_finish_time()
+            # sleep(4)
+            self.change_pipeline_status("Finished")
 
     def run1(self):
         self.initialize_pipeline_status()
