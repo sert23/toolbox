@@ -1,5 +1,5 @@
 import os
-from time import strftime, gmtime
+from time import strftime, gmtime, sleep
 #from progress.models import JobStatus
 from pipelines.pipelines import Pipeline
 
@@ -23,6 +23,7 @@ class helpersPipelines(Pipeline):
         self.actualize_pipeline_progress(log_msg)
         if self.set_out_files():
             self.set_finish_time()
+            sleep(4)
             self.change_pipeline_status("Finished")
 
     def run1(self):
