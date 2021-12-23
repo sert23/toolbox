@@ -23,10 +23,10 @@ class helpersPipelines(Pipeline):
         log_msg = strftime("%Y-%m-%d %H:%M:%S", gmtime()) + " SUCCESS: Helper tool finished"
         self.actualize_pipeline_progress(log_msg)
         self.change_pipeline_status("Finished")
-        if self.set_out_files():
-            self.set_finish_time()
-            sleep(4)
-            self.change_pipeline_status("Finished")
+        # if self.set_out_files():
+        #     self.set_finish_time()
+        #     sleep(4)
+        #     self.change_pipeline_status("Finished")
 
     def run1(self):
         self.initialize_pipeline_status()
