@@ -1,20 +1,28 @@
 from django.core.management.base import BaseCommand, CommandError
-from progress.models import Question as Poll
+from django.conf import settings
+from sRNABench.models import Species
+
+
+
+
 
 class Command(BaseCommand):
-    help = 'Closes the specified poll for voting'
+    help = 'refreshes the species database'
 
-    def add_arguments(self, parser):
-        parser.add_argument('poll_ids', nargs='+', type=int)
 
     def handle(self, *args, **options):
-        for poll_id in options['poll_ids']:
-            try:
-                poll = Poll.objects.get(pk=poll_id)
-            except Poll.DoesNotExist:
-                raise CommandError('Poll "%s" does not exist' % poll_id)
 
-            poll.opened = False
-            poll.save()
-
-            self.stdout.write(self.style.SUCCESS('Successfully closed poll "%s"' % poll_id))
+        try:
+            CONF = settings.CONF
+            path_to_species = CONF["species"]
+            Species.clear_species()
+            self.stdout.write(self.style.SUCCESS("old species database cleared"))
+            Species.create_batch(path_to_species)
+            self.stdout.write(self.style.SUCCESS("updating new species"))
+            self.stdout.write(self.style.SUCCESS("species database succesfully updated using:"))
+            self.stdout.write(self.style.SUCCESS(path_to_species))
+        except:
+            self.stdout.write(self.style.ERROR("There was some error, the database wasn't updated"))
+            self.stdout.write(self.style.ERROR("Check that " + path_to_species + " is the correct file"))
+            self.stdout.write(self.style.ERROR("Check file format"))
+            self.stdout.write(self.style.ERROR("species database might be empty now!!"))
