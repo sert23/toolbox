@@ -14,6 +14,7 @@ from pipelines.tools.sRNAfuncTermsPipeline import sRNAfuncTermsPipeline
 from pipelines.tools.sRNAgFreePipeline import sRNAgFreePipeline
 from pipelines.tools.miRNAgfreePipeline import miRNAgFreePipe
 from pipelines.tools.sRNAjBrowserPipeline import sRNAjBrowserPipeline, sRNAdejBrowserPipeline
+from pipelines.tools.sRNAcons import sRNAconsPipeline
 
 __author__ = 'antonior'
 
@@ -98,6 +99,14 @@ def mirg(pipeline_id=None, name=None, out_dir=None, conf_input=None, **kwargs):
     new_pipe = miRNAgFreePipe(pipeline_id, name, out_dir, conf_input, "")
     new_pipe.run()
 
+def cons(pipeline_id=None, name=None, out_dir=None, conf_input=None, **kwargs):
+    parameters = "".join([line for line in open(conf_input).readlines()
+                          if "desc" not in line and "libs" not in line
+                          and not "maintaingOrig" in line and not "zip" in line
+                          and not "graphics" in line]
+                         ).replace("=", ": ").replace("/shared/", "").replace("sRNAtoolbox/webData/", "")
+    new_pipe = sRNAbenchPipeline(pipeline_id, name, out_dir, conf_input, parameters)
+    new_pipe.run()
 
 
 
@@ -274,6 +283,8 @@ def main():
         #blast(**conf)
     if conf['type'] == 'helper':
         helper(**conf)
+    if conf['type'] == 'sRNAcons':
+        cons(**conf)
 
         #print("I'm a damn helper")
 
