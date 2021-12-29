@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -l walltime=24:30:00,mem=12Gb
+#PBS -l walltime=24:30:00,mem=50Gb
 
 
 
