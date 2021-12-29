@@ -147,7 +147,7 @@ def move_drive(input_folder, output_folder):
     json_file.close()
     drive_path = os.path.join(input_folder, "drive.json")
     drive_file = open(dict_path, "r")
-    drive_dict = json.load(dict_path)
+    drive_dict = json.load(dict_file)
     drive_file.close()
     for k in drive_dict.keys():
         filename, fileid, link, token = drive_dict[k]
