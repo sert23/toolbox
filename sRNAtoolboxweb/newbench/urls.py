@@ -12,7 +12,7 @@ urlpatterns = [
     #url(r'align/(.+)/(.+)/(.+)', views.show_align, name='show_align'),
     # url(r'run$', views.run, name='run_bench'),
     url(r'^$', views.NewUpload.as_view()),
-    url(r'^launch', views.Launch.as_view(), name="launch"),
+    url(r'^annotate/', views.Annotate.as_view(), name="annotate"),
     # url(r'^launch/[A-za-z0-9]+', views.NewUpload.as_view()),
     #url(r'test$', views.test),
 ]

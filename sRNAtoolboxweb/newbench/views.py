@@ -25,6 +25,7 @@ from FileModels.mirbaseMainParser import MirBaseParser
 from FileModels.speciesAnnotationParser import SpeciesAnnotationParser
 from FileModels.speciesParser import SpeciesParser
 from progress.models import JobStatus
+from multi.forms import PhotoForm
 # from .forms import miRNAgFreeForm, FileForm
 from utils import pipeline_utils
 from utils.sysUtils import make_dir
@@ -56,27 +57,6 @@ def generate_id():
         pipeline_id = generate_uniq_id()
         if not JobStatus.objects.filter(pipeline_key=pipeline_id):
             return pipeline_id
-
-class NewUpload(FormView):
-    # template_name = 'newBench/new_bench.html'
-    # template_name = 'Messages/miRgFree/drive_test.html'
-    # form_class = miRNAgFreeForm
-    # success_url = reverse_lazy("MIRG")
-    # success_url = reverse_lazy("MIRG")
-
-    def get(self, request,**kwargs):
-        path = request.path
-        jobID = generate_id()
-        folder_path = os.path.join(MEDIA_ROOT,jobID)
-        # os.mkdir(folder_path)
-        data_url = reverse_lazy("multi:multi_new") + jobID
-        # mirgeneDB = parse_mirgeneDB()
-        print(data_url)
-        return render(self.request, 'newBench/new_bench.html', { "jobID":jobID,
-                                                         "data_url": data_url,
-                                                         # "mirgenedb_list": mirgeneDB,
-
-                                                         })
 
 def get_files_fullpath(input_folder):
 
@@ -170,10 +150,38 @@ def move_drive(input_folder, output_folder):
     drive_dict = json.load(dict_path)
     drive_file.close()
     for k in drive_dict.keys():
-        print(k)
+        filename, fileid, link, token = drive_dict[k]
+        input_dict[filename] = {"input": filename, "name": "filename",
+                                "input_type": "Drive", "link": link, "token": token}
+    json_file = open(dict_path, "w")
+    json.dump(input_dict, json_file, indent=6)
+    json_file.close()
 
 
-class Launch(FormView):
+
+class NewUpload(FormView):
+    # template_name = 'newBench/new_bench.html'
+    # template_name = 'Messages/miRgFree/drive_test.html'
+    # form_class = miRNAgFreeForm
+    # success_url = reverse_lazy("MIRG")
+    # success_url = reverse_lazy("MIRG")
+
+    def get(self, request,**kwargs):
+        path = request.path
+        jobID = generate_id()
+        folder_path = os.path.join(MEDIA_ROOT,jobID)
+        # os.mkdir(folder_path)
+        data_url = reverse_lazy("multi:multi_new") + jobID
+        # mirgeneDB = parse_mirgeneDB()
+        print(data_url)
+        return render(self.request, 'newBench/new_bench.html', { "jobID":jobID,
+                                                         "data_url": data_url,
+                                                         # "mirgenedb_list": mirgeneDB,
+
+                                                         })
+
+
+class Annotate(FormView):
     # template_name = 'newBench/new_bench.html'
     # template_name = 'Messages/miRgFree/drive_test.html'
     # form_class = miRNAgFreeForm
@@ -200,48 +208,51 @@ class Launch(FormView):
         move_files(old_folder_path, folder_path)
         move_SRA(old_folder_path, folder_path)
         move_link(old_folder_path, folder_path)
-        # move_drive(old_folder_path, folder_path)
+        move_drive(old_folder_path, folder_path)
         move_dropbox(old_folder_path, folder_path)
         # data_url = reverse_lazy("multi:multi_new") + jobID
         # mirgeneDB = parse_mirgeneDB()
         # print(data_url)
-        return render(self.request, 'newBench/new_bench.html', {"jobID": new_jobID,
+        annotate_url = reverse_lazy("annotate") + new_jobID
+        return render(self.request, 'newBench/annotate.html', {"jobID": new_jobID,
+                                                               "all_samples": [["test 1","group1"],
+                                                                               ["test 1", "group1"]
+                                                               ],
+                                                               "annotate_url" : annotate_url,
                                                                 # "data_url": data_url,
                                                                 # "mirgenedb_list": mirgeneDB,
 
                                                                 })
 
+    def post(self, request):
+        #time.sleep(1)  # You don't need this line. This is just to delay the process so you can see the progress bar testing locally.
+        form = PhotoForm(self.request.POST, self.request.FILES)
+        path = request.path
+        folder = path.split("/")[-1]
+        print(folder)
+        if "file" in self.request.FILES:
+            if form.is_valid():
+                print("valid")
+                photo = form.save()
+                # # onlyfiles = [f for f in listdir(os.path.join(MEDIA_ROOT, folder))
+                # #              if os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, folder), f))]
+                # name = photo.file.name.split("/")[-1]
+                full_path = os.path.join(MEDIA_ROOT, folder, "annotation.xlsx")
+                shutil.move(os.path.join(MEDIA_ROOT,photo.file.name), full_path)
+                samples_annot = pd.read_excel(full_path)
+                # print(samples_annot.head())
+                data = {}
+                annot_table = []
+                for index, row in samples_annot.iterrows():
+                    annot_table.append([row[0], row[1]])
+
+                data["annotation"] = annot_table
+
+                return JsonResponse(data)
+                # return JsonResponse(data)
 
 
 
-
-    # def post(self, request, *args, **kwargs):
-    #     request.POST._mutable = True
-    #     #print(SPECIES_PATH)
-    #     request.POST['species'] = request.POST['species_hidden'].split(',')
-    #     print(request.POST['species'])
-    #     print(request.POST['species_hidden'].split(','))
-    #     request.POST._mutable = False
-    #     return super(MirG, self).post(request, *args, **kwargs)
-    #
-    # def form_valid(self, form):
-    #     # This method is called when valid form data has been POSTed.
-    #     # It should return an HttpResponse.
-    #
-    #     form.clean()
-    #     call, pipeline_id = form.create_call()
-    #     self.success_url = reverse_lazy('srnabench') + '?id=' + pipeline_id
-    #
-    #     print(call)
-    #     os.system(call)
-    #     js = JobStatus.objects.get(pipeline_key=pipeline_id)
-    #     js.status.create(status_progress='sent_to_queue')
-    #     js.job_status = 'sent_to_queue'
-    #     js.save()
-    #     return super(MirG, self).form_valid(form)
-    #
-    # def print_file_locat(self, form):
-    #     print(form.cleaned_data)
 
 # class NewUpload(FormView):
 #
