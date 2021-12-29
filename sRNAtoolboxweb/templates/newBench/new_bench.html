@@ -717,7 +717,7 @@ function toggleAdapter() {
 
     var redirLaunch = function(e) {
 
-        var launch_url = "{% url 'launch' %}?";
+        var launch_url = "{% url 'annotate' %}?";
             $("#protocol").val($("input[name=library_protocol]:checked").val());
             alert("clicked");
             var pars = $("#jobId").serialize();
