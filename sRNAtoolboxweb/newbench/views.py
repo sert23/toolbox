@@ -234,7 +234,8 @@ class Annotate(FormView):
         if move_drive(old_folder_path, folder_path):
             print("x")
             # download drive files background
-            drive_path = os.mkdir(os.path.join(files_path, "drive_temp"))
+            drive_path = os.path.join(files_path, "drive_temp")
+            os.mkdir(drive_path)
             download_drive(json_path, drive_path)
 
         # data_url = reverse_lazy("multi:multi_new") + jobID
