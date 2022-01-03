@@ -149,13 +149,32 @@ def move_drive(input_folder, output_folder):
     drive_file = open(drive_path, "r")
     drive_dict = json.load(drive_file)
     drive_file.close()
+    backvalue = False
     for k in drive_dict.keys():
         filename, fileid, link, token = drive_dict[k]
-        input_dict[filename] = {"input": filename, "name": "filename",
+        input_dict[filename] = {"input": filename, "name": filename,
                                 "input_type": "Drive", "link": link, "token": token}
+        backvalue = True
     json_file = open(dict_path, "w")
     json.dump(input_dict, json_file, indent=6)
     json_file.close()
+    return backvalue
+
+def download_drive(input_json, output_folder):
+    if not os.path.exists(output_folder):
+        os.mkdir(output_folder)
+    json_file = open(input_json, "r")
+    input_dict = json.load(json_file)
+    json_file.close()
+    for s in input_dict:
+        s_dict = input_dict[s]
+        if s_dict["input_type"] == "Drive":
+            link = s_dict["link"]
+            filename = os.path.join(output_folder, s_dict["link"])
+            token = s_dict["token"]
+            cmd = 'curl - H "Authorization: Bearer ' + token + ' "' + link +'" -o "' + filename + '"'
+            os.system(cmd)
+
 
 
 
@@ -182,6 +201,7 @@ class NewUpload(FormView):
 
 
 class Annotate(FormView):
+    # TODO if folder already exixsts omit creation
     # template_name = 'newBench/new_bench.html'
     # template_name = 'Messages/miRgFree/drive_test.html'
     # form_class = miRNAgFreeForm
@@ -202,14 +222,21 @@ class Annotate(FormView):
         if not os.path.exists(os.path.join(files_path)):
             os.mkdir(os.path.join(files_path))
 
-        json_file = open(os.path.join(folder_path,"input.json"), "w")
+        json_path = os.path.join(folder_path,"input.json")
+        json_file = open(json_path, "w")
         json.dump({}, json_file, indent=6)
         json_file.close()
         move_files(old_folder_path, folder_path)
         move_SRA(old_folder_path, folder_path)
         move_link(old_folder_path, folder_path)
-        move_drive(old_folder_path, folder_path)
         move_dropbox(old_folder_path, folder_path)
+
+        if move_drive(old_folder_path, folder_path):
+            print("x")
+            # download drive files background
+            drive_path = os.mkdir(os.path.join(files_path, "drive_temp"))
+            download_drive(json_path, drive_path)
+
         # data_url = reverse_lazy("multi:multi_new") + jobID
         # mirgeneDB = parse_mirgeneDB()
         # print(data_url)
