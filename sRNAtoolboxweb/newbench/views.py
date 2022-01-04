@@ -154,6 +154,7 @@ def move_drive(input_folder, output_folder):
         filename, fileid, link, token = drive_dict[k]
         link_id = "https://www.googleapis.com/drive/v3/files/" + fileid + "?alt=media"
         cmd = 'curl -H "Authorization: Bearer ' + token + '" "' + link_id +'" -o "{}"'
+        cmd = "curl -H 'Authorization: Bearer " + token + "' '" + link_id + "' -o '{}'"
         input_dict[filename] = {"input": filename, "name": filename,
                                 "input_type": "Drive", "link": link_id, "token": token, "cmd" : cmd
                                 }
