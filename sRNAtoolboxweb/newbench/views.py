@@ -178,6 +178,7 @@ def download_drive(input_json, output_folder):
             token = s_dict["token"]
             cmd = s_dict["cmd"]
             cmd = cmd.format(filename)
+            os.system("touch " + filename)
             os.system(cmd)
 
 
