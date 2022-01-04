@@ -174,7 +174,7 @@ def download_drive(input_json, output_folder):
         s_dict = input_dict[s]
         if s_dict["input_type"] == "Drive":
             link = s_dict["link"]
-            filename = os.path.join(output_folder, s_dict["link"])
+            filename = os.path.join(output_folder, s_dict["name"])
             token = s_dict["token"]
             cmd = s_dict["cmd"]
             cmd = cmd.format(filename)
