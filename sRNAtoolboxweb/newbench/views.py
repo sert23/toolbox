@@ -153,7 +153,7 @@ def move_drive(input_folder, output_folder):
     for k in drive_dict.keys():
         filename, fileid, link, token = drive_dict[k]
         link_id = "https://www.googleapis.com/drive/v3/files/" + fileid + "?alt=media"
-        cmd = 'curl - H "Authorization: Bearer ' + token + ' "' + link_id +'" -o "' + filename + '"'
+        cmd = 'curl -H "Authorization: Bearer ' + token + '" "' + link_id +'" -o "{}"'
         input_dict[filename] = {"input": filename, "name": filename,
                                 "input_type": "Drive", "link": link_id, "token": token, "cmd" : cmd
                                 }
@@ -176,6 +176,7 @@ def download_drive(input_json, output_folder):
             filename = os.path.join(output_folder, s_dict["link"])
             token = s_dict["token"]
             cmd = s_dict["cmd"]
+            cmd = cmd.format(filename)
             os.system(cmd)
 
 
