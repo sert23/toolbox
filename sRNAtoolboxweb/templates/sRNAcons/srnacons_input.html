@@ -10,16 +10,12 @@
                     <h3>Mapping of small RNA sequences to all genomes in sRNAtoolbox</h3>
                 </div>
             </div>
-
-
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
         <div class="row">
             <div class="col-lg-9">
-
                 {% include 'form_base.html' %}
-
             </div>
 
 
@@ -33,13 +29,22 @@
                     <div class="panel-body">
                         <a href="{{ settings.MANUAL_URL }}" target="_blank">Link to Web Manual</a>
                         <br>
-                    </div>
-                    <div class="panel-body">
-                        <a href="https://arn.ugr.es/srnatoolbox/srnacons/result?id=9J359OS8OPTZTKN" target="_blank">Link to Test Results</a>
+                        <a href="{{ settings.SUB_SITE }}/srnacons/result?id=QD7DGC6MMG81RL2" target="_blank">Link to Test Results</a>
                         <br>
                     </div>
                 </div>
-
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            Test Data
+                        </h4>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            <button type="button" class="btn btn-primary left-block" onclick="loadParams()">Load test data</button>
+                        </p>
+                    </div>
+                </div>
             </div>
 
 
@@ -51,20 +56,19 @@
 {% endblock %}
 
 {% block modals %}
-    {% include "Messages/de/SampleDescription.html" %}
-    {% include "Messages/de/ListOfIDs.html" %}
-    {% include "Messages/de/IDlist.html" %}
+    {% include "Messages/srnacons/Choose_Input.html" %}
+    {% include "Messages/srnacons/Parameters.html" %}
 {% endblock %}
-
 
 
 {% block js %}
     <script>
     function loadParams() {
-        $('a[href="#use-group-string-advanced"]').tab('show');
-        document.getElementById("id_listofIDs").value= "D42PPR3ZVTVQBK8:EYHC83BJX80ATIL:UWCUSRT3IZO3ME2:XXEYZ4EZ55BHKUG:YH5LQJZVNP9W3NX:5DZDVDGE0AZ5GQ0#51UQ20HBJ3XUWPJ:6IJISG8JIDJC0CA:FKZ2D88FZNWZCS5:OE1ZNRX2RSJ0OV1:OUSQYGT9V0V6ZA5:ZBM4WYEO1C80DTU";
-        document.getElementById("id_sampleDescription2").value= "MUTU9_cell:IM_cell:BJAB_cell:MUTU3_cell:RN_cell:IK_cell:RN_exo:IM_exo:MUTU9_exo:IK_exo:BJAB_exo:MUTU3_exo";
-        document.getElementById("id_sampleGroupsNot").value= "exosome#cell";
+        $('a[href="#urllink"]').tab('show');
+        document.getElementById("id_mistmatches").value= "1";
+        document.getElementById("id_url").value= 'https://arn.ugr.es/srnatoolbox/static/mature.fa';
+        document.getElementById("id_kingdom").value= "animal";
+        document.getElementById("id_ifile").value= "";
         return true   // The function returns the product of p1 and p2
     }
     </script>

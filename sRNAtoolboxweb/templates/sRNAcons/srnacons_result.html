@@ -41,16 +41,36 @@
                     </div>
                 </div>
             {% endif %}
+            {% if graphicSum or graphicSum_2 %}
+            <div class="col-lg-10">
+                <div class="panel panel-primary" id="sp">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#Sum" >Graphic summary</a>
+                        </h4>
+                    </div>
+                    <!-- .panel-heading -->
+                    <div id="Sum" class="panel-collapse">
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                {{ graphicSum | safe }}
+                                {{ graphicSum_2 | safe }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
             {% if srna2sp.content %}
             <div class="col-lg-10">
                 <div class="panel panel-primary" id="sp">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#Conservation" >Conservation depth per smallRNA</a>
+                            <a data-toggle="collapse" href="#Conservation" >Conservation depth per sRNA</a>
                         </h4>
                     </div>
                     <!-- .panel-heading -->
-                    <div id="Conservation" class="panel-collapse">
+                    <div id="Conservation" class="panel-collapse collapse">
                         <div class="panel-body">
                             <div class="table-responsive">
                                 {% render_table srna2sp.content %}
@@ -65,7 +85,7 @@
                 <div class="panel panel-primary" id="in">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" href="#Input" >Input sequences per specie</a>
+                            <a data-toggle="collapse" href="#Input" >Conservation depth per species</a>
                         </h4>
                     </div>
                     <!-- .panel-heading -->
