@@ -16,6 +16,7 @@ from django.views.generic import FormView
 from django.core.urlresolvers import reverse_lazy
 from django.conf import settings
 from FileModels.sRNAconsParsers import sRNAconsParser
+from .summary_plots import makesrnasPlot,makeSpeciesPlot
 
 #SPECIES_PATH = '/shared/data/sRNAbench/species.csv'
 #SPECIES_ANNOTATION_PATH = '/shared/data/sRNAbench/annotation.txt'
@@ -36,7 +37,7 @@ class TableResult(tables.Table):
         attrs = {'class': 'table table-striped table-bordered table-hover dataTable no-footer',
                  "id": lambda: "table_%d" % next(counter)}
         empty_text = "Results not found!"
-        order_by = ("name",)
+        order_by = ("frequency",)
 
 
 def define_table(columns, typeTable):
@@ -49,16 +50,16 @@ def define_table(columns, typeTable):
         attrs['Meta'] = type('Meta', (),
                              dict(attrs={'class': 'table table-striped table-bordered table-hover dataTable no-footer',
                                          "id": lambda: "table_%d" % next(counter)},
-                                  ordenable=False,
+                                  ordenable=True,
                                   empty_text="Results not found!",
-                                  order_by=("name",)))
+                                  order_by=("Frequency",)))
     else:
         attrs['Meta'] = type('Meta', (),
                              dict(attrs={'class': 'table table-striped',
                                          "id": "notformattable"},
-                                  ordenable=False,
+                                  ordenable=True,
                                   empty_text="Results not found!",
-                                  order_by=("name",)))
+                                  order_by=("frequency",)))
 
 
 
@@ -107,20 +108,32 @@ def result(request):
 
             if os.path.exists(os.path.join(new_record.outdir,"identicalSequenceRelation.tsv")):
                 try:
-                    parser = sRNAconsParser(os.path.join(new_record.outdir, "sRNA2Species.txt"), "srna2species", 500)
+                    parser = sRNAconsParser(os.path.join(new_record.outdir, "sRNA2Species.txt"), "srna2species", 1000)
                     srna2sp = [obj for obj in parser.parse()]
                     header = srna2sp[0].get_sorted_attr()
-                    blast_result = Result("Conservation depth of each smallRNA", define_table(header, 'TableResult')(srna2sp))
+                    blast_result = Result("Conservation per sRNA", define_table(header, 'TableResult')(srna2sp))
                     results["srna2sp"] = blast_result
                 except:
                     pass
 
-                try:            
-                    parser = sRNAconsParser(os.path.join(new_record.outdir, "species2SRNA.txt"), "species2srna", 500)
+                try:
+                    parser = sRNAconsParser(os.path.join(new_record.outdir, "species2SRNA.txt"), "species2srna", 1000)
                     srna2sp = [obj for obj in parser.parse()]
                     header = srna2sp[0].get_sorted_attr()
-                    blast_result = Result("Input sequences contained in each species", define_table(header, 'TableResult')(srna2sp))
+                    blast_result = Result("sRNAs per species", define_table(header, 'TableResult')(srna2sp))
                     results["sp2srna"] = blast_result
+                except:
+                    pass
+
+                try:
+                    graphicSum = makesrnasPlot(os.path.join(new_record.outdir, "sRNA2Species.txt"))
+                    results["graphicSum"] = graphicSum
+                except:
+                    pass
+
+                try:
+                    graphicSum_2 = makeSpeciesPlot(os.path.join(new_record.outdir, "species2SRNA.txt"))
+                    results["graphicSum_2"] = graphicSum_2
                 except:
                     pass
             else:
