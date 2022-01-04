@@ -152,8 +152,9 @@ def move_drive(input_folder, output_folder):
     backvalue = False
     for k in drive_dict.keys():
         filename, fileid, link, token = drive_dict[k]
+        link_id = "https://www.googleapis.com/drive/v3/files/" + fileid + "?alt=media"
         input_dict[filename] = {"input": filename, "name": filename,
-                                "input_type": "Drive", "link": link, "token": token}
+                                "input_type": "Drive", "link": link_id, "token": token}
         backvalue = True
     json_file = open(dict_path, "w")
     json.dump(input_dict, json_file, indent=6)
