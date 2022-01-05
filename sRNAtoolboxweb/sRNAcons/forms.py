@@ -144,7 +144,7 @@ class sRNAconsForm(forms.Form):
                                  outdir=FS.location,
                                  )
         if QSUB:
-            return 'qsub -q fast -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
+            return 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
                 configuration_file_path=configuration_file_path,
                 job_name=name,
                 sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
