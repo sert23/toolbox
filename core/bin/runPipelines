@@ -105,7 +105,7 @@ def cons(pipeline_id=None, name=None, out_dir=None, conf_input=None, **kwargs):
                           and not "maintaingOrig" in line and not "zip" in line
                           and not "graphics" in line]
                          ).replace("=", ": ").replace("/shared/", "").replace("sRNAtoolbox/webData/", "")
-    new_pipe = sRNAbenchPipeline(pipeline_id, name, out_dir, conf_input, parameters)
+    new_pipe = sRNAconsPipeline(pipeline_id, name, out_dir, conf_input, parameters)
     new_pipe.run()
 
 
