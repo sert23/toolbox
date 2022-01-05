@@ -1,0 +1,12 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}Choose_Input{% endblock %}
+{% block title %}
+    Choose Input File
+{% endblock %}
+{% block text %}
+<p> sRNAcons needs a fasta file with the sequences of mature miRNAs (see test data for an example). You can provide the input file in two ways:</p>
+    <ul>
+        <li>Upload a file (a fasta file)</li>
+        <li>Provide a link/URL with your data (it will be downloaded and then the tool will use it) </li>
+    </ul>
+{% endblock %}
