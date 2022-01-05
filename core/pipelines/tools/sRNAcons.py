@@ -16,7 +16,6 @@ class sRNAconsPipeline(Pipeline):
 
     def run(self):
         self.initialize_pipeline_status()
-        self.download_url()
         self.call_srnacons()
         self.set_finish_time()
         time.sleep(10)
