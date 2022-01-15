@@ -164,6 +164,13 @@ def move_drive(input_folder, output_folder):
     json_file.close()
     return backvalue
 
+def make_download_name(input_name):
+    # pieces = input_name.split(".")
+    down_name = input_name + ".downloading"
+    cmd = "touch " + down_name + ";"
+    cmd2 = "rm " + down_name
+    return cmd, cmd2
+
 def download_drive(input_json, output_folder):
     if not os.path.exists(output_folder):
         os.mkdir(output_folder)
@@ -178,9 +185,12 @@ def download_drive(input_json, output_folder):
             token = s_dict["token"]
             cmd = s_dict["cmd"]
             cmd = cmd.format(filename)
-            os.system("touch " + filename)
-            os.system(cmd)
+            start, end = make_download_name(filename)
 
+            command = start + cmd + end
+
+            # ret = subprocess.run(command, capture_output=False, shell=True)
+            ret = subprocess.Popen("{}; {}; {}".format(start, cmd, end), shell=True)
 
 
 
@@ -207,7 +217,7 @@ class NewUpload(FormView):
 
 
 class Annotate(FormView):
-    # TODO if folder already exixsts omit creation
+    # TODO if folder already exists omit creation
     # template_name = 'newBench/new_bench.html'
     # template_name = 'Messages/miRgFree/drive_test.html'
     # form_class = miRNAgFreeForm
