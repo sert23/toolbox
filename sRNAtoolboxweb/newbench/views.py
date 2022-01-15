@@ -167,7 +167,7 @@ def move_drive(input_folder, output_folder):
 def make_download_name(input_name):
     # pieces = input_name.split(".")
     down_name = input_name + ".downloading"
-    cmd = "touch " + down_name + ";"
+    cmd = "touch " + down_name
     cmd2 = "rm " + down_name
     return cmd, cmd2
 
@@ -191,7 +191,7 @@ def download_drive(input_json, output_folder):
 
             # ret = subprocess.run(command, capture_output=False, shell=True)
             # ret = subprocess.Popen("{}; {}; {}".format(start, cmd, end), shell=True)
-            ret = subprocess.Popen(start, shell=True)
+            ret = subprocess.Popen("{}; {};".format(start, cmd), shell=True)
             # ret = subprocess.Popen(cmd, shell=True)
 
 
