@@ -307,7 +307,7 @@ class Launch(FormView):
         context["table_headers"] = js_headers
         context["job_id"] = new_jobID
         context["annotate_url"] = reverse_lazy("annotate") + new_jobID
-        context["form"] = reverse_lazy("annotate") + sRNABenchForm
+        # context["form"] = reverse_lazy("annotate") + sRNABenchForm
         # data_url = reverse_lazy("multi:multi_new") + jobID
         # mirgeneDB = parse_mirgeneDB()
         # print(data_url)
