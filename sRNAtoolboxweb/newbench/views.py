@@ -294,7 +294,7 @@ class Launch(FormView):
 
             # id = "file_"+ str(ix)
             # link = '<a href="'+ os.path.join(MEDIA_URL,query_id,file) +'">'+file+'</a>'
-            status = "Not launched"
+            # status = "Not launched"
             checkbox = "<input type='checkbox' value='" + "' name='to_list' checked=true>"
             table_data.append([input_line, status, checkbox])
 
