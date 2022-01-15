@@ -283,13 +283,13 @@ class Launch(FormView):
                 downloading_path = os.path.join(folder_path,"files", "drive_temp", input_name + ".downloading")
                 downloaded_path = os.path.join(folder_path,"files", "drive_temp", input_name + ".downloading")
                 if os.path.exists(downloading_path):
-                    status == "downloading"
+                    status = "downloading"
                 elif os.path.exists(downloaded_path):
-                    status == "downloaded"
+                    status = "downloaded"
                 else:
-                    status == "download failed"
+                    status = "download failed"
             else:
-                status == "not launched"
+                status = "not launched"
 
             # id = "file_"+ str(ix)
             # link = '<a href="'+ os.path.join(MEDIA_URL,query_id,file) +'">'+file+'</a>'
