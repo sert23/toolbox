@@ -74,7 +74,7 @@ def move_files(input_folder, output_folder):
     files_to_move = get_files_fullpath(input_folder)
     files_folder = os.path.join(output_folder,"files")
     for f in files_to_move:
-        if ("SRA.txt" not in f) and ("links.txt" not in f) and ("drive.json" not in f) and ("dropbox.txt" not in f):
+        if ("SRA.txt" not in f) and ("links.txt" not in f) and ("drive.json" not in f) and ("dropbox.txt" not in f and ("redirect" not in f)):
             outf = f.replace(input_folder, files_folder)
             shutil.move(f, outf)
             input_dict[f] = { "input" : f , "name" : "", "input_type" : "uploaded file"}
