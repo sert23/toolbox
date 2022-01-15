@@ -220,19 +220,18 @@ class NewUpload(FormView):
 
 class Launch(FormView):
     # TODO if folder already exists omit creation
-    # template_name = 'newBench/new_bench.html'
+    template_name = 'newBench/parameters.html'
     # template_name = 'Messages/miRgFree/drive_test.html'
     # form_class = miRNAgFreeForm
     # success_url = reverse_lazy("MIRG")
     # success_url = reverse_lazy("MIRG")
-    template_name = 'multi_launch.html'
     form_class = sRNABenchForm
 
-    def get(self, request, **kwargs):
-        context = {}
-        path = request.path
-        param_dict = request.GET
-        config_lines = []
+    def get_context_data(self, **kwargs):
+        context = super(FormView, self).get_context_data(**kwargs)
+        # path = request.path
+        param_dict = self.request.GET
+        # config_lines = []
         oldID = param_dict.get("jobId")
         new_jobID = generate_uniq_id()
         old_folder_path = os.path.join(MEDIA_ROOT, oldID)
@@ -314,7 +313,7 @@ class Launch(FormView):
         # "input"
 
         annotate_url = reverse_lazy("annotate") + new_jobID
-        return render(self.request, 'newBench/parameters.html', context)
+        return context
 
     def post(self, request):
         #time.sleep(1)  # You don't need this line. This is just to delay the process so you can see the progress bar testing locally.
