@@ -25,7 +25,7 @@ from FileModels.mirbaseMainParser import MirBaseParser
 from FileModels.speciesAnnotationParser import SpeciesAnnotationParser
 from FileModels.speciesParser import SpeciesParser
 from progress.models import JobStatus
-from multi.forms import PhotoForm
+from multi.forms import PhotoForm, sRNABenchForm
 # from .forms import miRNAgFreeForm, FileForm
 from utils import pipeline_utils
 from utils.sysUtils import make_dir
@@ -218,21 +218,31 @@ class NewUpload(FormView):
                                                          })
 
 
-class Annotate(FormView):
+class Launch(FormView):
     # TODO if folder already exists omit creation
     # template_name = 'newBench/new_bench.html'
     # template_name = 'Messages/miRgFree/drive_test.html'
     # form_class = miRNAgFreeForm
     # success_url = reverse_lazy("MIRG")
     # success_url = reverse_lazy("MIRG")
+    template_name = 'multi_launch.html'
+    form_class = sRNABenchForm
 
     def get(self, request, **kwargs):
+        context = {}
         path = request.path
         param_dict = request.GET
         config_lines = []
         oldID = param_dict.get("jobId")
         new_jobID = generate_uniq_id()
         old_folder_path = os.path.join(MEDIA_ROOT, oldID)
+        # mark new ID in old folder, if present, ignore new_jobID
+        old_files = [f for f in os.listdir(os.path.join(MEDIA_ROOT, old_folder_path)) if f.startswith("redirect")]
+        if old_files:
+            name = old_files[0]
+            new_jobID = name.split("_")[1]
+        else:
+            os.system("touch " + os.path.join(old_folder_path,"redirect_" +  new_jobID))
         folder_path = os.path.join(MEDIA_ROOT, new_jobID)
         files_path = os.path.join(folder_path,"files")
         if not os.path.exists(os.path.join(folder_path)):
@@ -240,35 +250,70 @@ class Annotate(FormView):
         if not os.path.exists(os.path.join(files_path)):
             os.mkdir(os.path.join(files_path))
 
-        json_path = os.path.join(folder_path,"input.json")
-        json_file = open(json_path, "w")
-        json.dump({}, json_file, indent=6)
+        if not old_files:
+            json_path = os.path.join(folder_path, "input.json")
+            json_file = open(json_path, "w")
+            json.dump({}, json_file, indent=6)
+            json_file.close()
+            move_files(old_folder_path, folder_path)
+            move_SRA(old_folder_path, folder_path)
+            move_link(old_folder_path, folder_path)
+            move_dropbox(old_folder_path, folder_path)
+
+            if move_drive(old_folder_path, folder_path):
+                # print("x")
+                # download drive files background
+                drive_path = os.path.join(files_path, "drive_temp")
+                os.mkdir(drive_path)
+                download_drive(json_path, drive_path)
+
+        #build samples table
+        dict_path = os.path.join(folder_path, "input.json")
+        json_file = open(dict_path, "r")
+        input_dict = json.load(json_file)
         json_file.close()
-        move_files(old_folder_path, folder_path)
-        move_SRA(old_folder_path, folder_path)
-        move_link(old_folder_path, folder_path)
-        move_dropbox(old_folder_path, folder_path)
 
-        if move_drive(old_folder_path, folder_path):
-            print("x")
-            # download drive files background
-            drive_path = os.path.join(files_path, "drive_temp")
-            os.mkdir(drive_path)
-            download_drive(json_path, drive_path)
+        table_data = []
+        for object in input_dict:
 
+            input_line = object["input"]
+            input_type = object["input_type"]
+            input_name = object["name"]
+            if input_type == "Drive":
+                downloading_path = os.path.join(folder_path,"files", "drive_temp", input_name + ".downloading")
+                downloaded_path = os.path.join(folder_path,"files", "drive_temp", input_name + ".downloading")
+                if os.path.exists(downloading_path):
+                    status == "downloading"
+                elif os.path.exists(downloaded_path):
+                    status == "downloaded"
+                else:
+                    status == "download failed"
+            else:
+                status == "not launched"
+
+            # id = "file_"+ str(ix)
+            # link = '<a href="'+ os.path.join(MEDIA_URL,query_id,file) +'">'+file+'</a>'
+            status = "Not launched"
+            checkbox = "<input type='checkbox' value='" + "' name='to_list' checked=true>"
+            table_data.append([input_line, status, checkbox])
+
+        js_data = json.dumps(table_data)
+        js_headers = json.dumps([{"title": "Input"},
+                                 {"title": "Status"},
+                                 {"title": '<input type="checkbox" checked=true id="flowcheckall" value="" />&nbsp;All'}])
+
+        context["table_data"] = js_data
+        context["table_headers"] = js_headers
+        context["job_id"] = new_jobID
+        context["annotate_url"] = reverse_lazy("annotate") + new_jobID
         # data_url = reverse_lazy("multi:multi_new") + jobID
         # mirgeneDB = parse_mirgeneDB()
         # print(data_url)
-        annotate_url = reverse_lazy("annotate") + new_jobID
-        return render(self.request, 'newBench/annotate.html', {"jobID": new_jobID,
-                                                               "all_samples": [["test 1","group1"],
-                                                                               ["test 1", "group1"]
-                                                               ],
-                                                               "annotate_url" : annotate_url,
-                                                                # "data_url": data_url,
-                                                                # "mirgenedb_list": mirgeneDB,
 
-                                                                })
+        # "input"
+
+        annotate_url = reverse_lazy("annotate") + new_jobID
+        return render(self.request, 'newBench/parameters.html', context)
 
     def post(self, request):
         #time.sleep(1)  # You don't need this line. This is just to delay the process so you can see the progress bar testing locally.
