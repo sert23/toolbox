@@ -282,7 +282,7 @@ class Launch(FormView):
             input_name = object["name"]
             if input_type == "Drive":
                 downloading_path = os.path.join(folder_path,"files", "drive_temp", input_name + ".downloading")
-                downloaded_path = os.path.join(folder_path,"files", "drive_temp", input_name + ".downloading")
+                downloaded_path = os.path.join(folder_path,"files", "drive_temp", input_name)
                 if os.path.exists(downloading_path):
                     status = "downloading"
                 elif os.path.exists(downloaded_path):
