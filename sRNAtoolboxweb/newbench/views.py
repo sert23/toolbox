@@ -140,16 +140,18 @@ def move_drive(input_folder, output_folder):
     # curl - H
     # "Authorization: Bearer $token" "https://www.googleapis.com/drive/v3/files/$id?alt=media" - o
     # "$file"
-
+    backvalue = False
     dict_path = os.path.join(output_folder, "input.json")
     json_file = open(dict_path, "r")
     input_dict = json.load(json_file)
     json_file.close()
     drive_path = os.path.join(input_folder, "drive.json")
+    if not os.path.exists(drive_path):
+        return backvalue
     drive_file = open(drive_path, "r")
     drive_dict = json.load(drive_file)
     drive_file.close()
-    backvalue = False
+
     for k in drive_dict.keys():
         filename, fileid, link, token = drive_dict[k]
         link_id = "https://www.googleapis.com/drive/v3/files/" + fileid + "?alt=media"
