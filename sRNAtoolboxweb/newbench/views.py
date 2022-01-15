@@ -190,7 +190,8 @@ def download_drive(input_json, output_folder):
             command = start + cmd + end
 
             # ret = subprocess.run(command, capture_output=False, shell=True)
-            ret = subprocess.Popen("{}; {}; {}".format(start, cmd, end), shell=True)
+            # ret = subprocess.Popen("{}; {}; {}".format(start, cmd, end), shell=True)
+            ret = subprocess.Popen(cmd, shell=True)
 
 
 
