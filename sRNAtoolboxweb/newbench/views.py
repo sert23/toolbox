@@ -274,8 +274,8 @@ class Launch(FormView):
         json_file.close()
 
         table_data = []
-        for object in input_dict:
-
+        for k in input_dict.keys():
+            object = input_dict[k]
             input_line = object["input"]
             input_type = object["input_type"]
             input_name = object["name"]
