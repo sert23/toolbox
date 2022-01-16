@@ -317,34 +317,32 @@ class Launch(FormView):
         annotate_url = reverse_lazy("annotate") + new_jobID
         return context
 
-    def post(self, request):
-        #time.sleep(1)  # You don't need this line. This is just to delay the process so you can see the progress bar testing locally.
-        form = PhotoForm(self.request.POST, self.request.FILES)
-        path = request.path
-        folder = path.split("/")[-1]
-        print(folder)
-        if "file" in self.request.FILES:
-            if form.is_valid():
-                print("valid")
-                photo = form.save()
-                # # onlyfiles = [f for f in listdir(os.path.join(MEDIA_ROOT, folder))
-                # #              if os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, folder), f))]
-                # name = photo.file.name.split("/")[-1]
-                full_path = os.path.join(MEDIA_ROOT, folder, "annotation.xlsx")
-                shutil.move(os.path.join(MEDIA_ROOT,photo.file.name), full_path)
-                samples_annot = pd.read_excel(full_path)
-                # print(samples_annot.head())
-                data = {}
-                annot_table = []
-                for index, row in samples_annot.iterrows():
-                    annot_table.append([row[0], row[1]])
+    def post(self, request, *args, **kwargs):
 
-                data["annotation"] = annot_table
+        # path = request.path
+        # folder = path.split("/")[-1]
+        # form = MultiURLForm(self.request.POST, self.request.FILES, dest_folder=folder)
 
-                return JsonResponse(data)
-                # return JsonResponse(data)
+        request.POST._mutable = True
+        #print(SPECIES_PATH)
+        request.POST['species'] = request.POST['species_hidden'].split(',')
+        print(request.POST['species'])
+        print(request.POST['species_hidden'].split(','))
+        request.POST._mutable = False
+        return super(Launch, self).post(request, *args, **kwargs)
 
+    def form_valid(self, form):
 
+        form.clean()
+        pipeline_id = form.create_call()
+        self.success_url = reverse_lazy('srnabench') + '?id=' + pipeline_id
+
+        #os.system(call)
+        js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
+        return super(Launch, self).form_valid(form)
 
 
 # class NewUpload(FormView):
