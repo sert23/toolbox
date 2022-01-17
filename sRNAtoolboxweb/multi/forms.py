@@ -206,12 +206,15 @@ class sRNABenchForm(forms.Form):
         # self.old_folder = self.request.GET.pop('jobId', None)
         # destination folder
         old_files = [f for f in os.listdir(os.path.join(MEDIA_ROOT, self.old_folder)) if f.startswith("redirect")]
-        # try:
-        #     old_files = [f for f in os.listdir(os.path.join(MEDIA_ROOT, self.old_folder)) if f.startswith("redirect")]
-        # except:
-        #     old
-        name = old_files[0]
-        self.folder = name.split("_")[1]
+        new_jobID = generate_uniq_id()
+        # mark new ID in old folder, if present, ignore new_jobID
+        if old_files:
+            name = old_files[0]
+            new_jobID = name.split("_")[1]
+        else:
+            os.system("touch " + os.path.join(self.old_folder, "redirect_" + new_jobID))
+
+        self.folder = new_jobID
 
 
         super(sRNABenchForm, self).__init__(*args, **kwargs)
