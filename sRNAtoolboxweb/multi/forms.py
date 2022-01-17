@@ -202,9 +202,14 @@ class sRNABenchForm(forms.Form):
     input_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
 
     def __init__(self, *args, **kwargs):
-        self.old_folder = kwargs.pop('jobId', None)
+        # self.old_folder = kwargs.pop('jobId', None)
+        self.old_folder = self.request.GET.pop('jobId', None)
         # destination folder
         old_files = [f for f in os.listdir(os.path.join(MEDIA_ROOT, self.old_folder)) if f.startswith("redirect")]
+        # try:
+        #     old_files = [f for f in os.listdir(os.path.join(MEDIA_ROOT, self.old_folder)) if f.startswith("redirect")]
+        # except:
+        #     old
         name = old_files[0]
         self.folder = name.split("_")[1]
 
