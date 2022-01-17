@@ -238,7 +238,7 @@ class Launch(FormView):
         new_jobID = generate_uniq_id()
         old_folder_path = os.path.join(MEDIA_ROOT, oldID)
         # mark new ID in old folder, if present, ignore new_jobID
-        old_files = [f for f in os.listdir(os.path.join(MEDIA_ROOT, old_folder_path)) if f.startswith("redirect")]
+        old_files = [f for f in os.listdir(os.path.join(MEDIA_ROOT, old_folder_path))]
         if old_files:
             name = old_files[0]
             new_jobID = name.split("_")[1]
