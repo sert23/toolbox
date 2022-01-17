@@ -235,6 +235,7 @@ class Launch(FormView):
         param_dict = self.request.GET
         # config_lines = []
         oldID = param_dict.get("jobId")
+        oldID = self.kwargs.get("jobId")
         new_jobID = generate_uniq_id()
         old_folder_path = os.path.join(MEDIA_ROOT, oldID)
         # mark new ID in old folder, if present, ignore new_jobID
