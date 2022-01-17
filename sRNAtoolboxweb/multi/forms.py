@@ -577,7 +577,7 @@ class sRNABenchForm(forms.Form):
         general_config = " "
         with open(os.path.join(MEDIA_ROOT, pipeline_id, "conf.txt"), "r") as conf_file:
             general_config = conf_file.read()
-        dict_path = os.path.join(self.folder, "input.json")
+        dict_path = os.path.join(MEDIA_ROOT, self.folder, "input.json")
         json_file = open(dict_path, "r")
         input_dict = json.load(json_file)
         json_file.close()
