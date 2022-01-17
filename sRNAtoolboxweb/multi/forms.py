@@ -747,8 +747,8 @@ class sRNABenchForm(forms.Form):
 
         onlyfiles = [f for f in os.listdir(os.path.join(MEDIA_ROOT, pipeline_id))
                      if os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, pipeline_id), f))]
-        onlyfiles.remove("SRR_files.txt")
-        onlyfiles.remove("URL_files.txt")
+        onlyfiles.remove("input.json")
+        # onlyfiles.remove("URL_files.txt")
         onlyfiles.remove("conf.txt")
 
         return pipeline_id
