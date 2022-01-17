@@ -346,6 +346,14 @@ class Launch(FormView):
         pipeline_id = form.create_call()
         self.success_url = reverse_lazy('srnabench') + '?id=' + pipeline_id
 
+        os.mkdir(os.path.join(MEDIA_ROOT, pipeline_id))
+        JobStatus.objects.create(job_name=pipeline_id + "_multi", pipeline_key=pipeline_id, job_status="not_launched",
+                                 start_time=datetime.datetime.now(),
+                                 all_files=" ",
+                                 modules_files=" ",
+                                 pipeline_type="multiupload",
+                                 )
+
         #os.system(call)
         js = JobStatus.objects.get(pipeline_key=pipeline_id)
         js.status.create(status_progress='sent_to_queue')
