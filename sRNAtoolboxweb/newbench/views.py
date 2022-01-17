@@ -242,16 +242,17 @@ class Launch(FormView):
         param_dict = self.request.GET
         # config_lines = []
         oldID = param_dict.get("jobId")
+        old_folder_path = os.path.join(MEDIA_ROOT, oldID)
         # oldID = self.kwargs.get("jobId")
         new_jobID = generate_uniq_id()
-        old_folder_path = os.path.join(MEDIA_ROOT, oldID)
+        old_files = [f for f in os.listdir(old_folder_path) if f.startswith("redirect")]
         # mark new ID in old folder, if present, ignore new_jobID
-        old_files = [f for f in os.listdir(os.path.join(MEDIA_ROOT, old_folder_path))]
+
         if old_files:
             name = old_files[0]
             new_jobID = name.split("_")[1]
         else:
-            os.system("touch " + os.path.join(old_folder_path,"redirect_" +  new_jobID))
+            os.system("touch " + os.path.join(oldID,"redirect_" +  new_jobID))
         folder_path = os.path.join(MEDIA_ROOT, new_jobID)
         files_path = os.path.join(folder_path,"files")
         if not os.path.exists(os.path.join(folder_path)):
