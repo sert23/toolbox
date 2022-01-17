@@ -252,7 +252,7 @@ class Launch(FormView):
             name = old_files[0]
             new_jobID = name.split("_")[1]
         else:
-            os.system("touch " + os.path.join(oldID,"redirect_" +  new_jobID))
+            os.system("touch " + os.path.join(old_folder_path,"redirect_" +  new_jobID))
         folder_path = os.path.join(MEDIA_ROOT, new_jobID)
         files_path = os.path.join(folder_path,"files")
         if not os.path.exists(os.path.join(folder_path)):
