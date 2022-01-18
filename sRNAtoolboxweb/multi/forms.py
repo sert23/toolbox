@@ -745,7 +745,8 @@ class sRNABenchForm(forms.Form):
 
     def create_call(self):
         pipeline_id = self.folder
-        os.mkdir(os.path.join(MEDIA_ROOT, self.folder))
+        if not os.path.exists(os.path.join(MEDIA_ROOT, self.folder)):
+            os.mkdir(os.path.join(MEDIA_ROOT, self.folder))
 
         pipeline_id = self.create_conf_file(self.cleaned_data, pipeline_id)
 
