@@ -581,6 +581,8 @@ class sRNABenchForm(forms.Form):
         json_file = open(dict_path, "r")
         input_dict = json.load(json_file)
         json_file.close()
+        if not os.path.exists(os.path.join(MEDIA_ROOT, self.folder, "launched")):
+            os.mkdir(os.path.join(MEDIA_ROOT, self.folder, "launched"))
         for k in input_dict.keys():
             an_object = input_dict[k]
             new_id = generate_uniq_id()
@@ -743,6 +745,8 @@ class sRNABenchForm(forms.Form):
 
     def create_call(self):
         pipeline_id = self.folder
+        os.mkdir(os.path.join(MEDIA_ROOT, self.folder))
+
         pipeline_id = self.create_conf_file(self.cleaned_data, pipeline_id)
 
         onlyfiles = [f for f in os.listdir(os.path.join(MEDIA_ROOT, pipeline_id))
