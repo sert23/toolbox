@@ -596,7 +596,7 @@ class sRNABenchForm(forms.Form):
                 dest_path = input_file
             elif an_object["input_type"] == "uploaded file":
                 input_file = an_object["input"]
-                # dest_path = os.path.join(MEDIA_ROOT, new_id, input_file)
+                dest_path = input_file
                 # shutil.copyfile(os.path.join(MEDIA_ROOT, self.folder, "files", input_file), dest_path)
             elif an_object["input_type"] == "Drive":
                 input_file = an_object["name"]
