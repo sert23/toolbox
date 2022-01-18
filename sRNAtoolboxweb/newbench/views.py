@@ -77,7 +77,8 @@ def move_files(input_folder, output_folder):
         if ("SRA.txt" not in f) and ("links.txt" not in f) and ("drive.json" not in f) and ("dropbox.txt" not in f and ("redirect" not in f)):
             outf = f.replace(input_folder, files_folder)
             shutil.move(f, outf)
-            input_dict[f] = { "input" : f , "name" : "", "input_type" : "uploaded file"}
+            name = f.split("/")[-1]
+            input_dict[f] = { "input" : f , "name" : name, "input_type" : "uploaded file"}
 
     json_file = open(dict_path, "w")
     json.dump(input_dict, json_file, indent=6)
