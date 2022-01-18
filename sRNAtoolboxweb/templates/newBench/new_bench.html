@@ -762,7 +762,7 @@ function toggleAdapter() {
 
         var launch_url = "{% url 'annotate' %}?";
             $("#protocol").val($("input[name=library_protocol]:checked").val());
-            alert("clicked");
+            {#alert("clicked");#}
             var pars = $("#jobId").serialize();
             $("#run_link").attr("href", launch_url.concat(pars));
             $("#run_link2").trigger('click');
