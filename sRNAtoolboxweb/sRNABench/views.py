@@ -930,8 +930,12 @@ def show_align(request, job_id, type, name):
         outdir = new_record.outdir
         if type == "pre-microRNA":
             ifile = os.path.join(outdir, "hairpin", name + ".align")
+            short_name = name.split(",")[0]
+            afile = os.path.join(outdir, "hairpin", short_name + ".align")
             if os.path.exists(ifile):
                 content = open(ifile).readlines()
+            elif os.path.exists(afile):
+                content = open(afile).readlines()
             else:
                 content = "No Alignment available. Read count below threshold"
             desc = "alignment to pre-microRNA"
