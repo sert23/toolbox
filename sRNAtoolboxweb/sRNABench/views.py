@@ -937,7 +937,7 @@ def show_align(request, job_id, type, name):
             elif os.path.exists(afile):
                 content = open(afile).readlines()
             else:
-                content = "No Alignment available. Read count below threshold" + afile
+                content = "No Alignment available. Read count below threshold" + afile + short_name +" test" + name
             desc = "alignment to pre-microRNA"
             back = "pre-microRNA"
 
