@@ -150,7 +150,7 @@ class AMirconsForm(forms.Form):
         program_string = ":".join(program_list)
         if mirfile:
             file_to_update = mirfile
-            uploaded_file = str(file_to_update)
+            uploaded_file = str(file_to_update).replace(" ", "_")
             mirfile = FS.save(uploaded_file, file_to_update)
         else:
             mirtext=self.cleaned_data.get("mirtext")
@@ -159,7 +159,7 @@ class AMirconsForm(forms.Form):
 
         if utrfile:
             file_to_update = utrfile
-            uploaded_file = str(file_to_update)
+            uploaded_file = str(file_to_update).replace(" ", "_")
             utrfile = FS.save(uploaded_file, file_to_update)
         elif self.cleaned_data.get("utrtext"):
             utrtext = self.cleaned_data.get("utrtext")
