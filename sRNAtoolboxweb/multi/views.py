@@ -292,6 +292,26 @@ def download_list(multi_id):
 
     return data["files"]
 
+class Annotate(DetailView):
+    model = JobStatus
+    slug_field = 'pipeline_key'
+    slug_url_kwarg = 'pipeline_id'
+    template_name = 'newBench/annotate.html'
+    def render_to_response(self, context,  **response_kwargs):
+
+        job_status = context.get('object')
+        pipeline_id = job_status.pipeline_key
+        jobs_folder = os.path.join(MEDIA_ROOT,pipeline_id,"launched")
+        if not os.path.exists(jobs_folder):
+            return redirect(reverse_lazy("launch")+ "?jobId=" + pipeline_id)
+
+
+        launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder,f))]
+        context["ids_strings"] = ",".join(launched_ids)
+
+        return super(Annotate, self).render_to_response(context, **response_kwargs)
+
+
 
 # https://arn.ugr.es/srnatoolbox/multiupload/status/0SM8DZFZPQL2YE3
 class MultiStatusViewAnnot(DetailView):
@@ -345,9 +365,10 @@ class MultiStatusViewAnnot(DetailView):
             # job_stat = "sent_to_queue"
             click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
             outdir = new_record.outdir
+            annot = "-"
+            jobs_tbody.append([job, job_stat, start,finish ,input_line, annot])
+            # jobs_tbody.append([job, job_stat, start,finish ,input_line, click])
 
-            jobs_tbody.append([job, job_stat, start,finish ,input_line, click])
-            #jobs_tbody.append([job, job_stat, start, finish, click])
 
         if finished > 3 and (not context["running"]):
             context["launchDE"] = True
@@ -359,8 +380,9 @@ class MultiStatusViewAnnot(DetailView):
                                  {"title": "Started"},
                                  {"title": "Finished"},
                                  {"title": "Input"},
+                                 {"title": "Annotation"},
                                  # { "title": "Select" }])
-                                 {"title": 'Go to'}
+                                 # {"title": 'Go to'}
 
                                  ]
                                 )
