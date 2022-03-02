@@ -85,7 +85,7 @@
                             </thead>
                             <tbody>
                             {% for sample, group in all_samples %}
-                                <tr><td>{{ sample }}</td><td>{{ group }}</td> <td><i name='delete::"{{ sample }}"' class='fas fa-pen fa-clickable' ></i></td> </tr>
+                                <tr><td>{{ sample }}</td><td id = "{{ sample }}_annot">{{ group }}</td> <td><i name='edit::"{{ sample }}_annot"' class='fas fa-pen fa-clickable edit-annot' ></i></td> </tr>
 
                             {% endfor %}
                             </tbody>
@@ -199,6 +199,17 @@
  });</script>
 
 
+<script>
+
+    $(function () {
+
+        $(".edit-annot").click(function (event) {
+            alert(event.target.name);
+        })
+    });
+
+
+</script>
 
 
 {% endblock %}
