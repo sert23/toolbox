@@ -151,34 +151,34 @@
     </div>
     <!-- /#page-wrapper -->
 
-<script>
-    var received_data = {{ tbody|safe }};
-    var received_cols = {{ thead|safe }};
-
-    $(document).ready(function() {
-
-    var table = $('#jobs').DataTable( {
-
-//        'responsive': true,
-        data: received_data,
-//        processing: true,
-//        serverSide: true,
-//        deferRender: false,
-        'language':{
-       "loadingRecords": "&nbsp;",
-      "processing": "Loading..."
-    },
-        columns: received_cols,
-    } );
-
-} );
-
-
-
-
-
-</script>
-
+{#<script>#}
+{#    var received_data = {{ tbody|safe }};#}
+{#    var received_cols = {{ thead|safe }};#}
+{##}
+{#    $(document).ready(function() {#}
+{##}
+{#    var table = $('#jobs').DataTable( {#}
+{##}
+{#//        'responsive': true,#}
+{#        data: received_data,#}
+{#//        processing: true,#}
+{#//        serverSide: true,#}
+{#//        deferRender: false,#}
+{#        'language':{#}
+{#       "loadingRecords": "&nbsp;",#}
+{#      "processing": "Loading..."#}
+{#    },#}
+{#        columns: received_cols,#}
+{#    } );#}
+{##}
+{#} );#}
+{##}
+{##}
+{##}
+{##}
+{##}
+{#</script>#}
+{##}
 
 
     <script>
@@ -204,7 +204,7 @@
     $(function () {
 
         $(".edit-annot").click(function () {
-            alert($(this).name);
+            alert($(this).get(0));
             alert($(this).id);
         })
     });
