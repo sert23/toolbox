@@ -308,6 +308,8 @@ class Annotate(DetailView):
 
         launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder,f))]
         context["ids_strings"] = ",".join(launched_ids)
+        context["user_message"] = "This page is still in development, " \
+                                  "please do not use it as it will probably not work. Thank you "
 
         return super(Annotate, self).render_to_response(context, **response_kwargs)
 
