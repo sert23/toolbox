@@ -305,8 +305,7 @@ class Annotate(DetailView):
         if not os.path.exists(jobs_folder):
             return redirect(reverse_lazy("launch")+ "?jobId=" + pipeline_id)
 
-        new_record = JobStatus.objects.get(pipeline_key=pipeline_id)
-        output_folder = new_record.outdir
+        output_folder = os.path.join(MEDIA_ROOT, pipeline_id)
         dict_path = os.path.join(output_folder, "input.json")
         json_file = open(dict_path, "r")
         input_dict = json.load(json_file)
