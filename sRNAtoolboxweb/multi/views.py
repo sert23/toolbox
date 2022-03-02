@@ -293,6 +293,83 @@ def download_list(multi_id):
     return data["files"]
 
 
+# https://arn.ugr.es/srnatoolbox/multiupload/status/0SM8DZFZPQL2YE3
+class MultiStatusViewAnnot(DetailView):
+    model = JobStatus
+    slug_field = 'pipeline_key'
+    slug_url_kwarg = 'pipeline_id'
+    template_name = 'newBench/multi_status_annot.html'
+
+    def render_to_response(self, context,  **response_kwargs):
+
+        job_status = context.get('object')
+        pipeline_id = job_status.pipeline_key
+        jobs_folder = os.path.join(MEDIA_ROOT,pipeline_id,"launched")
+        if not os.path.exists(jobs_folder):
+            return redirect(reverse_lazy("launch")+ "?jobId=" + pipeline_id)
+
+
+        launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder,f))]
+        context["ids_strings"] = ",".join(launched_ids)
+
+        jobs_tbody = []
+        context["running"] = False
+        # if len(launched_ids)>3:
+        #     context["launchDE"] = True
+        finished = 0
+        for id in launched_ids:
+
+            job = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" >' + id +'</a>'
+            new_record = JobStatus.objects.get(pipeline_key=id)
+
+            # ptype = new_record.pipeline_type
+            # if ptype == "miRNAgFree":
+            #     return redirect(reverse_lazy("mirgfree:"))
+
+            job_stat = new_record.job_status
+            if job_stat == "sent_to_queue":
+                job_stat = "In queue"
+            if job_stat == "Running" or job_stat == "In queue":
+                context["running"] = True
+            if job_stat == "Finished":
+                finished = finished+1
+            start = new_record.start_time.strftime("%H:%M:%S, %d %b %Y")
+            #finish = new_record.finish_time.strftime("%H:%M, %d %b %Y")
+            if new_record.finish_time:
+                finish = new_record.finish_time.strftime("%H:%M, %d %b %Y")
+            else:
+                finish = "-"
+            input_config = os.path.join(MEDIA_ROOT,id,"conf.txt")
+            with open(input_config,"r") as f:
+                input_line = os.path.basename(f.readlines()[0][6:])
+            # job_stat = "sent_to_queue"
+            click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
+            outdir = new_record.outdir
+
+            jobs_tbody.append([job, job_stat, start,finish ,input_line, click])
+            #jobs_tbody.append([job, job_stat, start, finish, click])
+
+        if finished > 3 and (not context["running"]):
+            context["launchDE"] = True
+
+
+        js_data = json.dumps(jobs_tbody)
+        js_headers = json.dumps([{"title": "job ID"},
+                                 {"title": "Status"},
+                                 {"title": "Started"},
+                                 {"title": "Finished"},
+                                 {"title": "Input"},
+                                 # { "title": "Select" }])
+                                 {"title": 'Go to'}
+
+                                 ]
+                                )
+        context["tbody"] = js_data
+        context["thead"] = js_headers
+        context["njobs"] = len(jobs_tbody)
+        context["id"] = pipeline_id
+        context["download_list"] = download_list(pipeline_id)
+        return super(MultiStatusView, self).render_to_response(context, **response_kwargs)
 
 class MultiStatusView(DetailView):
     model = JobStatus
@@ -370,6 +447,7 @@ class MultiStatusView(DetailView):
         context["id"] = pipeline_id
         context["download_list"] = download_list(pipeline_id)
         return super(MultiStatusView, self).render_to_response(context, **response_kwargs)
+
 
 
 
