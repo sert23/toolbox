@@ -79,12 +79,13 @@
                     <table id="gallery" class="table table-bordered" >
                     <thead>
                       <tr>
-                        <th>Uploaded Files</th> <th>Group</th> <th onclick="delInput('ALL');" class="text-danger fa-clickable"> Delete all</th>
+                        <th>Uploaded Files</th> <th>Group</th> <th> Edit</th>
+{#                        <th>Uploaded Files</th> <th>Group</th> <th onclick="delInput('ALL');" class="text-danger fa-clickable"> Edit</th>#}
                               </tr>
                             </thead>
                             <tbody>
                             {% for sample, group in all_samples %}
-                                <tr><td>{{ sample }}</td><td>{{ group }}</td> <td><i name='delete::"{{ sample }}"' class='fas fa-trash fa-clickable' ></i></td> </tr>
+                                <tr><td>{{ sample }}</td><td>{{ group }}</td> <td><i name='delete::"{{ sample }}"' class='fas fa-pen fa-clickable' ></i></td> </tr>
 
                             {% endfor %}
                             </tbody>
