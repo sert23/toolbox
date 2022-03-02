@@ -369,7 +369,7 @@ class MultiStatusViewAnnot(DetailView):
         context["njobs"] = len(jobs_tbody)
         context["id"] = pipeline_id
         context["download_list"] = download_list(pipeline_id)
-        return super(MultiStatusView, self).render_to_response(context, **response_kwargs)
+        return super(MultiStatusViewAnnot, self).render_to_response(context, **response_kwargs)
 
 class MultiStatusView(DetailView):
     model = JobStatus
