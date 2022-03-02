@@ -11,6 +11,8 @@ urlpatterns = [
     url(r'^status/(?P<pipeline_id>[A-za-z0-9]+)', views.MultiStatusViewAnnot.as_view()),
     # url(r'^status/(?P<pipeline_id>[A-za-z0-9]+)', views.MultiStatusView.as_view()),
     url(r'^status/', views.MultiStatusViewAnnot.as_view(), name='multi_status'),
+
+    url(r'^annot/(?P<pipeline_id>[A-za-z0-9]+)', views.Annotate.as_view()),
     url(r'^annot/', views.Annotate.as_view(), name='multi_annotate'),
     # url(r'^status/', views.MultiStatusView.as_view(), name='multi_status'),
     #url(r'^(pick/[A-za-z0-9]+)', views.PickSample.as_view()),
