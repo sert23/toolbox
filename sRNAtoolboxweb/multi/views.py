@@ -305,9 +305,24 @@ class Annotate(DetailView):
         if not os.path.exists(jobs_folder):
             return redirect(reverse_lazy("launch")+ "?jobId=" + pipeline_id)
 
+        new_record = JobStatus.objects.get(pipeline_key=id)
+        output_folder = new_record.outdir
+        dict_path = os.path.join(output_folder, "input.json")
+        json_file = open(dict_path, "r")
+        input_dict = json.load(json_file)
+        json_file.close()
 
-        launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder,f))]
-        context["ids_strings"] = ",".join(launched_ids)
+        samples = []
+
+        for k in input_dict.keys():
+            c_dict = input_dict[k]
+            input_line = c_dict["input"]
+            annotation = c_dict.get("annotation", "Not annotated")
+            samples.append([input_line, annotation])
+
+
+        context["all_samples"] = samples
+
         context["user_message"] = "This page is still in development, " \
                                   "please do not use it as it will probably not work. Thank you "
 
