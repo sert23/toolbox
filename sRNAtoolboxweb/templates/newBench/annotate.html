@@ -85,7 +85,8 @@
                             </thead>
                             <tbody>
                             {% for sample, group in all_samples %}
-                                <tr><td>{{ sample }}</td><td id="{{ sample }}_annot">{{ group }}</td> <td><i id="id_{{ sample }}" name='edit::{{ sample }}_annot' class='fas fa-pen fa-clickable edit-annot' ></i></td> </tr>
+{#                                <tr><td>{{ sample }}</td><td id="{{ sample }}_annot">{{ group }}</td> <td name="test-name-td" ><i id="id_{{ sample }}" name='edit::{{ sample }}_annot' class='fas fa-pen fa-clickable edit-annot' ></i></td> </tr>#}
+                                <tr><td>{{ sample }}</td><td id="{{ sample }}_annot">{{ group }}</td> <td ><i id="edit_{{ sample }}" class='fas fa-pen fa-clickable edit-annot' ></i></td> </tr>
 
                             {% endfor %}
                             </tbody>
@@ -171,7 +172,7 @@
 {#        columns: received_cols,#}
 {#    } );#}
 {##}
-{#} );#}
+{# } );#}
 {##}
 {##}
 {##}
@@ -205,9 +206,9 @@
 
         $(".edit-annot").click(function () {
 
-            alert(this.name);
-            var full_name = this.name;
-            div_id = full_name.split("::")[1]
+            alert(this.id);
+            var full_name = this.id;
+            div_id = full_name.split("_")[1] + "_annot";
             alert(div_id)
         })
     });
