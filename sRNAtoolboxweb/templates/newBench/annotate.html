@@ -86,7 +86,7 @@
                             <tbody>
                             {% for sample, group in all_samples %}
 {#                                <tr><td>{{ sample }}</td><td id="{{ sample }}_annot">{{ group }}</td> <td name="test-name-td" ><i id="id_{{ sample }}" name='edit::{{ sample }}_annot' class='fas fa-pen fa-clickable edit-annot' ></i></td> </tr>#}
-                                <tr><td>{{ sample }}</td><td id="{{ sample }}_annot">{{ group }} <div id="{{ sample }}_div" style="display:none"><input type="text" id="{{ sample }}_input" ></div>  </td> <td ><i id="edit::{{ sample }}" class='fas fa-pen fa-clickable edit-annot' ></i></td> </tr>
+                                <tr><td>{{ sample }}</td><td> <div id="{{ sample }}_annot"></div> {{ group }} <div id="{{ sample }}_div" style="display:none"><input type="text" id="{{ sample }}_input" ></div>  </td> <td ><i id="edit::{{ sample }}" class='fas fa-pen fa-clickable edit-annot' ></i></td> </tr>
 
                             {% endfor %}
                             </tbody>
@@ -217,7 +217,9 @@
             var full_name = this.id;
             sample_id = full_name.split("::")[1];
             div_id = sample_id + "_div";
+            tag_id = sample_id + "_annot";
             toggleDiv(div_id);
+            toggleDiv(tag_id);
 
             {#style="display:none"#}
             alert(div_id)
