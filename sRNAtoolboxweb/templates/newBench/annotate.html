@@ -216,7 +216,7 @@
 
         $(".edit-annot").click(function () {
 
-            alert(this.id);
+            {#alert(this.id);#}
             var full_name = this.id;
             sample_id = full_name.split("::")[1];
             div_id = "div_" + sample_id ;
@@ -230,6 +230,19 @@
             {#alert(div_id)#}
         })
     });
+
+     $(function () {
+
+         $(".save-annot").click(function () {
+             var full_name = this.id;
+             sample_id = full_name.split("::")[1];
+             alert(sample_id);
+             toggleDiv("div_" + sample_id);
+             toggleDiv("annot_" + sample_id);
+             toggleDiv("pen_" + sample_id);
+             toggleDiv("div_save_" + sample_id);
+         });
+     });
 
     {#$(function () {#}
     {##}
