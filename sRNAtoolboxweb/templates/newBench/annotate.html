@@ -89,7 +89,7 @@
                                 <tr><td>{{ sample }}</td><td> <div id="annot_{{ k }}">{{ group }}</div>  <div id="div_{{ k }}" style="display:none"><input class="annot-input" type="text" id="input_{{ k }}" ></div>  </td>
                                     <td >
                                     <div id="pen_{{ k }}"> <i id="edit::{{ k }}" class='fas fa-pen fa-clickable edit-annot' ></i></div>
-                                    <div id="div_save_{{ k }}" style="display:none"> <i class='fas fa-check fa-clickable save-annot' ></i></div></td> </tr>
+                                    <div id="div_save_{{ k }}" style="display:none"> <i id="save_{{ sample }}" class='fas fa-check fa-clickable save-annot' ></i></div></td> </tr>
 
                             {% endfor %}
                             </tbody>
@@ -218,7 +218,7 @@
 
             {#alert(this.id);#}
             var full_name = this.id;
-            sample_id = full_name.split("::")[1];
+            sample_id = full_name.split("_")[1];
             div_id = "div_" + sample_id ;
             tag_id = "annot_" + sample_id ;
             toggleDiv(div_id);
