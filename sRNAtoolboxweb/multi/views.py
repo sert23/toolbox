@@ -313,11 +313,14 @@ class Annotate(DetailView):
 
         samples = []
 
-        for k in input_dict.keys():
+        for i,k in enumerate(input_dict.keys()):
             c_dict = input_dict[k]
-            input_line = c_dict["name"]
+            input_line = c_dict["input"]
+            orig_input = input_line
+            if "/" in input_line:
+                input_line = input_line.split("/") [-1]
             annotation = c_dict.get("annotation", "Not annotated")
-            samples.append([input_line, annotation])
+            samples.append([orig_input, input_line, annotation, i])
 
 
         context["all_samples"] = samples
