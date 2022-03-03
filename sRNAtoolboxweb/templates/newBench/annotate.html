@@ -86,7 +86,7 @@
                             <tbody>
                             {% for orig, sample, group, k in all_samples %}
 {#                                <tr><td>{{ sample }}</td><td id="{{ sample }}_annot">{{ group }}</td> <td name="test-name-td" ><i id="id_{{ sample }}" name='edit::{{ sample }}_annot' class='fas fa-pen fa-clickable edit-annot' ></i></td> </tr>#}
-                                <tr><td>{{ sample }}</td><td> <div id="annot_{{ k }}">{{ group }}</div>  <div id="div_{{ k }}" style="display:none"><input type="text" id="input_{{ k }}" ></div>  </td> <td ><div id="pen_{{ k }}"> <i id="edit::{{ k }}" class='fas fa-pen fa-clickable edit-annot' ></i></div></td> </tr>
+                                <tr><td>{{ sample }}</td><td> <div id="annot_{{ k }}">{{ group }}</div>  <div id="div_{{ k }}" style="display:none"><input class="annot-input" type="text" id="input_{{ k }}" ></div>  </td> <td ><div id="pen_{{ k }}"> <i id="edit::{{ k }}" class='fas fa-pen fa-clickable edit-annot' ></i></div> <div id="div_save_{{ k }}" style="display:none"> <i id="edit::{{ k }}" class='fas fa-save fa-clickable save-annot' ></i></div></td> </tr>
 
                             {% endfor %}
                             </tbody>
@@ -211,7 +211,7 @@
 
     $(function () {
 
-        $(".edit-annot").click(function () {
+        $(".annot-input").click(function () {
 
             alert(this.id);
             var full_name = this.id;
@@ -221,13 +221,19 @@
             toggleDiv(div_id);
             toggleDiv(tag_id);
             toggleDiv("pen_" + sample_id);
+            toggleDiv("div_save_" + sample_id);
 
             {#style="display:none"#}
-            alert(div_id)
+            {#alert(div_id)#}
         })
     });
 
-    {#<tr><td>{{ sample }}</td><td id="{{ sample }}_annot">{{ group }} <div id="{{ sample }}_div" style="display:none"><input type="text" id="{{ sample }}_input" ></div>  </td> <td ><i id="edit::{{ sample }}" class='fas fa-pen fa-clickable edit-annot' ></i></td> </tr>#}
+    {#$(function () {#}
+    {##}
+    {#    $(".").click(function () {#}
+    {##}
+    {#    })#}
+    {# })#}
 
 </script>
 
