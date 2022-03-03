@@ -315,7 +315,7 @@ class Annotate(DetailView):
 
         for k in input_dict.keys():
             c_dict = input_dict[k]
-            input_line = c_dict["input"]
+            input_line = c_dict["name"]
             annotation = c_dict.get("annotation", "Not annotated")
             samples.append([input_line, annotation])
 
