@@ -304,6 +304,9 @@ def ajax_annot_cell(request):
     data["url"] = "https://genecodis.genyo.es/gc4/externalquery&org=9606&genes=" + ",".join(result)
     return JsonResponse(data)
 
+def ajax_annot_file(request):
+    print("x")
+
 class Annotate(DetailView):
     model = JobStatus
     slug_field = 'pipeline_key'
@@ -311,9 +314,12 @@ class Annotate(DetailView):
     template_name = 'newBench/annotate.html'
     def post(self, request, *args, **kwargs):
 
-        path = str(request.path)
+        # path = str(request.path)
+        os.system("touch /shared/sRNAtoolbox/upload/JGOVBXE5NUIYPKT/test1.txt")
+        path = str(request.path_info)
         jobId = path.split("/")[-1]
         destination_path = os.path.join(MEDIA_ROOT, jobId, "hey.txt")
+        os.system("touch /shared/sRNAtoolbox/upload/JGOVBXE5NUIYPKT/test2.txt")
         os.system("touch " + destination_path)
         # request.POST._mutable = True
         # #print(SPECIES_PATH)
