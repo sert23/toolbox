@@ -105,15 +105,15 @@
             {#           data-url="{% url 'photos:progress_bar_upload' %}"#}
                        data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
                                             <input type="submit" id="sub_button" style="display:none">
+                        <button type="button" class="btn btn-info">
+                        <span class="fa fa-file-download"></span> Download template sheet</button>
 
+                        <button type="button" class="btn btn-success js-upload-photos">
+                        <span class="glyphicon glyphicon-cloud-upload"></span> Upload annotation</button>
 
                                 </form>
 
-                    <button type="button" class="btn btn-info js-upload-photos">
-                        <span class="fa fa-file-download"></span> Download template sheet</button>
 
-                        <button type="button" class="btn btn-success">
-                        <span class="glyphicon glyphicon-cloud-upload"></span> Upload annotation</button>
 
 
 
