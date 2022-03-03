@@ -99,7 +99,7 @@
             {#                                      data-url="/mirqc"#}
             {#                                    id="id_ajax_upload_form" method="POST"#}
                                                                         novalidate="">
-                                                <input id="fileupload" type="file" name="file" multiple
+                                                <input id="fileupload" type="file" name="file"
                        style="display: none;"
                        data-url="{{ annotate_url }}"
             {#           data-url="{% url 'photos:progress_bar_upload' %}"#}
@@ -112,7 +112,7 @@
                     <button type="button" class="btn btn-info js-upload-photos">
                         <span class="fa fa-file-download"></span> Download template sheet</button>
 
-                        <button type="button" class="btn btn-success js-upload-photos">
+                        <button type="button">
                         <span class="glyphicon glyphicon-cloud-upload"></span> Upload annotation</button>
 
 
@@ -236,12 +236,11 @@
          $(".save-annot").click(function () {
              var full_name = this.id;
              sample_id = full_name.split("_")[1];
-             alert(sample_id);
              toggleDiv("div_" + sample_id);
              toggleDiv("annot_" + sample_id);
              toggleDiv("pen_" + sample_id);
              toggleDiv("div_save_" + sample_id);
-             alert("hehe")
+         {#  here goes Ajax  #}
          });
      });
 
