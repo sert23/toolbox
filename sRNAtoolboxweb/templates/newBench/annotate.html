@@ -218,7 +218,7 @@
 
             {#alert(this.id);#}
             var full_name = this.id;
-            sample_id = full_name.split("_")[1];
+            sample_id = full_name.split("::")[1];
             div_id = "div_" + sample_id ;
             tag_id = "annot_" + sample_id ;
             toggleDiv(div_id);
@@ -235,7 +235,7 @@
 
          $(".save-annot").click(function () {
              var full_name = this.id;
-             sample_id = full_name.split("::")[1];
+             sample_id = full_name.split("_")[1];
              alert(sample_id);
              toggleDiv("div_" + sample_id);
              toggleDiv("annot_" + sample_id);
