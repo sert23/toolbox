@@ -201,6 +201,13 @@
 
 
 <script>
+    function toggleDiv(div_id) {
+        if  ($('#' + div_id).css('display') == "none"){
+                $('#' + div_id).css('display', 'inline-block');
+        }else{
+            $('#' + div_id).css('display', 'none');
+        }
+                    }
 
     $(function () {
 
@@ -210,7 +217,7 @@
             var full_name = this.id;
             sample_id = full_name.split("::")[1];
             div_id = sample_id + "_div";
-            $('#' + div_id).css('display', 'inline-block');
+            toggleDiv(div_id);
 
             {#style="display:none"#}
             alert(div_id)
