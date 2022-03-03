@@ -310,12 +310,17 @@ class Annotate(DetailView):
     slug_url_kwarg = 'pipeline_id'
     template_name = 'newBench/annotate.html'
     def post(self, request, *args, **kwargs):
-        request.POST._mutable = True
-        #print(SPECIES_PATH)
-        request.POST['species'] = request.POST['species_hidden'].split(',')
-        print(request.POST['species'])
-        print(request.POST['species_hidden'].split(','))
-        request.POST._mutable = False
+
+        path = str(request.path)
+        jobId = path.split("/")[-1]
+        destination_path = os.path.join(MEDIA_ROOT, jobId, "hey.txt")
+        os.system("touch " + destination_path)
+        # request.POST._mutable = True
+        # #print(SPECIES_PATH)
+        # request.POST['species'] = request.POST['species_hidden'].split(',')
+        # print(request.POST['species'])
+        # print(request.POST['species_hidden'].split(','))
+        # request.POST._mutable = False
         context={}
         return self.render_to_response(context=context)
 
