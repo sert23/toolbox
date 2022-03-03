@@ -204,8 +204,11 @@
     $(function () {
 
         $(".edit-annot").click(function () {
-            alert($(this).get(0));
-            alert(this.id);
+
+            alert(this.name);
+            var full_name = this.name;
+            div_id = full_name.split("::")[1]
+            alert(div_id)
         })
     });
 
