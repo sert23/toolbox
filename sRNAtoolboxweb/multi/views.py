@@ -292,11 +292,33 @@ def download_list(multi_id):
 
     return data["files"]
 
+def ajax_annot_cell(request):
+    jobID = request.GET.get("jobID")
+    topN = int(request.GET.get("top"))
+
+    new_record = JobStatus.objects.get(pipeline_key=jobID)
+
+    data = {}
+    data["jobID"] = jobID
+    data["topN"] = topN
+    data["url"] = "https://genecodis.genyo.es/gc4/externalquery&org=9606&genes=" + ",".join(result)
+    return JsonResponse(data)
+
 class Annotate(DetailView):
     model = JobStatus
     slug_field = 'pipeline_key'
     slug_url_kwarg = 'pipeline_id'
     template_name = 'newBench/annotate.html'
+    def post(self, request, *args, **kwargs):
+        request.POST._mutable = True
+        #print(SPECIES_PATH)
+        request.POST['species'] = request.POST['species_hidden'].split(',')
+        print(request.POST['species'])
+        print(request.POST['species_hidden'].split(','))
+        request.POST._mutable = False
+        context={}
+        return self.render_to_response(context=context)
+
     def render_to_response(self, context,  **response_kwargs):
 
         job_status = context.get('object')
