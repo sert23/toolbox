@@ -94,11 +94,11 @@
                             {% endfor %}
                             </tbody>
                           </table>
-                        <form enctype="multipart/form-data" method="post"
+                        <form enctype="multipart/form-data" method="post" {% csrf_token %}
             {#                                    id="fileupload" method="POST"#}
             {#                                      data-url="/mirqc"#}
             {#                                    id="id_ajax_upload_form" method="POST"#}
-                                                                        novalidate="">
+                                                                        >
                                                 <input id="fileupload" type="file" name="file"
                        style="display: none;"
                        data-url="{{ annotate_url }}">
@@ -112,7 +112,7 @@
 {#                        <span class="glyphicon glyphicon-cloud-upload"></span> Upload annotation</button>#}
                         <div class="custom-file" id="customFile">
                         <input type="file" class="custom-file-input" id="annotationInputFile" aria-describedby="fileHelp"
-                        data-url="{{ annotate_url }}" data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+                        data-url="{{ annotate_url }}" >
                         <label class="custom-file-label" for="exampleInputFile">
                             Provide annotation file
                         </label>
