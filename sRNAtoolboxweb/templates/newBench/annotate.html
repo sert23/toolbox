@@ -108,9 +108,15 @@
                         <button type="button" class="btn btn-info">
                         <span class="fa fa-file-download"></span> Download template sheet</button>
 
-                        <button type="button" class="btn btn-success js-upload-photos">
-                        <span class="glyphicon glyphicon-cloud-upload"></span> Upload annotation</button>
-
+{#                        <button type="button" class="btn btn-success js-upload-photos">#}
+{#                        <span class="glyphicon glyphicon-cloud-upload"></span> Upload annotation</button>#}
+                        <div class="custom-file" id="customFile">
+                        <input type="file" class="custom-file-input" id="annotationInputFile" aria-describedby="fileHelp">
+                        <label class="custom-file-label" for="exampleInputFile">
+                            Provide annotation file
+                        </label>
+                             </div>
+                            <button class="btn btn-primary" type="submit">Update annotation</button>
                                 </form>
 
 
