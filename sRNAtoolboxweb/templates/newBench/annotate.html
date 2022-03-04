@@ -85,9 +85,9 @@
                               </tr>
                             </thead>
                             <tbody>
-                            {% for orig, sample, group, k in all_samples %}
+                            {% for orig, sample, name, group, k in all_samples %}
 {#                                <tr><td>{{ sample }}</td><td id="{{ sample }}_annot">{{ group }}</td> <td name="test-name-td" ><i id="id_{{ sample }}" name='edit::{{ sample }}_annot' class='fas fa-pen fa-clickable edit-annot' ></i></td> </tr>#}
-                                <tr><td>{{ sample }}</td><td>{{ group }}</td><td> <div id="annot_{{ k }}">{{ group }}</div>  </td></tr>
+                                <tr><td>{{ sample }}</td><td>{{ name }}</td><td> <div id="annot_{{ k }}">{{ group }}</div>  </td></tr>
 {#                                    <div id="div_{{ k }}" style="display:none"><input class="annot-input" type="text" id="input_{{ k }}" ></div>  </td>#}
 {#                                    <td >#}
 {#                                    <div id="pen_{{ k }}"> <i id="edit::{{ k }}" class='fas fa-pen fa-clickable edit-annot' ></i></div>#}
