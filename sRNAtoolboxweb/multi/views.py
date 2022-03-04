@@ -329,6 +329,10 @@ class Annotate(DetailView):
         destination_path = os.path.join(MEDIA_ROOT, jobId, "hey.txt")
         destination_folder = os.path.join(MEDIA_ROOT, jobId)
         os.system("touch " + destination_path)
+        if request.FILES:
+            for k in request.FILES.keys():
+                c_destination = destination_path = os.path.join(MEDIA_ROOT, jobId, k)
+                os.system("touch " + c_destination)
         # to_upload = request.FILES['annotationInputFile']
         to_upload = request.POST.get('annotationInputFile')
         fs = FileSystemStorage(location=destination_folder)
