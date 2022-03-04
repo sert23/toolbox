@@ -94,14 +94,9 @@
                             {% endfor %}
                             </tbody>
                           </table>
-                        <form enctype="multipart/form-data" method="post" {% csrf_token %}
-            {#                                    id="fileupload" method="POST"#}
-            {#                                      data-url="/mirqc"#}
-            {#                                    id="id_ajax_upload_form" method="POST"#}
-                                                                        >
-                                                <input id="fileupload" type="file" name="file"
-                       style="display: none;"
-                       data-url="{{ annotate_url }}">
+                        <form enctype="multipart/form-data" method="post" >
+                            {% csrf_token %}
+            {#
             {#           data-url="{% url 'photos:progress_bar_upload' %}"#}
 {#                       data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>#}
 {#                                            <input type="submit" id="sub_button" style="display:none">#}
