@@ -111,13 +111,22 @@
 {#                        <button type="button" class="btn btn-success js-upload-photos">#}
 {#                        <span class="glyphicon glyphicon-cloud-upload"></span> Upload annotation</button>#}
                         <div class="custom-file" id="customFile">
-                        <input type="file" class="custom-file-input" id="annotationInputFile" aria-describedby="fileHelp"
-                        data-url="{{ annotate_url }}" data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+                        <input type="file" class="custom-file-input" id="annotationInputFile" aria-describedby="fileHelp">
+{#                        data-url="{{ annotate_url }}" data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>#}
                         <label class="custom-file-label" for="exampleInputFile">
                             Provide annotation file
                         </label>
+                            <div
+                                class="buttonHolder"> <input type="submit"
+                                name="submit"
+                                value="RUN"
+
+                                    class="btn btn-primary btn btn-primary"
+                                    id="submit-id-submit"
+                                />
                              </div>
                             <button class="btn btn-primary" type="submit">Update annotation</button>
+                        </div>
                                 </form>
 
 
