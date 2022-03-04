@@ -96,8 +96,7 @@
                           </table>
                         <form  method="post"  enctype="multipart/form-data">
                             {% csrf_token %}
-            {#
-            {#           data-url="{% url 'photos:progress_bar_upload' %}"#}
+                        {#           data-url="{% url 'photos:progress_bar_upload' %}"#}
 {#                       data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>#}
 {#                                            <input type="submit" id="sub_button" style="display:none">#}
                         <button type="button" class="btn btn-info">
@@ -112,15 +111,11 @@
                             Provide annotation file
                         </label>
                             <div
-                                class="buttonHolder"> <input type="submit"
-                                name="submit"
-                                value="RUN"
-
+                                class="buttonHolder"> <input type="submit" name="submit" value="Update annotation"
                                     class="btn btn-primary btn btn-primary"
-                                    id="submit-id-submit"
-                                />
+                                    id="submit-id-submit"/>
                              </div>
-                            <button class="btn btn-primary" type="submit">Update annotation</button>
+{#                            <button class="btn btn-primary" type="submit">Update annotation</button>#}
                         </div>
                                 </form>
 
