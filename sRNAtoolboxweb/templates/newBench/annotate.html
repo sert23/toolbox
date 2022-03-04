@@ -101,10 +101,10 @@
                                                                         novalidate="">
                                                 <input id="fileupload" type="file" name="file"
                        style="display: none;"
-                       data-url="{{ annotate_url }}"
+                       data-url="{{ annotate_url }}">
             {#           data-url="{% url 'photos:progress_bar_upload' %}"#}
-                       data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
-                                            <input type="submit" id="sub_button" style="display:none">
+{#                       data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>#}
+{#                                            <input type="submit" id="sub_button" style="display:none">#}
                         <button type="button" class="btn btn-info">
                         <span class="fa fa-file-download"></span> Download template sheet</button>
 
