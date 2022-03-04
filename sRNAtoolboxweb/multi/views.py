@@ -1,6 +1,7 @@
 import time
 import glob
 from django.shortcuts import render, redirect
+from django.core.files.storage import FileSystemStorage
 from django.http import JsonResponse
 from django.views import View
 from django.views.generic import FormView, DetailView
@@ -292,17 +293,26 @@ def download_list(multi_id):
 
     return data["files"]
 
-def ajax_annot_cell(request):
-    jobID = request.GET.get("jobID")
-    topN = int(request.GET.get("top"))
-
-    new_record = JobStatus.objects.get(pipeline_key=jobID)
-
-    data = {}
-    data["jobID"] = jobID
-    data["topN"] = topN
-    data["url"] = "https://genecodis.genyo.es/gc4/externalquery&org=9606&genes=" + ",".join(result)
-    return JsonResponse(data)
+# def ajax_annot_cell(request):
+#
+#     if request.method == 'POST':
+#         jobID = request.GET.get("jobID")
+#         # topN = int(request.GET.get("top"))
+#
+#         new_record = JobStatus.objects.get(pipeline_key=jobID)
+#         myfile = request.FILES['myfile']
+#         fs = FileSystemStorage(location=folder)  # defaults to   MEDIA_ROOT
+#         filename = fs.save(myfile.name, myfile)
+#         file_url = fs.url(filename)
+#         return render(request, 'upload.html', {
+#             'file_url': file_url
+#         })
+#
+#     data = {}
+#     data["jobID"] = jobID
+#     data["topN"] = topN
+#     data["url"] = "https://genecodis.genyo.es/gc4/externalquery&org=9606&genes=" + ",".join(result)
+#     return JsonResponse(data)
 
 def ajax_annot_file(request):
     print("x")
@@ -314,13 +324,15 @@ class Annotate(DetailView):
     template_name = 'newBench/annotate.html'
     def post(self, request, *args, **kwargs):
 
-        # path = str(request.path)
-        os.system("touch /shared/sRNAtoolbox/upload/JGOVBXE5NUIYPKT/test1.txt")
         path = str(request.path_info)
         jobId = path.split("/")[-1]
         destination_path = os.path.join(MEDIA_ROOT, jobId, "hey.txt")
-        os.system("touch /shared/sRNAtoolbox/upload/JGOVBXE5NUIYPKT/test2.txt")
+        destination_folder = os.path.join(MEDIA_ROOT, jobId)
         os.system("touch " + destination_path)
+        to_upload = request.FILES[0]
+        fs = FileSystemStorage(location=destination_folder)
+        filename = fs.save(to_upload.name, to_upload)
+
         # request.POST._mutable = True
         # #print(SPECIES_PATH)
         # request.POST['species'] = request.POST['species_hidden'].split(',')
