@@ -75,7 +75,8 @@
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-
+                    <button type="button" class="btn btn-info">
+                        <span class="fa fa-file-download"></span> Download template sheet</button>
                     <table id="gallery" class="table table-bordered" >
                     <thead>
                       <tr>
@@ -98,9 +99,7 @@
                             {% csrf_token %}
                         {#           data-url="{% url 'photos:progress_bar_upload' %}"#}
 {#                       data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>#}
-{#                                            <input type="submit" id="sub_button" style="display:none">#}
-                        <button type="button" class="btn btn-info">
-                        <span class="fa fa-file-download"></span> Download template sheet</button>
+{#                                            <input type="submit" id="sub_button" style="display:none">#
 
 {#                        <button type="button" class="btn btn-success js-upload-photos">#}
 {#                        <span class="glyphicon glyphicon-cloud-upload"></span> Upload annotation</button>#}
@@ -112,7 +111,7 @@
                         </label>
                             <div
                                 class="buttonHolder"> <input type="submit" name="submit" value="Update annotation"
-                                    class="btn btn-primary btn btn-primary"
+                                    class="btn btn-primary btn btn-success"
                                     id="submit-id-submit"/>
                              </div>
 {#                            <button class="btn btn-primary" type="submit">Update annotation</button>#}
