@@ -326,20 +326,19 @@ class Annotate(DetailView):
 
         path = str(request.path_info)
         jobId = path.split("/")[-1]
-        destination_path = os.path.join(MEDIA_ROOT, jobId, "hey.txt")
-        destination_folder = os.path.join(MEDIA_ROOT, jobId)
-        os.system("touch " + destination_path)
-        if request.FILES:
-            for k in request.FILES.keys():
-                c_destination = destination_path = os.path.join(MEDIA_ROOT, jobId, k)
-                os.system("touch " + c_destination)
+        # destination_path = os.path.join(MEDIA_ROOT, jobId, "hey.txt")
+        annotation_folder = os.path.join(MEDIA_ROOT, jobId)
+        if not os.path.exists(annotation_folder):
+            os.mkdir(annotation_folder)
+        else:
+            shutil.rmtree(annotation_folder)
+            os.mkdir(annotation_folder)
         # to_upload = request.FILES['annotationInputFile']
         to_upload = request.FILES.get('annotationInputFile')
-        fs = FileSystemStorage(location=destination_folder)
+        fs = FileSystemStorage(location=annotation_folder)
         filename = fs.save(to_upload.name, to_upload)
-        destination_path = os.path.join(MEDIA_ROOT, jobId, "hey2.txt")
-        if request.FILES:
-            os.system("touch " + destination_path + filename)
+
+
         # request.POST._mutable = True
         # #print(SPECIES_PATH)
         # request.POST['species'] = request.POST['species_hidden'].split(',')
