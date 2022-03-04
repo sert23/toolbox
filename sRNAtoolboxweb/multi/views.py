@@ -346,7 +346,7 @@ class Annotate(DetailView):
         # print(request.POST['species_hidden'].split(','))
         # request.POST._mutable = False
         context={}
-        return redirect(reverse_lazy('multi_annotate') + jobId)
+        return redirect(reverse_lazy('multi:multi_annotate') + jobId)
 
     def render_to_response(self, context,  **response_kwargs):
 
