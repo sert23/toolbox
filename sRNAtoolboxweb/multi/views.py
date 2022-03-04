@@ -21,6 +21,8 @@ import shutil
 import datetime
 import json
 import re
+import pandas as pd
+import csv
 
 def make_folder(path):
     if not os.path.exists(path):
@@ -317,6 +319,61 @@ def download_list(multi_id):
 def ajax_annot_file(request):
     print("x")
 
+def check_file(file_path):
+
+    print("x")
+
+def read_annot_file(file_path):
+    # input sheet should have headder
+    # TODO checks
+    if file_path.endswith("xls") or file_path.endswith("xlsx"):
+        annot_df = pd.read_excel(file_path)
+    else:
+        s = csv.Sniffer()
+        d = s.sniff(
+            open(file_path).read(100)).delimiter
+        annot_df = pd.read_csv(file_path, d)
+
+    return annot_df
+
+def annotate_input(jobID, annotation_file):
+    dict_path = os.path.join(MEDIA_ROOT, jobID, "input.json")
+    json_file = open(dict_path, "r")
+    input_dict = json.load(json_file)
+    json_file.close()
+
+    annot_df = read_annot_file(annotation_file)
+    # inputs = annot_df["Input"].tolist()
+    for index, row in annot_df.iterrows():
+        i = row[0]
+        if input_dict.get(i):
+            shallow_dict = input_dict.get(i)
+            c_key = i
+        else:
+            succesful = False
+            for k in input_dict.keys():
+                if k.endswith("/" + i):
+                    shallow_dict = input_dict.get(k)
+                    c_key = k
+                    succesful = True
+            if not succesful:
+                continue
+
+        shallow_dict["name_annotation"] = row[1]
+        shallow_dict["group_annotation"] = row[2]
+        input_dict[c_key] = shallow_dict
+
+    json_file = open(dict_path, "w")
+    json.dump(input_dict, json_file, indent=6)
+    json_file.close()
+
+
+
+
+
+
+
+
 class Annotate(DetailView):
     model = JobStatus
     slug_field = 'pipeline_key'
@@ -337,14 +394,9 @@ class Annotate(DetailView):
         to_upload = request.FILES.get('annotationInputFile')
         fs = FileSystemStorage(location=annotation_folder)
         filename = fs.save(to_upload.name, to_upload)
+        annotate_input(jobId, os.path.join(annotation_folder, filename) )
 
 
-        # request.POST._mutable = True
-        # #print(SPECIES_PATH)
-        # request.POST['species'] = request.POST['species_hidden'].split(',')
-        # print(request.POST['species'])
-        # print(request.POST['species_hidden'].split(','))
-        # request.POST._mutable = False
         context={}
         return redirect(reverse_lazy('multi:multi_annotate') + jobId)
 
@@ -370,8 +422,9 @@ class Annotate(DetailView):
             orig_input = input_line
             if "/" in input_line:
                 input_line = input_line.split("/") [-1]
-            annotation = c_dict.get("annotation", "Not annotated")
-            samples.append([orig_input, input_line, annotation, i])
+            name_annotation = c_dict.get("name_annotation", "Not annotated")
+            group_annotation = c_dict.get("group_annotation", "Not annotated")
+            samples.append([orig_input, input_line, name_annotation, group_annotation, i])
 
 
         context["all_samples"] = samples
