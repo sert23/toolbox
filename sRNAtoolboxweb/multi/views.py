@@ -332,7 +332,9 @@ class Annotate(DetailView):
         to_upload = request.FILES[0]
         fs = FileSystemStorage(location=destination_folder)
         filename = fs.save(to_upload.name, to_upload)
-
+        destination_path = os.path.join(MEDIA_ROOT, jobId, "hey2.txt")
+        if request.FILES:
+            os.system("touch " + destination_path + filename)
         # request.POST._mutable = True
         # #print(SPECIES_PATH)
         # request.POST['species'] = request.POST['species_hidden'].split(',')
