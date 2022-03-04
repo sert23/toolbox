@@ -327,7 +327,7 @@ class Annotate(DetailView):
         path = str(request.path_info)
         jobId = path.split("/")[-1]
         # destination_path = os.path.join(MEDIA_ROOT, jobId, "hey.txt")
-        annotation_folder = os.path.join(MEDIA_ROOT, jobId)
+        annotation_folder = os.path.join(MEDIA_ROOT, jobId, "annotation")
         if not os.path.exists(annotation_folder):
             os.mkdir(annotation_folder)
         else:
