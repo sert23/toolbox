@@ -75,8 +75,7 @@
                     </div>
                     <!-- /.panel-heading -->
                     <div class="panel-body">
-                    <button type="button" class="btn btn-info">
-                        <span class="fa fa-file-download"></span> Download template sheet</button>
+
                     <table id="gallery" class="table table-bordered" >
                     <thead>
                       <tr>
@@ -95,17 +94,12 @@
                             {% endfor %}
                             </tbody>
                           </table>
-                        <form  method="post"  enctype="multipart/form-data">
+                    <form  method="post"  enctype="multipart/form-data">
                             {% csrf_token %}
-                        {#           data-url="{% url 'photos:progress_bar_upload' %}"#}
-{#                       data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>#}
-{#                                            <input type="submit" id="sub_button" style="display:none">#
-
-{#                        <button type="button" class="btn btn-success js-upload-photos">#}
-{#                        <span class="glyphicon glyphicon-cloud-upload"></span> Upload annotation</button>#}
-                        <div class="custom-file" id="customFile">
-                        <input type="file" class="custom-file-input" id="annotationInputFile" name="annotationInputFile" aria-describedby="fileHelp"
-                        >
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="custom-file" id="customFile">
+                        <input type="file" class="custom-file-input" id="annotationInputFile" name="annotationInputFile" aria-describedby="fileHelp">
                         <label class="custom-file-label" for="exampleInputFile">
                             Provide annotation file
                         </label>
@@ -116,6 +110,20 @@
                              </div>
 {#                            <button class="btn btn-primary" type="submit">Update annotation</button>#}
                         </div>
+                        </div>
+                        <div class="col-lg-6">
+                                <button type="button" class="btn btn-info">
+                        <span class="fa fa-file-download"></span> Download template sheet</button>
+                        </div>
+                    </div>
+
+                        {#           data-url="{% url 'photos:progress_bar_upload' %}"#}
+{#                       data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>#}
+
+
+{#                        <button type="button" class="btn btn-success js-upload-photos">#}
+{#                        <span class="glyphicon glyphicon-cloud-upload"></span> Upload annotation</button>#}
+
                                 </form>
 
 
