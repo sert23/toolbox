@@ -23,6 +23,7 @@ import json
 import re
 import pandas as pd
 import csv
+from collections import OrderedDict
 
 def make_folder(path):
     if not os.path.exists(path):
@@ -339,7 +340,7 @@ def read_annot_file(file_path):
 def annotate_input(jobID, annotation_file):
     dict_path = os.path.join(MEDIA_ROOT, jobID, "input.json")
     json_file = open(dict_path, "r")
-    input_dict = json.load(json_file)
+    input_dict = json.load(json_file, object_pairs_hook=OrderedDict)
     json_file.close()
 
     annot_df = read_annot_file(annotation_file)
@@ -359,8 +360,8 @@ def annotate_input(jobID, annotation_file):
             if not succesful:
                 continue
 
-        shallow_dict["name_annotation"] = row[1]
-        shallow_dict["group_annotation"] = row[2]
+        shallow_dict["name_annotation"] = str(row[1])
+        shallow_dict["group_annotation"] = str(row[2])
         input_dict[c_key] = shallow_dict
 
     json_file = open(dict_path, "w")
@@ -369,8 +370,11 @@ def annotate_input(jobID, annotation_file):
 
 
 
-
-
+def generate_download_template(request):
+    parameters = request.GET
+    folder = parameters["jobId"]
+    test_file = os.path.join(MEDIA_ROOT, folder, "test.mock")
+    os.system("touch " + test_file)
 
 
 
@@ -411,7 +415,7 @@ class Annotate(DetailView):
         output_folder = os.path.join(MEDIA_ROOT, pipeline_id)
         dict_path = os.path.join(output_folder, "input.json")
         json_file = open(dict_path, "r")
-        input_dict = json.load(json_file)
+        input_dict = json.load(json_file, object_pairs_hook=OrderedDict)
         json_file.close()
 
         samples = []
