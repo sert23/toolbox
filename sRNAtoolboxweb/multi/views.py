@@ -373,9 +373,29 @@ def annotate_input(jobID, annotation_file):
 def generate_download_template(request):
     parameters = request.GET
     folder = parameters["jobId"]
-    test_file = os.path.join(MEDIA_ROOT, folder, "test.xlsx")
-    os.system("touch " + test_file)
-    url = test_file.replace(MEDIA_ROOT, MEDIA_URL)
+    dict_path = os.path.join(MEDIA_ROOT, folder, "input.json")
+    json_file = open(dict_path, "r")
+    input_dict = json.load(json_file, object_pairs_hook=OrderedDict)
+    json_file.close()
+
+    annot_df = pd.DataFrame(columns=['Input', 'Name', 'Group'])
+    for i,k in enumerate(input_dict.keys()):
+        shallow_dict = input_dict.get(k)
+        row = []
+        if shallow_dict.get("input_type") == "uploaded file":
+            input_string = shallow_dict.get("name")
+        else:
+            input_string = shallow_dict.get("input")
+        name = shallow_dict.get("name_annotation", "")
+        group = shallow_dict.get("group_annotation", "")
+
+        annot_df.loc[i] = pd.Series({'Input': input_string, 'Name': name, 'Group': group})
+
+    # test_file = os.path.join(MEDIA_ROOT, folder, "test.xlsx")
+    template_file = os.path.join(MEDIA_ROOT, folder, "test.csv")
+    annot_df.to_csv(template_file)
+    # os.system("touch " + test_file)
+    url = template_file.replace(MEDIA_ROOT, MEDIA_URL)
     return redirect(url)
 
 
