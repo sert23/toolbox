@@ -14,6 +14,7 @@ urlpatterns = [
 
     url(r'^annot/(?P<pipeline_id>[A-za-z0-9]+)', views.Annotate.as_view()),
     url(r'^annot/', views.Annotate.as_view(), name='multi_annotate'),
+    url(r'^template', views.generate_download_template, name='generate_template'),
     # url(r'^status/', views.MultiStatusView.as_view(), name='multi_status'),
     #url(r'^(pick/[A-za-z0-9]+)', views.PickSample.as_view()),
     # url(r'^/launch/[A-za-z0-9]+', views.MultiUploadView.as_view(), name='multi_launch'),
