@@ -392,8 +392,8 @@ def generate_download_template(request):
         annot_df.loc[i] = pd.Series({'Input': input_string, 'Name': name, 'Group': group})
 
     # test_file = os.path.join(MEDIA_ROOT, folder, "test.xlsx")
-    template_file = os.path.join(MEDIA_ROOT, folder, "test.csv")
-    annot_df.to_csv(template_file)
+    template_file = os.path.join(MEDIA_ROOT, folder, "test.xlsx")
+    annot_df.to_excel(template_file)
     # os.system("touch " + test_file)
     url = template_file.replace(MEDIA_ROOT, MEDIA_URL)
     return redirect(url)
