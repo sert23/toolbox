@@ -373,7 +373,7 @@ def annotate_input(jobID, annotation_file):
 def generate_download_template(request):
     parameters = request.GET
     folder = parameters["jobId"]
-    test_file = os.path.join(MEDIA_ROOT, folder, "test.mock")
+    test_file = os.path.join(MEDIA_ROOT, folder, "test.xlsx")
     os.system("touch " + test_file)
     url = test_file.replace(MEDIA_ROOT, MEDIA_URL)
     return redirect(url)
@@ -434,6 +434,7 @@ class Annotate(DetailView):
 
 
         context["all_samples"] = samples
+        context["jobID"] = pipeline_id
 
         context["user_message"] = "This page is still in development, " \
                                   "please do not use it as it will probably not work. Thank you "
