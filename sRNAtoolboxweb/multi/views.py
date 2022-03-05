@@ -375,6 +375,8 @@ def generate_download_template(request):
     folder = parameters["jobId"]
     test_file = os.path.join(MEDIA_ROOT, folder, "test.mock")
     os.system("touch " + test_file)
+    url = test_file.replace(MEDIA_ROOT, MEDIA_URL)
+    return redirect(url)
 
 
 
