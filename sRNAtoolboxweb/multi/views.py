@@ -491,8 +491,6 @@ class MultiStatusViewAnnot(DetailView):
         # make annotation compatible
         short_dict = {os.path.basename(x):input_dict.get(x) for x in input_dict.keys()}
 
-
-
         jobs_tbody = []
         context["running"] = False
         # if len(launched_ids)>3:
@@ -529,8 +527,11 @@ class MultiStatusViewAnnot(DetailView):
             annot_dict = short_dict.get(input_line.rstrip(), {})
             name_annotation = annot_dict.get("name_annotation", "Not annotated")
             group_annotation = annot_dict.get("group_annotation", "Not annotated")
+            annot_dict["jobID"] = id
+            short_dict[input_line.rstrip()] = annot_dict
             jobs_tbody.append([job, job_stat, start,finish ,input_line.rstrip(), name_annotation])
             # jobs_tbody.append([job, job_stat, start,finish ,input_line, click])
+
 
 
 
@@ -550,6 +551,10 @@ class MultiStatusViewAnnot(DetailView):
 
                                  ]
                                 )
+        json_file = open(os.path.join(MEDIA_ROOT, pipeline_id, "test.json" ), "w")
+        json.dump(short_dict, json_file, indent=6)
+        json_file.close()
+
         context["tbody"] = js_data
         context["thead"] = js_headers
         context["njobs"] = len(jobs_tbody)
