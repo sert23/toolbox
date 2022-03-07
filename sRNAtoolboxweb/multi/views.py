@@ -455,6 +455,7 @@ class Annotate(DetailView):
 
         context["all_samples"] = samples
         context["jobID"] = pipeline_id
+        context["go_back_url"] = reverse_lazy("multi:multi_status") + pipeline_id
 
         context["user_message"] = "This page is still in development, " \
                                   "please do not use it as it will probably not work. Thank you "
