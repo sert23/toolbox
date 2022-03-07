@@ -483,7 +483,7 @@ class MultiStatusViewAnnot(DetailView):
         launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder,f))]
         context["ids_strings"] = ",".join(launched_ids)
 
-        dict_path = os.path.join(pipeline_id, "input.json")
+        dict_path = os.path.join(MEDIA_ROOT, pipeline_id, "input.json")
         json_file = open(dict_path, "r")
         input_dict = json.load(json_file, object_pairs_hook=OrderedDict)
         json_file.close()
