@@ -464,6 +464,8 @@ class Annotate(DetailView):
 
 
 
+
+
 # https://arn.ugr.es/srnatoolbox/multiupload/status/0SM8DZFZPQL2YE3
 class MultiStatusViewAnnot(DetailView):
     model = JobStatus
@@ -529,7 +531,7 @@ class MultiStatusViewAnnot(DetailView):
             group_annotation = annot_dict.get("group_annotation", "Not annotated")
             annot_dict["jobID"] = id
             short_dict[input_line.rstrip()] = annot_dict
-            jobs_tbody.append([job, job_stat, start,finish ,input_line.rstrip(), name_annotation])
+            jobs_tbody.append([job, job_stat, start,finish ,input_line.rstrip(), name_annotation, group_annotation])
             # jobs_tbody.append([job, job_stat, start,finish ,input_line, click])
 
 
@@ -545,12 +547,20 @@ class MultiStatusViewAnnot(DetailView):
                                  {"title": "Started"},
                                  {"title": "Finished"},
                                  {"title": "Input"},
-                                 {"title": "Annotation"},
+                                 {"title": "Name"},
+                                 {"title": "Group"},
                                  # { "title": "Select" }])
                                  # {"title": 'Go to'}
 
                                  ]
                                 )
+        #
+        #
+        #
+        # THIS ALTERS THE INPUT.JSON
+        #
+        #
+        #
         json_file = open(os.path.join(MEDIA_ROOT, pipeline_id, "input.json"), "w")
         json.dump(short_dict, json_file, indent=6)
         json_file.close()
