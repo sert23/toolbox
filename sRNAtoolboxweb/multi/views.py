@@ -483,6 +483,11 @@ class MultiStatusViewAnnot(DetailView):
         launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder,f))]
         context["ids_strings"] = ",".join(launched_ids)
 
+        dict_path = os.path.join(pipeline_id, "input.json")
+        json_file = open(dict_path, "r")
+        input_dict = json.load(json_file, object_pairs_hook=OrderedDict)
+        json_file.close()
+
         jobs_tbody = []
         context["running"] = False
         # if len(launched_ids)>3:
@@ -516,7 +521,7 @@ class MultiStatusViewAnnot(DetailView):
             # job_stat = "sent_to_queue"
             click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
             outdir = new_record.outdir
-            annot = "-"
+            annot = input_dict.get(input_line, "-")
             jobs_tbody.append([job, job_stat, start,finish ,input_line, annot])
             # jobs_tbody.append([job, job_stat, start,finish ,input_line, click])
 
