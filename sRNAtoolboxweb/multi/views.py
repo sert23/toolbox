@@ -491,6 +491,10 @@ class MultiStatusViewAnnot(DetailView):
         # make annotation compatible
         short_dict = {os.path.basename(x):input_dict.get(x) for x in input_dict.keys()}
 
+        json_file = open(os.path.join(MEDIA_ROOT, pipeline_id, "test.json" ), "w")
+        json.dump(short_dict, json_file, indent=6)
+        json_file.close()
+
         jobs_tbody = []
         context["running"] = False
         # if len(launched_ids)>3:
