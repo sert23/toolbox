@@ -526,13 +526,13 @@ class MultiStatusViewAnnot(DetailView):
             # job_stat = "sent_to_queue"
             click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
             outdir = new_record.outdir
-            annot_dict = short_dict.get(input_line, {})
+            annot_dict = short_dict.get(input_line.rstrip(), {})
             name_annotation = annot_dict.get("name_annotation", "Not annotated")
             group_annotation = annot_dict.get("group_annotation", "Not annotated")
             jobs_tbody.append([job, job_stat, start,finish ,input_line, name_annotation])
             # jobs_tbody.append([job, job_stat, start,finish ,input_line, click])
 
-            short_dict["lista"] = jobs_tbody
+
             json_file = open(os.path.join(MEDIA_ROOT, pipeline_id, "test.json"), "w")
             json.dump(short_dict, json_file, indent=6)
             json_file.close()
