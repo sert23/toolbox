@@ -488,6 +488,9 @@ class MultiStatusViewAnnot(DetailView):
         input_dict = json.load(json_file, object_pairs_hook=OrderedDict)
         json_file.close()
 
+        # make annotation compatible
+        short_dict = {os.path.basename(x):input_dict.get(x) for x in input_dict.keys()}
+
         jobs_tbody = []
         context["running"] = False
         # if len(launched_ids)>3:
@@ -521,8 +524,10 @@ class MultiStatusViewAnnot(DetailView):
             # job_stat = "sent_to_queue"
             click = '<a href="'+SUB_SITE+'/jobstatus/' + id +'" target="_blank" > Go to results </a>'
             outdir = new_record.outdir
-            annot = input_dict.get(input_line, "-")
-            jobs_tbody.append([job, job_stat, start,finish ,input_line, annot])
+            annot_dict = short_dict.get(input_line, {})
+            name_annotation = annot_dict.get("name_annotation", "Not annotated")
+            group_annotation = annot_dict.get("group_annotation", "Not annotated")
+            jobs_tbody.append([job, job_stat, start,finish ,input_line, name_annotation])
             # jobs_tbody.append([job, job_stat, start,finish ,input_line, click])
 
 
