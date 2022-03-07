@@ -551,7 +551,7 @@ class MultiStatusViewAnnot(DetailView):
 
                                  ]
                                 )
-        json_file = open(os.path.join(MEDIA_ROOT, pipeline_id, "test.json" ), "w")
+        json_file = open(os.path.join(MEDIA_ROOT, pipeline_id, "input.json"), "w")
         json.dump(short_dict, json_file, indent=6)
         json_file.close()
 
