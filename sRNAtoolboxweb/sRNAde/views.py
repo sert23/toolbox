@@ -913,6 +913,7 @@ class DeFromMultiAnnot(FormView):
             desc.append(group)
 
         parameters["input"] = MEDIA_ROOT
+        parameters["output"] = output_dir
         parameters["grpString"] = ",".join(grp)
         parameters["matrixDesc"] = ",".join(desc)
         parameters["minRCexpr"] = 1
@@ -921,6 +922,18 @@ class DeFromMultiAnnot(FormView):
         with open(conf_path,"w") as conf_txt:
             for k in sorted(parameters.keys()):
                 conf_txt.write(k + "=" + str(parameters.get(k))+"\n")
+
+        conf_dict = {"out_dir": output_dir,
+                     "type": "sRNAde",
+                     "pipeline_id": output_id,
+                     "name": name,
+                     "conf_input": conf_path
+                     }
+
+        json_path = os.path.join(output_dir, "conf.json")
+        json_file = open(json_path, "w")
+        json.dump(input_dict, json_file, indent=6)
+        json_file.close()
 
         JobStatus.objects.create(job_name=name, pipeline_key=output_id, job_status="not_launched",
                                  start_time=datetime.datetime.now(),
