@@ -891,6 +891,7 @@ class DeFromMultiAnnot(FormView):
         output_id = pipeline_utils.generate_uniq_id()
         name = output_id + "_de"
         output_dir = os.path.join(MEDIA_ROOT, output_id)
+        os.mkdir(output_dir)
         conf_path = os.path.join(MEDIA_ROOT, output_id, "conf.txt")
 
         dict_path = os.path.join(MEDIA_ROOT, query_id, "input.json")
