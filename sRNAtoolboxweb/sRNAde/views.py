@@ -918,6 +918,7 @@ class DeFromMultiAnnot(FormView):
         parameters["matrixDesc"] = ",".join(desc)
         parameters["minRCexpr"] = 1
         parameters["web"] = "true"
+        parameters["grpDesc"] = "#".join(list(set(desc)))
 
         with open(conf_path,"w") as conf_txt:
             for k in sorted(parameters.keys()):
@@ -927,8 +928,14 @@ class DeFromMultiAnnot(FormView):
                      "type": "sRNAde",
                      "pipeline_id": output_id,
                      "name": name,
-                     "conf_input": conf_path
+                     "conf_input": conf_path,
+                     "input": MEDIA_ROOT,
+                     "grpDesc": "#".join(list(set(desc))),
+                     "matrixDesc": ",".join(desc)
                      }
+
+
+
 
         json_path = os.path.join(output_dir, "conf.json")
         json_file = open(json_path, "w")
