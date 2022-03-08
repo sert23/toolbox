@@ -951,7 +951,7 @@ class DeFromMultiAnnot(FormView):
                                  )
 
         call = 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
-            configuration_file_path=conf_path,
+            configuration_file_path=json_path,
             job_name=name,
             sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh'))
 
