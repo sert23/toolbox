@@ -932,7 +932,7 @@ class DeFromMultiAnnot(FormView):
 
         json_path = os.path.join(output_dir, "conf.json")
         json_file = open(json_path, "w")
-        json.dump(input_dict, json_file, indent=6)
+        json.dump(conf_dict, json_file, indent=6)
         json_file.close()
 
         JobStatus.objects.create(job_name=name, pipeline_key=output_id, job_status="not_launched",
