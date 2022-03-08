@@ -932,10 +932,14 @@ class DeFromMultiAnnot(FormView):
 
         call = 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
             configuration_file_path=conf_path,
-            job_name=name + output_id,
+            job_name=name,
             sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh'))
 
         os.system(call)
+        js = JobStatus.objects.get(pipeline_key=output_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
 
 
 
