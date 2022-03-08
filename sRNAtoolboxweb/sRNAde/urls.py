@@ -1,5 +1,5 @@
 from sRNABench.views import  test
-from sRNAde.views import De, DeLaunch, result, De_method_view,DeFromMulti,SeqVar_view
+from sRNAde.views import De, DeLaunch, result, De_method_view,DeFromMulti,SeqVar_view, DeFromMultiAnnot
 
 __author__ = 'antonior'
 
@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^$', De.as_view(), name="DE"),
     url(r'launch/(?P<pipeline_id>[A-za-z0-9]+)', DeLaunch.as_view()),
     url(r'launch/', DeLaunch.as_view(), name="DE_launch"),
+    url(r'fromanot/(?P<pipeline_id>[A-za-z0-9]+)', DeFromMultiAnnot.as_view()),
     # url(r'^/*$', views.de),
     # url(r'run$', views.run, name='run_de'),
 
