@@ -21,6 +21,7 @@ urlpatterns = [
     url(r'^$', De.as_view(), name="DE"),
     url(r'launch/(?P<pipeline_id>[A-za-z0-9]+)', DeLaunch.as_view()),
     url(r'launch/', DeLaunch.as_view(), name="DE_launch"),
+    url(r'fromannot/', DeFromMultiAnnot.as_view(), name="launch_annot"),
     url(r'fromannot/(?P<pipeline_id>[A-za-z0-9]+)', DeFromMultiAnnot.as_view()),
     # url(r'^/*$', views.de),
     # url(r'run$', views.run, name='run_de'),

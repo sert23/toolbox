@@ -18,10 +18,10 @@
     <p>There are two ways to do it, using the annotation that can be updated on this page or running an independent sRNAde job. </p>
     <div class="row">
     <div class="col-lg-6">
-        <a href="" class="btn btn-link" ><button type="button" class="btn btn-primary">sRNAde (new annotation) </button></a>
+        <a href="{% url 'DE_multi' %}{{ id }}" target="_blank" class="btn btn-link" ><button type="button" class="btn btn-primary">sRNAde (new annotation) </button></a>
     </div>
     <div class="col-lg-6">
-        <a href="" class="btn btn-link" ><button type="button" class="btn btn-primary">sRNAde (already annotated) </button></a>
+        <a href="{% url 'launch_annot' %}{{ id }}" target="_blank" class="btn btn-link" ><button type="button" class="btn btn-primary">sRNAde (already annotated) </button></a>
     </div>
 
     </div>
