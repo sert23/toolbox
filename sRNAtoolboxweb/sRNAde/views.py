@@ -931,6 +931,7 @@ class DeFromMultiAnnot(FormView):
                      "type": "sRNAde",
                      "pipeline_id": output_id,
                      "name": "test_unbelivable",
+                     "job_name": "test_unbelivable",
                      "conf_input": conf_path,
                      "input": MEDIA_ROOT,
                      "grpDesc": "#".join(list(set(desc))),
