@@ -192,8 +192,11 @@ class JobStatusDetail(DetailView):
                         if data[9] == "Q":
                             count += 1
                             return count
+                        elif data[9] == "R":
+                            return 0
                     elif data[9] == "Q":
                         count += 1
+
         position = qstat_pos(job_status.pipeline_key)
         if position < 1:
             running = True
