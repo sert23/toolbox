@@ -83,6 +83,7 @@
                     <a href="{% url 'multi:multi_relaunch' %}{{ id }}"><button type="button" class="btn btn-primary">Relaunch Jobs</button></a>
                      {% if launchDE %}
                         <a href="{% url 'DE_multi' %}{{ id }}" target="_blank"><button type="button" class="btn btn-success">Launch Jobs on sRNAde</button></a>
+                        <a href="" target="_blank"><button type="button" class="btn btn-danger">Launch Jobs on sRNAde (don't use please) </button></a>
                      {% endif %}
                     {% if download_list %}
                     <a href="#"  id="download_button" ><button type="button" class="btn btn-info">Bulk download results</button></a>
