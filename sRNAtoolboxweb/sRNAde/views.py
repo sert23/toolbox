@@ -891,7 +891,7 @@ class DeFromMultiAnnot(FormView):
         query_id = str(self.request.path_info).split("/")[-1]
         # initial_path = os.path.join(MEDIA_ROOT, query_id, "input.json")
         output_id = pipeline_utils.generate_uniq_id()
-        name = str(output_id)+ "_de"
+        pipeline_name = str(output_id) + "_de"
         output_dir = os.path.join(MEDIA_ROOT, output_id)
         os.mkdir(output_dir)
         conf_path = os.path.join(MEDIA_ROOT, output_id, "conf.txt")
@@ -920,9 +920,9 @@ class DeFromMultiAnnot(FormView):
         parameters["matrixDesc"] = ",".join(desc)
         parameters["minRCexpr"] = 1
         parameters["web"] = "true"
-        parameters["name"] = name
-        parameters["name2"] = name
-        parameters["name3"] = name + "test"
+        parameters["name"] = pipeline_name
+        parameters["name2"] = pipeline_name
+        parameters["name3"] = pipeline_name + "test"
         parameters["grpDesc"] = "#".join(list(set(desc))) # TODO keep set in order
 
         with open(conf_path, "w") as conf_txt:
@@ -933,7 +933,7 @@ class DeFromMultiAnnot(FormView):
                      "type": "sRNAde",
                      "pipeline_id": output_id,
                      "name_old": "test_unbelivable",
-                     "name": output_id,
+                     "name": pipeline_name,
                      "job_name": "test_unbelivable",
                      "conf_input": conf_path,
                      "input": MEDIA_ROOT,
@@ -946,7 +946,7 @@ class DeFromMultiAnnot(FormView):
         json.dump(conf_dict, json_file, indent=6)
         json_file.close()
 
-        JobStatus.objects.create(job_name=name, pipeline_key=output_id, job_status="not_launched",
+        JobStatus.objects.create(job_name=pipeline_name, pipeline_key=output_id, job_status="not_launched",
                                  start_time=datetime.datetime.now(),
                                  # finish_time=datetime.time(0, 0),
                                  all_files=" ",
@@ -956,7 +956,7 @@ class DeFromMultiAnnot(FormView):
 
         call = 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
             configuration_file_path=json_path,
-            job_name=name,
+            job_name=pipeline_name,
             sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh'))
 
         os.system(call)
