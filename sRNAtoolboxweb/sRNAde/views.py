@@ -920,7 +920,7 @@ class DeFromMultiAnnot(FormView):
         parameters["matrixDesc"] = ",".join(desc)
         parameters["minRCexpr"] = 1
         parameters["web"] = "true"
-        parameters["name"] = output_id
+        parameters["name"] = name
         parameters["grpDesc"] = "#".join(list(set(desc))) # TODO keep set in order
 
         with open(conf_path, "w") as conf_txt:
@@ -930,7 +930,7 @@ class DeFromMultiAnnot(FormView):
         conf_dict = {"out_dir": output_dir,
                      "type": "sRNAde",
                      "pipeline_id": output_id,
-                     "name": name,
+                     "name": "test_unbelivable",
                      "conf_input": conf_path,
                      "input": MEDIA_ROOT,
                      "grpDesc": "#".join(list(set(desc))),
