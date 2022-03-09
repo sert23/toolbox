@@ -885,7 +885,7 @@ class DeFromMultiAnnot(FormView):
     form_class = DEmultiForm
     success_url = reverse_lazy("DE_multi")
 
-    def get_context_data(self, **kwargs):
+    def get(self, request, **kwargs):
         query_id = str(self.request.path_info).split("/")[-1]
         # initial_path = os.path.join(MEDIA_ROOT, query_id, "input.json")
         output_id = pipeline_utils.generate_uniq_id()
@@ -920,9 +920,9 @@ class DeFromMultiAnnot(FormView):
         parameters["web"] = "true"
         parameters["grpDesc"] = "#".join(list(set(desc)))
 
-        with open(conf_path,"w") as conf_txt:
+        with open(conf_path, "w") as conf_txt:
             for k in sorted(parameters.keys()):
-                conf_txt.write(k + "=" + str(parameters.get(k))+"\n")
+                conf_txt.write(k + "=" + str(parameters.get(k)) + "\n")
 
         conf_dict = {"out_dir": output_dir,
                      "type": "sRNAde",
@@ -933,9 +933,6 @@ class DeFromMultiAnnot(FormView):
                      "grpDesc": "#".join(list(set(desc))),
                      "matrixDesc": ",".join(desc)
                      }
-
-
-
 
         json_path = os.path.join(output_dir, "conf.json")
         json_file = open(json_path, "w")
@@ -960,6 +957,84 @@ class DeFromMultiAnnot(FormView):
         js.status.create(status_progress='sent_to_queue')
         js.job_status = 'sent_to_queue'
         js.save()
+
+        return redirect(reverse_lazy('srnade') + '?id=' + output_id)
+
+    # def get_context_data(self, **kwargs):
+    #     query_id = str(self.request.path_info).split("/")[-1]
+    #     # initial_path = os.path.join(MEDIA_ROOT, query_id, "input.json")
+    #     output_id = pipeline_utils.generate_uniq_id()
+    #     name = output_id + "_de"
+    #     output_dir = os.path.join(MEDIA_ROOT, output_id)
+    #     os.mkdir(output_dir)
+    #     conf_path = os.path.join(MEDIA_ROOT, output_id, "conf.txt")
+    #
+    #     dict_path = os.path.join(MEDIA_ROOT, query_id, "input.json")
+    #     json_file = open(dict_path, "r")
+    #     input_dict = json.load(json_file, object_pairs_hook=OrderedDict)
+    #     json_file.close()
+    #
+    #     grp = []  # grpString=9IQMWQD4HP6LSCE,L0V7EPEVI0TTIQ1,N6421OZY0XPUOID,U05O6B1XWM7RMQJ,Z4RXZO25Z9XM8I7
+    #     desc = []  # grpDesc=Normal#Treated
+    #     sample = []  # "sampleDesc"
+    #     parameters = {}
+    #     for k in input_dict.keys():
+    #         annot_dict = input_dict.get(k)
+    #         jobID = annot_dict.get("jobID")
+    #         grp.append(jobID)
+    #         name = annot_dict.get("name_annotation")
+    #         sample.append(name)
+    #         group = annot_dict.get("group_annotation")
+    #         desc.append(group)
+    #
+    #     parameters["input"] = MEDIA_ROOT
+    #     parameters["output"] = output_dir
+    #     parameters["grpString"] = ",".join(grp)
+    #     parameters["matrixDesc"] = ",".join(desc)
+    #     parameters["minRCexpr"] = 1
+    #     parameters["web"] = "true"
+    #     parameters["grpDesc"] = "#".join(list(set(desc)))
+    #
+    #     with open(conf_path,"w") as conf_txt:
+    #         for k in sorted(parameters.keys()):
+    #             conf_txt.write(k + "=" + str(parameters.get(k))+"\n")
+    #
+    #     conf_dict = {"out_dir": output_dir,
+    #                  "type": "sRNAde",
+    #                  "pipeline_id": output_id,
+    #                  "name": name,
+    #                  "conf_input": conf_path,
+    #                  "input": MEDIA_ROOT,
+    #                  "grpDesc": "#".join(list(set(desc))),
+    #                  "matrixDesc": ",".join(desc)
+    #                  }
+    #
+    #
+    #
+    #
+    #     json_path = os.path.join(output_dir, "conf.json")
+    #     json_file = open(json_path, "w")
+    #     json.dump(conf_dict, json_file, indent=6)
+    #     json_file.close()
+    #
+    #     JobStatus.objects.create(job_name=name, pipeline_key=output_id, job_status="not_launched",
+    #                              start_time=datetime.datetime.now(),
+    #                              # finish_time=datetime.time(0, 0),
+    #                              all_files=" ",
+    #                              modules_files="",
+    #                              pipeline_type="sRNAde",
+    #                              )
+    #
+    #     call = 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
+    #         configuration_file_path=json_path,
+    #         job_name=name,
+    #         sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh'))
+    #
+    #     os.system(call)
+    #     js = JobStatus.objects.get(pipeline_key=output_id)
+    #     js.status.create(status_progress='sent_to_queue')
+    #     js.job_status = 'sent_to_queue'
+    #     js.save()
 
 
 
