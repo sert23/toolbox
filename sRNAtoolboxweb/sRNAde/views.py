@@ -921,6 +921,8 @@ class DeFromMultiAnnot(FormView):
         parameters["minRCexpr"] = 1
         parameters["web"] = "true"
         parameters["name"] = name
+        parameters["name2"] = name
+        parameters["name3"] = name + "test"
         parameters["grpDesc"] = "#".join(list(set(desc))) # TODO keep set in order
 
         with open(conf_path, "w") as conf_txt:
@@ -938,7 +940,7 @@ class DeFromMultiAnnot(FormView):
                      "matrixDesc": ",".join(desc)
                      }
 
-        json_path = os.path.join(output_dir, "conf.json")
+        json_path = os.path.join(output_dir, "conf_.json")
         json_file = open(json_path, "w")
         json.dump(conf_dict, json_file, indent=6)
         json_file.close()
