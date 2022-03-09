@@ -102,7 +102,6 @@ class JobStatusDetail(DetailView):
             if msg.type == "error":
                 error = True
 
-        #http://bioinfo5.ugr.es:8000/jobstatus/IJFPGD68UAKFFHU
         if error:
             return {'msgs': msgs,
                     #"url": "/srnatoolbox/" + job_status.pipeline_type + "/results/?id=" + job_status.pipeline_key,
@@ -192,11 +191,19 @@ class JobStatusDetail(DetailView):
                         # plist.append(data[1],data[4])
                         if data[9] == "Q":
                             count += 1
-                            break
+                            return count
                     elif data[9] == "Q":
                         count += 1
-            return str(count)
-        return {'running': True, 'queue': True, 'msgs': [Msg("INFO: Job is queue waiting")], "id": job_status.pipeline_key, "position": qstat_pos(job_status.pipeline_key)}
+        position = qstat_pos(job_status.pipeline_key)
+        if position < 1:
+            running = True
+            queue = False
+        else:
+            running = False
+            queue = True
+
+        return {'running': running, 'queue': queue, 'msgs': [Msg("INFO: Job is queue waiting")], "id": job_status.pipeline_key, "position": str(position)}
+        # return {'running': True, 'queue': True, 'msgs': [Msg("INFO: Job is queue waiting")], "id": job_status.pipeline_key, "position": str(position)}
 
 
     def get_context_data(self, **kwargs):
