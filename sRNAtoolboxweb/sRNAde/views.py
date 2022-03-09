@@ -891,7 +891,7 @@ class DeFromMultiAnnot(FormView):
         query_id = str(self.request.path_info).split("/")[-1]
         # initial_path = os.path.join(MEDIA_ROOT, query_id, "input.json")
         output_id = pipeline_utils.generate_uniq_id()
-        name = output_id + "_de"
+        name = str(output_id)+ "_de"
         output_dir = os.path.join(MEDIA_ROOT, output_id)
         os.mkdir(output_dir)
         conf_path = os.path.join(MEDIA_ROOT, output_id, "conf.txt")
@@ -941,7 +941,7 @@ class DeFromMultiAnnot(FormView):
                      "matrixDesc": ",".join(desc)
                      }
 
-        json_path = os.path.join(output_dir, "conf_.json")
+        json_path = os.path.join(output_dir, "conf.json")
         json_file = open(json_path, "w")
         json.dump(conf_dict, json_file, indent=6)
         json_file.close()
