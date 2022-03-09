@@ -880,6 +880,8 @@ class DeLaunch(FormView):
         return super(DeLaunch, self).form_valid(form)
 
 
+# https://arn.ugr.es/srnatoolbox/multiupload/status/EONO1KS2B2I7Y5J
+# https://arn.ugr.es/srnatoolbox/srnade/fromannot/EONO1KS2B2I7Y5J
 class DeFromMultiAnnot(FormView):
     template_name = 'de_multi.html'
     form_class = DEmultiForm
@@ -918,7 +920,8 @@ class DeFromMultiAnnot(FormView):
         parameters["matrixDesc"] = ",".join(desc)
         parameters["minRCexpr"] = 1
         parameters["web"] = "true"
-        parameters["grpDesc"] = "#".join(list(set(desc)))
+        parameters["name"] = output_id
+        parameters["grpDesc"] = "#".join(list(set(desc))) # TODO keep set in order
 
         with open(conf_path, "w") as conf_txt:
             for k in sorted(parameters.keys()):
