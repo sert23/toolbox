@@ -16,9 +16,23 @@
 <p></p>
     <p>You can specify groups/conditions for sRNAbench samples to compute differential expression.</p>
     <p>There are two ways to do it, using the annotation that can be updated on this page or running an independent sRNAde job. </p>
-    <a href="" class="btn btn-link" ><button type="button" class="btn btn-danger">Launch Jobs on sRNAde (don't use please) </button></a>
-    <a href="" class="btn btn-link" ><button type="button" class="btn btn-danger">Launch Jobs on sRNAde (don't use please) </button></a>
-    <a href="" class="btn btn-link" ><button type="button" class="btn btn-danger">Launch Jobs on sRNAde (don't use please) </button></a>
+    <div class="row">
+    <div class="col-lg-6">
+        <a href="" class="btn btn-link" ><button type="button" class="btn btn-primary">sRNAde (new annotation) </button></a>
+    </div>
+    <div class="col-lg-6">
+        <a href="" class="btn btn-link" ><button type="button" class="btn btn-primary">sRNAde (already annotated) </button></a>
+    </div>
+
+    </div>
+    <div class="row">
+    <div class="col-lg-6">
+        <a href="{% url 'multi:multi_annotate' %}{{ id }}"><button type="button" class="btn btn-primary">Annotate Samples <i class="fa fa-pen"> </i> </button></a>
+    </div>
+    </div>
+
+
+
 
 
 {% endblock %}
