@@ -435,7 +435,7 @@ class ReLaunch(FormView):
         print(request.POST['species'])
         print(request.POST['species_hidden'].split(','))
         request.POST._mutable = False
-        return super(Launch, self).post(request, *args, **kwargs)
+        return super(ReLaunch, self).post(request, *args, **kwargs)
 
     def form_valid(self, form):
 
