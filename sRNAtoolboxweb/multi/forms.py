@@ -214,8 +214,8 @@ class sRNABenchForm(forms.Form):
         if old_files:
             name = old_files[0]
             new_jobID = name.split("_")[1]
-        else:
-            os.system("touch " + os.path.join(self.old_folder, "redirect_" + new_jobID))
+        # else:
+        #     os.system("touch " + os.path.join(self.old_folder, "redirect_" + new_jobID))
 
         self.folder = new_jobID
 
