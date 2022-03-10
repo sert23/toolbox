@@ -203,7 +203,7 @@ class sRNABenchForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.old_folder = kwargs.pop('orig_folder', None)
-        is_relaunch = kwargs.pop('orig_folder', None)
+        is_relaunch = kwargs.pop('is_relaunch', None)
         # self.old_folder = self.request.GET.pop('jobId', None)
         # destination folder
         new_jobID = generate_uniq_id()
