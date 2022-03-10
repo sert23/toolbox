@@ -211,7 +211,7 @@ class sRNABenchForm(forms.Form):
 
         if is_relaunch:
             self.folder = new_jobID
-            os.mkdir()
+            os.mkdir(new_folder)
             shutil.copy(os.path.join(MEDIA_ROOT, self.old_folder, "input.json"), os.path.join(MEDIA_ROOT, new_jobID, "input.json"))
             os.system("touch " + self.old_folder)
         else:
