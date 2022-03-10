@@ -372,7 +372,7 @@ class ReLaunch(FormView):
     form_class = sRNABenchForm
 
     def get_form_kwargs(self):
-        kwargs = super(Launch, self).get_form_kwargs()
+        kwargs = super(ReLaunch, self).get_form_kwargs()
         parameters = self.request.GET
         folder = parameters["jobId"]
         kwargs['orig_folder'] = folder
