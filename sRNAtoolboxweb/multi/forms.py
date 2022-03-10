@@ -203,21 +203,29 @@ class sRNABenchForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.old_folder = kwargs.pop('orig_folder', None)
+        is_relaunch = kwargs.pop('orig_folder', None)
         # self.old_folder = self.request.GET.pop('jobId', None)
         # destination folder
-        if self.old_folder:
-            old_files = [f for f in os.listdir(os.path.join(MEDIA_ROOT, self.old_folder)) if f.startswith("redirect")]
-        else:
-            old_files = None
         new_jobID = generate_uniq_id()
-        # mark new ID in old folder, if present, ignore new_jobID
-        if old_files:
-            name = old_files[0]
-            new_jobID = name.split("_")[1]
-        # else:
-        #     os.system("touch " + os.path.join(self.old_folder, "redirect_" + new_jobID))
 
-        self.folder = new_jobID
+        if is_relaunch:
+            self.folder = new_jobID
+            shutil.copy(os.path.join(MEDIA_ROOT, self.old_folder, "input.json"), os.path.join(MEDIA_ROOT, new_jobID, "input.json"))
+            os.system("touch " + self.old_folder)
+        else:
+            if self.old_folder:
+                old_files = [f for f in os.listdir(os.path.join(MEDIA_ROOT, self.old_folder)) if f.startswith("redirect")]
+            else:
+                old_files = None
+
+            # mark new ID in old folder, if present, ignore new_jobID
+            if old_files:
+                name = old_files[0]
+                new_jobID = name.split("_")[1]
+            else:
+                os.system("touch " + os.path.join(self.old_folder, "redirect_" + new_jobID))
+
+            self.folder = new_jobID
 
 
         super(sRNABenchForm, self).__init__(*args, **kwargs)
