@@ -362,6 +362,101 @@ class Launch(FormView):
         js.save()
         return super(Launch, self).form_valid(form)
 
+class ReLaunch(FormView):
+    # TODO if folder already exists omit creation
+    template_name = 'newBench/parameters.html'
+    # template_name = 'Messages/miRgFree/drive_test.html'
+    # form_class = miRNAgFreeForm
+    # success_url = reverse_lazy("MIRG")
+    # success_url = reverse_lazy("MIRG")
+    form_class = sRNABenchForm
+
+    # def get_form_kwargs(self):
+    #     kwargs = super(Launch, self).get_form_kwargs()
+    #     parameters = self.request.GET
+    #     folder = parameters["jobId"]
+    #     kwargs['orig_folder'] = folder
+    #     return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super(FormView, self).get_context_data(**kwargs)
+        # path = request.path
+        param_dict = self.request.GET
+        # config_lines = []
+        jobID = param_dict.get("jobId")
+        folder_path = os.path.join(MEDIA_ROOT, jobID)
+        # old_folder_path = os.path.join(MEDIA_ROOT, oldID)
+        # oldID = self.kwargs.get("jobId")
+
+        #build samples table
+        dict_path = os.path.join(folder_path, "input.json")
+        json_file = open(dict_path, "r")
+        input_dict = json.load(json_file)
+        json_file.close()
+
+        table_data = []
+        for k in input_dict.keys():
+            object = input_dict[k]
+            input_line = object["input"]
+            input_type = object["input_type"]
+            input_name = object["name"]
+            status = "not launched"
+
+
+            # id = "file_"+ str(ix)
+            # link = '<a href="'+ os.path.join(MEDIA_URL,query_id,file) +'">'+file+'</a>'
+            # status = "Not launched"
+            checkbox = "<input type='checkbox' value='" + "' name='to_list' checked=true>"
+            table_data.append([input_line, status, checkbox])
+
+        js_data = json.dumps(table_data)
+        js_headers = json.dumps([{"title": "Input"},
+                                 {"title": "Status"},
+                                 {"title": '<input type="checkbox" checked=true id="flowcheckall" value="" />&nbsp;All'}])
+
+        context["table_data"] = js_data
+        context["table_headers"] = js_headers
+        context["job_id"] = jobID
+        context["annotate_url"] = reverse_lazy("annotate") + jobID
+
+
+        annotate_url = reverse_lazy("annotate") + jobID
+        return context
+
+    def post(self, request, *args, **kwargs):
+
+        # path = request.path
+        # folder = path.split("/")[-1]
+        # form = MultiURLForm(self.request.POST, self.request.FILES, dest_folder=folder)
+
+        request.POST._mutable = True
+        #print(SPECIES_PATH)
+        request.POST['species'] = request.POST['species_hidden'].split(',')
+        print(request.POST['species'])
+        print(request.POST['species_hidden'].split(','))
+        request.POST._mutable = False
+        return super(Launch, self).post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+
+        form.clean()
+        pipeline_id = form.create_call()
+        self.success_url = reverse_lazy('srnabench') + '?id=' + pipeline_id
+
+        # os.mkdir(os.path.join(MEDIA_ROOT, pipeline_id))
+        JobStatus.objects.create(job_name=pipeline_id + "_multi", pipeline_key=pipeline_id, job_status="not_launched",
+                                 start_time=datetime.datetime.now(),
+                                 all_files=" ",
+                                 modules_files=" ",
+                                 pipeline_type="multiupload",
+                                 )
+
+        #os.system(call)
+        js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
+        return super(Launch, self).form_valid(form)
 
 # class NewUpload(FormView):
 #
