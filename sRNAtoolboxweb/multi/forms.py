@@ -207,9 +207,11 @@ class sRNABenchForm(forms.Form):
         # self.old_folder = self.request.GET.pop('jobId', None)
         # destination folder
         new_jobID = generate_uniq_id()
+        new_folder = os.path.join(MEDIA_ROOT,new_jobID)
 
         if is_relaunch:
             self.folder = new_jobID
+            os.mkdir()
             shutil.copy(os.path.join(MEDIA_ROOT, self.old_folder, "input.json"), os.path.join(MEDIA_ROOT, new_jobID, "input.json"))
             os.system("touch " + self.old_folder)
         else:
