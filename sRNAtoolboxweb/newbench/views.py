@@ -371,12 +371,14 @@ class ReLaunch(FormView):
     # success_url = reverse_lazy("MIRG")
     form_class = sRNABenchForm
 
-    # def get_form_kwargs(self):
-    #     kwargs = super(Launch, self).get_form_kwargs()
-    #     parameters = self.request.GET
-    #     folder = parameters["jobId"]
-    #     kwargs['orig_folder'] = folder
-    #     return kwargs
+    def get_form_kwargs(self):
+        kwargs = super(Launch, self).get_form_kwargs()
+        parameters = self.request.GET
+        folder = parameters["jobId"]
+        kwargs['orig_folder'] = folder
+        kwargs['is_relaunch'] = True
+
+        return kwargs
 
     def get_context_data(self, **kwargs):
         context = super(FormView, self).get_context_data(**kwargs)
