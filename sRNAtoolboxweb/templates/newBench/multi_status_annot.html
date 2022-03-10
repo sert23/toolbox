@@ -80,7 +80,7 @@
 
                     <table id="jobs" class="table table-striped table-bordered table-hover dataTable no-footer"></table>
 
-                    <a href="{% url 'newbench_relaunch' %}?jobId={{ id }}&is_relaunch=true"><button type="button" class="btn btn-primary"  data-toggle="tooltip" data-placement="bottom"
+                    <a href="{% url 'newbench_relaunch' %}?jobId={{ id }}&is_relaunch=true"><button type="button" class="btn btn-primary"  data-toggle="tooltip" data-placement="top"
                                                                                                     title="Launch new sRNAbench jobs (different parameters) using the same input data"> Relaunch Jobs</button></a>
                     <a href="{% url 'multi:multi_annotate' %}{{ id }}"><button type="button" class="btn btn-primary">Annotate Samples <i class="fa fa-pen"> </i> </button></a>
 {#                    <a href="{% url 'multi:annotate' %}{{ id }}"><button type="button" class="btn btn-primary">Annotate Samples</button></a>#}
