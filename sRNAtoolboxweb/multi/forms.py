@@ -205,7 +205,7 @@ class sRNABenchForm(forms.Form):
         self.old_folder = kwargs.pop('orig_folder', None)
         # self.old_folder = self.request.GET.pop('jobId', None)
         # destination folder
-        if os.listdir(os.path.join(MEDIA_ROOT, self.old_folder)):
+        if self.old_folder:
             old_files = [f for f in os.listdir(os.path.join(MEDIA_ROOT, self.old_folder)) if f.startswith("redirect")]
         else:
             old_files = None
