@@ -458,7 +458,7 @@ class ReLaunch(FormView):
         js.status.create(status_progress='sent_to_queue')
         js.job_status = 'sent_to_queue'
         js.save()
-        return super(Launch, self).form_valid(form)
+        return super(ReLaunch, self).form_valid(form)
 
 # class NewUpload(FormView):
 #
