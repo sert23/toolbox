@@ -40,7 +40,7 @@
     <div class="col-lg-6">
         <label class="control-label ">
                 Units<a data-toggle="modal" data-target="#quality_filter" class="btn btn-link"></a> </label>
-        <select name="matrix_file_type" class="form-control select" id="id_matrix_file_type">
+        <select name="matrix_unit" class="form-control select" id="id_matrix_unit">
             <option value="" selected="">RPM</option>
         </select>
     </div>
@@ -48,10 +48,20 @@
 {#        <label class="control-label " style="visibility: hidden;">#}
 {#                Units basically this just neeeds to be <a data-toggle="modal" data-target="#quality_filter" class="btn btn-link"></a> </label>#}
 <br>
-        <a href="" class="btn btn-link pull-right"><button type="button" class="btn btn-success"> Generate matrix </button></a>
+        <a href="#" target="_blank" id="matrix_link" class="btn btn-link pull-right"><button type="button" class="btn btn-success"> Generate matrix </button></a>
     </div>
     </div>
+<script>
+    $("#id_matrix_unit").change(function() {
+    var pars = $("#id_matrix_file_type,#id_matrix_annotation,#id_matrix_unit").serialize();
+    pars = pars + "&jobID={{ id }}";
+    {#alert(pars);#}
+        {#alert(pars);#}
+    var launch_url = "";
+    $("#matrix_link").attr("href", launch_url.concat(pars));
+});
 
+</script>
 
 
 
