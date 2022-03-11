@@ -80,19 +80,22 @@
 
                     <table id="jobs" class="table table-striped table-bordered table-hover dataTable no-footer"></table>
 
-                    <a href="{% url 'newbench_relaunch' %}?jobId={{ id }}&is_relaunch=true"><button type="button" class="btn btn-primary"  data-toggle="tooltip" data-placement="top"
-                                                                                                    title="Launch new sRNAbench jobs (different parameters) using the same input data"> Relaunch Jobs</button></a>
+                    {% if download_list %}
+                    <a href="#"  id="download_button" ><button type="button" class="btn btn-info">Bulk download results</button></a>
+                    {% endif %}
+
+                     <a href="{% url 'newbench_relaunch' %}?jobId={{ id }}&is_relaunch=true"><button type="button" class="btn btn-primary"  data-toggle="tooltip" data-placement="top"
+                                                                                                    title="Launch new sRNAbench jobs (different parameters) using the same input read files"> Relaunch Jobs</button></a>
                     <a href="{% url 'multi:multi_annotate' %}{{ id }}"><button type="button" class="btn btn-primary">Annotate Samples <i class="fa fa-pen"> </i> </button></a>
 {#                    <a href="{% url 'multi:annotate' %}{{ id }}"><button type="button" class="btn btn-primary">Annotate Samples</button></a>#}
                      {% if launchDE %}
                         <a href="{% url 'DE_multi' %}{{ id }}" target="_blank"><button type="button" class="btn btn-success">Launch Jobs on sRNAde</button></a>
 
-                         <a href="" data-toggle="modal" data-target="#launch_DE" class="btn btn-link" ><button type="button" class="btn btn-danger">Launch Jobs on sRNAde (don't use please) </button></a>
+                         <a href="javascript:void(0)" data-toggle="modal" data-target="#launch_DE" class="btn btn-link" ><button type="button" class="btn btn-danger">Launch Jobs on sRNAde (don't use please) </button></a>
+                         <a href="javascript:void(0)" data-toggle="modal" data-target="#generate_matrix" class="btn btn-link" ><button type="button" class="btn btn-danger">Generate matrix (don't use please) </button></a>
                      {% endif %}
 
-                    {% if download_list %}
-                    <a href="#"  id="download_button" ><button type="button" class="btn btn-info">Bulk download results</button></a>
-                    {% endif %}
+
                         {% for msg in msgs %}
                             {% if msg.type == "info" %}
                                 <div class="alert alert-info">
@@ -181,6 +184,7 @@
 
 {% block modals %}
     {% include "Messages/newbench/launch_DE.html" %}
+    {% include "Messages/newbench/Generate_matrix.html" %}
 {% endblock %}
 
 
