@@ -1,7 +1,7 @@
 {% extends "Messages/modal_template.html" %}
 {% block id %}generate_matrix{% endblock %}
 {% block title %}
-    Generate matrix
+    Generate matrix from sRNAbench jobs
 {% endblock %}
 {% block text %}
 
@@ -14,18 +14,25 @@
 {#  AIzaSyBG_apmyiqz0PVwA6FO_GionR-e1Zz7DlI  GOOGLE API KEY  #}
 
 <p></p>
-    <p>You can specify groups/conditions for sRNAbench samples to compute differential expression using sRNAde.</p>
+    <p>You can generate a matrix to summarise different files from sRNAbench results. Use the selectors and buttons below to generate
+    a matrix of your choice.</p>
     <p>There are two ways to do it, using the annotation that can be updated on this page or running an independent sRNAde job. </p>
     <div class="row">
+
+    <label class="control-label ">
+                File type<a data-toggle="modal" data-target="#quality_filter" class="btn btn-link"><i class="fa fa-question-circle"> </i></a> </label>
+
     <div class="col-lg-6">
-        <a href="{% url 'DE_multi' %}{{ id }}" target="_blank" class="btn btn-link" ><button type="button" class="btn btn-primary" data-toggle="tooltip"
-        data-placement="top"  title="Launch a sRNAde job (Differential Expression) by manually providing groups or conditions for each sample"
-        >sRNAde (new annotation) </button></a>
+        <label class="control-label ">
+                Annotation file<a data-toggle="modal" data-target="#quality_filter" class="btn btn-link"><i class="fa fa-question-circle"> </i></a> </label>
+        <select name="matrix_file_type" class="form-control select" id="id_matrix_file_type">
+            <option value="" selected="">Read length</option>
+        </select>
     </div>
     <div class="col-lg-6">
-        <a href="{% url 'launch_annot' %}{{ id }}" target="_blank" class="btn btn-link" ><button type="button" class="btn btn-primary"
-         data-toggle="tooltip"  data-placement="top"  title="Launch a sRNAde job with the annotation already provided"
-        >sRNAde (current annotation) </button></a>
+        <select name="matrix_annotation" class="form-control select" id="id_matrix_annotation">
+            <option value="" selected="">miRNA</option>
+        </select>
     </div>
 
     </div>
