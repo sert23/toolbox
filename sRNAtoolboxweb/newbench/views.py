@@ -467,12 +467,9 @@ def ajax_matrix_selectors(request):
 
     file_type_dict = MATRIX_GENERATOR_DICT.get(current_file_type)
     data["filetypes"] = list(file_type_dict.keys())
+    data["selected_type"] = current_file_type
     data["files"] = file_type_dict.get("file")
     data["units"] = file_type_dict.get("column")
-
-
-
-
     # new_record = JobStatus.objects.get(pipeline_key=jobID)
     # outdir = new_record.outdir
     # miRNA_file = os.path.join(outdir, "mature_sense.grouped")
