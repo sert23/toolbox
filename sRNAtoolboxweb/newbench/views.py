@@ -460,6 +460,34 @@ class ReLaunch(FormView):
         js.save()
         return super(ReLaunch, self).form_valid(form)
 
+def ajax_matrix_selectors(request):
+    jobID = request.GET.get("jobID")
+    topN = int(request.GET.get("top"))
+
+    new_record = JobStatus.objects.get(pipeline_key=jobID)
+    outdir = new_record.outdir
+    miRNA_file = os.path.join(outdir, "mature_sense.grouped")
+    # with open(miRNA_file, "r") as mf:
+    #     miRNA_df = pd.read_csv(mf, sep="\t")
+    #
+    # names = list(miRNA_df["name"].unique())
+    # names = [i for i in names if i.startswith("hsa")]
+    # maxi = len(names)
+    # if topN < maxi:
+    #     result = names[:topN]
+    # else:
+    #     result = names
+    #
+    # # https://genecodis.genyo.es/gc4/externalquery&org=9606&genes=1,2,13,14,5
+
+    data = {}
+    # data["jobID"] = jobID
+    # data["topN"] = topN
+    # data["names"] = result
+    # data["url"] = "https://genecodis.genyo.es/gc4/externalquery&org=9606&genes=" + ",".join(result)
+    data["message"] = "the message is that it worked"
+    return JsonResponse(data)
+
 # class NewUpload(FormView):
 #
 #     template_name = 'miRNAgFree/multi_status.html'

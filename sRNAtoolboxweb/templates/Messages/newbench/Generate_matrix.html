@@ -27,6 +27,7 @@
                 Annotation file<a data-toggle="tooltip" data-placement="top" title="Choose"  class="btn btn-link"><i class="fa fa-question-circle"> </i></a> </label>
         <select name="matrix_file_type" class="form-control select" id="id_matrix_file_type">
             <option value="" selected="">Read length</option>
+            <option value="" selected="">Expression file</option>
         </select>
     </div>
     <div class="col-lg-6">
@@ -52,7 +53,37 @@
         <a href="#" target="_blank" id="matrix_link" class="btn btn-link pull-right"><button type="button" class="btn btn-success"> Generate matrix </button></a>
     </div>
     </div>
-<script>
+
+    <script>
+
+    var loadSelectors = function(e) {
+
+        {#alert("eyo");#}
+        $.ajax({
+        url: '{% url "ajax_matrix_selector" %}',
+        data: {
+            "id" : "{{ id }}",
+             "file_type": $("#id_matrix_file_type").val(),
+        },
+        dataType: 'json',
+        success: function (data) {
+            alert("seems to work");
+            alert(data.message);
+
+            {#$("#add_basic_hm").html("");#}
+            {#$("#add_basic_hm").html(data.plot);#}
+            {#alert("ea");#}
+        }
+        })
+    }
+
+        $("#id_matrix_unit").change(function() {
+            loadSelectors();
+        })
+
+    </script>
+
+    <script>
     $("#id_matrix_unit").change(function() {
     var pars = $("#id_matrix_file_type,#id_matrix_annotation,#id_matrix_unit").serialize();
     pars = pars + "&jobID={{ id }}";
