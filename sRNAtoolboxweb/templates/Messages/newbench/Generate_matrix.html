@@ -72,8 +72,14 @@
             {# populate files #}
             $('#id_matrix_annotation').empty();
             for (const [key, value] of Object.entries(data.files)) {
-                  console.log(key, value);
+                  {#console.log(key, value);#}
                 $('#id_matrix_annotation').append('<option value="' + key + '">' + value + '</option>');
+            };
+
+            $("#id_matrix_unit").empty();
+            for (const [key, value] of Object.entries(data.units)) {
+                  {#console.log(key, value);#}
+                $("#id_matrix_unit").append('<option value="' + key + '">' + value + '</option>');
             };
 
 
