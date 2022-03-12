@@ -75,11 +75,16 @@
             {#alert("ea");#}
         }
         })
-    }
+    };
 
         $("#id_matrix_unit").change(function() {
             loadSelectors();
-        })
+        });
+
+        $( "#generate_matrix" ).on('shown', function(){
+               loadSelectors();
+            });
+
 
     </script>
 
