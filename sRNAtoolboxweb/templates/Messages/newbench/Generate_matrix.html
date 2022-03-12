@@ -71,10 +71,11 @@
             console.log("succesful ajax");
             {# populate files #}
             $('#id_matrix_annotation').empty();
-            for (const [key, value] of Object.entries(data.files)) {
-                  {#console.log(key, value);#}
-                $('#id_matrix_annotation').append('<option value="' + key + '">' + value + '</option>');
-            };
+            for (var i = 0; i < data.files.length; i++) {
+                row = data.files[i];
+                console.log(row[0],row[1]);
+                $('#id_matrix_annotation').append('<option value="' + row[0] + '">' + row[1] + '</option>');
+
 
             $("#id_matrix_unit").empty();
             for (const [key, value] of Object.entries(data.units)) {
