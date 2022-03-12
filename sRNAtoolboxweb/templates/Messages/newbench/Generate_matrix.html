@@ -80,7 +80,7 @@
             $("#id_matrix_unit").empty();
             for (var i = 0; i < data.units.length; i++) {
                 row = data.units[i];
-                {#console.log(row[0], row[1]);#}
+                console.log(row[0], row[1]);
                $("#id_matrix_unit").append('<option value="' + row[0] + '">' + row[1] + '</option>');
             }
 
