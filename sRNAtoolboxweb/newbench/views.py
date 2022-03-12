@@ -462,13 +462,13 @@ class ReLaunch(FormView):
 
 def ajax_matrix_selectors(request):
     data = {}
-    jobID = request.GET.get("jobID")
+    jobID = request.GET.get("id")
     current_file_type = request.GET.get("file_type")
 
     file_type_dict = MATRIX_GENERATOR_DICT.get(current_file_type)
-    data["filetypes"] = list(file_type_dict.keys())
-    data["files"] = file_type_dict.get("file")
-    data["units"] = file_type_dict.get("column")
+    # data["filetypes"] = list(file_type_dict.keys())
+    # data["files"] = file_type_dict.get("file")
+    # data["units"] = file_type_dict.get("column")
 
 
 
