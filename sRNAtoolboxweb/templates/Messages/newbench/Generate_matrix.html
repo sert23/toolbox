@@ -73,16 +73,16 @@
             $('#id_matrix_annotation').empty();
             for (var i = 0; i < data.files.length; i++) {
                 row = data.files[i];
-                console.log(row[0], row[1]);
+                {#console.log(row[0], row[1]);#}
                 $('#id_matrix_annotation').append('<option value="' + row[0] + '">' + row[1] + '</option>');
-            };
+            }
 
             $("#id_matrix_unit").empty();
-            for (const [key, value] of Object.entries(data.units)) {
-                  {#console.log(key, value);#}
-                $("#id_matrix_unit").append('<option value="' + key + '">' + value + '</option>');
-            };
-
+            for (var i = 0; i < data.units.length; i++) {
+                row = data.units[i];
+                {#console.log(row[0], row[1]);#}
+               $("#id_matrix_unit").append('<option value="' + row[0] + '">' + row[1] + '</option>');
+            }
 
 
             {#alert(data.message);#}
