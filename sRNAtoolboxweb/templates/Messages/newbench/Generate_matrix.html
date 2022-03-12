@@ -67,8 +67,8 @@
         },
         dataType: 'json',
         success: function (data) {
-            alert("seems to work");
-
+            {#alert("seems to work");#}
+            console.log("succesful ajax");
             {# populate files #}
             $('#id_matrix_annotation').empty();
             for (const [key, value] of Object.entries(data.files)) {
@@ -84,16 +84,16 @@
 
 
 
-            alert(data.message);
+            {#alert(data.message);#}
 
             {#$("#add_basic_hm").html("");#}
             {#$("#add_basic_hm").html(data.plot);#}
-            {#alert("ea");#}
+            console.log("finished populating");
         }
         })
     };
 
-        $("#id_matrix_unit").change(function() {
+        $("#id_matrix_file_type").change(function() {
             loadSelectors();
         });
 
