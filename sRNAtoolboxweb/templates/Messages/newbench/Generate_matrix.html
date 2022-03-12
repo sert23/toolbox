@@ -68,6 +68,16 @@
         dataType: 'json',
         success: function (data) {
             alert("seems to work");
+
+            {# populate files #}
+            $('#id_matrix_annotation').empty();
+            for (const [key, value] of Object.entries(data.files)) {
+                  console.log(key, value);
+                $('#id_matrix_annotation').append('<option value="' + key + '">' + value + '</option>');
+            };
+
+
+
             alert(data.message);
 
             {#$("#add_basic_hm").html("");#}

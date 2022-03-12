@@ -10,7 +10,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
-from sRNAtoolboxweb.settings import BASE_DIR,MEDIA_ROOT,MEDIA_URL, SUB_SITE
+from sRNAtoolboxweb.settings import BASE_DIR,MEDIA_ROOT,MEDIA_URL, SUB_SITE, MATRIX_GENERATOR_DICT
 from DataModels.params_bench import ParamsBench
 from DataModels.sRNABenchConfig import SRNABenchConfig
 from FileModels.IsomirParser import IsomirParser
@@ -461,8 +461,17 @@ class ReLaunch(FormView):
         return super(ReLaunch, self).form_valid(form)
 
 def ajax_matrix_selectors(request):
+    data = {}
     jobID = request.GET.get("jobID")
-    # topN = int(request.GET.get("top"))
+    current_file_type = request.GET.get("file_type")
+
+    file_type_dict = MATRIX_GENERATOR_DICT.get(current_file_type)
+    data["filetypes"] = list(file_type_dict.keys())
+    data["files"] = file_type_dict.get("file")
+    data["units"] = file_type_dict.get("column")
+
+
+
 
     # new_record = JobStatus.objects.get(pipeline_key=jobID)
     # outdir = new_record.outdir
@@ -479,8 +488,6 @@ def ajax_matrix_selectors(request):
     #     result = names
     #
     # # https://genecodis.genyo.es/gc4/externalquery&org=9606&genes=1,2,13,14,5
-
-    data = {}
     # data["jobID"] = jobID
     # data["topN"] = topN
     # data["names"] = result
