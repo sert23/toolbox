@@ -10,7 +10,7 @@ from django.core.files.storage import FileSystemStorage
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.shortcuts import render, redirect
 from django.views.generic import FormView
-from sRNAtoolboxweb.settings import BASE_DIR,MEDIA_ROOT,MEDIA_URL, SUB_SITE, MATRIX_GENERATOR_DICT
+from sRNAtoolboxweb.settings import BASE_DIR,MEDIA_ROOT,MEDIA_URL, SUB_SITE, MATRIX_GENERATOR_DICT, CONF
 from DataModels.params_bench import ParamsBench
 from DataModels.sRNABenchConfig import SRNABenchConfig
 from FileModels.IsomirParser import IsomirParser
@@ -45,6 +45,7 @@ import re
 import plotly.graph_objs as go
 from plotly.offline import plot
 import math
+from collections import OrderedDict
 
 # Create your views here.
 
@@ -470,27 +471,49 @@ def ajax_matrix_selectors(request):
     data["selected_type"] = current_file_type
     data["files"] = file_type_dict.get("file")
     data["units"] = file_type_dict.get("column")
-    # new_record = JobStatus.objects.get(pipeline_key=jobID)
-    # outdir = new_record.outdir
-    # miRNA_file = os.path.join(outdir, "mature_sense.grouped")
-    # with open(miRNA_file, "r") as mf:
-    #     miRNA_df = pd.read_csv(mf, sep="\t")
-    #
-    # names = list(miRNA_df["name"].unique())
-    # names = [i for i in names if i.startswith("hsa")]
-    # maxi = len(names)
-    # if topN < maxi:
-    #     result = names[:topN]
-    # else:
-    #     result = names
-    #
-    # # https://genecodis.genyo.es/gc4/externalquery&org=9606&genes=1,2,13,14,5
-    # data["jobID"] = jobID
-    # data["topN"] = topN
-    # data["names"] = result
-    # data["url"] = "https://genecodis.genyo.es/gc4/externalquery&org=9606&genes=" + ",".join(result)
-    data["message"] = "the message is that it worked"
+
+    # data["message"] = "the message is that it worked"
     return JsonResponse(data)
+
+def make_grpStr(jobID):
+    dict_path = os.path.join(MEDIA_ROOT, jobID, "input.json")
+    json_file = open(dict_path, "r")
+    input_dict = json.load(json_file, object_pairs_hook=OrderedDict)
+    jobs = []
+    for k in input_dict.keys():
+        c_dict = input_dict[k]
+        jobs.append(c_dict.get("jobID"))
+    jobs = [i for i in jobs if i]
+    grp = ",".join(jobs)
+    return grp
+
+
+def matrix_generator(request):
+    context = {}
+
+    jobID = request.GET.get("jobID")
+    is_fromDE = request.GET.get("is_fromDE")
+    file_type = request.GET.get("matrix_file_type")
+    annot_file = request.GET.get("matrix_annotation")
+    column = request.GET.get("matrix_unit")
+    file_type_dict = MATRIX_GENERATOR_DICT.get(file_type)
+    params = file_type_dict.get("fixedParam")
+    output_folder = os.path.join(MEDIA_ROOT, "matrix_temp", str(datetime.datetime.now()) + "_" + generate_id() + "_" + jobID)
+    os.mkdir(output_folder)
+    exec_path = CONF.get("exec")
+    jar_file = os.path.join(exec_path, "sRNAde.jar")
+    if is_fromDE:
+        print("x")
+    else:
+        grpString = make_grpStr(jobID)
+        line = "java -jar " + jar_file + " " + params + " colData={column} statFiles={annot_file} input={base_folder} grpString={jobs}"
+        command_line = line.format(column=column,
+                                   annot_file=annot_file,
+                                   base_folder=MEDIA_ROOT,
+                                   jobs=grpString)
+        os.system(command_line)
+
+    return render()
 
 # class NewUpload(FormView):
 #
