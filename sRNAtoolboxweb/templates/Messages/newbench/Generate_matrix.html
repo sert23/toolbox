@@ -66,11 +66,6 @@
     };
 
 
-    $(".matrix-selector").change(function() {
-
-        loadLink();
-
-        });
 
     var loadSelectors = function(e) {
 
@@ -110,6 +105,9 @@
             }
             $("#id_matrix_unit").val($("#id_matrix_unit option:first").val());
             console.log("finished populating");
+            console.log($("#id_matrix_annotation").val());
+            console.log($("#id_matrix_unit").val());
+            loadLink();
         }
         })
     };
