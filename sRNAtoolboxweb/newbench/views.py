@@ -495,7 +495,7 @@ def matrix_generator(request):
     jobID = request.GET.get("jobID")
     is_fromDE = request.GET.get("is_fromDE")
     file_type = request.GET.get("matrix_file_type")
-    annot_file = request.GET.get("matrix_annotation")
+    annot_file = '"' + str(request.GET.get("matrix_annotation")) + '"'
     column = request.GET.get("matrix_unit")
     file_type_dict = MATRIX_GENERATOR_DICT.get(file_type)
     params = file_type_dict.get("fixedParam")
