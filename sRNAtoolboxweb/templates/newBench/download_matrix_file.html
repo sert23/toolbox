@@ -42,7 +42,17 @@
                     <!-- /.panel-heading -->
                     <div class="panel-body">
 
-                        <a class="btn btn-default" href="{{ download_url }}" download><i class="fa fa-download"></i> Download matrix file</a>
+                        {% if error_message %}
+                            <div class="alert alert-warning">
+                                    <p>
+                                        {{ error_message }}
+                                    </p>
+                                </div>
+                        {% else %}
+                            <a class="btn btn-default" href="{{ download_url }}" download><i class="fa fa-download"></i> Download matrix file</a>
+                        {% endif %}
+
+
 
                     </div>
 

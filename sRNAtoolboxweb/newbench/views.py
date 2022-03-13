@@ -513,21 +513,25 @@ def matrix_generator(request):
     if is_fromDE:
         print("x")
     else:
-        grpString = make_grpStr(jobID)
-        line = "java -jar " + jar_file + " " + params + " colData={column} statFiles={annot_file} input={base_folder} grpString={jobs} output={output_folder}"
-        command_line = line.format(column=column,
-                                   annot_file=annot_file,
-                                   base_folder=MEDIA_ROOT,
-                                   jobs=grpString,
-                                   output_folder=output_folder)
-        with open(os.path.join(output_folder,"line"), "w") as wf:
-            wf.write(command_line)
-        os.system(command_line)
-    serving_matrix = find_file_of_interest(output_folder)
-    context["download_url"] = serving_matrix.replace(MEDIA_ROOT, MEDIA_URL)
-    context["go_back_url"] = os.path.join(reverse_lazy("progress_status"), jobID)
+        try:
+            grpString = make_grpStr(jobID)
+            line = "java -jar " + jar_file + " " + params + " colData={column} statFiles={annot_file} input={base_folder} grpString={jobs} output={output_folder}"
+            command_line = line.format(column=column,
+                                       annot_file=annot_file,
+                                       base_folder=MEDIA_ROOT,
+                                       jobs=grpString,
+                                       output_folder=output_folder)
+            with open(os.path.join(output_folder,"line"), "w") as wf:
+                wf.write(command_line)
+            os.system(command_line)
+            serving_matrix = find_file_of_interest(output_folder)
+            context["download_url"] = serving_matrix.replace(MEDIA_ROOT, MEDIA_URL)
+            context["go_back_url"] = os.path.join(reverse_lazy("progress_status"), jobID)
 
-    return render(request, "newBench/download_matrix_file.html", context)
+            return render(request, "newBench/download_matrix_file.html", context)
+        except:
+            context["go_back_url"] = os.path.join(reverse_lazy("progress_status"), jobID)
+            context["error_message"] = "There was an unexpected error. Please report it using the following code " + output_folder
 
 # class NewUpload(FormView):
 #
