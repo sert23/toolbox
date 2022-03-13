@@ -512,6 +512,8 @@ def matrix_generator(request):
                                    annot_file=annot_file,
                                    base_folder=MEDIA_ROOT,
                                    jobs=grpString)
+        with open(os.path.join(output_folder,"line"), "w") as wf:
+            wf.write(command_line)
         os.system(command_line)
 
     return render()
