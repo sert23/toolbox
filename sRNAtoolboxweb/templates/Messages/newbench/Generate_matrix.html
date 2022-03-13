@@ -115,7 +115,7 @@
     pars = pars + "&jobID={{ id }}";
     {#alert(pars);#}
         {#alert(pars);#}
-    var launch_url = "{% url matrix_generator %}?";
+    var launch_url = "{% url 'matrix_generator' %}?";
     $("#matrix_link").attr("href", launch_url.concat(pars));
 });
 
