@@ -85,14 +85,14 @@
                 {#console.log(row[0], row[1]);#}
                 $('#id_matrix_annotation').append('<option value="' + row[0] + '">' + row[1] + '</option>');
             }
-
+            $("#id_matrix_annotation").val($("#id_matrix_annotation option:first").val());
             $("#id_matrix_unit").empty();
             for (var i = 0; i < data.units.length; i++) {
                 row = data.units[i];
                 {#console.log(row[0], row[1]);#}
                $("#id_matrix_unit").append('<option value="' + row[0] + '">' + row[1] + '</option>');
             }
-
+            $("#id_matrix_unit").val($("#id_matrix_unit option:first").val());
             console.log("finished populating");
         }
         })
@@ -122,12 +122,12 @@
 
         $(".matrix-selector").change(function() {
 
-            loadLink()
+            loadLink();
 
             });
         $( "#generate_matrix_modal_button").click(function() {
 
-            loadLink()
+            loadLink();
 
             });
 
