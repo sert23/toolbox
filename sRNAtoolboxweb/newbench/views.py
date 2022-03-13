@@ -489,6 +489,13 @@ def make_grpStr(jobID):
     return grp
 
 
+def find_file_of_interest(folder_path):
+    interest_file = [f for f in os.listdir(folder_path) if f.endswith(".mat")][0]
+    full_path = os.path.join(folder_path, interest_file)
+    return full_path
+
+
+
 def matrix_generator(request):
     context = {}
 
@@ -516,6 +523,8 @@ def matrix_generator(request):
         with open(os.path.join(output_folder,"line"), "w") as wf:
             wf.write(command_line)
         os.system(command_line)
+    serving_matrix = find_file_of_interest(output_folder)
+    context["download_url"] = serving_matrix.replace(MEDIA_ROOT, MEDIA_URL)
 
     return render(request, "newBench/download_matrix_file.html", context)
 
