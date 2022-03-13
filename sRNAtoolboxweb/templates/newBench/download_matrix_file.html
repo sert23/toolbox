@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block header %}
+{% if running %}
+<meta http-equiv="refresh" content="5" >
+{% endif %}
+{% endblock %}
+
+
+
+{% block content %}
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+{#                <h1 class="page-header">{{ tool }}</h1>#}
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+
+
+
+<div></div>
+
+            <div class="col-lg-4">
+            {% for msg in msgs %}
+                {% if msg.type == "error" %}
+
+
+                {% endif %}
+            {% endfor %}
+            <a class="btn btn-default" href="{{ go_back_url }}"><i class="fa fa-arrow-left"></i>Back to the main job</a>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                       <i class="fa fa-tasks fa-fw"></i> Matrix generated
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+
+                        <a class="btn btn-default" href="{{ download_url }}"><i class="fa fa-arrow-left"></i>Back to the main job</a>
+
+                    </div>
+
+
+
+                    <!-- .panel-body -->
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- /.row -->
+    </div>
+    <!-- /#page-wrapper -->
+
+
+{% endblock %}
+
+

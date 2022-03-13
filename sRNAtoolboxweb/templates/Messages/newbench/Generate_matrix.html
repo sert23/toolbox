@@ -110,14 +110,26 @@
     </script>
 
     <script>
-    $(".matrix-selector").change(function() {
-    var pars = $("#id_matrix_file_type,#id_matrix_annotation,#id_matrix_unit").serialize();
-    pars = pars + "&jobID={{ id }}";
-    {#alert(pars);#}
-        {#alert(pars);#}
-    var launch_url = "{% url 'matrix_generator' %}?";
-    $("#matrix_link").attr("href", launch_url.concat(pars));
-});
+        var loadLink = function(e) {
+            var pars = $("#id_matrix_file_type,#id_matrix_annotation,#id_matrix_unit").serialize();
+            pars = pars + "&jobID={{ id }}";
+            {#alert(pars);#}
+                {#alert(pars);#}
+            var launch_url = "{% url 'matrix_generator' %}?";
+            $("#matrix_link").attr("href", launch_url.concat(pars));
+        };
+
+
+        $(".matrix-selector").change(function() {
+
+            loadLink()
+
+            });
+        $( "#generate_matrix_modal_button").click(function() {
+
+            loadLink()
+
+            });
 
 </script>
 
