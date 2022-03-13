@@ -481,12 +481,25 @@ def make_grpStr(jobID):
     json_file = open(dict_path, "r")
     input_dict = json.load(json_file, object_pairs_hook=OrderedDict)
     jobs = []
+    annotated = True
+    annotations = []
     for k in input_dict.keys():
         c_dict = input_dict[k]
         jobs.append(c_dict.get("jobID"))
-    jobs = [i for i in jobs if i]
-    grp = ",".join(jobs)
-    return grp
+        group = c_dict.get("group_annotation")
+        if group:
+            annotations.append(group)
+        else:
+            annotated = False
+    jobs_clean = [i for i in jobs if i]
+    if annotated and len(annotations) == len(jobs_clean) :
+        matdesc = ",".join(annotations)
+        grp = ",".join(jobs_clean)
+        final_string = grp + " matrixDesc=" + matdesc + " "
+        return final_string
+    else:
+        grp = ",".join(jobs_clean)
+        return grp
 
 
 def find_file_of_interest(folder_path):
