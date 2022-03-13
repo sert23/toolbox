@@ -507,11 +507,12 @@ def matrix_generator(request):
         print("x")
     else:
         grpString = make_grpStr(jobID)
-        line = "java -jar " + jar_file + " " + params + " colData={column} statFiles={annot_file} input={base_folder} grpString={jobs}"
+        line = "java -jar " + jar_file + " " + params + " colData={column} statFiles={annot_file} input={base_folder} grpString={jobs} output={output_folder}"
         command_line = line.format(column=column,
                                    annot_file=annot_file,
                                    base_folder=MEDIA_ROOT,
-                                   jobs=grpString)
+                                   jobs=grpString,
+                                   output_folder=output_folder)
         with open(os.path.join(output_folder,"line"), "w") as wf:
             wf.write(command_line)
         os.system(command_line)
