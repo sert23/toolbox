@@ -525,7 +525,7 @@ def matrix_generator(request):
         os.system(command_line)
     serving_matrix = find_file_of_interest(output_folder)
     context["download_url"] = serving_matrix.replace(MEDIA_ROOT, MEDIA_URL)
-    context["go_back_url"] = os.path.join(reverse_lazy("progress"), jobID)
+    context["go_back_url"] = os.path.join(reverse_lazy("progress_status"), jobID)
 
     return render(request, "newBench/download_matrix_file.html", context)
 
