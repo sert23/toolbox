@@ -25,13 +25,13 @@
     <div class="col-lg-6">
         <label class="control-label ">
                 Annotation file<a data-toggle="tooltip" data-placement="top" title="Choose"  class="btn btn-link"><i class="fa fa-question-circle"> </i></a> </label>
-        <select name="matrix_file_type" class="form-control select" id="id_matrix_file_type">
+        <select name="matrix_file_type" class="form-control select matrix-selector" id="id_matrix_file_type">
             <option value="Read Length" selected="">Read length</option>
 {#            <option value="" selected="">Expression file</option>#}
         </select>
     </div>
     <div class="col-lg-6">
-        <select name="matrix_annotation" class="form-control select" id="id_matrix_annotation">
+        <select name="matrix_annotation" class="form-control select matrix-selector" id="id_matrix_annotation">
             <option value="" selected="">miRNA</option>
         </select>
     </div>
@@ -41,16 +41,16 @@
     <div class="col-lg-6">
         <label class="control-label ">
                 Units<a data-toggle="modal" data-target="#quality_filter" class="btn btn-link"></a> </label>
-        <select name="matrix_unit" class="form-control select" id="id_matrix_unit">
+        <select name="matrix_unit" class="form-control select matrix-selector" id="id_matrix_unit">
             <option value="" selected="">RPM</option>
-            <option value="" selected="">Read Count Percentage</option>
+{#            <option value="" selected="">Read Count Percentage</option>#}
         </select>
     </div>
     <div class="col-lg-6 pull-right">
 {#        <label class="control-label " style="visibility: hidden;">#}
 {#                Units basically this just neeeds to be <a data-toggle="modal" data-target="#quality_filter" class="btn btn-link"></a> </label>#}
 <br>
-        <a href="#" target="_blank" id="matrix_link" class="btn btn-link pull-right"><button type="button" class="btn btn-success"> Generate matrix </button></a>
+        <a href="javascript:void(0)" target="_blank" id="matrix_link" class="btn btn-link pull-right"><button type="button" class="btn btn-success"> Generate matrix </button></a>
     </div>
     </div>
 
@@ -93,11 +93,6 @@
                $("#id_matrix_unit").append('<option value="' + row[0] + '">' + row[1] + '</option>');
             }
 
-
-            {#alert(data.message);#}
-
-            {#$("#add_basic_hm").html("");#}
-            {#$("#add_basic_hm").html(data.plot);#}
             console.log("finished populating");
         }
         })
@@ -115,12 +110,12 @@
     </script>
 
     <script>
-    $("#id_matrix_unit").change(function() {
+    $(".matrix-selector").change(function() {
     var pars = $("#id_matrix_file_type,#id_matrix_annotation,#id_matrix_unit").serialize();
     pars = pars + "&jobID={{ id }}";
     {#alert(pars);#}
         {#alert(pars);#}
-    var launch_url = "";
+    var launch_url = "{% url matrix_generator %}?";
     $("#matrix_link").attr("href", launch_url.concat(pars));
 });
 
