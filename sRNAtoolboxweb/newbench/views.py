@@ -517,7 +517,7 @@ def matrix_generator(request):
             wf.write(command_line)
         os.system(command_line)
 
-    return render()
+    return render(request, "newBench/download_matrix_file.html", context)
 
 # class NewUpload(FormView):
 #
