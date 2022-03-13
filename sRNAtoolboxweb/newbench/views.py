@@ -46,6 +46,7 @@ import plotly.graph_objs as go
 from plotly.offline import plot
 import math
 from collections import OrderedDict
+import time
 
 # Create your views here.
 
@@ -498,7 +499,7 @@ def matrix_generator(request):
     column = request.GET.get("matrix_unit")
     file_type_dict = MATRIX_GENERATOR_DICT.get(file_type)
     params = file_type_dict.get("fixedParam")
-    output_folder = os.path.join(MEDIA_ROOT, "matrix_temp", str(datetime.datetime.now()) + "_" + generate_id() + "_" + jobID)
+    output_folder = os.path.join(MEDIA_ROOT, "matrix_temp", time.strftime("%Y%m%d-%H%M%S") + "_" + generate_id() + "_" + jobID)
     os.mkdir(output_folder)
     exec_path = CONF.get("exec")
     jar_file = os.path.join(exec_path, "sRNAde.jar")
