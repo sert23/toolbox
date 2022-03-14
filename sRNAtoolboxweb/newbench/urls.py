@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^relaunch', views.ReLaunch.as_view(), name="newbench_relaunch"),
     url(r'^matrix_selector', views.ajax_matrix_selectors, name="ajax_matrix_selector"),
     url(r'^matrix_generator', views.matrix_generator, name="matrix_generator"),
-    url(r'^contamination', views.contaminaBench, name="contamination"),
+    url(r'^contamination', views.contaminaBench.as_view(), name="contamination"),
     # url(r'^launch/[A-za-z0-9]+', views.NewUpload.as_view()),
     #url(r'test$', views.test),
 ]
