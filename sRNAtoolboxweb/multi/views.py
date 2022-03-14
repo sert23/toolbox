@@ -211,7 +211,7 @@ class MultiLaunchView(FormView):
         # call, pipeline_id = form.create_call()
         # self.success_url = reverse_lazy('mirconstarget') + '?id=' + pipeline_id
 
-def RelaunchMulti(request):
+def RelaunchMultiOld(request):
     old_ID = str(request.path_info).split("/")[-1]
 
     random_ID = generate_id()
@@ -232,6 +232,34 @@ def RelaunchMulti(request):
     if os.path.exists(os.path.join(MEDIA_ROOT, random_ID)):
         url = reverse('multi:multi_launch') + random_ID
         return redirect(url)
+
+
+
+
+    url = reverse('multi:multi_launch') + old_ID
+    # url = reverse('multi:multi_launch') + random_ID
+    return redirect(url)
+
+def RelaunchMulti(request):
+    old_ID = str(request.path_info).split("/")[-1]
+
+    random_ID = generate_id()
+    old_dir = os.path.join(MEDIA_ROOT, old_ID)
+
+    if os.path.exists(old_dir):
+        os.mkdir(os.path.join(MEDIA_ROOT, random_ID))
+        JobStatus.objects.create(job_name=random_ID + "_multi", pipeline_key=random_ID, job_status="not_launched",
+                                 start_time=datetime.datetime.now(),
+                                 all_files=" ",
+                                 modules_files=" ",
+                                 pipeline_type="multiupload",
+                                 )
+        shutil.copy(os.path.join(MEDIA_ROOT, old_ID, "input.json"), os.path.join(MEDIA_ROOT, old_ID, "input.json"))
+        os.system("touch " + old_dir)
+
+        if os.path.exists(os.path.join(MEDIA_ROOT, random_ID)):
+            url = reverse('multi:multi_launch') + random_ID
+            return redirect(url)
 
 
 
@@ -407,6 +435,7 @@ class Annotate(DetailView):
     template_name = 'newBench/annotate.html'
     def post(self, request, *args, **kwargs):
 
+        context = {}
         path = str(request.path_info)
         jobId = path.split("/")[-1]
         # destination_path = os.path.join(MEDIA_ROOT, jobId, "hey.txt")
@@ -420,10 +449,12 @@ class Annotate(DetailView):
         to_upload = request.FILES.get('annotationInputFile')
         fs = FileSystemStorage(location=annotation_folder)
         filename = fs.save(to_upload.name, to_upload)
-        annotate_input(jobId, os.path.join(annotation_folder, filename) )
+        try:
+            annotate_input(jobId, os.path.join(annotation_folder, filename) )
+        except:
+            print("do nothing")
 
 
-        context={}
         return redirect(reverse_lazy('multi:multi_annotate') + jobId)
 
     def render_to_response(self, context,  **response_kwargs):
