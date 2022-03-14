@@ -172,9 +172,12 @@ def result(request):
 
             results["parameters"] = new_record.parameters
 
-            for param in new_record.parameters.split("\n"):
-                if "Programs:" in param:
-                    min = len(param.split(" ")[1].split(":"))
+            try:
+                for param in new_record.parameters.split("\n"):
+                    if "Programs:" in param:
+                        min = len(param.split(" ")[1].split(":"))
+            except:
+                print("do nothing")
 
             if "PSROBOT" in new_record.parameters or "TAPIR_FASTA" in new_record.parameters or "TAPIR_HYBRID" in new_record.parameters:
                 plants = True
