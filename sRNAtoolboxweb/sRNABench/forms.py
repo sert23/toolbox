@@ -589,6 +589,14 @@ class contaminaForm(forms.Form):
                 Field('job_reuse', css_class='form-control'),
                 title="Choose your input",
                 extra_title=render_modal('Choose_Input'),
-                c_id="1"
+                c_id="1",
+                open=True
+            ),
+            ButtonHolder(
+                # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
+                # Submit('submit', 'RUN', css_class='btn btn-primary')
+                Submit('submit', 'RUN', css_class='btn btn-primary')
+                # onsubmit="alert('Neat!'); return false")
+
             )
         )
