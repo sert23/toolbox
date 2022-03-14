@@ -586,6 +586,8 @@ class contaminaForm(forms.Form):
 
             create_collapsable_div(
                 'Reuse Job',
-                Field('job_reuse', css_class='form-control')
+                Field('job_reuse', css_class='form-control'),
+                title="Choose your input",
+                extra_title=render_modal('Choose_Input'),
             )
         )
