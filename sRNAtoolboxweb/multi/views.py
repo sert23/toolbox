@@ -450,10 +450,10 @@ class Annotate(DetailView):
         fs = FileSystemStorage(location=annotation_folder)
         filename = fs.save(to_upload.name, to_upload)
         try:
-            annotate_input(jobId, os.path.join(annotation_folder, filename) )
+            annotate_input(jobId, os.path.join(annotation_folder, filename))
         except:
             print("do nothing")
-
+            context["error_message"] = "There was some error parsing your file. Please check again the format and requirements."
 
         return redirect(reverse_lazy('multi:multi_annotate') + jobId)
 
