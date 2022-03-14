@@ -179,10 +179,12 @@ def result(request):
             except:
                 print("do nothing")
 
-            if "PSROBOT" in new_record.parameters or "TAPIR_FASTA" in new_record.parameters or "TAPIR_HYBRID" in new_record.parameters:
-                plants = True
-                min = 1
-
+            try:
+                if "PSROBOT" in new_record.parameters or "TAPIR_FASTA" in new_record.parameters or "TAPIR_HYBRID" in new_record.parameters:
+                    plants = True
+                    min = 1
+            except:
+                print("do nothing")
 
             parser = TargetConsensusParser(new_record.consensus_file)
             list_d = [obj for obj in parser.get_by_n(min)]
