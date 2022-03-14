@@ -48,6 +48,16 @@
             <!-- /.col-lg-12 -->
         </div>
         <!-- /.row -->
+        {% if error_message %}
+                    <div classs="row">
+                        <div class="col-lg-8">
+                            <div class="alert alert-warning">
+                                {{ error_message }}
+                            </div>
+                        </div>
+                    </div>
+             {% endif %}
+
         <div class="row">
              <div class="row">
             <div class="col-lg-4">
@@ -69,15 +79,8 @@
 
 
 
-            {% if error_message %}
-                <div classs="row">
-                    <div class="col-lg-8">
-                        <div class="alert alert-warning">
-                            {{ error_message }}
-                        </div>
-                    </div>
-                </div>
-             {% endif %}
+
+
 
 
                 <div class="panel panel-default">
@@ -154,39 +157,10 @@
                                 </form>
 
 
-
-
-
-
-{#                    <a href="{% url 'multi:multi_relaunch' %}{{ id }}"><button type="button" class="btn btn-primary">Relaunch Jobs</button></a>#}
-
-                    {% if download_list %}
-                    <a href="#"  id="download_button" ><button type="button" class="btn btn-info">Bulk download results</button></a>
-                    {% endif %}
-                        {% for msg in msgs %}
-                            {% if msg.type == "info" %}
-                                <div class="alert alert-info">
-                                    {{ msg.text }}
-                                </div>
-                            {% elif msg.type == "warning" %}
-                                <div class="alert alert-warning">
-                                    {{ msg.text }}
-                                </div>
-                            {% elif msg.type == "error" %}
-                                <div class="alert alert-danger">
-                                    {{ msg.text }}
-                                </div>
-                            {% elif msg.type == "success" %}
-                                <div class="alert alert-success">
-                                    {{ msg.text }}
-                                </div>
-                            {% endif %}
-                        {% empty %}
-                        {% endfor %}
-
                     </div>
                     <!-- .panel-body -->
                 </div>
+
             </div>
 
 
