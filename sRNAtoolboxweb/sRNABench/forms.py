@@ -589,6 +589,6 @@ class contaminaForm(forms.Form):
                 Field('job_reuse', css_class='form-control'),
                 title="Choose your input",
                 extra_title=render_modal('Choose_Input'),
-                c_id=1
+                c_id="1"
             )
         )
