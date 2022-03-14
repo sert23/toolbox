@@ -559,12 +559,12 @@ class contaminaBench(FormView):
     success_url = reverse_lazy("contamination")
 
     def post(self, request, *args, **kwargs):
-        request.POST._mutable = True
-        #print(SPECIES_PATH)
-        request.POST['species'] = request.POST['species_hidden'].split(',')
-        print(request.POST['species'])
-        print(request.POST['species_hidden'].split(','))
-        request.POST._mutable = False
+        # request.POST._mutable = True
+        # #print(SPECIES_PATH)
+        # request.POST['species'] = request.POST['species_hidden'].split(',')
+        # print(request.POST['species'])
+        # print(request.POST['species_hidden'].split(','))
+        # request.POST._mutable = False
         return super(contaminaBench, self).post(request, *args, **kwargs)
 
     def form_valid(self, form):
