@@ -566,3 +566,26 @@ class sRNABenchForm(forms.Form):
             return '{sh} {configuration_file_path}'.format(
                 configuration_file_path=configuration_file_path,
                 sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run.sh')), pipeline_id
+
+class contaminaForm(forms.Form):
+
+    ifile = forms.FileField(label='Upload the reads (fastq.gz, fa.gz or rc.gz)' + render_modal('SRNAinput'),
+                            required=False)
+    sra_input = forms.CharField(label='Or provide a SRA ID (starting with SRR or ERR)', required=False)
+    url = forms.URLField(
+        label=mark_safe('Or provide a URL for large files <strong class="text-success"> (recommended!)</strong>'),
+        required=False)
+    job_reuse = forms.CharField(label='Reuse input from previous sRNAbench job using jobID',
+                                required=False)
+
+
+    def __init__(self, *args, **kwargs):
+        super(contaminaForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+
+            create_collapsable_div(
+                'Reuse Job',
+                Field('job_reuse', css_class='form-control')
+            )
+        )

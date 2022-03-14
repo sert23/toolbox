@@ -26,6 +26,7 @@ from FileModels.speciesAnnotationParser import SpeciesAnnotationParser
 from FileModels.speciesParser import SpeciesParser
 from progress.models import JobStatus
 from multi.forms import PhotoForm, sRNABenchForm
+from sRNABench.forms import contaminaForm
 # from .forms import miRNAgFreeForm, FileForm
 from utils import pipeline_utils
 from utils.sysUtils import make_dir
@@ -550,6 +551,41 @@ def matrix_generator(request):
         context["go_back_url"] = os.path.join(reverse_lazy("progress_status"), jobID)
         context["error_message"] = "There was an unexpected error. Please report it using the following code " + jobID
         return render(request, "newBench/download_matrix_file.html", context)
+
+
+class contaminaBench(FormView):
+    template_name = 'newBench/contamination.html'
+    form_class = contaminaForm
+    success_url = reverse_lazy("contamination")
+
+    def post(self, request, *args, **kwargs):
+        request.POST._mutable = True
+        #print(SPECIES_PATH)
+        request.POST['species'] = request.POST['species_hidden'].split(',')
+        print(request.POST['species'])
+        print(request.POST['species_hidden'].split(','))
+        request.POST._mutable = False
+        return super(contaminaBench, self).post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+
+        form.clean()
+        call, pipeline_id = form.create_call()
+        self.success_url = reverse_lazy('srnabench') + '?id=' + pipeline_id
+
+        print(call)
+        os.system(call)
+        js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
+        return super(contaminaBench, self).form_valid(form)
+
+    def print_file_locat(self, form):
+        print(form.cleaned_data)
+
 # class NewUpload(FormView):
 #
 #     template_name = 'miRNAgFree/multi_status.html'

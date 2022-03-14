@@ -1,0 +1,367 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+
+
+<!-- Modal -->
+<div class="modal fade" id="spinner" tabindex="-1" role="dialog" aria-labelledby="spinnerLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <img style="display:block; margin-left:auto; margin-right:auto; width:50%;" src="{% static 'gif/sRNAbench_spinner.gif' %}">
+          <h1 style="text-align: center;">Uploading file...</h1>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+    <div id="page-wrapper">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+            <a href="{{ settings.SUB_SITE }}/srnabench/" target="_blank"> <h1>sRNAbench: </h1></a>
+            <h3>Profiling of small RNAs and its sequence variants in single or multi-species high-throughput experiments</h3>
+            </div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+    <div class="col-lg-9">
+
+    
+
+{% comment %}    <form action="/srnatoolbox/srnabench/test" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="submit"  class="btn btn-success" value="Launch Test">
+   </form>
+
+    <br>{% endcomment %}
+
+
+    {% include 'form_base.html' %}
+
+    <div id='show-me-three' style="visibility: hidden;">Hello I'm Div 3 </div>
+    </div>
+
+
+
+
+
+        <div class="col-lg-3">
+            <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Help
+                </h4>
+            </div>
+            <div class="panel-body">
+                <a href="{{ settings.MANUAL_URL }}" target="_blank">Link to Web Manual</a>
+{#                <a href="http://bioinfo5.ugr.es/sRNAbench/sRNAbench_web.pdf" target="_blank">Link to Web Manual</a>#}
+                <br/>
+                <a href="{{ settings.SUB_SITE }}/jobstatus/ZAPFTBMPBGCPIDM" target="_blank">Link to Test Data Results</a>
+                </div>
+
+                </div>
+
+    </div>
+
+    <div class="col-lg-3">
+            <div class="panel panel-green">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Test Data Description
+                </h4>
+            </div>
+            <div class="panel-body">
+                Secreted exosomes of an Epstein-Barr virus (EBV)-transformed lymphoblastoid cell line (LCLs). Small RNAs of human and virus origin can be detected.
+                <br>
+                <a href="http://www.cell.com/cell-reports/fulltext/S2211-1247%2814%2900703-7"  target="_blank">Link To Publication</a>
+            </div>
+            </div>
+
+    </div>
+
+    <div class="col-lg-3">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Test Data Parameters
+                </h4>
+            </div>
+            <div class="panel-body">
+                Input File: <a href="{% static '/IK_exosomes.fastq.gz' %}" download> <i class="fa fa-download fa-fw"></i> IK_exo.fastq.gz</a>
+                <br>
+                Or use SRA ID: SRR1563060
+                <br>
+                Species: <pre style=" white-space: nowrap; overflow-y: hidden">Human(GRCh38_p10),Epstein Barr Virus(NC_007605)</pre>
+                Protocol: Illumina
+
+
+
+
+            </div>
+
+        </div>
+
+
+
+
+
+            </div>
+
+
+    </div>
+
+
+
+
+    </div>
+    <!-- /.row -->
+
+
+
+    <!-- /#page-wrapper -->
+    
+
+{% endblock %}
+
+
+{% block modals %}
+    {% include "Messages/bench/Choose_input.html" %}
+    {% include "Messages/bench/sRNAbenchInput.html" %}
+    {% include "Messages/bench/Species_dropdown.html" %}
+    {% include "Messages/bench/library_mode.html" %}
+    {% include "Messages/bench/other_ncrnas.html" %}
+    {% include "Messages/bench/guess_Adapter.html" %}
+    {% include "Messages/bench/minimum_adapter_length.html" %}
+    {% include "Messages/bench/mismatches_adapter.html" %}
+    {% include "Messages/bench/quality_filter.html" %}
+    {% include "Messages/bench/phred_encode.html" %}
+    {% include "Messages/bench/mirna_species.html" %}
+    {% include "Messages/bench/Not_profile.html" %}
+    {% include "Messages/bench/RecursiveAdaptorTrimming.html" %}
+    {% include "Messages/bench/speciesBench.html" %}
+    {% include "Messages/bench/UploadUserFiles.html" %}
+    {% include "Messages/bench/mirnas.html" %}
+
+{#    Protocols      #}
+    {% include "Messages/protocols/Illumina.html" %}
+    {% include "Messages/protocols/NEB.html" %}
+    {% include "Messages/protocols/Bioo.html" %}
+    {% include "Messages/protocols/Smarter.html" %}
+    {% include "Messages/protocols/Qiagen.html" %}
+    {% include "Messages/protocols/Custom.html" %}
+
+
+{% endblock %}
+
+</div>
+
+{% block js %}
+
+<script>
+
+function toggleFields() {
+{#    if ($("#age").val() <= 13)#}
+    if ( document.getElementById('id_species_hidden').value){
+
+        $("#genome-div").show();
+    }else{
+        $("#genome-div").hide();
+    }}
+
+
+$('input[name="library_protocol"]').on("click", function(e) {
+    if (document.getElementById('id_library_protocol_6').checked) {
+        $("#Adapter_Custom").show();
+    } else {
+        $("#Adapter_Custom").hide();
+    }
+})
+
+
+
+$("#id_quality_method").change(function () {
+{#    if ( document.getElementById('id_library_protocol_6').checked){#}
+    if ( document.getElementById('id_quality_method').value === "min"){
+        $("#Div_max").show();
+    }else{
+        $("#Div_max").hide();
+    }
+    });
+
+
+        {##}
+        {# Adapter options #}
+        {##}
+
+$('input[name="guess_adapter"]').on("click", function(e) {
+    if ( document.getElementById('id_guess_adapter').checked){
+        document.getElementById("id_adapter_chosen").disabled = true;
+        document.getElementById("id_adapter_manual").disabled = true;
+    }else{
+        document.getElementById("id_adapter_chosen").disabled = false;
+        document.getElementById("id_adapter_manual").disabled = false;
+    }
+
+})
+
+$('input[name="adapter_manual"]').on("mouseout", function(e) {
+
+    if ( document.getElementById('id_adapter_manual').value.length > 0 ){
+
+        document.getElementById("id_adapter_chosen").disabled = true;
+        document.getElementById("id_guess_adapter").disabled = true;
+    }else{
+        document.getElementById("id_adapter_chosen").disabled = false;
+        document.getElementById("id_guess_adapter").disabled = false;
+    }
+
+})
+$('input[name="adapter_manual"]').on("change", function(e) {
+
+    if ( document.getElementById('id_adapter_manual').value.length > 0 ){
+
+        document.getElementById("id_adapter_chosen").disabled = true;
+        document.getElementById("id_guess_adapter").disabled = true;
+    }else{
+        document.getElementById("id_adapter_chosen").disabled = false;
+        document.getElementById("id_guess_adapter").disabled = false;
+    }
+
+})
+
+$("input[type=file]").on('change',function(){
+    var extensions = ["xls","xlsx","doc","docx"]
+    if (extensions.includes(this.files[0].name.split('.').pop()) ){
+        alert('Spread-sheet or document extensions such as ".xls" or ".doc" are not supported. Please upload a different file. ')
+        document.getElementById('id_ifile').value = "";
+    }
+
+{#    filename.split('.').pop();#}
+});
+
+function toggleAdapter() {
+{#    if ($("#age").val() <= 13)#}
+    if ( document.getElementById('id_library_protocol').value){
+
+        $("#genome-div").show();
+    }else{
+        $("#genome-div").hide();
+    }}
+
+
+</script>
+
+    <script>
+    jQuery(document).ready(function() {
+        jQuery('#id_species').multiselect({
+            enableCollapsibleOptGroups: true,
+            enableCaseInsensitiveFiltering: true,
+            filterBehavior: 'both',
+            maxHeight: 300,
+            onDropdownHidden: function (e) {
+                if(document.getElementById('id_species').value){
+                   jQuery('#id_species_hidden').val(jQuery('#id_species').val().map(function(item) {
+                        return item.split(':')[0]}).join(','));
+                } else{
+                        document.getElementById('id_species_hidden').value = "" ;
+                }
+{#                    alert(document.getElementById('id_species_hidden').value);#}
+                    toggleFields();
+{#                alert(jQuery('#id_species').val().join(','));#}
+
+            }
+
+        });
+        jQuery("#genome-div").hide();
+        jQuery("#Adapter_Custom").hide();
+        jQuery("#Div_max").hide();
+    });
+    </script>
+
+    <script>
+        // tooltip demo
+        $('.row').tooltip({
+            selector: "[data-toggle=tooltip]",
+            container: "body"
+        })
+
+    </script>
+
+    <script>
+        function validation() {
+        var x, text, message, stop;
+        stop = false
+        message = "There were some errors in your job. Please select your input again and check for invalid options"
+
+        x = document.getElementById("id_adapter_manual").value;
+
+        if (!document.getElementById("id_species").value && !document.getElementById("id_mirna_profiled").value) {
+            document.getElementById('id_ifile').value = "";
+            alert(message);
+            stop = true;
+            return true
+{#            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true#}
+        } else if ((0 + Boolean(document.getElementById('id_ifile').value) + Boolean(document.getElementById('id_url').value) + Boolean(document.getElementById('id_sra_input').value ) + Boolean(document.getElementById('id_job_reuse').value)!=1)) {
+            document.getElementById('id_ifile').value = "";
+{#            alert("id_file url"); #}
+{#            return true;#}
+            alert(message);
+            stop = true;
+            return true
+        } else if (!Array.from(document.getElementsByName('library_protocol')).some(Boolean)) {
+            document.getElementById('id_ifile').value = "";
+            {#            alert( " predict and library mode"); return true#}
+            alert(message);
+            stop = true;
+            return true
+        } else if ((0+ Boolean(document.getElementById('id_species_hidden')) + Boolean(document.getElementById('id_mirna_profiled')) + Boolean(document.getElementById('id_referenceDB') === "MirGeneDB"))<1) {
+            document.getElementById('id_ifile').value = "";
+            {#            alert( " predict and library mode"); return true#}
+            alert(message);
+            stop = true;
+            return true
+
+{#        }else if (document.getElementById('id_predict_mirna').checked && document.getElementById('id_library_mode').checked) {#}
+{#            document.getElementById('id_ifile').value = "";#}
+            {#            alert( " predict and library mode"); return true#}
+{#            alert(message);#}
+{#            return true#}
+
+		}
+        if (stop==false){
+            $('#spinner').modal('show');
+        }
+
+
+    }
+    </script>
+
+    <script>
+    $('input[name="referenceDB"]').on("click", function(e) {
+        x = document.getElementById("id_referenceDB_3").checked;
+        if (x==false){
+            document.getElementById("div_id_mirDB").style.visibility="hidden";
+            document.getElementById("id_mirDB").style.visibility="hidden";
+{#            document.getElementById("show-me-three").style.visibility="hidden";#}
+        }
+        else{
+            document.getElementById("div_id_mirDB").style.visibility="visible";
+            document.getElementById("id_mirDB").style.visibility="visible";
+        }
+{#    if (e.clientX === 0 && e.clientY === 0) {#}
+{#        console.log("keyboard");#}
+{#    } else {#}
+{#        console.log("mouse");#}
+{#    };#}
+{#        alert(x)#}
+});
+    </script>
+
+
+{% endblock %}
+
