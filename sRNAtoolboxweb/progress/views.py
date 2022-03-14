@@ -201,11 +201,13 @@ class JobStatusDetail(DetailView):
         if position < 1:
             running = True
             queue = False
+            out_message = "INFO: Your job is running"
         else:
             running = False
             queue = True
+            out_message = "INFO: Job is queue waiting"
 
-        return {'running': running, 'queue': queue, 'msgs': [Msg("INFO: Job is queue waiting")], "id": job_status.pipeline_key, "position": str(position)}
+        return {'running': running, 'queue': queue, 'msgs': [Msg(out_message)], "id": job_status.pipeline_key, "position": str(position)}
         # return {'running': True, 'queue': True, 'msgs': [Msg("INFO: Job is queue waiting")], "id": job_status.pipeline_key, "position": str(position)}
 
 
