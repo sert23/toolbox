@@ -601,7 +601,8 @@ class contaminaForm(forms.Form):
         conf['pipeline_id'] = pipeline_id
         output_folder = os.path.join(MEDIA_ROOT, pipeline_id)
         test_file = os.path.join(MEDIA_ROOT, pipeline_id, "test_contam.txt")
-        os.system("touch /shared/sRNAtoolbox/upload/test")
+        # os.system("touch /shared/sRNAtoolbox/upload/test")
+        os.mkdir(output_folder)
         os.system("touch " + test_file)
         # FS = FileSystemStorage()
         # FS.location = os.path.join(MEDIA_ROOT, pipeline_id)
