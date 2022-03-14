@@ -18,6 +18,7 @@ from sRNABench.models import Species
 from sRNAtoolboxweb.settings import MEDIA_ROOT, CONF, QSUB, BASE_DIR
 from sRNAtoolboxweb.utils import create_collapsable_div, render_modal
 from utils.pipeline_utils import generate_uniq_id
+import shutil
 
 
 class CategoriesField(forms.ModelMultipleChoiceField):
@@ -579,6 +580,7 @@ class contaminaForm(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
 
+            # in data cleaning we should check if the folder actually exists
             create_collapsable_div(
                 'Reuse Job',
                 Field('job_reuse', css_class='form-control'),
@@ -606,7 +608,10 @@ class contaminaForm(forms.Form):
         # os.system("touch " + test_file)
 
         job_ID = cleaned_data["job_reuse"]
-        input_file = os.path.join(MEDIA_ROOT, job_ID, "reads_orig.fa")
+        orig_input_file = os.path.join(MEDIA_ROOT, job_ID, "reads.fa")
+        cp_input_file = os.path.join(MEDIA_ROOT, pipeline_id, "reads.fa")
+        shutil.copy(orig_input_file, cp_input_file)
+
         libs = """
                 libs=Acidobacteria
                 libs=Aquificae
@@ -650,9 +655,9 @@ class contaminaForm(forms.Form):
                 libs=human_virus_host
                 libs=algae_virus_host
                 libs=plants_virus_host
-                """.replace("\t", "")
+                """.replace(" ", "")
         with open(conf_file, "w") as tf:
-            tf.write("input=" + input_file + "\n")
+            tf.write("input=" + cp_input_file + "\n")
             tf.write(libs + "\n")
             tf.write("output=" + output_folder + "\n")
             tf.write("Rscript=/opt/local/R-3.5.3/bin/Rscript\n")
