@@ -452,11 +452,11 @@ class Annotate(DetailView):
         try:
             annotate_input(jobId, os.path.join(annotation_folder, filename))
         except:
-            shutil.rmtree(annotation_folder)
-            os.mkdir(annotation_folder)
+            # shutil.rmtree(annotation_folder)
+            # os.mkdir(annotation_folder)
             error_file = os.path.join(annotation_folder, "error.error")
             os.system("touch " + error_file)
-            context["error_message"] = "There was some error parsing your file. Please check again the format and requirements."
+            # context["error_message"] = "There was some error parsing your file. Please check again the format and requirements."
 
         return redirect(reverse_lazy('multi:multi_annotate') + jobId)
 
@@ -467,6 +467,11 @@ class Annotate(DetailView):
         jobs_folder = os.path.join(MEDIA_ROOT,pipeline_id,"launched")
         if not os.path.exists(jobs_folder):
             return redirect(reverse_lazy("launch")+ "?jobId=" + pipeline_id)
+
+        error_file = os.path.join(MEDIA_ROOT, pipeline_id, "annotation", "error.error")
+        if os.path.exists(error_file):
+            context["error_message"] = "There was some error parsing your file. Please check again the format and requirements to fix it."
+
 
         output_folder = os.path.join(MEDIA_ROOT, pipeline_id)
         dict_path = os.path.join(output_folder, "input.json")
@@ -493,6 +498,7 @@ class Annotate(DetailView):
 
         context["user_message"] = "This page is still in development, " \
                                   "please do not use it as it will probably not work. Thank you "
+
 
         return super(Annotate, self).render_to_response(context, **response_kwargs)
 
