@@ -452,7 +452,10 @@ class Annotate(DetailView):
         try:
             annotate_input(jobId, os.path.join(annotation_folder, filename))
         except:
-            print("do nothing")
+            shutil.rmtree(annotation_folder)
+            os.mkdir(annotation_folder)
+            error_file = os.path.join(annotation_folder, "error.error")
+            os.system("touch " + error_file)
             context["error_message"] = "There was some error parsing your file. Please check again the format and requirements."
 
         return redirect(reverse_lazy('multi:multi_annotate') + jobId)
