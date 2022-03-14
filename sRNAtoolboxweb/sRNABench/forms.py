@@ -569,13 +569,8 @@ class sRNABenchForm(forms.Form):
 
 class contaminaForm(forms.Form):
 
-    ifile = forms.FileField(label='Upload the reads (fastq.gz, fa.gz or rc.gz)' + render_modal('SRNAinput'),
-                            required=False)
-    sra_input = forms.CharField(label='Or provide a SRA ID (starting with SRR or ERR)', required=False)
-    url = forms.URLField(
-        label=mark_safe('Or provide a URL for large files <strong class="text-success"> (recommended!)</strong>'),
-        required=False)
-    job_reuse = forms.CharField(label='Reuse input from previous sRNAbench job using jobID',
+
+    job_reuse = forms.CharField(label='Provide sRNAbench jobID to analize bacterial and viral content',
                                 required=False)
 
 
@@ -600,3 +595,46 @@ class contaminaForm(forms.Form):
 
             )
         )
+
+    def create_conf_file(self, cleaned_data, pipeline_id):
+        conf = {}
+        conf['pipeline_id'] = pipeline_id
+        output_folder = os.path.join(MEDIA_ROOT, pipeline_id)
+        test_file = os.path.join(MEDIA_ROOT, pipeline_id, "test_contam.txt")
+        os.system("touch " + test_file)
+        # FS = FileSystemStorage()
+        # FS.location = os.path.join(MEDIA_ROOT, pipeline_id)
+        # os.system("mkdir " + FS.location)
+        # out_dir = FS.location
+        # conf['out_dir'] = out_dir
+        # #Input
+        # ifile, libs_files = self.upload_files(cleaned_data, FS)
+        #
+        # #Species
+        # species = [i.db_ver for i in cleaned_data['species']]
+        # assemblies = [i.db for i in cleaned_data['species']]
+        # short_names = [i.shortName for i in cleaned_data['species']]
+        # micrornas_species = ':'.join(short_names)
+        # if cleaned_data.get("mirna_profiled"):
+        #     micrornas_species = cleaned_data.get("mirna_profiled")
+        # lib_mode = cleaned_data.get('library_mode')
+        # no_libs = cleaned_data.get('no_libs')
+        # is_solid = "false"
+        #
+        # #Reads preprocessing
+        # protocol = cleaned_data.get('library_protocol')
+        # adapter_length = str(cleaned_data['adapter_length'])
+        # adapter_mismatch = str(cleaned_data['adapter_mismatch'])
+        # nucleotides_5_removed = str(cleaned_data['nucleotides_5_removed'])
+        # remove3pBases = str(cleaned_data['nucleotides_3_removed'])
+        # recursive_adapter_trimming = str(cleaned_data.get('adapter_recursive_trimming')).lower()
+    def generate_id(self):
+        is_new = True
+        while is_new:
+            pipeline_id = generate_uniq_id()
+            if not JobStatus.objects.filter(pipeline_key=pipeline_id):
+                return pipeline_id
+
+    def create_call(self):
+        pipeline_id = self.generate_id()
+        name, configuration_file_path = self.create_conf_file(self.cleaned_data, pipeline_id)
