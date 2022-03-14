@@ -600,10 +600,81 @@ class contaminaForm(forms.Form):
         conf = {}
         conf['pipeline_id'] = pipeline_id
         output_folder = os.path.join(MEDIA_ROOT, pipeline_id)
-        test_file = os.path.join(MEDIA_ROOT, pipeline_id, "test_contam.txt")
+        conf_file = os.path.join(MEDIA_ROOT, pipeline_id, "conf.txt")
         # os.system("touch /shared/sRNAtoolbox/upload/test")
         os.mkdir(output_folder)
-        os.system("touch " + test_file)
+        # os.system("touch " + test_file)
+
+        job_ID = cleaned_data["job_reuse"]
+        input_file = os.path.join(MEDIA_ROOT, job_ID, "reads_orig.fa")
+        libs = """
+                libs=Acidobacteria
+                libs=Aquificae
+                libs=Asgard-group
+                libs=Atribacterota
+                libs=Bacteria-incertae-sedis
+                libs=Caldiserica-Cryosericota-group
+                libs=Calditrichaeota
+                libs=Candidatus-Thermoplasmatota
+                libs=Chrysiogenetes
+                libs=Coprothermobacterota
+                libs=Deferribacteres
+                libs=Dictyoglomi
+                libs=DPANN-group
+                libs=Elusimicrobia
+                libs=Euryarchaeota
+                libs=FCB-group
+                libs=Fusobacteria
+                libs=Nitrospinae-Tectomicrobia-group
+                libs=Nitrospirae
+                libs=Other
+                libs=Proteobacteria
+                libs=PVC-group
+                libs=Spirochaetes
+                libs=Synergistetes
+                libs=TACK-group
+                libs=Terrabacteria-group
+                libs=Thermodesulfobacteria
+                libs=Thermotogae
+                libs=unclassified-Archaea
+                libs=unclassified-Bacteria
+                libs=land-plants_virus_host
+                libs=invertebrates_virus_host
+                libs=other_virus_host
+                libs=eukaryotic-algae_virus_host
+                libs=vertebrates_virus_host
+                libs=archaea_virus_host
+                libs=bacteria_virus_host
+                libs=fungi_virus_host
+                libs=protozoa_virus_host
+                libs=human_virus_host
+                libs=algae_virus_host
+                libs=plants_virus_host
+                """.replace("\t", "")
+        with open(conf_file, "w") as tf:
+            tf.write("input=" + input_file + "\n")
+            tf.write(libs + "\n")
+            tf.write("output=" + output_folder + "\n")
+            tf.write("Rscript=/opt/local/R-3.5.3/bin/Rscript\n")
+            tf.write("zip=true\n")
+            tf.write("dbPath=/opt/sRNAtoolboxDB\n")
+            tf.write("seed=20\n")
+            tf.write("noMM=1\n")
+            tf.write("mBowtie=10\n")
+
+
+        name = pipeline_id + '_bench'
+
+        return name, conf_file
+
+
+
+
+
+
+
+
+
         # FS = FileSystemStorage()
         # FS.location = os.path.join(MEDIA_ROOT, pipeline_id)
         # os.system("mkdir " + FS.location)
@@ -640,3 +711,8 @@ class contaminaForm(forms.Form):
     def create_call(self):
         pipeline_id = self.generate_id()
         name, configuration_file_path = self.create_conf_file(self.cleaned_data, pipeline_id)
+        if QSUB:
+            return 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
+                configuration_file_path=configuration_file_path,
+                job_name=name,
+                sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
