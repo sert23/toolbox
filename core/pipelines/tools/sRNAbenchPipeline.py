@@ -48,7 +48,7 @@ class sRNAbenchPipeline(Pipeline):
         self.actualize_pipeline_progress(log_msg)
         # self.logger.write(log_msg + "\n")
 
-        cmd = "java -Xmx8000m -jar " + self.configuration.path_to_srnabech + " " + self.conf
+        cmd = "java -Xmx30000m -jar " + self.configuration.path_to_srnabech + " " + self.conf
         os.system(cmd)
         self.set_java_command_line(cmd)
 
