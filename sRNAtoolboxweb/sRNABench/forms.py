@@ -609,7 +609,7 @@ class contaminaForm(forms.Form):
 
         job_ID = cleaned_data["job_reuse"]
         orig_input_file = os.path.join(MEDIA_ROOT, job_ID, "reads.fa")
-        cp_input_file = os.path.join(MEDIA_ROOT, pipeline_id, "reads.fa")
+        cp_input_file = os.path.join(MEDIA_ROOT, pipeline_id, "input_reads.fa")
         shutil.copy(orig_input_file, cp_input_file)
 
         libs = """
@@ -669,8 +669,24 @@ class contaminaForm(forms.Form):
 
 
         name = pipeline_id + '_bench'
+        JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not_launched",
+                                 start_time=datetime.now(),
+                                 all_files=cp_input_file,
+                                 modules_files="",
+                                 pipeline_type="sRNAbench",
+                                 )
+        configuration_file_path = os.path.join(output_folder, 'conf.json')
+        configuration = {
+            'pipeline_id': pipeline_id,
+            'out_dir': output_folder,
+            'name': name,
+            'conf_input': conf_file,
+            'type': 'sRNAbench'
+        }
+        with open(configuration_file_path, 'w') as conf:
+            json.dump(configuration, conf, indent=True)
 
-        return name, conf_file
+        return name, configuration_file_path
 
 
 
