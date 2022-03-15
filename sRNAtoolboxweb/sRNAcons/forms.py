@@ -29,7 +29,7 @@ class sRNAconsForm(forms.Form):
     )
     ifile = forms.FileField(label='Upload input file(Fasta file)', required=False)
     url = forms.URLField(label='URL/link', required=False)
-    mistmatches = forms.IntegerField(label="Number of mistmatches", required=True, initial=1, min_value=0)
+    mistmatches = forms.IntegerField(label="Number of mistmatches", required=True, initial=1, min_value=0, max_value=2)
     kingdom = forms.ChoiceField(label='Kingdom', choices=KINGDOMS, required=False)
 
     def __init__(self, *args, **kwargs):
