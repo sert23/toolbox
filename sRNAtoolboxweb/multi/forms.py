@@ -456,7 +456,10 @@ class sRNABenchForm(forms.Form):
         #Input
         ifile, libs_files, dummy = self.upload_files(cleaned_data, FS)
 
-        spikes_path = cleaned_data.get('spikes_path')
+        if os.path.exists(os.path.join(out_dir, "spikes.fa")):
+            spikes_path = "spikes.fa"
+        else:
+            spikes_path = None
 
         #Species
         species = [i.db_ver for i in cleaned_data['species']]
