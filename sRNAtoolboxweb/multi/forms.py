@@ -205,6 +205,8 @@ class sRNABenchForm(forms.Form):
 
     input_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
 
+    spikes = forms.FileField(label='', required=False)
+
     def __init__(self, *args, **kwargs):
         self.old_folder = kwargs.pop('orig_folder', None)
         is_relaunch = kwargs.pop('is_relaunch', None)
@@ -314,11 +316,21 @@ class sRNABenchForm(forms.Form):
 
             create_collapsable_div(
                 'profile1',
-                'profile2',
-                'profile3',
-                'profile4',
-                'profile5',
+                # 'profile2',
+                # 'profile3',
+                # 'profile4',
+                # 'profile5',
                  Field('profile_url1', css_class='form-control'),
+                title='Upload user annotations for profiling', c_id='6'
+            ),
+
+            create_collapsable_div(
+                'spikes',
+                # 'profile2',
+                # 'profile3',
+                # 'profile4',
+                # 'profile5',
+                Field('profile_url1', css_class='form-control'),
                 title='Upload user annotations for profiling', c_id='6'
             ),
 
@@ -414,6 +426,15 @@ class sRNABenchForm(forms.Form):
                 FS.save(uploaded_file, profile)
                 libs_files.append(os.path.join(FS.location, uploaded_file))
 
+        spikes = cleaned_data.get('spikes')
+        if spikes:
+            uploaded_file = "spikes.fa"
+            FS.save(uploaded_file, spikes)
+            spikes_path = os.path.join(FS.location, uploaded_file)
+            # libs_files.append(os.path.join(FS.location, uploaded_file))
+        else:
+            spikes_path = None
+
         user_urls = cleaned_data.get('profile_url1')
         if user_urls:
             for line in user_urls.split('\n'):
@@ -422,7 +443,7 @@ class sRNABenchForm(forms.Form):
                 url_lib, headers = urllib.request.urlretrieve(url, filename=dest)
                 libs_files.append(url_lib)
 
-        return ifile, libs_files
+        return ifile, libs_files, spikes_path
 
     def create_conf_file(self, cleaned_data, pipeline_id):
         conf = {}
@@ -433,7 +454,7 @@ class sRNABenchForm(forms.Form):
         out_dir = FS.location
         conf['out_dir'] = out_dir
         #Input
-        ifile, libs_files = self.upload_files(cleaned_data, FS)
+        ifile, libs_files, spike_path = self.upload_files(cleaned_data, FS)
 
         #Species
         species = [i.db_ver for i in cleaned_data['species']]
@@ -547,7 +568,8 @@ class sRNABenchForm(forms.Form):
                                   user_files=libs_files, minReadLength=min_read_length, mBowtie=max_multiple_mapping,
                                    remove3pBases = remove3pBases, umi=umi, iterative5pTrimming=iterative5pTrimming,
                                    qualityType=qualityType,minQ=minQ, phred=phred_encode, maxQfailure=maximum_positions,
-                                   protocol=predifined_protocol, Rscript="/opt/local/R-3.5.3/bin/Rscript")
+                                   protocol=predifined_protocol, Rscript="/opt/local/R-3.5.3/bin/Rscript",
+                                   spikeIn=spike_path)
 
         conf_file_location = os.path.join(FS.location, "conf.txt")
         new_conf.write_conf_file(conf_file_location)
@@ -632,91 +654,6 @@ class sRNABenchForm(forms.Form):
         return pipeline_id
 
 
-
-
-        # input_data = cleaned_data.get("input_hidden").split(",")
-        # if not os.path.exists(os.path.join(MEDIA_ROOT, self.folder, "launched")):
-        #     os.mkdir(os.path.join(MEDIA_ROOT, self.folder, "launched"))
-        # onlyfiles = [f for f in os.listdir(os.path.join(MEDIA_ROOT, pipeline_id))
-        #              if os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, pipeline_id), f))]
-        # onlyfiles.remove("SRR_files.txt")
-        # onlyfiles.remove("URL_files.txt")
-        # onlyfiles.remove("conf.txt")
-
-        # SRR_list = []
-        # with open(os.path.join(MEDIA_ROOT, pipeline_id, "SRR_files.txt"), "r") as SRR_file:
-        #     for ix, SRR in enumerate(SRR_file.readlines()):
-        #         SRR_list.append(SRR.rstrip())
-        # URL_list = []
-        # with open(os.path.join(MEDIA_ROOT, pipeline_id, "URL_files.txt"), "r") as URL_file:
-        #     for ix, URL in enumerate(URL_file.readlines()):
-        #         URL_list.append(URL.rstrip())
-        #
-        # general_config = " "
-        # with open(os.path.join(MEDIA_ROOT, pipeline_id, "conf.txt"), "r") as conf_file:
-        #     general_config = conf_file.read()
-        #
-        # job_list = []
-        # for i in input_data:
-        #     new_id = generate_uniq_id()
-        #     out_dir = os.path.join(MEDIA_ROOT, new_id)
-        #     os.mkdir(out_dir)
-        #     clase, ix = i.rstrip().split("_")
-        #     if clase == "file":
-        #         input_file = onlyfiles[int(ix)]
-        #         full_path = os.path.join(MEDIA_ROOT, new_id, input_file)
-        #         shutil.copyfile(os.path.join(MEDIA_ROOT, pipeline_id, input_file), os.path.join(out_dir, input_file))
-        #
-        #     if clase == "SRR":
-        #         input_file = SRR_list[int(ix)]
-        #         full_path = input_file
-        #
-        #     if clase == "URL":
-        #         url = URL_list[int(ix)]
-        #         # dest = os.path.join(out_dir, os.path.basename(url))
-        #         # ifile, headers = urllib.request.urlretrieve(url, filename=dest)
-        #         # input_file = dest
-        #         full_path = url
-        #
-        #         # ifile, headers = urllib.request.urlretrieve(url, filename=dest)
-        #     line = "input=" + full_path + "\n"
-        #     line2 = "output=" + out_dir + "\n"
-        #     config = line + line2 + general_config
-        #     conf_file_location = os.path.join(out_dir, "conf.txt")
-        #     with open(conf_file_location, "w") as conf_fi:
-        #         conf_fi.write(config)
-        #     name = new_id + '_bench'
-        #     configuration = {
-        #         'pipeline_id': new_id,
-        #         'out_dir': out_dir,
-        #         'name': name,
-        #         'conf_input': conf_file_location,
-        #         'type': 'sRNAbench'
-        #     }
-        #     configuration_file_path = os.path.join(out_dir, 'conf.json')
-        #     JobStatus.objects.create(job_name=name, pipeline_key=new_id, job_status="not_launched",
-        #                              start_time=datetime.now(),
-        #                              all_files=full_path,
-        #                              modules_files="",
-        #                              outdir=out_dir,
-        #                              pipeline_type="sRNAbench",
-        #                              )
-        #     with open(configuration_file_path, 'w') as conf_file:
-        #         json.dump(configuration, conf_file, indent=True)
-        #     if QSUB:
-        #         call = 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
-        #             configuration_file_path=configuration_file_path,
-        #             job_name=name,
-        #             sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh'))
-        #         os.system(call)
-        #         js = JobStatus.objects.get(pipeline_key=new_id)
-        #         js.status.create(status_progress='sent_to_queue')
-        #         js.job_status = 'sent_to_queue'
-        #         js.save()
-        #     os.system("touch " + os.path.join(MEDIA_ROOT, self.folder, "launched", new_id))
-        #     job_list.append(new_id)
-        #
-        # return pipeline_id
 
     def create_call_old(self):
         pipeline_id = self.folder
@@ -994,6 +931,15 @@ class sRNABenchForm2(forms.Form):
                 FS.save(uploaded_file, profile)
                 libs_files.append(os.path.join(FS.location, uploaded_file))
 
+        spikes = cleaned_data.get('spikes')
+        if spikes:
+            uploaded_file = "spikes.fa"
+            FS.save(uploaded_file, spikes)
+            spikes_path = os.path.join(FS.location, uploaded_file)
+            # libs_files.append(os.path.join(FS.location, uploaded_file))
+        else:
+            spikes_path = None
+
         user_urls = cleaned_data.get('profile_url1')
         if user_urls:
             for line in user_urls.split('\n'):
@@ -1002,7 +948,7 @@ class sRNABenchForm2(forms.Form):
                 url_lib, headers = urllib.request.urlretrieve(url, filename=dest)
                 libs_files.append(url_lib)
 
-        return ifile, libs_files
+        return ifile, libs_files, spikes_path
 
     def create_conf_file(self, cleaned_data, pipeline_id):
         conf = {}
@@ -1012,7 +958,7 @@ class sRNABenchForm2(forms.Form):
         # os.system("mkdir " + FS.location)
         out_dir = FS.location
         conf['out_dir'] = out_dir
-        libs_files = self.upload_files(cleaned_data, FS)
+        dummy, libs_files, spike_path = self.upload_files(cleaned_data, FS)
         lib_mode = cleaned_data.get('library_mode')
         # is_solid = str(cleaned_data.get('is_solid')).lower()
         guess_adapter = str(cleaned_data.get('guess_adapter')).lower()
@@ -1059,7 +1005,7 @@ class sRNABenchForm2(forms.Form):
                                    guessAdapter=guess_adapter, highconf=highconf, mirDB=mirDB,
                                    homolog=homologous,
                                    user_files=libs_files, minReadLength=min_read_length,
-                                   mBowtie=max_multiple_mapping)
+                                   mBowtie=max_multiple_mapping, spikeIn=spike_path)
 
         conf_file_location = os.path.join(FS.location, "conf.txt")
         new_conf.write_conf_file(conf_file_location)
