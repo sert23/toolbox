@@ -470,7 +470,7 @@ class Annotate(DetailView):
 
         error_file = os.path.join(MEDIA_ROOT, pipeline_id, "annotation", "error.error")
         if os.path.exists(error_file):
-            context["error_message"] = "There was some error parsing your file. Please check again the format and requirements to fix it."
+            context["error_message"] = "There was some error parsing your file. Please check the format and requirements again to fix it."
 
 
         output_folder = os.path.join(MEDIA_ROOT, pipeline_id)
