@@ -602,6 +602,9 @@ class sRNABenchForm(forms.Form):
             new_id = generate_uniq_id()
             out_dir = os.path.join(MEDIA_ROOT, new_id)
             os.mkdir(out_dir)
+            if spikes_path:
+                shutil.copy(os.path.join(MEDIA_ROOT, self.folder, spikes_path), os.path.join(out_dir, spikes_path))
+
             if an_object["input_type"] == "SRA":
                 input_file = an_object["input"]
                 dest_path = input_file
