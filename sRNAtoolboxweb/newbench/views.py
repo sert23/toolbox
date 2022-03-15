@@ -343,7 +343,8 @@ class Launch(FormView):
         spikes = request.FILES.get('spikes')
         if spikes:
             fs = FileSystemStorage()
-            filename = fs.save(os.path.join(MEDIA_ROOT, "test_spike.fa"), spikes)
+            time_stamp = datetime.datetime.now().strftime("%m%d%%H%M%S")
+            filename = fs.save(os.path.join(MEDIA_ROOT, "multi", time_stamp +  "_test_spike.fa"), spikes)
             uploaded_file_url = fs.url(filename)
 
         print(request.POST['species'])
