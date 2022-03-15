@@ -339,7 +339,8 @@ class Launch(FormView):
         request.POST._mutable = True
         #print(SPECIES_PATH)
         request.POST['species'] = request.POST['species_hidden'].split(',')
-        if request.POST['spikes']:
+
+        if request.FILES['spikes']:
             x = request.POST['hakuna matata']
         print(request.POST['species'])
         print(request.POST['species_hidden'].split(','))
