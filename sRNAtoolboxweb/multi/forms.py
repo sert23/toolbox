@@ -153,10 +153,14 @@ class sRNABenchForm(forms.Form):
         # ("EMPTY", mark_safe("Input reads are already trimmed")),
 
         ("Illumina", mark_safe("Illumina TrueSeq&#153; (280916)" + render_modal('Illumina'))),
+        ("Illumina_alt", mark_safe("Illumina TrueSeq&#153; (280916)" + render_modal('Illumina'))),
         ("NEBnext", mark_safe("NEBnext&#153;" + render_modal('NEB'))),
         ("Bioo", mark_safe("Bioo Scientific Nextflex&#153; (v2,v3)" + render_modal('Bioo'))),
+        ("Bioo_UMI", mark_safe("Bioo Scientific Nextflex&#153; (v2,v3)" + render_modal('Bioo'))),
         ("SMARTer", mark_safe("Clonetech SMARTer&#153;" + render_modal('Smarter'))),
         ("Qiagen", mark_safe("Qiagen&#153; (with UMIs)" + render_modal('Qiagen'))),
+        ("Trimmed", mark_safe("Qiagen&#153; (with UMIs)" + render_modal('Qiagen'))),
+        ("Guess", mark_safe("Qiagen&#153; (with UMIs)" + render_modal('Qiagen'))),
         ("Custom", mark_safe("Customized protocol" + render_modal('Custom')))]
     library_protocol = forms.ChoiceField(label="", choices=protocols, required=False, widget=forms.RadioSelect())
 
@@ -234,39 +238,6 @@ class sRNABenchForm(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
 
-            # create_collapsable_div(
-
-            # TabHolder(
-            #     Tab('Upload',
-            #         # Div('ifile'),
-            #         'ifile'
-            #         # Div('field_name_2')
-            #         ),
-            #     Tab('URL/link',
-            #         Field('url', css_class='form-control'),
-            #         ),
-            #     Tab('SRA Run ID',
-            #         Field('sra_input', css_class='form-control'),
-            #         ),
-            #     Tab('Reuse Job',
-            #         Field('job_reuse', css_class='form-control')
-            #         )
-            # ),
-            #     title="Choose your input",
-            #     extra_title=render_modal('Choose_Input'),
-            #     c_id='1',
-            #     open=True
-            #     ),
-
-            # Fieldset(
-            #     '',
-            #     'ifile',
-            #     Field('sra_input', css_class='form-control'),
-            #     Field('url',css_class='form-control'),
-            #     Field('job_name', css_class='form-control'),
-            #     Field('species_hidden', name='species_hidden')
-            # ),
-
             create_collapsable_div(
                 Field('species'),
                 Field('species_hidden', name='species_hidden'),
@@ -284,7 +255,7 @@ class sRNABenchForm(forms.Form):
                     Div(InlineRadios('library_protocol'), css_class="col-md-12")),
                 Div(Fieldset(
                     'Custom preprocessing options',
-                    "guess_adapter",
+                    # "guess_adapter",
                     Field('adapter_chosen', css_class='form-control'),
                     Field('adapter_manual', css_class='form-control'),
                     'adapter_length',
@@ -488,20 +459,26 @@ class sRNABenchForm(forms.Form):
         iterative5pTrimming = None
 
         guess_adapter = "false"
+
+        predifined_protocol = None
         if protocol == "Illumina":
-            adapter = "TGGAATTCTCGGGTGCCAAGGG"
+            predifined_protocol = "I"
+        elif protocol == "Illumina_alt":
+            predifined_protocol = "Ia"
         elif protocol == "NEBnext":
-            adapter = "AGATCGGAAGAGCACACGTCT"
+            predifined_protocol = "NN"
         elif protocol == "Bioo":
-            adapter = "TGGAATTCTCGGGTGCCAAGGG"
-            remove3pBases = "4"
-            nucleotides_5_removed = "4"
-        elif protocol == "SMARTer":
-            adapter = "AAAAAAAAAA"
-            iterative5pTrimming = 4
+            predifined_protocol = "B"
+        elif protocol == "Bioo_UMI":
+            predifined_protocol = "B_umi"
         elif protocol == "Qiagen":
-            umi = "3pA12"
-            adapter = "AACTGTAGGCACCATCAAT"
+            predifined_protocol = "Q"
+        elif protocol == "SMARTer":
+            predifined_protocol = "SMARTer"
+        elif protocol == "Guess":
+            predifined_protocol = "guess"
+        elif protocol == "Trimmed":
+            predifined_protocol = "trimmed"
         elif protocol == "Custom":
             protocol= None
             if cleaned_data.get('guess_adapter'):
@@ -573,7 +550,7 @@ class sRNABenchForm(forms.Form):
                                   user_files=libs_files, minReadLength=min_read_length, mBowtie=max_multiple_mapping,
                                    remove3pBases = remove3pBases, umi=umi, iterative5pTrimming=iterative5pTrimming,
                                    qualityType=qualityType,minQ=minQ, phred=phred_encode, maxQfailure=maximum_positions,
-                                   protocol=protocol, Rscript="/opt/local/R-3.5.3/bin/Rscript")
+                                   protocol=predifined_protocol, Rscript="/opt/local/R-3.5.3/bin/Rscript")
 
         conf_file_location = os.path.join(FS.location, "conf.txt")
         new_conf.write_conf_file(conf_file_location)
