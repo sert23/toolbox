@@ -340,8 +340,12 @@ class Launch(FormView):
         #print(SPECIES_PATH)
         request.POST['species'] = request.POST['species_hidden'].split(',')
 
-        if request.FILES['spikes']:
-            x = request.POST['hakuna matata']
+        spikes = request.FILES.get('spikes')
+        if spikes:
+            fs = FileSystemStorage()
+            filename = fs.save(os.path.join(MEDIA_ROOT, "test_spike.fa"), spikes)
+            uploaded_file_url = fs.url(filename)
+
         print(request.POST['species'])
         print(request.POST['species_hidden'].split(','))
         request.POST._mutable = False
