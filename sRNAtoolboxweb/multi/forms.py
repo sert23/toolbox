@@ -574,7 +574,7 @@ class sRNABenchForm(forms.Form):
                                    remove3pBases = remove3pBases, umi=umi, iterative5pTrimming=iterative5pTrimming,
                                    qualityType=qualityType,minQ=minQ, phred=phred_encode, maxQfailure=maximum_positions,
                                    protocol=predifined_protocol, Rscript="/opt/local/R-3.5.3/bin/Rscript",
-                                   spikeIn=spikes_path, plotTRNA=True)
+                                   spikeIn=spikes_path, plotTRNA="true")
 
         conf_file_location = os.path.join(FS.location, "conf.txt")
         new_conf.write_conf_file(conf_file_location)
