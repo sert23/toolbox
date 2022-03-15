@@ -331,7 +331,7 @@ class sRNABenchForm(forms.Form):
                 # 'profile4',
                 # 'profile5',
                 Field('profile_url1', css_class='form-control'),
-                title='Upload user annotations for profiling', c_id='6'
+                title='Upload spike-in sequences for normalization', c_id='6'
             ),
 
             ButtonHolder(
