@@ -153,14 +153,14 @@ class sRNABenchForm(forms.Form):
         # ("EMPTY", mark_safe("Input reads are already trimmed")),
 
         ("Illumina", mark_safe("Illumina TrueSeq&#153; (280916)" + render_modal('Illumina'))),
-        ("Illumina_alt", mark_safe("Illumina TrueSeq&#153; (280916)" + render_modal('Illumina'))),
+        ("Illumina_alt", mark_safe("Illumina (alternative)" + render_modal('Illumina'))),
         ("NEBnext", mark_safe("NEBnext&#153;" + render_modal('NEB'))),
         ("Bioo", mark_safe("Bioo Scientific Nextflex&#153; (v2,v3)" + render_modal('Bioo'))),
-        ("Bioo_UMI", mark_safe("Bioo Scientific Nextflex&#153; (v2,v3)" + render_modal('Bioo'))),
+        ("Bioo_UMI", mark_safe("Bioo Scientific Nextflex&#153; (v2,v3) using random adapters as UMIs" + render_modal('Bioo'))),
         ("SMARTer", mark_safe("Clonetech SMARTer&#153;" + render_modal('Smarter'))),
         ("Qiagen", mark_safe("Qiagen&#153; (with UMIs)" + render_modal('Qiagen'))),
-        ("Trimmed", mark_safe("Qiagen&#153; (with UMIs)" + render_modal('Qiagen'))),
-        ("Guess", mark_safe("Qiagen&#153; (with UMIs)" + render_modal('Qiagen'))),
+        ("Trimmed", mark_safe("Provided reads are already trimmed" )),
+        ("Guess", mark_safe("Guess the protocol" + render_modal('Qiagen'))),
         ("Custom", mark_safe("Customized protocol" + render_modal('Custom')))]
     library_protocol = forms.ChoiceField(label="", choices=protocols, required=False, widget=forms.RadioSelect())
 
