@@ -340,12 +340,12 @@ class Launch(FormView):
         #print(SPECIES_PATH)
         request.POST['species'] = request.POST['species_hidden'].split(',')
 
-        spikes = request.FILES.get('spikes')
-        if spikes:
-            fs = FileSystemStorage()
-            time_stamp = datetime.datetime.now().strftime("%m%d%Y%H%M%S")
-            filename = fs.save(os.path.join(MEDIA_ROOT, "multi", time_stamp + "_test_spike.fa"), spikes)
-            request.POST['spikes_path'] = filename
+        # spikes = request.FILES.get('spikes')
+        # if spikes:
+        #     fs = FileSystemStorage()
+        #     time_stamp = datetime.datetime.now().strftime("%m%d%Y%H%M%S")
+        #     filename = fs.save(os.path.join(MEDIA_ROOT, "multi", time_stamp + "_test_spike.fa"), spikes)
+        #     request.POST['spikes_path'] = "test_spike.fa"
 
         print(request.POST['species'])
         print(request.POST['species_hidden'].split(','))
