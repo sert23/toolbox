@@ -454,7 +454,9 @@ class sRNABenchForm(forms.Form):
         out_dir = FS.location
         conf['out_dir'] = out_dir
         #Input
-        ifile, libs_files, spike_path = self.upload_files(cleaned_data, FS)
+        ifile, libs_files, dummy = self.upload_files(cleaned_data, FS)
+
+        spikes_path = cleaned_data.get('spikes_path')
 
         #Species
         species = [i.db_ver for i in cleaned_data['species']]
@@ -569,7 +571,7 @@ class sRNABenchForm(forms.Form):
                                    remove3pBases = remove3pBases, umi=umi, iterative5pTrimming=iterative5pTrimming,
                                    qualityType=qualityType,minQ=minQ, phred=phred_encode, maxQfailure=maximum_positions,
                                    protocol=predifined_protocol, Rscript="/opt/local/R-3.5.3/bin/Rscript",
-                                   spikeIn="spikes.fa")
+                                   spikeIn=spikes_path)
 
         conf_file_location = os.path.join(FS.location, "conf.txt")
         new_conf.write_conf_file(conf_file_location)
