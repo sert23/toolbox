@@ -457,7 +457,7 @@ class sRNABenchForm(forms.Form):
         #initialize variables
         umi = None
         iterative5pTrimming = None
-
+        adapter = None
         guess_adapter = "false"
 
         predifined_protocol = None
@@ -490,9 +490,6 @@ class sRNABenchForm(forms.Form):
             elif cleaned_data.get("adapter_chosen"):
                 adapter = cleaned_data.get("adapter_chosen")
                 guess_adapter = "false"
-
-        if adapter== "EMPTY":
-            adapter = None
 
         #Quality Control
 
