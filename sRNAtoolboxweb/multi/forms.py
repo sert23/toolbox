@@ -330,7 +330,7 @@ class sRNABenchForm(forms.Form):
                 # 'profile3',
                 # 'profile4',
                 # 'profile5',
-                Field('profile_url1', css_class='form-control'),
+                # Field('profile_url1', css_class='form-control'),
                 title='Upload spike-in sequences for normalization', c_id='6'
             ),
 
@@ -569,7 +569,7 @@ class sRNABenchForm(forms.Form):
                                    remove3pBases = remove3pBases, umi=umi, iterative5pTrimming=iterative5pTrimming,
                                    qualityType=qualityType,minQ=minQ, phred=phred_encode, maxQfailure=maximum_positions,
                                    protocol=predifined_protocol, Rscript="/opt/local/R-3.5.3/bin/Rscript",
-                                   spikeIn=spike_path)
+                                   spikeIn="spikes.fa")
 
         conf_file_location = os.path.join(FS.location, "conf.txt")
         new_conf.write_conf_file(conf_file_location)
