@@ -1138,7 +1138,7 @@ def parse_miRBase():
         lines = db.readlines()
         for line in lines:
             row = line.split("\t")
-            annot_list.append(row[0:1])
+            annot_list.append(row[0:2])
 
     return annot_list
 
