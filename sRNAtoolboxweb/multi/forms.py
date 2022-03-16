@@ -1186,8 +1186,8 @@ class sRNABenchForm_withDBs(forms.Form):
     reference_database = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=miR_DBs, initial=None, required=False)
 
     mirgeneDB = forms.MultipleChoiceField(label='Choose short name from MiRGeneDB', choices=MGDB, initial=None, required=False)
-    miRBase = forms.ChoiceField(label='Choose short name from miRBase', choices=MiRBASE, initial=None, required=False)
-    Pmiren = forms.ChoiceField(label='Choose short name from PmiREN', choices=PMIREN, initial=None, required=False)
+    miRBase = forms.MultipleChoiceField(label='Choose short name from miRBase', choices=MiRBASE, initial=None, required=False)
+    Pmiren = forms.MultipleChoiceField(label='Choose short name from PmiREN', choices=PMIREN, initial=None, required=False)
 
     # species (assembly)
     library_mode = forms.BooleanField(label='Do not map to genome (Library mode)' + render_modal('library_mode'), required=False)
@@ -1302,9 +1302,9 @@ class sRNABenchForm_withDBs(forms.Form):
             create_collapsable_div(
                 Div(
                     Div(Field('reference_database', css_class='form-control'), css_class="col-lg-6"),
-                    Div(Field('mirgeneDB', css_class='form-control'), css_class="col-lg-6", css_id="MGDB_div"),
-                    Div(Field('miRBase', css_class='form-control'), css_class="col-lg-6", css_id="MB_div"),
-                    Div(Field('Pmiren', css_class='form-control'), css_class="col-lg-6", css_id="PM_div"),
+                    Div(Field('mirgeneDB', css_class='form-control db-multi'), css_class="col-lg-6", css_id="MGDB_div"),
+                    Div(Field('miRBase', css_class='form-control db-multi'), css_class="col-lg-6", css_id="MB_div"),
+                    Div(Field('Pmiren', css_class='form-control db-multi'), css_class="col-lg-6", css_id="PM_div"),
                     css_class="row"),
                 # Field('reference_database'),
                 Field('species'),
