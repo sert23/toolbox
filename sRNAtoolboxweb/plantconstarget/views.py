@@ -212,6 +212,7 @@ def result(request):
                 pass
             results["id"] = job_id
             results["date"] = new_record.start_time + datetime.timedelta(days=15)
+            results["positional_files"] = positional_files
             return render(request, "mirconstarget_result.html", results)
 
         else:
