@@ -1175,9 +1175,9 @@ class sRNABenchForm_withDBs(forms.Form):
     # species (miRNA)
     reference_database = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=miR_DBs, initial=None, required=False)
 
-    mirgeneDB = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=miR_DBs, initial=None, required=False)
-    miRBase = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=miR_DBs, initial=None, required=False)
-    Pmiren = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=miR_DBs, initial=None, required=False)
+    mirgeneDB = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=MGDB, initial=None, required=False)
+    miRBase = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=MiRBASE, initial=None, required=False)
+    Pmiren = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=PMIREN, initial=None, required=False)
 
     # species (assembly)
     library_mode = forms.BooleanField(label='Do not map to genome (Library mode)' + render_modal('library_mode'), required=False)
