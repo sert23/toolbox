@@ -1120,38 +1120,27 @@ class sRNABenchForm2(forms.Form):
 
         return pipeline_id
 
-def parse_MGDB():
-    db_path = MIRNA_DBS.get("MirGeneDB 2.1")
+def parse_DB(input_DB):
+    db_path = MIRNA_DBS.get(input_DB)
     annot_list = []
     with open(db_path) as db:
         lines = db.readlines()
         for line in lines:
             row = line.split("\t")
-            annot_list.append(row[0:2])
-
+            option = [row[0], row[1] + " ({})".format(row[2])]
+            annot_list.append(option)
     return annot_list
+
+def parse_MGDB():
+    return parse_DB("MirGeneDB 2.1")
 
 def parse_miRBase():
-    db_path = MIRNA_DBS.get("miRBase release 22.1")
-    annot_list = []
-    with open(db_path) as db:
-        lines = db.readlines()
-        for line in lines:
-            row = line.split("\t")
-            annot_list.append(row[0:2])
 
-    return annot_list
+    return parse_DB("miRBase release 22.1")
 
 def parse_PmiREN():
     db_path = MIRNA_DBS.get("PmiREN2.0")
-    annot_list = []
-    with open(db_path) as db:
-        lines = db.readlines()
-        for line in lines:
-            row = line.split("\t")
-            annot_list.append(row[0:2])
-
-    return annot_list
+    return parse_DB("PmiREN2.0")
 
 class sRNABenchForm_withDBs(forms.Form):
     miR_DBs = (
