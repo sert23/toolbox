@@ -25,7 +25,7 @@ from FileModels.mirbaseMainParser import MirBaseParser
 from FileModels.speciesAnnotationParser import SpeciesAnnotationParser
 from FileModels.speciesParser import SpeciesParser
 from progress.models import JobStatus
-from multi.forms import PhotoForm, sRNABenchForm
+from multi.forms import PhotoForm, sRNABenchForm, sRNABenchForm_withDBs
 from sRNABench.forms import contaminaForm
 # from .forms import miRNAgFreeForm, FileForm
 from utils import pipeline_utils
@@ -228,10 +228,9 @@ class Launch(FormView):
     # TODO if folder already exists omit creation
     template_name = 'newBench/parameters.html'
     # template_name = 'Messages/miRgFree/drive_test.html'
-    # form_class = miRNAgFreeForm
-    # success_url = reverse_lazy("MIRG")
-    # success_url = reverse_lazy("MIRG")
-    form_class = sRNABenchForm
+
+    form_class = sRNABenchForm_withDBs
+    # form_class = sRNABenchForm
 
     def get_form_kwargs(self):
         kwargs = super(Launch, self).get_form_kwargs()
@@ -377,10 +376,9 @@ class ReLaunch(FormView):
     # TODO if folder already exists omit creation
     template_name = 'newBench/parameters.html'
     # template_name = 'Messages/miRgFree/drive_test.html'
-    # form_class = miRNAgFreeForm
-    # success_url = reverse_lazy("MIRG")
-    # success_url = reverse_lazy("MIRG")
-    form_class = sRNABenchForm
+
+    form_class = sRNABenchForm_withDBs
+    # form_class = sRNABenchForm
 
     def get_form_kwargs(self):
         kwargs = super(ReLaunch, self).get_form_kwargs()
