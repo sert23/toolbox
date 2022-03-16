@@ -1183,7 +1183,7 @@ class sRNABenchForm_withDBs(forms.Form):
                              required=False)
 
     # species (miRNA)
-    reference_database = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=miR_DBs, initial=None, required=False)
+    reference_database = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=miR_DBs, initial="2", required=False)
 
     mirgeneDB = forms.MultipleChoiceField(label='Choose short name from MiRGeneDB', choices=MGDB, initial=None, required=False)
     miRBase = forms.MultipleChoiceField(label='Choose short name from miRBase', choices=MiRBASE, initial=None, required=False)
@@ -1192,7 +1192,7 @@ class sRNABenchForm_withDBs(forms.Form):
     # species (assembly)
     library_mode = forms.BooleanField(label='Do not map to genome (Library mode)' + render_modal('library_mode'), required=False)
     no_libs = forms.BooleanField(label='Do not profile other ncRNAs  (you are interested in known microRNAs only!)' + render_modal('other_ncrnas'), required=False)
-    species = CategoriesField(queryset=m, required=False, label="Genome assemblies"+ render_modal('species_dropdown'))
+    species = CategoriesField(queryset=m, required=False, label="Species (Genome assembly)"+ render_modal('species_dropdown'))
 
     # Adapter Trimming<div class="alert alert-danger">
     #guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence<strong style="color:Red;"> (not recommended!)</strong>'), required=False)
@@ -1310,7 +1310,7 @@ class sRNABenchForm_withDBs(forms.Form):
                 Field('species'),
                 Field('species_hidden', name='species_hidden'),
                 Field('input_hidden', name='input_hidden'),
-                Div('library_mode', 'no_libs', css_id='genome-div'),
+                Div('library_mode', 'no_libs', 'predict_mirna', css_id='genome-div'),
 
                 title='Select species annotation', c_id='2',
                 extra_title=render_modal('Species'),
@@ -1349,25 +1349,6 @@ class sRNABenchForm_withDBs(forms.Form):
             ),
 
             create_collapsable_div(
-                Fieldset(
-                'Choose miRNA reference sequences',
-
-                # 'genome_mir',
-                # 'highconf',
-                # InlineRadios('referenceDB'),
-                Div(InlineRadios('referenceDB'), css_class="col-md-12"),
-                Field('mirDB', css_class='form-control', style="visibility: hidden;")
-                ),
-                Fieldset(
-                'Species Selection' + render_modal('mirna_species'),
-                Field('mirna_profiled',css_class='form-control'),
-                'predict_mirna'
-                # Field('homologous',css_class='form-control'),
-                ),
-                title='MicroRNA analysis', c_id='4'
-            ),
-
-            create_collapsable_div(
                 #'is_solid',
 
                 Field('aligment_type', css_class='form-control'),
@@ -1392,11 +1373,6 @@ class sRNABenchForm_withDBs(forms.Form):
 
             create_collapsable_div(
                 'spikes',
-                # 'profile2',
-                # 'profile3',
-                # 'profile4',
-                # 'profile5',
-                # Field('profile_url1', css_class='form-control'),
                 title='Upload spike-in sequences for normalization', c_id='7'
             ),
 
@@ -1417,11 +1393,12 @@ class sRNABenchForm_withDBs(forms.Form):
         cleaned_data = super(sRNABenchForm_withDBs, self).clean()
 
         #species
-        print(cleaned_data.get('species'))
+
         if sum([bool(cleaned_data.get('species')), bool(cleaned_data.get('mirna_profiled')), cleaned_data.get("referenceDB")== "MirGeneDB" ]) < 1:
-            self.add_error('species','Species or miRBase/MirGeneDB short name tag(s) are required')
-            self.add_error('referenceDB','Species or miRBase/MirGeneDB short name tag(s) are required')
-            self.add_error('mirna_profiled', 'Species or miRBase/MirGeneDB short name tag(s) are required')
+        # if sum([bool(cleaned_data.get('species')), bool(cleaned_data.get('mirna_profiled')), cleaned_data.get("referenceDB")== "MirGeneDB" ]) < 1:
+            self.add_error('species','Species assembly or miRBase/MirGeneDB/PmiREN short name tag(s) are required')
+            self.add_error('reference_database','Species assembly or miRBase/MirGeneDB/PmiREN short name tag(s) are required')
+            # self.add_error('mirna_profiled', 'Species or miRBase/MirGeneDB short name tag(s) are required')
 
         #preprocessing
         if not cleaned_data.get("library_protocol"):
@@ -1431,15 +1408,6 @@ class sRNABenchForm_withDBs(forms.Form):
         if cleaned_data.get('predict_mirna') and cleaned_data.get('library_mode'):
             self.add_error('library_mode', 'Mapping to genome is necessary for miRNA prediction')
             self.add_error('predict_mirna', 'Mapping to genome is necessary for miRNA prediction')
-
-        # if not cleaned_data.get('guess_adapter') and cleaned_data.get('adapter_chosen')=='' and cleaned_data.get('adapter_manual')=='':
-        # if sum([bool(cleaned_data.get('guess_adapter')), bool(cleaned_data.get('adapter_chosen')!=''), bool(cleaned_data.get('adapter_manual')!='')]) != 1:
-        #     print(sum([bool(cleaned_data.get('guess_adapter')), bool(cleaned_data.get('adapter_chosen')==''), bool(cleaned_data.get('adapter_manual')=='')]))
-        #     self.add_error('guess_adapter', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
-        #     self.add_error('adapter_chosen', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
-        #     self.add_error('adapter_manual', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
-        # if cleaned_data.get('guess_adapter') and not cleaned_data.get('species'):
-        #     self.add_error('species', 'if `guess the adapter sequence`, an input genome is required')
 
         return cleaned_data
 
