@@ -359,7 +359,8 @@ class sRNABenchForm(forms.Form):
 
         #preprocessing
         if not cleaned_data.get("library_protocol"):
-            self.add_error('library_protocol', 'Choose one provided or custom protocol ')
+            # self.add_error('library_protocol', 'Choose one provided or custom protocol ')
+            self.add_error('library_protocol', mark_safe('<p class="text-danger">Choose one provided or custom protocol</p>'))
 
         #predict
         if cleaned_data.get('predict_mirna') and cleaned_data.get('library_mode'):
