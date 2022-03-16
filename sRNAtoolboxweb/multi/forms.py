@@ -241,7 +241,7 @@ class sRNABenchForm(forms.Form):
         self.helper.layout = Layout(
 
             create_collapsable_div(
-                Div(Field('species', css_class='form-control'), css_class="col-lg-3"),
+                Field('species', css_class='form-control'),
                 Field('species_hidden', name='species_hidden'),
                 Field('input_hidden', name='input_hidden'),
                 Div('library_mode', 'no_libs', css_id='genome-div'),
@@ -1272,7 +1272,8 @@ class sRNABenchForm_withDBs(forms.Form):
         self.helper.layout = Layout(
 
             create_collapsable_div(
-                Field('reference_database'),
+                Div(Field('reference_database'), css_class="col-lg-3"),
+                # Field('reference_database'),
                 Field('species'),
                 Field('species_hidden', name='species_hidden'),
                 Field('input_hidden', name='input_hidden'),
