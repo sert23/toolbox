@@ -1123,16 +1123,26 @@ class sRNABenchForm2(forms.Form):
 
 class sRNABenchForm_withDBs(forms.Form):
     miR_DBs = (
-        # (None, "Select Adapter to trim off"),
-        #
-        # miRdb=1 --> mirbase
-        #
-        # miRdb=3 --> pmiren
 
         (None, "No miRNA reference"),
         ("2", "MirGeneDB 2.1"),
         ("1", "miRBase release 22.1",),
         ("3", "PmiREN2.0"),
+    )
+
+    MGDB = (
+        ("A", "A"),
+        ("B", "B"),
+        ("C", "C"),
+    )
+    MiRBASE = (
+        ("D", "D"),
+        ("E", "E"),
+    )
+
+    PMIREN = (
+        ("F", "F"),
+        ("G", "G"),
     )
 
     ADAPTERS = (
@@ -1161,8 +1171,15 @@ class sRNABenchForm_withDBs(forms.Form):
     url = forms.URLField(label=mark_safe('Or provide a URL for large files <strong class="text-success"> (recommended!)</strong>'), required=False)
     job_reuse = forms.CharField(label='Reuse input from previous sRNAbench job using jobID',
                              required=False)
-    # species
-    reference_database = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=miR_DBs, initial=None)
+
+    # species (miRNA)
+    reference_database = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=miR_DBs, initial=None, required=False)
+
+    mirgeneDB = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=miR_DBs, initial=None, required=False)
+    miRBase = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=miR_DBs, initial=None, required=False)
+    Pmiren = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=miR_DBs, initial=None, required=False)
+
+    # species (assembly)
     library_mode = forms.BooleanField(label='Do not map to genome (Library mode)' + render_modal('library_mode'), required=False)
     no_libs = forms.BooleanField(label='Do not profile other ncRNAs  (you are interested in known microRNAs only!)' + render_modal('other_ncrnas'), required=False)
     species = CategoriesField(queryset=m, required=False, label="Genome assemblies"+ render_modal('species_dropdown'))
@@ -1271,8 +1288,13 @@ class sRNABenchForm_withDBs(forms.Form):
         self.helper = FormHelper()
         self.helper.layout = Layout(
 
+
             create_collapsable_div(
-                Div(Div(Field('reference_database', css_class='form-control'), css_class="col-lg-6"),
+                Div(
+                    Div(Field('reference_database', css_class='form-control'), css_class="col-lg-6"),
+                    Div(Field('mirgeneDB', css_class='form-control'), css_class="col-lg-6", css_id="MGDB_div"),
+                    Div(Field('miRBase', css_class='form-control'), css_class="col-lg-6", css_id="MB_div"),
+                    Div(Field('Pmiren', css_class='form-control'), css_class="col-lg-6", css_id="PM_div"),
                     css_class="row"),
                 # Field('reference_database'),
                 Field('species'),
