@@ -105,6 +105,7 @@
                 $("#MGDB_div").css("display", "block");
             } else if (DB == "3") {
                 $("#PM_div").css("display", "block");
+
             }
         }
     };
@@ -121,7 +122,19 @@
     </script>
 
 
-
+    <script>
+        jQuery(document).ready(function() {
+            jQuery('.db-multi').multiselect({
+                enableCollapsibleOptGroups: true,
+                enableCaseInsensitiveFiltering: true,
+                filterBehavior: 'both',
+                maxHeight: 300,
+                onDropdownHidden: function (e) {
+                  alert($("#mirgeneDB").val());
+                },
+            })
+        });
+    </script>
 
 
     <script>
@@ -265,16 +278,7 @@ function toggleAdapter() {
          });
     </script>
 
-    <script>
-        jQuery(document).ready(function() {
-            jQuery('.db-multi').multiselect({
-                enableCollapsibleOptGroups: true,
-                enableCaseInsensitiveFiltering: true,
-                filterBehavior: 'both',
-                maxHeight: 300,
-            })
-        });
-    </script>
+
     <script>
     function validation() {
         var x, text, message;
