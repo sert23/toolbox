@@ -1165,7 +1165,7 @@ class sRNABenchForm_withDBs(forms.Form):
     reference_database = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=miR_DBs, initial=None)
     library_mode = forms.BooleanField(label='Do not map to genome (Library mode)' + render_modal('library_mode'), required=False)
     no_libs = forms.BooleanField(label='Do not profile other ncRNAs  (you are interested in known microRNAs only!)' + render_modal('other_ncrnas'), required=False)
-    species = CategoriesField(queryset=m, required=False, label="Species"+ render_modal('species_dropdown'))
+    species = CategoriesField(queryset=m, required=False, label="Genome assemblies"+ render_modal('species_dropdown'))
 
     # Adapter Trimming<div class="alert alert-danger">
     #guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence<strong style="color:Red;"> (not recommended!)</strong>'), required=False)
@@ -1280,7 +1280,7 @@ class sRNABenchForm_withDBs(forms.Form):
                 Field('input_hidden', name='input_hidden'),
                 Div('library_mode', 'no_libs', css_id='genome-div'),
 
-                title='Select species', c_id='2',
+                title='Select species annotation', c_id='2',
                 extra_title=render_modal('Species'),
                 open=True
 
