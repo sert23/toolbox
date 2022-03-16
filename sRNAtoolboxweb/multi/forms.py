@@ -17,7 +17,7 @@ from crispy_forms.helper import FormHelper
 import os
 from progress.models import JobStatus
 from sRNABench.models import Species
-from sRNAtoolboxweb.settings import MEDIA_ROOT, CONF, QSUB, BASE_DIR
+from sRNAtoolboxweb.settings import MEDIA_ROOT, CONF, QSUB, BASE_DIR, MIRNA_DBS
 from sRNAtoolboxweb.utils import create_collapsable_div, render_modal
 from utils.pipeline_utils import generate_uniq_id
 import shutil
@@ -1120,6 +1120,38 @@ class sRNABenchForm2(forms.Form):
 
         return pipeline_id
 
+def parse_MGDB():
+    db_path = MIRNA_DBS.get("MirGeneDB 2.1")
+    annot_list = []
+    with open(db_path) as db:
+        lines = db.readlines()
+        for line in lines:
+            row = line.split("\t")
+            annot_list.append(row[0:1])
+
+    return annot_list
+
+def parse_miRBase():
+    db_path = MIRNA_DBS.get("miRBase release 22.1")
+    annot_list = []
+    with open(db_path) as db:
+        lines = db.readlines()
+        for line in lines:
+            row = line.split("\t")
+            annot_list.append(row[0:1])
+
+    return annot_list
+
+def parse_PmiREN():
+    db_path = MIRNA_DBS.get("PmiREN2.0")
+    annot_list = []
+    with open(db_path) as db:
+        lines = db.readlines()
+        for line in lines:
+            row = line.split("\t")
+            annot_list.append(row[0:1])
+
+    return annot_list
 
 class sRNABenchForm_withDBs(forms.Form):
     miR_DBs = (
@@ -1130,20 +1162,9 @@ class sRNABenchForm_withDBs(forms.Form):
         ("3", "PmiREN2.0"),
     )
 
-    MGDB = (
-        ("A", "A"),
-        ("B", "B"),
-        ("C", "C"),
-    )
-    MiRBASE = (
-        ("D", "D"),
-        ("E", "E"),
-    )
-
-    PMIREN = (
-        ("F", "F"),
-        ("G", "G"),
-    )
+    MGDB = parse_MGDB()
+    MiRBASE = parse_miRBase()
+    PMIREN = parse_PmiREN()
 
     ADAPTERS = (
         # (None, "Select Adapter to trim off"),
@@ -1175,9 +1196,9 @@ class sRNABenchForm_withDBs(forms.Form):
     # species (miRNA)
     reference_database = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=miR_DBs, initial=None, required=False)
 
-    mirgeneDB = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=MGDB, initial=None, required=False)
-    miRBase = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=MiRBASE, initial=None, required=False)
-    Pmiren = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=PMIREN, initial=None, required=False)
+    mirgeneDB = forms.ChoiceField(label='Choose short name from MiRGeneDB', choices=MGDB, initial=None, required=False)
+    miRBase = forms.ChoiceField(label='Choose short name from miRBase', choices=MiRBASE, initial=None, required=False)
+    Pmiren = forms.ChoiceField(label='Choose short name from PmiREN', choices=PMIREN, initial=None, required=False)
 
     # species (assembly)
     library_mode = forms.BooleanField(label='Do not map to genome (Library mode)' + render_modal('library_mode'), required=False)
