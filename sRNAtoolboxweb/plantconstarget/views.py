@@ -6,7 +6,7 @@ import os
 import django_tables2 as tables
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
-
+from sRNAtoolboxweb.settings import MEDIA_ROOT, CONF, QSUB, BASE_DIR, MEDIA_URL
 from django.views.generic import FormView
 from django.core.urlresolvers import reverse_lazy
 from plantconstarget.forms import PMirconsForm
@@ -165,7 +165,6 @@ def result(request):
 
         if new_record.job_status == "Finished":
 
-            os.system("touch " + os.path.join(new_record.outdir, "hello.txt"))
             plants = False
             min = 2
 
@@ -198,6 +197,12 @@ def result(request):
                 results[id] = r
             except:
                 results[id] = Result(id, define_table(["Results"], 'TableResult', plants)([{"Results": "Results not found!"}]))
+
+            all_files = [x for x in os.listdir(new_record.outdir) if os.path.isfile(os.path.join(new_record.outdir, x))]
+            files_to_serve = [x for x in all_files if (x.startswith("multipleTargets") or x.startswith("perTranscript") or x.startswith("positionalConsensus"))]
+            init_url = new_record.outdir.replace(MEDIA_ROOT, MEDIA_URL)
+            positional_files = [ [x, os.path.join(init_url, x)] for x in files_to_serve ]
+
 
             results["zip"] = "/".join(new_record.zip_file.split("/")[-2:])
             #return render(request, "mirconstarget_result.html", results)

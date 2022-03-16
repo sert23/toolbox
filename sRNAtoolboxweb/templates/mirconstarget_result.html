@@ -80,17 +80,14 @@
                 <!-- .panel-heading -->
                 <div id="Pos_consensus" class="panel-collapse collapse">
                     <div class="panel-body">
+                        <div class="row">
+                        {% for name, file_url in positional_files %}
 
-
-                        <div class="col-lg-6">
-                            <h3>Parameters</h3>
-                                <pre style="white-space: pre-line">
-
-                            {{ parameters }}
-                                </pre>
+                            <div class="col-lg-6">
+                                <a href="{{ file_url }}" download><h4>Download {{ name }}</h4></a>
                         </div>
 
-
+                        {% endfor %}
                     </div>
                 </div>
         </div>
