@@ -1185,7 +1185,7 @@ class sRNABenchForm_withDBs(forms.Form):
     # species (miRNA)
     reference_database = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=miR_DBs, initial=None, required=False)
 
-    mirgeneDB = forms.ChoiceField(label='Choose short name from MiRGeneDB', choices=MGDB, initial=None, required=False)
+    mirgeneDB = forms.MultipleChoiceField(label='Choose short name from MiRGeneDB', choices=MGDB, initial=None, required=False)
     miRBase = forms.ChoiceField(label='Choose short name from miRBase', choices=MiRBASE, initial=None, required=False)
     Pmiren = forms.ChoiceField(label='Choose short name from PmiREN', choices=PMIREN, initial=None, required=False)
 
