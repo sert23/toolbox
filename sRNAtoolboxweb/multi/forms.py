@@ -162,7 +162,7 @@ class sRNABenchForm(forms.Form):
         ("Trimmed", mark_safe("Provided reads are already trimmed" )),
         ("Guess", mark_safe("Guess the protocol" + render_modal('Guess_protocol'))),
         ("Custom", mark_safe("Customized protocol" + render_modal('Custom')))]
-    library_protocol = forms.ChoiceField(label="", choices=protocols, required=False, widget=forms.RadioSelect())
+    library_protocol = forms.ChoiceField(label="", choices=protocols, required=True, widget=forms.RadioSelect())
 
     #Quality Control
 
