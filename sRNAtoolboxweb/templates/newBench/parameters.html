@@ -99,7 +99,6 @@
 
 
         if (DB) {
-            alert(DB);
             if (DB == "1") {
                 $("#MB_div").css("display", "block");
             } else if (DB == "2") {
@@ -266,7 +265,16 @@ function toggleAdapter() {
          });
     </script>
 
-
+    <script>
+        jQuery(document).ready(function() {
+            jQuery('#id_mirgeneDB').multiselect({
+                enableCollapsibleOptGroups: true,
+                enableCaseInsensitiveFiltering: true,
+                filterBehavior: 'both',
+                maxHeight: 300,
+            })
+        });
+    </script>
     <script>
     function validation() {
         var x, text, message;
