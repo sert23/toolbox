@@ -130,7 +130,7 @@
                 filterBehavior: 'both',
                 maxHeight: 300,
                 onDropdownHidden: function (e) {
-                  alert($("#id_mirgeneDB").val());
+                  {# alert($("#id_mirgeneDB").val());#}
                 },
             })
         });
@@ -150,7 +150,7 @@ function toggleFields() {
 
 
 $('input[name="library_protocol"]').on("click", function(e) {
-    if (document.getElementById('id_library_protocol_6').checked) {
+    if (document.getElementById('id_library_protocol_10').checked) {
         $("#Adapter_Custom").show();
     } else {
         $("#Adapter_Custom").hide();
@@ -265,7 +265,7 @@ function toggleAdapter() {
         }else{
             jQuery("#genome-div").hide();
         }
-        if (document.getElementById('id_library_protocol_6').checked) {
+        if (document.getElementById('id_library_protocol_10').checked) {
             $("#Adapter_Custom").show();
         } else {
             $("#Adapter_Custom").hide();

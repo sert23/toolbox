@@ -1394,7 +1394,7 @@ class sRNABenchForm_withDBs(forms.Form):
 
         #species
 
-        if sum([bool(cleaned_data.get('species')), bool(cleaned_data.get('mirna_profiled')), cleaned_data.get("referenceDB")== "MirGeneDB" ]) < 1:
+        if sum([bool(cleaned_data.get('species')), bool(cleaned_data.get('mirgeneDB')), bool(cleaned_data.get('miRBase')), bool(cleaned_data.get('Pmiren'))  ]) < 1:
         # if sum([bool(cleaned_data.get('species')), bool(cleaned_data.get('mirna_profiled')), cleaned_data.get("referenceDB")== "MirGeneDB" ]) < 1:
             self.add_error('species','Species assembly or miRBase/MirGeneDB/PmiREN short name tag(s) are required')
             self.add_error('reference_database','Species assembly or miRBase/MirGeneDB/PmiREN short name tag(s) are required')
