@@ -1121,7 +1121,606 @@ class sRNABenchForm2(forms.Form):
         return pipeline_id
 
 
+class sRNABenchForm_withDBs(forms.Form):
+    miR_DBs = (
+        # (None, "Select Adapter to trim off"),
+        #
+        # miRdb=1 --> mirbase
+        #
+        # miRdb=3 --> pmiren
 
+        (None, "No miRNA reference"),
+        ("2", "MirGeneDB 2.1"),
+        ("1", "miRBase release 22.1",),
+        ("3", "PmiREN2.0"),
+    )
+
+    ADAPTERS = (
+        # (None, "Select Adapter to trim off"),
+        ("EMPTY", "Input reads are already trimmed"),
+        ("TGGAATTCTCGGGTGCCAAGG", "Illumina RA3 - TGGAATTCTCGGGTGCCAAGG"),
+        ("UCGUAUGCCGUCUUCUGCUUGU", "Illumina(alternative) - UCGUAUGCCGUCUUCUGCUUGU", ),
+        ("330201030313112312", "SOLiD(SREK) - 330201030313112312"),
+    )
+
+    ALIGMENT_TYPES = (
+        ('n', 'bowtie seed alignment(only mismatches in seed region count)'),
+        ('v', 'full read alignment(all mismatches count)'),
+    )
+
+    #mirdb_list = [(None, "Do not use MirGeneDB")]
+    mirdb_list = []
+    fh = open(CONF["mirDbPath"])
+    for line in fh:
+        mirdb_list.append((line.rstrip(), line.rstrip()))
+
+
+    ifile = forms.FileField(label='Upload the reads (fastq.gz, fa.gz or rc.gz)' + render_modal('SRNAinput'),
+                            required=False)
+    sra_input = forms.CharField(label='Or provide a SRA ID (starting with SRR or ERR)', required=False)
+    url = forms.URLField(label=mark_safe('Or provide a URL for large files <strong class="text-success"> (recommended!)</strong>'), required=False)
+    job_reuse = forms.CharField(label='Reuse input from previous sRNAbench job using jobID',
+                             required=False)
+    # species
+    reference_database = forms.ChoiceField(label='Choose miRNA annotation reference database', choices=miR_DBs, initial=None)
+    library_mode = forms.BooleanField(label='Do not map to genome (Library mode)' + render_modal('library_mode'), required=False)
+    no_libs = forms.BooleanField(label='Do not profile other ncRNAs  (you are interested in known microRNAs only!)' + render_modal('other_ncrnas'), required=False)
+    species = CategoriesField(queryset=m, required=False, label="Species"+ render_modal('species_dropdown'))
+
+    # Adapter Trimming<div class="alert alert-danger">
+    #guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence<strong style="color:Red;"> (not recommended!)</strong>'), required=False)
+    guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence <strong class="text-danger"> (not recommended!)</strong>'), required=False)
+    #guess_adapter = forms.BooleanField(label='Guess the adapter sequence  (not recommended!)', required=False) <strong>My Condition is</strong>
+    adapter_chosen = forms.ChoiceField(choices=ADAPTERS, required=False)
+    adapter_manual = forms.CharField(label='Provide adapter sequence', required=False)
+    adapter_length = forms.IntegerField(label='Minimum Adapter Length', max_value=12, min_value=6, initial=10)
+    adapter_mismatch = forms.IntegerField(label='Max. mismatches in adapter detection', max_value=2, min_value=0, initial=1)
+    adapter_recursive_trimming = forms.BooleanField(label='Recursive Adapter trimming', required=False, initial=False)
+    nucleotides_3_removed = forms.IntegerField(label='Remove 3\' nucleotides from random adapter', max_value=15, min_value=0, initial=0)
+
+    #Reads preprocessing
+
+    protocols = [
+        # ("EMPTY", mark_safe("Input reads are already trimmed")),
+
+        ("Illumina", mark_safe("Illumina TrueSeq&#153; (280916)" + render_modal('Illumina'))),
+        ("Illumina_alt", mark_safe("Illumina (alternative)" + render_modal('Illumina'))),
+        ("NEBnext", mark_safe("NEBnext&#153;" + render_modal('NEB'))),
+        ("Bioo", mark_safe("Bioo Scientific Nextflex&#153; (v2,v3)" + render_modal('Bioo'))),
+        ("Bioo_UMI", mark_safe("Bioo Scientific Nextflex&#153; (v2,v3) using random adapters as UMIs" + render_modal('Bioo'))),
+        ("SMARTer", mark_safe("Clonetech SMARTer&#153;" + render_modal('Smarter'))),
+        ("Qiagen", mark_safe("Qiagen&#153; (with UMIs)" + render_modal('Qiagen'))),
+        ("Trimmed", mark_safe("Provided reads are already trimmed" )),
+        ("Guess", mark_safe("Guess the protocol" + render_modal('Guess_protocol'))),
+        ("Custom", mark_safe("Customized protocol" + render_modal('Custom')))]
+    library_protocol = forms.ChoiceField(label="", choices=protocols, required=False, widget=forms.RadioSelect())
+
+    #Quality Control
+
+    quality_method = forms.ChoiceField(label="Filtering method" + render_modal('quality_filter'), choices=[(None, "No quality filter"),("mean","Use minimum mean quality score"),
+                                                   ("min","Use minimum quality score threshold per sequenced nucleotide")], required=False, initial= None)
+    phred_encode = forms.ChoiceField(label="Phred Score Encoding" + render_modal('phred_encode'), choices=[(33, "Phred+33 (Default)"),(64,"Phred+64")], required=False)
+    quality_threshold = forms.IntegerField(label='Phred Score Threshold', max_value=35, min_value=20, initial=20, required=False)
+    maximum_positions = forms.IntegerField(label='Maximum number of positions allowed below quality threshold', max_value=3, min_value=0, initial=0,required=False)
+
+    # MicroRNA Analysis
+    referenceDB = forms.ChoiceField(label="", choices=[("miRBase","Use miRBase (default)"),("highconf","Use high-confidence miRNAs only (miRBase)"),("MirGeneDB","Use a MirGeneDBv2.0 tag")], initial="miRBase", required=False, widget=forms.RadioSelect())
+    genome_mir = forms.BooleanField(label='Use the miRNAs for the species from the selected genomes', required=False)
+    highconf = forms.BooleanField(label='Use high confidence microRNAs from miRBase', required=False, initial=False)
+    mirDB = forms.ChoiceField(label="", choices=mirdb_list, required=False)
+    mirna_profiled = forms.CharField(
+        label='Use miRBase tag(s) to define your miRNA reference annotation (microRNAs from selected species used by default)',
+            required=False, initial="", widget=forms.TextInput(attrs={'placeholder': "e.g: hsa (human),mmu (mouse) or hsa:hsv1(human and herpes simplex virus)"}))
+
+    homologous = forms.CharField(label='Analyse homologous microRNAs (can be set to "all"):', required=False)
+
+    # Parameters
+    is_solid = forms.BooleanField(label='The input is SOLiD', required=False)
+    predict_mirna = forms.BooleanField(label='Predict New miRNAs', required=False)
+    aligment_type = forms.ChoiceField(choices=ALIGMENT_TYPES, initial='n')
+    seed_length = forms.IntegerField(label='Select the seed length for alignment', max_value=21, min_value=17, initial=20)
+    min_read_count = forms.IntegerField(label='Minimum Read Count: ', max_value=10, min_value=1, initial=2)
+    min_read_length = forms.IntegerField(label='Min. Read Length ', max_value=17, min_value=15, initial=15)
+    mismatches = forms.IntegerField(label='Allowed number of mismatches (either to the genome or libraries)', max_value=2, min_value=0, initial=1)
+    nucleotides_5_removed = forms.IntegerField(label='Remove 5\' barcode (number of nucleotides) ', max_value=6, min_value=0, initial=0)
+    max_multiple_mapping = forms.IntegerField(label='Maximum Number of Multiple Mappings', max_value=40, min_value=1, initial=10)
+
+    #Profile
+    profile1 = forms.FileField(label='', required=False)
+    profile2 = forms.FileField(label='', required=False)
+    profile3 = forms.FileField(label='', required=False)
+    profile4 = forms.FileField(label='', required=False)
+    profile5 = forms.FileField(label='', required=False)
+    profile_url1 = forms.CharField(label='Provide a URLs (one per line)', required=False, widget=forms.Textarea)
+    species_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
+
+    input_hidden = forms.CharField(label='', required=False, widget=forms.HiddenInput, max_length=2500)
+
+    spikes = forms.FileField(label='', required=False)
+
+    def __init__(self, *args, **kwargs):
+        self.old_folder = kwargs.pop('orig_folder', None)
+        is_relaunch = kwargs.pop('is_relaunch', None)
+        # self.old_folder = self.request.GET.pop('jobId', None)
+        # destination folder
+        new_jobID = generate_uniq_id()
+        new_folder = os.path.join(MEDIA_ROOT,new_jobID)
+
+        if is_relaunch:
+            self.folder = new_jobID
+            os.mkdir(new_folder)
+            shutil.copy(os.path.join(MEDIA_ROOT, self.old_folder, "input.json"), os.path.join(MEDIA_ROOT, new_jobID, "input.json"))
+            os.system("touch " + self.old_folder)
+        else:
+            if self.old_folder:
+                old_files = [f for f in os.listdir(os.path.join(MEDIA_ROOT, self.old_folder)) if f.startswith("redirect")]
+            else:
+                old_files = None
+
+            # mark new ID in old folder, if present, ignore new_jobID
+            if old_files:
+                name = old_files[0]
+                new_jobID = name.split("_")[1]
+            else:
+                os.system("touch " + os.path.join(self.old_folder, "redirect_" + new_jobID))
+
+            self.folder = new_jobID
+
+
+        super(sRNABenchForm_withDBs, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+
+            create_collapsable_div(
+                Field('reference_database'),
+                Field('species'),
+                Field('species_hidden', name='species_hidden'),
+                Field('input_hidden', name='input_hidden'),
+                Div('library_mode', 'no_libs', css_id='genome-div'),
+
+                title='Select species', c_id='2',
+                extra_title=render_modal('Species'),
+                open=True
+
+            ),
+            create_collapsable_div(
+                Fieldset(
+                    'Select sequencing library protocol',
+                    Div(InlineRadios('library_protocol'), css_class="col-md-12")),
+                Div(Fieldset(
+                    'Custom preprocessing options',
+                    # "guess_adapter",
+                    Field('adapter_chosen', css_class='form-control'),
+                    Field('adapter_manual', css_class='form-control'),
+                    'adapter_length',
+                    'adapter_mismatch',
+                    'nucleotides_5_removed',
+                    'nucleotides_3_removed',
+                    'adapter_recursive_trimming'),css_id="Adapter_Custom"),
+                title='Reads preprocessing', c_id='3',
+                open=True
+            ),
+
+            create_collapsable_div(
+
+                    # '<small class="text-danger"> These parameters only apply if you provide fastq formatted input </small>.',
+                    #'<p class="text-danger"> These parameters only apply if you provide fastq formatted input </p>.',
+                    Field('quality_method', css_class='form-control'),
+                    Field("phred_encode",  css_class='form-control'),
+                    Field('quality_threshold'),
+                    Div(Field('maximum_positions'),
+                        css_id="Div_max"),
+                title='Quality Control', c_id='35',
+                extra_title='<small><b class="text-danger"> These parameters only apply if you provide fastq formatted input.</b></small>'
+            ),
+
+            create_collapsable_div(
+                Fieldset(
+                'Choose miRNA reference sequences',
+
+                # 'genome_mir',
+                # 'highconf',
+                # InlineRadios('referenceDB'),
+                Div(InlineRadios('referenceDB'), css_class="col-md-12"),
+                Field('mirDB', css_class='form-control', style="visibility: hidden;")
+                ),
+                Fieldset(
+                'Species Selection' + render_modal('mirna_species'),
+                Field('mirna_profiled',css_class='form-control'),
+                'predict_mirna'
+                # Field('homologous',css_class='form-control'),
+                ),
+                title='MicroRNA analysis', c_id='4'
+            ),
+
+            create_collapsable_div(
+                #'is_solid',
+
+                Field('aligment_type', css_class='form-control'),
+                Field('seed_length', css_class='form-control'),
+                Field('min_read_count', css_class='form-control'),
+                Field('min_read_length', css_class='form-control'),
+                Field('mismatches', css_class='form-control'),
+
+                Field('max_multiple_mapping', css_class='form-control'),
+                title='Parameters', c_id='5'
+            ),
+
+            create_collapsable_div(
+                'profile1',
+                # 'profile2',
+                # 'profile3',
+                # 'profile4',
+                # 'profile5',
+                 Field('profile_url1', css_class='form-control'),
+                title='Upload user annotations for profiling', c_id='6'
+            ),
+
+            create_collapsable_div(
+                'spikes',
+                # 'profile2',
+                # 'profile3',
+                # 'profile4',
+                # 'profile5',
+                # Field('profile_url1', css_class='form-control'),
+                title='Upload spike-in sequences for normalization', c_id='7'
+            ),
+
+            ButtonHolder(
+                #Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
+                # Submit('submit', 'RUN', css_class='btn btn-primary')
+                # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="return validation()")
+                Div(Submit('submit', 'RUN', css_class='btn btn-primary', onclick="return saveChecked()" ),
+                    css_id="button_div", title="")
+        # Submit('submit', mark_safe('<a href="#" data-toggle="tooltip" title="Hooray!">Hover over me</a>'),
+        #        css_class='btn btn-primary', onclick="return saveChecked()")
+                       #onsubmit="alert('Neat!'); return false")
+
+            )
+        )
+
+    def clean(self):
+        cleaned_data = super(sRNABenchForm_withDBs, self).clean()
+
+        #species
+        print(cleaned_data.get('species'))
+        if sum([bool(cleaned_data.get('species')), bool(cleaned_data.get('mirna_profiled')), cleaned_data.get("referenceDB")== "MirGeneDB" ]) < 1:
+            self.add_error('species','Species or miRBase/MirGeneDB short name tag(s) are required')
+            self.add_error('referenceDB','Species or miRBase/MirGeneDB short name tag(s) are required')
+            self.add_error('mirna_profiled', 'Species or miRBase/MirGeneDB short name tag(s) are required')
+
+        #preprocessing
+        if not cleaned_data.get("library_protocol"):
+            self.add_error('library_protocol', 'Choose one provided or custom protocol ')
+
+        #predict
+        if cleaned_data.get('predict_mirna') and cleaned_data.get('library_mode'):
+            self.add_error('library_mode', 'Mapping to genome is necessary for miRNA prediction')
+            self.add_error('predict_mirna', 'Mapping to genome is necessary for miRNA prediction')
+
+        # if not cleaned_data.get('guess_adapter') and cleaned_data.get('adapter_chosen')=='' and cleaned_data.get('adapter_manual')=='':
+        # if sum([bool(cleaned_data.get('guess_adapter')), bool(cleaned_data.get('adapter_chosen')!=''), bool(cleaned_data.get('adapter_manual')!='')]) != 1:
+        #     print(sum([bool(cleaned_data.get('guess_adapter')), bool(cleaned_data.get('adapter_chosen')==''), bool(cleaned_data.get('adapter_manual')=='')]))
+        #     self.add_error('guess_adapter', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
+        #     self.add_error('adapter_chosen', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
+        #     self.add_error('adapter_manual', 'Choose either an adapter from the list, enter it manually or select `guess the adapter sequence`')
+        # if cleaned_data.get('guess_adapter') and not cleaned_data.get('species'):
+        #     self.add_error('species', 'if `guess the adapter sequence`, an input genome is required')
+
+        return cleaned_data
+
+    @staticmethod
+    def upload_files(cleaned_data, FS):
+        libs_files = []
+        name_modifier = cleaned_data.get('job_name')
+        url = cleaned_data.get('url')
+        sra_input = cleaned_data.get('sra_input')
+        job_reuse = cleaned_data.get("job_reuse")
+        ifile = cleaned_data.get("ifile") or ''
+        if ifile:
+            file_to_update = ifile
+            extension = file_to_update.name.split('.')[-1]
+            if name_modifier is not None and name_modifier != '':
+                uploaded_file = str(name_modifier) + "." + extension
+            else:
+                uploaded_file = str(file_to_update).replace(" ", "")
+
+            FS.save(uploaded_file, file_to_update)
+            ifile = os.path.join(FS.location, uploaded_file)
+
+        elif url:
+            extension = os.path.basename(url).split('.')[-1]
+            if name_modifier is not None:
+                dest = os.path.join(FS.location, str(name_modifier) + "." + extension).replace(" ", "")
+            else:
+                dest = os.path.join(FS.location, os.path.basename(url))
+
+            #ifile, headers = urllib.request.urlretrieve(url, filename=dest)
+            ifile = url
+        elif sra_input:
+            ifile = sra_input
+        elif job_reuse:
+            jobID = job_reuse
+            new_record = JobStatus.objects.get(pipeline_key=jobID)
+            conf = os.path.join(new_record.outdir,"conf.txt")
+            input_f = ""
+            with open(conf, "r") as conf_file:
+                lines = conf_file.readlines()
+                for line in lines:
+                    if line.startswith("input="):
+                        input_f = line.rstrip().split("=")[1]
+            ifile = input_f
+
+        for i in range(1, 6):
+            profile = cleaned_data.get('profile' + str(i))
+            if profile:
+                uploaded_file = str(profile).replace(' ', '')
+                FS.save(uploaded_file, profile)
+                libs_files.append(os.path.join(FS.location, uploaded_file))
+
+        spikes = cleaned_data.get('spikes')
+        if spikes:
+            uploaded_file = "spikes.fa"
+            FS.save(uploaded_file, spikes)
+            spikes_path = os.path.join(FS.location, uploaded_file)
+            # libs_files.append(os.path.join(FS.location, uploaded_file))
+        else:
+            spikes_path = None
+
+        user_urls = cleaned_data.get('profile_url1')
+        if user_urls:
+            for line in user_urls.split('\n'):
+                url_line = str(line).replace(' ', '')
+                dest = os.path.join(FS.location, os.path.basename(url_line))
+                url_lib, headers = urllib.request.urlretrieve(url, filename=dest)
+                libs_files.append(url_lib)
+
+        return ifile, libs_files, spikes_path
+
+    def create_conf_file(self, cleaned_data, pipeline_id):
+        conf = {}
+        conf['pipeline_id'] = pipeline_id
+        FS = FileSystemStorage()
+        FS.location = os.path.join(MEDIA_ROOT, pipeline_id)
+        # os.system("mkdir " + FS.location)
+        out_dir = FS.location
+        conf['out_dir'] = out_dir
+        #Input
+        ifile, libs_files, dummy = self.upload_files(cleaned_data, FS)
+
+        if os.path.exists(os.path.join(out_dir, "spikes.fa")):
+            spikes_path = "spikes.fa"
+        else:
+            spikes_path = None
+
+        #Species
+        species = [i.db_ver for i in cleaned_data['species']]
+        assemblies = [i.db for i in cleaned_data['species']]
+        short_names = [i.shortName for i in cleaned_data['species']]
+        micrornas_species = ':'.join(short_names)
+        if cleaned_data.get("mirna_profiled"):
+            micrornas_species = cleaned_data.get("mirna_profiled")
+        lib_mode = cleaned_data.get('library_mode')
+        no_libs = cleaned_data.get('no_libs')
+        is_solid = "false"
+
+        #Reads preprocessing
+        protocol = cleaned_data.get('library_protocol')
+        adapter_length = str(cleaned_data['adapter_length'])
+        adapter_mismatch = str(cleaned_data['adapter_mismatch'])
+        nucleotides_5_removed = str(cleaned_data['nucleotides_5_removed'])
+        remove3pBases = str(cleaned_data['nucleotides_3_removed'])
+        recursive_adapter_trimming = str(cleaned_data.get('adapter_recursive_trimming')).lower()
+
+        #initialize variables
+        umi = None
+        iterative5pTrimming = None
+        adapter = None
+        guess_adapter = "false"
+
+        predifined_protocol = None
+        if protocol == "Illumina":
+            predifined_protocol = "I"
+        elif protocol == "Illumina_alt":
+            predifined_protocol = "Ia"
+        elif protocol == "NEBnext":
+            predifined_protocol = "NN"
+        elif protocol == "Bioo":
+            predifined_protocol = "B"
+        elif protocol == "Bioo_UMI":
+            predifined_protocol = "B_umi"
+        elif protocol == "Qiagen":
+            predifined_protocol = "Q"
+        elif protocol == "SMARTer":
+            predifined_protocol = "SMARTer"
+        elif protocol == "Guess":
+            predifined_protocol = "guess"
+        elif protocol == "Trimmed":
+            predifined_protocol = "trimmed"
+        elif protocol == "Custom":
+            protocol= None
+            if cleaned_data.get('guess_adapter'):
+                guess_adapter = "true"
+                adapter = "EMPTY"
+            elif cleaned_data.get("adapter_manual"):
+                adapter = cleaned_data.get("adapter_manual")
+                guess_adapter = "false"
+            elif cleaned_data.get("adapter_chosen"):
+                adapter = cleaned_data.get("adapter_chosen")
+                guess_adapter = "false"
+
+        #Quality Control
+
+        qualityType = cleaned_data.get("quality_method")
+        minQ = None
+        phred_encode = None
+        maximum_positions = None
+
+        if qualityType == "mean":
+            minQ = cleaned_data.get("quality_threshold")
+            phred_encode = cleaned_data.get("phred_encode")
+        elif qualityType == "min":
+            minQ = cleaned_data.get("quality_threshold")
+            phred_encode = cleaned_data.get("phred_encode")
+            maximum_positions = cleaned_data.get("maximum_positions")
+        else:
+            qualityType=None
+
+
+        # Reference DB
+        if cleaned_data.get("referenceDB") == "highconf":
+            highconf = True
+        else:
+            highconf = False
+        if cleaned_data.get("referenceDB") == "MirGeneDB":
+            mirDB = cleaned_data.get('mirDB')
+        else:
+            mirDB = None
+        predict_mirna = str(cleaned_data.get('predict_mirna')).lower()
+
+        #Parameters
+        seed_length = str(cleaned_data['seed_length'])
+        mismatches = str(cleaned_data['mismatches'])
+        aligment_type = str(cleaned_data['aligment_type'])
+        min_read_count = str(cleaned_data['min_read_count'])
+        min_read_length = str(cleaned_data['min_read_length'])
+        max_multiple_mapping = str(cleaned_data['max_multiple_mapping'])
+
+
+        species_annotation_file = SpeciesAnnotationParser(CONF["speciesAnnotation"])
+        species_annotation = species_annotation_file.parse()
+        db = CONF["db"]
+
+
+        new_conf = SRNABenchConfig(species_annotation, db, FS.location, "EMPTY", iszip="true",
+                                  #RNAfold="RNAfold2",
+                                  bedGraph="true", writeGenomeDist="true", predict=predict_mirna, graphics="true",
+                                  species=species, assembly=assemblies, short_names=short_names, adapter=adapter,
+                                  recursiveAdapterTrimming=recursive_adapter_trimming, libmode=lib_mode, nolib=no_libs,
+                                  microRNA=micrornas_species, removeBarcode=nucleotides_5_removed,
+                                  adapterMinLength=adapter_length, adapterMM=adapter_mismatch,
+                                  seed=seed_length,
+                                  noMM=mismatches, alignType=aligment_type, minRC=min_read_count, solid=is_solid,
+                                  guessAdapter=guess_adapter, highconf=highconf, mirDB=mirDB,
+                                  user_files=libs_files, minReadLength=min_read_length, mBowtie=max_multiple_mapping,
+                                   remove3pBases = remove3pBases, umi=umi, iterative5pTrimming=iterative5pTrimming,
+                                   qualityType=qualityType,minQ=minQ, phred=phred_encode, maxQfailure=maximum_positions,
+                                   protocol=predifined_protocol, Rscript="/opt/local/R-3.5.3/bin/Rscript",
+                                   spikeIn=spikes_path, plotTRNA="true")
+
+        conf_file_location = os.path.join(FS.location, "conf.txt")
+        new_conf.write_conf_file(conf_file_location)
+
+        f = open(conf_file_location, "r")
+        lines = f.readlines()
+        f.close()
+        f = open(conf_file_location, "w")
+        for line in lines:
+            if not (line.startswith("input=EMPTY") or line.startswith("output=")):
+                f.write(line)
+        f.close()
+
+        general_config = " "
+        with open(os.path.join(MEDIA_ROOT, pipeline_id, "conf.txt"), "r") as conf_file:
+            general_config = conf_file.read()
+        dict_path = os.path.join(MEDIA_ROOT, self.folder, "input.json")
+        json_file = open(dict_path, "r")
+        input_dict = json.load(json_file)
+        json_file.close()
+        if not os.path.exists(os.path.join(MEDIA_ROOT, self.folder, "launched")):
+            os.mkdir(os.path.join(MEDIA_ROOT, self.folder, "launched"))
+        for k in input_dict.keys():
+            an_object = input_dict[k]
+            new_id = generate_uniq_id()
+            out_dir = os.path.join(MEDIA_ROOT, new_id)
+            os.mkdir(out_dir)
+            if spikes_path:
+                shutil.copy(os.path.join(MEDIA_ROOT, self.folder, spikes_path), os.path.join(out_dir, spikes_path))
+
+            if an_object["input_type"] == "SRA":
+                input_file = an_object["input"]
+                dest_path = input_file
+            elif an_object["input_type"] == "download link":
+                input_file = an_object["input"]
+                dest_path = input_file
+            elif an_object["input_type"] == "uploaded file":
+                input_file = an_object["name"]
+                dest_path = os.path.join(MEDIA_ROOT, new_id, input_file)
+                shutil.copyfile(os.path.join(MEDIA_ROOT, self.folder, "files", input_file), dest_path)
+            elif an_object["input_type"] == "Drive":
+                input_file = an_object["name"]
+                dest_path = os.path.join(MEDIA_ROOT, new_id, input_file)
+                shutil.copyfile(os.path.join(MEDIA_ROOT, self.folder, "files", "drive_temp", input_file), dest_path)
+
+            line = "input=" + dest_path + "\n"
+            line2 = "output=" + out_dir + "\n"
+            config = line + line2 + general_config
+            conf_file_location = os.path.join(out_dir, "conf.txt")
+            with open(conf_file_location, "w") as conf_fi:
+                conf_fi.write(config)
+            name = new_id + '_bench'
+            configuration = {
+                'pipeline_id': new_id,
+                'out_dir': out_dir,
+                'name': name,
+                'conf_input': conf_file_location,
+                'type': 'sRNAbench'
+            }
+            configuration_file_path = os.path.join(out_dir, 'conf.json')
+            JobStatus.objects.create(job_name=name, pipeline_key=new_id, job_status="not_launched",
+                                     start_time=datetime.now(),
+                                     all_files=dest_path,
+                                     modules_files="",
+                                     outdir=out_dir,
+                                     pipeline_type="sRNAbench",
+                                     )
+            with open(configuration_file_path, 'w') as conf_file:
+                json.dump(configuration, conf_file, indent=True)
+
+            if QSUB:
+                call = 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
+                    configuration_file_path=configuration_file_path,
+                    job_name=name,
+                    sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh'))
+                os.system(call)
+                js = JobStatus.objects.get(pipeline_key=new_id)
+                js.status.create(status_progress='sent_to_queue')
+                js.job_status = 'sent_to_queue'
+                js.save()
+
+            os.system("touch " + os.path.join(MEDIA_ROOT, self.folder, "launched", new_id))
+
+
+        return pipeline_id
+
+
+
+    def create_call_old(self):
+        pipeline_id = self.folder
+        pipeline_id = self.create_conf_file(self.cleaned_data, pipeline_id)
+
+        onlyfiles = [f for f in os.listdir(os.path.join(MEDIA_ROOT, pipeline_id))
+                     if os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, pipeline_id), f))]
+        onlyfiles.remove("SRR_files.txt")
+        onlyfiles.remove("URL_files.txt")
+        onlyfiles.remove("conf.txt")
+
+        return pipeline_id
+
+    def create_call(self):
+        pipeline_id = self.folder
+        if not os.path.exists(os.path.join(MEDIA_ROOT, self.folder)):
+            os.mkdir(os.path.join(MEDIA_ROOT, self.folder))
+
+        pipeline_id = self.create_conf_file(self.cleaned_data, pipeline_id)
+
+        onlyfiles = [f for f in os.listdir(os.path.join(MEDIA_ROOT, pipeline_id))
+                     if os.path.isfile(os.path.join(os.path.join(MEDIA_ROOT, pipeline_id), f))]
+        onlyfiles.remove("input.json")
+        # onlyfiles.remove("URL_files.txt")
+        onlyfiles.remove("conf.txt")
+
+        return pipeline_id
 
 
 # class PhotoForm(forms.ModelForm):
