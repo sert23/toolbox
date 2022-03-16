@@ -1127,7 +1127,7 @@ def parse_DB(input_DB):
         lines = db.readlines()
         for line in lines:
             row = line.split("\t")
-            option = [row[0], row[1] + " ({})".format(row[2])]
+            option = [row[0], row[1] + " ({})".format(row[2].rstrip())]
             annot_list.append(option)
     return annot_list
 
