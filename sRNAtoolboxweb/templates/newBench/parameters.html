@@ -86,6 +86,39 @@
 
 {% block js %}
 
+
+    <script>
+
+    var toggleDB = function(DB) {
+
+        {#div_list = ["MGDB_div", "MB_div", "PM_div" ];#}
+
+        $("#MGDB_div"). css("display", "none");
+        $("#MB_div"). css("display", "none");
+        $("#PM_div"). css("display", "none");
+
+
+        if (DB){
+            alert(DB)
+        };
+
+
+    };
+
+    $("#reference_database").change(function() {
+
+        toggleDB($("#reference_database").val());
+
+    });
+
+
+
+    </script>
+
+
+
+
+
     <script>
 
 function toggleFields() {
