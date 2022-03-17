@@ -1160,10 +1160,15 @@ def assembly2short(input_list):
     Pmiren = [x for x in Pmiren if x is not None]
     list_to_keep = []
     db = None
-    for i,l in enumerate([miRBase, MGDB, Pmiren]):
+    dbs = [ ["2", MGDB],
+            ["3", Pmiren],
+            ["1", miRBase],
+    ]
+    for i,l in dbs:
+    # for i,l in enumerate([miRBase, MGDB, Pmiren]):
         if len(l) > len(list_to_keep):
             list_to_keep = l
-            db = str(i+1)
+            db = i
     return db, list_to_keep
 
 
