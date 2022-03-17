@@ -176,7 +176,8 @@ def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url
             y = input_table.iloc[:,i+1].values,
             name = names[i+1],
             marker =dict(
-                colorscale="Viridis"
+                colorscale="Dark24"
+                # colorscale="Viridis"
             )
         )
         data.append(trace)
