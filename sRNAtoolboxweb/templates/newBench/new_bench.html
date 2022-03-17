@@ -318,7 +318,7 @@
     },
 
     done: function (e, data) {
-         $("#modal-progress").modal("hide");
+         {#$("#modal-progress").modal("hide"); #}
       if (data.alert){
        alert("something went wrong");
       }
@@ -336,6 +336,7 @@
              "</a></td> <td> Uploaded file </td> <td><i name='uploaded::"+ data.result.name +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
         )
       }
+        $("#modal-progress").modal("hide");
     }
 
   });
