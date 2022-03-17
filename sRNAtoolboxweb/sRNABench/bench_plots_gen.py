@@ -178,23 +178,39 @@ def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url
               "#EB663B",  "#511CFB",  "#00A08B",  "#FB00D1",  "#FC0080",  "#B2828D",  "#6C7C32",  "#778AAE",
               "#862A16",  "#A777F1",  "#620042",  "#1616A7",  "#DA60CA",  "#6C4516",  "#0D2A63",  "#AF0038"]
 
+    save_later = False
     for i in range(input_table.shape[1]-1):
         print(input_table.iloc[:,i+1].values)
         print(names[i + 1])
         c_color = colors[i]
         # do somethig with unassigned
         c_name = names[i+1]
+        if c_name != "un-assigned":
+            trace = go.Bar(
+                x = lengths,
+                y = input_table.iloc[:,i+1].values,
+                name = c_name,
+                marker =dict(
+                    color = c_color,
+                    # colorscale="Dark24"
+                    # colorscale="Viridis"
+                )
+            )
+            data.append(trace)
+        else:
+            save_later = True
+            saved_y = input_table.iloc[:,i+1].values
+    if save_later:
         trace = go.Bar(
-            x = lengths,
-            y = input_table.iloc[:,i+1].values,
-            name = c_name,
-            marker =dict(
-                color = c_color,
-                # colorscale="Dark24"
-                # colorscale="Viridis"
+            x=lengths,
+            y=saved_y,
+            name="un-assigned",
+            marker=dict(
+                color="#C0C0C0",
             )
         )
         data.append(trace)
+
 
     layout = go.Layout(
         margin=go.layout.Margin(
