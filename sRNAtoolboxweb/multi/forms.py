@@ -1163,7 +1163,7 @@ def assembly2short(input_list):
     for i,l in enumerate([miRBase, MGDB, Pmiren]):
         if len(l) > len(list_to_keep):
             list_to_keep = l
-            db = str(i)
+            db = str(i+1)
     return db, list_to_keep
 
 
