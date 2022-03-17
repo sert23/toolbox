@@ -1142,7 +1142,7 @@ def parse_DB(input_DB):
 
 def parse_taxons(input_DB, input_list):
     db_path = MIRNA_DBS.get(input_DB)
-    annot_dict = []
+    annot_dict = {}
     with open(db_path) as db:
         lines = db.readlines()
         for line in lines:
