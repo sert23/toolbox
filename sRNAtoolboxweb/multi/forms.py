@@ -350,11 +350,19 @@ class sRNABenchForm(forms.Form):
     def clean(self):
         cleaned_data = super(sRNABenchForm, self).clean()
 
-        #species
-        print(cleaned_data.get('species'))
+
+        # print(cleaned_data.get('species'))
+        # if cleaned_data.get('species'):
+        #     print("do nothing")
+        # elif not cleaned_data.get('species') and not cleaned_data.get('referenceDB'):
+        #     self.add_error('species', 'Species or miRBase/MirGeneDB short name tag(s) are required')
+        #     self.add_error('referenceDB', 'Species or miRBase/MirGeneDB short name tag(s) are required')
+        # elif cleaned_data.get('referenceDB'):
+        #     if cleaned_data.get('referenceDB') == #species
+
+
         if sum([bool(cleaned_data.get('species')), bool(cleaned_data.get('mirna_profiled')), cleaned_data.get("referenceDB")== "MirGeneDB" ]) < 1:
-            self.add_error('species','Species or miRBase/MirGeneDB short name tag(s) are required')
-            self.add_error('referenceDB','Species or miRBase/MirGeneDB short name tag(s) are required')
+
             self.add_error('mirna_profiled', 'Species or miRBase/MirGeneDB short name tag(s) are required')
 
         #preprocessing
@@ -1132,6 +1140,33 @@ def parse_DB(input_DB):
             annot_list.append(option)
     return annot_list
 
+def parse_taxons(input_DB, input_list):
+    db_path = MIRNA_DBS.get(input_DB)
+    annot_dict = []
+    with open(db_path) as db:
+        lines = db.readlines()
+        for line in lines:
+            row = line.rstrip().split("\t")
+            annot_dict[str(row[0])] = row[2]
+    name_list = [annot_dict.get(x) for x in input_list]
+    return name_list
+
+def assembly2short(input_list):
+    MGDB = parse_taxons("MirGeneDB 2.1", input_list)
+    MGDB = [x for x in MGDB if x is not None]
+    miRBase = parse_taxons("miRBase release 22.1", input_list)
+    miRBase = [x for x in miRBase if x is not None]
+    Pmiren = parse_taxons("PmiREN2.0", input_list)
+    Pmiren = [x for x in Pmiren if x is not None]
+    list_to_keep = []
+    db = None
+    for i,l in enumerate([miRBase, MGDB, Pmiren]):
+        if len(l) < len(list_to_keep):
+            list_to_keep = l
+            db = str(i)
+    return db, list_to_keep
+
+
 def parse_MGDB():
     return parse_DB("MirGeneDB 2.1")
 
@@ -1140,7 +1175,6 @@ def parse_miRBase():
     return parse_DB("miRBase release 22.1")
 
 def parse_PmiREN():
-    db_path = MIRNA_DBS.get("PmiREN2.0")
     return parse_DB("PmiREN2.0")
 
 class sRNABenchForm_withDBs(forms.Form):
@@ -1394,12 +1428,28 @@ class sRNABenchForm_withDBs(forms.Form):
         cleaned_data = super(sRNABenchForm_withDBs, self).clean()
 
         #species
-
-        if sum([bool(cleaned_data.get('species')), bool(cleaned_data.get('mirgeneDB')), bool(cleaned_data.get('miRBase')), bool(cleaned_data.get('Pmiren'))  ]) < 1:
-        # if sum([bool(cleaned_data.get('species')), bool(cleaned_data.get('mirna_profiled')), cleaned_data.get("referenceDB")== "MirGeneDB" ]) < 1:
-            self.add_error('species','Species assembly or miRBase/MirGeneDB/PmiREN short name tag(s) are required')
-            self.add_error('reference_database','Species assembly or miRBase/MirGeneDB/PmiREN short name tag(s) are required')
-            # self.add_error('mirna_profiled', 'Species or miRBase/MirGeneDB short name tag(s) are required')
+        # reference_database
+        reference_database = cleaned_data.get('reference_database')
+        print(cleaned_data.get('species'))
+        if cleaned_data.get('species'):
+            print("do nothing")
+        elif not (cleaned_data.get('species') or reference_database ):
+            self.add_error('species', 'Species assembly or miRBase/MirGeneDB/PmiREN short name tag(s) are required')
+            self.add_error('reference_database',
+                           'Species assembly or miRBase/MirGeneDB/PmiREN short name tag(s) are required')
+        elif reference_database:
+            if reference_database == "2" and (not cleaned_data.get('mirgeneDB')):
+                self.add_error('species', 'Species assembly or miRBase/MirGeneDB/PmiREN short name tag(s) are required')
+                self.add_error('reference_database',
+                               'Species assembly or miRBase/MirGeneDB/PmiREN short name tag(s) are required')
+            elif reference_database == "1" and (not cleaned_data.get('miRBase')):
+                self.add_error('species', 'Species assembly or miRBase/MirGeneDB/PmiREN short name tag(s) are required')
+                self.add_error('reference_database',
+                               'Species assembly or miRBase/MirGeneDB/PmiREN short name tag(s) are required')
+            elif reference_database == "3" and (not cleaned_data.get('Pmiren')):
+                self.add_error('species', 'Species assembly or miRBase/MirGeneDB/PmiREN short name tag(s) are required')
+                self.add_error('reference_database',
+                               'Species assembly or miRBase/MirGeneDB/PmiREN short name tag(s) are required')
 
         #preprocessing
         if not cleaned_data.get("library_protocol"):
@@ -1409,6 +1459,12 @@ class sRNABenchForm_withDBs(forms.Form):
         if cleaned_data.get('predict_mirna') and cleaned_data.get('library_mode'):
             self.add_error('library_mode', 'Mapping to genome is necessary for miRNA prediction')
             self.add_error('predict_mirna', 'Mapping to genome is necessary for miRNA prediction')
+            self.add_error('species', 'Mapping to genome is necessary for miRNA prediction')
+
+        if cleaned_data.get('predict_mirna') and not cleaned_data.get('species'):
+            self.add_error('library_mode', 'Mapping to genome is necessary for miRNA prediction')
+            self.add_error('predict_mirna', 'Mapping to genome is necessary for miRNA prediction')
+            self.add_error('species', 'Mapping to genome is necessary for miRNA prediction')
 
         return cleaned_data
 
@@ -1496,6 +1552,32 @@ class sRNABenchForm_withDBs(forms.Form):
         else:
             spikes_path = None
 
+        #microRNA
+        short_names = []
+        miRdb = None
+        reference_database = cleaned_data.get('reference_database')
+        # translate taxonID to short names
+        if reference_database:
+            if reference_database == "2" and cleaned_data.get('mirgeneDB'):
+                taxonIDs = cleaned_data.get('mirgeneDB')
+                short_names = parse_taxons("MirGeneDB 2.1", taxonIDs)
+                miRdb = "2"
+            elif reference_database == "1" and cleaned_data.get('miRBase'):
+                taxonIDs = cleaned_data.get('miRBase')
+                short_names = parse_taxons("miRBase release 22.1", taxonIDs)
+                miRdb = "1"
+            elif reference_database == "3" and cleaned_data.get('Pmiren'):
+                taxonIDs = cleaned_data.get('Pmiren')
+                short_names = parse_taxons("PmiREN2.0", taxonIDs)
+                miRdb = "3"
+        if short_names:
+            microRNA = ":".join(short_names)
+        else:
+            # get microRNA names from species field
+            species_taxons = [i.taxID for i in cleaned_data['species']]
+            miRdb, short_names = assembly2short(species_taxons)
+            microRNA = ":".join(short_names)
+
         #Species
         species = [i.db_ver for i in cleaned_data['species']]
         assemblies = [i.db for i in cleaned_data['species']]
@@ -1570,15 +1652,15 @@ class sRNABenchForm_withDBs(forms.Form):
             qualityType=None
 
 
-        # Reference DB
-        if cleaned_data.get("referenceDB") == "highconf":
-            highconf = True
-        else:
-            highconf = False
-        if cleaned_data.get("referenceDB") == "MirGeneDB":
-            mirDB = cleaned_data.get('mirDB')
-        else:
-            mirDB = None
+        # # Reference DB
+        # if cleaned_data.get("referenceDB") == "highconf":
+        #     highconf = True
+        # else:
+        #     highconf = False
+        # if cleaned_data.get("referenceDB") == "MirGeneDB":
+        #     mirDB = cleaned_data.get('mirDB')
+        # else:
+        #     mirDB = None
         predict_mirna = str(cleaned_data.get('predict_mirna')).lower()
 
         #Parameters
@@ -1600,11 +1682,11 @@ class sRNABenchForm_withDBs(forms.Form):
                                   bedGraph="true", writeGenomeDist="true", predict=predict_mirna, graphics="true",
                                   species=species, assembly=assemblies, short_names=short_names, adapter=adapter,
                                   recursiveAdapterTrimming=recursive_adapter_trimming, libmode=lib_mode, nolib=no_libs,
-                                  microRNA=micrornas_species, removeBarcode=nucleotides_5_removed,
+                                  microRNA=microRNA, miRdb=miRdb, removeBarcode=nucleotides_5_removed,
                                   adapterMinLength=adapter_length, adapterMM=adapter_mismatch,
                                   seed=seed_length,
                                   noMM=mismatches, alignType=aligment_type, minRC=min_read_count, solid=is_solid,
-                                  guessAdapter=guess_adapter, highconf=highconf, mirDB=mirDB,
+                                  guessAdapter=guess_adapter, highconf=None, mirDB=None,
                                   user_files=libs_files, minReadLength=min_read_length, mBowtie=max_multiple_mapping,
                                    remove3pBases = remove3pBases, umi=umi, iterative5pTrimming=iterative5pTrimming,
                                    qualityType=qualityType,minQ=minQ, phred=phred_encode, maxQfailure=maximum_positions,
