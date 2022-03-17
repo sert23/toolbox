@@ -30,26 +30,7 @@ def Full_read_length_divs(input_folder, path_to_venv=None, plotly_script=None, m
                                    stderr=subprocess.PIPE)
         with open(os.path.join(input_folder, "stat", "test2.out"), "w") as test_f:
             test_f.write(" ".join(call_list))
-    #
-    # if False:
-    #     # os.system("touch " + os.path.join(input_folder, "stat", "2", "test.out"))
-    #     # os.mkdir(os.path.join(input_folder,"stat","2"))
-    #     #
-    #     call = " ".join([os.path.join(path_to_venv,"python"), BENCH_PLOTLY ,"readLength", input_folder])
-    #     with open(os.path.join(input_folder,"stat","test.out"), "w") as test_f:
-    #         test_f.write(call)
-    #     #os.system(" ".join([os.path.join(PATH_TO_VENV,"python"), BENCH_PLOTLY ,"readLength", input_folder]))
-    #     #subprocess.call('source ' +os.path.join(PATH_TO_VENV,"activate") + ';' + call , shell=True)
-    #     plotter = subprocess.Popen([os.path.join(PATH_TO_VENV,"python3.5"), BENCH_PLOTLY ,"readLength", input_folder],stdout=subprocess.PIPE,
-    #                                  stderr=subprocess.PIPE)
-    #     # [outStream, errStream] = plotter.communicate()
-    #     # with open(os.path.join(input_folder,"stat","err.out"), "w") as test_f:
-    #     #     test_f.write(str(outStream))
-    #     #     test_f.write(str(errStream))
-    #
-    #     # subprocess.Popen([os.path.join(PATH_TO_VENV,"python3"), BENCH_PLOTLY ,"readLength", input_folder])
-    #     # os.system("touch " + os.path.join(input_folder,"stat","2","test.out", "w"))
-    # elif not os.path.exists(out_path1) :
+
 
 
     input_table = pandas.read_table(length_file, sep='\t')
@@ -348,7 +329,8 @@ def top_miRs_plot(input_file, title=".", path_to_venv=None, plotly_script=None, 
         y=y,
         marker=dict(
             color=['rgb(31, 119, 180)']*len(x),
-            colorscale="Viridis"
+            colorscale="Dark24"
+            # colorscale="Viridis"
         ))
     data = [trace]
     layout = go.Layout(
