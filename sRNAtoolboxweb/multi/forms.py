@@ -1343,8 +1343,8 @@ class sRNABenchForm_withDBs(forms.Form):
                 Div(
                     Div(Field('reference_database', css_class='form-control'), css_class="col-lg-6"),
                     Div(Field('mirgeneDB', css_class='form-control db-multi'), css_class="col-lg-6", css_id="MGDB_div"),
-                    Div(Field('miRBase', css_class='form-control db-multi'), css_class="col-lg-6", css_id="MB_div"),
-                    Div(Field('Pmiren', css_class='form-control db-multi'), css_class="col-lg-6", css_id="PM_div"),
+                    Div(Field('miRBase', css_class='form-control db-multi'), css_class="col-lg-6", css_id="MB_div", style="display: none;"),
+                    Div(Field('Pmiren', css_class='form-control db-multi'), css_class="col-lg-6", css_id="PM_div", style="display: none;"),
                     css_class="row"),
                 # Field('reference_database'),
                 Field('species'),
