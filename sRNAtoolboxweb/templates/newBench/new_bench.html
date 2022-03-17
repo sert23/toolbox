@@ -325,11 +325,11 @@
         if (data.result.is_valid) {
             $("#something_up").val("true");
           {#alert("hello");#}
-         $("#modal-progress").modal("hide");
+         {#$("#modal-progress").modal("hide");#}
           $("#uploaded_card").show();
           {#alert(data.result.name);#}
           {#alert(data.result.url);#}
-         $("#modal-progress").modal("hide");
+         {#$("#modal-progress").modal("hide");#}
         $("#gallery").show();
          $("#gallery tbody").prepend(
           "<tr><td><a target='_blank' href='" + data.result.url + "'>" + data.result.name +
