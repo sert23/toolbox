@@ -167,6 +167,12 @@ def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url
 
     print(input_table.shape[1])
     data = []
+    colors = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
+                 'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
+                 'red', 'red','red', 'red','red', 'red',
+                 'rgb(148, 103, 189)', 'rgb(140, 86, 75)',
+                 'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
+                 'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
     for i in range(input_table.shape[1]-1):
         print(input_table.iloc[:,i+1].values)
         print(names[i + 1])
@@ -176,12 +182,7 @@ def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url
             y = input_table.iloc[:,i+1].values,
             name = names[i+1],
             marker =dict(
-                color = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
-                 'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
-                 'red', 'red','red', 'red','red', 'red',
-                 'rgb(148, 103, 189)', 'rgb(140, 86, 75)',
-                 'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
-                 'rgb(188, 189, 34)', 'rgb(23, 190, 207)'],
+                color = colors[i],
                 # colorscale="Dark24"
                 # colorscale="Viridis"
             )
