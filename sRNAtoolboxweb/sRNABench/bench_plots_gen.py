@@ -176,7 +176,13 @@ def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url
             y = input_table.iloc[:,i+1].values,
             name = names[i+1],
             marker =dict(
-                colorscale="Dark24"
+                color = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
+                 'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
+                 'red', 'red','red', 'red','red', 'red',
+                 'rgb(148, 103, 189)', 'rgb(140, 86, 75)',
+                 'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
+                 'rgb(188, 189, 34)', 'rgb(23, 190, 207)'],
+                # colorscale="Dark24"
                 # colorscale="Viridis"
             )
         )
