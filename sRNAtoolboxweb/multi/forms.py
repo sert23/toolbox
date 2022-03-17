@@ -138,7 +138,7 @@ class sRNABenchForm(forms.Form):
 
     # Adapter Trimming<div class="alert alert-danger">
     #guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence<strong style="color:Red;"> (not recommended!)</strong>'), required=False)
-    guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence <strong class="text-danger"> (not recommended!)</strong>'), required=False)
+    # guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence <strong class="text-danger"> (not recommended!)</strong>'), required=False)
     #guess_adapter = forms.BooleanField(label='Guess the adapter sequence  (not recommended!)', required=False) <strong>My Condition is</strong>
     adapter_chosen = forms.ChoiceField(choices=ADAPTERS, required=False)
     adapter_manual = forms.CharField(label='Provide adapter sequence', required=False)
@@ -1160,10 +1160,10 @@ def assembly2short(input_list):
     Pmiren = [x for x in Pmiren if x is not None]
     list_to_keep = []
     db = None
-    dbs = [ ["2", MGDB],
+    dbs = [["2", MGDB],
             ["3", Pmiren],
             ["1", miRBase],
-    ]
+        ]
     for i,l in dbs:
     # for i,l in enumerate([miRBase, MGDB, Pmiren]):
         if len(l) > len(list_to_keep):
@@ -1236,7 +1236,7 @@ class sRNABenchForm_withDBs(forms.Form):
 
     # Adapter Trimming<div class="alert alert-danger">
     #guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence<strong style="color:Red;"> (not recommended!)</strong>'), required=False)
-    guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence <strong class="text-danger"> (not recommended!)</strong>'), required=False)
+    # guess_adapter = forms.BooleanField(label=mark_safe('<strong >Guess the adapter sequence <strong class="text-danger"> (not recommended!)</strong>'), required=False)
     #guess_adapter = forms.BooleanField(label='Guess the adapter sequence  (not recommended!)', required=False) <strong>My Condition is</strong>
     adapter_chosen = forms.ChoiceField(choices=ADAPTERS, required=False)
     adapter_manual = forms.CharField(label='Provide adapter sequence', required=False)
@@ -1606,7 +1606,7 @@ class sRNABenchForm_withDBs(forms.Form):
         umi = None
         iterative5pTrimming = None
         adapter = None
-        guess_adapter = "false"
+        # guess_adapter = "false"
 
         predifined_protocol = None
         if protocol == "Illumina":
@@ -1691,7 +1691,7 @@ class sRNABenchForm_withDBs(forms.Form):
                                   adapterMinLength=adapter_length, adapterMM=adapter_mismatch,
                                   seed=seed_length,
                                   noMM=mismatches, alignType=aligment_type, minRC=min_read_count, solid=is_solid,
-                                  guessAdapter=guess_adapter, highconf=None, mirDB=None,
+                                  guessAdapter=None, highconf=None, mirDB=None,
                                   user_files=libs_files, minReadLength=min_read_length, mBowtie=max_multiple_mapping,
                                    remove3pBases = remove3pBases, umi=umi, iterative5pTrimming=iterative5pTrimming,
                                    qualityType=qualityType,minQ=minQ, phred=phred_encode, maxQfailure=maximum_positions,
