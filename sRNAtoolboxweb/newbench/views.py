@@ -544,11 +544,19 @@ def find_file_of_interest(folder_path):
 
 def ajax_read_length(request):
     data_dict = {}
+    file_path = request.GET.get('matrix_location', None)
+    file_path = file_path.replace(MEDIA_URL, MEDIA_ROOT)
+    with open(file_path, "r") as rf:
+        rl_df = pd.read_csv(rf, sep="\t")
+
+    lengths = list(rl_df["read length"])
+    rl_df['mean'] = rl_df.mean(axis=1)
+    values = list(rl_df["mean"])
     data_dict["message"] = "it's working"
 
     data = [go.Bar(name="test",
-                   x=[1,2],
-                   y=[3,4],
+                   x=lengths,
+                   y=values,
                    # marker=dict(color=perc_df.bar_color.values),
                    # hovertemplate="%{x}p: %{y}",
                    showlegend=False
@@ -663,164 +671,3 @@ class contaminaBench(FormView):
 
     def print_file_locat(self, form):
         print(form.cleaned_data)
-
-# class NewUpload(FormView):
-#
-#     template_name = 'miRNAgFree/multi_status.html'
-#
-#     def get(self, request, **kwargs):
-#         path = request.path
-#
-#         jobID = request.GET.get('jobId', None)
-#         folder_path = os.path.join(MEDIA_ROOT,jobID)
-#
-#         # ignore_list = ["dropbox.txt", "drive.json","links.txt", "SRA.txt", "config.txt", "IDs"]
-#         files = [f for f in os.listdir(folder_path) if os.path.isfile(os.path.join(folder_path, f))]
-#
-#         param_dict = request.GET
-#
-#         if not "conf.txt" in files:
-#             make_config(request)
-#             IDs = assign_IDs(folder_path)
-#             for line in IDs:
-#                 print(line)
-#                 ik, ifile, itype = line
-#                 # to_launch.append([generate_id(), k.rstrip(), "Drive"])
-#
-#                 JobStatus.objects.create(job_name=" ", pipeline_key=ik, job_status="not_launched",
-#                                          start_time=datetime.datetime.now(),
-#                                          all_files=ifile,
-#                                          modules_files="",
-#                                          pipeline_type="miRNAgFree",
-#                                          outdir = os.path.join(MEDIA_ROOT,ik)
-#                                          )
-#             JobStatus.objects.create(job_name=" ", pipeline_key=jobID, job_status="not_launched",
-#                                      start_time=datetime.datetime.now(),
-#                                      all_files=" ",
-#                                      modules_files="",
-#                                      pipeline_type="multiupload",
-#                                      )
-#             data = dict()
-#             data["running"] = False
-#             IDs = []
-#             with open(os.path.join(folder_path, "IDs"), 'r') as rfile:
-#                 lines = rfile.readlines()
-#                 for line in lines:
-#                     IDs.append(line.rstrip().split("\t"))
-#
-#             jobs_tbody = []
-#             for i in IDs:
-#                 # print(i[0])
-#                 new_record = JobStatus.objects.get(pipeline_key=i[0])
-#                 job_stat = new_record.job_status
-#                 if job_stat != "Finished":
-#                     data["running"] = True
-#                 if job_stat == "sent_to_queue":
-#                     job_stat = "In queue"
-#                 start = new_record.start_time.strftime("%H:%M:%S, %d %b %Y")
-#                 if new_record.finish_time:
-#                     finish = new_record.finish_time.strftime("%H:%M, %d %b %Y")
-#                 else:
-#                     finish = "-"
-#                 click = '<a href="' + SUB_SITE + '/jobstatus/' + i[0] + '" target="_blank" > Go to results </a>'
-#                 jobs_tbody.append([i[0], job_stat.replace("_"," "), start, finish, i[1], click])
-#
-#             js_headers = json.dumps([{"title": "job ID"},
-#                                      {"title": "Status"},
-#                                      {"title": "Started"},
-#                                      {"title": "Finished"},
-#                                      {"title": "Input"},
-#                                      # { "title": "Select" }])
-#                                      {"title": 'Go to'}
-#                                      ])
-#             data["tbody"] = json.dumps(jobs_tbody)
-#             data["thead"] = js_headers
-#             data["id"] = jobID
-#             data["refresh_rate"] = 5
-#
-#             return render(self.request, 'miRNAgFree/multi_status.html', data)
-#
-#         elif param_dict.get("protocol"):
-#
-#             return redirect(reverse_lazy("launch" )+ "?jobId=" + jobID)
-#
-#         else:
-#             data = dict()
-#             data["running"] = False
-#             IDs = []
-#             with open(os.path.join(folder_path,"IDs"), 'r') as rfile:
-#                 lines = rfile.readlines()
-#                 for line in lines:
-#                     IDs.append(line.rstrip().split("\t"))
-#
-#             with open(os.path.join(folder_path, "conf.txt"), "r") as cfile:
-#                 config_content = cfile.read()
-#
-#             jobs_tbody = []
-#             for i in IDs:
-#                 # print(i[0])
-#                 new_record = JobStatus.objects.get(pipeline_key=i[0])
-#                 job_stat = new_record.job_status
-#
-#                 ### launching job
-#                 # if job_stat == "downloading":
-#                 #     # launch
-#                 #     c_path = make_config_json(i[0])
-#                 #     comm = create_call(i[0], c_path)
-#                 #     # print("HERE")
-#                 #     # print(comm)
-#                 #     os.system(comm)
-#                 #     new_record.job_status = 'sent_to_queue'
-#
-#
-#                 if job_stat == "not_launched":
-#
-#                     # new folder
-#                     dest_folder = os.path.join(MEDIA_ROOT,i[0])
-#                     make_folder(dest_folder)
-#                     # new config
-#
-#                     config_path = os.path.join(dest_folder,"conf.txt")
-#                     input_type = i[2]
-#                     input_line = make_input_line(folder_path, i[0], input_type, i[1])
-#                     output_line = "output=" + os.path.join(MEDIA_ROOT,i[0]) + "\n"
-#                     new_content = input_line + output_line + config_content
-#                     with open(config_path,"w") as cf:
-#                         cf.write(new_content)
-#
-#                     # launch
-#                     c_path = make_config_json(i[0])
-#                     comm = create_call(i[0], c_path)
-#                     os.system(comm)
-#                     new_record.job_status = 'sent_to_queue'
-#                     new_record.save()
-#                     if len(IDs) == 1:
-#                         return redirect(reverse_lazy('progress', kwargs={"pipeline_id": i[0]}))
-#                 if job_stat != "Finished" and job_stat != "Finished with Errors":
-#                     data["running"] = True
-#                 if job_stat == "sent_to_queue":
-#                     job_stat = "In queue"
-#                 start = new_record.start_time.strftime("%H:%M:%S, %d %b %Y")
-#                 if new_record.finish_time:
-#                     finish = new_record.finish_time.strftime("%H:%M, %d %b %Y")
-#                 else:
-#                     finish = "-"
-#                 job_stat = new_record.job_status
-#                 click = '<a href="' + SUB_SITE + '/jobstatus/' + i[0] + '" target="_blank" > Go to results </a>'
-#                 jobs_tbody.append([i[0], job_stat.replace("_"," "), start, finish, i[1], click])
-#
-#             js_headers = json.dumps([{"title": "job ID"},
-#                                      {"title": "Status"},
-#                                      {"title": "Started"},
-#                                      {"title": "Finished"},
-#                                      {"title": "Input"},
-#                                      # { "title": "Select" }])
-#                                      {"title": 'Go to'}
-#                                      ])
-#             # print(jobs_tbody)
-#             data["tbody"] = json.dumps(jobs_tbody)
-#
-#             data["thead"] = js_headers
-#             data["id"] = jobID
-#             data["refresh_rate"] = 90
-#             return render(self.request, 'miRNAgFree/multi_status.html', data)
