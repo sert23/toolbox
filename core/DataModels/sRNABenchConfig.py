@@ -191,7 +191,10 @@ class SRNABenchConfig2():
                 delattr(self, "assembly")
                 # delattr(self, "libsStringTypes")
                 # delattr(self, "libsStringNames")
-
+        else:
+            # libsStringTypes
+            self.libsStringTypes = "mature#sense;hairpin#sense"
+            self.libsStringNames = "microRNA_sense"
 
         self.solid = solid
 
