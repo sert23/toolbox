@@ -542,7 +542,10 @@ def find_file_of_interest(folder_path):
     shutil.move(full_path, new_name)
     return new_name
 
-
+def ajax_read_length(request):
+    data = {}
+    data["message"] = "it's working"
+    return JsonResponse(data)
 
 def matrix_generator(request):
     context = {}
