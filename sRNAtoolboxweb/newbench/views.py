@@ -546,7 +546,9 @@ def ajax_read_length(request):
     data_dict = {}
     file_path = request.GET.get('matrix_location', None)
     file_path = file_path.replace(MEDIA_URL, MEDIA_ROOT)
-    RNA_annotation = request.GET.get('annotation', None)
+    file_name = os.path.basename(file_path)
+    annotation_name = file_path.split("_minExpr")[0]
+    # RNA_annotation = request.GET.get('annotation', None)
     with open(file_path, "r") as rf:
         rl_df = pd.read_csv(rf, sep="\t")
 
@@ -578,7 +580,7 @@ def ajax_read_length(request):
             t=100,
             pad=4
         ),
-        title=str(RNA_annotation) + "reads",
+        title=str(annotation_name) + " reads",
         font=dict(size=18),
         # autosize=False,
         # height=650,
