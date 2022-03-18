@@ -558,6 +558,7 @@ def matrix_generator(request):
         os.mkdir(output_folder)
         exec_path = CONF.get("exec")
         jar_file = os.path.join(exec_path, "sRNAde.jar")
+        context["file_type"] = file_type
         if is_fromDE:
             print("x")
         else:

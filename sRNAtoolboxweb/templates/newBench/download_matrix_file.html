@@ -52,6 +52,10 @@
                             <a class="btn btn-default" href="{{ download_url }}" download><i class="fa fa-download"></i> Download matrix file</a>
                         {% endif %}
 
+                        {% if file_type == "Read Length" %}
+                            <a class="btn btn-default" href="{{ go_back_url }}"><i class="fa fa-arrow-left"></i>Test button</a>
+                        {% endif %}
+
 
 
                     </div>
@@ -60,6 +64,13 @@
 
                     <!-- .panel-body -->
                 </div>
+            </div>
+
+            <div class="col-lg-6" style="display: none;">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                       <i class="fa fa-chart-bar fa-fw"></i> Plot
+                    </div>
             </div>
         </div>
 
