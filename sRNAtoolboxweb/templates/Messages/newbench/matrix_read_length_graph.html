@@ -1,0 +1,51 @@
+{% extends "Messages/modal_xl.html" %}
+{% block id %}read_length_plot{% endblock %}
+{% block title %}
+{#    <div id="graph_title"></div>#}
+{% endblock %}
+{% block text %}
+
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div id="add_graph">
+        </div>
+    </div>
+    </div>
+
+
+
+    <script>
+
+     var loadGraph = function(e) {
+
+
+
+        {#alert("eyo");#}
+        $.ajax({
+        url: '{% url "ajax_read_length_graph" %}',
+        data: {
+            "matrix_location" : "{{ download_url }}",
+
+        },
+        dataType: 'json',
+        success: function (data) {
+
+            $("#add_graph").html("");
+            $("#add_graph").html(data.plot);
+
+        }
+      });
+     };
+
+    $('#read_length_plot').on('shown.bs.modal', function (e) {
+        loadGraph();
+    });
+
+
+
+
+</script>
+
+
+{% endblock %}

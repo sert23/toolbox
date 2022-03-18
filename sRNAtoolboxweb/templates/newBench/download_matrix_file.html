@@ -53,7 +53,7 @@
                         {% endif %}
 
                         {% if file_type == "Read Length" %}
-                            <a class="btn btn-default" href="{{ go_back_url }}"><i class="fa fa-arrow-left"></i>Test button</a>
+                            <a class="btn btn-success pull-right" href="javascript:void(0)"><i class="fa fa-chart-bar"></i>Visualize</a>
                         {% endif %}
 
 
@@ -84,3 +84,6 @@
 {% endblock %}
 
 
+{% block modals %}
+{% include "Messages/newbench/matrix_read_length_graph.html" %}
+{% endblock %}

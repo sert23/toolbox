@@ -543,9 +543,49 @@ def find_file_of_interest(folder_path):
     return new_name
 
 def ajax_read_length(request):
-    data = {}
-    data["message"] = "it's working"
-    return JsonResponse(data)
+    data_dict = {}
+    data_dict["message"] = "it's working"
+
+    data = [go.Bar(name="test",
+                   x=[1,2],
+                   y=[3,4],
+                   # marker=dict(color=perc_df.bar_color.values),
+                   # hovertemplate="%{x}p: %{y}",
+                   showlegend=False
+                   )]
+
+    layout = go.Layout(
+        margin=go.layout.Margin(
+            l=50,
+            r=200,
+            b=200,
+            t=100,
+            pad=4
+        ),
+        # title=input_variable,
+        font=dict(size=18),
+        # autosize=False,
+        # height=650,
+        # width=1150,
+        xaxis=dict(
+            title=""),
+        yaxis=dict(
+            # type=scale,
+            automargin=True,
+            # ticksuffix='%',
+            tickprefix="   ",
+            # dtick=dtick,
+            # title=input_variable + "\n<br>"
+        )
+    )
+    fig = go.Figure(data=data, layout=layout)
+
+    div = plot(fig, show_link=False, auto_open=False, include_plotlyjs=False, output_type="div",
+               config={'editable': True})
+
+    data_dict["plot"] = div
+    return JsonResponse(data_dict)
+
 
 def matrix_generator(request):
     context = {}
