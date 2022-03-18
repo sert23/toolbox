@@ -546,6 +546,7 @@ def ajax_read_length(request):
     data_dict = {}
     file_path = request.GET.get('matrix_location', None)
     file_path = file_path.replace(MEDIA_URL, MEDIA_ROOT)
+    RNA_annotation = request.GET.get('annotation', None)
     with open(file_path, "r") as rf:
         rl_df = pd.read_csv(rf, sep="\t")
 
@@ -562,37 +563,36 @@ def ajax_read_length(request):
     for i,x in enumerate(values):
         if float(x) > 0.1 and i > 40:
             min_width = i
-    data = [go.Bar(name="test",
+    data = [go.Bar(name="",
                    x=lengths,
                    y=values,
                    # marker=dict(color=perc_df.bar_color.values),
                    # hovertemplate="%{x}p: %{y}",
                    showlegend=False
                    )]
-
     layout = go.Layout(
         margin=go.layout.Margin(
             l=50,
-            r=200,
-            b=200,
+            r=50,
+            b=50,
             t=100,
             pad=4
         ),
-        # title=input_variable,
+        title=str(RNA_annotation) + "reads",
         font=dict(size=18),
         # autosize=False,
         # height=650,
         # width=1150,
         xaxis=dict(
             range=[0,min_width],
-            title=""),
+            title="Read length (nt)"),
         yaxis=dict(
             # type=scale,
             automargin=True,
-            # ticksuffix='%',
+            ticksuffix='%',
             tickprefix="   ",
             # dtick=dtick,
-            # title=input_variable + "\n<br>"
+            title="Percentage of reads" + "\n<br>"
         )
     )
     fig = go.Figure(data=data, layout=layout)
