@@ -493,14 +493,14 @@ def make_grpStr(jobID):
     for k in input_dict.keys():
         c_dict = input_dict[k]
         jobs.append(c_dict.get("jobID"))
-        group = c_dict.get("name_annotation")
-        if group:
-            annotations.append(group)
+        name = c_dict.get("name_annotation")
+        if name:
+            annotations.append(name)
         else:
             annotated = False
     jobs_clean = [i for i in jobs if i]
     if annotated and len(annotations) == len(jobs_clean):
-        sampledesc = ",".join(annotations)
+        sampledesc = ":".join(annotations)
         grp = ",".join(jobs_clean)
         final_string = grp + " sampleDesc=" + sampledesc + " "
         return final_string
@@ -544,44 +544,44 @@ def find_file_of_interest(folder_path):
 def matrix_generator(request):
     context = {}
     jobID = request.GET.get("jobID")
-    try:
-        is_fromDE = request.GET.get("is_fromDE")
-        file_type = request.GET.get("matrix_file_type")
-        annot_file = '"' + str(request.GET.get("matrix_annotation")) + '"'
-        column = request.GET.get("matrix_unit")
-        file_type_dict = MATRIX_GENERATOR_DICT.get(file_type)
-        params = file_type_dict.get("fixedParam")
-        output_folder = os.path.join(MEDIA_ROOT, "matrix_temp", time.strftime("%Y%m%d-%H%M%S") + "_" + generate_id() + "_" + jobID)
-        os.mkdir(output_folder)
-        exec_path = CONF.get("exec")
-        jar_file = os.path.join(exec_path, "sRNAde.jar")
-        if is_fromDE:
-            print("x")
-        else:
-            try:
-                grpString, names = make_grpStr(jobID)
-                line = "java -jar " + jar_file + " " + params + " colData={column} statFiles={annot_file} input={base_folder} grpString={jobs} output={output_folder}"
-                command_line = line.format(column=column,
-                                           annot_file=annot_file,
-                                           base_folder=MEDIA_ROOT,
-                                           jobs=grpString,
-                                           output_folder=output_folder)
-                with open(os.path.join(output_folder,"line"), "w") as wf:
-                    wf.write(command_line)
-                os.system(command_line)
-                serving_matrix = find_file_of_interest(output_folder)
-                context["download_url"] = serving_matrix.replace(MEDIA_ROOT, MEDIA_URL)
-                context["go_back_url"] = os.path.join(reverse_lazy("progress_status"), jobID)
-
-                return render(request, "newBench/download_matrix_file.html", context)
-            except:
-                context["go_back_url"] = os.path.join(reverse_lazy("progress_status"), jobID)
-                context["error_message"] = "There was an unexpected error. Please report it using the following code " + output_folder
-                return render(request, "newBench/download_matrix_file.html", context)
-    except:
+    # try:
+    is_fromDE = request.GET.get("is_fromDE")
+    file_type = request.GET.get("matrix_file_type")
+    annot_file = '"' + str(request.GET.get("matrix_annotation")) + '"'
+    column = request.GET.get("matrix_unit")
+    file_type_dict = MATRIX_GENERATOR_DICT.get(file_type)
+    params = file_type_dict.get("fixedParam")
+    output_folder = os.path.join(MEDIA_ROOT, "matrix_temp", time.strftime("%Y%m%d-%H%M%S") + "_" + generate_id() + "_" + jobID)
+    os.mkdir(output_folder)
+    exec_path = CONF.get("exec")
+    jar_file = os.path.join(exec_path, "sRNAde.jar")
+    if is_fromDE:
+        print("x")
+    else:
+        # try:
+        grpString, names = make_grpStr(jobID)
+        line = "java -jar " + jar_file + " " + params + " colData={column} statFiles={annot_file} input={base_folder} grpString={jobs} output={output_folder}"
+        command_line = line.format(column=column,
+                                   annot_file=annot_file,
+                                   base_folder=MEDIA_ROOT,
+                                   jobs=grpString,
+                                   output_folder=output_folder)
+        with open(os.path.join(output_folder,"line"), "w") as wf:
+            wf.write(command_line)
+        os.system(command_line)
+        serving_matrix = find_file_of_interest(output_folder)
+        context["download_url"] = serving_matrix.replace(MEDIA_ROOT, MEDIA_URL)
         context["go_back_url"] = os.path.join(reverse_lazy("progress_status"), jobID)
-        context["error_message"] = "There was an unexpected error. Please report it using the following code " + jobID
+
         return render(request, "newBench/download_matrix_file.html", context)
+    #         except:
+    #             context["go_back_url"] = os.path.join(reverse_lazy("progress_status"), jobID)
+    #             context["error_message"] = "There was an unexpected error. Please report it using the following code " + output_folder
+    #             return render(request, "newBench/download_matrix_file.html", context)
+    # except:
+    #     context["go_back_url"] = os.path.join(reverse_lazy("progress_status"), jobID)
+    #     context["error_message"] = "There was an unexpected error. Please report it using the following code " + jobID
+    #     return render(request, "newBench/download_matrix_file.html", context)
 
 
 class contaminaBench(FormView):
