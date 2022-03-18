@@ -555,7 +555,13 @@ def ajax_read_length(request):
     values = list(rl_df["mean"])
     data_dict["message"] = "it's working"
 
-    values = [0 if i < 0.1 else i for i in values]
+    # values = [0 if i < 0.1 else i for i in values]
+    min_width = 40
+    # if 40 > min_width:
+    #     min_width = 40
+    for i,x in enumerate(values):
+        if float(x) > 0.1 and i > 40:
+            min_width = i
     data = [go.Bar(name="test",
                    x=lengths,
                    y=values,
@@ -578,6 +584,7 @@ def ajax_read_length(request):
         # height=650,
         # width=1150,
         xaxis=dict(
+            range=[0,min_width],
             title=""),
         yaxis=dict(
             # type=scale,
