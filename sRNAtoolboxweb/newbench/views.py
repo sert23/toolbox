@@ -550,6 +550,7 @@ def ajax_read_length(request):
         rl_df = pd.read_csv(rf, sep="\t")
 
     lengths = list(rl_df["read length"])
+    rl_df.drop('read length', inplace=True, axis=1)
     rl_df['mean'] = rl_df.mean(axis=1)
     values = list(rl_df["mean"])
     data_dict["message"] = "it's working"
