@@ -3,7 +3,11 @@
 
 {% block header %}
 {% if running %}
-<meta http-equiv="refresh" content="5" >
+<meta http-equiv="refresh" content="30" >
+{% endif %}
+
+{% if queue %}
+<meta http-equiv="refresh" content="30" >
 {% endif %}
 {% endblock %}
 
