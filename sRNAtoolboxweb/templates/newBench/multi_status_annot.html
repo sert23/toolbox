@@ -89,10 +89,10 @@
                     <a href="{% url 'multi:multi_annotate' %}{{ id }}"><button type="button" class="btn btn-primary">Annotate Samples <i class="fa fa-pen"> </i> </button></a>
 {#                    <a href="{% url 'multi:annotate' %}{{ id }}"><button type="button" class="btn btn-primary">Annotate Samples</button></a>#}
                      {% if launchDE %}
-                        <a href="{% url 'DE_multi' %}{{ id }}" target="_blank"><button type="button" class="btn btn-success">Launch Jobs on sRNAde</button></a>
+{#                        <a href="{% url 'DE_multi' %}{{ id }}" target="_blank"><button type="button" class="btn btn-success">Launch Jobs on sRNAde</button></a>#}
 
-                         <a href="javascript:void(0)" data-toggle="modal" data-target="#launch_DE" class="btn btn-link" ><button type="button" class="btn btn-danger">Launch Jobs on sRNAde (don't use please) </button></a>
-                         <a href="javascript:void(0)" data-toggle="modal" data-target="#generate_matrix" class="btn btn-link" id="generate_matrix_modal_button"><button type="button" class="btn btn-danger">Generate matrix (don't use please) </button></a>
+                         <a href="javascript:void(0)" data-toggle="modal" data-target="#launch_DE" class="btn btn-link" ><button type="button" class="btn btn-success">Launch Jobs on sRNAde</button></a>
+                         <a href="javascript:void(0)" data-toggle="modal" data-target="#generate_matrix" class="btn btn-link" id="generate_matrix_modal_button"><button type="button" class="btn btn-link">Generate matrix</button></a>
                      {% endif %}
 
 
