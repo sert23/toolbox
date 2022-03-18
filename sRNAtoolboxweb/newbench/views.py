@@ -548,7 +548,7 @@ def ajax_read_length(request):
     file_path = file_path.replace(MEDIA_URL, MEDIA_ROOT)
     file_name = os.path.basename(file_path)
     annotation_name = file_name.split("_minExpr")[0]
-    # RNA_annotation = request.GET.get('annotation', None)
+    annotation_name = annotation_name.replace("_"," ")
     with open(file_path, "r") as rf:
         rl_df = pd.read_csv(rf, sep="\t")
 
