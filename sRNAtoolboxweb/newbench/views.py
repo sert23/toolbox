@@ -493,13 +493,38 @@ def make_grpStr(jobID):
     for k in input_dict.keys():
         c_dict = input_dict[k]
         jobs.append(c_dict.get("jobID"))
+        group = c_dict.get("name_annotation")
+        if group:
+            annotations.append(group)
+        else:
+            annotated = False
+    jobs_clean = [i for i in jobs if i]
+    if annotated and len(annotations) == len(jobs_clean):
+        sampledesc = ",".join(annotations)
+        grp = ",".join(jobs_clean)
+        final_string = grp + " sampleDesc=" + sampledesc + " "
+        return final_string
+    else:
+        grp = ",".join(jobs_clean)
+        return grp
+
+def make_grpStr_old(jobID):
+    dict_path = os.path.join(MEDIA_ROOT, jobID, "input.json")
+    json_file = open(dict_path, "r")
+    input_dict = json.load(json_file, object_pairs_hook=OrderedDict)
+    jobs = []
+    annotated = True
+    annotations = []
+    for k in input_dict.keys():
+        c_dict = input_dict[k]
+        jobs.append(c_dict.get("jobID"))
         group = c_dict.get("group_annotation")
         if group:
             annotations.append(group)
         else:
             annotated = False
     jobs_clean = [i for i in jobs if i]
-    if annotated and len(annotations) == len(jobs_clean) :
+    if annotated and len(annotations) == len(jobs_clean):
         matdesc = ",".join(annotations)
         grp = ",".join(jobs_clean)
         final_string = grp + " matrixDesc=" + matdesc + " "
@@ -534,7 +559,7 @@ def matrix_generator(request):
             print("x")
         else:
             try:
-                grpString = make_grpStr(jobID)
+                grpString, names = make_grpStr(jobID)
                 line = "java -jar " + jar_file + " " + params + " colData={column} statFiles={annot_file} input={base_folder} grpString={jobs} output={output_folder}"
                 command_line = line.format(column=column,
                                            annot_file=annot_file,
