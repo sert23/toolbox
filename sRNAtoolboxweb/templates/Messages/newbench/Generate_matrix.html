@@ -62,6 +62,8 @@
         {#alert(pars);#}
             {#alert(pars);#}
         var launch_url = "{% url 'matrix_generator' %}?";
+        console.log($("#id_matrix_annotation").val());
+        console.log($("#id_matrix_unit").val());
         $("#matrix_link").attr("href", launch_url.concat(pars));
     };
 
@@ -121,6 +123,9 @@
                loadLink();
             });
 
+        $(".matrix-selector").change(function() {
+            loadLink();
+        });
 
     </script>
 
@@ -128,7 +133,7 @@
 
 
 
-</script>
+    </script>
 
 
 
