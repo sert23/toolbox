@@ -279,9 +279,14 @@ def Mapping_stat_plot(input_folder, path_to_venv=None, plotly_script=None, media
     input_table = pandas.read_table(length_file, sep='\t')
     x = input_table["name"].values
     y = input_table["RCperc"].values
+    maxi = len(x)
+    for n in x:
+        if n < 0.5:
+            maxi = n
+            break
     trace = go.Bar(
-        x=x,
-        y=y,
+        x=x[0:maxi],
+        y=y[0:maxi],
         marker=dict(
             color=['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                          'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
