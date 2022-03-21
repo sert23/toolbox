@@ -178,7 +178,7 @@ def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url
               "#EB663B",  "#511CFB",  "#00A08B",  "#FB00D1",  "#FC0080",  "#B2828D",  "#6C7C32",  "#778AAE",
               "#862A16",  "#A777F1",  "#620042",  "#1616A7",  "#DA60CA",  "#6C4516",  "#0D2A63",  "#AF0038"]
 
-    colors = colors1 + colors2
+    colors = colors2 + colors1
     colors = colors*4
 
     save_later = False
