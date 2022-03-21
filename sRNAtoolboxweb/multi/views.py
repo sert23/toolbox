@@ -572,7 +572,11 @@ class MultiStatusViewAnnot(DetailView):
             outdir = new_record.outdir
             annot_dict = short_dict.get(input_line.rstrip(), {})
             name_annotation = annot_dict.get("name_annotation", "Not annotated")
+            if name_annotation == "nan":
+                name_annotation = "Not annotated"
             group_annotation = annot_dict.get("group_annotation", "Not annotated")
+            if group_annotation == "nan":
+                group_annotation = "Not annotated"
             annot_dict["jobID"] = id
             short_dict[input_line.rstrip()] = annot_dict
             jobs_tbody.append([job, job_stat, start,finish ,input_line.rstrip(), name_annotation, group_annotation])
