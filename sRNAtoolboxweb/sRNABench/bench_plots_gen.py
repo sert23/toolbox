@@ -167,16 +167,19 @@ def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url
 
     print(input_table.shape[1])
     data = []
-    # colors = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
-    #              'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
-    #              'red', 'red','red', 'red','red', 'red',
-    #              'rgb(148, 103, 189)', 'rgb(140, 86, 75)',
-    #              'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
-    #              'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
+    colors2 = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
+                 'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
+                 'red', 'red','red', 'red','red', 'red',
+                 'rgb(148, 103, 189)', 'rgb(140, 86, 75)',
+                 'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
+                 'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
 
-    colors = ["#2E91E5",  "#E15F99",  "#1CA71C",  "#FB0D0D",  "#DA16FF",  "#222A2A",  "#B68100",  "#750D86",
+    colors1 = ["#2E91E5",  "#E15F99",  "#1CA71C",  "#FB0D0D",  "#DA16FF",  "#222A2A",  "#B68100",  "#750D86",
               "#EB663B",  "#511CFB",  "#00A08B",  "#FB00D1",  "#FC0080",  "#B2828D",  "#6C7C32",  "#778AAE",
               "#862A16",  "#A777F1",  "#620042",  "#1616A7",  "#DA60CA",  "#6C4516",  "#0D2A63",  "#AF0038"]
+
+    colors = colors1 + colors2
+    colors = colors*4
 
     save_later = False
     for i in range(input_table.shape[1]-1):
