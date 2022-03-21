@@ -169,7 +169,6 @@ def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url
     data = []
     colors2 = ['rgb(31, 119, 180)', 'rgb(255, 127, 14)',
                  'rgb(44, 160, 44)', 'rgb(214, 39, 40)',
-                 'red', 'red','red', 'red','red', 'red',
                  'rgb(148, 103, 189)', 'rgb(140, 86, 75)',
                  'rgb(227, 119, 194)', 'rgb(127, 127, 127)',
                  'rgb(188, 189, 34)', 'rgb(23, 190, 207)']
@@ -180,12 +179,12 @@ def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url
 
     colors = colors2 + colors1
     colors = colors*4
-
+    color_index = 0
     save_later = False
     for i in range(input_table.shape[1]-1):
         print(input_table.iloc[:,i+1].values)
         print(names[i + 1])
-        c_color = colors[i]
+        c_color = colors[color_index]
         # do somethig with unassigned
         c_name = names[i+1]
         if c_name != "un-assigned":
