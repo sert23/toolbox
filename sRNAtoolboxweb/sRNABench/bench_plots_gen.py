@@ -280,7 +280,7 @@ def Mapping_stat_plot(input_folder, path_to_venv=None, plotly_script=None, media
     x = input_table["name"].values
     y = input_table["RCperc"].values
     maxi = len(x)
-    for n in x:
+    for n in y:
         if float(n) < 0.5:
             maxi = n
             break
