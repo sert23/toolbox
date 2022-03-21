@@ -488,7 +488,11 @@ class Annotate(DetailView):
             if "/" in input_line:
                 input_line = input_line.split("/") [-1]
             name_annotation = c_dict.get("name_annotation", "Not annotated")
+            if name_annotation == "nan":
+                name_annotation = "Not annotated"
             group_annotation = c_dict.get("group_annotation", "Not annotated")
+            if group_annotation == "nan":
+                group_annotation = "Not annotated"
             samples.append([orig_input, input_line, name_annotation, group_annotation, i])
 
 

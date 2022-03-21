@@ -908,11 +908,12 @@ class DeFromMultiAnnot(FormView):
         for k in input_dict.keys():
             annot_dict = input_dict.get(k)
             jobID = annot_dict.get("jobID")
-            grp.append(jobID)
             name = annot_dict.get("name_annotation")
-            sample.append(name)
             group = annot_dict.get("group_annotation")
-            desc.append(group)
+            if group and group!="nan":
+                sample.append(name)
+                grp.append(jobID)
+                desc.append(group)
 
         parameters["input"] = MEDIA_ROOT
         parameters["output"] = output_dir
