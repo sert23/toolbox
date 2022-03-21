@@ -184,7 +184,7 @@ def Read_len_type(input_folder, path_to_venv=None, plotly_script=None, media_url
     for i in range(input_table.shape[1]-1):
         print(input_table.iloc[:,i+1].values)
         print(names[i + 1])
-        c_color = colors[color_index]
+        c_color = colors[i]
         # do somethig with unassigned
         c_name = names[i+1]
         if c_name != "un-assigned":
