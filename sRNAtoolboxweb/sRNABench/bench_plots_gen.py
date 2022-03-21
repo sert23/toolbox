@@ -281,7 +281,7 @@ def Mapping_stat_plot(input_folder, path_to_venv=None, plotly_script=None, media
     y = input_table["RCperc"].values
     maxi = len(x)
     for n in x:
-        if n < 0.5:
+        if float(n) < 0.5:
             maxi = n
             break
     trace = go.Bar(
