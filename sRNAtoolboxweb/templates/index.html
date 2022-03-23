@@ -43,13 +43,15 @@
             <ul class="nav nav-tabs">
                 <li class="active"><a href="#sRNAbench" data-toggle="tab">sRNAbench</a>
                 </li>
-                <li class=""><a href="#batch" data-toggle="tab">sRNAbench (batch mode)</a>
-                </li>
+{#                <li class=""><a href="#batch" data-toggle="tab">sRNAbench (batch mode)</a>#}
+{#                </li>#}
                 <li class=""><a href="#sRNAde" data-toggle="tab">sRNAde</a>
                 </li>
                 <li class=""><a href="#sRNAblast" data-toggle="tab">sRNAblast</a>
                 </li>
                 <li class=""><a href="#miRNAconsTarget" data-toggle="tab">miRNAconsTarget</a>
+                </li>
+                <li class=""><a href="#sRNAcons" data-toggle="tab">sRNAcons</a>
                 </li>
 {#                <li class=""><a href="#sRNAjBrowser" data-toggle="tab">sRNAjBrowser</a>#}
 {#                </li>#}
@@ -63,19 +65,19 @@
 
             <div class="tab-content">
                 <div class="tab-pane fade active in" id="sRNAbench">
-                    <a href="{{ settings.SUB_SITE }}/srnabench/"> <h3>sRNAbench:</h3> <h4>Expression profiling of small RNAs and prediction of novel microRNAs from deep sequencing data</h4>  </a>
+                    <a href="{{ settings.SUB_SITE }}/newbench/"> <h3>sRNAbench:</h3> <h4>Expression profiling of small RNAs and prediction of novel microRNAs from deep sequencing data</h4>  </a>
                     <h4 style="line-height: 150%">sRNAbench is mainly designed to be uses in model species, or at least species with
                         an available genome assembly or fasta-formatted annotations. Several commonly used input formats like fastq, sra, fasta or read/count are supported.
                         It performs expression profiling of known microRNAs and other types of small RNAs, detection and analysis of isomiRs,
                         outputs several graphical summaries and predicts novel microRNAs both in plants and animals.</h4>
                 </div>
 
-                <div class="tab-pane fade" id="batch">
-                    <a href="{{ settings.SUB_SITE }}/newbench/"> <h3>sRNAbench (batch mode):</h3> <h4> Parallel expression profiling of small RNAs for several files at once</h4>  </a>
-                    <h4 style="line-height: 150%"> Batch mode is a new feature of sRNAbench that allows for intuitive profiling of several samples at once.
-                    If you have several samples with the same sequencing approach (library preparation) this tool will profile all these samples using the same
-                    bioinformatics protocol. This will also guarantee that all your samples are profiled following the exact same steps.</h4>
-                </div>
+{#                <div class="tab-pane fade" id="batch">#}
+{#                    <a href="{{ settings.SUB_SITE }}/newbench/"> <h3>sRNAbench (batch mode):</h3> <h4> Parallel expression profiling of small RNAs for several files at once</h4>  </a>#}
+{#                    <h4 style="line-height: 150%"> Batch mode is a new feature of sRNAbench that allows for intuitive profiling of several samples at once.#}
+{#                    If you have several samples with the same sequencing approach (library preparation) this tool will profile all these samples using the same#}
+{#                    bioinformatics protocol. This will also guarantee that all your samples are profiled following the exact same steps.</h4>#}
+{#                </div>#}
 
                 <div class="tab-pane fade" id="sRNAde">
                     <a href="{{ settings.SUB_SITE }}/srnade/"> <h3>sRNAde:</h3> <h4>Differential expression analysis </h4></a>
@@ -125,6 +127,13 @@
                                 miRNAconsTargets uses a selection microRNA target prediction programs and
                                 applies them to the user supplied sets of microRNAs and 3'UTRs or CDS sequences. It reports both,
                                 individual predictions and a consensus prediction. </h4>
+                </div>
+
+                <div class="tab-pane fade" id="sRNAcons">
+                    <a href="/srnacons/" > <h3>sRNAcons:</h3> <h4>Estimation of the conservation depth of small RNAs</h4>  </a>
+                    <h4 style="line-height: 150%"> User provided small RNA sequences (fasta format) are mapped against all assemblies available
+                        in sRNAtoolbox. The tool has two different outputs, i) The conservation depth for all small RNA input sequences, i.e
+                        the percentage of genomes in which the sequence was found, and ii)the percentage of mapped input sequences per genome.</h4>
                 </div>
 
                 <div class="tab-pane fade" id="sRNAjBrowser">
