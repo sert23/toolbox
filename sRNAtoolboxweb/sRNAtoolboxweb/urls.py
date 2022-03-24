@@ -29,6 +29,7 @@ urlpatterns =[
     url(r'^testing', views.testing),
     url(r'^barleyCultivar', views.cultivar),
     url(r'^statistics', views.version, name='versions'),
+    url(r'^database', views.database_content, name='databases'),
     url(r'^manage', views.management, name='manage'),
     url(r'^/*$', views.index, name='home'),
     url(r'^admin/', admin.site.urls),

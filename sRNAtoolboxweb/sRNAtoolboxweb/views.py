@@ -236,7 +236,7 @@ def cultivar(request):
     return render(request, "static_pages/jbrowserDE_result_static.html", results)
 
 
-def content(request):
+def database_content(request):
     template = "content.html"
 
     fileContent = STATIC_ROOT + "toolboxDB.json"
