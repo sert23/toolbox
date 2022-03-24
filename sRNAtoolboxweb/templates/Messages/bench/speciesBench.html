@@ -6,4 +6,11 @@
 {% block text %}
 <p>sRNAbench can profile small RNAs from experiments with genetic material from different organisms. Therefore,
     different species can be selected by means of activating the corresponding &lsquo;checkboxes&rsquo;.</p>
+    <p>The first dropdown menu at your left will allow you to select a miRNA reference database. If available for your species,
+    we recommend MirGeneDB or PmiREN. Then choose one or several short names on the second menu to profile your sample(s) using that species miRNA complement.
+    </p>
+    <p> Selecting a genome assembly is only required if the &lsquo;Predict New miRNAs&rsquo; option is selected.
+        Other genomic annotations are also added through this option so it has to be provided unless you are only interested in miRNAs.
+
+    </p>
 {% endblock %}
