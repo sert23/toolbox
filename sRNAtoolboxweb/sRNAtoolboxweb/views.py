@@ -3,7 +3,7 @@ import itertools
 import django_tables2 as tables
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-
+import json
 
 from progress.models import JobStatus
 
@@ -19,6 +19,8 @@ __author__ = 'antonior'
 from django.shortcuts import render, redirect
 
 from django.conf import settings
+from sRNAtoolboxweb.settings import STATIC_ROOT
+
 from sRNAtoolboxweb.manage_plot import stacked_bars_state_percentage,stacked_bars_state,job_type
 
 PIPELINETYPES_URL = {
@@ -234,4 +236,25 @@ def cultivar(request):
     return render(request, "static_pages/jbrowserDE_result_static.html", results)
 
 
+def content(request):
+    template = "content.html"
 
+    fileContent = STATIC_ROOT + "toolboxDB.json"
+
+    with open(fileContent) as json_file:
+        data = json.load(json_file)
+
+    header = ["Scientific name", "Taxon ID", "Assembly", "miRNA", "Other annotations"]
+    results = {}
+
+    table = []
+
+    for element in data:
+        values = data[element]
+        values['taxonID'] = element
+        table.append(values)
+
+    print(header)
+    results["table"] = table
+    results["header"] = header
+    return render(request, template, results)
