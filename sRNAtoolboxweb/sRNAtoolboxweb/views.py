@@ -237,7 +237,7 @@ def cultivar(request):
 
 
 def database_content(request):
-    template = "content.html"
+    template = "database_content.html"
 
     fileContent = STATIC_ROOT + "toolboxDB.json"
 
