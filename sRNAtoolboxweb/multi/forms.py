@@ -1196,7 +1196,7 @@ class sRNABenchForm_withDBs(forms.Form):
     PMIREN = parse_PmiREN()
 
     ADAPTERS = (
-        # (None, "Select Adapter to trim off"),
+        (None, "Select Adapter to trim off"),
         # ("EMPTY", "Input reads are already trimmed"),
         ("TGGAATTCTCGGGTGCCAAGG", "Illumina RA3 - TGGAATTCTCGGGTGCCAAGG"),
         ("UCGUAUGCCGUCUUCUGCUUGU", "Illumina(alternative) - UCGUAUGCCGUCUUCUGCUUGU", ),
