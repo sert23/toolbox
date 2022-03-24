@@ -1,0 +1,18 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}modalAnn{{key}}{% endblock %}
+{% block title %}
+    {{value}}: {{key}}
+{% endblock %}
+{% block text %}
+    Available annotations for <b>{{element.ScientificName}}</b> from <b>{{value}}</b>:
+    <br>
+    <ul>
+    {% for annotation,valueAnn in element.otherAnnot.items %}
+        {% if annotation == key %}
+            {% for annSecond,annSecondValue in valueAnn.items %}    
+                <li>{{ annSecond }}:{{annSecondValue}}</li>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endblock %}

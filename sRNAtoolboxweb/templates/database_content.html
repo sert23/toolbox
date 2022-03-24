@@ -115,7 +115,7 @@
                                             {% if element.otherAnnotDesc %}
                                                 {% for key,value in element.otherAnnotDesc.items %}
                                                 <a data-toggle="modal" data-target="#modalAnn{{key}}"><button class="btn btn-primary btn-xs">{{value}}</button></a>
-                                                {% include "Messages/content/otherAnnot.html" %}
+                                                {% include "Messages/database/otherAnnot.html" %}
                                                 <br> 
                                                 {% endfor %}
                                             {% else %}
