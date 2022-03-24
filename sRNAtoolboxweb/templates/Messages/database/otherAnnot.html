@@ -10,7 +10,7 @@
     {% for annotation,valueAnn in element.otherAnnot.items %}
         {% if annotation == key %}
             {% for annSecond,annSecondValue in valueAnn.items %}    
-                <li>{{ annSecond }}:{{annSecondValue}}</li>
+                <li>{{ annSecond }}: {{annSecondValue}}</li>
             {% endfor %}
         {% endif %}
     {% endfor %}
