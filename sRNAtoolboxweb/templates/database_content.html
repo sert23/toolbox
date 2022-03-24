@@ -1,0 +1,157 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block content %}
+
+    
+
+    <div id="page-wrapper">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">sRNAtoolbox Database Content</h1>
+            </div>
+        </div>
+
+
+        <ul class="nav nav-pills" id="myTab">
+            <li class="active"><a href="#Summary" data-toggle="tab">Summary</a>
+            </li>
+            <li><a href="#sp" data-toggle="tab">Per species</a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane fade in active" id="Summary">
+                <div class="row">
+                    <br>
+                    <div class="col col-lg-6">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover no-footer">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>sRNAtoolbox 2022</th>
+                                        <th>sRNAtoolbox 2019</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><b>Plant genomes</b></td>
+                                        <td>Ensembl Plants 51, 91 genomes</td>
+                                        <td>Ensembl Plants 36, 48 genomes</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Bacterial collection</b></td>
+                                        <td>NCBI Microbial Genomes (one genome per genus), 3004 genomes</td>
+                                        <td>NCBI Microbial Genomes (one genome per genus), 781 genomes</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Bacterial genomes</b></td>
+                                        <td>NCBI Microbial Genomes (one genome per species), 9655 genomes</td>
+                                        <td>Not available</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Virus genomes</b></td>
+                                        <td>NCBI virus (one genome per species), 10301 genomes</td>
+                                        <td>Not available</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>RNA annotations</b></td>
+                                        <td>RNA central release 20 (snoRNA, snRNA,...)</td>
+                                        <td>RNA central release 13</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>miRNA annotations</b></td>
+                                        <td>PmiREN, MirGeneDB, miRbase</td>
+                                        <td>MirGeneDB, miRbase</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Number of different species with miRNA complement</b></td>
+                                        <td>358</td>
+                                        <td>293</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade in" id="sp">
+                <div class="row">
+                    <br>
+                    <div class="col col-lg-8">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover dataTable no-footer">
+                                <thead>
+                                    <tr>
+                                        {% for element in header %}
+                                        <th><a>{{ element }} </a></th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for element in table %}
+                                    <tr>
+                                        <td class="rowTable">{{ element.ScientificName}} </td>
+                                        <td class="rowTable">{{ element.taxonID }} </td>
+                                        <td class="rowTable">
+                                            {% if element.assembly %}
+                                                {{ element.assembly }}
+                                            {% else %}
+                                                Not available
+                                            {% endif %}
+                                        </td>
+                                        <td class="rowTable">
+                                            {% if element.miRNA %}
+                                                {% for key,value in element.miRNA.items %}
+                                                    {{ key }}:{{ value }}
+                                                {% endfor %}
+                                            {% else %}
+                                                Not available
+                                            {% endif %}
+                                        </td>
+                                        <td class="rowTable">
+                                            {% if element.otherAnnotDesc %}
+                                                {% for key,value in element.otherAnnotDesc.items %}
+                                                <a data-toggle="modal" data-target="#modalAnn{{key}}"><button class="btn btn-primary btn-xs">{{value}}</button></a>
+                                                {% include "Messages/content/otherAnnot.html" %}
+                                                <br> 
+                                                {% endfor %}
+                                            {% else %}
+                                            Not available
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+{% block modals %}
+
+{% endblock %}
+
+
+{% block js %}
+<script src="{% static 'js/plugins/dataTables/jquery.dataTables.js' %}"></script>
+<script src="{% static 'js/plugins/dataTables/dataTables.bootstrap.js' %}"></script>
+<script>
+    $('table').each(function() {
+        if (this.id != "notformattable"){
+            console.log(this.id);
+            $(this).dataTable();
+        }
+    });
+</script>
+
+{% endblock %}
