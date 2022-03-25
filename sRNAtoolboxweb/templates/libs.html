@@ -5,17 +5,24 @@
             <h5>{{ key.0}}</h5>
             <dl class="dl-horizontal">
                 {% for key2, value2 in value.items %}
-                <dt style='text-align: left; margin-bottom: 0.25em; width: auto; padding-right: 1em;'>{{ key2 }}
-                </dt>
-                <dd style="margin-left: 0; margin-bottom: 0.25em;">{{ value2 }}
-                    {% if "anti" in key2 %}
-                        <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "MA_antisense" id key.1 %}">MA antisense</a></dd>
-                        <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "SA_antisense" id key.1 %}">SA antisense</a></dd>
-                    {% else %}
+                    {% if not "anti" in key2 %}
+                        <dt style='text-align: left; margin-bottom: 0.25em; width: auto; padding-right: 1em;'>{{ key2 }}
+                        </dt>
+                        <dd style="margin-left: 0; margin-bottom: 0.25em;">{{ value2 }}
                         <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "MA" id key.1 %}">multiple assignment (MA)</a></dd>
                         <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "SA" id key.1 %}">single assignment (SA)</a></dd>
                     {% endif %}
                 </dd>
+                {% endfor %}
+                {% for key2, value2 in value.items %}
+                    {% if "anti" in key2 %}
+                        <dt style='text-align: left; margin-bottom: 0.25em; width: auto; padding-right: 1em;'>{{ key2 }}
+                            </dt>
+                            <dd style="margin-left: 0; margin-bottom: 0.25em;">{{ value2 }}
+                            <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "MA_antisense" id key.1 %}">MA antisense</a></dd>
+                            <dd style="margin-left: 0; margin-bottom: 0.25em;"><a href="{% url "table_bench" "SA_antisense" id key.1 %}">SA antisense</a></dd>
+                    {% endif %}
+                    </dd>
                 {% endfor %}
             </dl>
         {% endfor %}
