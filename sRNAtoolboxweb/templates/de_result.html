@@ -71,6 +71,23 @@
 
             {% endif %}
             </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="dropdown">
+                      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Download
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">Expression matrix (read counts)</a></li>
+                        <li><a href="#">Expression matrix (RPM)</a></li>
+{#                        <li><a href="#">Something else here</a></li>#}
+{#                        <li role="separator" class="divider"></li>#}
+{#                        <li><a href="#">Separated link</a></li>#}
+                      </ul>
+                    </div>
+                </div>
+            </div>
 
             <!-- Nav tabs -->
             <div class="" role="tabpanel" data-example-id="togglable-tabs">
@@ -618,7 +635,7 @@
                 <div class="col-lg-6">
     {#                <a href="{{ MEDIA_URL }}{{ img  }}"  > <img src="{{ MEDIA_URL }}{{ img  }}"  alt="Heat Map" style="width:100%;height:100%" /> </a>#}
                     <h3 align="center"> {{ name }}  </h3>
-                    <a href="javascript:void(0)" ><img id="con_img{{ forloop.counter }}" src="{{ img  }}" alt="img" style="width:100%;height:100%;padding:1px;border:thin solid black;"  /> </a>
+                    <a href= ><img id="con_img{{ forloop.counter }}" src="{{ img  }}" alt="img" style="width:100%;height:100%;padding:1px;border:thin solid black;"  /> </a>
 
                 </div>
 
