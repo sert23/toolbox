@@ -62,7 +62,7 @@
                 {% if zip %}
                 <div class="col-lg-6">
 
-                    <div class="col-lg-7">
+                    <div class="col-lg-8">
                     <br>
 
                 <h4 class="text-success"> Download all results as zip file <a href="{{ zip }}" download> <i class="fa fa-file-zip-o fa-fw"></i> here</a></h4>
@@ -74,8 +74,8 @@
                         Download <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu">
-                         <li><a href="#">Expression matrix (read counts)</a></li>
-                        <li><a href="#">Expression matrix (RPM)</a></li>
+                         <li><a href="{{ read_count_matrix_url }}">Expression matrix (read counts)</a></li>
+                        <li><a href="{{ RPM_matrix_url }}">Expression matrix (RPM)</a></li>
                       </ul>
                     </div>
                 </div>

@@ -309,6 +309,19 @@ def old_result(request):
     else:
         return redirect(reverse_lazy('srnade'))
 
+def find_matrix_URL(init_path, file_type):
+    # / ttest / mature_sense_minExpr1_RCadj.mat
+    extension_dict = { "RC" : "RCadj.mat",
+                       "RPM": "totalRPM.mat"
+    }
+    extension = extension_dict[file_type]
+    file_folder = os.path.join(init_path, "de", "ttest")
+    potential_files = [os.path.join(file_folder, x) for x in os.listdir(file_folder) if
+                       (os.path.isfile(os.path.join(file_folder, x)) and x.endswith(extension))]
+    most_likely_file = potential_files[0]
+    return most_likely_file.replace(MEDIA_ROOT, MEDIA_URL)
+
+
 def result(request):
     if 'id' in request.GET:
         job_id = request.GET['id']
@@ -320,6 +333,9 @@ def result(request):
             results["id"] = job_id
             zip_path = os.path.join(new_record.outdir, "sRNAde_full_Result.zip")
             results["zip"] = zip_path.replace(MEDIA_ROOT, MEDIA_URL)
+            results["read_count_matrix_url"] = find_matrix_URL(new_record.outdir, "RC")
+            results["RPM_matrix_url"] = find_matrix_URL(new_record.outdir, "RPM")
+
 
             #seqVar
             if os.path.exists(os.path.join(new_record.outdir, 'seqvar')):
@@ -910,7 +926,7 @@ class DeFromMultiAnnot(FormView):
             jobID = annot_dict.get("jobID")
             name = annot_dict.get("name_annotation")
             group = annot_dict.get("group_annotation")
-            if group and group!="nan":
+            if group and (group != "nan"):
                 sample.append(name)
                 grp.append(jobID)
                 desc.append(group)
