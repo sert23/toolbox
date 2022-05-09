@@ -737,3 +737,50 @@ class contaminaForm(forms.Form):
                 configuration_file_path=configuration_file_path,
                 job_name=name,
                 sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')), pipeline_id
+
+
+class requestForm(forms.Form):
+
+    taxonID = forms.CharField(label='Taxonomy ID from NCBI (from Taxonomy NCBI)',
+                                required=True)
+    common_name = forms.CharField(label='Common name',
+                                required=True)
+    scientific_name = forms.CharField(label='Scientific name',
+                                required=True)
+    link_genome = forms.CharField(label='Link to genome assembly or project website',
+                                required=True)
+    database = forms.CharField(label='is it in miRBase/MirGeneDB/PmiREN/other miRNA annotation',
+                                required=True)
+    contact = forms.CharField(label='please provide your details (including email) for followup contact',
+                                required=True)
+    comments = forms.CharField(label='additional comments',
+                                required=True)
+
+    def __init__(self, *args, **kwargs):
+        super(requestForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+
+            # in data cleaning we should check if the folder actually exists
+            create_collapsable_div(
+                'Request a new species',
+                Field('taxonID', css_class='form-control'),
+                Field('common_name', css_class='form-control'),
+                Field('scientific_name', css_class='form-control'),
+                Field('link_genome', css_class='form-control'),
+                Field('database', css_class='form-control'),
+                Field('contact', css_class='form-control'),
+                Field('comments', css_class='form-control'),
+                title='Request a new species',
+                extra_title=render_modal('Choose_Input'),
+                c_id="1",
+                open=True
+            ),
+            ButtonHolder(
+                # Submit('submit', 'RUN', css_class='btn btn-primary', onclick="alert('Neat!'); return true")
+                # Submit('submit', 'RUN', css_class='btn btn-primary')
+                Submit('submit', 'RUN', css_class='btn btn-primary')
+                # onsubmit="alert('Neat!'); return false")
+
+            )
+        )
