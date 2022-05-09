@@ -26,7 +26,7 @@ from FileModels.speciesAnnotationParser import SpeciesAnnotationParser
 from FileModels.speciesParser import SpeciesParser
 from progress.models import JobStatus
 from multi.forms import PhotoForm, sRNABenchForm, sRNABenchForm_withDBs
-from sRNABench.forms import contaminaForm
+from sRNABench.forms import contaminaForm, requestForm
 # from .forms import miRNAgFreeForm, FileForm
 from utils import pipeline_utils
 from utils.sysUtils import make_dir
@@ -682,3 +682,9 @@ class contaminaBench(FormView):
 
     def print_file_locat(self, form):
         print(form.cleaned_data)
+
+class SpeciesRequest(FormView):
+    template_name = 'newBench/request.html'
+    form_class = requestForm
+    success_url = reverse_lazy("species-request")
+
