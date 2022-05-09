@@ -1,211 +1,19 @@
+{#{% extends 'base.html' %}#}
+{#{% extends 'photos/base.html' %}#}
 {% extends "base.html" %}
 {% load staticfiles %}
+
 {% block content %}
 
-{#<script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>#}
-<!-- Modal -->
-<div class="modal fade" id="spinner" tabindex="-1" role="dialog" aria-labelledby="spinnerLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-body">
-          <img style="display:block; margin-left:auto; margin-right:auto; width:50%;" src="{% static 'gif/sRNAbench_spinner.gif' %}">
-          <h1 style="text-align: center;">Uploading file...</h1>
-        </div>
-      </div>
-    </div>
-</div>
+{#{% load static %}#}
 
-    <style>
-    .fa-clickable {
-    cursor:pointer;
-    outline:none;
-    }
-    </style>
-
-    <div class="modal fade" id="modal-progress" data-backdrop="static" data-keyboard="false">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Uploading...</h4>
-        </div>
-        <div class="modal-body">
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 0%;">0%</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-    <div id="page-wrapper">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="page-header">
-            <a href="{{ settings.SUB_SITE }}/newbench/" target="_blank"> <h1>sRNAbench: </h1></a>
-                <h3>Profiling of small RNAs and its sequence variants in single or multi-species high-throughput experiments</h3>
-{#            <h3> You should probably not be here </h3>#}
-            </div>
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
-    <!-- /.row -->
-    <input type="hidden" id="jobId" name="jobId" value="{{ jobID }}">
-        <form enctype="multipart/form-data"
-{#                                    id="fileupload" method="POST"#}
-{#                                      data-url="/mirqc"#}
-{#                                    id="id_ajax_upload_form" method="POST"#}
-                                                            novalidate="">
-                                    <input id="fileupload" type="file" name="file" multiple
-           style="display: none;"
-           data-url="{{ data_url }}"
-{#           data-url="{% url 'photos:progress_bar_upload' %}"#}
-           data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
-                                <input type="submit" id="sub_button" style="display:none">
-
-
-                                </form>
-    <div class="row">
-    <div class="col-lg-9">
-
-
-
-        <div class="panel panel-default">
-    <div class="panel-heading">
-        <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapseOne">Data to upload</a> <a  data-toggle="modal" data-target="#choose_input" class="btn btn-link"><i class="fa fa-question-circle"> </i></a>
-        </h4>
-
-
-
-    </div>
-    <div id="collapseOne" class="panel-collapse collapse in">
-        <div class="panel-body">
-        <div style="margin-bottom: 20px;">
-{#    <button type="button" class="btn btn-primary js-upload-photos">#}
-    <a  data-toggle="modal" data-target="#add_samples" class="btn btn-link">
-            <button type="button" class="btn btn-success">
-                <span class="glyphicon glyphicon-cloud-upload"></span> Add sample(s)</button> </a>
-
-            <table id="gallery" class="table table-bordered" >
-    <thead>
-      <tr>
-        <th>Uploaded Files</th> <th>Type</th> <th onclick="delInput('ALL');" class="text-danger fa-clickable"> Delete all</th>
-              </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-          </table>
-    
-        </div>
-
-                <div class="row">
-                    <div class="col-lg-6">
-
-                </div>
-                            <div class="col-lg-6 text-right" ><a id="run_link" href="#" > <button onclick="redirLaunch();" id="run_id" type="button" class="btn btn-primary" style="display: inline-block;"> NEXT </button> </a>  </div>
-    {#                        <div class="col-lg-6 text-right" ><a id="run_link2" href="#" > test </a>  </div>#}
-    {#                        <div class="col-lg-6 text-right" ><a onclick="alert('no idea');" id="run_link3" href="#" > test2 </a>  </div>#}
-    {#                        <div class="col-lg-6 text-right" ><a id="run_link" target="_blank" href="#" onclick="location.replace('http://google.com/'),'_top'"> </a> <button onclick="location.replace('http://google.com/'),'_top'" id="run_id" type="button" class="btn btn-success" style="display: inline-block;"> RUN </button> </div>#}
-    {#                        <div class="col-lg-6 text-right" ><a id="run_link" target="_blank" href="#"> </a> <a id="run_id"> hehehe</a> </div>#}
-
-                        </div>
-
-        </div>
-    </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </div>
-
-        <div class="col-lg-3">
-            <div class="panel panel-info">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    Help
-                </h4>
-            </div>
-            <div class="panel-body">
-                <a href="{{ settings.MANUAL_URL }}" target="_blank">Link to Web Manual</a>
-{#                <a href="http://bioinfo5.ugr.es/sRNAbench/sRNAbench_web.pdf" target="_blank">Link to Web Manual</a>#}
-                <br/>
-                <a href="{{ settings.SUB_SITE }}/jobstatus/ZAPFTBMPBGCPIDM" target="_blank">Link to Test Data Results</a>
-                </div>
-
-                </div>
-            <div class="panel panel-default">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    Test Data Parameters
-                </h4>
-            </div>
-            <div class="panel-body">
-                Input File: <a href="{% static '/IK_exosomes.fastq.gz' %}" download> <i class="fa fa-download fa-fw"></i> IK_exo.fastq.gz</a>
-                <br>
-                Or use SRA ID: SRR1563060
-                <br>
-            </div>
-
-        </div>
-
-            <div class="panel panel-green">
-            <div class="panel-heading">
-                <h4 class="panel-title">
-                    Test Data Description
-                </h4>
-            </div>
-            <div class="panel-body">
-                Secreted exosomes of an Epstein-Barr virus (EBV)-transformed lymphoblastoid cell line (LCLs). Small RNAs of human and virus origin can be detected.
-                <br>
-                <a href="http://www.cell.com/cell-reports/fulltext/S2211-1247%2814%2900703-7"  target="_blank">Link To Publication</a>
-            </div>
-            </div>
-
-    </div>
-
-
-
-
-
-
-    </div>
-
-
-
-
-    </div>
-    <!-- /.row -->
-
-
-
-    <!-- /#page-wrapper -->
-    
-
-{% endblock %}
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
 
 
 {% block modals %}
-    {% include "Messages/newbench/Choose_input.html" %}
-    {% include "Messages/miRgFree/upload_samples.html" %}
+    {% include "Messages/bench/Choose_input.html" %}
     {% include "Messages/bench/sRNAbenchInput.html" %}
-    {% include "Messages/miRgFree/Species_dropdown.html" %}
+    {% include "Messages/bench/Species_dropdown.html" %}
     {% include "Messages/bench/library_mode.html" %}
     {% include "Messages/bench/other_ncrnas.html" %}
     {% include "Messages/bench/guess_Adapter.html" %}
@@ -220,438 +28,204 @@
     {% include "Messages/bench/UploadUserFiles.html" %}
     {% include "Messages/bench/mirnas.html" %}
 
+{#    Protocols      #}
+    {% include "Messages/protocols/Illumina.html" %}
+    {% include "Messages/protocols/NEB.html" %}
+    {% include "Messages/protocols/Bioo.html" %}
+    {% include "Messages/protocols/Smarter.html" %}
+    {% include "Messages/protocols/Qiagen.html" %}
+    {% include "Messages/protocols/Custom.html" %}
+    {% include "Messages/protocols/Guess.html" %}
 
 
 {% endblock %}
 
-</div>
+    {% block javascript %}
+{#    <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>#}
+{#    <script src="{% static 'js/bootstrap.min.js' %}"></script>#}
+  {# JQUERY FILE UPLOAD SCRIPTS #}
+{#  <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>#}
+{#  <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>#}
+{#  <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>#}
+{##}
+{#  <script src="/static/vendors/datatables.net/js/jquery.dataTables.min.js"></script>#}
+{#  <script src="/static/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>#}
+{#  <script src="/static/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>#}
+{#  <script src="/static/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>#}
+{#  <script src="/static/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>#}
+{#  <script src="/static/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>#}
+{#  <script src="/static/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>#}
+{#  <script src="/static/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>#}
+{#  <script src="/static/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>#}
+{#  <script src="/static/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>#}
+{#  <script src="/static/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>#}
+{#  <script src="/static/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>#}
+{##}
+{#<script src="http://cdn.datatables.net/plug-ins/1.10.12/api/processing().js"></script>#}
 
-{% block js %}
-
-    <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
+        <script src="{% static 'js/jquery-file-upload/vendor/jquery.ui.widget.js' %}"></script>
   <script src="{% static 'js/jquery-file-upload/jquery.iframe-transport.js' %}"></script>
   <script src="{% static 'js/jquery-file-upload/jquery.fileupload.js' %}"></script>
 
+  <script src="{% static 'vendors/datatables.net/js/jquery.dataTables.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-bs/js/dataTables.bootstrap.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-buttons/js/dataTables.buttons.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-buttons/js/buttons.flash.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-buttons/js/buttons.html5.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-buttons/js/buttons.print.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-keytable/js/dataTables.keyTable.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-responsive/js/dataTables.responsive.min.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js'%} "></script>
+  <script src="{% static 'vendors/datatables.net-scroller/js/dataTables.scroller.min.js'%} "></script>
+
+<script src="http://cdn.datatables.net/plug-ins/1.10.12/api/processing().js'%} "></script>
+<style>
+
+    .help-block{
+   color: #dc465b;
+   font-style: italic;
+}
+
+</style>
+
+{% endblock %}
+
+{% block js %}
+
+
     <script>
 
-        $("#div_pasted").hide();
-        $("#gallery").hide();
+    var toggleDB = function(DB) {
 
-        $("#use_pasted").click(function () {
-            if (document.getElementById('use_pasted').checked){
-                $("#div_id_species").hide();
-                $("#div_pasted").show();
+        {#div_list = ["MGDB_div", "MB_div", "PM_div" ];#}
 
-            } else {
-                $("#div_id_species").show();
-                $("#div_pasted").hide();
+        $("#MGDB_div").css("display", "none");
+        $("#MB_div").css("display", "none");
+        $("#PM_div").css("display", "none");
+
+
+        if (DB) {
+            if (DB == "1") {
+                $("#MB_div").css("display", "block");
+            } else if (DB == "2") {
+                $("#MGDB_div").css("display", "block");
+            } else if (DB == "3") {
+                $("#PM_div").css("display", "block");
+
             }
-
-
-        });
-
-    </script>
-
-    <script>
-
-    var delInput = function(del_string) {
-
-        {#alert(del_string);#}
-        $.ajax({
-        url: '{% url "ajax_del" %}',
-        data: {
-            "id" : "{{ jobID }}",
-            "to_del" :  del_string,
-        },
-        dataType: 'json',
-        success: function (data) {
-            if (del_string=="ALL"){
-                $("#gallery tbody tr").remove();
-            }
-            if (data.message){
-                alert(data.message);
-            }
-        },
-    });
+        }
     };
 
-    $('table').on('click','tr i',function(e){
+    $("#id_reference_database").change(function() {
 
-        {#e.preventDefault();#}
-        {#var row=$(e.target).closest("tr");#}
-        {#alert($(this).attr('name'));#}
-        delInput($(this).attr('name'));
+        toggleDB($("#id_reference_database").val());
 
+    });
 
-        $(this).parents('tr').remove();
-      });
+    {# hide DB selectors on start #}
+    toggleDB($("#id_reference_database").val());
 
     </script>
-
-    <script>$(function () {
-
-        $(".js-upload-photos").click(function () {
-
-            $("#fileupload").click();
-        });
-
-    {# });#}
-
-  $("#fileupload").fileupload({
-    dataType: 'json',
-    sequentialUploads: true,
-
-    start: function (e) {
-      $('.modal').modal('hide');
-      $("#modal-progress").modal("show");
-    },
-
-    stop: function (e) {
-      $("#modal-progress").modal("hide");
-    },
-
-    progressall: function (e, data) {
-      var progress = parseInt(data.loaded / data.total * 100, 10);
-      var strProgress = progress + "%";
-      $(".progress-bar").css({"width": strProgress});
-      $(".progress-bar").text(strProgress);
-    },
-
-    done: function (e, data) {
-         {#$("#modal-progress").modal("hide"); #}
-      if (data.alert){
-       alert("something went wrong");
-      }
-        if (data.result.is_valid) {
-            $("#something_up").val("true");
-          {#alert("hello");#}
-         {#$("#modal-progress").modal("hide");#}
-          $("#uploaded_card").show();
-          {#alert(data.result.name);#}
-          {#alert(data.result.url);#}
-         {#$("#modal-progress").modal("hide");#}
-        $("#gallery").show();
-         $("#gallery tbody").prepend(
-          "<tr><td><a target='_blank' href='" + data.result.url + "'>" + data.result.name +
-             "</a></td> <td> Uploaded file </td> <td><i name='uploaded::"+ data.result.name +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
-        )
-      }
-        {#$("#modal-progress").modal("hide");#}
-    }
-
-  });
-
- });</script>
-
-
-        {#</script>#}
-   {#  Dropbox code   #}
-
-    <script type="text/javascript" src="https://www.dropbox.com/static/api/2/dropins.js" id="dropboxjs"
-            data-app-key="vaiq8bxw40wiwhn"></script>
-
-    <script>
-
-
-
-
-
-    options = {
-
-    // Required. Called when a user selects an item in the Chooser.
-    success: function(files) {
-
-        var links = files.map(e => e.link).join(",");
-        $.ajax({
-        url: '{% url "ajax_drop" %}',
-        data: {
-            "id" : "{{ jobID }}",
-            "files" :  links,
-        },
-        dataType: 'json',
-            success: function (data) {
-                $("#gallery").show();
-                var arrayLength = data.samples.length;
-                if(arrayLength >0){
-                for (var i = 0; i < arrayLength; i++) {
-
-                $("#gallery tbody").prepend(
-          "<tr><td><a target='blank' href='" + data.links[i] +  "'>" + data.samples[i] +
-             "</a></td> <td>" + "Dropbox" + "</td> <td><i name='"+ "dropbox" +"::"+ data.links[i] +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
-                    );
-                {#alert("hey");#}
-
-                    }
-                };
-                $('.modal').modal('hide');
-            },
-        });
-    },
-
-
-
-        {#if (arrayLength > 0) {#}
-        {#    $("#gallery").show();#}
-        {#    for (var i = 0; i < arrayLength; i++) {#}
-        {##}
-        {#        $("#gallery tbody").prepend(#}
-        {#  "<tr><td><a target='blank' href='" + files[i].link +  "'>" + files[i].name +#}
-        {#     "</a></td> <td>" + "Dropbox file" + "</td> <td name='"+ "dropbox" +":"+ files[i].name +"'><i name='"+ "dropbox" +":"+ files[i].name +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"#}
-        {#);#}
-        {##}
-        {#    };#}
-        {#    $('.modal').modal('hide');#}
-        {# }#}
-
-
-    // Optional. Called when the user closes the dialog without selecting a file
-    // and does not include any parameters.
-    cancel: function() {
-
-    },
-
-    // Optional. "preview" (default) is a preview link to the document for sharing,
-    // "direct" is an expiring link to download the contents of the file. For more
-    // information about link types, see Link types below.
-    linkType: "direct", // or "direct"
-
-    // Optional. A value of false (default) limits selection to a single file, while
-    // true enables multiple file selection.
-    multiselect: true, // or true
-
-    // Optional. This is a list of file extensions. If specified, the user will
-    // only be able to select files with these extensions. You may also specify
-    // file types, such as "video" or "images" in the list. For more information,
-    // see File types below. By default, all extensions are allowed.
-    {# extensions: ['.pdf', '.doc', '.docx'],#}
-
-    // Optional. A value of false (default) limits selection to files,
-    // while true allows the user to select both folders and files.
-    // You cannot specify `linkType: "direct"` when using `folderselect: true`.
-    folderselect: false, // or true
-
-    // Optional. A limit on the size of each file that may be selected, in bytes.
-    // If specified, the user will only be able to select files with size
-    // less than or equal to this limit.
-    // For the purposes of this option, folders have size zero.
-     {# sizeLimit: 1024, // or any positive number#}
-};
-    var DBbutton = Dropbox.createChooseButton(options);
-    {#document.getElementById("dropbox-container").appendChild(DBbutton);#}
-    </script>
-
-
-
- {#  Google drive code   #}
-
 
 
     <script>
-    // Ajax function
-
-    var driveAjax = function(ids,names,urls,token) {
-
-                    $.ajax({
-                    url: '{% url "ajax_drive" %}',
-                    data: {
-                        "id" : "{{ jobID }}",
-                        "ids" : ids,
-                        "names" : names,
-                        "urls" : urls,
-                        "token" : token,
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        var arrayLength = data.samples_k.length;
-                        for (var i = 0; i < arrayLength; i++) {
-                            var k = data.samples_k[i];
-                            var row = data.samples[k];
-                             {# [i, ids[n], urls[n], token] #}
-                            $("#gallery tbody").prepend(
-                          "<tr><td><a target='_blank' href='" + row[2] + "'>" + k +
-                             "</a></td> <td> Drive</td> <td><i name='drive::" + k +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
-                        );
-                        $("#gallery").show();
-                        }
-
-                    },
-                });
-                };
-
-
+        jQuery(document).ready(function() {
+            jQuery('.db-multi').multiselect({
+                enableCollapsibleOptGroups: true,
+                enableCaseInsensitiveFiltering: true,
+                filterBehavior: 'both',
+                maxHeight: 300,
+                onDropdownHidden: function (e) {
+                  {# alert($("#id_mirgeneDB").val());#}
+                },
+            })
+        });
     </script>
 
 
+    <script>
 
-    <script type="text/javascript">
+function toggleFields() {
+{#    if ($("#age").val() <= 13)#}
+    if ( document.getElementById('id_species_hidden').value){
 
-            // The Browser API key obtained from the Google Developers Console.
-            var developerKey = 'AIzaSyBG_apmyiqz0PVwA6FO_GionR-e1Zz7DlI';
-
-            // The Client ID obtained from the Google Developers Console. Replace with your own Client ID.
-            var clientId = "926118481098-crke10cc1ombemh7b7v0l8gsstm966r0.apps.googleusercontent.com";
-
-            var appId = "926118481098";
-
-            // Scope to use to access user's photos.
-            var scope = ['https://www.googleapis.com/auth/drive.file'];
-
-            var pickerApiLoaded = false;
-            var oauthToken;
-
-            // Use the API Loader script to load google.picker and gapi.auth.
-            function loadPicker() {
-                gapi.load('auth', {'callback': onAuthApiLoad});
-                gapi.load('picker', {'callback': onPickerApiLoad});
-            }
-
-            function onAuthApiLoad() {
-                window.gapi.auth.authorize(
-                        {
-                            'client_id': clientId,
-                            'scope': scope,
-                            'immediate': false
-                        },
-                handleAuthResult);
-            }
-
-            function onPickerApiLoad() {
-                pickerApiLoaded = true;
-                createPicker();
-            }
-
-            function handleAuthResult(authResult) {
-                if (authResult && !authResult.error) {
-                    oauthToken = authResult.access_token;
-
-                    createPicker();
-                }
-
-                // Create and render a Picker object for searching images.
-                function createPicker() {
-                    $('.modal').modal('hide');
-                    if (pickerApiLoaded && oauthToken) {
-                        {#var view = new google.picker.DocsView(google.picker.ViewId.FOLDERS)#}
-
-                        {#    .setSelectFolderEnabled(false);#}
-                        {#var view = new google.picker.View(google.picker.ViewId.DOCS);#}
-                        var view = new google.picker.DocsView();
-
-                        view.setMode(google.picker.DocsViewMode.LIST);
-                        view.setIncludeFolders(true);
-                        view.setSelectFolderEnabled(false);
-                        view.setEnableDrives(false);
-                        {#view.setEnableTeamDrives(true);#}
-                        view.setParent('root');
-                        {#view.setMimeTypes("");#}
-                        {#view.setMimeTypes("image/png,image/jpeg,image/jpg");#}
-                        var picker = new google.picker.PickerBuilder()
-                            .enableFeature(google.picker.Feature.NAV_HIDDEN)
-                            .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
-                            .enableFeature(google.picker.Feature.SUPPORT_TEAM_DRIVES)
-                            .enableFeature(google.picker.Feature.SUPPORT_DRIVES)
-                            .setAppId(appId)
-                            .setOAuthToken(oauthToken)
-                            .addView(view)
-                            .setTitle("Select file(s) to upload")
-                            .enableFeature(google.picker.Feature.SUPPORT_DRIVES)
-                            {#.setEnableDrives(true)#}
-                            .addView(new google.picker.DocsUploadView())
-                            .setDeveloperKey(developerKey)
-
-                            .setCallback(pickerCallback)
-                            .build();
-                        picker.setVisible(true);
-                    }
-                }
-
-                //Ajax function
-
-
-
-
-                // A simple callback implementation.
-                function pickerCallback(data) {
-                    var url = 'nothing';
-                    var name = 'nothing';
-
-                    if (data[google.picker.Response.ACTION] == google.picker.Action.PICKED) {
-                        var docs = data[google.picker.Response.DOCUMENTS];
-                        var doc = data[google.picker.Response.DOCUMENTS][0];
-                        url = doc[google.picker.Document.URL];
-
-                        var arrayLength = docs.length;
-                        ids = [];
-                        urls = [];
-                        names = [];
-                        token = oauthToken;
-                            if(arrayLength >0){
-                            for (var i = 0; i < arrayLength; i++) {
-                                var d = docs[i];
-                                ids[i] = d.id;
-                                names[i] = d.name;
-                                urls[i] = d[google.picker.Document.URL];
-                                    }
-                            };
-                            {#alert(names);#}
-                             driveAjax(ids,names,urls,oauthToken);
-
-
-                        {#$("#gallery").show();#}
-                        {#$("#gallery tbody").prepend(#}
-                        {#  "<tr><td><a target='_blank' href=''>" + doc.id + "::" + oauthToken +#}
-                        {#     "</a></td> <td> D</td> <td><iclass='fas fa-trash fa-clickable' ></i></td>  </tr>"#}
-                        {#);#}
-
-                        name = doc.name;
-                        var param = {'fileId': doc.id, 'oAuthToken': oauthToken, 'name': name};
-
-
-//
-                    }
-//
-                }
-            }
-
-            function showPickerDialog(){
-                $('.modal').modal('hide');
-                loadPicker();
-            }
-
-        </script>
-<script type="text/javascript" src="https://apis.google.com/js/api.js"></script>
-
-<script>
-
-
-$('input[name="advanced_options"]').on("change", function(e) {
-    if (document.getElementById('advanced_options').checked || document.getElementById('advanced_options2').checked){
-        $("#advanced_panel").show();
-        $("#advanced_div").hide();
-        $("#advanced_div2").hide();
-        }
-});
-
-$("#advanced_options").change(function() {
-    $("#advanced_options2").prop("checked", this.checked);
-});
-
-$("#advanced_options2").change(function() {
-    $("#advanced_options").prop("checked", this.checked);
-});
-
+        $("#genome-div").show();
+    }else{
+        $("#genome-div").hide();
+    }}
 
 
 $('input[name="library_protocol"]').on("click", function(e) {
-    if (document.getElementById('id_library_protocol_6').checked) {
+    if (document.getElementById('id_library_protocol_10').checked) {
         $("#Adapter_Custom").show();
     } else {
         $("#Adapter_Custom").hide();
     }
+})
+
+
+
+$("#id_quality_method").change(function () {
+{#    if ( document.getElementById('id_library_protocol_6').checked){#}
+    if ( document.getElementById('id_quality_method').value === "min"){
+        $("#Div_max").show();
+    }else{
+        $("#Div_max").hide();
+    }
+    });
+
+
+        {##}
+        {# Adapter options #}
+        {##}
+
+$('input[name="guess_adapter"]').on("click", function(e) {
+    if ( document.getElementById('id_guess_adapter').checked){
+        document.getElementById("id_adapter_chosen").disabled = true;
+        document.getElementById("id_adapter_manual").disabled = true;
+    }else{
+        document.getElementById("id_adapter_chosen").disabled = false;
+        document.getElementById("id_adapter_manual").disabled = false;
+    }
+
+})
+
+$('input[name="adapter_manual"]').on("mouseout", function(e) {
+
+    if ( document.getElementById('id_adapter_manual').value.length > 0 ){
+
+        document.getElementById("id_adapter_chosen").disabled = true;
+        document.getElementById("id_guess_adapter").disabled = true;
+    }else{
+        document.getElementById("id_adapter_chosen").disabled = false;
+        document.getElementById("id_guess_adapter").disabled = false;
+    }
+
+})
+$('input[name="adapter_manual"]').on("change", function(e) {
+
+    if ( document.getElementById('id_adapter_manual').value.length > 0 ){
+
+        document.getElementById("id_adapter_chosen").disabled = true;
+        document.getElementById("id_guess_adapter").disabled = true;
+    }else{
+        document.getElementById("id_adapter_chosen").disabled = false;
+        document.getElementById("id_guess_adapter").disabled = false;
+    }
+
+})
+
+$("input[type=file]").on('change',function(){
+    var extensions = ["xls","xlsx","doc","docx"]
+    if (extensions.includes(this.files[0].name.split('.').pop()) ){
+        alert('Spread-sheet or document extensions such as ".xls" or ".doc" are not supported. Please upload a different file. ')
+        document.getElementById('id_ifile').value = "";
+    }
+
+{#    filename.split('.').pop();#}
 });
-
-
-
 
 function toggleAdapter() {
 {#    if ($("#age").val() <= 13)#}
@@ -663,15 +237,12 @@ function toggleAdapter() {
     }}
 
 
+
+
+
 </script>
 
-    <script>
-
-    jQuery("#Adapter_Custom").hide();
-
-    </script>
-
-    <script>
+   <script>
     jQuery(document).ready(function() {
         jQuery('#id_species').multiselect({
             enableCollapsibleOptGroups: true,
@@ -686,31 +257,39 @@ function toggleAdapter() {
                         document.getElementById('id_species_hidden').value = "" ;
                 }
 {#                    alert(document.getElementById('id_species_hidden').value);#}
-{#                    toggleFields();#}
+                    toggleFields();
 {#                alert(jQuery('#id_species').val().join(','));#}
 
             }
 
         });
-        jQuery("#genome-div").hide();
-        jQuery("#Adapter_Custom").hide();
-        jQuery("#Div_max").hide();
-    });
+        if (selectedItems.length>0){
+            document.getElementById("submit-id-submit").disabled = false;
+        }else {
+            document.getElementById("submit-id-submit").disabled = true;
+        }
+        if ( document.getElementById('id_species_hidden').value){
+            $("#genome-div").show();
+        }else{
+            jQuery("#genome-div").hide();
+        }
+        if (document.getElementById('id_library_protocol_10').checked) {
+            $("#Adapter_Custom").show();
+        } else {
+            $("#Adapter_Custom").hide();
+        }
+        if ( document.getElementById('id_quality_method').value === "min"){
+            $("#Div_max").show();
+        }else{
+            $("#Div_max").hide();
+        }
+         });
     </script>
 
-    <script>
-        // tooltip demo
-        $('.row').tooltip({
-            selector: "[data-toggle=tooltip]",
-            container: "body"
-        })
-
-    </script>
 
     <script>
-        function validation() {
-        var x, text, message, stop;
-        stop = false
+    function validation() {
+        var x, text, message;
         message = "There were some errors in your job. Please select your input again and check for invalid options"
 
         x = document.getElementById("id_adapter_manual").value;
@@ -718,62 +297,182 @@ function toggleAdapter() {
         if (!document.getElementById("id_species").value && !document.getElementById("id_mirna_profiled").value) {
             document.getElementById('id_ifile').value = "";
             alert(message);
-            stop = true;
             return true
 {#            alert("species and mirna_profiled" + document.getElementById("id_species").value); return true#}
-        } else if ((0 + Boolean(document.getElementById('id_ifile').value) + Boolean(document.getElementById('id_url').value) + Boolean(document.getElementById('id_sra_input').value ) + Boolean(document.getElementById('id_job_reuse').value)!=1)) {
+        }else if ((0 + Boolean(document.getElementById('id_ifile').value) + Boolean(document.getElementById('id_url').value) + Boolean(document.getElementById('id_sra_input').value )!=1)){
             document.getElementById('id_ifile').value = "";
-{#            alert("id_file url"); #}
+{#            alert("id_file url");#}
 {#            return true;#}
             alert(message);
-            stop = true;
             return true
-        } else if (!Array.from(document.getElementsByName('library_protocol')).some(Boolean)) {
+        }else if (document.getElementById('id_predict_mirna').checked && document.getElementById('id_library_mode').checked){
             document.getElementById('id_ifile').value = "";
-            {#            alert( " predict and library mode"); return true#}
+{#            alert( " predict and library mode"); return true#}
             alert(message);
-            stop = true;
             return true
-        } else if ((0+ Boolean(document.getElementById('id_species_hidden')) + Boolean(document.getElementById('id_mirna_profiled')) + Boolean(document.getElementById('id_referenceDB') === "MirGeneDB"))<1) {
+        }else if ((0 + document.getElementById('id_guess_adapter').checked + Boolean(document.getElementById('id_adapter_chosen').value) + Boolean(document.getElementById('id_adapter_manual').value )!=1)){
             document.getElementById('id_ifile').value = "";
-            {#            alert( " predict and library mode"); return true#}
-            alert(message);
-            stop = true;
+{#            alert(message); return true#}
+            alert("adapter row");
             return true
-
-{#        }else if (document.getElementById('id_predict_mirna').checked && document.getElementById('id_library_mode').checked) {#}
-{#            document.getElementById('id_ifile').value = "";#}
-            {#            alert( " predict and library mode"); return true#}
-{#            alert(message);#}
-{#            return true#}
-
-		}
-        if (stop==false){
-            $('#spinner').modal('show');
+        }else if (document.getElementById('id_guess_adapter').checked && !document.getElementById('id_species')){
+            document.getElementById('id_ifile').value = "";
+            alert(message);
+            return true
+{#            alert("guess without species"); return true#}
         }
-
-
     }
     </script>
 
+    <script>
+    $('input[name="referenceDB"]').on("click", function(e) {
+        x = document.getElementById("id_referenceDB_3").checked;
+        if (x==false){
+            document.getElementById("div_id_mirDB").style.visibility="hidden";
+            document.getElementById("id_mirDB").style.visibility="hidden";
+{#            document.getElementById("show-me-three").style.visibility="hidden";#}
+        }
+        else{
+            document.getElementById("div_id_mirDB").style.visibility="visible";
+            document.getElementById("id_mirDB").style.visibility="visible";
+        }
+{#    if (e.clientX === 0 && e.clientY === 0) {#}
+{#        console.log("keyboard");#}
+{#    } else {#}
+{#        console.log("mouse");#}
+{#    };#}
+{#        alert(x)#}
+});
+    </script>
 
     <script>
 
-    var redirLaunch = function(e) {
+        $(document).ready(function(){
+            $("#button_div").attr("href","#");
+            $("#button_div").attr("data-toggle","tooltip");
+            $("#button_div").attr("style","display:inline-block");
+            $("#button_div").attr("data-placement","right");
+            $("#button_div").attr("data-original-title","");
 
-        var launch_url = "{% url 'annotate' %}?";
-            $("#protocol").val($("input[name=library_protocol]:checked").val());
-            {#alert("clicked");#}
-            var pars = $("#jobId").serialize();
-            $("#run_link").attr("href", launch_url.concat(pars));
-            $("#run_link2").trigger('click');
-
-
-    };
+            $('[data-toggle="tooltip"]').tooltip();
+         });
 
 
+{#    $('#submit-id-submit').on('mouseover', function () {#}
+{#        if (document.getElementById("submit-id-submit").disabled){#}
+{#            $("#button_div").attr("title","Please select at least one sample");#}
+{#        }else{#}
+{#            $("#button_div").attr("title","Please select at least one sample");#}
+{#        }#}
+{#    });#}
 
-    </script>
+
+
+
+    var selectedItems=[];
+    function printChecked(){
+    $("input:checkbox[name=to_list]:checked").each(function() {
+    selectedItems.push($(this).val());
+    selectedItems=Array.from(new Set(selectedItems))
+    });
+    $("input:checkbox[name=to_list]:not(:checked)").each(function() {
+    selectedItems=selectedItems.filter(e => e !== $(this).val());
+    });
+{#    alert(selectedItems);#}
+
+    }
+    function saveChecked() {
+        $('#spinner').modal('show');
+{#        validation()#}
+        document.getElementById('id_input_hidden').value = selectedItems.join();
+{#        alert(document.getElementById('id_input_hidden').value)#}
+    }
+</script>
+
+
+{% endblock %}
+
+{#    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>#}
+{#      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>#}
+{#    <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>#}
+{#    <script src="{% static 'js/bootstrap.min.js' %}"></script>#}
+
+<!-- Modal -->
+<div class="modal fade" id="spinner" tabindex="-1" role="dialog" aria-labelledby="spinnerLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-body">
+          <img style="display:block; margin-left:auto; margin-right:auto; width:50%;" src="{% static 'gif/Multibench_spinner.gif' %}">
+        </div>
+      </div>
+    </div>
+</div>
+
+  {# PHOTOS PAGE SCRIPTS #}
+{#  <script src="{% static 'photos/js/progress-bar-upload.js' %}"></script>#}
+
+    <div id="page-wrapper">
+
+        <div class="col-lg-12">
+            <div class="page-header">
+            <h3>Choose sRNAbench parameters for your files</h3>
+            </div>
+        </div>
+
+        <div class="row">
+        <div class="col-lg-9">
+
+        <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">
+{#                <a data-toggle="collapse" href="#collapseOne">Uploaded data</a>#}
+            </h4>
+
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+            <div class="panel-body">
+            <div style="margin-bottom: 20px;">
+
+
+    {#            <table id="jobs" class="table table-striped table-bordered bulk_action"></table>#}
+
+{#                <table id="jobs" class="table table-striped table-bordered table-hover dataTable no-footer"></table>#}
+            </div>
+
+                {% load crispy_forms_tags %}
+                {% crispy form %}
+
+            </div>
+
+        </div>
+        </div>
+        </div>
+
+            <div class="col-lg-3">
+            <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    Help
+                </h4>
+            </div>
+            <div class="panel-body">
+                <a href="{{ settings.MANUAL_URL }}" target="_blank">Link to Web Manual</a>
+{#                <a href="http://bioinfo5.ugr.es/sRNAbench/sRNAbench_web.pdf" target="_blank">Link to Web Manual</a>#}
+{#                <br/>#}
+{#                <a href="{{ settings.SUB_SITE }}/jobstatus/51GKXBGGWRXZ4QO" target="_blank">Link to Test Data Results</a>#}
+                </div>
+
+                </div>
+    </div>
+
+
+
+</div>
+    </div>
+
+
+{#{% block photos_content %}#}
+
 
 
 {% endblock %}
