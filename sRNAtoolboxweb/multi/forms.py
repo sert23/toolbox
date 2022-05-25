@@ -1743,12 +1743,12 @@ class sRNABenchForm_withDBs(forms.Form):
             elif an_object["input_type"] == "uploaded file":
                 input_file = an_object["input"]
                 dest_path = os.path.join(MEDIA_ROOT, new_id, input_file)
-                shutil.copyfile(os.path.join(MEDIA_ROOT, self.folder, "files", input_file), dest_path)
+                shutil.copyfile(os.path.join(MEDIA_ROOT, self.old_folder, "files", input_file), dest_path)
                 # shutil.copyfile(input_f, dest_path)
             elif an_object["input_type"] == "Drive":
                 input_file = an_object["name"]
                 dest_path = os.path.join(MEDIA_ROOT, new_id, input_file)
-                shutil.copyfile(os.path.join(MEDIA_ROOT, self.folder, "files", "drive_temp", input_file), dest_path)
+                shutil.copyfile(os.path.join(MEDIA_ROOT, self.old_folder, "files", "drive_temp", input_file), dest_path)
 
             line = "input=" + dest_path + "\n"
             line2 = "output=" + out_dir + "\n"
