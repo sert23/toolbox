@@ -1727,7 +1727,7 @@ class sRNABenchForm_withDBs(forms.Form):
             an_object = input_dict[k]
             new_id = generate_uniq_id()
             out_dir = os.path.join(MEDIA_ROOT, new_id)
-            out_files_dir = os.path.join(MEDIA_ROOT, new_id, "files")
+            out_files_dir = os.path.join(MEDIA_ROOT, self.folder, "files")
             os.mkdir(out_dir)
             if not os.path.exists(out_files_dir):
                 os.mkdir(out_files_dir)
