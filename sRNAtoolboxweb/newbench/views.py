@@ -81,7 +81,7 @@ def move_files(input_folder, output_folder):
             outf = f.replace(input_folder, files_folder)
             shutil.move(f, outf)
             name = f.split("/")[-1]
-            input_dict[f] = { "input" : f , "name" : name, "input_type" : "uploaded file"}
+            input_dict[f] = { "input" : outf , "name" : name, "input_type" : "uploaded file"}
 
     json_file = open(dict_path, "w")
     json.dump(input_dict, json_file, indent=6)
