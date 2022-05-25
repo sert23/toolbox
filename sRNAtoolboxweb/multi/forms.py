@@ -1723,7 +1723,10 @@ class sRNABenchForm_withDBs(forms.Form):
             an_object = input_dict[k]
             new_id = generate_uniq_id()
             out_dir = os.path.join(MEDIA_ROOT, new_id)
+            # out_files_dir = os.path.join(MEDIA_ROOT, new_id, "files")
             os.mkdir(out_dir)
+            # os.mkdir(out_files_dir)
+
             if spikes_path:
                 shutil.copy(os.path.join(MEDIA_ROOT, self.folder, spikes_path), os.path.join(out_dir, spikes_path))
 
@@ -1734,9 +1737,10 @@ class sRNABenchForm_withDBs(forms.Form):
                 input_file = an_object["input"]
                 dest_path = input_file
             elif an_object["input_type"] == "uploaded file":
-                input_file = an_object["name"]
+                input_file = an_object["input"]
                 dest_path = os.path.join(MEDIA_ROOT, new_id, input_file)
-                shutil.copyfile(os.path.join(MEDIA_ROOT, self.folder, "files", input_file), dest_path)
+                # shutil.copyfile(os.path.join(MEDIA_ROOT, self.folder, "files", input_file), dest_path)
+                shutil.copyfile(input_file, dest_path)
             elif an_object["input_type"] == "Drive":
                 input_file = an_object["name"]
                 dest_path = os.path.join(MEDIA_ROOT, new_id, input_file)
