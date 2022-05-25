@@ -1314,7 +1314,11 @@ class sRNABenchForm_withDBs(forms.Form):
         new_folder = os.path.join(MEDIA_ROOT,new_jobID)
 
         if is_relaunch:
+
             self.folder = new_jobID
+            os.system("touch /shared/sRNAtoolbox/upload/X2TKB97NBD7379K/test1_" + new_jobID)
+            os.system("touch /shared/sRNAtoolbox/upload/X2TKB97NBD7379K/test2_" + self.folder)
+            os.system("touch /shared/sRNAtoolbox/upload/X2TKB97NBD7379K/test2_" + self.old_folder)
             os.mkdir(new_folder)
             shutil.copy(os.path.join(MEDIA_ROOT, self.old_folder, "input.json"), os.path.join(MEDIA_ROOT, new_jobID, "input.json"))
             os.system("touch " + self.old_folder)
@@ -1739,8 +1743,8 @@ class sRNABenchForm_withDBs(forms.Form):
             elif an_object["input_type"] == "uploaded file":
                 input_file = an_object["input"]
                 dest_path = os.path.join(MEDIA_ROOT, new_id, input_file)
-                # shutil.copyfile(os.path.join(MEDIA_ROOT, self.folder, "files", input_file), dest_path)
-                shutil.copyfile(input_file, dest_path)
+                shutil.copyfile(os.path.join(MEDIA_ROOT, self.folder, "files", input_file), dest_path)
+                # shutil.copyfile(input_f, dest_path)
             elif an_object["input_type"] == "Drive":
                 input_file = an_object["name"]
                 dest_path = os.path.join(MEDIA_ROOT, new_id, input_file)
