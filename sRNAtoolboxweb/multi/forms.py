@@ -1308,6 +1308,7 @@ class sRNABenchForm_withDBs(forms.Form):
     def __init__(self, *args, **kwargs):
         self.old_folder = kwargs.pop('orig_folder', None)
         is_relaunch = kwargs.pop('is_relaunch', None)
+        self.is_relaunch = is_relaunch
         # self.old_folder = self.request.GET.pop('jobId', None)
         # destination folder
         new_jobID = generate_uniq_id()
@@ -1741,7 +1742,7 @@ class sRNABenchForm_withDBs(forms.Form):
             elif an_object["input_type"] == "download link":
                 input_file = an_object["input"]
                 dest_path = input_file
-            elif an_object["input_type"] == "uploaded file":
+            elif an_object["input_type"] == "uploaded file" and self.is_relaunch:
                 input_file = an_object["input"]
                 file_name = an_object["name"]
                 dest_path = os.path.join(MEDIA_ROOT, self.folder, "files" , file_name)
@@ -1751,7 +1752,10 @@ class sRNABenchForm_withDBs(forms.Form):
                 # os.system("touch /shared/sRNAtoolbox/upload/X2TKB97NBD7379K/test7_" + str(dest_path))
                 # os.system("touch /shared/sRNAtoolbox/upload/X2TKB97NBD7379K/excuse_me_wtf" )
                 shutil.copyfile(input_file, dest_path)
-
+            elif an_object["input_type"]:
+                input_file = an_object["name"]
+                dest_path = os.path.join(MEDIA_ROOT, new_id, input_file)
+                shutil.copyfile(os.path.join(MEDIA_ROOT, self.folder, "files", input_file), dest_path)
                 # shutil.copyfile(input_f, dest_path)
             elif an_object["input_type"] == "Drive":
                 input_file = an_object["name"]
