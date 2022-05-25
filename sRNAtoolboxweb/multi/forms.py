@@ -1745,8 +1745,8 @@ class sRNABenchForm_withDBs(forms.Form):
                 dest_path = os.path.join(MEDIA_ROOT, self.folder, input_file)
                 os.system("touch /shared/sRNAtoolbox/upload/X2TKB97NBD7379K/test4_" + self.folder)
                 os.system("touch /shared/sRNAtoolbox/upload/X2TKB97NBD7379K/test5_" + self.old_folder)
-                os.system("touch /shared/sRNAtoolbox/upload/X2TKB97NBD7379K/test6_" + os.path.join(MEDIA_ROOT, self.old_folder, "files", input_file))
-                os.system("touch /shared/sRNAtoolbox/upload/X2TKB97NBD7379K/test7_" + dest_path)
+                os.system("touch /shared/sRNAtoolbox/upload/X2TKB97NBD7379K/test6_" + str(os.path.join(MEDIA_ROOT, self.old_folder, "files", input_file)))
+                os.system("touch /shared/sRNAtoolbox/upload/X2TKB97NBD7379K/test7_" + str(dest_path))
                 os.system("touch /shared/sRNAtoolbox/upload/X2TKB97NBD7379K/excuse_me_wtf" )
 
                 shutil.copyfile(os.path.join(MEDIA_ROOT, self.old_folder, "files", input_file), dest_path)
