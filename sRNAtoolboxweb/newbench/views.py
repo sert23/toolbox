@@ -86,7 +86,8 @@ def move_files(input_folder, output_folder):
     json_file = open(dict_path, "w")
     json.dump(input_dict, json_file, indent=6)
     json_file.close()
-    json.dump(input_dict+"orig", json_file, indent=6)
+    json_file = open(dict_path+"orig", "w")
+    json.dump(input_dict, json_file, indent=6)
 
 
 def move_SRA(input_folder, output_folder):
