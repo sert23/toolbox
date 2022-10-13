@@ -104,7 +104,7 @@
                     <div class="col-lg-6">
 
                 </div>
-                            <div class="col-lg-6 text-right" ><a id="run_link" href="#" > <button onclick="redirLaunch();" id="run_id" type="button" class="btn btn-primary" style="display: inline-block;"> NEXT </button> </a>  </div>
+                            <div class="col-lg-6 text-right" ><a id="run_link" href="#" > <button onclick="redirLaunch();" id="run_id" type="button" class="btn btn-primary" style="display: inline-block;" disabled> NEXT </button> </a>  </div>
     {#                        <div class="col-lg-6 text-right" ><a id="run_link2" href="#" > test </a>  </div>#}
     {#                        <div class="col-lg-6 text-right" ><a onclick="alert('no idea');" id="run_link3" href="#" > test2 </a>  </div>#}
     {#                        <div class="col-lg-6 text-right" ><a id="run_link" target="_blank" href="#" onclick="location.replace('http://google.com/'),'_top'"> </a> <button onclick="location.replace('http://google.com/'),'_top'" id="run_id" type="button" class="btn btn-success" style="display: inline-block;"> RUN </button> </div>#}
@@ -330,7 +330,7 @@
           {#alert(data.result.name);#}
           {#alert(data.result.url);#}
          {#$("#modal-progress").modal("hide");#}
-        $("#gallery").show();
+        $("#gallery").show(); $('#run_id').prop('disabled', false);
          $("#gallery tbody").prepend(
           "<tr><td><a target='_blank' href='" + data.result.url + "'>" + data.result.name +
              "</a></td> <td> Uploaded file </td> <td><i name='uploaded::"+ data.result.name +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
@@ -370,7 +370,7 @@
         },
         dataType: 'json',
             success: function (data) {
-                $("#gallery").show();
+                $("#gallery").show(); $('#run_id').prop('disabled', false);
                 var arrayLength = data.samples.length;
                 if(arrayLength >0){
                 for (var i = 0; i < arrayLength; i++) {
@@ -471,7 +471,7 @@
                           "<tr><td><a target='_blank' href='" + row[2] + "'>" + k +
                              "</a></td> <td> Drive</td> <td><i name='drive::" + k +"' class='fas fa-trash fa-clickable' ></i></td>  </tr>"
                         );
-                        $("#gallery").show();
+                        $("#gallery").show(); $('#run_id').prop('disabled', false);
                         }
 
                     },
