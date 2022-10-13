@@ -79,7 +79,7 @@ http://example.server.com/file2.fastq.gz" name="links" rows="5" class="form-cont
         dataType: 'json',
         success: function (data) {
             var arrayLength = data.samples.length;
-            $("#gallery").show();
+            $("#gallery").show(); $('#run_id').prop('disabled', false);
             if(arrayLength >0){
                 for (var i = 0; i < arrayLength; i++) {
 
