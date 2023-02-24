@@ -1,0 +1,16 @@
+Vim: Advertencia: la salida no es un terminal
+Vim: Advertencia: la entrada no es desde un terminal
+[?1049h[?1h=[1;24r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[24;1H"../update.txt" [Sólo lectura] 15L, 1080C[1;1Hhttp://bioinfo2.ugr.es/sRNAtoolboxDB/exec/mariadb-java-client-1.1.7.jar;/opt/sRNN[2;1HAtoolboxDB/exec/;v1.0.0
+http://bioinfo2.ugr.es/sRNAtoolboxDB/exec/sRNAbench.jar;/opt/sRNAtoolboxDB/exec//[4;1H;v1.0.0
+http://bioinfo2.ugr.es/sRNAtoolboxDB/exec/sRNAbench;/opt/sRNAtoolboxDB/exec/;v1..[6;1H0.0
+http://bioinfo2.ugr.es/sRNAtoolboxDB/exec/sRNAde.jar;/opt/sRNAtoolboxDB/exec/;v11[8;1H.0.0
+http://bioinfo2.ugr.es/sRNAtoolboxDB/exec/sRNAde;/opt/sRNAtoolboxDB/exec/;v1.0.0[10;1Hhttp://bioinfo2.ugr.es/sRNAtoolboxDB/exec/sRNAblast.jar;/opt/sRNAtoolboxDB/exec//[11;1H;v1.0.0
+http://bioinfo2.ugr.es/sRNAtoolboxDB/exec/sRNAhelper.jar;/opt/sRNAtoolboxDB/execc[13;1H/;v1.0.0
+http://bioinfo2.ugr.es/sRNAtoolboxDB/exec/commons-math3-3.2.jar;/opt/sRNAtoolboxx[15;1HDB/exec/;v1.0.0
+http://bioinfo2.ugr.es/sRNAtoolboxDB/exec/makeSeqObj.jar;/opt/sRNAtoolboxDB/execc[17;1H/;v1.0.0
+http://bioinfo2.ugr.es/sRNAtoolboxDB/exec/miRNAconsTargets.jar;/opt/sRNAtoolboxDD[19;1HB/exec/;v1.0.0
+http://bioinfo2.ugr.es/sRNAtoolboxDB/exec/miRNAconsTargets_plants.py;/opt/sRNAtoo[21;1HolboxDB/exec/;v1.0.0
+http://bioinfo2.ugr.es/sRNAtoolboxDB/protocol.txt;/home/srna/Desktop/;v1.0.0[24;63H1,1      Comienzo[1;1H[?12l[?25h[24;1H[?1l>[?1049lVim: error al leer la entrada, saliendo...
+
+Vim: Finished.
+[24;1H

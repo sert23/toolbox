@@ -1,0 +1,7 @@
+#!/bin/bash
+
+InstPath=" -classpath /opt/java helperTools.MakeBatch"
+MaxMem="2000m"
+
+java   ${InstPath} "$@"
+

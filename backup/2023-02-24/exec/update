@@ -1,0 +1,191 @@
+#!/usr/bin/env python
+
+import os, sys
+import urllib
+import argparse
+
+def url_consulta(key,value,url):
+        campos=urllib.urlencode({key:value})
+        web=urllib.urlopen(url,campos)
+        response=web.read()
+        return response
+
+def process_links(response,sample,remove):
+	response=response.split("\n")
+	for element in response:
+		if element:
+			element=element.split("=")
+			sp=element[0]
+			element=element[1].split(";")
+			file=element[0]
+			file=file.split("/")
+			file=file[-1]
+			log_element=sp+"="+element[1]+file
+			if remove=="no":
+				enlace[element[0]]=element[1]
+				selection[sample]=enlace
+				if not log_element in log:
+					log.append(log_element)
+
+			else:
+				delete=element[1]+file
+				os.system("rm "+delete)
+				if log_element in log:
+					log.remove(log_element)
+	if remove=="no":
+		return (selection,log)
+	else:
+		return (delete,log)
+
+################################################################################################################################################
+
+####TITLE
+
+dialog_title='dialog --title "sRNAtoolboxDB - Update" --backtitle "sRNAtoolboxDB" --msgbox "This software allows user to update the software of sRNAtoolbox. \nIf there are any news, it will be shown too." 0 0'
+os.system(dialog_title)
+
+####ARGPARSER
+
+parser=argparse.ArgumentParser(
+    description='''Description of the program.''')
+args=parser.parse_args()
+
+####WEB PHP
+
+php="http://bioinfo2.ugr.es/sRNAtoolboxDB/update.php"
+
+####READ CURRENT VERSION
+
+version=''
+
+if not os.path.exists("/opt/sRNAtoolboxDB/log_version"):
+        os.system("touch /opt/sRNAtoolboxDB/log_version")
+	c_version=url_consulta("cversion","True",php)
+	c_version=c_version.strip()
+	log_version=open("/opt/sRNAtoolboxDB/log_version", "w")
+	log_version.write(c_version)
+	log_version.close()
+
+else:
+	pass
+
+file_version=open("/opt/sRNAtoolboxDB/log_version", "r")
+version=file_version.readline()
+version=version.strip()
+version=version.split("=")
+version=version[1]
+
+####ADVISES
+
+adv={}
+advises=url_consulta("version",version,php)
+advises=advises.replace("\n\n","\n")
+advises=advises.split("\n")
+if not "No-news" in advises:
+	for line in advises:
+		if line:
+			line=line.split("=")
+			adv[line[0]]=line[1]
+
+advises_version=adv["v"+version]
+if advises_version:
+	dialog_advises='dialog --title "sRNAtoolboxDB - News from version v'+version+'" --backtitle "sRNAtoolboxDB" --msgbox "'+advises_version+'" 0 0'
+	os.system(dialog_advises)
+
+####READ MORE RECENT VERSION
+
+c_version=url_consulta("cversion","True",php)
+c_version=c_version.strip()
+c_version=c_version.split("=")
+c_version=c_version[1]
+
+####CHECK IF IS UPDATE
+
+update=False
+
+if version!=c_version:
+	update=True
+
+####DIALOG IF IS NOT UPDATE
+
+if update==True:
+	dialog_update='dialog --title "sRNAtoolboxDB - Update" --backtitle "sRNAtoolboxDB" --msgbox " You don\'t have the most recent version of sRNAtoolboxDB VB" 0 0'
+	os.system(dialog_update)
+
+####GET SOFTWARE FROM WEB
+
+softw={}
+links=url_consulta("getsoftware","True",php)
+links=links.split("\n")
+
+for line in links:
+	if line:
+		line=line.split(";")
+		input=line[0]
+		output=line[1]
+		softw[input]=output
+
+####WGET SOFTWARE - CHECK IF IS UPDATE
+
+update={}
+for link in softw:
+	input=link
+	output=softw[link]
+        if not os.path.isdir(output):
+		os.system("mkdir "+output)
+	else:
+		cmda="cd "+output
+		cmdb="wget -N -r -np -nH --cut-dirs=3 -R index.html* "+input+' 2>/opt/sRNAtoolboxDB/log_error | stdbuf -o0 awk \'/[.] +[0-9][0-9]?[0-9]?%/ { print substr($0,63,3) }\' | dialog --title "sRNAtoolboxDB - Updating" --backtitle "sRNAtoolboxDB" --infobox "Updating software" 0 0'    
+		os.system(cmda+";"+cmdb+";wait")
+		if not os.path.exists("/opt/sRNAtoolboxDB/log_error"):
+			if not ".jar" in input:
+				if "exec" in output:
+					input_2=input.split("/")[-1]
+					cmde="chmod 777 "+output+input_2
+                		        os.system(cmde)
+		else:
+			file_stderr= open("/opt/sRNAtoolboxDB/log_error")
+			stderr=file_stderr.read()
+			stderr=stderr.strip()
+			if "not retrieving" in stderr:
+				update[link]=False
+			elif "FINISHED" in stderr:
+				update[link]=True
+				if not ".jar" in input:
+					if "exec" in output:
+						input_2=input.split("/")[-1]
+						cmde="chmod 777 "+output+input_2
+						os.system(cmde)
+			os.system("rm /opt/sRNAtoolboxDB/log_error")
+upd=[]
+not_upd=[]
+
+for link in update:
+	if update[link]==False:
+		link=link.split("/")
+		link=link[-1]
+		not_upd.append(link)
+	elif update[link]==True:
+		link=link.split("/")
+		link=link[-1]
+		upd.append(link)
+
+if upd:
+	dialog_end='dialog --title "sRNAtoolboxDB - Update" --backtitle "sRNAtoolboxDB" --msgbox "You have updated this programs: \n'
+
+	for element in upd:
+		dialog_end=dialog_end+"* "+element+"\n"
+		element=element+"-"+version
+		if element in adv:
+			mss=adv[element]
+			element=element.split("-")
+			version=element[1]
+			program=element[0]
+			dialog_program='dialog --title "'+program+" is updated to version v"+version+'" --backtitle "sRNAtoolboxDB" --msgbox " '+mss+' " 0 0'
+			os.system(dialog_program)
+	dialog_end=dialog_end+'" 0 0'
+	os.system(dialog_end)
+	
+else:
+	dialog_end='dialog --title "sRNAtoolboxDB - Update" --backtitle "sRNAtoolboxDB" --msgbox "No program has been updated" 0 0'
+	os.system(dialog_end)

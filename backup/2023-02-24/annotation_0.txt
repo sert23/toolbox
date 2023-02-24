@@ -1,0 +1,2033 @@
+#############################################################################
+#############################################################################
+##################  Annotation for B73_RefGen_v4 #################
+B73_RefGen_v4:kingdom=plant
+B73_RefGen_v4:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+B73_RefGen_v4:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+B73_RefGen_v4:tRNA=B73_RefGen_v4_genomic_tRNA
+zma:tRNA=B73_RefGen_v4_genomic_tRNA
+
+B73_RefGen_v4:libs=B73_RefGen_v4_ncRNA
+B73_RefGen_v4:desc=Ensembl plants release 44
+
+zma:libs=B73_RefGen_v4_ncRNA
+zma:desc=Ensembl plants release 44
+
+
+B73_RefGen_v4:libs=B73_RefGen_v4_cdna
+B73_RefGen_v4:desc=Ensembl plants release 44
+
+zma:libs=B73_RefGen_v4_cdna
+zma:desc=Ensembl plants release 44
+
+
+B73_RefGen_v4:libs=B73_RefGen_v4_RNAcentral
+B73_RefGen_v4:desc=RNAcentral database 13.0
+
+zma:libs=B73_RefGen_v4_RNAcentral
+zma:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Acyr_2_0 #################
+Acyr_2_0:kingdom=animal
+Acyr_2_0:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Acyr_2_0:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+Acyr_2_0:tRNA=Acyr_2_0_genomic_tRNA
+api:tRNA=Acyr_2_0_genomic_tRNA
+
+Acyr_2_0:libs=Acyr_2_0_ncRNA
+Acyr_2_0:desc=Ensembl release 97 (44 for Metazoan)
+
+api:libs=Acyr_2_0_ncRNA
+api:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Acyr_2_0:libs=Acyr_2_0_cdna
+Acyr_2_0:desc=Ensembl release 97 (44 for Metazoan)
+
+api:libs=Acyr_2_0_cdna
+api:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Acyr_2_0:libs=Acyr_2_0_RNAcentral
+Acyr_2_0:desc=RNAcentral database 13.0
+
+api:libs=Acyr_2_0_RNAcentral
+api:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for AMS_PRJEB1171_v1 #################
+AMS_PRJEB1171_v1:kingdom=animal
+AMS_PRJEB1171_v1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+AMS_PRJEB1171_v1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+AMS_PRJEB1171_v1:libs=AMS_PRJEB1171_v1_ncRNA
+AMS_PRJEB1171_v1:desc=Ensembl release 97 (44 for Metazoan)
+
+Adineta_vaga:libs=AMS_PRJEB1171_v1_ncRNA
+Adineta_vaga:desc=Ensembl release 97 (44 for Metazoan)
+
+
+AMS_PRJEB1171_v1:libs=AMS_PRJEB1171_v1_cdna
+AMS_PRJEB1171_v1:desc=Ensembl release 97 (44 for Metazoan)
+
+Adineta_vaga:libs=AMS_PRJEB1171_v1_cdna
+Adineta_vaga:desc=Ensembl release 97 (44 for Metazoan)
+
+
+AMS_PRJEB1171_v1:libs=AMS_PRJEB1171_v1_RNAcentral
+AMS_PRJEB1171_v1:desc=RNAcentral database 13.0
+
+Adineta_vaga:libs=AMS_PRJEB1171_v1_RNAcentral
+Adineta_vaga:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for AaegL3 #################
+AaegL3:kingdom=animal
+AaegL3:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+AaegL3:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+AaegL3:libs=AaegL3_ncRNA
+AaegL3:desc=Ensembl release 97 (44 for Metazoan)
+
+aae:libs=AaegL3_ncRNA
+aae:desc=Ensembl release 97 (44 for Metazoan)
+
+
+AaegL3:libs=AaegL3_cdna
+AaegL3:desc=Ensembl release 97 (44 for Metazoan)
+
+aae:libs=AaegL3_cdna
+aae:desc=Ensembl release 97 (44 for Metazoan)
+
+
+AaegL3:libs=AaegL3_RNAcentral
+AaegL3:desc=RNAcentral database 13.0
+
+aae:libs=AaegL3_RNAcentral
+aae:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Aqu1 #################
+Aqu1:kingdom=animal
+Aqu1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Aqu1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Aqu1:libs=Aqu1_ncRNA
+Aqu1:desc=Ensembl release 97 (44 for Metazoan)
+
+aqu:libs=Aqu1_ncRNA
+aqu:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Aqu1:libs=Aqu1_cdna
+Aqu1:desc=Ensembl release 97 (44 for Metazoan)
+
+aqu:libs=Aqu1_cdna
+aqu:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Aqu1:libs=Aqu1_RNAcentral
+Aqu1:desc=RNAcentral database 13.0
+
+aqu:libs=Aqu1_RNAcentral
+aqu:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for AdarC3 #################
+AdarC3:kingdom=animal
+AdarC3:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+AdarC3:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+AdarC3:libs=AdarC3_ncRNA
+AdarC3:desc=Ensembl release 97 (44 for Metazoan)
+
+Anopheles_darlingi:libs=AdarC3_ncRNA
+Anopheles_darlingi:desc=Ensembl release 97 (44 for Metazoan)
+
+
+AdarC3:libs=AdarC3_cdna
+AdarC3:desc=Ensembl release 97 (44 for Metazoan)
+
+Anopheles_darlingi:libs=AdarC3_cdna
+Anopheles_darlingi:desc=Ensembl release 97 (44 for Metazoan)
+
+
+AdarC3:libs=AdarC3_RNAcentral
+AdarC3:desc=RNAcentral database 13.0
+
+Anopheles_darlingi:libs=AdarC3_RNAcentral
+Anopheles_darlingi:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for AgamP4 #################
+AgamP4:kingdom=animal
+AgamP4:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+AgamP4:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+AgamP4:tRNA=AgamP4_genomic_tRNA
+aga:tRNA=AgamP4_genomic_tRNA
+
+AgamP4:libs=AgamP4_ncRNA
+AgamP4:desc=Ensembl release 97 (44 for Metazoan)
+
+aga:libs=AgamP4_ncRNA
+aga:desc=Ensembl release 97 (44 for Metazoan)
+
+
+AgamP4:libs=AgamP4_cdna
+AgamP4:desc=Ensembl release 97 (44 for Metazoan)
+
+aga:libs=AgamP4_cdna
+aga:desc=Ensembl release 97 (44 for Metazoan)
+
+
+AgamP4:libs=AgamP4_RNAcentral
+AgamP4:desc=RNAcentral database 13.0
+
+aga:libs=AgamP4_RNAcentral
+aga:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Agla_1_0 #################
+Agla_1_0:kingdom=animal
+Agla_1_0:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Agla_1_0:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Agla_1_0:libs=Agla_1_0_ncRNA
+Agla_1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Anoplophora_glabripennis:libs=Agla_1_0_ncRNA
+Anoplophora_glabripennis:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Agla_1_0:libs=Agla_1_0_cdna
+Agla_1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Anoplophora_glabripennis:libs=Agla_1_0_cdna
+Anoplophora_glabripennis:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Agla_1_0:libs=Agla_1_0_RNAcentral
+Agla_1_0:desc=RNAcentral database 13.0
+
+Anoplophora_glabripennis:libs=Agla_1_0_RNAcentral
+Anoplophora_glabripennis:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Amel_4_5 #################
+Amel_4_5:kingdom=animal
+Amel_4_5:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Amel_4_5:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+Amel_4_5:tRNA=Amel_4_5_genomic_tRNA
+ame:tRNA=Amel_4_5_genomic_tRNA
+
+Amel_4_5:libs=Amel_4_5_ncRNA
+Amel_4_5:desc=Ensembl release 97 (44 for Metazoan)
+
+ame:libs=Amel_4_5_ncRNA
+ame:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Amel_4_5:libs=Amel_4_5_cdna
+Amel_4_5:desc=Ensembl release 97 (44 for Metazoan)
+
+ame:libs=Amel_4_5_cdna
+ame:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Amel_4_5:libs=Amel_4_5_RNAcentral
+Amel_4_5:desc=RNAcentral database 13.0
+
+ame:libs=Amel_4_5_RNAcentral
+ame:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Attacep1_0 #################
+Attacep1_0:kingdom=animal
+Attacep1_0:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Attacep1_0:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Attacep1_0:libs=Attacep1_0_ncRNA
+Attacep1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Atta_cephalotes:libs=Attacep1_0_ncRNA
+Atta_cephalotes:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Attacep1_0:libs=Attacep1_0_cdna
+Attacep1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Atta_cephalotes:libs=Attacep1_0_cdna
+Atta_cephalotes:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Attacep1_0:libs=Attacep1_0_RNAcentral
+Attacep1_0:desc=RNAcentral database 13.0
+
+Atta_cephalotes:libs=Attacep1_0_RNAcentral
+Atta_cephalotes:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for ASM77530v1 #################
+ASM77530v1:kingdom=animal
+ASM77530v1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+ASM77530v1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+ASM77530v1:libs=ASM77530v1_ncRNA
+ASM77530v1:desc=Ensembl release 97 (44 for Metazoan)
+
+Belgica_antarctica:libs=ASM77530v1_ncRNA
+Belgica_antarctica:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM77530v1:libs=ASM77530v1_cdna
+ASM77530v1:desc=Ensembl release 97 (44 for Metazoan)
+
+Belgica_antarctica:libs=ASM77530v1_cdna
+Belgica_antarctica:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM77530v1:libs=ASM77530v1_RNAcentral
+ASM77530v1:desc=RNAcentral database 13.0
+
+Belgica_antarctica:libs=ASM77530v1_RNAcentral
+Belgica_antarctica:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for BIMP_2_0 #################
+BIMP_2_0:kingdom=animal
+BIMP_2_0:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+BIMP_2_0:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+BIMP_2_0:libs=BIMP_2_0_ncRNA
+BIMP_2_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Bombus_impatiens:libs=BIMP_2_0_ncRNA
+Bombus_impatiens:desc=Ensembl release 97 (44 for Metazoan)
+
+
+BIMP_2_0:libs=BIMP_2_0_cdna
+BIMP_2_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Bombus_impatiens:libs=BIMP_2_0_cdna
+Bombus_impatiens:desc=Ensembl release 97 (44 for Metazoan)
+
+
+BIMP_2_0:libs=BIMP_2_0_RNAcentral
+BIMP_2_0:desc=RNAcentral database 13.0
+
+Bombus_impatiens:libs=BIMP_2_0_RNAcentral
+Bombus_impatiens:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Bter_1_0 #################
+Bter_1_0:kingdom=animal
+Bter_1_0:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Bter_1_0:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Bter_1_0:libs=Bter_1_0_ncRNA
+Bter_1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Bombus_terrestris:libs=Bter_1_0_ncRNA
+Bombus_terrestris:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Bter_1_0:libs=Bter_1_0_cdna
+Bter_1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Bombus_terrestris:libs=Bter_1_0_cdna
+Bombus_terrestris:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Bter_1_0:libs=Bter_1_0_RNAcentral
+Bter_1_0:desc=RNAcentral database 13.0
+
+Bombus_terrestris:libs=Bter_1_0_RNAcentral
+Bombus_terrestris:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for ASM15162v1 #################
+ASM15162v1:kingdom=animal
+ASM15162v1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+ASM15162v1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+ASM15162v1:tRNA=ASM15162v1_genomic_tRNA
+bmo:tRNA=ASM15162v1_genomic_tRNA
+
+ASM15162v1:libs=ASM15162v1_ncRNA
+ASM15162v1:desc=Ensembl release 97 (44 for Metazoan)
+
+bmo:libs=ASM15162v1_ncRNA
+bmo:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM15162v1:libs=ASM15162v1_cdna
+ASM15162v1:desc=Ensembl release 97 (44 for Metazoan)
+
+bmo:libs=ASM15162v1_cdna
+bmo:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM15162v1:libs=ASM15162v1_RNAcentral
+ASM15162v1:desc=RNAcentral database 13.0
+
+bmo:libs=ASM15162v1_RNAcentral
+bmo:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for BraLan2 #################
+BraLan2:kingdom=animal
+BraLan2:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+BraLan2:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+BraLan2:libs=BraLan2_cdna
+BraLan2:desc=Ensembl release 97 (44 for Metazoan)
+
+Branchiostoma_lanceolatum:libs=BraLan2_cdna
+Branchiostoma_lanceolatum:desc=Ensembl release 97 (44 for Metazoan)
+
+
+BraLan2:libs=BraLan2_RNAcentral
+BraLan2:desc=RNAcentral database 13.0
+
+Branchiostoma_lanceolatum:libs=BraLan2_RNAcentral
+Branchiostoma_lanceolatum:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Bmal-4_0 #################
+Bmal-4_0:kingdom=animal
+Bmal-4_0:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Bmal-4_0:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Bmal-4_0:libs=Bmal-4_0_ncRNA
+Bmal-4_0:desc=Ensembl release 97 (44 for Metazoan)
+
+bma:libs=Bmal-4_0_ncRNA
+bma:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Bmal-4_0:libs=Bmal-4_0_cdna
+Bmal-4_0:desc=Ensembl release 97 (44 for Metazoan)
+
+bma:libs=Bmal-4_0_cdna
+bma:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Bmal-4_0:libs=Bmal-4_0_RNAcentral
+Bmal-4_0:desc=RNAcentral database 13.0
+
+bma:libs=Bmal-4_0_RNAcentral
+bma:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for C_brenneri-6_0_1b #################
+C_brenneri-6_0_1b:kingdom=animal
+C_brenneri-6_0_1b:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+C_brenneri-6_0_1b:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+C_brenneri-6_0_1b:tRNA=C_brenneri-6_0_1b_genomic_tRNA
+cbn:tRNA=C_brenneri-6_0_1b_genomic_tRNA
+
+C_brenneri-6_0_1b:libs=C_brenneri-6_0_1b_ncRNA
+C_brenneri-6_0_1b:desc=Ensembl release 97 (44 for Metazoan)
+
+cbn:libs=C_brenneri-6_0_1b_ncRNA
+cbn:desc=Ensembl release 97 (44 for Metazoan)
+
+
+C_brenneri-6_0_1b:libs=C_brenneri-6_0_1b_cdna
+C_brenneri-6_0_1b:desc=Ensembl release 97 (44 for Metazoan)
+
+cbn:libs=C_brenneri-6_0_1b_cdna
+cbn:desc=Ensembl release 97 (44 for Metazoan)
+
+
+C_brenneri-6_0_1b:libs=C_brenneri-6_0_1b_RNAcentral
+C_brenneri-6_0_1b:desc=RNAcentral database 13.0
+
+cbn:libs=C_brenneri-6_0_1b_RNAcentral
+cbn:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for CB4 #################
+CB4:kingdom=animal
+CB4:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+CB4:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+CB4:tRNA=CB4_genomic_tRNA
+cbr:tRNA=CB4_genomic_tRNA
+
+CB4:libs=CB4_ncRNA
+CB4:desc=Ensembl release 97 (44 for Metazoan)
+
+cbr:libs=CB4_ncRNA
+cbr:desc=Ensembl release 97 (44 for Metazoan)
+
+
+CB4:libs=CB4_cdna
+CB4:desc=Ensembl release 97 (44 for Metazoan)
+
+cbr:libs=CB4_cdna
+cbr:desc=Ensembl release 97 (44 for Metazoan)
+
+
+CB4:libs=CB4_RNAcentral
+CB4:desc=RNAcentral database 13.0
+
+cbr:libs=CB4_RNAcentral
+cbr:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for WBcel235 #################
+WBcel235:kingdom=animal
+WBcel235:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+WBcel235:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+#############################################################################
+#############################################################################
+##################  Annotation for C_japonica-7_0_1 #################
+C_japonica-7_0_1:kingdom=animal
+C_japonica-7_0_1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+C_japonica-7_0_1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+C_japonica-7_0_1:tRNA=C_japonica-7_0_1_genomic_tRNA
+Caenorhabditis_japonica:tRNA=C_japonica-7_0_1_genomic_tRNA
+
+C_japonica-7_0_1:libs=C_japonica-7_0_1_ncRNA
+C_japonica-7_0_1:desc=Ensembl release 97 (44 for Metazoan)
+
+Caenorhabditis_japonica:libs=C_japonica-7_0_1_ncRNA
+Caenorhabditis_japonica:desc=Ensembl release 97 (44 for Metazoan)
+
+
+C_japonica-7_0_1:libs=C_japonica-7_0_1_cdna
+C_japonica-7_0_1:desc=Ensembl release 97 (44 for Metazoan)
+
+Caenorhabditis_japonica:libs=C_japonica-7_0_1_cdna
+Caenorhabditis_japonica:desc=Ensembl release 97 (44 for Metazoan)
+
+
+C_japonica-7_0_1:libs=C_japonica-7_0_1_RNAcentral
+C_japonica-7_0_1:desc=RNAcentral database 13.0
+
+Caenorhabditis_japonica:libs=C_japonica-7_0_1_RNAcentral
+Caenorhabditis_japonica:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for C_remanei-15_0_1 #################
+C_remanei-15_0_1:kingdom=animal
+C_remanei-15_0_1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+C_remanei-15_0_1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+C_remanei-15_0_1:tRNA=C_remanei-15_0_1_genomic_tRNA
+crm:tRNA=C_remanei-15_0_1_genomic_tRNA
+
+C_remanei-15_0_1:libs=C_remanei-15_0_1_ncRNA
+C_remanei-15_0_1:desc=Ensembl release 97 (44 for Metazoan)
+
+crm:libs=C_remanei-15_0_1_ncRNA
+crm:desc=Ensembl release 97 (44 for Metazoan)
+
+
+C_remanei-15_0_1:libs=C_remanei-15_0_1_cdna
+C_remanei-15_0_1:desc=Ensembl release 97 (44 for Metazoan)
+
+crm:libs=C_remanei-15_0_1_cdna
+crm:desc=Ensembl release 97 (44 for Metazoan)
+
+
+C_remanei-15_0_1:libs=C_remanei-15_0_1_RNAcentral
+C_remanei-15_0_1:desc=RNAcentral database 13.0
+
+crm:libs=C_remanei-15_0_1_RNAcentral
+crm:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Capitella_teleta_v1_0 #################
+Capitella_teleta_v1_0:kingdom=animal
+Capitella_teleta_v1_0:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Capitella_teleta_v1_0:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Capitella_teleta_v1_0:libs=Capitella_teleta_v1_0_ncRNA
+Capitella_teleta_v1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+cte:libs=Capitella_teleta_v1_0_ncRNA
+cte:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Capitella_teleta_v1_0:libs=Capitella_teleta_v1_0_cdna
+Capitella_teleta_v1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+cte:libs=Capitella_teleta_v1_0_cdna
+cte:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Capitella_teleta_v1_0:libs=Capitella_teleta_v1_0_RNAcentral
+Capitella_teleta_v1_0:desc=RNAcentral database 13.0
+
+cte:libs=Capitella_teleta_v1_0_RNAcentral
+cte:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for oyster_v9 #################
+oyster_v9:kingdom=animal
+oyster_v9:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+oyster_v9:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+oyster_v9:libs=oyster_v9_ncRNA
+oyster_v9:desc=Ensembl release 97 (44 for Metazoan)
+
+Crassostrea_gigas:libs=oyster_v9_ncRNA
+Crassostrea_gigas:desc=Ensembl release 97 (44 for Metazoan)
+
+
+oyster_v9:libs=oyster_v9_cdna
+oyster_v9:desc=Ensembl release 97 (44 for Metazoan)
+
+Crassostrea_gigas:libs=oyster_v9_cdna
+Crassostrea_gigas:desc=Ensembl release 97 (44 for Metazoan)
+
+
+oyster_v9:libs=oyster_v9_RNAcentral
+oyster_v9:desc=RNAcentral database 13.0
+
+Crassostrea_gigas:libs=oyster_v9_RNAcentral
+Crassostrea_gigas:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for CpipJ2 #################
+CpipJ2:kingdom=animal
+CpipJ2:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+CpipJ2:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+CpipJ2:libs=CpipJ2_ncRNA
+CpipJ2:desc=Ensembl release 97 (44 for Metazoan)
+
+cqu:libs=CpipJ2_ncRNA
+cqu:desc=Ensembl release 97 (44 for Metazoan)
+
+
+CpipJ2:libs=CpipJ2_cdna
+CpipJ2:desc=Ensembl release 97 (44 for Metazoan)
+
+cqu:libs=CpipJ2_cdna
+cqu:desc=Ensembl release 97 (44 for Metazoan)
+
+
+CpipJ2:libs=CpipJ2_RNAcentral
+CpipJ2:desc=RNAcentral database 13.0
+
+cqu:libs=CpipJ2_RNAcentral
+cqu:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Cson1 #################
+Cson1:kingdom=animal
+Cson1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Cson1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Cson1:libs=Cson1_cdna
+Cson1:desc=Ensembl release 97 (44 for Metazoan)
+
+Culicoides_sonorensis:libs=Cson1_cdna
+Culicoides_sonorensis:desc=Ensembl release 97 (44 for Metazoan)
+
+#############################################################################
+#############################################################################
+##################  Annotation for Dpv3 #################
+Dpv3:kingdom=animal
+Dpv3:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Dpv3:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Dpv3:libs=Dpv3_ncRNA
+Dpv3:desc=Ensembl release 97 (44 for Metazoan)
+
+Danaus_plexippus:libs=Dpv3_ncRNA
+Danaus_plexippus:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Dpv3:libs=Dpv3_cdna
+Dpv3:desc=Ensembl release 97 (44 for Metazoan)
+
+Danaus_plexippus:libs=Dpv3_cdna
+Danaus_plexippus:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Dpv3:libs=Dpv3_RNAcentral
+Dpv3:desc=RNAcentral database 13.0
+
+Danaus_plexippus:libs=Dpv3_RNAcentral
+Danaus_plexippus:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for daphmag2_4 #################
+daphmag2_4:kingdom=animal
+daphmag2_4:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+daphmag2_4:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+daphmag2_4:libs=daphmag2_4_ncRNA
+daphmag2_4:desc=Ensembl release 97 (44 for Metazoan)
+
+Daphnia_magna:libs=daphmag2_4_ncRNA
+Daphnia_magna:desc=Ensembl release 97 (44 for Metazoan)
+
+
+daphmag2_4:libs=daphmag2_4_cdna
+daphmag2_4:desc=Ensembl release 97 (44 for Metazoan)
+
+Daphnia_magna:libs=daphmag2_4_cdna
+Daphnia_magna:desc=Ensembl release 97 (44 for Metazoan)
+
+
+daphmag2_4:libs=daphmag2_4_RNAcentral
+daphmag2_4:desc=RNAcentral database 13.0
+
+Daphnia_magna:libs=daphmag2_4_RNAcentral
+Daphnia_magna:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for V1_0 #################
+V1_0:kingdom=animal
+V1_0:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+V1_0:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+V1_0:libs=V1_0_ncRNA
+V1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+dpu:libs=V1_0_ncRNA
+dpu:desc=Ensembl release 97 (44 for Metazoan)
+
+
+V1_0:libs=V1_0_cdna
+V1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+dpu:libs=V1_0_cdna
+dpu:desc=Ensembl release 97 (44 for Metazoan)
+
+
+V1_0:libs=V1_0_RNAcentral
+V1_0:desc=RNAcentral database 13.0
+
+dpu:libs=V1_0_RNAcentral
+dpu:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for DendPond_male_1_0 #################
+DendPond_male_1_0:kingdom=animal
+DendPond_male_1_0:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+DendPond_male_1_0:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+DendPond_male_1_0:libs=DendPond_male_1_0_ncRNA
+DendPond_male_1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Dendroctonus_ponderosae:libs=DendPond_male_1_0_ncRNA
+Dendroctonus_ponderosae:desc=Ensembl release 97 (44 for Metazoan)
+
+
+DendPond_male_1_0:libs=DendPond_male_1_0_cdna
+DendPond_male_1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Dendroctonus_ponderosae:libs=DendPond_male_1_0_cdna
+Dendroctonus_ponderosae:desc=Ensembl release 97 (44 for Metazoan)
+
+
+DendPond_male_1_0:libs=DendPond_male_1_0_RNAcentral
+DendPond_male_1_0:desc=RNAcentral database 13.0
+
+Dendroctonus_ponderosae:libs=DendPond_male_1_0_RNAcentral
+Dendroctonus_ponderosae:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for DtinU1 #################
+DtinU1:kingdom=animal
+DtinU1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+DtinU1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+DtinU1:libs=DtinU1_cdna
+DtinU1:desc=Ensembl release 97 (44 for Metazoan)
+
+Dinothrombium_tinctorium:libs=DtinU1_cdna
+Dinothrombium_tinctorium:desc=Ensembl release 97 (44 for Metazoan)
+
+#############################################################################
+#############################################################################
+##################  Annotation for dana_caf1 #################
+dana_caf1:kingdom=animal
+dana_caf1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+dana_caf1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+dana_caf1:tRNA=dana_caf1_genomic_tRNA
+dan:tRNA=dana_caf1_genomic_tRNA
+
+dana_caf1:libs=dana_caf1_ncRNA
+dana_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+dan:libs=dana_caf1_ncRNA
+dan:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dana_caf1:libs=dana_caf1_cdna
+dana_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+dan:libs=dana_caf1_cdna
+dan:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dana_caf1:libs=dana_caf1_RNAcentral
+dana_caf1:desc=RNAcentral database 13.0
+
+dan:libs=dana_caf1_RNAcentral
+dan:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for dere_caf1 #################
+dere_caf1:kingdom=animal
+dere_caf1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+dere_caf1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+dere_caf1:tRNA=dere_caf1_genomic_tRNA
+der:tRNA=dere_caf1_genomic_tRNA
+
+dere_caf1:libs=dere_caf1_ncRNA
+dere_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+der:libs=dere_caf1_ncRNA
+der:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dere_caf1:libs=dere_caf1_cdna
+dere_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+der:libs=dere_caf1_cdna
+der:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dere_caf1:libs=dere_caf1_RNAcentral
+dere_caf1:desc=RNAcentral database 13.0
+
+der:libs=dere_caf1_RNAcentral
+der:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for dgri_caf1 #################
+dgri_caf1:kingdom=animal
+dgri_caf1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+dgri_caf1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+dgri_caf1:tRNA=dgri_caf1_genomic_tRNA
+dgr:tRNA=dgri_caf1_genomic_tRNA
+
+dgri_caf1:libs=dgri_caf1_ncRNA
+dgri_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+dgr:libs=dgri_caf1_ncRNA
+dgr:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dgri_caf1:libs=dgri_caf1_cdna
+dgri_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+dgr:libs=dgri_caf1_cdna
+dgr:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dgri_caf1:libs=dgri_caf1_RNAcentral
+dgri_caf1:desc=RNAcentral database 13.0
+
+dgr:libs=dgri_caf1_RNAcentral
+dgr:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for BDGP6_22 #################
+BDGP6_22:kingdom=animal
+BDGP6_22:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+BDGP6_22:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+#############################################################################
+#############################################################################
+##################  Annotation for dmoj_caf1 #################
+dmoj_caf1:kingdom=animal
+dmoj_caf1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+dmoj_caf1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+dmoj_caf1:tRNA=dmoj_caf1_genomic_tRNA
+dmo:tRNA=dmoj_caf1_genomic_tRNA
+
+dmoj_caf1:libs=dmoj_caf1_ncRNA
+dmoj_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+dmo:libs=dmoj_caf1_ncRNA
+dmo:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dmoj_caf1:libs=dmoj_caf1_cdna
+dmoj_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+dmo:libs=dmoj_caf1_cdna
+dmo:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dmoj_caf1:libs=dmoj_caf1_RNAcentral
+dmoj_caf1:desc=RNAcentral database 13.0
+
+dmo:libs=dmoj_caf1_RNAcentral
+dmo:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for dper_caf1 #################
+dper_caf1:kingdom=animal
+dper_caf1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+dper_caf1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+dper_caf1:tRNA=dper_caf1_genomic_tRNA
+dpe:tRNA=dper_caf1_genomic_tRNA
+
+dper_caf1:libs=dper_caf1_ncRNA
+dper_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+dpe:libs=dper_caf1_ncRNA
+dpe:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dper_caf1:libs=dper_caf1_cdna
+dper_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+dpe:libs=dper_caf1_cdna
+dpe:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dper_caf1:libs=dper_caf1_RNAcentral
+dper_caf1:desc=RNAcentral database 13.0
+
+dpe:libs=dper_caf1_RNAcentral
+dpe:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Dpse_3_0 #################
+Dpse_3_0:kingdom=animal
+Dpse_3_0:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Dpse_3_0:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+Dpse_3_0:tRNA=Dpse_3_0_genomic_tRNA
+dps:tRNA=Dpse_3_0_genomic_tRNA
+
+Dpse_3_0:libs=Dpse_3_0_ncRNA
+Dpse_3_0:desc=Ensembl release 97 (44 for Metazoan)
+
+dps:libs=Dpse_3_0_ncRNA
+dps:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Dpse_3_0:libs=Dpse_3_0_cdna
+Dpse_3_0:desc=Ensembl release 97 (44 for Metazoan)
+
+dps:libs=Dpse_3_0_cdna
+dps:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Dpse_3_0:libs=Dpse_3_0_RNAcentral
+Dpse_3_0:desc=RNAcentral database 13.0
+
+dps:libs=Dpse_3_0_RNAcentral
+dps:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for dsec_caf1 #################
+dsec_caf1:kingdom=animal
+dsec_caf1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+dsec_caf1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+dsec_caf1:tRNA=dsec_caf1_genomic_tRNA
+dse:tRNA=dsec_caf1_genomic_tRNA
+
+dsec_caf1:libs=dsec_caf1_ncRNA
+dsec_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+dse:libs=dsec_caf1_ncRNA
+dse:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dsec_caf1:libs=dsec_caf1_cdna
+dsec_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+dse:libs=dsec_caf1_cdna
+dse:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dsec_caf1:libs=dsec_caf1_RNAcentral
+dsec_caf1:desc=RNAcentral database 13.0
+
+dse:libs=dsec_caf1_RNAcentral
+dse:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for ASM75419v3 #################
+ASM75419v3:kingdom=animal
+ASM75419v3:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+ASM75419v3:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+ASM75419v3:tRNA=ASM75419v3_genomic_tRNA
+dsi:tRNA=ASM75419v3_genomic_tRNA
+
+ASM75419v3:libs=ASM75419v3_ncRNA
+ASM75419v3:desc=Ensembl release 97 (44 for Metazoan)
+
+dsi:libs=ASM75419v3_ncRNA
+dsi:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM75419v3:libs=ASM75419v3_cdna
+ASM75419v3:desc=Ensembl release 97 (44 for Metazoan)
+
+dsi:libs=ASM75419v3_cdna
+dsi:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM75419v3:libs=ASM75419v3_RNAcentral
+ASM75419v3:desc=RNAcentral database 13.0
+
+dsi:libs=ASM75419v3_RNAcentral
+dsi:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for dvir_caf1 #################
+dvir_caf1:kingdom=animal
+dvir_caf1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+dvir_caf1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+dvir_caf1:tRNA=dvir_caf1_genomic_tRNA
+dvi:tRNA=dvir_caf1_genomic_tRNA
+
+dvir_caf1:libs=dvir_caf1_ncRNA
+dvir_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+dvi:libs=dvir_caf1_ncRNA
+dvi:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dvir_caf1:libs=dvir_caf1_cdna
+dvir_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+dvi:libs=dvir_caf1_cdna
+dvi:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dvir_caf1:libs=dvir_caf1_RNAcentral
+dvir_caf1:desc=RNAcentral database 13.0
+
+dvi:libs=dvir_caf1_RNAcentral
+dvi:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for dwil_caf1 #################
+dwil_caf1:kingdom=animal
+dwil_caf1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+dwil_caf1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+dwil_caf1:tRNA=dwil_caf1_genomic_tRNA
+dwi:tRNA=dwil_caf1_genomic_tRNA
+
+dwil_caf1:libs=dwil_caf1_ncRNA
+dwil_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+dwi:libs=dwil_caf1_ncRNA
+dwi:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dwil_caf1:libs=dwil_caf1_cdna
+dwil_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+dwi:libs=dwil_caf1_cdna
+dwi:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dwil_caf1:libs=dwil_caf1_RNAcentral
+dwil_caf1:desc=RNAcentral database 13.0
+
+dwi:libs=dwil_caf1_RNAcentral
+dwi:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for dyak_caf1 #################
+dyak_caf1:kingdom=animal
+dyak_caf1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+dyak_caf1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+dyak_caf1:tRNA=dyak_caf1_genomic_tRNA
+dya:tRNA=dyak_caf1_genomic_tRNA
+
+dyak_caf1:libs=dyak_caf1_ncRNA
+dyak_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+dya:libs=dyak_caf1_ncRNA
+dya:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dyak_caf1:libs=dyak_caf1_cdna
+dyak_caf1:desc=Ensembl release 97 (44 for Metazoan)
+
+dya:libs=dyak_caf1_cdna
+dya:desc=Ensembl release 97 (44 for Metazoan)
+
+
+dyak_caf1:libs=dyak_caf1_RNAcentral
+dyak_caf1:desc=RNAcentral database 13.0
+
+dya:libs=dyak_caf1_RNAcentral
+dya:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for ASM221717v1 #################
+ASM221717v1:kingdom=animal
+ASM221717v1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+ASM221717v1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+ASM221717v1:libs=ASM221717v1_cdna
+ASM221717v1:desc=Ensembl release 97 (44 for Metazoan)
+
+Folsomia_candida_str._VU_population:libs=ASM221717v1_cdna
+Folsomia_candida_str._VU_population:desc=Ensembl release 97 (44 for Metazoan)
+
+#############################################################################
+#############################################################################
+##################  Annotation for Hmel1 #################
+Hmel1:kingdom=animal
+Hmel1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Hmel1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Hmel1:libs=Hmel1_ncRNA
+Hmel1:desc=Ensembl release 97 (44 for Metazoan)
+
+hme:libs=Hmel1_ncRNA
+hme:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Hmel1:libs=Hmel1_cdna
+Hmel1:desc=Ensembl release 97 (44 for Metazoan)
+
+hme:libs=Hmel1_cdna
+hme:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Hmel1:libs=Hmel1_RNAcentral
+Hmel1:desc=RNAcentral database 13.0
+
+hme:libs=Hmel1_RNAcentral
+hme:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Helro1 #################
+Helro1:kingdom=animal
+Helro1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Helro1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Helro1:libs=Helro1_ncRNA
+Helro1:desc=Ensembl release 97 (44 for Metazoan)
+
+Helobdella_robusta:libs=Helro1_ncRNA
+Helobdella_robusta:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Helro1:libs=Helro1_cdna
+Helro1:desc=Ensembl release 97 (44 for Metazoan)
+
+Helobdella_robusta:libs=Helro1_cdna
+Helobdella_robusta:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Helro1:libs=Helro1_RNAcentral
+Helro1:desc=RNAcentral database 13.0
+
+Helobdella_robusta:libs=Helro1_RNAcentral
+Helobdella_robusta:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for IscaW1 #################
+IscaW1:kingdom=animal
+IscaW1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+IscaW1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+IscaW1:libs=IscaW1_ncRNA
+IscaW1:desc=Ensembl release 97 (44 for Metazoan)
+
+isc:libs=IscaW1_ncRNA
+isc:desc=Ensembl release 97 (44 for Metazoan)
+
+
+IscaW1:libs=IscaW1_cdna
+IscaW1:desc=Ensembl release 97 (44 for Metazoan)
+
+isc:libs=IscaW1_cdna
+isc:desc=Ensembl release 97 (44 for Metazoan)
+
+
+IscaW1:libs=IscaW1_RNAcentral
+IscaW1:desc=RNAcentral database 13.0
+
+isc:libs=IscaW1_RNAcentral
+isc:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for LSalAtl2s #################
+LSalAtl2s:kingdom=animal
+LSalAtl2s:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+LSalAtl2s:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+LSalAtl2s:libs=LSalAtl2s_ncRNA
+LSalAtl2s:desc=Ensembl release 97 (44 for Metazoan)
+
+Lepeophtheirus_salmonis:libs=LSalAtl2s_ncRNA
+Lepeophtheirus_salmonis:desc=Ensembl release 97 (44 for Metazoan)
+
+
+LSalAtl2s:libs=LSalAtl2s_cdna
+LSalAtl2s:desc=Ensembl release 97 (44 for Metazoan)
+
+Lepeophtheirus_salmonis:libs=LSalAtl2s_cdna
+Lepeophtheirus_salmonis:desc=Ensembl release 97 (44 for Metazoan)
+
+
+LSalAtl2s:libs=LSalAtl2s_RNAcentral
+LSalAtl2s:desc=RNAcentral database 13.0
+
+Lepeophtheirus_salmonis:libs=LSalAtl2s_RNAcentral
+Lepeophtheirus_salmonis:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for LdelU1 #################
+LdelU1:kingdom=animal
+LdelU1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+LdelU1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+LdelU1:libs=LdelU1_cdna
+LdelU1:desc=Ensembl release 97 (44 for Metazoan)
+
+Leptotrombidium_deliense:libs=LdelU1_cdna
+Leptotrombidium_deliense:desc=Ensembl release 97 (44 for Metazoan)
+
+
+LdelU1:libs=LdelU1_RNAcentral
+LdelU1:desc=RNAcentral database 13.0
+
+Leptotrombidium_deliense:libs=LdelU1_RNAcentral
+Leptotrombidium_deliense:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for LinAna1_0 #################
+LinAna1_0:kingdom=animal
+LinAna1_0:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+LinAna1_0:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+LinAna1_0:libs=LinAna1_0_ncRNA
+LinAna1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Lingula_anatina:libs=LinAna1_0_ncRNA
+Lingula_anatina:desc=Ensembl release 97 (44 for Metazoan)
+
+
+LinAna1_0:libs=LinAna1_0_cdna
+LinAna1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Lingula_anatina:libs=LinAna1_0_cdna
+Lingula_anatina:desc=Ensembl release 97 (44 for Metazoan)
+
+
+LinAna1_0:libs=LinAna1_0_RNAcentral
+LinAna1_0:desc=RNAcentral database 13.0
+
+Lingula_anatina:libs=LinAna1_0_RNAcentral
+Lingula_anatina:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Loa_loa_V3 #################
+Loa_loa_V3:kingdom=animal
+Loa_loa_V3:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Loa_loa_V3:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Loa_loa_V3:libs=Loa_loa_V3_ncRNA
+Loa_loa_V3:desc=Ensembl release 97 (44 for Metazoan)
+
+Loa_loa:libs=Loa_loa_V3_ncRNA
+Loa_loa:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Loa_loa_V3:libs=Loa_loa_V3_cdna
+Loa_loa_V3:desc=Ensembl release 97 (44 for Metazoan)
+
+Loa_loa:libs=Loa_loa_V3_cdna
+Loa_loa:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Loa_loa_V3:libs=Loa_loa_V3_RNAcentral
+Loa_loa_V3:desc=RNAcentral database 13.0
+
+Loa_loa:libs=Loa_loa_V3_RNAcentral
+Loa_loa:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Lotgi1 #################
+Lotgi1:kingdom=animal
+Lotgi1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Lotgi1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Lotgi1:libs=Lotgi1_ncRNA
+Lotgi1:desc=Ensembl release 97 (44 for Metazoan)
+
+lgi:libs=Lotgi1_ncRNA
+lgi:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Lotgi1:libs=Lotgi1_cdna
+Lotgi1:desc=Ensembl release 97 (44 for Metazoan)
+
+lgi:libs=Lotgi1_cdna
+lgi:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Lotgi1:libs=Lotgi1_RNAcentral
+Lotgi1:desc=RNAcentral database 13.0
+
+lgi:libs=Lotgi1_RNAcentral
+lgi:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for ASM118794v1 #################
+ASM118794v1:kingdom=animal
+ASM118794v1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+ASM118794v1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+ASM118794v1:libs=ASM118794v1_ncRNA
+ASM118794v1:desc=Ensembl release 97 (44 for Metazoan)
+
+Lucilia_cuprina:libs=ASM118794v1_ncRNA
+Lucilia_cuprina:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM118794v1:libs=ASM118794v1_cdna
+ASM118794v1:desc=Ensembl release 97 (44 for Metazoan)
+
+Lucilia_cuprina:libs=ASM118794v1_cdna
+Lucilia_cuprina:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM118794v1:libs=ASM118794v1_RNAcentral
+ASM118794v1:desc=RNAcentral database 13.0
+
+Lucilia_cuprina:libs=ASM118794v1_RNAcentral
+Lucilia_cuprina:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Mdes_1_0 #################
+Mdes_1_0:kingdom=animal
+Mdes_1_0:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Mdes_1_0:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Mdes_1_0:libs=Mdes_1_0_ncRNA
+Mdes_1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Mayetiola_destructor:libs=Mdes_1_0_ncRNA
+Mayetiola_destructor:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Mdes_1_0:libs=Mdes_1_0_cdna
+Mdes_1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Mayetiola_destructor:libs=Mdes_1_0_cdna
+Mayetiola_destructor:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Mdes_1_0:libs=Mdes_1_0_RNAcentral
+Mdes_1_0:desc=RNAcentral database 13.0
+
+Mayetiola_destructor:libs=Mdes_1_0_RNAcentral
+Mayetiola_destructor:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Msca1 #################
+Msca1:kingdom=animal
+Msca1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Msca1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Msca1:libs=Msca1_ncRNA
+Msca1:desc=Ensembl release 97 (44 for Metazoan)
+
+Megaselia_scalaris:libs=Msca1_ncRNA
+Megaselia_scalaris:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Msca1:libs=Msca1_cdna
+Msca1:desc=Ensembl release 97 (44 for Metazoan)
+
+Megaselia_scalaris:libs=Msca1_cdna
+Megaselia_scalaris:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Msca1:libs=Msca1_RNAcentral
+Msca1:desc=RNAcentral database 13.0
+
+Megaselia_scalaris:libs=Msca1_RNAcentral
+Megaselia_scalaris:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for MelCinx1_0 #################
+MelCinx1_0:kingdom=animal
+MelCinx1_0:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+MelCinx1_0:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+MelCinx1_0:libs=MelCinx1_0_ncRNA
+MelCinx1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Melitaea_cinxia:libs=MelCinx1_0_ncRNA
+Melitaea_cinxia:desc=Ensembl release 97 (44 for Metazoan)
+
+
+MelCinx1_0:libs=MelCinx1_0_cdna
+MelCinx1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Melitaea_cinxia:libs=MelCinx1_0_cdna
+Melitaea_cinxia:desc=Ensembl release 97 (44 for Metazoan)
+
+
+MelCinx1_0:libs=MelCinx1_0_RNAcentral
+MelCinx1_0:desc=RNAcentral database 13.0
+
+Melitaea_cinxia:libs=MelCinx1_0_RNAcentral
+Melitaea_cinxia:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for MneLei_Aug2011 #################
+MneLei_Aug2011:kingdom=animal
+MneLei_Aug2011:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+MneLei_Aug2011:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+MneLei_Aug2011:libs=MneLei_Aug2011_ncRNA
+MneLei_Aug2011:desc=Ensembl release 97 (44 for Metazoan)
+
+Mnemiopsis_leidyi:libs=MneLei_Aug2011_ncRNA
+Mnemiopsis_leidyi:desc=Ensembl release 97 (44 for Metazoan)
+
+
+MneLei_Aug2011:libs=MneLei_Aug2011_cdna
+MneLei_Aug2011:desc=Ensembl release 97 (44 for Metazoan)
+
+Mnemiopsis_leidyi:libs=MneLei_Aug2011_cdna
+Mnemiopsis_leidyi:desc=Ensembl release 97 (44 for Metazoan)
+
+
+MneLei_Aug2011:libs=MneLei_Aug2011_RNAcentral
+MneLei_Aug2011:desc=RNAcentral database 13.0
+
+Mnemiopsis_leidyi:libs=MneLei_Aug2011_RNAcentral
+Mnemiopsis_leidyi:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Nvit_2_1 #################
+Nvit_2_1:kingdom=animal
+Nvit_2_1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Nvit_2_1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Nvit_2_1:libs=Nvit_2_1_ncRNA
+Nvit_2_1:desc=Ensembl release 97 (44 for Metazoan)
+
+nvi:libs=Nvit_2_1_ncRNA
+nvi:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Nvit_2_1:libs=Nvit_2_1_cdna
+Nvit_2_1:desc=Ensembl release 97 (44 for Metazoan)
+
+nvi:libs=Nvit_2_1_cdna
+nvi:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Nvit_2_1:libs=Nvit_2_1_RNAcentral
+Nvit_2_1:desc=RNAcentral database 13.0
+
+nvi:libs=Nvit_2_1_RNAcentral
+nvi:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for ASM20922v1 #################
+ASM20922v1:kingdom=animal
+ASM20922v1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+ASM20922v1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+ASM20922v1:libs=ASM20922v1_ncRNA
+ASM20922v1:desc=Ensembl release 97 (44 for Metazoan)
+
+nve:libs=ASM20922v1_ncRNA
+nve:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM20922v1:libs=ASM20922v1_cdna
+ASM20922v1:desc=Ensembl release 97 (44 for Metazoan)
+
+nve:libs=ASM20922v1_cdna
+nve:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM20922v1:libs=ASM20922v1_RNAcentral
+ASM20922v1:desc=RNAcentral database 13.0
+
+nve:libs=ASM20922v1_RNAcentral
+nve:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for PRJNA270931 #################
+PRJNA270931:kingdom=animal
+PRJNA270931:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+PRJNA270931:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+PRJNA270931:libs=PRJNA270931_ncRNA
+PRJNA270931:desc=Ensembl release 97 (44 for Metazoan)
+
+Octopus_bimaculoides:libs=PRJNA270931_ncRNA
+Octopus_bimaculoides:desc=Ensembl release 97 (44 for Metazoan)
+
+
+PRJNA270931:libs=PRJNA270931_cdna
+PRJNA270931:desc=Ensembl release 97 (44 for Metazoan)
+
+Octopus_bimaculoides:libs=PRJNA270931_cdna
+Octopus_bimaculoides:desc=Ensembl release 97 (44 for Metazoan)
+
+
+PRJNA270931:libs=PRJNA270931_RNAcentral
+PRJNA270931:desc=RNAcentral database 13.0
+
+Octopus_bimaculoides:libs=PRJNA270931_RNAcentral
+Octopus_bimaculoides:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for ASM49940v2 #################
+ASM49940v2:kingdom=animal
+ASM49940v2:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+ASM49940v2:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+ASM49940v2:tRNA=ASM49940v2_genomic_tRNA
+Onchocerca_volvulus:tRNA=ASM49940v2_genomic_tRNA
+
+ASM49940v2:libs=ASM49940v2_ncRNA
+ASM49940v2:desc=Ensembl release 97 (44 for Metazoan)
+
+Onchocerca_volvulus:libs=ASM49940v2_ncRNA
+Onchocerca_volvulus:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM49940v2:libs=ASM49940v2_cdna
+ASM49940v2:desc=Ensembl release 97 (44 for Metazoan)
+
+Onchocerca_volvulus:libs=ASM49940v2_cdna
+Onchocerca_volvulus:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM49940v2:libs=ASM49940v2_RNAcentral
+ASM49940v2:desc=RNAcentral database 13.0
+
+Onchocerca_volvulus:libs=ASM49940v2_RNAcentral
+Onchocerca_volvulus:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for ASM171814v1 #################
+ASM171814v1:kingdom=animal
+ASM171814v1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+ASM171814v1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+ASM171814v1:libs=ASM171814v1_cdna
+ASM171814v1:desc=Ensembl release 97 (44 for Metazoan)
+
+Orchesella_cincta:libs=ASM171814v1_cdna
+Orchesella_cincta:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM171814v1:libs=ASM171814v1_RNAcentral
+ASM171814v1:desc=RNAcentral database 13.0
+
+Orchesella_cincta:libs=ASM171814v1_RNAcentral
+Orchesella_cincta:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for PhumU2 #################
+PhumU2:kingdom=animal
+PhumU2:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+PhumU2:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+PhumU2:libs=PhumU2_ncRNA
+PhumU2:desc=Ensembl release 97 (44 for Metazoan)
+
+Pediculus_humanus:libs=PhumU2_ncRNA
+Pediculus_humanus:desc=Ensembl release 97 (44 for Metazoan)
+
+
+PhumU2:libs=PhumU2_cdna
+PhumU2:desc=Ensembl release 97 (44 for Metazoan)
+
+Pediculus_humanus:libs=PhumU2_cdna
+Pediculus_humanus:desc=Ensembl release 97 (44 for Metazoan)
+
+
+PhumU2:libs=PhumU2_RNAcentral
+PhumU2:desc=RNAcentral database 13.0
+
+Pediculus_humanus:libs=PhumU2_RNAcentral
+Pediculus_humanus:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for El_Paco #################
+El_Paco:kingdom=animal
+El_Paco:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+El_Paco:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+El_Paco:tRNA=El_Paco_genomic_tRNA
+ppc:tRNA=El_Paco_genomic_tRNA
+
+El_Paco:libs=El_Paco_cdna
+El_Paco:desc=Ensembl release 97 (44 for Metazoan)
+
+ppc:libs=El_Paco_cdna
+ppc:desc=Ensembl release 97 (44 for Metazoan)
+
+
+El_Paco:libs=El_Paco_RNAcentral
+El_Paco:desc=RNAcentral database 13.0
+
+ppc:libs=El_Paco_RNAcentral
+ppc:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for RproC3 #################
+RproC3:kingdom=animal
+RproC3:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+RproC3:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+RproC3:libs=RproC3_ncRNA
+RproC3:desc=Ensembl release 97 (44 for Metazoan)
+
+Rhodnius_prolixus:libs=RproC3_ncRNA
+Rhodnius_prolixus:desc=Ensembl release 97 (44 for Metazoan)
+
+
+RproC3:libs=RproC3_cdna
+RproC3:desc=Ensembl release 97 (44 for Metazoan)
+
+Rhodnius_prolixus:libs=RproC3_cdna
+Rhodnius_prolixus:desc=Ensembl release 97 (44 for Metazoan)
+
+
+RproC3:libs=RproC3_RNAcentral
+RproC3:desc=RNAcentral database 13.0
+
+Rhodnius_prolixus:libs=RproC3_RNAcentral
+Rhodnius_prolixus:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for SscaA1 #################
+SscaA1:kingdom=animal
+SscaA1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+SscaA1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+SscaA1:libs=SscaA1_ncRNA
+SscaA1:desc=Ensembl release 97 (44 for Metazoan)
+
+Sarcoptes_scabiei:libs=SscaA1_ncRNA
+Sarcoptes_scabiei:desc=Ensembl release 97 (44 for Metazoan)
+
+
+SscaA1:libs=SscaA1_cdna
+SscaA1:desc=Ensembl release 97 (44 for Metazoan)
+
+Sarcoptes_scabiei:libs=SscaA1_cdna
+Sarcoptes_scabiei:desc=Ensembl release 97 (44 for Metazoan)
+
+
+SscaA1:libs=SscaA1_RNAcentral
+SscaA1:desc=RNAcentral database 13.0
+
+Sarcoptes_scabiei:libs=SscaA1_RNAcentral
+Sarcoptes_scabiei:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for ASM23792v2 #################
+ASM23792v2:kingdom=animal
+ASM23792v2:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+ASM23792v2:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+ASM23792v2:libs=ASM23792v2_ncRNA
+ASM23792v2:desc=Ensembl release 97 (44 for Metazoan)
+
+sma:libs=ASM23792v2_ncRNA
+sma:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM23792v2:libs=ASM23792v2_cdna
+ASM23792v2:desc=Ensembl release 97 (44 for Metazoan)
+
+sma:libs=ASM23792v2_cdna
+sma:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM23792v2:libs=ASM23792v2_RNAcentral
+ASM23792v2:desc=RNAcentral database 13.0
+
+sma:libs=ASM23792v2_RNAcentral
+sma:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Si_gnG #################
+Si_gnG:kingdom=animal
+Si_gnG:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Si_gnG:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Si_gnG:libs=Si_gnG_ncRNA
+Si_gnG:desc=Ensembl release 97 (44 for Metazoan)
+
+Solenopsis_invicta:libs=Si_gnG_ncRNA
+Solenopsis_invicta:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Si_gnG:libs=Si_gnG_cdna
+Si_gnG:desc=Ensembl release 97 (44 for Metazoan)
+
+Solenopsis_invicta:libs=Si_gnG_cdna
+Solenopsis_invicta:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Si_gnG:libs=Si_gnG_RNAcentral
+Si_gnG:desc=RNAcentral database 13.0
+
+Solenopsis_invicta:libs=Si_gnG_RNAcentral
+Solenopsis_invicta:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Stegodyphus_mimosarum_v1 #################
+Stegodyphus_mimosarum_v1:kingdom=animal
+Stegodyphus_mimosarum_v1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Stegodyphus_mimosarum_v1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Stegodyphus_mimosarum_v1:libs=Stegodyphus_mimosarum_v1_ncRNA
+Stegodyphus_mimosarum_v1:desc=Ensembl release 97 (44 for Metazoan)
+
+Stegodyphus_mimosarum:libs=Stegodyphus_mimosarum_v1_ncRNA
+Stegodyphus_mimosarum:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Stegodyphus_mimosarum_v1:libs=Stegodyphus_mimosarum_v1_cdna
+Stegodyphus_mimosarum_v1:desc=Ensembl release 97 (44 for Metazoan)
+
+Stegodyphus_mimosarum:libs=Stegodyphus_mimosarum_v1_cdna
+Stegodyphus_mimosarum:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Stegodyphus_mimosarum_v1:libs=Stegodyphus_mimosarum_v1_RNAcentral
+Stegodyphus_mimosarum_v1:desc=RNAcentral database 13.0
+
+Stegodyphus_mimosarum:libs=Stegodyphus_mimosarum_v1_RNAcentral
+Stegodyphus_mimosarum:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Smar1 #################
+Smar1:kingdom=animal
+Smar1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Smar1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Smar1:libs=Smar1_ncRNA
+Smar1:desc=Ensembl release 97 (44 for Metazoan)
+
+smr:libs=Smar1_ncRNA
+smr:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Smar1:libs=Smar1_cdna
+Smar1:desc=Ensembl release 97 (44 for Metazoan)
+
+smr:libs=Smar1_cdna
+smr:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Smar1:libs=Smar1_RNAcentral
+Smar1:desc=RNAcentral database 13.0
+
+smr:libs=Smar1_RNAcentral
+smr:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Spur_3_1 #################
+Spur_3_1:kingdom=animal
+Spur_3_1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Spur_3_1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+Spur_3_1:tRNA=Spur_3_1_genomic_tRNA
+spu:tRNA=Spur_3_1_genomic_tRNA
+
+Spur_3_1:libs=Spur_3_1_ncRNA
+Spur_3_1:desc=Ensembl release 97 (44 for Metazoan)
+
+spu:libs=Spur_3_1_ncRNA
+spu:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Spur_3_1:libs=Spur_3_1_cdna
+Spur_3_1:desc=Ensembl release 97 (44 for Metazoan)
+
+spu:libs=Spur_3_1_cdna
+spu:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Spur_3_1:libs=Spur_3_1_RNAcentral
+Spur_3_1:desc=RNAcentral database 13.0
+
+spu:libs=Spur_3_1_RNAcentral
+spu:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for S_ratti_ED321_v5_0_4 #################
+S_ratti_ED321_v5_0_4:kingdom=animal
+S_ratti_ED321_v5_0_4:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+S_ratti_ED321_v5_0_4:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+S_ratti_ED321_v5_0_4:libs=S_ratti_ED321_v5_0_4_ncRNA
+S_ratti_ED321_v5_0_4:desc=Ensembl release 97 (44 for Metazoan)
+
+str:libs=S_ratti_ED321_v5_0_4_ncRNA
+str:desc=Ensembl release 97 (44 for Metazoan)
+
+
+S_ratti_ED321_v5_0_4:libs=S_ratti_ED321_v5_0_4_cdna
+S_ratti_ED321_v5_0_4:desc=Ensembl release 97 (44 for Metazoan)
+
+str:libs=S_ratti_ED321_v5_0_4_cdna
+str:desc=Ensembl release 97 (44 for Metazoan)
+
+
+S_ratti_ED321_v5_0_4:libs=S_ratti_ED321_v5_0_4_RNAcentral
+S_ratti_ED321_v5_0_4:desc=RNAcentral database 13.0
+
+str:libs=S_ratti_ED321_v5_0_4_RNAcentral
+str:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Tel_dalmanni_2A_v1_0 #################
+Tel_dalmanni_2A_v1_0:kingdom=animal
+Tel_dalmanni_2A_v1_0:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Tel_dalmanni_2A_v1_0:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Tel_dalmanni_2A_v1_0:libs=Tel_dalmanni_2A_v1_0_ncRNA
+Tel_dalmanni_2A_v1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Teleopsis_dalmanni:libs=Tel_dalmanni_2A_v1_0_ncRNA
+Teleopsis_dalmanni:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Tel_dalmanni_2A_v1_0:libs=Tel_dalmanni_2A_v1_0_cdna
+Tel_dalmanni_2A_v1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Teleopsis_dalmanni:libs=Tel_dalmanni_2A_v1_0_cdna
+Teleopsis_dalmanni:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Tel_dalmanni_2A_v1_0:libs=Tel_dalmanni_2A_v1_0_RNAcentral
+Tel_dalmanni_2A_v1_0:desc=RNAcentral database 13.0
+
+Teleopsis_dalmanni:libs=Tel_dalmanni_2A_v1_0_RNAcentral
+Teleopsis_dalmanni:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for ASM23943v1 #################
+ASM23943v1:kingdom=animal
+ASM23943v1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+ASM23943v1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+ASM23943v1:libs=ASM23943v1_ncRNA
+ASM23943v1:desc=Ensembl release 97 (44 for Metazoan)
+
+tur:libs=ASM23943v1_ncRNA
+tur:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM23943v1:libs=ASM23943v1_cdna
+ASM23943v1:desc=Ensembl release 97 (44 for Metazoan)
+
+tur:libs=ASM23943v1_cdna
+tur:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM23943v1:libs=ASM23943v1_RNAcentral
+ASM23943v1:desc=RNAcentral database 13.0
+
+tur:libs=ASM23943v1_RNAcentral
+tur:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for ASM82789v1 #################
+ASM82789v1:kingdom=animal
+ASM82789v1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+ASM82789v1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+ASM82789v1:libs=ASM82789v1_ncRNA
+ASM82789v1:desc=Ensembl release 97 (44 for Metazoan)
+
+Thelohanellus_kitauei:libs=ASM82789v1_ncRNA
+Thelohanellus_kitauei:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM82789v1:libs=ASM82789v1_cdna
+ASM82789v1:desc=Ensembl release 97 (44 for Metazoan)
+
+Thelohanellus_kitauei:libs=ASM82789v1_cdna
+Thelohanellus_kitauei:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM82789v1:libs=ASM82789v1_RNAcentral
+ASM82789v1:desc=RNAcentral database 13.0
+
+Thelohanellus_kitauei:libs=ASM82789v1_RNAcentral
+Thelohanellus_kitauei:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Tcas5_2 #################
+Tcas5_2:kingdom=animal
+Tcas5_2:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Tcas5_2:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Tcas5_2:libs=Tcas5_2_ncRNA
+Tcas5_2:desc=Ensembl release 97 (44 for Metazoan)
+
+tca:libs=Tcas5_2_ncRNA
+tca:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Tcas5_2:libs=Tcas5_2_cdna
+Tcas5_2:desc=Ensembl release 97 (44 for Metazoan)
+
+tca:libs=Tcas5_2_cdna
+tca:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Tcas5_2:libs=Tcas5_2_RNAcentral
+Tcas5_2:desc=RNAcentral database 13.0
+
+tca:libs=Tcas5_2_RNAcentral
+tca:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for Tspiralis1 #################
+Tspiralis1:kingdom=animal
+Tspiralis1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+Tspiralis1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+Tspiralis1:libs=Tspiralis1_cdna
+Tspiralis1:desc=Ensembl release 97 (44 for Metazoan)
+
+Trichinella_spiralis:libs=Tspiralis1_cdna
+Trichinella_spiralis:desc=Ensembl release 97 (44 for Metazoan)
+
+
+Tspiralis1:libs=Tspiralis1_RNAcentral
+Tspiralis1:desc=RNAcentral database 13.0
+
+Trichinella_spiralis:libs=Tspiralis1_RNAcentral
+Trichinella_spiralis:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for ASM15027v1 #################
+ASM15027v1:kingdom=animal
+ASM15027v1:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+ASM15027v1:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+ASM15027v1:libs=ASM15027v1_ncRNA
+ASM15027v1:desc=Ensembl release 97 (44 for Metazoan)
+
+Trichoplax_adhaerens:libs=ASM15027v1_ncRNA
+Trichoplax_adhaerens:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM15027v1:libs=ASM15027v1_cdna
+ASM15027v1:desc=Ensembl release 97 (44 for Metazoan)
+
+Trichoplax_adhaerens:libs=ASM15027v1_cdna
+Trichoplax_adhaerens:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ASM15027v1:libs=ASM15027v1_RNAcentral
+ASM15027v1:desc=RNAcentral database 13.0
+
+Trichoplax_adhaerens:libs=ASM15027v1_RNAcentral
+Trichoplax_adhaerens:desc=RNAcentral database 13.0
+
+#############################################################################
+#############################################################################
+##################  Annotation for ZooNev1_0 #################
+ZooNev1_0:kingdom=animal
+ZooNev1_0:libsStringTypes=mature#sense;hairpin#sense|snRNA#sense|snoRNA#sense|tRNA#sense|rRNA#sense|ncRNA#sense|mRNA#sense;protein_coding#sense;cdna#sense;cds#sense|mRNA#sense;protein_coding#antisense;cdna#antisense;cds#antisense|lncRNA#sense
+ZooNev1_0:libsStringNames=miRBase(sense)|snRNA|snoRNA|tRNA|rRNA|ncRNA|mRNA(sense)|mRNA(antisense)|lncRNA
+
+ZooNev1_0:libs=ZooNev1_0_ncRNA
+ZooNev1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Zootermopsis_nevadensis:libs=ZooNev1_0_ncRNA
+Zootermopsis_nevadensis:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ZooNev1_0:libs=ZooNev1_0_cdna
+ZooNev1_0:desc=Ensembl release 97 (44 for Metazoan)
+
+Zootermopsis_nevadensis:libs=ZooNev1_0_cdna
+Zootermopsis_nevadensis:desc=Ensembl release 97 (44 for Metazoan)
+
+
+ZooNev1_0:libs=ZooNev1_0_RNAcentral
+ZooNev1_0:desc=RNAcentral database 13.0
+
+Zootermopsis_nevadensis:libs=ZooNev1_0_RNAcentral
+Zootermopsis_nevadensis:desc=RNAcentral database 13.0
+

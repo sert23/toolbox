@@ -1,0 +1,479 @@
+animal,Acyrthosiphon pisum,api,Acyr_2_0,Acyr_2_0_mp,Acyrthosiphon pisum,7029,true,true
+animal,Adineta vaga,Adineta_vaga,AMS_PRJEB1171_v1,AMS_PRJEB1171_v1_mp,Adineta vaga,104782,true,false
+animal,Acyrthosiphon pisum,api,Acyr_2_0,Acyr_2_0_mp,Acyrthosiphon pisum,7029,true,true
+animal,Adineta vaga,Adineta_vaga,AMS_PRJEB1171_v1,AMS_PRJEB1171_v1_mp,Adineta vaga,104782,true,false
+animal,Aedes albopictus,aalb,AaloF1,AaloF1_mp,Aedes albopictus,7160,true,false
+animal,Amphimedon queenslandica,aqu,Aqu1,Aqu1_mp,Amphimedon queenslandica,400682,true,true
+animal,Anopheles albimanus,Anopheles_albimanus,AalbS2,AalbS2_mp,Anopheles albimanus,7167,true,false
+animal,Anopheles arabiensis,aara,AaraD1,AaraD1_mp,Anopheles arabiensis,7173,true,false
+animal,Anopheles atroparvus,Anopheles_atroparvus,AatrE3,AatrE3_mp,Anopheles atroparvus,41427,true,false
+animal,Anopheles christyi,Anopheles_christyi,AchrA1,AchrA1_mp,Anopheles christyi,43041,true,false
+animal,Anopheles coluzzii,acoz,AcolM1,AcolM1_mp,Anopheles coluzzii,1518534,true,false
+animal,Anopheles culicifacies,Anopheles_culicifacies,AculA1,AculA1_mp,Anopheles culicifacies,139723,true,false
+animal,Anopheles darlingi,Anopheles_darlingi,AdarC3,AdarC3_mp,Anopheles darlingi,43151,true,false
+animal,Anopheles dirus,Anopheles_dirus,AdirW1,AdirW1_mp,Anopheles dirus,7168,true,false
+animal,Anopheles epiroticus,Anopheles_epiroticus,AepiE1,AepiE1_mp,Anopheles epiroticus,199890,true,false
+animal,Anopheles farauti,Anopheles_farauti,AfarF2,AfarF2_mp,Anopheles farauti,69004,true,false
+animal,Anopheles funestus,Anopheles_funestus,AfunF3,AfunF3_mp,Anopheles funestus,62324,true,false
+animal,Anopheles gambiae,aga,AgamP4,AgamP4_mp,Anopheles gambiae,7165,true,true
+animal,Anopheles maculatus,Anopheles_maculatus,AmacM1,AmacM1_mp,Anopheles maculatus,74869,true,false
+animal,Anopheles melas,Anopheles_melas,AmelC2,AmelC2_mp,Anopheles melas,34690,true,false
+animal,Anopheles merus,Anopheles_merus,AmerM2,AmerM2_mp,Anopheles merus,30066,true,false
+animal,Anopheles minimus,Anopheles_minimus,AminM1,AminM1_mp,Anopheles minimus,112268,true,false
+animal,Anopheles quadriannulatus,Anopheles_quadriannulatus,AquaS1,AquaS1_mp,Anopheles quadriannulatus,34691,true,false
+animal,Anopheles sinensis,Anopheles_sinensis,AsinS2,AsinS2_mp,Anopheles sinensis,74873,true,false
+animal,Anopheles stephensi,Anopheles_stephensi,AsteS1,AsteS1_mp,Anopheles stephensi,30069,true,false
+animal,Anoplophora glabripennis,agb,Agla_1_0,Agla_1_0_mp,Anoplophora glabripennis,217634,true,false
+animal,Atta cephalotes,acep,Attacep1_0,Attacep1_0_mp,Atta cephalotes,12957,true,false
+animal,Belgica antarctica,Belgica_antarctica,ASM77530v1,ASM77530v1_mp,Belgica antarctica,315563,true,false
+animal,Biomphalaria glabrata,bgt,BglaB1,BglaB1_mp,Biomphalaria glabrata,6526,true,false
+animal,Bombus impatiens,bim,BIMP_2_0,BIMP_2_0_mp,Bombus impatiens,132113,true,false
+animal,Bombus terrestris,bter,Bter_1_0,Bter_1_0_mp,Bombus terrestris,30195,true,false
+animal,Bombyx mori,bmo,ASM15162v1,ASM15162v1_mp,Bombyx mori,7091,true,true
+animal,Brugia malayi,bma,Bmal-4_0,Bmal-4_0_mp,Brugia malayi,6279,true,true
+animal,Caenorhabditis brenneri,cbn,C_brenneri-6_0_1b,C_brenneri-6_0_1b_mp,Caenorhabditis brenneri,135651,true,true
+animal,Caenorhabditis briggsae,cbr,CB4,CB4_mp,Caenorhabditis briggsae,6238,true,true
+animal,Caenorhabditis japonica,Caenorhabditis_japonica,C_japonica-7_0_1,C_japonica-7_0_1_mp,Caenorhabditis japonica,281687,true,false
+animal,Caenorhabditis remanei,crm,C_remanei-15_0_1,C_remanei-15_0_1_mp,Caenorhabditis remanei,31234,true,true
+animal,Capitella teleta,cte,Capitella_teleta_v1_0,Capitella_teleta_v1_0_mp,Capitella teleta,283909,true,true
+animal,Cimex lectularius,clec,ClecH1,ClecH1_mp,Cimex lectularius,79782,true,false
+animal,Crassostrea gigas,crg,oyster_v9,oyster_v9_mp,Crassostrea gigas,29159,true,false
+animal,Culex quinquefasciatus,cqu,CpipJ2,CpipJ2_mp,Culex quinquefasciatus,7176,true,true
+animal,Danaus plexippus,dpl,Dpv3,Dpv3_mp,Danaus plexippus,13037,true,false
+animal,Daphnia magna,dmk,daphmag2_4,daphmag2_4_mp,Daphnia magna,35525,true,false
+animal,Daphnia pulex,dpu,V1_0,V1_0_mp,Daphnia pulex,6669,true,true
+animal,Dendroctonus ponderosae,dpa,DendPond_male_1_0,DendPond_male_1_0_mp,Dendroctonus ponderosae,77166,true,false
+animal,Glossina austeni,Glossina_austeni,GausT1,GausT1_mp,Glossina austeni,7395,true,false
+animal,Glossina brevipalpis,Glossina_brevipalpis,GbreI1,GbreI1_mp,Glossina brevipalpis,37001,true,false
+animal,Glossina morsitans,Glossina_morsitans,GmorY1,GmorY1_mp,Glossina morsitans,37546,true,false
+animal,Glossina pallidipes,Glossina_pallidipes,GpalI1,GpalI1_mp,Glossina pallidipes,7398,true,false
+animal,Glossina palpalis,Glossina_palpalis,GpapI1,GpapI1_mp,Glossina palpalis,67801,true,false
+animal,Heliconius melpomene,hme,Hmel1,Hmel1_mp,Heliconius melpomene,34740,true,true
+animal,Helobdella robusta,hro,Helro1,Helro1_mp,Helobdella robusta,6412,true,false
+animal,Hofstenia miamia,Hofstenia_miamia,HmiaM1,HmiaM1_mp,Hofstenia miamia,442651,true,false
+animal,Ixodes scapularis,isc,IscaW1,IscaW1_mp,Ixodes scapularis,6945,true,true
+animal,Lepeophtheirus salmonis,Lepeophtheirus_salmonis,LSalAtl2s,LSalAtl2s_mp,Lepeophtheirus salmonis,72036,true,false
+animal,Leptotrombidium deliense,Leptotrombidium_deliense,LdelU1,LdelU1_mp,Leptotrombidium deliense,299467,true,false
+animal,Lingula anatina,lak,LinAna1_0,LinAna1_0_mp,Lingula anatina,7574,true,false
+animal,Loa loa,loa,Loa_loa_V3,Loa_loa_V3_mp,Loa loa,7209,true,false
+animal,Lottia gigantea,lgi,Lotgi1,Lotgi1_mp,Lottia gigantea,225164,true,true
+animal,Lucilia cuprina,lcq,ASM118794v1,ASM118794v1_mp,Lucilia cuprina,7375,true,false
+animal,Lutzomyia longipalpis,Lutzomyia_longipalpis,LlonJ1,LlonJ1_mp,Lutzomyia longipalpis,7200,true,false
+animal,Mayetiola destructor,Mayetiola_destructor,Mdes_1_0,Mdes_1_0_mp,Mayetiola destructor,39758,true,false
+animal,Megaselia scalaris,Megaselia_scalaris,Msca1,Msca1_mp,Megaselia scalaris,36166,true,false
+animal,Melitaea cinxia,Melitaea_cinxia,MelCinx1_0,MelCinx1_0_mp,Melitaea cinxia,113334,true,false
+animal,Mnemiopsis leidyi,Mnemiopsis_leidyi,MneLei_Aug2011,MneLei_Aug2011_mp,Mnemiopsis leidyi,27923,true,false
+animal,Musca domestica,mde,MdomA1,MdomA1_mp,Musca domestica,7370,true,false
+animal,Nematostella vectensis,nve,ASM20922v1,ASM20922v1_mp,Nematostella vectensis,45351,true,true
+animal,Octopus bimaculoides,obi,PRJNA270931,PRJNA270931_mp,Octopus bimaculoides,37653,true,false
+animal,Onchocerca volvulus,Onchocerca_volvulus,ASM49940v2,ASM49940v2_mp,Onchocerca volvulus,6282,true,false
+animal,Pediculus humanus,phu,PhumU2,PhumU2_mp,Pediculus humanus,121224,true,false
+animal,Phlebotomus papatasi,Phlebotomus_papatasi,PpapI1,PpapI1_mp,Phlebotomus papatasi,29031,true,false
+animal,Rhodnius prolixus,Rhodnius_prolixus,RproC3,RproC3_mp,Rhodnius prolixus,13249,true,false
+animal,Sarcoptes scabiei,Sarcoptes_scabiei,SscaA1,SscaA1_mp,Sarcoptes scabiei,52283,true,false
+animal,Schistosoma mansoni,sma,ASM23792v2,ASM23792v2_mp,Schistosoma mansoni,6183,true,true
+animal,Solenopsis invicta,soc,Si_gnH,Si_gnH_mp,Solenopsis invicta,13686,true,false
+animal,Stegodyphus mimosarum,Stegodyphus_mimosarum,Stegodyphus_mimosarum_v1,Stegodyphus_mimosarum_v1_mp,Stegodyphus mimosarum,407821,true,false
+animal,Stomoxys calcitrans,Stomoxys_calcitrans,ScalU1,ScalU1_mp,Stomoxys calcitrans,35570,true,false
+animal,Strigamia maritima,smr,Smar1,Smar1_mp,Strigamia maritima,126957,true,true
+animal,Strongyloides ratti,str,S_ratti_ED321_v5_0_4,S_ratti_ED321_v5_0_4_mp,Strongyloides ratti,34506,true,true
+animal,Teleopsis dalmanni,Teleopsis_dalmanni,Tel_dalmanni_2A_v1_0,Tel_dalmanni_2A_v1_0_mp,Teleopsis dalmanni,139649,true,false
+animal,Tetranychus urticae,tur,ASM23943v1,ASM23943v1_mp,Tetranychus urticae,32264,true,true
+animal,Thelohanellus kitauei,Thelohanellus_kitauei,ASM82789v1,ASM82789v1_mp,Thelohanellus kitauei,669202,true,false
+animal,Tribolium castaneum,tca,Tcas5_2,Tcas5_2_mp,Tribolium castaneum,7070,true,true
+animal,Trichoplax adhaerens,tad,ASM15027v1,ASM15027v1_mp,Trichoplax adhaerens,10228,true,false
+animal,Zootermopsis nevadensis,zne,ZooNev1_0,ZooNev1_0_mp,Zootermopsis nevadensis,136037,true,false
+animal,Abingdon island giant tortoise,cabi,ASM359739v1,ASM359739v1_mp,Chelonoidis abingdonii,106734,true,false
+animal,African ostrich,Struthio_camelus_australis,ASM69896v1,ASM69896v1_mp,Struthio camelus australis,441894,true,false
+animal,Agassiz's desert tortoise,Gopherus_agassizii,ASM289641v1,ASM289641v1_mp,Gopherus agassizii,38772,true,false
+animal,Algerian mouse,Mus_spretus,SPRET_EiJ_v1,SPRET_EiJ_v1_mp,Mus spretus,10096,true,false
+animal,Alpaca,Vicugna_pacos,vicPac1,vicPac1_mp,Vicugna pacos,30538,true,false
+animal,Alpine marmot,Marmota_marmota_marmota,marMar2_1,marMar2_1_mp,Marmota marmota marmota,9994,true,false
+animal,Amazon molly,Poecilia_formosa,Poecilia_formosa-5_1_2,Poecilia_formosa-5_1_2_mp,Poecilia formosa,48698,true,false
+animal,American beaver,ccan,C_can_genome_v1_0,C_can_genome_v1_0_mp,Castor canadensis,51338,true,false
+animal,American bison,Bison_bison_bison,Bison_UMD1_0,Bison_UMD1_0_mp,Bison bison bison,43346,true,false
+animal,American black bear,Ursus_americanus,ASM334442v1,ASM334442v1_mp,Ursus americanus,9643,true,false
+animal,American mink,Neovison_vison,NNQGG_v01,NNQGG_v01_mp,Neovison vison,452646,true,false
+animal,Angola colobus,Colobus_angolensis_palliatus,Cang_pa_1_0,Cang_pa_1_0_mp,Colobus angolensis palliatus,336983,true,false
+animal,Arabian camel,cdk,CamDro2,CamDro2_mp,Camelus dromedarius,9838,true,false
+animal,Arctic ground squirrel,Urocitellus_parryii,ASM342692v1,ASM342692v1_mp,Urocitellus parryii,9999,true,false
+animal,Argentine black and white tegu,Salvator_merianae,HLtupMer3,HLtupMer3_mp,Salvator merianae,96440,true,false
+animal,Armadillo,dno,Dasnov3_0,Dasnov3_0_mp,Dasypus novemcinctus,9361,true,true
+animal,Asian bonytongue,sfm,fSclFor1_1,fSclFor1_1_mp,Scleropages formosus,113540,true,false
+animal,Asiatic black bear,Ursus_thibetanus_thibetanus,ASM966005v1,ASM966005v1_mp,Ursus thibetanus thibetanus,441215,true,false
+animal,Atlantic cod,gmo,gadMor3_0,gadMor3_0_mp,Gadus morhua,8049,true,true
+animal,Atlantic herring,Clupea_harengus,Ch_v2_0_2,Ch_v2_0_2_mp,Clupea harengus,7950,true,false
+animal,Atlantic salmon,ssa,ICSASG_v2,ICSASG_v2_mp,Salmo salar,8030,true,true
+animal,Australian saltwater crocodile,cpoo,CroPor_comp1,CroPor_comp1_mp,Crocodylus porosus,8502,true,false
+animal,Ballan wrasse,Labrus_bergylta,BallGen_V1,BallGen_V1_mp,Labrus bergylta,56723,true,false
+animal,Barramundi perch,lcf,ASB_HGAPassembly_v1,ASB_HGAPassembly_v1_mp,Lates calcarifer,8187,true,false
+animal,Beluga whale,dle,ASM228892v3,ASM228892v3_mp,Delphinapterus leucas,9749,true,false
+animal,Bengalese finch,lsr,LonStrDom1,LonStrDom1_mp,Lonchura striata domestica,299123,true,false
+animal,Bicolor damselfish,Stegastes_partitus,Stegastes_partitus-1_0_2,Stegastes_partitus-1_0_2_mp,Stegastes partitus,144197,true,false
+animal,Black snub-nosed monkey,rbb,ASM169854v1,ASM169854v1_mp,Rhinopithecus bieti,61621,true,false
+animal,Blind barbel,sanh,SAMN03320099_WGS_v1_1,SAMN03320099_WGS_v1_1_mp,Sinocyclocheilus anshuiensis,1608454,true,false
+animal,Blue tilapia,oau,ASM587006v1,ASM587006v1_mp,Oreochromis aureus,47969,true,false
+animal,Blue tit,ccae,cyaCae2,cyaCae2_mp,Cyanistes caeruleus,156563,true,false
+animal,Blue whale,Balaenoptera_musculus,mBalMus1_v2,mBalMus1_v2_mp,Balaenoptera musculus,9771,true,false
+animal,Blue-crowned manakin,Lepidothrix_coronata,Lepidothrix_coronata-1_0,Lepidothrix_coronata-1_0_mp,Lepidothrix coronata,321398,true,false
+animal,Blue-ringed sea krait,Laticauda_laticaudata,latLat_1_0,latLat_1_0_mp,Laticauda laticaudata,8630,true,false
+animal,Blunt-snouted clingfish,Gouania_willdenowi,fGouWil2_1,fGouWil2_1_mp,Gouania willdenowi,441366,true,false
+animal,Bolivian squirrel monkey,sbq,SaiBol1_0,SaiBol1_0_mp,Saimiri boliviensis boliviensis,39432,true,false
+animal,Bonobo,ppa,panpan1_1,panpan1_1_mp,Pan paniscus,9597,true,true
+animal,Brazilian guinea pig,Cavia_aperea,CavAp1_0,CavAp1_0_mp,Cavia aperea,37548,true,false
+animal,Brown trout,Salmo_trutta,fSalTru1_1,fSalTru1_1_mp,Salmo trutta,8032,true,false
+animal,Budgerigar,Melopsittacus_undulatus,Melopsittacus_undulatus_6_3,Melopsittacus_undulatus_6_3_mp,Melopsittacus undulatus,13146,true,false
+animal,Burrowing owl,acun,athCun1,athCun1_mp,Athene cunicularia,194338,true,false
+animal,Burton's mouthbrooder,Haplochromis_burtoni,AstBur1_0,AstBur1_0_mp,Haplochromis burtoni,8153,true,false
+animal,Bushbaby,oga,OtoGar3,OtoGar3_mp,Otolemur garnettii,30611,true,true
+animal,C.intestinalis,cin,KH,KH_mp,Ciona intestinalis,7719,true,true
+animal,C.savignyi,csa,CSAV_2_0,CSAV_2_0_mp,Ciona savignyi,51511,true,true
+animal,California sea lion,Zalophus_californianus,mZalCal1_pri,mZalCal1_pri_mp,Zalophus californianus,9704,true,false
+animal,Canada lynx,Lynx_canadensis,mLynCan4_v1_p,mLynCan4_v1_p_mp,Lynx canadensis,61383,true,false
+animal,Capuchin,Cebus_capucinus,Cebus_imitator-1_0,Cebus_imitator-1_0_mp,Cebus capucinus,2715852,true,false
+animal,Cat,fca,Felis_catus_9_0,Felis_catus_9_0_mp,Felis catus,9685,true,false
+animal,Central bearded dragon,pvt,pvi1_1,pvi1_1_mp,Pogona vitticeps,103695,true,false
+animal,Chacoan peccary,Catagonus_wagneri,CatWag_v2_BIUU_UCD,CatWag_v2_BIUU_UCD_mp,Catagonus wagneri,51154,true,false
+animal,Channel bull blenny,cgob,fCotGob3_1,fCotGob3_1_mp,Cottoperca gobio,56716,true,false
+animal,Channel catfish,ipu,IpCoco_1_2,IpCoco_1_2_mp,Ictalurus punctatus,7998,true,true
+animal,Chicken,gga,GRCg6a,GRCg6a_mp,Gallus gallus,9031,true,true
+animal,Chilean tinamou,Nothoprocta_perdicaria,notPer1,notPer1_mp,Nothoprocta perdicaria,30464,true,false
+animal,Chimpanzee,ptr,Pan_tro_3_0,Pan_tro_3_0_mp,Pan troglodytes,9598,true,true
+animal,Chinese medaka,Oryzias_sinensis,ASM858656v1,ASM858656v1_mp,Oryzias sinensis,183150,true,false
+animal,Chinese softshell turtle,pss,PelSin_1_0,PelSin_1_0_mp,Pelodiscus sinensis,13735,true,false
+animal,Chinook salmon,otw,Otsh_v1_0,Otsh_v1_0_mp,Oncorhynchus tshawytscha,74940,true,false
+animal,Climbing perch,Anabas_testudineus,fAnaTes1_2,fAnaTes1_2_mp,Anabas testudineus,64144,true,false
+animal,Clown anemonefish,aoce,AmpOce1_0,AmpOce1_0_mp,Amphiprion ocellaris,80972,true,false
+animal,Coelacanth,lcm,LatCha1,LatCha1_mp,Latimeria chalumnae,7897,true,false
+animal,Coho salmon,Oncorhynchus_kisutch,Okis_V2,Okis_V2_mp,Oncorhynchus kisutch,8019,true,false
+animal,Collared flycatcher,fab,FicAlb1_5,FicAlb1_5_mp,Ficedula albicollis,59894,true,false
+animal,Common canary,scan,SCA1,SCA1_mp,Serinus canaria,9135,true,false
+animal,Common kestrel,Falco_tinnunculus,FalTin1_0,FalTin1_0_mp,Falco tinnunculus,100819,true,false
+animal,Common snapping turtle,Chelydra_serpentina,Chelydra_serpentina-1_0,Chelydra_serpentina-1_0_mp,Chelydra serpentina,8475,true,false
+animal,Common wall lizard,pmua,PodMur_1_0,PodMur_1_0_mp,Podarcis muralis,64176,true,false
+animal,Common wombat,Vombatus_ursinus,bare-nosed_wombat_genome_assembly,bare-nosed_wombat_genome_assembly_mp,Vombatus ursinus,29139,true,false
+animal,Coquerel's sifaka,Propithecus_coquereli,Pcoq_1_0,Pcoq_1_0_mp,Propithecus coquereli,379532,true,false
+animal,Cow,bta,ARS-UCD1_2,ARS-UCD1_2_mp,Bos taurus,9913,true,true
+animal,Crab-eating macaque,mcf,Macaca_fascicularis_6_0,Macaca_fascicularis_6_0_mp,Macaca fascicularis,9541,true,false
+animal,Damara mole rat,Fukomys_damarensis,DMR_v1_0,DMR_v1_0_mp,Fukomys damarensis,885580,true,false
+animal,Dark-eyed junco,Junco_hyemalis,ASM382977v1,ASM382977v1_mp,Junco hyemalis,40217,true,false
+animal,Daurian ground squirrel,Spermophilus_dauricus,ASM240643v1,ASM240643v1_mp,Spermophilus dauricus,99837,true,false
+animal,Degu,Octodon_degus,OctDeg1_0,OctDeg1_0_mp,Octodon degus,10160,true,false
+animal,Denticle herring,Denticeps_clupeoides,fDenClu1_1,fDenClu1_1_mp,Denticeps clupeoides,299321,true,false
+animal,Dingo,Canis_lupus_dingo,ASM325472v1,ASM325472v1_mp,Canis lupus dingo,286419,true,false
+animal,Dolphin,Tursiops_truncatus,turTru1,turTru1_mp,Tursiops truncatus,9739,true,false
+animal,Domestic yak,Bos_grunniens,LU_Bosgru_v3_0,LU_Bosgru_v3_0_mp,Bos grunniens,30521,true,false
+animal,Donkey,Equus_asinus_asinus,ASM303372v1,ASM303372v1_mp,Equus asinus asinus,83772,true,false
+animal,Drill,Mandrillus_leucophaeus,Mleu_le_1_0,Mleu_le_1_0_mp,Mandrillus leucophaeus,9568,true,false
+animal,Duck,Anas_platyrhynchos_platyrhynchos,CAU_duck1_0,CAU_duck1_0_mp,Anas platyrhynchos platyrhynchos,8840,true,false
+animal,Eastern brown snake,Pseudonaja_textilis,EBS10Xv2-PRI,EBS10Xv2-PRI_mp,Pseudonaja textilis,8673,true,false
+animal,Eastern buzzard,Buteo_japonicus,ButJap1_0,ButJap1_0_mp,Buteo japonicus,224669,true,false
+animal,Eastern happy,Astatotilapia_calliptera,fAstCal1_2,fAstCal1_2_mp,Astatotilapia calliptera,8154,true,false
+animal,Eastern spot-billed duck,Anas_zonorhyncha,ASM222487v1,ASM222487v1_mp,Anas zonorhyncha,75864,true,false
+animal,Electric eel,eel,Ee_SOAP_WITH_SSPACE,Ee_SOAP_WITH_SSPACE_mp,Electrophorus electricus,8005,true,true
+animal,Elephant,lav,Loxafr3_0,Loxafr3_0_mp,Loxodonta africana,9785,true,false
+animal,Elephant shark,cmk,Callorhinchus_milii-6_1_3,Callorhinchus_milii-6_1_3_mp,Callorhinchus milii,7868,true,false
+animal,Emu,Dromaius_novaehollandiae,droNov1,droNov1_mp,Dromaius novaehollandiae,8790,true,false
+animal,Eurasian eagle-owl,Bubo_bubo,BubBub1_0,BubBub1_0_mp,Bubo bubo,30461,true,false
+animal,Eurasian red squirrel,Sciurus_vulgaris,mSciVul1_1,mSciVul1_1_mp,Sciurus vulgaris,55149,true,false
+animal,Eurasian sparrowhawk,Accipiter_nisus,Accipiter_nisus_ver1_0,Accipiter_nisus_ver1_0_mp,Accipiter nisus,211598,true,false
+animal,European seabass,Dicentrarchus_labrax,seabass_V1_0,seabass_V1_0_mp,Dicentrarchus labrax,13489,true,false
+animal,Ferret,mpuf,MusPutFur1_0,MusPutFur1_0_mp,Mustela putorius furo,9669,true,false
+animal,Fugu,tru,fTakRub1_2,fTakRub1_2_mp,Takifugu rubripes,31033,true,false
+animal,Gelada,Theropithecus_gelada,Tgel_1_0,Tgel_1_0_mp,Theropithecus gelada,9565,true,false
+animal,Giant panda,aml,ASM200744v2,ASM200744v2_mp,Ailuropoda melanoleuca,9646,true,false
+animal,Gibbon,nle,Nleu_3_0,Nleu_3_0_mp,Nomascus leucogenys,61853,true,true
+animal,Gilthead seabream,Sparus_aurata,fSpaAur1_1,fSpaAur1_1_mp,Sparus aurata,8175,true,false
+animal,Goat,chi,ARS1,ARS1_mp,Capra hircus,9925,true,true
+animal,Golden Hamster,Mesocricetus_auratus,MesAur1_0,MesAur1_0_mp,Mesocricetus auratus,10036,true,false
+animal,Golden eagle,Aquila_chrysaetos_chrysaetos,bAquChr1_2,bAquChr1_2_mp,Aquila chrysaetos chrysaetos,223781,true,false
+animal,Golden pheasant,Chrysolophus_pictus,Chrysolophus_pictus_GenomeV1_0,Chrysolophus_pictus_GenomeV1_0_mp,Chrysolophus pictus,9089,true,false
+animal,Golden snub-nosed monkey,rro,Rrox_v1,Rrox_v1_mp,Rhinopithecus roxellana,61622,true,false
+animal,Golden-collared manakin,Manacus_vitellinus,ASM171598v2,ASM171598v2_mp,Manacus vitellinus,328815,true,false
+animal,Golden-line barbel,sgh,SAMN03320097_WGS_v1_1,SAMN03320097_WGS_v1_1_mp,Sinocyclocheilus grahami,75366,true,false
+animal,Goldfish,caua,ASM336829v1,ASM336829v1_mp,Carassius auratus,7957,true,false
+animal,Goodes thornscrub tortoise,Gopherus_evgoodei,rGopEvg1_v1_p,rGopEvg1_v1_p_mp,Gopherus evgoodei,1825980,true,false
+animal,Gorilla,ggo,gorGor4,gorGor4_mp,Gorilla gorilla,9595,true,true
+animal,Gouldian finch,Erythrura_gouldiae,GouldianFinch,GouldianFinch_mp,Erythrura gouldiae,44316,true,false
+animal,Great Tit,pmaj,Parus_major1_1,Parus_major1_1_mp,Parus major,9157,true,false
+animal,Great spotted kiwi,Apteryx_haastii,aptHaa1,aptHaa1_mp,Apteryx haastii,8823,true,false
+animal,Greater amberjack,sdu,Sdu_1_0,Sdu_1_0_mp,Seriola dumerili,41447,true,false
+animal,Greater bamboo lemur,Prolemur_simus,Prosim_1_0,Prosim_1_0_mp,Prolemur simus,1328070,true,false
+animal,Greater horseshoe bat,Rhinolophus_ferrumequinum,mRhiFer1_v1_p,mRhiFer1_v1_p_mp,Rhinolophus ferrumequinum,59479,true,false
+animal,Green anole,aca,AnoCar2_0v2,AnoCar2_0v2_mp,Anolis carolinensis,28377,true,true
+animal,Guinea Pig,cpo,Cavpor3_0,Cavpor3_0_mp,Cavia porcellus,10141,true,true
+animal,Guppy,pret,Guppy_female_1_0_MT,Guppy_female_1_0_MT_mp,Poecilia reticulata,8081,true,false
+animal,Hagfish,Eptatretus_burgeri,Eburgeri_3_2,Eburgeri_3_2_mp,Eptatretus burgeri,7764,true,false
+animal,Hedgehog,Erinaceus_europaeus,eriEur1,eriEur1_mp,Erinaceus europaeus,9365,true,false
+animal,Helmeted guineafowl,nmel,NumMel1_0,NumMel1_0_mp,Numida meleagris,8996,true,false
+animal,Horned golden-line barbel,srx,SAMN03320098_v1_1,SAMN03320098_v1_1_mp,Sinocyclocheilus rhinocerous,307959,true,false
+animal,Horse,eca,EquCab3_0,EquCab3_0_mp,Equus caballus,9796,true,true
+animal,Huchen,Hucho_hucho,ASM331708v1,ASM331708v1_mp,Hucho hucho,62062,true,false
+animal,Human,hsa,GRCh38_p13,GRCh38_p13_mp,Homo sapiens,9606,true,true
+animal,Hyrax,Procavia_capensis,proCap1,proCap1_mp,Procavia capensis,9813,true,false
+animal,Indian cobra,Naja_naja,Nana_v5,Nana_v5_mp,Naja naja,35670,true,false
+animal,Indian glassy fish,Parambassis_ranga,fParRan2_1,fParRan2_1_mp,Parambassis ranga,210632,true,false
+animal,Indian medaka,oml,Om_v0_7_RACA,Om_v0_7_RACA_mp,Oryzias melastigma,30732,true,false
+animal,Indian peafowl,Pavo_cristatus,AIIM_Pcri_1_0,AIIM_Pcri_1_0_mp,Pavo cristatus,9049,true,false
+animal,Japanese quail,cjo,Coturnix_japonica_2_0,Coturnix_japonica_2_0_mp,Coturnix japonica,93934,true,false
+animal,Javanese ricefish,Oryzias_javanicus,OJAV_1_1,OJAV_1_1_mp,Oryzias javanicus,123683,true,false
+animal,Jewelled blenny,Salarias_fasciatus,fSalaFa1_1,fSalaFa1_1_mp,Salarias fasciatus,181472,true,false
+animal,Kakapo,Strigops_habroptila,bStrHab1_v1_p,bStrHab1_v1_p_mp,Strigops habroptila,2489341,true,false
+animal,Kangaroo rat,Dipodomys_ordii,Dord_2_0,Dord_2_0_mp,Dipodomys ordii,10020,true,false
+animal,Koala,pcw,phaCin_unsw_v4_1,phaCin_unsw_v4_1_mp,Phascolarctos cinereus,38626,true,false
+animal,Komodo dragon,Varanus_komodoensis,ASM479886v1,ASM479886v1_mp,Varanus komodoensis,61221,true,false
+animal,Lamprey,pma,Pmarinus_7_0,Pmarinus_7_0_mp,Petromyzon marinus,7757,true,true
+animal,Large yellow croaker,lco,L_crocea_2_0,L_crocea_2_0_mp,Larimichthys crocea,215358,true,false
+animal,Leishan spiny toad,Leptobrachium_leishanense,ASM966780v1,ASM966780v1_mp,Leptobrachium leishanense,445787,true,false
+animal,Leopard,ppad,PanPar1_0,PanPar1_0_mp,Panthera pardus,9691,true,false
+animal,Lesser Egyptian jerboa,Jaculus_jaculus,JacJac1_0,JacJac1_0_mp,Jaculus jaculus,51337,true,false
+animal,Lesser hedgehog tenrec,Echinops_telfairi,TENREC,TENREC_mp,Echinops telfairi,9371,true,false
+animal,Lion,Panthera_leo,PanLeo1_0,PanLeo1_0_mp,Panthera leo,9689,true,false
+animal,Little spotted kiwi,Apteryx_owenii,aptOwe1,aptOwe1_mp,Apteryx owenii,8824,true,false
+animal,Live sharksucker,Echeneis_naucrates,fEcheNa1_1,fEcheNa1_1_mp,Echeneis naucrates,173247,true,false
+animal,Long-tailed chinchilla,Chinchilla_lanigera,ChiLan1_0,ChiLan1_0_mp,Chinchilla lanigera,34839,true,false
+animal,Lumpfish,Cyclopterus_lumpus,fCycLum1_pri,fCycLum1_pri_mp,Cyclopterus lumpus,8103,true,false
+animal,Lyretail cichlid,nbr,NeoBri1_0,NeoBri1_0_mp,Neolamprologus brichardi,32507,true,true
+animal,Ma's night monkey,Aotus_nancymaae,Anan_2_0,Anan_2_0_mp,Aotus nancymaae,37293,true,false
+animal,Macaque,mml,Mmul_10,Mmul_10_mp,Macaca mulatta,9544,true,true
+animal,Mainland tiger snake,Notechis_scutatus,TS10Xv2-PRI,TS10Xv2-PRI_mp,Notechis scutatus,8663,true,false
+animal,Makobe Island cichlid,pny,PunNye1_0,PunNye1_0_mp,Pundamilia nyererei,303518,true,true
+animal,Mallard,apl,ASM874695v1,ASM874695v1_mp,Anas platyrhynchos,8839,true,true
+animal,Mangrove rivulus,kmr,ASM164957v1,ASM164957v1_mp,Kryptolebias marmoratus,37003,true,false
+animal,Marmoset,cja,ASM275486v1,ASM275486v1_mp,Callithrix jacchus,9483,true,true
+animal,Medium ground-finch,gfr,GeoFor_1_0,GeoFor_1_0_mp,Geospiza fortis,48883,true,false
+animal,Meerkat,Suricata_suricatta,meerkat_22Aug2017_6uvM2_HiC,meerkat_22Aug2017_6uvM2_HiC_mp,Suricata suricatta,37032,true,false
+animal,Megabat,Pteropus_vampyrus,pteVam1,pteVam1_mp,Pteropus vampyrus,132908,true,false
+animal,Microbat,Myotis_lucifugus,Myoluc2_0,Myoluc2_0_mp,Myotis lucifugus,59463,true,false
+animal,Midas cichlid,Amphilophus_citrinellus,Midas_v5,Midas_v5_mp,Amphilophus citrinellus,61819,true,false
+animal,Mongolian gerbil,mun,MunDraft-v1_0,MunDraft-v1_0_mp,Meriones unguiculatus,10047,true,false
+animal,Monterrey platyfish,xco,Xiphophorus_couchianus-4_0_1,Xiphophorus_couchianus-4_0_1_mp,Xiphophorus couchianus,32473,true,false
+animal,Mouse Lemur,mmr,Mmur_3_0,Mmur_3_0_mp,Microcebus murinus,30608,true,true
+animal,Mummichog,Fundulus_heteroclitus,Fundulus_heteroclitus-3_0_2,Fundulus_heteroclitus-3_0_2_mp,Fundulus heteroclitus,8078,true,false
+animal,Narwhal,Monodon_monoceros,NGI_Narwhal_1,NGI_Narwhal_1_mp,Monodon monoceros,40151,true,false
+animal,New Caledonian crow,Corvus_moneduloides,UO_Cmon_1_0,UO_Cmon_1_0_mp,Corvus moneduloides,1196302,true,false
+animal,Nile tilapia,oni,O_niloticus_UMD_NMBU,O_niloticus_UMD_NMBU_mp,Oreochromis niloticus,8128,true,true
+animal,Northern American deer mouse,Peromyscus_maniculatus_bairdii,HU_Pman_2_1,HU_Pman_2_1_mp,Peromyscus maniculatus bairdii,230844,true,false
+animal,Northern pike,els,Eluc_v4,Eluc_v4_mp,Esox lucius,8010,true,false
+animal,Northern spotted owl,Strix_occidentalis_caurina,Soccid_v01,Soccid_v01_mp,Strix occidentalis caurina,311401,true,false
+animal,Ocean sunfish,Mola_mola,ASM169857v1,ASM169857v1_mp,Mola mola,94237,true,false
+animal,Okarito brown kiwi,Apteryx_rowi,aptRow1,aptRow1_mp,Apteryx rowi,308060,true,false
+animal,Olive baboon,panu,Panu_3_0,Panu_3_0_mp,Papio anubis,9555,true,false
+animal,Opossum,mdo,ASM229v1,ASM229v1_mp,Monodelphis domestica,13616,true,true
+animal,Orange clownfish,Amphiprion_percula,Nemo_v1,Nemo_v1_mp,Amphiprion percula,161767,true,false
+animal,Orangutan,pon,PPYG2,PPYG2_mp,Pongo abelii,9601,true,false
+animal,Orbiculate cardinalfish,Sphaeramia_orbicularis,fSphaOr1_1,fSphaOr1_1_mp,Sphaeramia orbicularis,375764,true,false
+animal,Oriental scops-owl,Otus_sunia,OtuSun1_0,OtuSun1_0_mp,Otus sunia,257818,true,false
+animal,Painted turtle,Chrysemys_picta_bellii,Chrysemys_picta_bellii-3_0_3,Chrysemys_picta_bellii-3_0_3_mp,Chrysemys picta bellii,8478,true,false
+animal,P. kingsleyae,pki,PKINGS_0_1,PKINGS_0_1_mp,Paramormyrops kingsleyae,1676925,true,false
+animal,P. magnuspinnatus,Periophthalmus_magnuspinnatus,PM_fa,PM_fa_mp,Periophthalmus magnuspinnatus,409849,true,false
+animal,Pig-tailed macaque,mne,Mnem_1_0,Mnem_1_0_mp,Macaca nemestrina,9545,true,true
+animal,Pika,Ochotona_princeps,OchPri2_0-Ens,OchPri2_0-Ens_mp,Ochotona princeps,9978,true,false
+animal,Pike-perch,sluc,SLUC_FBN_1,SLUC_FBN_1_mp,Sander lucioperca,283035,true,false
+animal,Pinecone soldierfish,Myripristis_murdjan,fMyrMur1_1,fMyrMur1_1_mp,Myripristis murdjan,586833,true,false
+animal,Pink-footed goose,Anser_brachyrhynchus,ASM259213v1,ASM259213v1_mp,Anser brachyrhynchus,132585,true,false
+animal,Platyfish,xma,X_maculatus-5_0-male,X_maculatus-5_0-male_mp,Xiphophorus maculatus,8083,true,false
+animal,Platypus,oan,mOrnAna1_p_v1,mOrnAna1_p_v1_mp,Ornithorhynchus anatinus,9258,true,true
+animal,Polar bear,umr,UrsMar_1_0,UrsMar_1_0_mp,Ursus maritimus,29073,true,false
+animal,Prairie vole,Microtus_ochrogaster,MicOch1_0,MicOch1_0_mp,Microtus ochrogaster,79684,true,false
+animal,Rabbit,ocu,OryCun2_0,OryCun2_0_mp,Oryctolagus cuniculus,9986,true,true
+animal,Rainbow trout,omy,Omyk_1_0,Omyk_1_0_mp,Oncorhynchus mykiss,8022,true,false
+animal,Rat,rno,Rnor_6_0,Rnor_6_0_mp,Rattus norvegicus,10116,true,true
+animal,Red fox,vvp,VulVul2_2,VulVul2_2_mp,Vulpes vulpes,9627,true,false
+animal,Red-bellied piranha,Pygocentrus_nattereri,Pygocentrus_nattereri-1_0_2,Pygocentrus_nattereri-1_0_2_mp,Pygocentrus nattereri,42514,true,false
+animal,Reedfish,Erpetoichthys_calabaricus,fErpCal1_1,fErpCal1_1_mp,Erpetoichthys calabaricus,27687,true,false
+animal,Ring-necked pheasant,pcoc,ASM414374v1,ASM414374v1_mp,Phasianus colchicus,9054,true,false
+animal,Round goby,Neogobius_melanostomus,RGoby_Basel_V2,RGoby_Basel_V2_mp,Neogobius melanostomus,47308,true,false
+animal,Ruff,Calidris_pugnax,ASM143184v1,ASM143184v1_mp,Calidris pugnax,198806,true,false
+animal,Ryukyu mouse,mcal,CAROLI_EIJ_v1_1,CAROLI_EIJ_v1_1_mp,Mus caroli,10089,true,false
+animal,S. cerevisiae,sce,R64-1-1,R64-1-1_mp,Saccharomyces cerevisiae,4932,true,false
+animal,Sailfin molly,Poecilia_latipinna,P_latipinna-1_0,P_latipinna-1_0_mp,Poecilia latipinna,48699,true,false
+animal,Sheep,oar,Oar_rambouillet_v1_0,Oar_rambouillet_v1_0_mp,Ovis aries,9940,true,true
+animal,Sheepshead minnow,cvg,C_variegatus-1_0,C_variegatus-1_0_mp,Cyprinodon variegatus,28743,true,false
+animal,Shortfin molly,Poecilia_mexicana,P_mexicana-1_0,P_mexicana-1_0_mp,Poecilia mexicana,48701,true,false
+animal,Shrew,Sorex_araneus,sorAra1,sorAra1_mp,Sorex araneus,42254,true,false
+animal,Shrew mouse,mpah,PAHARI_EIJ_v1_1,PAHARI_EIJ_v1_1_mp,Mus pahari,10093,true,false
+animal,Siamese fighting fish,Betta_splendens,fBetSpl5_2,fBetSpl5_2_mp,Betta splendens,158456,true,false
+animal,Siberian musk deer,Moschus_moschiferus,MosMos_v2_BIUU_UCD,MosMos_v2_BIUU_UCD_mp,Moschus moschiferus,68415,true,false
+animal,Silver-eye,Zosterops_lateralis_melanops,ASM128173v1,ASM128173v1_mp,Zosterops lateralis melanops,1220523,true,false
+animal,Sloth,Choloepus_hoffmanni,choHof1,choHof1_mp,Choloepus hoffmanni,9358,true,false
+animal,Small tree finch,Camarhynchus_parvulus,STF_HiC,STF_HiC_mp,Camarhynchus parvulus,87175,true,false
+animal,Sooty mangabey,caty,Caty_1_0,Caty_1_0_mp,Cercocebus atys,9531,true,false
+animal,Sperm whale,pcad,ASM283717v2,ASM283717v2_mp,Physeter catodon,9755,true,false
+animal,Spiny chromis,Acanthochromis_polyacanthus,ASM210954v1,ASM210954v1_mp,Acanthochromis polyacanthus,80966,true,false
+animal,Spoon-billed sandpiper,Calidris_pygmaea,ASM369795v1,ASM369795v1_mp,Calidris pygmaea,425635,true,false
+animal,Spotted gar,loc,LepOcu1,LepOcu1_mp,Lepisosteus oculatus,7918,true,false
+animal,Squirrel,Ictidomys_tridecemlineatus,SpeTri2_0,SpeTri2_0_mp,Ictidomys tridecemlineatus,43179,true,false
+animal,Steppe mouse,Mus_spicilegus,MUSP714,MUSP714_mp,Mus spicilegus,10103,true,false
+animal,Stickleback,gat,BROAD_S1,BROAD_S1_mp,Gasterosteus aculeatus,69293,true,false
+animal,Superb fairywren,Malurus_cyaneus_samueli,mCya_1_0,mCya_1_0_mp,Malurus cyaneus samueli,2593467,true,false
+animal,Swainson's thrush,Catharus_ustulatus,bCatUst1_pri,bCatUst1_pri_mp,Catharus ustulatus,91951,true,false
+animal,Swamp eel,malb,M_albus_1_0,M_albus_1_0_mp,Monopterus albus,43700,true,false
+animal,Swan goose,acyg,GooseV1_0,GooseV1_0_mp,Anser cygnoides,8845,true,false
+animal,Tarsier,Carlito_syrichta,Tarsius_syrichta-2_0_1,Tarsius_syrichta-2_0_1_mp,Carlito syrichta,1868482,true,false
+animal,Tasmanian devil,sha,mSarHar1_11,mSarHar1_11_mp,Sarcophilus harrisii,9305,true,true
+animal,Tetraodon,tni,TETRAODON_8_0,TETRAODON_8_0_mp,Tetraodon nigroviridis,99883,true,true
+animal,Three-toed box turtle,Terrapene_carolina_triunguis,T_m_triunguis-2_0,T_m_triunguis-2_0_mp,Terrapene carolina triunguis,2587831,true,false
+animal,Tiger,ptg,PanTig1_0,PanTig1_0_mp,Panthera tigris altaica,74533,true,false
+animal,Tiger tail seahorse,hcq,H_comes_QL1_v1,H_comes_QL1_v1_mp,Hippocampus comes,109280,true,false
+animal,Tongue sole,csem,Cse_v1_0,Cse_v1_0_mp,Cynoglossus semilaevis,244447,true,false
+animal,Tree Shrew,Tupaia_belangeri,tupBel1,tupBel1_mp,Tupaia belangeri,37347,true,false
+animal,Tropical clawed frog,xtr,Xenopus_tropicalis_v9_1,Xenopus_tropicalis_v9_1_mp,Xenopus tropicalis,8364,true,true
+animal,Tuatara,Sphenodon_punctatus,ASM311381v1,ASM311381v1_mp,Sphenodon punctatus,8508,true,false
+animal,Turbot,Scophthalmus_maximus,ASM1334776v1,ASM1334776v1_mp,Scophthalmus maximus,52904,true,false
+animal,Turkey,mgp,Turkey_5_1,Turkey_5_1_mp,Meleagris gallopavo,9103,true,false
+animal,Turquoise killifish,nfu,Nfu_20140520,Nfu_20140520_mp,Nothobranchius furzeri,105023,true,false
+animal,Ugandan red Colobus,pteh,ASM277652v2,ASM277652v2_mp,Piliocolobus tephrosceles,591936,true,false
+animal,Upper Galilee mountains blind mole rat,ngi,S_galili_v1_0,S_galili_v1_0_mp,Nannospalax galili,1026970,true,false
+animal,Vaquita,Phocoena_sinus,mPhoSin1_pri,mPhoSin1_pri_mp,Phocoena sinus,42100,true,false
+animal,Vervet-AGM,csab,ChlSab1_1,ChlSab1_1_mp,Chlorocebus sabaeus,60711,true,false
+animal,Wallaby,Notamacropus_eugenii,Meug_1_0,Meug_1_0_mp,Notamacropus eugenii,9315,true,false
+animal,West African mud turtle,Pelusios_castaneus,Pelusios_castaneus-1_0,Pelusios_castaneus-1_0_mp,Pelusios castaneus,367368,true,false
+animal,Western mosquitofish,Gambusia_affinis,ASM309773v1,ASM309773v1_mp,Gambusia affinis,33528,true,false
+animal,White-throated sparrow,Zonotrichia_albicollis,Zonotrichia_albicollis-1_0_1,Zonotrichia_albicollis-1_0_1_mp,Zonotrichia albicollis,44394,true,false
+animal,Wild yak,bom,BosGru_v2_0,BosGru_v2_0_mp,Bos mutus,72004,true,false
+animal,Yarkand deer,Cervus_hanglu_yarkandensis,CEY_v1,CEY_v1_mp,Cervus hanglu yarkandensis,84702,true,false
+animal,Yellow-billed parrot,Amazona_collaria,ASM394721v1,ASM394721v1_mp,Amazona collaria,241587,true,false
+animal,Yellowtail amberjack,slal,Sedor1,Sedor1_mp,Seriola lalandi dorsalis,1841481,true,false
+animal,Zebra finch,tgu,bTaeGut1_v1_p,bTaeGut1_v1_p_mp,Taeniopygia guttata,59729,true,true
+animal,Zebra mbuna,mze,M_zebra_UMD2a,M_zebra_UMD2a_mp,Maylandia zebra,106582,true,false
+animal,Zebrafish,dre,GRCz11,GRCz11_mp,Danio rerio,7955,true,true
+animal,Zig-zag eel,Mastacembelus_armatus,fMasArm1_2,fMasArm1_2_mp,Mastacembelus armatus,205130,true,false
+plant,Actinidia chinensis,Actinidia_chinensis,Red5_PS1_1_69_0,Red5_PS1_1_69_0_mp,Actinidia chinensis,1590841,true,false
+plant,Aegilops tauschii,ata,Aet_v4_0,Aet_v4_0_mp,Aegilops tauschii,200361,true,true
+plant,Amborella trichopoda,atr,AMTR1_0,AMTR1_0_mp,Amborella trichopoda,13333,true,true
+plant,Ananas comosus,Ananas_comosus,F153,F153_mp,Ananas comosus,4615,true,false
+plant,Arabidopsis halleri,Arabidopsis_halleri,Ahal2_2,Ahal2_2_mp,Arabidopsis halleri,63677,true,false
+plant,Arabidopsis lyrata,aly,v_1_0,v_1_0_mp,Arabidopsis lyrata,81972,true,true
+plant,Arabidopsis thaliana,ath,TAIR10,TAIR10_mp,Arabidopsis thaliana,3702,true,true
+plant,Arabis alpina,Arabis_alpina,A_alpina_V4,A_alpina_V4_mp,Arabis alpina,50452,true,false
+plant,Asparagus officinalis,aof,Aspof_V1,Aspof_V1_mp,Asparagus officinalis,4686,true,true
+plant,Beta vulgaris,bvg,RefBeet-1_2_2,RefBeet-1_2_2_mp,Beta vulgaris,3555,true,false
+plant,Brachypodium distachyon,bdi,Brachypodium_distachyon_v3_0,Brachypodium_distachyon_v3_0_mp,Brachypodium distachyon,15368,true,true
+plant,Brassica napus,bna,AST_PRJEB5043_v1,AST_PRJEB5043_v1_mp,Brassica napus,3708,true,true
+plant,Brassica oleracea,bol,BOL,BOL_mp,Brassica oleracea,109376,true,true
+plant,Brassica rapa,bra,Brapa_1_0,Brapa_1_0_mp,Brassica rapa,3711,true,true
+plant,Camelina sativa,cas,Cs,Cs_mp,Camelina sativa,90675,true,true
+plant,Cannabis sativa female,Cannabis_sativa_female,cs10,cs10_mp,Cannabis sativa female,3483,true,false
+plant,Capsicum annuum,cann,ASM51225v2,ASM51225v2_mp,Capsicum annuum,4072,true,false
+plant,Chara braunii,Chara_braunii,Cbr_1_0,Cbr_1_0_mp,Chara braunii,69332,true,false
+plant,Chenopodium quinoa,cqi,ASM168347v1,ASM168347v1_mp,Chenopodium quinoa,63459,true,false
+plant,Chlamydomonas reinhardtii,cre,Chlamydomonas_reinhardtii_v5_5,Chlamydomonas_reinhardtii_v5_5_mp,Chlamydomonas reinhardtii,3055,true,true
+plant,Chondrus crispus,ccp,ASM35022v2,ASM35022v2_mp,Chondrus crispus,2769,true,false
+plant,Citrullus lanatus,Citrullus_lanatus,Cla97_v1,Cla97_v1_mp,Citrullus lanatus,3654,true,false
+plant,Citrus clementina,ccl,Citrus_clementina_v1_0,Citrus_clementina_v1_0_mp,Citrus clementina,85681,true,true
+plant,Coffea canephora,Coffea_canephora,AUK_PRJEB4211_v1,AUK_PRJEB4211_v1_mp,Coffea canephora,49390,true,false
+plant,Corchorus capsularis,Corchorus_capsularis,CCACVL1_1_0,CCACVL1_1_0_mp,Corchorus capsularis,210143,true,false
+plant,Cucumis melo,cme,Melonv4,Melonv4_mp,Cucumis melo,3656,true,true
+plant,Cucumis sativus,cst,ASM407v2,ASM407v2_mp,Cucumis sativus,3659,true,true
+plant,Cyanidioschyzon merolae,cme,ASM9120v1,ASM9120v1_mp,Cyanidioschyzon merolae,280699,true,false
+plant,Cynara cardunculus,cca,CcrdV1,CcrdV1_mp,Cynara cardunculus,59895,true,true
+plant,Daucus carota,dcr,ASM162521v1,ASM162521v1_mp,Daucus carota,79200,true,false
+plant,Dioscorea rotundata,Dioscorea_rotundata,TDr96_F1_v2_PseudoChromosome,TDr96_F1_v2_PseudoChromosome_mp,Dioscorea rotundata,55577,true,false
+plant,Eragrostis curvula,Eragrostis_curvula,CERZOS_E_curvula1_0,CERZOS_E_curvula1_0_mp,Eragrostis curvula,38414,true,false
+plant,Eragrostis tef,Eragrostis_tef,ASM97063v1,ASM97063v1_mp,Eragrostis tef,110835,true,false
+plant,Eucalyptus grandis,egr,Egrandis1_0,Egrandis1_0_mp,Eucalyptus grandis,71139,true,false
+plant,Eutrema salsugineum,eus,Eutsalg1_0,Eutsalg1_0_mp,Eutrema salsugineum,72664,true,false
+plant,Galdieria sulphuraria,gsl,ASM34128v1,ASM34128v1_mp,Galdieria sulphuraria,130081,true,false
+plant,Glycine max,gma,Glycine_max_v2_1,Glycine_max_v2_1_mp,Glycine max,3847,true,true
+plant,Gossypium raimondii,gra,Graimondii2_0_v6,Graimondii2_0_v6_mp,Gossypium raimondii,29730,true,true
+plant,Helianthus annuus,han,HanXRQr1_0,HanXRQr1_0_mp,Helianthus annuus,4232,true,true
+plant,Ipomoea triloba,itr,ASM357664v1,ASM357664v1_mp,Ipomoea triloba,35885,true,false
+plant,Juglans regia,jre,Walnut_2_0,Walnut_2_0_mp,Juglans regia,51240,true,false
+plant,Kalanchoe fedtschenkoi,Kalanchoe_fedtschenkoi,K_fedtschenkoi_M2_v1,K_fedtschenkoi_M2_v1_mp,Kalanchoe fedtschenkoi,63787,true,false
+plant,Leersia perrieri,Leersia_perrieri,Lperr_V1_4,Lperr_V1_4_mp,Leersia perrieri,77586,true,false
+plant,Lupinus angustifolius,lang,LupAngTanjil_v1_0,LupAngTanjil_v1_0_mp,Lupinus angustifolius,3871,true,false
+plant,Malus domestica Golden,Malus_domestica_Golden,ASM211411v1,ASM211411v1_mp,Malus domestica Golden,3750,true,false
+plant,Manihot esculenta,mes,Manihot_esculenta_v6,Manihot_esculenta_v6_mp,Manihot esculenta,3983,true,true
+plant,Marchantia polymorpha,Marchantia_polymorpha,Marchanta_polymorpha_v1,Marchanta_polymorpha_v1_mp,Marchantia polymorpha,3197,true,false
+plant,Medicago truncatula,mtr,MedtrA17_4_0,MedtrA17_4_0_mp,Medicago truncatula,3880,true,true
+plant,Musa acuminata,mus,Musa_acuminata_v2,Musa_acuminata_v2_mp,Musa acuminata,214687,true,false
+plant,Nicotiana attenuata,nau,NIATTr2,NIATTr2_mp,Nicotiana attenuata,49451,true,false
+plant,Nymphaea colorata,ncol,ASM883128v1,ASM883128v1_mp,Nymphaea colorata,210225,true,false
+plant,Oryza barthii,Oryza_barthii,O_barthii_v1,O_barthii_v1_mp,Oryza barthii,65489,true,false
+plant,Oryza brachyantha,obr,Oryza_brachyantha_v1_4b,Oryza_brachyantha_v1_4b_mp,Oryza brachyantha,4533,true,false
+plant,Oryza glaberrima,Oryza_glaberrima,Oryza_glaberrima_V1,Oryza_glaberrima_V1_mp,Oryza glaberrima,4538,true,false
+plant,Oryza glumipatula,Oryza_glumipatula,Oryza_glumaepatula_v1_5,Oryza_glumaepatula_v1_5_mp,Oryza glumipatula,40148,true,false
+plant,Oryza longistaminata,Oryza_longistaminata,O_longistaminata_v1_0,O_longistaminata_v1_0_mp,Oryza longistaminata,4528,true,false
+plant,Oryza meridionalis,Oryza_meridionalis,Oryza_meridionalis_v1_3,Oryza_meridionalis_v1_3_mp,Oryza meridionalis,40149,true,false
+plant,Oryza nivara,Oryza_nivara,Oryza_nivara_v1_0,Oryza_nivara_v1_0_mp,Oryza nivara,4536,true,false
+plant,Oryza punctata,Oryza_punctata,Oryza_punctata_v1_2,Oryza_punctata_v1_2_mp,Oryza punctata,4537,true,false
+plant,Oryza rufipogon,Oryza_rufipogon,OR_W1943,OR_W1943_mp,Oryza rufipogon,4529,true,false
+plant,Ostreococcus lucimarinus,olu,ASM9206v1,ASM9206v1_mp,Ostreococcus lucimarinus,436017,true,false
+plant,Panicum hallii FIL2,Panicum_hallii_FIL2,PHallii_v3_1,PHallii_v3_1_mp,Panicum hallii FIL2,206008,true,false
+plant,Papaver somniferum,psom,ASM357369v1,ASM357369v1_mp,Papaver somniferum,3469,true,false
+plant,Phaseolus vulgaris,pvu,PhaVulg1_0,PhaVulg1_0_mp,Phaseolus vulgaris,3885,true,true
+plant,Physcomitrium patens,ppp,Phypa_V3,Phypa_V3_mp,Physcomitrium patens,3218,true,false
+plant,Pistacia vera,pvy,PisVer_v2,PisVer_v2_mp,Pistacia vera,55513,true,false
+plant,Populus trichocarpa,ptc,Pop_tri_v3,Pop_tri_v3_mp,Populus trichocarpa,3694,true,true
+plant,Prunus avium,pavi,PAV_r1_0,PAV_r1_0_mp,Prunus avium,42229,true,false
+plant,Prunus dulcis,pdul,ALMONDv2,ALMONDv2_mp,Prunus dulcis,3755,true,false
+plant,Prunus persica,ppe,Prunus_persica_NCBIv2,Prunus_persica_NCBIv2_mp,Prunus persica,3760,true,true
+plant,Quercus lobata,qlo,ValleyOak3_0,ValleyOak3_0_mp,Quercus lobata,97700,true,false
+plant,Rosa chinensis,rcn,RchiOBHm-V2,RchiOBHm-V2_mp,Rosa chinensis,74649,true,false
+plant,Saccharum spontaneum,Saccharum_spontaneum,Sspon_HiC_chr_asm,Sspon_HiC_chr_asm_mp,Saccharum spontaneum,62335,true,false
+plant,Selaginella moellendorffii,smo,v1_0,v1_0_mp,Selaginella moellendorffii,88036,true,true
+plant,Sesamum indicum,sind,S_indicum_v1_0,S_indicum_v1_0_mp,Sesamum indicum,4182,true,false
+plant,Setaria italica,sita,Setaria_italica_v2_0,Setaria_italica_v2_0_mp,Setaria italica,4555,true,false
+plant,Setaria viridis,Setaria_viridis,Setaria_viridis_v2_0,Setaria_viridis_v2_0_mp,Setaria viridis,4556,true,false
+plant,Solanum lycopersicum,sly,SL3_0,SL3_0_mp,Solanum lycopersicum,4081,true,true
+plant,Solanum tuberosum,stu,SolTub_3_0,SolTub_3_0_mp,Solanum tuberosum,4113,true,true
+plant,Sorghum bicolor,sbi,Sorghum_bicolor_NCBIv3,Sorghum_bicolor_NCBIv3_mp,Sorghum bicolor,4558,true,true
+plant,Trifolium pratense,Trifolium_pratense,Trpr,Trpr_mp,Trifolium pratense,57577,true,false
+plant,Triticum dicoccoides,tdc,WEWSeq_v_1_0,WEWSeq_v_1_0_mp,Triticum dicoccoides,85692,true,false
+plant,Triticum spelta,Triticum_spelta,PGSBv2_0,PGSBv2_0_mp,Triticum spelta,58933,true,false
+plant,Triticum turgidum,ttu,Svevo_v1,Svevo_v1_mp,Triticum turgidum,4567,true,true
+plant,Triticum urartu,Triticum_urartu,ASM34745v1,ASM34745v1_mp,Triticum urartu,4572,true,false
+plant,Vigna angularis,var,Vigan1_1,Vigan1_1_mp,Vigna angularis,3914,true,false
+plant,Vigna radiata,vra,Vradiata_ver6,Vradiata_ver6_mp,Vigna radiata,3916,true,false
+plant,Vitis vinifera,vvi,12X,12X_mp,Vitis vinifera,29760,true,true
+plant,Zea mays,zma,Zm-B73-REFERENCE-NAM-5_0,Zm-B73-REFERENCE-NAM-5_0_mp,Zea mays,4577,true,true
+animal,Japanese medaka HNI,ola,ASM223471v1,ASM223471v1_mp,Oryzias latipes,8090,true,true
+animal,Mouse,mmu,GRCm39,GRCm39_mp,Mus musculus,10090,true,true
+animal,Chinese hamster CriGri,Cricetulus_griseus_CriGri,CriGri_1_0,CriGri_1_0_mp,Cricetulus griseus CriGri,10029,true,false
+animal,Pig,ssc,Sscrofa11_1,Sscrofa11_1_mp,Sus scrofa,9823,true,true
+animal,Dog,cfa,CanFam3_1,CanFam3_1_mp,Canis lupus familiaris,9615,true,false
+plant,Triticum aestivum,tae,IWGSC,IWGSC_mp,Triticum aestivum,4565,true,true
+animal,Common carp,ccr,common_carp_genome,common_carp_genome_mp,Cyprinus carpio,7962,true,true
+animal,D. melanogaster,dme,BDGP6_32,BDGP6_32_mp,Drosophila melanogaster,7227,true,true
+animal,Mexican tetra,amex,Astyanax_mexicanus-2_0,Astyanax_mexicanus-2_0_mp,Astyanax mexicanus,7994,true,false
+plant,Hordeum vulgare,hvu,IBSC_v2,IBSC_v2_mp,Hordeum vulgare,112509,true,true
+animal,C. elegans,cel,WBcel235,WBcel235_mp,Caenorhabditis elegans,6239,true,true
+animal virus,Human virus collection,xxx,human_tagged_virus,human_tagged_virus,Human virus collection,0,false,false
+animal virus,Vertebrates virus collection,xxx,vertebrates_tagged_virus,vertebrates_tagged_virus,Vertebrates virus collection,0,false,false
+animal virus,Invertebrates virus collection,xxx,invertebrates_tagged_virus,invertebrates_tagged_virus,Invertebrates virus collection,0,false,false
+animal virus,Drosophila C virus,xxx,NC_001834,NC_001834,Drosophila C virus,64279,false,false
+animal virus,Epstein Barr Virus,ebv,NC_007605,NC_007605,Human herpesvirus 4,10376,false,false
+animal virus,Hepatitis B virus (strain ayw),---,NC_003977,NC_003977,Hepatitis B virus strain ayw,0,false,false
+animal virus,Hepatitis C virus genotype 1,---,NC_004102,NC_004102,Hepatitis C virus genotype 1,0,false,false
+animal virus,Human herpesvirus 5 strain Merlin,hcmv,NC_006273,NC_006273,Human herpesvirus 5,10359,false,false
+animal virus,Human herpesvirus 8(KSHV),kshv,NC_009333,NC_009333,Human herpesvirus 8,37296,false,false
+animal virus,Human papillomavirus,xxx,NC_022095,NC_022095,Human papillomavirus,10566,false,false
+animal virus,Sindbis virus,xxx,NC_001547,NC_001547,Sindbis virus,11034,false,false
+animal virus,Slow bee paralysis virus,xxx,GU938761,GU938761,Slow bee paralysis virus,458132,false,false
+animal virus,Human virus collection,xxx,human_virus_host,human_virus_host,Human virus collection,0,false,false
+animal virus,Invertebrate virus collection,xxx,invertebrates_virus_host,invertebrates_virus_host,Invertebrate virus collection,0,false,false
+animal virus,Vertebrate virus collection,xxx,vertebrates_virus_host,vertebrates_virus_host,Vertebrate virus collection,0,false,false
+plant virus,Plant virus collection,xxx,plant_tagged_virus,plant_tagged_virus,Plant virus collection,0,false,false
+plant virus,Cauliflower mosaic virus,xxx,CaMV,CaMV_mp,Cauliflower mosaic virus,0,false,false
+plant virus,Maize chlorotic dwarf virus,xxx,MCDV,MCDV_mp,Maize chlorotic dwarf virus,0,false,false
+plant virus,Potato leafroll virus,xxx,PLRV,PLRV_mp,Potato leafroll virus,0,false,false
+plant virus,Potato virus Y,xxx,PVY,PVY_mp,Potato virus Y,0,false,false
+plant virus,Rice tungro bacilliform virus,xxx,RTBV,RTBV_mp,Rice tungro bacilliform virus,0,false,false
+plant virus,Rice tungro spherical virus,xxx,RTSV,RTSV_mp,Rice tungro spherical virus,0,false,false
+plant virus,Tomato yellow leaf curl virus,xxx,TYLCV,TYLCV_mp,Tomato yellow leaf curl virus,0,false,false
+plant virus,Plant virus collection,xxx,plants_virus_host,plants_virus_host,Plant virus collection,0,false,false
+plant virus,Land plants virus collection,xxx,land-plants_virus_host,land-plants_virus_host,Land plants virus collection,0,false,false
+fungi,Fungi ascomycota collection 1,xxx,fungi_ascomycota1_collection,fungi_ascomycota1_collection,Fungi ascomycota collection 1,0,false,false
+fungi,Fungi ascomycota collection 2,xxx,fungi_ascomycota2_collection,fungi_ascomycota2_collection,Fungi ascomycota collection 2,0,false,false
+fungi,Fungi ascomycota collection 3,xxx,fungi_ascomycota3_collection,fungi_ascomycota3_collection,Fungi ascomycota collection 3,0,false,false
+fungi,Fungi basidiomycota collection,xxx,fungi_basidiomycota1_collection,fungi_basidiomycota1_collection,Fungi basidiomycota collection,0,false,false
+fungi,Fungi blastomycota collection,xxx,fungi_blastomycota1_collection,fungi_blastomycota1_collection,Fungi blastomycota collection,0,false,false
+fungi,Fungi chytridiomycota collection,xxx,fungi_chytridiomycota1_collection,fungi_chytridiomycota1_collection,Fungi chytridiomycota collection,0,false,false
+fungi,Fungi microsporidia collection,xxx,fungi_microsporidia1_collection,fungi_microsporidia1_collection,Fungi microsporidia collection,0,false,false
+fungi,Fungi mucoromycota collection,xxx,fungi_mucoromycota1_collection,fungi_mucoromycota1_collection,Fungi mucoromycota collection,0,false,false
+fungi,Fungi rozellomycota collection,xxx,fungi_rozellomycota1_collection,fungi_rozellomycota1_collection,Fungi rozellomycota collection,0,false,false
+bacteria,Bacteria collection,xxx,bacterial_collection,bacterial_collection,Bacteria collection,0,false,false
+animal virus,SARS-CoV-2,xxx,NC_045512,NC_045512,SARS-CoV-2,2697049,false,false
+animal,Beet armyworm,xxx,QAU_Sexi_v1,QAU_Sexi_v1_mp,Spodoptera exigua,7107,false,false
+animal virus,Spodoptera exigua nucleopolyhedrovirus,xxx,NC_002169,NC_002169,Spodoptera exigua nucleopolyhedrovirus,10454,false,false

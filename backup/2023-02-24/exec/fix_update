@@ -1,0 +1,7 @@
+#/bin/bash
+
+wget -q http://bioinfo2.ugr.es/sRNAtoolboxDB/exec/update -O /opt/sRNAtoolboxDB/exec/update
+wget -q http://bioinfo2.ugr.es/sRNAtoolboxDB/exec/populate -O /opt/sRNAtoolboxDB/exec/populate
+wget -q http://bioinfo2.ugr.es/sRNAtoolboxDB/exec/sRNAde.jar -O /opt/sRNAtoolboxDB/exec/sRNAde.jar
+chmod +x /opt/sRNAtoolboxDB/exec/update /opt/sRNAtoolboxDB/exec/populate /opt/sRNAtoolboxDB/exec/sRNAde.jar
+

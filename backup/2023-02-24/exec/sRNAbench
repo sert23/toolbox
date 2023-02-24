@@ -1,0 +1,7 @@
+#!/bin/bash
+
+InstPath="$DBPATH/exec/"
+MaxMem="12000m"
+
+java -Xmx${MaxMem} -jar ${InstPath}sRNAbench.jar "$@"
+

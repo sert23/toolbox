@@ -1,0 +1,294 @@
+#!/usr/bin/env python
+
+import os, sys
+import urllib
+import argparse
+from collections import OrderedDict
+
+def url_consulta(key,value,url):
+		campos=urllib.urlencode({key:value})
+		web=urllib.urlopen(url,campos)
+		response=web.read()
+		return response
+
+def process_species(show,species):
+		count=0
+		for element in show:
+				if element: #avoid empty elements
+						element=element.split(",")
+						kingdom=element[0]
+						scientific=element[5]
+						db=element[3]
+						index_bowtie=element[4]
+						if db:
+								scientific=scientific.replace(" ","\ ")
+								scientific=scientific.replace("(","\(")
+								scientific=scientific.replace(")","\)")
+								species[db]=[scientific,"off",index_bowtie,kingdom]
+								count=count+1
+				species = OrderedDict(sorted(species.items(), key=lambda t: t[1]))
+		return (species,count)
+
+def process_links(response,sample,remove):
+	response=response.split("\n")
+	for element in response:
+		if element:
+			element=element.split("=")
+			sp=element[0]
+			element=element[1].split(";")
+			file=element[0]
+			file=file.split("/")
+			file=file[-1]				
+			log_element=sp+"="+element[1]+file
+			if remove=="no":				
+				enlace[element[0]]=element[1]
+				selection[sample]=enlace
+				if not log_element in log:
+					log.append(log_element)
+				
+			else:
+				delete=element[1]+file	
+				os.system("rm "+delete+" 2>/dev/null")
+				if log_element in log:
+					log.remove(log_element)
+	if remove=="no":
+		return (selection,log)
+	else:
+		return (delete,log)
+
+################################################################################################################################################
+
+####TITLE
+
+dialog_title='dialog --title "sRNAtoolboxDB - Populate" --backtitle "sRNAtoolboxDB" --msgbox "Populate allows the user to download the assemblies that sRNAtoolboxDB has available. \nAfter this message it will be shown a list of species and its correspondant assemblies. The first time you run Populate all the assemblies are unchecked, so the user must mark one or more to download it and then press the OK button. The software will start the download. Finally it will appear a list of installed species. \nTo delete one or more assemblies, when the list of assemblies is shown, if one of them is checked it means that it\'s installed and if the user uncheck it, this will be deleted." 0 0'
+os.system(dialog_title)
+
+####ARGPARSER
+
+parser=argparse.ArgumentParser(
+	description='''Description of the program.''')
+args=parser.parse_args()
+
+####WEB PHP
+
+php="http://bioinfo2.ugr.es/sRNAtoolboxDB/populate.php"
+php2="http://bioinfo2.ugr.es/sRNAtoolboxDB/update.php"
+
+####READ SPECIES
+
+species={} #hash, example: key=hg19, value=[human, off]
+showspecies=url_consulta("showspecies","true",php)
+showspecies=showspecies.split("\n")
+species,count=process_species(showspecies,species)
+
+####READ INSTALLED SPECIES
+
+log=[]
+inst={}
+
+if not os.path.exists("/opt/sRNAtoolboxDB/log"):
+	os.system("touch /opt/sRNAtoolboxDB/log")
+else:
+	file_installed = open("/opt/sRNAtoolboxDB/log", "r") 
+	installed = file_installed.read()
+	installed=installed.split("\n")
+	for element in installed:
+		if element:
+			log.append(element)
+			element=element.split("=")
+			abr=element[0]
+			inst[abr]="on"
+			species[abr][1]="on"
+
+####DIALOG
+
+kingdoms=[]
+for element in species:
+	ki=species[element][3]
+	if not ki in kingdoms:
+		kingdoms.append(ki)
+values=''
+for ki in kingdoms:
+	dialog='dialog --title "sRNAtoolboxDB - Populate" --backtitle "sRNAtoolboxDB" --stdout --scrollbar --checklist "Choose the assemblies: '+ki+'" 35 0 '+(str(count))+' ' 
+	for element in species:
+		if ki==species[element][3]:
+			dialog=dialog+(species[element])[0]+" \("+element+"\) "+(species[element])[1]+" "
+	
+	dialog="VALUE=$("+dialog+") && echo $VALUE"
+
+	valuesa= os.popen(dialog).read()
+	values=values+valuesa
+
+if not values:
+	exit()
+
+values=values.replace('\" \"','\"')
+values=values.replace('\n','')
+values=values.split('"')
+
+values_edit=[]
+for sample_scf in values:
+	if sample_scf:
+		for sp in species:
+			scientific=species[sp][0]
+			scientific=scientific.replace('\ ',' ')
+			if scientific==sample_scf:
+				sample=sp
+				values_edit.append(sample)
+values=values_edit
+
+####ASSEMBLIES TO DOWNLOAD
+
+values_edit=[]
+
+for sample in values:
+	if not sample in inst:
+		values_edit.append(sample) #assemblies to download	
+	
+####SAVE THE DIALOG SELECTION
+
+selection={}
+
+for sample in values_edit:
+	enlace={}
+	if sample:
+		response=url_consulta("getspecies",sample,php)
+		selection,log=process_links(response,sample,"no")
+
+####REMOVE
+
+rmove=[]
+for sample in species:
+	if not sample in values:
+		if sample in inst:
+			rmove.append(sample)
+c_delete=0
+for element in rmove:	
+	dialog='dialog --title "sRNAtoolboxDB - Populate" --backtitle "sRNAtoolboxDB" --stdout --yesno "Are you sure to remove '+element+'?" 0 0; echo $?'
+	selec=os.popen(dialog).read()
+	selec=int(selec)
+	if selec==0:
+		response=url_consulta("getspecies",element,php)
+		delete,log=process_links(response,element,"yes")
+		c_delete=c_delete+1
+
+####WRITE CURRENT VERSION
+
+if not os.path.exists("/opt/sRNAtoolboxDB/log_version"):
+		os.system("touch /opt/sRNAtoolboxDB/log_version")
+
+os.system("rm /opt/sRNAtoolboxDB/log_version")
+c_version=url_consulta("cversion","True",php2)
+c_version=c_version.strip()
+log_version=open("/opt/sRNAtoolboxDB/log_version", "w")
+log_version.write(c_version)
+log_version.close()
+
+####DOWNLOAD
+
+for sample in selection:
+	enlaces=selection[sample]
+	count=0
+	total=len(enlaces)
+	for elemento in enlaces:
+		if elemento:
+			output=enlaces[elemento]
+			input=elemento
+			if not os.path.isdir(output):
+				os.system("mkdir "+output)
+			else:	
+				count=count+1
+				for n in range(0,5):
+					cmda="cd "+output
+					cmdb="wget -c -S -r -np -nH --cut-dirs=3 -R index.html* "+input+' 2>&1 | stdbuf -o0 awk \'/[.] +[0-9][0-9]?[0-9]?%/ { print substr($0,63,3) }\' | dialog --title "sRNAtoolboxDB - Populate" --backtitle "sRNAtoolboxDB" --gauge "Downloading '+sample+", file "+str(count)+" of "+str(total)+' " 10 100'
+					os.system(cmda+";"+cmdb+";echo $?>/opt/sRNAtoolboxDB/err_log"+";wait")
+				if not os.path.exists("/opt/sRNAtoolboxDB/err_log"):
+					for elemento in enlaces:
+						element2=elemento.split("/")
+						f=element2[-1]
+						c=enlaces[elemento]
+						cmdc="rm "+c+f+" 2>/dev/null"
+						os.system(cmdc)
+					os.system("rm /opt/sRNAtoolboxDB/err_log 2>/dev/null")
+					exit()
+				os.system("rm /opt/sRNAtoolboxDB/err_log 2>/dev/null")
+
+
+####WRITE LOG
+
+new_log=open("/opt/sRNAtoolboxDB/log.tmp","w+")
+species_log=[] ##Species installed
+for element in log:
+	element_2=element.split("=")
+	if os.path.exists(element_2[1]):
+		new_log.write(element+"\n")
+		if not element_2[0] in species_log:
+			species_log.append(element_2[0])
+new_log.close()
+os.system ("mv /opt/sRNAtoolboxDB/log.tmp /opt/sRNAtoolboxDB/log")
+
+####WRITE INFORMATION FILE
+
+info_sp={}
+if os.path.exists("/opt/sRNAtoolboxDB/info"):
+	os.system("rm /opt/sRNAtoolboxDB/info")
+info_file=open("/opt/sRNAtoolboxDB/info","w+")
+for element in log:
+	element=element.split("=")
+	assembly=element[0]
+	sp=species[assembly][0]
+	index=species[assembly][2]
+	sp=sp.replace("\ "," ")
+	if not sp in info_sp:
+		info_sp[sp]=[assembly,index]
+
+tag="################################################"
+tag2="#########\n#########\n\n"
+legend="Installed genome assemblies and annotations:\n -- Note that the names of these files have to be used with the following parameters:\n\tspecies=for example species=hg38_prim_mp (the bowtie index of the genome assembly)\n\tlibs=for example libs=hg38_prim_ncRNA (for the profiling of other ncRNAs)\n"
+info_file.write("\n"+legend)
+legend2="Scientific name // Assembly // Bowtie Index (species=)\n\n"
+legend3="Libs(libs=) // Description\n\n"
+
+for element in info_sp:
+	info_file.write("\n"+tag+"\n\n")
+	info_file.write(legend2)
+	line1=element+" // "+info_sp[element][0]+" // "+info_sp[element][1]
+	info_file.write(line1+"\n\n")
+	info_file.write(tag2)
+	assembly=info_sp[element][0]
+	info=url_consulta("getspecies",assembly,php)
+	info=info.split("\n")
+	info_file.write(legend3)
+	for line in info:
+		if line:
+			line=line.strip()
+			line=line.split("=")
+			assembly=line[0]
+			information=line[1]
+			information=information.split(";")
+			if "libs" in information[0] and ".fa" in information[0]:
+				inf1=information[0].split("/")
+				inf1=inf1[-1]
+				if (len(information))>2:
+					inf2=information[2]
+					inf1=inf1+" // "+inf2
+				info_file.write(inf1+"\n")		
+
+info_file.close()	
+
+os.system("cp /opt/sRNAtoolboxDB/info /home/srna/Desktop/info")
+
+####DIALOG FOR INSTALLED SPECIES
+
+count=len(species_log)
+
+if count>0:
+	dialog_log='dialog --title "sRNAtoolboxDB - Populate" --backtitle "sRNAtoolboxDB" --stdout --no-tags --visit-items --scrollbar --no-cancel --checklist "Installed species: \n" 0 0 '+(str(count))+' '
+	for element in species_log:
+		sc_log=species[element][0]
+		dialog_log=dialog_log+sc_log+" "+sc_log+" on "
+	dialog_log=dialog_log+"> /dev/null"
+	os.system(dialog_log)	
+else:
+	dialog_log='dialog --title "sRNAtoolboxDB - Populate" --backtitle "sRNAtoolboxDB" --msgbox "No installed species" 0 0'
+	os.system(dialog_log)

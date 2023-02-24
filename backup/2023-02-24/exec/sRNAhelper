@@ -1,0 +1,7 @@
+#!/bin/bash
+
+InstPath="$DBPATH/exec/"
+MaxMem="4000m"
+
+java -Xmx${MaxMem} -jar ${InstPath}sRNAhelper.jar "$@"
+

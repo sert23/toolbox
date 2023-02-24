@@ -1,0 +1,9 @@
+
+
+{
+ "targetSpy" : "java -jar /opt/TargetSpy/bin/TargetSpy.jar",
+ "pita" : "/usr/local/bin/pita_prediction.pl",
+ "miranda" : "/usr/local/bin/miranda",
+}
+
+
