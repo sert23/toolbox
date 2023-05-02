@@ -294,6 +294,8 @@ class Launch(FormView):
             input_line = object["input"]
             input_type = object["input_type"]
             input_name = object["name"]
+            if input_type == "uploaded file":
+                input_line = input_name
             if input_type == "Drive":
                 downloading_path = os.path.join(folder_path,"files", "drive_temp", input_name + ".downloading")
                 downloaded_path = os.path.join(folder_path,"files", "drive_temp", input_name)
