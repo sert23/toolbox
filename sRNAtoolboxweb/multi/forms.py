@@ -159,6 +159,7 @@ class sRNABenchForm(forms.Form):
         ("Bioo_UMI", mark_safe("Bioo Scientific Nextflex&#153; (v2,v3) using random adapters as UMIs" + render_modal('Bioo'))),
         ("SMARTer", mark_safe("Clonetech SMARTer&#153;" + render_modal('Smarter'))),
         ("Qiagen", mark_safe("Qiagen&#153; (with UMIs)" + render_modal('Qiagen'))),
+        ("BGI", mark_safe("BGI&#153;" + render_modal('Qiagen'))),
         ("Trimmed", mark_safe("Provided reads are already trimmed" )),
         ("Guess", mark_safe("Guess the protocol" + render_modal('Guess_protocol'))),
         ("Custom", mark_safe("Customized protocol" + render_modal('Custom')))]
@@ -508,6 +509,8 @@ class sRNABenchForm(forms.Form):
             predifined_protocol = "B_umi"
         elif protocol == "Qiagen":
             predifined_protocol = "Q"
+        elif protocol == "BGI":
+            predifined_protocol = "BGI"
         elif protocol == "SMARTer":
             predifined_protocol = "SMARTer"
         elif protocol == "Guess":
@@ -1258,6 +1261,7 @@ class sRNABenchForm_withDBs(forms.Form):
         ("Bioo_UMI", mark_safe("Bioo Scientific Nextflex&#153; (v2,v3) using random adapters as UMIs" + render_modal('Bioo'))),
         ("SMARTer", mark_safe("Clonetech SMARTer&#153;" + render_modal('Smarter'))),
         ("Qiagen", mark_safe("Qiagen&#153; (with UMIs)" + render_modal('Qiagen'))),
+        ("BGI", mark_safe("BGI&#153;" + render_modal('Qiagen'))),
         ("Guess", mark_safe("Guess the protocol" + render_modal('Guess_protocol'))),
         ("Custom", mark_safe("Customized protocol" + render_modal('Custom')))]
     library_protocol = forms.ChoiceField(label="", choices=protocols, required=False, widget=forms.RadioSelect())
@@ -1626,6 +1630,8 @@ class sRNABenchForm_withDBs(forms.Form):
             predifined_protocol = "B_umi"
         elif protocol == "Qiagen":
             predifined_protocol = "Q"
+        elif protocol == "BGI":
+            predifined_protocol = "BGI"
         elif protocol == "SMARTer":
             predifined_protocol = "SMARTer"
         elif protocol == "Guess":
