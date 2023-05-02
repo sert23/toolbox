@@ -417,6 +417,8 @@ class ReLaunch(FormView):
             input_name = object["name"]
             status = "not launched"
 
+            if input_type == "uploaded file":
+                input_line = input_name
 
             # id = "file_"+ str(ix)
             # link = '<a href="'+ os.path.join(MEDIA_URL,query_id,file) +'">'+file+'</a>'
