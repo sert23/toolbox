@@ -1,0 +1,15 @@
+{% extends "Messages/modal_template.html" %}
+{% block id %}BGI{% endblock %}
+{% block title %}
+    Illumina TrueSeq™ (280916) protocol or alternative adapter
+{% endblock %}
+{% block text %}
+<p> Preprocessing of samples prepared with <a href="https://www.bgi.com/us/sequencing-services/rna-sequencing-solutions/small-rna-sequencing/" target="_blank">BGI's small RNA-seq</a>.</p>
+    <ul>
+  <li>Detect the adapter sequence: AAGTCGGAGGCCAAGCGGTCTTAGGAAGACAA</li>
+  <li>Minimum length of adapter sequence that needs to be aligned: 10 </li>
+  <li>Allowed mismatches between adapter and reference sequences: 1 </li>
+    </ul>
+
+
+{% endblock %}
