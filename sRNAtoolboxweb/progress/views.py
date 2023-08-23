@@ -10,7 +10,7 @@ from django.views.generic import DetailView
 from rest_framework import generics
 from rest_framework.generics import UpdateAPIView, RetrieveAPIView, CreateAPIView
 from progress.models import JobStatus, Status
-from sRNAtoolboxweb.settings import CONF, SUB_SITE
+from sRNAtoolboxweb.settings import CONF, SUB_SITE, MEDIA_ROOT
 from progress.serializers import JobStatusSerializer, StatusSerializer
 from django.core.urlresolvers import reverse
 
@@ -220,6 +220,9 @@ class JobStatusDetail(DetailView):
             return context
 
         if job_status.job_status == 'Finished':
+            if not job_status.outdir:
+                job_status.outdir = os.path.join(MEDIA_ROOT, job_status.pipeline_key)
+                job_status.save()
             return {}
 
         status = queue_Status(job_status.pipeline_key)
