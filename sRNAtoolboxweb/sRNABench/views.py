@@ -687,7 +687,10 @@ def result_new(request):
 
                 #sRNA summary
                 if "libs" in parameters:
-                    add_libs(parameters, results, config_params)
+                    try:
+                        add_libs(parameters, results, config_params)
+                    except:
+                        pass
 
                 #New Mirna
                 if os.path.exists(os.path.join(new_record.outdir, "novel.txt")):
