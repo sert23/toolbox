@@ -67,6 +67,30 @@
         $("#matrix_link").attr("href", launch_url.concat(pars));
     };
 
+    var loadFileSelector = function(e) {
+
+        {#alert("eyo");#}
+        $.ajax({
+        url: '{% url "ajax_matrix_selector" %}',
+        data: {
+            "id" : "{{ id }}",
+             "file_type": $("#id_matrix_file_type").val(),
+        },
+        dataType: 'json',
+        success: function (data) {
+            {#alert("seems to work");#}
+            console.log("succesful ajax");
+            {# populate files #}
+            $('#id_matrix_file_type').empty();
+            for (var i = 0; i < data.filetypes.length; i++) {
+                console.log(data.filetypes[i]);
+                $('#id_matrix_file_type').append('<option value="' + data.filetypes[i] + '">' + data.filetypes[i] + '</option>');
+            }
+            $("id_matrix_file_type select").val(data.selected_type).change();
+            loadLink();
+        }
+        })
+    };
 
 
     var loadSelectors = function(e) {
@@ -83,14 +107,6 @@
             {#alert("seems to work");#}
             console.log("succesful ajax");
             {# populate files #}
-
-
-            $('#id_matrix_file_type').empty();
-            for (var i = 0; i < data.filetypes.length; i++) {
-                console.log(data.filetypes[i]);
-                $('#id_matrix_file_type').append('<option value="' + data.filetypes[i] + '">' + data.filetypes[i] + '</option>');
-            }
-            $("id_matrix_file_type select").val(data.selected_type).change();
 
             $('#id_matrix_annotation').empty();
             for (var i = 0; i < data.files.length; i++) {
@@ -114,12 +130,14 @@
         })
     };
 
+
         $("#id_matrix_file_type").change(function() {
             loadSelectors();
         });
 
         $( "#generate_matrix_modal_button").click(function() {
-               loadSelectors();
+            loadFileSelector();
+            loadSelectors();
                loadLink();
             });
 
@@ -129,11 +147,6 @@
 
     </script>
 
-    <script>
-
-
-
-    </script>
 
 
 
