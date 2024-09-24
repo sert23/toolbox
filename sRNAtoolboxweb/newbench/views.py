@@ -617,23 +617,22 @@ def matrix_generator(request):
     jobID = request.GET.get("jobID")
     if request.GET.get("matrix_file_type") == "Expression file":
         os.system("touch /opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/test2.txt")
-        # grpString = make_grpStr(jobID)
-        # exec_path = CONF.get("exec")
-        # jar_file = os.path.join(exec_path, "sRNAde.jar")
-        # line = "java -jar " + jar_file + ""
-        # command_line = line.format(column=column,
-        #                            annot_file=annot_file,
-        #                            base_folder=MEDIA_ROOT,
-        #                            jobs=grpString,
-        #                            output_folder=output_folder)
-        # with open(os.path.join(output_folder, "line"), "w") as wf:
-        #     wf.write(command_line)
-        # os.system(command_line)
-        # serving_matrix = find_file_of_interest(output_folder)
-        # context["download_url"] = serving_matrix.replace(MEDIA_ROOT, MEDIA_URL)
-        # context["go_back_url"] = os.path.join(reverse_lazy("progress_status"), jobID)
-        #
-        # return render(request, "newBench/download_matrix_file.html", context)
+        grpString = make_grpStr(jobID)
+        exec_path = CONF.get("exec")
+        jar_file = os.path.join(exec_path, "sRNAde.jar")
+        output_folder = os.path.join(MEDIA_ROOT, "matrix_temp",
+                                     time.strftime("%Y%m%d-%H%M%S") + "_" + generate_id() + "_" + jobID)
+        line = "java -jar " + jar_file + " input={base_folder} grpString={jobs} output={output_folder} minRCexpr=0"
+        command_line = line.format(base_folder=MEDIA_ROOT,
+                                   jobs=grpString,
+                                   output_folder=output_folder)
+        with open(os.path.join(output_folder, "line"), "w") as wf:
+            wf.write(command_line)
+        os.system(command_line)
+        serving_matrix = find_file_of_interest(output_folder)
+        context["download_url"] = serving_matrix.replace(MEDIA_ROOT, MEDIA_URL)
+        context["go_back_url"] = os.path.join(reverse_lazy("progress_status"), jobID)
+        return render(request, "newBench/download_matrix_file.html", context)
     try:
         is_fromDE = request.GET.get("is_fromDE")
         file_type = request.GET.get("matrix_file_type")
