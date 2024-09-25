@@ -622,7 +622,7 @@ def matrix_generator(request):
         os.system("touch /opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/test2.txt")
         grpString = make_grpStr(jobID)
         exec_path = CONF.get("exec")
-        norm = request.GET.get("column")
+        norm = request.GET.get("matrix_unit")
         jar_file = os.path.join(exec_path, "sRNAde.jar")
         output_folder = os.path.join(MEDIA_ROOT, "matrix_temp",
                                      time.strftime("%Y%m%d-%H%M%S") + "_" + generate_id() + "_" + jobID)
@@ -633,6 +633,7 @@ def matrix_generator(request):
                                    output_folder=output_folder)
         with open(os.path.join(output_folder, "line"), "w") as wf:
             wf.write(command_line)
+            wf.write(norm)
         os.system(command_line)
         serving_matrix = find_file_of_interest(output_folder, norm)
         context["download_url"] = serving_matrix.replace(MEDIA_ROOT, MEDIA_URL)
