@@ -622,6 +622,7 @@ def matrix_generator(request):
         jar_file = os.path.join(exec_path, "sRNAde.jar")
         output_folder = os.path.join(MEDIA_ROOT, "matrix_temp",
                                      time.strftime("%Y%m%d-%H%M%S") + "_" + generate_id() + "_" + jobID)
+        os.mkdir(output_folder)
         line = "java -jar " + jar_file + " input={base_folder} grpString={jobs} output={output_folder} minRCexpr=0"
         command_line = line.format(base_folder=MEDIA_ROOT,
                                    jobs=grpString,
