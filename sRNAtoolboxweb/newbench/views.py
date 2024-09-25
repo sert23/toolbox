@@ -540,8 +540,11 @@ def make_grpStr_old(jobID):
         return grp
 
 
-def find_file_of_interest(folder_path):
-    interest_file = [f for f in os.listdir(folder_path) if f.endswith(".mat")][0]
+def find_file_of_interest(folder_path, normalization=None):
+    if normalization:
+        interest_file = [f for f in os.listdir(folder_path) if f.endswith(normalization)][0]
+    else:
+        interest_file = [f for f in os.listdir(folder_path) if f.endswith(".mat")][0]
     full_path = os.path.join(folder_path, interest_file)
     #change extension
     new_name = full_path.replace(".mat", ".tsv")
@@ -619,6 +622,7 @@ def matrix_generator(request):
         os.system("touch /opt/sRNAtoolbox_prod/sRNAtoolboxweb/upload/test2.txt")
         grpString = make_grpStr(jobID)
         exec_path = CONF.get("exec")
+        norm = request.GET.get("column")
         jar_file = os.path.join(exec_path, "sRNAde.jar")
         output_folder = os.path.join(MEDIA_ROOT, "matrix_temp",
                                      time.strftime("%Y%m%d-%H%M%S") + "_" + generate_id() + "_" + jobID)
@@ -630,7 +634,7 @@ def matrix_generator(request):
         with open(os.path.join(output_folder, "line"), "w") as wf:
             wf.write(command_line)
         os.system(command_line)
-        serving_matrix = find_file_of_interest(output_folder)
+        serving_matrix = find_file_of_interest(output_folder, norm)
         context["download_url"] = serving_matrix.replace(MEDIA_ROOT, MEDIA_URL)
         context["go_back_url"] = os.path.join(reverse_lazy("progress_status"), jobID)
         return render(request, "newBench/download_matrix_file.html", context)
