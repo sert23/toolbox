@@ -545,6 +545,7 @@ class MultiStatusViewAnnot(DetailView):
 
         jobs_tbody = []
         context["running"] = False
+        context["date"] = job_status.start_time + datetime.timedelta(days=7)
         # if len(launched_ids)>3:
         #     context["launchDE"] = True
         finished = 0
