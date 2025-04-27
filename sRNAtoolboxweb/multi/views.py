@@ -643,7 +643,7 @@ class MultiStatusView(DetailView):
 
         launched_ids = [f for f in listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder,f))]
         context["ids_strings"] = ",".join(launched_ids)
-
+        context["date"] = job_status.start_time + datetime.timedelta(days=7)
         jobs_tbody = []
         context["running"] = False
         # if len(launched_ids)>3:
