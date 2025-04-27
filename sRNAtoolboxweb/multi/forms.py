@@ -1206,7 +1206,7 @@ def launch_multi_jobs(pipeline_key):
         spikes_path = None
     if not os.path.exists(os.path.join(MEDIA_ROOT, folder, "launched")):
         os.mkdir(os.path.join(MEDIA_ROOT, folder, "launched"))
-    keys = input_dict.keys()
+    keys = list(input_dict.keys())
     for k in keys:
         an_object = input_dict[k]
         new_id = generate_uniq_id()
