@@ -1435,7 +1435,7 @@ class sRNABenchForm_withDBs(forms.Form):
             shutil.copy(os.path.join(MEDIA_ROOT, self.old_folder, "input.json"),
                         os.path.join(MEDIA_ROOT, new_jobID, "input.json"))
             os.system("touch " + self.old_folder)
-            shutil.copy(os.path.join(MEDIA_ROOT, orig_folder, old_file),
+            shutil.copy(os.path.join(MEDIA_ROOT, self.old_folder, old_file),
                         os.path.join(MEDIA_ROOT, new_jobID,old_file))
         else:
             if self.old_folder:
