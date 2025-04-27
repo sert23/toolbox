@@ -1428,7 +1428,7 @@ class sRNABenchForm_withDBs(forms.Form):
             # os.system("touch /shared/sRNAtoolbox/upload/X2TKB97NBD7379K/test1_" + new_jobID)
             # os.system("touch /shared/sRNAtoolbox/upload/X2TKB97NBD7379K/test2_" + self.folder)
             # os.system("touch /shared/sRNAtoolbox/upload/X2TKB97NBD7379K/test3_" + self.old_folder)
-            # os.mkdir(new_folder)
+            os.mkdir(new_folder)
             shutil.copy(os.path.join(MEDIA_ROOT, self.old_folder, "input.json"), os.path.join(MEDIA_ROOT, new_jobID, "input.json"))
             old_file = [f for f in os.listdir(os.path.join(MEDIA_ROOT, self.old_folder)) if f.startswith("redirected")][0]
             orig_folder = old_file.split("_")[1]
