@@ -403,6 +403,10 @@ class ReLaunch(FormView):
         # old_folder_path = os.path.join(MEDIA_ROOT, oldID)
         # oldID = self.kwargs.get("jobId")
 
+        # if not os.path.exists(os.path.join(folder_path)):
+        #     os.mkdir(os.path.join(folder_path))
+        #     os.system("touch " + os.path.join(folder_path, "redirected_" + oldID))
+
         #build samples table
         dict_path = os.path.join(folder_path, "input.json")
         json_file = open(dict_path, "r")
