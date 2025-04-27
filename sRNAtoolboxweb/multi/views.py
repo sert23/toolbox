@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.views import View
 from django.views.generic import FormView, DetailView
 
-from .forms import PhotoForm, MultiURLForm,sRNABenchForm
+from .forms import PhotoForm, MultiURLForm, sRNABenchForm, launch_multi_jobs
 from .models import Photo
 from django.core.urlresolvers import reverse, reverse_lazy
 import string
@@ -521,6 +521,7 @@ class MultiStatusViewAnnot(DetailView):
 
         job_status = context.get('object')
         pipeline_id = job_status.pipeline_key
+        launch_multi_jobs(pipeline_id)
         jobs_folder = os.path.join(MEDIA_ROOT,pipeline_id,"launched")
         if not os.path.exists(jobs_folder):
             return redirect(reverse_lazy("launch")+ "?jobId=" + pipeline_id)
