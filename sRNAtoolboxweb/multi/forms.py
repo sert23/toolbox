@@ -1187,10 +1187,12 @@ def parse_PmiREN():
 
 def launch_multi_jobs(pipeline_key):
     # TODO fix is_relaunch
-    is_relaunch = False
     with open(os.path.join(MEDIA_ROOT, pipeline_key, "conf.txt"), "r") as conf_file:
         general_config = conf_file.read()
     old_file_id = [f for f in os.listdir(os.path.join(MEDIA_ROOT, pipeline_key)) if f.startswith("redirected")][0]
+    is_relaunch = False
+    if "relaunched" in old_file_id:
+        is_relaunch = True
     old_id = old_file_id.split("_")[1]
     folder = pipeline_key
     dict_path = os.path.join(MEDIA_ROOT, folder, "temp_input.json")

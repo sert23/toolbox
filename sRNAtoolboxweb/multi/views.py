@@ -245,6 +245,10 @@ def RelaunchMulti(request):
 
     random_ID = generate_id()
     old_dir = os.path.join(MEDIA_ROOT, old_ID)
+    folder_path = old_dir
+    if not os.path.exists(os.path.join(folder_path)):
+        os.mkdir(os.path.join(folder_path))
+        os.system("touch " + os.path.join(folder_path, "redirected&relaunch_" + old_ID))
 
     if os.path.exists(old_dir):
         os.mkdir(os.path.join(MEDIA_ROOT, random_ID))
@@ -255,6 +259,7 @@ def RelaunchMulti(request):
                                  pipeline_type="multiupload",
                                  )
         shutil.copy(os.path.join(MEDIA_ROOT, old_ID, "input.json"), os.path.join(MEDIA_ROOT, old_ID, "input.json"))
+        shutil.copy(os.path.join(MEDIA_ROOT, old_ID, "input.json"), os.path.join(MEDIA_ROOT, random_ID, "input.json"))
         os.system("touch " + old_dir)
 
         if os.path.exists(os.path.join(MEDIA_ROOT, random_ID)):
