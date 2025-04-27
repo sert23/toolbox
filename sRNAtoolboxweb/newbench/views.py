@@ -107,8 +107,6 @@ def move_SRA(input_folder, output_folder):
         json.dump(input_dict, json_file, indent=6)
         json_file.close()
 
-
-
 def move_link(input_folder, output_folder):
     dict_path = os.path.join(output_folder, "input.json")
     json_file = open(dict_path, "r")
@@ -257,11 +255,12 @@ class Launch(FormView):
             name = old_files[0]
             new_jobID = name.split("_")[1]
         else:
-            os.system("touch " + os.path.join(old_folder_path,"redirect_" +  new_jobID))
+            os.system("touch " + os.path.join(old_folder_path, "redirect_" + new_jobID))
         folder_path = os.path.join(MEDIA_ROOT, new_jobID)
-        files_path = os.path.join(folder_path,"files")
+        files_path = os.path.join(folder_path, "files")
         if not os.path.exists(os.path.join(folder_path)):
             os.mkdir(os.path.join(folder_path))
+            os.system("touch " + os.path.join(folder_path, "redirected_" + oldID))
         if not os.path.exists(os.path.join(files_path)):
             os.mkdir(os.path.join(files_path))
 
@@ -362,12 +361,13 @@ class Launch(FormView):
         self.success_url = reverse_lazy('srnabench') + '?id=' + pipeline_id
 
         # os.mkdir(os.path.join(MEDIA_ROOT, pipeline_id))
-        JobStatus.objects.create(job_name=pipeline_id + "_multi", pipeline_key=pipeline_id, job_status="not_launched",
-                                 start_time=datetime.datetime.now(),
-                                 all_files=" ",
-                                 modules_files=" ",
-                                 pipeline_type="multiupload",
-                                 )
+        if not JobStatus.objects.filter(pipeline_key=pipeline_id).exists():
+            JobStatus.objects.create(job_name=pipeline_id + "_multi", pipeline_key=pipeline_id, job_status="not_launched",
+                                     start_time=datetime.datetime.now(),
+                                     all_files=" ",
+                                     modules_files=" ",
+                                     pipeline_type="multiupload",
+                                     )
 
         #os.system(call)
         js = JobStatus.objects.get(pipeline_key=pipeline_id)
