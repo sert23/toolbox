@@ -495,3 +495,75 @@ class DEmultiForm(forms.Form):
                                  )
 
         return pipeline_id
+
+
+class DEAdvForm(forms.Form):
+    sampleGroups = forms.CharField(
+        label=mark_safe('Sample groups (hash separated, <strong class="text-danger">required</strong>):'),
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': "e.g: Normal#TumorI#TumorII"}))
+
+    def __init__(self, *args, **kwargs):
+        self.folder = kwargs.pop('orig_folder', None)
+        super(DEmultiForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Field("sampleGroups", css_class="form-control"),
+            ButtonHolder(
+                Submit('submit', 'SUBMIT', css_class='btn btn-primary')
+            )
+        )
+    def clean(self):
+
+        #TODO check input format
+
+        cleaned_data = super(DEmultiForm, self).clean()
+        if not cleaned_data.get("sampleGroups"):
+            self.add_error("sampleGroups", 'You need to provide Sample Groups')
+        else:
+            sampleGroups = cleaned_data.get("sampleGroups").replace("#",",")
+            if len(sampleGroups.split(",")) <2:
+                self.add_error("sampleGroups", 'You need to provide at least 2 groups')
+
+    def generate_id(self):
+        is_new = True
+        while is_new:
+            pipeline_id = generate_uniq_id()
+            if not JobStatus.objects.filter(pipeline_key=pipeline_id):
+                return pipeline_id
+
+    def create_config_file(self):
+        pipeline_id = self.generate_id()
+        cleaned_data = self.cleaned_data
+        os.mkdir(os.path.join(MEDIA_ROOT,pipeline_id))
+        name = pipeline_id + '_de'
+        out_dir = os.path.join(MEDIA_ROOT,pipeline_id)
+        json_path = os.path.join(MEDIA_ROOT,pipeline_id,"init_par.json")
+
+        #Get jobIDs
+        jobs_folder = os.path.join(MEDIA_ROOT,self.folder , "launched")
+        launched_ids = [f for f in os.listdir(jobs_folder) if os.path.isfile(os.path.join(jobs_folder, f))]
+
+        parameters = {}
+        parameters["jobIDs"] = ",".join(launched_ids)
+
+        for k in cleaned_data.keys():
+            if cleaned_data.get(k):
+                parameters[k] = cleaned_data[k]
+        # parameters["input"] = MEDIA_ROOT
+        parameters["ifile"] = " "
+        with open(json_path, 'w') as jf:
+            json.dump(parameters, jf, sort_keys=True)
+
+        JobStatus.objects.create(job_name=name, pipeline_key=pipeline_id, job_status="not_launched",
+                                 start_time=datetime.datetime.now(),
+                                 # finish_time=datetime.time(0, 0),
+                                 all_files=" ",
+                                 modules_files="",
+                                 pipeline_type="sRNAde",
+                                 )
+
+        return pipeline_id
+
+
+

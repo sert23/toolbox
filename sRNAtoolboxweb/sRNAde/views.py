@@ -9,7 +9,7 @@ import xlrd
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, redirect
 from pygal.style import LightGreenStyle
-from .forms import DEForm, DEinputForm,DElaunchForm,DEmultiForm
+from .forms import DEForm, DEinputForm,DElaunchForm,DEmultiForm, DEAdvForm
 import pandas as pd
 from FileModels.deStatsParser import DeStatsParser
 from FileModels.sRNAdeparser import SRNAdeParser
@@ -749,7 +749,7 @@ class DeFromMulti(FormView):
 
 class DeAdvanced(FormView):
     template_name = 'de_multi.html'
-    form_class = DEmultiForm
+    form_class = DEAdvForm
     success_url = reverse_lazy('DE_advanced')
 
     def get_form_kwargs(self):
@@ -967,7 +967,8 @@ class DeFromMultiAnnot(FormView):
         parameters["name"] = pipeline_name
         parameters["name2"] = pipeline_name
         parameters["name3"] = pipeline_name + "test"
-        parameters["grpDesc"] = "#".join(list(set(desc))) # TODO keep set in order
+        # parameters["grpDesc"] = "#".join(list(set(desc))) # TODO keep set in order
+        parameters["grpDesc"] = "#".join(sorted(set(desc)))
 
         with open(conf_path, "w") as conf_txt:
             for k in sorted(parameters.keys()):
@@ -1113,3 +1114,115 @@ class DeFromMultiAnnot(FormView):
         # js.save()
         return super(DeFromMultiAnnot, self).form_valid(form)
 
+class DeFromMultiAnnotAdvanced(FormView):
+    """
+    Clone of DeFromMultiAnnot, but independent.
+    Intended for an "advanced" entry point (separate URL + separate form if desired).
+    """
+    template_name = 'de_multi.html'
+    form_class = DEAdvForm  # change to DEmultiForm if you want identical form
+    success_url = reverse_lazy("DE_multi")
+
+    def get(self, request, **kwargs):
+        query_id = str(self.request.path_info).split("/")[-1]  # incoming multi-upload pipeline id
+
+        output_id = pipeline_utils.generate_uniq_id()
+        pipeline_name = str(output_id) + "_de"
+        output_dir = os.path.join(MEDIA_ROOT, output_id)
+        os.mkdir(output_dir)
+        conf_path = os.path.join(MEDIA_ROOT, output_id, "conf.txt")
+
+        dict_path = os.path.join(MEDIA_ROOT, query_id, "input.json")
+        with open(dict_path, "r") as json_file:
+            input_dict = json.load(json_file, object_pairs_hook=OrderedDict)
+
+        grp = []
+        desc = []
+        sample = []  # kept for parity, not used downstream
+
+        for k in input_dict.keys():
+            annot_dict = input_dict.get(k)
+            jobID = annot_dict.get("jobID")
+            name = annot_dict.get("name_annotation")
+            group = annot_dict.get("group_annotation")
+
+            if group and (group != "nan"):
+                sample.append(name)
+                grp.append(jobID)
+                desc.append(group)
+
+        parameters = {}
+        parameters["input"] = MEDIA_ROOT
+        parameters["output"] = output_dir
+        parameters["grpString"] = ",".join(grp)
+        parameters["matrixDesc"] = ",".join(desc)
+        parameters["minRCexpr"] = 1
+        parameters["web"] = "true"
+        parameters["name"] = pipeline_name
+        parameters["name2"] = pipeline_name
+        parameters["name3"] = pipeline_name + "test"
+
+        # Keep your existing behaviour (set(desc)) although it is unordered.
+        # If you want deterministic order, I can give you a stable version.
+        parameters["grpDesc"] = "#".join(list(set(desc)))
+
+        with open(conf_path, "w") as conf_txt:
+            for k in sorted(parameters.keys()):
+                conf_txt.write(k + "=" + str(parameters.get(k)) + "\n")
+
+        conf_dict = {
+            "out_dir": output_dir,
+            "type": "sRNAde",
+            "pipeline_id": output_id,
+            "name_old": "test_unbelivable",
+            "name": pipeline_name,
+            "job_name": "test_unbelivable",
+            "conf_input": conf_path,
+            "input": MEDIA_ROOT,
+            "grpDesc": "#".join(list(set(desc))),
+            "matrixDesc": ",".join(desc),
+
+            # Optional marker so downstream code can tell it came from advanced entry point.
+            "advanced": True,
+            "source_pipeline": query_id,
+        }
+
+        json_path = os.path.join(output_dir, "conf.json")
+        with open(json_path, "w") as json_file:
+            json.dump(conf_dict, json_file, indent=6)
+
+        JobStatus.objects.create(
+            job_name=pipeline_name,
+            pipeline_key=output_id,
+            job_status="not_launched",
+            start_time=datetime.datetime.now(),
+            all_files=" ",
+            modules_files="",
+            pipeline_type="sRNAde",
+        )
+
+        call = 'qsub -v c="{configuration_file_path}" -N {job_name} {sh}'.format(
+            configuration_file_path=json_path,
+            job_name=pipeline_name,
+            sh=os.path.join(os.path.dirname(BASE_DIR) + '/core/bash_scripts/run_qsub.sh')
+        )
+
+        os.system(call)
+        js = JobStatus.objects.get(pipeline_key=output_id)
+        js.status.create(status_progress='sent_to_queue')
+        js.job_status = 'sent_to_queue'
+        js.save()
+
+        return redirect(reverse_lazy('srnade') + '?id=' + output_id)
+
+    def get_form_kwargs(self):
+        kwargs = super(DeFromMultiAnnotAdvanced, self).get_form_kwargs()
+        # robust last segment (avoid empty when path ends with "/")
+        folder = [p for p in self.request.path.split("/") if p][-1]
+        kwargs['orig_folder'] = folder
+        return kwargs
+
+    def form_valid(self, form):
+        pipeline_id = form.create_config_file()
+        self.success_url = reverse_lazy('DE_launch') + pipeline_id
+        return super(DeFromMultiAnnotAdvanced, self).form_valid(form)
