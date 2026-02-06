@@ -747,6 +747,33 @@ class DeFromMulti(FormView):
         # js.save()
         return super(DeFromMulti, self).form_valid(form)
 
+class DeAdvanced(FormView):
+    template_name = 'de_multi.html'
+    form_class = DEmultiForm
+    success_url = reverse_lazy('DE_advanced')
+
+    def get_form_kwargs(self):
+        kwargs = super(DeAdvanced, self).get_form_kwargs()
+        path = self.request.path
+        folder = path.split("/")[-1]
+        kwargs['orig_folder'] = folder
+        return kwargs
+
+    def form_valid(self, form):
+        # This method is called when valid form data has been POSTed.
+        # It should return an HttpResponse.
+        #call, pipeline_id = form.create_call()
+        pipeline_id = form.create_config_file()
+        self.success_url = reverse_lazy('DE_launch') + pipeline_id
+
+        # print(call)
+        #os.system(call)
+        # js = JobStatus.objects.get(pipeline_key=pipeline_id)
+        # js.status.create(status_progress='sent_to_queue')
+        # js.job_status = 'sent_to_queue'
+        # js.save()
+        return super(DeAdvanced, self).form_valid(form)
+
 
 class DeLaunch(FormView):
     template_name = 'de_launch.html'
