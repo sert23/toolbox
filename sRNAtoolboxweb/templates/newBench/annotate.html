@@ -112,7 +112,19 @@
                           </table>
                     <form  method="post"  enctype="multipart/form-data">
                             {% csrf_token %}
-                    <div class="row">
+                      <div class="row">
+                        <div class="col-lg-6">
+                          <label for="annotation_groups">Groups (optional)</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="annotation_groups"
+                            name="annotation_groups"
+                            placeholder="e.g., Normal#Tumor"
+                          >
+                        </div>
+                      </div>
+                        <div class="row">
                         <div class="col-lg-6">
                             <div class="custom-file" id="customFile">
                         <label class="custom-file-label" for="exampleInputFile">
