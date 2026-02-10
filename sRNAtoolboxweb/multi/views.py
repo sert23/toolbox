@@ -444,6 +444,17 @@ class Annotate(DetailView):
         path = str(request.path_info)
         jobId = path.split("/")[-1]
         # destination_path = os.path.join(MEDIA_ROOT, jobId, "hey.txt")
+
+        group_value = request.POST.get("annotation_groups", "").strip()
+
+        # write grpDesc
+        if group_value:
+            if "#" in group_value:
+                groups_path = os.path.join(MEDIA_ROOT, jobId, "groups.json")
+                with open(groups_path, "w", encoding="utf-8") as fh:
+                    json.dump({"grpDesc": group_value}, fh, ensure_ascii=False, indent=2)
+
+        # write annotation file
         annotation_folder = os.path.join(MEDIA_ROOT, jobId, "annotation")
         if not os.path.exists(annotation_folder):
             os.mkdir(annotation_folder)
