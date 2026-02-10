@@ -968,7 +968,14 @@ class DeFromMultiAnnot(FormView):
         parameters["name2"] = pipeline_name
         parameters["name3"] = pipeline_name + "test"
         # parameters["grpDesc"] = "#".join(list(set(desc))) # TODO keep set in order
-        parameters["grpDesc"] = "#".join(sorted(set(desc)))
+        # if file exists; add from file else create from desc
+        if os.path.exists(os.path.join(MEDIA_ROOT, query_id, "groups.json")):
+            json_file = open(os.path.join(MEDIA_ROOT, query_id, "groups.json"), "r")
+            groups_dict = json.load(json_file)
+            json_file.close()
+            parameters["grpDesc"] = groups_dict["grpDesc"]
+        else:
+            parameters["grpDesc"] = "#".join(sorted(set(desc)))
 
         with open(conf_path, "w") as conf_txt:
             for k in sorted(parameters.keys()):
